@@ -42,3 +42,12 @@ describe('R3 · el PGN entra a mi repertorio', () => {
     expect(importarPgn(repertorio, 'b', pgn).nuevas).toBe(0)
   })
 })
+
+describe('R3 · PGN con R D T A C (pase 2 de la T22)', () => {
+  it('en un PGN en español, R es el rey', () => {
+    const [l] = lineasDePgn('1. e4 e5 2. Cf3 Cc6 3. Ac4 Ac5 4. Rf1')
+    expect(l!.at(-1)).toBe('Kf1')
+    // en uno en inglés, R sigue siendo la torre
+    expect(lineasDePgn('1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. Rf1')[0]!.at(-1)).toBe('Rf1') // la torre de h1 a f1
+  })
+})

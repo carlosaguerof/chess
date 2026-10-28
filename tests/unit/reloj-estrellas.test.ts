@@ -73,3 +73,19 @@ describe('T16 · estrellas', () => {
     expect(conEstrellas({ brisa: 2 }, 'brisa', 3)).toEqual({ brisa: 3 })
   })
 })
+
+describe('T14 · jugar con el reloj ya en cero (pase 2 de la T22)', () => {
+  it('pierde por tiempo y la jugada no entra, aunque haya incremento', async () => {
+    const { nuevaPartida, conJugada } = await import('../../src/partida/modelo.ts')
+    const p = nuevaPartida('brisa', 'w', undefined, undefined, '1+1')
+    const corriendo = { ...p, reloj: { ...p.reloj!, corriendo: 'w' as const, desde: 0 } }
+    const tarde = conJugada(corriendo, 'e2e4', 60_050)
+    expect(tarde.jugadas).toEqual([])
+    expect(tarde.fin?.tipo).toBe('tiempo')
+    expect(tarde.fin?.ganador).toBe('b')
+    const atiempo = conJugada(corriendo, 'e2e4', 59_000)
+    expect(atiempo.jugadas).toEqual(['e2e4'])
+    expect(atiempo.reloj!.restante.w).toBe(1000 + 1000) // le quedaba 1 s y suma 1 de incremento
+  })
+})
+

@@ -52,8 +52,10 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   await expect(page.getByTestId('fase')).toContainText('Ahora tú') // sin la parte de enseñar
   await contestar(page, info, A)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve en 3 días')
+  // el reloj avanza dos minutos entre una línea y otra (como de verdad)
+  await page.clock.setFixedTime(new Date(HOY.getTime() + 2 * 60_000))
   await page.getByTestId('siguiente-repaso').click()
-  // B: con un error → vuelve mañana
+  // B: con un error → vuelve mañana (fallar 1...c6 repasando B no regresa a A)
   await expect(page.getByTestId('nombre-linea')).toHaveText(B.nombre)
   await contestar(page, info, B, true)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve mañana')

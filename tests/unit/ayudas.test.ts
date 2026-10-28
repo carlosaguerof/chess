@@ -44,3 +44,13 @@ describe('T15 · con el motor a toda fuerza (aparte del del bot)', () => {
     m.cerrar()
   })
 })
+
+describe('T15 · amenazas solo con capturas legales (pase 2 de la T22)', () => {
+  it('una pieza clavada no amenaza', () => {
+    // el caballo negro de e6 está clavado por la torre de e1 contra su rey: no puede tomar el alfil de d4
+    const c = new Chess('4k3/8/4n3/8/3B4/8/8/4R1K1 b - - 0 1')
+    expect(amenazas(c, 'w')).toEqual([])
+    // sin la torre, sí
+    expect(amenazas(new Chess('4k3/8/4n3/8/3B4/8/8/6K1 b - - 0 1'), 'w')).toEqual([{ desde: 'e6', hasta: 'd4' }])
+  })
+})

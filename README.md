@@ -1,6 +1,6 @@
 # chess — mis aperturas
 
-Web app personal para aprender mis aperturas y defensas: bots con personaje y nivel, base de conocimiento de aperturas, mi repertorio, cursos y guía en la partida real. Todo corre en el navegador; nada se publica.
+Web app personal para aprender mis aperturas y defensas: bots con personaje y nivel, base de conocimiento de aperturas, mi repertorio, cursos y guía en la partida real. Todo corre en el navegador, sin servidor ni cuentas; se publica como página estática en GitHub Pages (<https://carlosaguerof.github.io/chess/>).
 
 ```
 npm ci && npx playwright install webkit chromium
