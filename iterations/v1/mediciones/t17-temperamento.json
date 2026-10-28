@@ -1,59 +1,91 @@
 {
- "700ag-vs-500.json": {
-  "eloA": 700,
-  "eloB": 500,
-  "temperamentos": [
-   "agresivo",
-   "equilibrado"
+ "comando": "node scripts/calibrar.ts partido <eloA> <eloB> 48 <semilla> <salida> --temperamentos <a>,<b>",
+ "cara_a_cara": {
+  "partidos": [
+   {
+    "temperamentos": [
+     "agresivo",
+     "defensivo"
+    ],
+    "semilla": 801,
+    "juegos": 48,
+    "jaquesYCapturas": {
+     "a": 330,
+     "b": 267
+    },
+    "puntosPrimero": 22
+   },
+   {
+    "temperamentos": [
+     "agresivo",
+     "defensivo"
+    ],
+    "semilla": 803,
+    "juegos": 48,
+    "jaquesYCapturas": {
+     "a": 339,
+     "b": 296
+    },
+    "puntosPrimero": 25.5
+   },
+   {
+    "temperamentos": [
+     "defensivo",
+     "agresivo"
+    ],
+    "semilla": 802,
+    "juegos": 48,
+    "jaquesYCapturas": {
+     "a": 298,
+     "b": 342
+    },
+    "puntosPrimero": 29
+   },
+   {
+    "temperamentos": [
+     "defensivo",
+     "agresivo"
+    ],
+    "semilla": 804,
+    "juegos": 48,
+    "jaquesYCapturas": {
+     "a": 271,
+     "b": 366
+    },
+    "puntosPrimero": 24.5
+   }
   ],
-  "jaquesYCapturas": {
-   "a": 377,
-   "b": 304
+  "partidas": 192,
+  "agresivo": {
+   "total": 1377,
+   "porPartida": 7.17
   },
-  "juegos": 48,
-  "puntosA": 40.5,
-  "ganadas": 40,
-  "tablas": 1,
-  "perdidas": 7,
-  "porcentajeA": 0.84375,
-  "version": "Stockfish 19 Lite WASM"
+  "defensivo": {
+   "total": 1132,
+   "porPartida": 5.9
+  },
+  "diferenciaPorPartida": {
+   "media": 1.28,
+   "errorEstandar": 0.25,
+   "t": 5.03
+  }
  },
- "700ag-vs-700def.json": {
-  "eloA": 700,
-  "eloB": 700,
-  "temperamentos": [
-   "agresivo",
-   "defensivo"
-  ],
-  "jaquesYCapturas": {
-   "a": 359,
-   "b": 309
+ "fuerza": [
+  {
+   "partido": "700 agresivo vs 500 equilibrado",
+   "semilla": 805,
+   "juegos": 48,
+   "puntos": 44,
+   "porcentaje": 91.7,
+   "cumpleT4": true
   },
-  "juegos": 48,
-  "puntosA": 22,
-  "ganadas": 21,
-  "tablas": 2,
-  "perdidas": 25,
-  "porcentajeA": 0.4583333333333333,
-  "version": "Stockfish 19 Lite WASM"
- },
- "700def-vs-500.json": {
-  "eloA": 700,
-  "eloB": 500,
-  "temperamentos": [
-   "defensivo",
-   "equilibrado"
-  ],
-  "jaquesYCapturas": {
-   "a": 340,
-   "b": 284
-  },
-  "juegos": 48,
-  "puntosA": 41,
-  "ganadas": 40,
-  "tablas": 2,
-  "perdidas": 6,
-  "porcentajeA": 0.8541666666666666,
-  "version": "Stockfish 19 Lite WASM"
- }
+  {
+   "partido": "700 defensivo vs 500 equilibrado",
+   "semilla": 806,
+   "juegos": 48,
+   "puntos": 39.5,
+   "porcentaje": 82.3,
+   "cumpleT4": true
+  }
+ ]
 }

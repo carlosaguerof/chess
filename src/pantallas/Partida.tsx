@@ -128,7 +128,9 @@ export function Partida() {
   if (ajustes.amenazas && !partida.fin) for (const a of amenazas(chess, partida.colorHumano)) flechas.push({ orig: a.desde as Key, dest: a.hasta as Key, brush: 'red' })
   const sugerencia = ajustes.sugerencia && miTurno && evaluacion?.fen === chess.fen() ? evaluacion.mejor : null
   if (sugerencia) flechas.push({ orig: sugerencia.slice(0, 2) as Key, dest: sugerencia.slice(2, 4) as Key, brush: 'green' })
-  const barra = ajustes.barra && evaluacion ? evaluacion.pct : null
+  // al terminar por mate la barra se llena del lado del ganador; en tablas, a la mitad
+  const finBarra = partida.fin && (partida.fin.tipo === 'mate' || partida.fin.ganador === null) ? (partida.fin.ganador === 'w' ? 100 : partida.fin.ganador === 'b' ? 0 : 50) : null
+  const barra = ajustes.barra ? (finBarra ?? evaluacion?.pct ?? null) : null
   const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
   // T18: del resumen a practicar justo esa línea
   const practicar = (() => {

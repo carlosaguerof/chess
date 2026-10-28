@@ -92,3 +92,22 @@ test('R7 · el interruptor quita el repaso del inicio y se recuerda al recargar;
   await page.goto('/#/ajustes')
   await expect(page.getByTestId('ajuste-repaso')).not.toBeChecked()
 })
+
+test('R7 · pedir Pista o Respuesta en el repaso también la regresa a mañana', async ({ page }, info) => {
+  test.setTimeout(120_000)
+  await page.clock.setFixedTime(HOY)
+  await page.goto('/')
+  const ayer = HOY.getTime() - 86_400_000
+  await page.evaluate(([a, b, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f }, [b]: { fecha: f } })), [A.id, B.id, ayer] as const)
+  await page.goto('/#/repaso')
+  for (const [l, boton] of [[A, 'pista'], [B, 'respuesta']] as const) {
+    await expect(page.getByTestId('nombre-linea')).toHaveText(l.nombre)
+    await expect(page.getByTestId('instruccion')).toContainText('¿Qué harías?')
+    await page.getByTestId(boton).click()
+    await expect(page.getByTestId('aviso-leccion')).toHaveAttribute('data-resultado', boton)
+    await contestar(page, info, l)
+    await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve mañana')
+    await page.getByTestId('siguiente-repaso').click()
+  }
+  await expect(page.getByTestId('manana')).toContainText('Mañana tocan 2 líneas')
+})

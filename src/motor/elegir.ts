@@ -1,7 +1,7 @@
 import { Chess } from 'chess.js'
 import { uciDe } from '../ajedrez/reglas.ts'
 import type { Candidata, MotorUci } from './uci.ts'
-import { bonoTemperamento } from './temperamento.ts'
+import { bonoTemperamento, bonoDelNivel } from './temperamento.ts'
 
 /** Los parámetros de un nivel. Viven todos en `niveles.json` (un solo archivo de datos). */
 export interface ParamsNivel {
@@ -84,7 +84,8 @@ export async function elegirJugada(motor: MotorUci, fen: string, nivel: ParamsNi
   //    El temperamento (T17) solo inclina entre jugadas casi iguales (ver temperamento.ts).
   const t = Math.max(1, nivel.temperatura ?? 50)
   // la pérdida efectiva puede quedar por debajo de 0: así el bono también decide entre jugadas igual de buenas
-  const efectiva = (c: Candidata) => perdida(c) - bonoTemperamento(fen, c.uci, perdida(c), temperamento)
+  const bono = bonoDelNivel(t)
+  const efectiva = (c: Candidata) => perdida(c) - bonoTemperamento(fen, c.uci, perdida(c), temperamento, bono)
   const pesos = cands.map((c) => Math.exp(-efectiva(c) / t))
   const total = pesos.reduce((s, p) => s + p, 0)
   let r = azar() * total

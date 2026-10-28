@@ -6,6 +6,7 @@ import { empezarPartida, partidaEnCurso } from '../partida/usePartidaBot.ts'
 import { navegar } from '../ruta.ts'
 import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
+import { leerRegistro } from '../registro/almacen-registro.ts'
 import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
 
 export function Inicio() {
@@ -19,8 +20,9 @@ export function Inicio() {
     if (!repasoActivo()) return null
     const lecciones = cursos(rep).flatMap((c) => c.lecciones)
     const hechas = leerProgreso()
-    const hoy = paraHoy(leerRepaso(), hechas, lecciones, dia())
-    const manana = paraHoy(leerRepaso(), hechas, lecciones, sumarDias(dia(), 1)).length
+    const registro = leerRegistro()
+    const hoy = paraHoy(leerRepaso(), hechas, lecciones, dia(), registro)
+    const manana = paraHoy(leerRepaso(), hechas, lecciones, sumarDias(dia(), 1), registro).length
     return { n: hoy.length, min: minutos(hoy), manana, aprendidas: lecciones.some((l) => hechas[l.id]) }
   })()
   const jugar = () => {
