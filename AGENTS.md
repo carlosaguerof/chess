@@ -26,7 +26,7 @@ Las capturas de Playwright van a `iterations/v1/capturas/<perfil>/`.
 ## Principios
 - Producto y UX: `/Users/carlosaguerof/01_repos/00_direccion/principios/producto.md` (Nielsen + Maister + lo de Carlos). Su aterrizaje en esta app: `context/producto.md` §2.
 - Todo en español. Notación de piezas **R D T A C**, `0-0` y `0-0-0`.
-- **Nada se inventa en las aperturas.** Lo mío sale de `input/`; lo demás, de la base en `conocimiento/`, con su fuente y validado con el motor.
+- **Nada se inventa en las aperturas.** La teoría estándar de la base (`conocimiento/`, con su fuente y validada con el motor) es la fuente de verdad. Mi guía (`input/`) solo dice qué aperturas quiero aprender; si no coincide con la teoría, gana la teoría.
 - Pantallas y flujo como chess.com; **nunca sus archivos ni su marca** (ni piezas, ni sonidos, ni avatares, ni nombres de bots). Todo propio o abierto, con la licencia en `LICENCIAS.md`.
 - Sin secretos en el repo ni en el chat. No hay llaves: todo corre en el navegador.
 - No se publica nada (sin deploy) sin que Carlos lo pida.

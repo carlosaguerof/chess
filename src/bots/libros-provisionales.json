@@ -1,0 +1,27 @@
+{
+  "nota": "Libros PROVISIONALES de la T5: líneas copiadas tal cual de lichess-org/chess-openings (CC0), con su nombre. La T6 los reemplaza por los de la base.",
+  "lineas": {
+    "italiana": [["Italian Game: Giuoco Piano", "e4 e5 Nf3 Nc6 Bc4 Bc5"], ["Italian Game: Two Knights Defense, Modern Bishop's Opening", "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7"]],
+    "abierta": [["Italian Game: Giuoco Pianissimo, Normal", "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5"], ["Scotch Game: Classical Variation", "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5"], ["Ruy Lopez: Morphy Defense", "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O b5 Bb3 d6"]],
+    "abierta:escocesa": [["Scotch Game: Classical Variation", "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5"]],
+    "abierta:espanola": [["Ruy Lopez: Morphy Defense", "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O b5 Bb3 d6"]],
+    "abierta:vienesa": [["Vienna Game: Vienna Gambit", "e4 e5 Nc3 Nf6 f4"]],
+    "abierta:dama": [["King's Pawn Game: Wayward Queen Attack", "e4 e5 Qh5"]],
+    "caro-kann": [["Caro-Kann Defense: Advance Variation, Short Variation", "e4 c6 d4 d5 e5 Bf5 Nf3"], ["Caro-Kann Defense: Classical Variation", "e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5"], ["Caro-Kann Defense: Exchange Variation", "e4 c6 d4 d5 exd5 cxd5 Nf3 Nc6"], ["Caro-Kann Defense: Two Knights Attack", "e4 c6 Nc3 d5 Nf3"]],
+    "caro-kann:avance": [["Caro-Kann Defense: Advance Variation, Short Variation", "e4 c6 d4 d5 e5 Bf5 Nf3"]],
+    "caro-kann:clasica": [["Caro-Kann Defense: Classical Variation, Main Line", "e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5 Ng3 Bg6 h4"]],
+    "caro-kann:cambio": [["Caro-Kann Defense: Exchange Variation", "e4 c6 d4 d5 exd5 cxd5 Bf4"]],
+    "caro-kann:dos-caballos": [["Caro-Kann Defense: Two Knights Attack", "e4 c6 Nc3 d5 Nf3"]],
+    "francesa": [["French Defense: Advance Variation", "e4 e6 d4 d5 e5 c5 c3 Nc6"]],
+    "escandinava": [["Scandinavian Defense: Main Line", "e4 d5 exd5 Qxd5 Nc3 Qa5"]],
+    "siciliana-alapin": [["Sicilian Defense: Alapin Variation", "e4 c5 c3"]],
+    "eslava": [["Slav Defense: Modern Line", "d4 d5 c4 c6 Nf3"], ["Slav Defense: Exchange Variation", "d4 d5 c4 c6 Nf3 Nf6 cxd5 cxd5"]],
+    "gambito-dama": [["Queen's Gambit Declined: Normal Defense", "d4 d5 c4 e6 Nc3 Nf6"], ["Queen's Gambit Accepted", "d4 d5 c4 dxc4 Nf3 Nf6"]],
+    "gambito-dama-declinado": [["Queen's Gambit Declined: Normal Defense", "d4 d5 c4 e6 Nc3 Nf6"]],
+    "gambito-dama-aceptado": [["Queen's Gambit Accepted", "d4 d5 c4 dxc4 Nf3 Nf6"]],
+    "londres": [["Queen's Pawn Game: London System", "d4 d5 Nf3 Nf6 Bf4 c5 e3 Nc6 Nbd2 e6 c3"]],
+    "otros-negras:inglesa": [["English Opening: Caro-Kann Defensive System", "c4 c6"]],
+    "otros-negras:reti": [["Nimzo-Larsen Attack: Classical Variation", "Nf3 d5 b3"]],
+    "otros-negras:larsen": [["Nimzo-Larsen Attack: Classical Variation", "b3 d5"]]
+  }
+}
