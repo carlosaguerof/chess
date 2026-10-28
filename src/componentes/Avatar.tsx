@@ -1,7 +1,9 @@
 import type { Personaje } from '../bots/personajes.ts'
+import { CaraGenerada } from './CaraGenerada.tsx'
 
-/** Avatar propio: la inicial del personaje sobre su color (R4 lo cambia por un dibujo generado). */
+/** Avatar propio: el mío es una silueta; el de cada personaje, una cara dibujada en el código (R4). */
 export function Avatar({ personaje, tam = 40, yo = false }: { personaje?: Personaje; tam?: number; yo?: boolean }) {
+  if (!yo && personaje) return <CaraGenerada id={personaje.id} fondo={personaje.color} tam={tam} etiqueta={personaje.nombre} />
   const color = yo ? '#5d9948' : (personaje?.color ?? '#555')
   return (
     <svg className="avatar" width={tam} height={tam} viewBox="0 0 40 40" role="img" aria-label={yo ? 'Tú' : (personaje?.nombre ?? 'Bot')}>
