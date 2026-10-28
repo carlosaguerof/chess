@@ -8,6 +8,9 @@ import { DetalleBot } from './pantallas/DetalleBot.tsx'
 import { Partida } from './pantallas/Partida.tsx'
 import { Licencias } from './pantallas/Licencias.tsx'
 import { Repertorio } from './pantallas/Repertorio.tsx'
+import { Cursos } from './pantallas/Cursos.tsx'
+import { Curso } from './pantallas/Curso.tsx'
+import { Leccion } from './pantallas/Leccion.tsx'
 
 const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', ruta: '/licencias' }]
 
@@ -24,10 +27,13 @@ export function App() {
   if (import.meta.env.DEV && primera === 'medir-motor') return <MedirMotor />
   // la partida ocupa toda la pantalla (N8: solo lo que importa)
   if (primera === 'partida') return <Partida />
+  if (primera === 'leccion' && segunda) return <Leccion key={ruta.consulta.get('otra') ?? ''} cursoId={decodeURIComponent(segunda)} indice={Number(ruta.partes[2] ?? 0)} />
   let pantalla
   if (primera === 'bots') pantalla = <ListaBots />
   else if (primera === 'bot' && segunda) pantalla = <DetalleBot id={segunda} />
   else if (primera === 'licencias') pantalla = <Licencias />
+  else if (primera === 'cursos') pantalla = <Cursos />
+  else if (primera === 'curso' && segunda) pantalla = <Curso id={decodeURIComponent(segunda)} />
   else if (primera === 'repertorio') pantalla = <Repertorio colorInicial={segunda === 'negras' ? 'b' : 'w'} />
   else pantalla = <Inicio />
   return (

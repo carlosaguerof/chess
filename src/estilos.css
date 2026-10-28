@@ -251,3 +251,37 @@ h1, h2, h3 { margin: 0; }
 .menu-linea button { background: none; border: 0; text-align: left; padding: 12px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; }
 .menu-linea button:hover { background: var(--fondo-hover); }
 .menu-linea .peligro { color: #ff8a80; }
+
+/* ---------- cursos y lecciones ---------- */
+.cursos, .curso { display: flex; flex-direction: column; gap: 14px; }
+.cursos h1, .curso h1 { font-size: 24px; }
+.cursos h2 { font-size: 15px; color: var(--texto-suave); margin: 4px 0 8px; }
+.lista-cursos, .lista-lecciones { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.fila-curso, .fila-leccion { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--fondo-panel); border-radius: var(--radio); text-decoration: none; }
+.fila-curso:hover, .fila-leccion:hover { background: #2e2c29; }
+.fila-curso-texto, .fila-leccion-texto { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.fila-curso .nombre, .fila-leccion .nombre { font-weight: 700; }
+.fila-leccion .apagado { font-size: 13px; }
+.barra-avance { height: 6px; background: #3a3835; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.barra-avance i { display: block; height: 100%; background: var(--acento); }
+.marca-leccion { width: 30px; height: 30px; border-radius: 50%; background: var(--fondo-panel-2); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex: 0 0 auto; }
+.fila-leccion.hecha .marca-leccion { background: var(--acento); color: #fff; }
+.leccion { min-height: 100vh; display: grid; grid-template-columns: 1fr; align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
+.leccion-columna { display: flex; flex-direction: column; gap: 6px; }
+.leccion-titulo { display: flex; flex-direction: column; font-size: 13px; line-height: 1.3; }
+.leccion-titulo strong { font-size: 16px; }
+.leccion-panel { gap: 12px; }
+.leccion-fase { display: flex; align-items: center; justify-content: space-between; }
+.leccion-instruccion { margin: 0; font-size: 20px; }
+.aviso-leccion { margin: 0; padding: 10px 12px; border-radius: 8px; font-weight: 600; line-height: 1.4; }
+.aviso-leccion.correcta { background: #2e3a24; color: var(--acento-claro); }
+.aviso-leccion.alternativa { background: #2e3a24; color: #d6e8b8; }
+.aviso-leccion.incorrecta { background: #4a2522; color: #ffb4ab; }
+.aviso-leccion.pista, .aviso-leccion.respuesta, .aviso-leccion.info { background: #2b3440; color: #cfe0f5; font-weight: 500; }
+.botones-ayuda { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fin-leccion { display: flex; flex-direction: column; gap: 10px; }
+.fin-leccion h2 { font-size: 22px; }
+@media (min-width: 900px) {
+  .leccion { grid-template-columns: minmax(0, min(calc(100vh - 140px), 760px)) 380px; justify-content: center; gap: 20px; padding: 20px; }
+  .leccion-panel { border-radius: 10px; padding: 16px; height: fit-content; position: sticky; top: 20px; }
+}

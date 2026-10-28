@@ -16,18 +16,20 @@ export interface EntradaGuia {
   nombreGuia: string
   /** el texto de mi guía para esa entrada (se muestra donde coincide con la teoría) */
   textoGuia: string
+  /** el nombre del curso de esta entrada */
+  curso: string
 }
 
 export const GUIA: EntradaGuia[] = [
-  { color: 'w', apertura: 'italiana', prefijo: '', nombreGuia: 'Italiana', textoGuia: '2.Cf3 Cc6 3.Ac4 — apuntas el alfil a f7, desarrollo natural, enroque corto.' },
-  { color: 'w', apertura: 'siciliana', prefijo: 'alapin', nombreGuia: 'Alapin', textoGuia: '2.c3 — construyes centro con d4, evitas toda la teoría Siciliana.' },
-  { color: 'w', apertura: 'caro-kann', prefijo: 'avance', nombreGuia: 'Avance', textoGuia: '2.d4 d5 3.e5 — cierras centro, atacas flanco de rey con c3-Cf3-Ae2.' },
-  { color: 'w', apertura: 'francesa', prefijo: '', nombreGuia: 'Avance', textoGuia: '2.d4 d5 3.e5 — mismo plan que contra Caro-Kann. Un solo esquema, dos defensas.' },
-  { color: 'w', apertura: 'escandinava', prefijo: '', nombreGuia: 'Captura', textoGuia: '2.exd5 Dxd5 3.Cc3 — ganas tiempo atacando la dama, desarrollo y enroque.' },
-  { color: 'w', apertura: 'otros-1e4', prefijo: '', nombreGuia: 'Principios', textoGuia: 'Desarrolla, controla el centro, enroca. No necesitas teoría específica.' },
-  { color: 'b', apertura: 'caro-kann', prefijo: '', nombreGuia: 'Caro-Kann', textoGuia: '1...c6 — preparas ...d5 sólido, estructura clara, poca teoría.' },
-  { color: 'b', apertura: 'eslava', prefijo: '', nombreGuia: 'Eslava', textoGuia: '1...d5 2.c4 c6 — defiendes d5 con peón, tu alfil de casillas blancas sale a f5.' },
-  { color: 'b', apertura: 'otros-negras', prefijo: '', nombreGuia: 'Principios', textoGuia: '1.c4, 1.Cf3, 1.b3 — juega ...c6 + ...d5 y normalmente transpone a estructuras conocidas.' },
+  { color: 'w', apertura: 'italiana', prefijo: '', curso: 'Italiana', nombreGuia: 'Italiana', textoGuia: '2.Cf3 Cc6 3.Ac4 — apuntas el alfil a f7, desarrollo natural, enroque corto.' },
+  { color: 'w', apertura: 'siciliana', prefijo: 'alapin', curso: 'Alapin contra la Siciliana', nombreGuia: 'Alapin', textoGuia: '2.c3 — construyes centro con d4, evitas toda la teoría Siciliana.' },
+  { color: 'w', apertura: 'caro-kann', prefijo: 'avance', curso: 'Avance contra la Caro-Kann', nombreGuia: 'Avance', textoGuia: '2.d4 d5 3.e5 — cierras centro, atacas flanco de rey con c3-Cf3-Ae2.' },
+  { color: 'w', apertura: 'francesa', prefijo: '', curso: 'Avance contra la Francesa', nombreGuia: 'Avance', textoGuia: '2.d4 d5 3.e5 — mismo plan que contra Caro-Kann. Un solo esquema, dos defensas.' },
+  { color: 'w', apertura: 'escandinava', prefijo: '', curso: 'Captura contra la Escandinava', nombreGuia: 'Captura', textoGuia: '2.exd5 Dxd5 3.Cc3 — ganas tiempo atacando la dama, desarrollo y enroque.' },
+  { color: 'w', apertura: 'otros-1e4', prefijo: '', curso: 'Otras defensas contra 1.e4', nombreGuia: 'Principios', textoGuia: 'Desarrolla, controla el centro, enroca. No necesitas teoría específica.' },
+  { color: 'b', apertura: 'caro-kann', prefijo: '', curso: 'Defensa Caro-Kann', nombreGuia: 'Caro-Kann', textoGuia: '1...c6 — preparas ...d5 sólido, estructura clara, poca teoría.' },
+  { color: 'b', apertura: 'eslava', prefijo: '', curso: 'Defensa Eslava', nombreGuia: 'Eslava', textoGuia: '1...d5 2.c4 c6 — defiendes d5 con peón, tu alfil de casillas blancas sale a f5.' },
+  { color: 'b', apertura: 'otros-negras', prefijo: '', curso: '...c6 + ...d5 contra lo demás', nombreGuia: 'Principios', textoGuia: '1.c4, 1.Cf3, 1.b3 — juega ...c6 + ...d5 y normalmente transpone a estructuras conocidas.' },
 ]
 
 export interface LineaRepertorio {

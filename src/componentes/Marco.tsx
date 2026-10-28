@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { IconoArbol, IconoCasa, IconoJugar, IconoMas } from './Iconos.tsx'
+import { IconoArbol, IconoCasa, IconoJugar, IconoLibro, IconoMas } from './Iconos.tsx'
 
 export interface EntradaMenu {
   ruta: string
@@ -11,6 +11,7 @@ export interface EntradaMenu {
 export const SECCIONES: EntradaMenu[] = [
   { ruta: '/', nombre: 'Inicio', icono: <IconoCasa /> },
   { ruta: '/bots', nombre: 'Jugar', icono: <IconoJugar /> },
+  { ruta: '/cursos', nombre: 'Aprender', icono: <IconoLibro /> },
   { ruta: '/repertorio', nombre: 'Repertorio', icono: <IconoArbol /> },
 ]
 
@@ -24,7 +25,7 @@ export interface EntradaMas {
 
 export function Marco(props: { actual: string; secciones: EntradaMenu[]; mas: EntradaMas[]; children: ReactNode }) {
   const [abierto, setAbierto] = useState(false)
-  const activo = (r: string) => (r === '/' ? props.actual === '/' : props.actual.startsWith(r))
+  const activo = (r: string) => (r === '/' ? props.actual === '/' : props.actual.startsWith(r) || (r === '/cursos' && props.actual.startsWith('/curso')))
   return (
     <div className="marco">
       <nav className="navegacion" aria-label="Secciones">
