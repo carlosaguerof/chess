@@ -85,3 +85,29 @@ El bot se toma de todos modos entre 0.4 y 1.2 s por jugada (para que se sienta c
 - Fairy-Stockfish: https://github.com/fairy-stockfish/Fairy-Stockfish (`src/ucioption.cpp`, `src/search.cpp`); npm `fairy-stockfish-nnue.wasm`.
 - Maia: https://github.com/CSSLab/maia-chess, https://github.com/CSSLab/maia2, https://github.com/CSSLab/maia3, https://github.com/CSSLab/maia-platform-frontend.
 - Rodent IV: https://github.com/nescitus/rodent-iv (sin versión WASM encontrada).
+
+## Calibración de los niveles 300–1200 (T4)
+
+Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 partidas por par, colores alternados (cada apertura se juega una vez con cada color), 24 aperturas de salida distintas (`scripts/aperturas-calibracion.ts`, nombres de lichess). Tablas = medio punto. Partidas de más de 400 medias jugadas = tablas. Motor: `Stockfish 19 Lite WASM`. Resumen: `iterations/v1/mediciones/calibracion-t4-300-1200.json`; las partidas una por una (en UCI) quedan fuera del repo, en `00_corridas/_local/chess/2026-10-28_mvp/calibracion/oficial-t4/`.
+
+"ELO en cadena": 300 vale 300; cada nivel suma la diferencia medida contra el de 100 abajo (−400·log10(1/p − 1)). Son números internos, no de chess.com: lo que se garantiza es el orden.
+
+| Nivel | Contra el de 200 abajo | +G =T −P | ¿≥ 60 %? | Contra el de 100 abajo | ELO en cadena |
+|---|---|---|---|---|---|
+| 300 | — | — | — | — | 300 |
+| 400 | — | — | — | 61.5 % vs 300 | 381 |
+| 500 | 38 / 48 vs 300 (79.2 %) | +36 =4 −8 | sí | 59.4 % vs 400 | 447 |
+| 600 | 35.5 / 48 vs 400 (74.0 %) | +34 =3 −11 | sí | 72.9 % vs 500 | 619 |
+| 700 | 40 / 48 vs 500 (83.3 %) | +38 =4 −6 | sí | 65.6 % vs 600 | 731 |
+| 800 | 40.5 / 48 vs 600 (84.4 %) | +40 =1 −7 | sí | 71.9 % vs 700 | 894 |
+| 900 | 40 / 48 vs 700 (83.3 %) | +39 =2 −7 | sí | 66.7 % vs 800 | 1015 |
+| 1000 | 38.5 / 48 vs 800 (80.2 %) | +38 =1 −9 | sí | 77.1 % vs 900 | 1225 |
+| 1100 | 32.5 / 48 vs 900 (67.7 %) | +32 =1 −15 | sí | 70.8 % vs 1000 | 1380 |
+| 1200 | 40 / 48 vs 1000 (83.3 %) | +39 =2 −7 | sí | 59.4 % vs 1100 | 1446 |
+
+**Cómo se llegó a estos parámetros.** La v1 (por profundidad: 1 a 8) cumplía el 60 % pero con saltos disparejos (600→700 ganaba 89.6 %, 700→800 solo 59.4 %; cadena de 300 a 2268). La v2 controla la fuerza por **nodos** (de 60 a 7,444, ×1.55 por nivel), con errores y temperatura que bajan parejo: de 300 a 800 la cadena quedó casi igual al número nominal (300, 381, 447, 619, 731, 894), pero de 900 a 1200 volvió a crecer rápido. La v3 suaviza 900–1200 (nodos ×1.3, errores ×0.89, temperatura ×0.9 por nivel). Es la que está en `src/motor/niveles.json`. La corrida oficial desde ese archivo dio exactamente lo mismo que la v3: la calibración es determinista (semillas fijas).
+
+**El mismo camino en la app y en la calibración:**
+- Calibración: `scripts/calibrar.ts:71` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor de Node (`scripts/motor-node.ts`).
+- App: `src/pantallas/Partida.tsx:17` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:60` (`jugadaDelBot`) → `src/motor/bot.ts:38` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
+- Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.

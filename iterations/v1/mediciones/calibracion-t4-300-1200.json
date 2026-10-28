@@ -1,0 +1,185 @@
+{
+ "carpeta": "/Users/carlosaguerof/01_repos/00_corridas/_local/chess/2026-10-28_mvp/calibracion/oficial-t4",
+ "juegosPorPartido": 48,
+ "minutos": 3.7969166666666667,
+ "version": "Stockfish 19 Lite WASM",
+ "filas": [
+  {
+   "elo": 300,
+   "contra200": null,
+   "contra100": null,
+   "eloCadena": 300
+  },
+  {
+   "elo": 400,
+   "contra200": null,
+   "contra100": {
+    "rival": 300,
+    "juegos": 48,
+    "puntos": 29.5,
+    "porcentaje": 0.6145833333333334
+   },
+   "eloCadena": 381
+  },
+  {
+   "elo": 500,
+   "contra200": {
+    "rival": 300,
+    "juegos": 48,
+    "puntos": 38,
+    "porcentaje": 0.7916666666666666,
+    "g": 36,
+    "t": 4,
+    "p": 8,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 400,
+    "juegos": 48,
+    "puntos": 28.5,
+    "porcentaje": 0.59375
+   },
+   "eloCadena": 447
+  },
+  {
+   "elo": 600,
+   "contra200": {
+    "rival": 400,
+    "juegos": 48,
+    "puntos": 35.5,
+    "porcentaje": 0.7395833333333334,
+    "g": 34,
+    "t": 3,
+    "p": 11,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 500,
+    "juegos": 48,
+    "puntos": 35,
+    "porcentaje": 0.7291666666666666
+   },
+   "eloCadena": 619
+  },
+  {
+   "elo": 700,
+   "contra200": {
+    "rival": 500,
+    "juegos": 48,
+    "puntos": 40,
+    "porcentaje": 0.8333333333333334,
+    "g": 38,
+    "t": 4,
+    "p": 6,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 600,
+    "juegos": 48,
+    "puntos": 31.5,
+    "porcentaje": 0.65625
+   },
+   "eloCadena": 731
+  },
+  {
+   "elo": 800,
+   "contra200": {
+    "rival": 600,
+    "juegos": 48,
+    "puntos": 40.5,
+    "porcentaje": 0.84375,
+    "g": 40,
+    "t": 1,
+    "p": 7,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 700,
+    "juegos": 48,
+    "puntos": 34.5,
+    "porcentaje": 0.71875
+   },
+   "eloCadena": 894
+  },
+  {
+   "elo": 900,
+   "contra200": {
+    "rival": 700,
+    "juegos": 48,
+    "puntos": 40,
+    "porcentaje": 0.8333333333333334,
+    "g": 39,
+    "t": 2,
+    "p": 7,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 800,
+    "juegos": 48,
+    "puntos": 32,
+    "porcentaje": 0.6666666666666666
+   },
+   "eloCadena": 1015
+  },
+  {
+   "elo": 1000,
+   "contra200": {
+    "rival": 800,
+    "juegos": 48,
+    "puntos": 38.5,
+    "porcentaje": 0.8020833333333334,
+    "g": 38,
+    "t": 1,
+    "p": 9,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 900,
+    "juegos": 48,
+    "puntos": 37,
+    "porcentaje": 0.7708333333333334
+   },
+   "eloCadena": 1225
+  },
+  {
+   "elo": 1100,
+   "contra200": {
+    "rival": 900,
+    "juegos": 48,
+    "puntos": 32.5,
+    "porcentaje": 0.6770833333333334,
+    "g": 32,
+    "t": 1,
+    "p": 15,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 1000,
+    "juegos": 48,
+    "puntos": 34,
+    "porcentaje": 0.7083333333333334
+   },
+   "eloCadena": 1380
+  },
+  {
+   "elo": 1200,
+   "contra200": {
+    "rival": 1000,
+    "juegos": 48,
+    "puntos": 40,
+    "porcentaje": 0.8333333333333334,
+    "g": 39,
+    "t": 2,
+    "p": 7,
+    "cumple": true
+   },
+   "contra100": {
+    "rival": 1100,
+    "juegos": 48,
+    "puntos": 28.5,
+    "porcentaje": 0.59375
+   },
+   "eloCadena": 1446
+  }
+ ]
+}
