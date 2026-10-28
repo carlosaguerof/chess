@@ -9,8 +9,9 @@ test('R4 · la lista completa de bots con su cara dibujada en el código (sin im
   await page.goto('/#/bots')
   await expect(page.locator('svg[data-cara]').first()).toBeVisible()
   const caras = await page.locator('svg[data-cara]').evaluateAll((s) => new Set(s.map((x) => x.getAttribute('data-cara'))).size)
-  // todos los que se pueden escoger (los 47 cuando la calibración de la T13 cubre de 100 a 3000)
-  expect(caras).toBe(personajesDisponibles().length)
+  // los 47: con la calibración de la T13 (100 a 3000) todos se pueden escoger
+  expect(personajesDisponibles()).toHaveLength(47)
+  expect(caras).toBe(47)
   expect(deFuera).toEqual([])
   await page.screenshot({ path: `iterations/v1/capturas/${info.project.name}/r4-lista-completa.png`, fullPage: true })
 })
