@@ -1,103 +1,245 @@
 {
- "nota": "Parámetros de cada nivel (v3, calibrada el 2026-10-28). Los usa elegirJugada (src/motor/elegir.ts) en la app y en la calibración. nodos = cuántas posiciones revisa el motor; multipv = candidatas; errorGrande = probabilidad de una jugada que pierde ≥150 cp; temperatura = qué tanto se aleja de la mejor. calibrado=false: todavía no se calibró (T13). Ver specs/motor.md.",
- "niveles": [
-  {
-   "elo": 100,
-   "modo": "debil",
-   "nodos": 60,
-   "multipv": 12,
-   "errorGrande": 0.4,
-   "temperatura": 400,
-   "calibrado": false
-  },
-  {
-   "elo": 200,
-   "modo": "debil",
-   "nodos": 93,
-   "multipv": 11,
-   "errorGrande": 0.312,
-   "temperatura": 320,
-   "calibrado": false
-  },
-  {
-   "elo": 300,
-   "modo": "debil",
-   "nodos": 144,
-   "multipv": 11,
-   "errorGrande": 0.243,
-   "temperatura": 256
-  },
-  {
-   "elo": 400,
-   "modo": "debil",
-   "nodos": 223,
-   "multipv": 10,
-   "errorGrande": 0.19,
-   "temperatura": 205
-  },
-  {
-   "elo": 500,
-   "modo": "debil",
-   "nodos": 346,
-   "multipv": 9,
-   "errorGrande": 0.148,
-   "temperatura": 164
-  },
-  {
-   "elo": 600,
-   "modo": "debil",
-   "nodos": 537,
-   "multipv": 8,
-   "errorGrande": 0.115,
-   "temperatura": 131
-  },
-  {
-   "elo": 700,
-   "modo": "debil",
-   "nodos": 832,
-   "multipv": 8,
-   "errorGrande": 0.09,
-   "temperatura": 105
-  },
-  {
-   "elo": 800,
-   "modo": "debil",
-   "nodos": 1290,
-   "multipv": 7,
-   "errorGrande": 0.07,
-   "temperatura": 84
-  },
-  {
-   "elo": 900,
-   "modo": "debil",
-   "nodos": 1677,
-   "multipv": 6,
-   "errorGrande": 0.062,
-   "temperatura": 76
-  },
-  {
-   "elo": 1000,
-   "modo": "debil",
-   "nodos": 2180,
-   "multipv": 6,
-   "errorGrande": 0.055,
-   "temperatura": 68
-  },
-  {
-   "elo": 1100,
-   "modo": "debil",
-   "nodos": 2834,
-   "multipv": 5,
-   "errorGrande": 0.049,
-   "temperatura": 61
-  },
-  {
-   "elo": 1200,
-   "modo": "debil",
-   "nodos": 3684,
-   "multipv": 5,
-   "errorGrande": 0.044,
-   "temperatura": 55
-  }
- ]
+  "nota": "Parámetros de cada nivel (100 a 3000). Los usa elegirJugada (src/motor/elegir.ts) en la app y en la calibración. debil: nodos = cuántas posiciones revisa el motor, multipv = candidatas, errorGrande = probabilidad de una jugada que pierde ≥150 cp, temperatura = qué tanto se aleja de la mejor. Calibración de la T13 (48 partidas por par): tabla en specs/motor.md. El modo uci (UCI_Elo de Stockfish) existe en el código, pero ningún nivel lo usa. Ver specs/motor.md.",
+  "niveles": [
+    {
+      "elo": 100,
+      "modo": "debil",
+      "nodos": 60,
+      "multipv": 12,
+      "errorGrande": 0.4,
+      "temperatura": 400
+    },
+    {
+      "elo": 200,
+      "modo": "debil",
+      "nodos": 93,
+      "multipv": 11,
+      "errorGrande": 0.312,
+      "temperatura": 320
+    },
+    {
+      "elo": 300,
+      "modo": "debil",
+      "nodos": 144,
+      "multipv": 11,
+      "errorGrande": 0.243,
+      "temperatura": 256
+    },
+    {
+      "elo": 400,
+      "modo": "debil",
+      "nodos": 223,
+      "multipv": 10,
+      "errorGrande": 0.19,
+      "temperatura": 205
+    },
+    {
+      "elo": 500,
+      "modo": "debil",
+      "nodos": 346,
+      "multipv": 9,
+      "errorGrande": 0.148,
+      "temperatura": 164
+    },
+    {
+      "elo": 600,
+      "modo": "debil",
+      "nodos": 537,
+      "multipv": 8,
+      "errorGrande": 0.115,
+      "temperatura": 131
+    },
+    {
+      "elo": 700,
+      "modo": "debil",
+      "nodos": 832,
+      "multipv": 8,
+      "errorGrande": 0.09,
+      "temperatura": 105
+    },
+    {
+      "elo": 800,
+      "modo": "debil",
+      "nodos": 1290,
+      "multipv": 7,
+      "errorGrande": 0.07,
+      "temperatura": 84
+    },
+    {
+      "elo": 900,
+      "modo": "debil",
+      "nodos": 1677,
+      "multipv": 6,
+      "errorGrande": 0.062,
+      "temperatura": 76
+    },
+    {
+      "elo": 1000,
+      "modo": "debil",
+      "nodos": 2180,
+      "multipv": 6,
+      "errorGrande": 0.055,
+      "temperatura": 68
+    },
+    {
+      "elo": 1100,
+      "modo": "debil",
+      "nodos": 2834,
+      "multipv": 5,
+      "errorGrande": 0.049,
+      "temperatura": 61
+    },
+    {
+      "elo": 1200,
+      "modo": "debil",
+      "nodos": 3684,
+      "multipv": 5,
+      "errorGrande": 0.044,
+      "temperatura": 55
+    },
+    {
+      "elo": 1300,
+      "modo": "debil",
+      "nodos": 4973,
+      "multipv": 5,
+      "errorGrande": 0.0361,
+      "temperatura": 47
+    },
+    {
+      "elo": 1400,
+      "modo": "debil",
+      "nodos": 6714,
+      "multipv": 5,
+      "errorGrande": 0.0296,
+      "temperatura": 40
+    },
+    {
+      "elo": 1500,
+      "modo": "debil",
+      "nodos": 9064,
+      "multipv": 5,
+      "errorGrande": 0.0243,
+      "temperatura": 34
+    },
+    {
+      "elo": 1600,
+      "modo": "debil",
+      "nodos": 12236,
+      "multipv": 4,
+      "errorGrande": 0.0199,
+      "temperatura": 29
+    },
+    {
+      "elo": 1700,
+      "modo": "debil",
+      "nodos": 16519,
+      "multipv": 4,
+      "errorGrande": 0.0163,
+      "temperatura": 25
+    },
+    {
+      "elo": 1800,
+      "modo": "debil",
+      "nodos": 22301,
+      "multipv": 4,
+      "errorGrande": 0.0134,
+      "temperatura": 22
+    },
+    {
+      "elo": 1900,
+      "modo": "debil",
+      "nodos": 30106,
+      "multipv": 3,
+      "errorGrande": 0.011,
+      "temperatura": 19
+    },
+    {
+      "elo": 2000,
+      "modo": "debil",
+      "nodos": 40643,
+      "multipv": 3,
+      "errorGrande": 0.009,
+      "temperatura": 16
+    },
+    {
+      "elo": 2100,
+      "modo": "debil",
+      "nodos": 51210,
+      "multipv": 3,
+      "errorGrande": 0.0063,
+      "temperatura": 12
+    },
+    {
+      "elo": 2200,
+      "modo": "debil",
+      "nodos": 64525,
+      "multipv": 3,
+      "errorGrande": 0.0044,
+      "temperatura": 9
+    },
+    {
+      "elo": 2300,
+      "modo": "debil",
+      "nodos": 81302,
+      "multipv": 3,
+      "errorGrande": 0.0031,
+      "temperatura": 7
+    },
+    {
+      "elo": 2400,
+      "modo": "debil",
+      "nodos": 102441,
+      "multipv": 2,
+      "errorGrande": 0.0022,
+      "temperatura": 5
+    },
+    {
+      "elo": 2500,
+      "modo": "debil",
+      "nodos": 129076,
+      "multipv": 2,
+      "errorGrande": 0.0015,
+      "temperatura": 4
+    },
+    {
+      "elo": 2600,
+      "modo": "debil",
+      "nodos": 162636,
+      "multipv": 2,
+      "errorGrande": 0.001,
+      "temperatura": 3
+    },
+    {
+      "elo": 2700,
+      "modo": "debil",
+      "nodos": 204921,
+      "multipv": 2,
+      "errorGrande": 0,
+      "temperatura": 2
+    },
+    {
+      "elo": 2800,
+      "modo": "debil",
+      "nodos": 258200,
+      "multipv": 1,
+      "errorGrande": 0,
+      "temperatura": 2
+    },
+    {
+      "elo": 2900,
+      "modo": "debil",
+      "nodos": 325332,
+      "multipv": 1,
+      "errorGrande": 0,
+      "temperatura": 2
+    },
+    {
+      "elo": 3000,
+      "modo": "debil",
+      "nodos": 409918,
+      "multipv": 1,
+      "errorGrande": 0,
+      "temperatura": 2
+    }
+  ]
 }
