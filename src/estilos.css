@@ -384,3 +384,7 @@ h1, h2, h3 { margin: 0; }
 .ajustes { display: flex; flex-direction: column; gap: 12px; }
 .ajustes h1 { font-size: 24px; }
 .ajustes .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 4px 14px; display: flex; flex-direction: column; }
+.repaso-hoy { display: flex; flex-direction: column; gap: 2px; }
+a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+.listo-por-hoy { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.listo-por-hoy h1 { font-size: 26px; }

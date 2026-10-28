@@ -78,11 +78,13 @@ export interface Respaldo {
   progreso: Record<string, { fecha: number }>
   /** registro por jugada (nota 1) */
   registro: unknown[]
+  /** R7: los escalones y fechas del repaso */
+  repaso?: Record<string, { escalon: number; proxima: string }>
 }
 
 /** El archivo que se descarga: JSON con formato fijo (exportar → importar → exportar da los mismos bytes). */
 export function exportar(r: Omit<Respaldo, 'app' | 'version'>): string {
-  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio, progreso: r.progreso, registro: r.registro }
+  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio, progreso: r.progreso, registro: r.registro, repaso: r.repaso ?? {} }
   return JSON.stringify(respaldo, null, 1) + '\n'
 }
 
@@ -100,7 +102,7 @@ export function importar(texto: string): Respaldo {
   if (r?.app !== 'chess-mis-aperturas' || r.version !== 1 || !r.repertorio || !Array.isArray(r.repertorio.lineas)) {
     throw new ErrorImportar('Ese archivo no es un respaldo de tu repertorio. Escoge el archivo que exportaste desde esta app.')
   }
-  return { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio as Repertorio, progreso: r.progreso ?? {}, registro: r.registro ?? [] }
+  return { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio as Repertorio, progreso: r.progreso ?? {}, registro: r.registro ?? [], repaso: r.repaso ?? {} }
 }
 
 /**

@@ -4,12 +4,25 @@ import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso } from '../partida/usePartidaBot.ts'
 import { navegar } from '../ruta.ts'
+import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
+import { cursos } from '../cursos/datos.ts'
+import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
 
 export function Inicio() {
   const bot = recomendado()
   const enCurso = partidaEnCurso()
   const rival = personajePorId(enCurso?.botId)
   const [confirmar, setConfirmar] = useState(false)
+  const [rep] = useRepertorio()
+  // R7: el repaso de hoy (si el interruptor está prendido)
+  const repaso = (() => {
+    if (!repasoActivo()) return null
+    const lecciones = cursos(rep).flatMap((c) => c.lecciones)
+    const hechas = leerProgreso()
+    const hoy = paraHoy(leerRepaso(), hechas, lecciones, dia())
+    const manana = paraHoy(leerRepaso(), hechas, lecciones, sumarDias(dia(), 1)).length
+    return { n: hoy.length, min: minutos(hoy), manana, aprendidas: lecciones.some((l) => hechas[l.id]) }
+  })()
   const jugar = () => {
     empezarPartida(bot.id, 'w')
     navegar('/partida')
@@ -46,6 +59,25 @@ export function Inicio() {
           Escoger otro bot o color
         </a>
       </section>
+      {repaso &&
+        (repaso.n > 0 ? (
+          <a className="tarjeta tarjeta-enlace repaso-hoy" href="#/repaso" data-testid="repaso-hoy" data-n={repaso.n}>
+            <div>
+              <strong>
+                Repaso de hoy: {repaso.n} {repaso.n === 1 ? 'línea' : 'líneas'}, unos {repaso.min} {repaso.min === 1 ? 'minuto' : 'minutos'}
+              </strong>
+              <span className="apagado">Las líneas que aprendiste, justo antes de olvidarlas</span>
+            </div>
+            <span className="boton primario chico">Repasar</span>
+          </a>
+        ) : (
+          <div className="tarjeta repaso-hoy" data-testid="repaso-hoy" data-n={0}>
+            <strong>Repaso de hoy: listo</strong>
+            <span className="apagado">
+              {repaso.aprendidas ? `Mañana ${repaso.manana === 1 ? 'toca 1 línea' : `tocan ${repaso.manana} líneas`}.` : 'Cuando termines una lección en Aprender, aquí vuelve antes de que la olvides.'}
+            </span>
+          </div>
+        ))}
       <a className="tarjeta tarjeta-enlace" href="#/refuerza" data-testid="ir-refuerza">
         <div>
           <strong>Refuerza lo que fallas</strong>
