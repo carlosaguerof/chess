@@ -37,7 +37,8 @@ export interface Amenaza {
 
 /**
  * Las amenazas contra mis piezas (T15): cada pieza mía (no el rey) que el rival puede tomar con una jugada legal
- * y sin defensa suficiente: nadie la defiende, o el rival la puede tomar con una pieza que vale menos.
+ * y sin defensa suficiente: nadie la defiende, la atacan más piezas de las que la defienden, o el rival la puede
+ * tomar con una pieza que vale menos.
  */
 export function amenazas(chess: Chess, color: ColorCorto): Amenaza[] {
   const rival: ColorCorto = color === 'w' ? 'b' : 'w'
@@ -51,7 +52,7 @@ export function amenazas(chess: Chess, color: ColorCorto): Amenaza[] {
     const defensores = atacantes(chess, sq, color)
     const masBarato = ata.reduce((a, b) => (VALOR[chess.get(b)!.type]! < VALOR[chess.get(a)!.type]! ? b : a))
     const valorAtacante = VALOR[chess.get(masBarato)!.type]!
-    if (defensores.length === 0 || valorAtacante < VALOR[p.type]!) r.push({ desde: masBarato, hasta: sq })
+    if (defensores.length === 0 || valorAtacante < VALOR[p.type]! || ata.length > defensores.length) r.push({ desde: masBarato, hasta: sq })
   }
   return r
 }

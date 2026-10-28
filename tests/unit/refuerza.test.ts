@@ -74,3 +74,19 @@ describe('T12 (nota 1) · registro por jugada y "Refuerza lo que fallas"', () =>
     expect(textoConteo(resto[0]!)).toBe('nunca practicada')
   })
 })
+
+describe('Refuerza · la Pista habla de la jugada que se pregunta (pase 3 de la T22)', () => {
+  it('con la línea completa, la Pista de 1.e4 no cita el plan de la variante', async () => {
+    const { readFileSync } = await import('node:fs')
+    const { repertorioInicial } = await import('../../src/repertorio/modelo.ts')
+    const { jugadasDeMiRepertorio, lineaCompleta } = await import('../../src/registro/refuerza.ts')
+    const { pista, estadoDeRepaso } = await import('../../src/cursos/modelo.ts')
+    const rep = repertorioInicial(JSON.parse(readFileSync('conocimiento/base.json', 'utf8')))
+    const j = jugadasDeMiRepertorio(rep, []).find((x) => x.camino.length === 0 && x.esperada === 'e4')!
+    const leccion = { id: 'r', cursoId: 'r', nombre: j.linea.nombre, familia: j.linea.familia, plan: j.linea.plan, autorPlan: j.linea.autorPlan, frecuencia: 3, color: j.linea.color, jugadas: lineaCompleta(j) }
+    expect(leccion.jugadas.length).toBeGreaterThan(1)
+    const p = pista(leccion, { ...estadoDeRepaso(leccion), ply: 0 })
+    expect(p).toContain('Mueve el peón de e2')
+    for (const frase of j.linea.plan.split(/(?<=\.)\s+/).filter((f) => f.length > 20)) expect(p).not.toContain(frase)
+  })
+})

@@ -124,7 +124,7 @@ h1, h2, h3 { margin: 0; }
 .partida-columna { display: flex; flex-direction: column; gap: 6px; }
 .partida-arriba { display: flex; align-items: center; gap: 4px; padding-left: 4px; }
 .partida-arriba .barra-jugador { flex: 1; }
-.salir { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--texto-apagado); border-radius: 6px; }
+.salir { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--texto-apagado); border-radius: 6px; background: none; border: 0; padding: 0; cursor: pointer; }
 .salir:hover { background: var(--fondo-panel-2); color: #fff; }
 .partida-tablero { width: 100%; position: relative; }
 .barra-jugador { display: flex; align-items: center; gap: 10px; padding: 4px 8px; min-height: 44px; }

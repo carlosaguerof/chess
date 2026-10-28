@@ -20,7 +20,7 @@ const CON_BLANCAS: Record<string, string> = {
   'siciliana:alapin': 'Alapin contra la Siciliana',
   'siciliana:smith-morra': 'Gambito Smith-Morra',
   'siciliana:grand-prix': 'Ataque Grand Prix',
-  siciliana: 'Siciliana abierta (con blancas)',
+  siciliana: 'Siciliana (con blancas)',
   'caro-kann:avance': 'Avance contra la Caro-Kann',
   'caro-kann:clasica': 'Clásica contra la Caro-Kann',
   'caro-kann:cambio': 'Cambio contra la Caro-Kann',

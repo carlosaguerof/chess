@@ -50,3 +50,42 @@ describe('T13 · los 47 personajes y sus libros', () => {
     expect(contraD4.every((a) => a.length > 0)).toBe(true)
   })
 })
+
+describe('T13 · con las opciones por defecto ("Que juegue mis líneas" prendido), los tres de 700 siguen distintos (pase 3 de la T22)', () => {
+  it('por el camino de la app (jugadaDelBot), cada uno abre y contesta 1.e4 con su libro dentro de mi árbol', async () => {
+    const { Chess } = await import('chess.js')
+    const { jugadaDelBot } = await import('../../src/motor/bot.ts')
+    const { libroDe } = await import('../../src/bots/libros.ts')
+    const { jugadaDeMisLineas } = await import('../../src/guia/guia.ts')
+    const { repertorioInicial } = await import('../../src/repertorio/modelo.ts')
+    const { OPCIONES_POR_DEFECTO } = await import('../../src/partida/modelo.ts')
+    const { azarConSemilla } = await import('../../src/motor/elegir.ts')
+    expect(OPCIONES_POR_DEFECTO.misLineas).toBe(true)
+    const base = JSON.parse(readFileSync('conocimiento/base.json', 'utf8'))
+    const rep = repertorioInicial(base)
+    const sinMotor = () => Promise.reject(new Error('no debía llegar al motor'))
+    const juega = async (p: (typeof PERSONAJES)[number], colorBot: 'w' | 'b', historia: string[]) => {
+      const c = new Chess()
+      for (const s of historia) c.move(s)
+      const humano = colorBot === 'w' ? 'b' : 'w'
+      const azar = azarConSemilla(7)
+      const vistas = new Set<string>()
+      for (let i = 0; i < 40; i++) {
+        const j = await jugadaDelBot(c, { elo: p.elo, modo: 'debil', nodos: 1, multipv: 1, errorGrande: 0, temperatura: 1 }, sinMotor, {
+          misLineas: (h, a, pref) => jugadaDeMisLineas(rep, humano, h, a, pref),
+          libro: libroDe(p, colorBot, lineasDeLibro),
+          delLibro: candidatasDeLibro(p, colorBot, lineasDeLibro),
+        }, azar)
+        vistas.add(c.move({ from: j!.uci.slice(0, 2), to: j!.uci.slice(2, 4) }).san)
+        c.undo()
+      }
+      return [...vistas].sort().join(',')
+    }
+    const tres = PERSONAJES.filter((p) => p.elo === 700)
+    const abre = await Promise.all(tres.map((p) => juega(p, 'w', [])))
+    const contraE4 = await Promise.all(tres.map((p) => juega(p, 'b', ['e4'])))
+    expect(new Set(abre).size).toBe(3)
+    expect(new Set(contraE4).size).toBe(3)
+    for (const [p, a] of tres.map((p, i) => [p, abre[i]!] as const)) expect(new Set(candidatasDeLibro(p, 'w', lineasDeLibro)([])).has(a), `${p.nombre} abre ${a}`).toBe(true)
+  })
+})

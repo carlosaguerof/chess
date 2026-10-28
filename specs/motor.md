@@ -10,7 +10,7 @@
 
 Por qué:
 1. **Cubre todo el rango, 100–3000,** incluida mi zona (500–1000), que ninguna opción hecha cubre: el `UCI_Elo` de Stockfish no baja de 1320 y Maia no distingue niveles debajo de 1100.
-2. **Es ligero y rápido en el iPhone:** 1.85 MB (1.2 MB con gzip, 1.1 MB con brotli), carga en 0.24 s y elige jugada en milisegundos en tu zona y en poco más de 1 s en el 3000, en WebKit con pantalla de iPhone (medido; ver la tabla de mediciones). No necesita encabezados especiales del servidor, así que `npm run casa` y cualquier hosting estático sirven.
+2. **Es ligero y rápido en el iPhone:** 1.85 MB (1.2 MB con gzip, 1.1 MB con brotli), carga en 0.28 s y elige jugada en milisegundos en tu zona y en poco más de 1 s en el 3000, en WebKit con pantalla de iPhone (medido; ver la tabla de mediciones). No necesita encabezados especiales del servidor, así que `npm run casa` y cualquier hosting estático sirven.
 3. **Sirve para estilos:** las aperturas son el libro de cada personaje (aparte del motor, como hace lichess); el temperamento (T17) se engancha al escoger entre candidatas parecidas. Con `UCI_Elo` no hay dónde engancharlo.
 4. **Un solo camino:** la misma función, `elegirJugada` (`src/motor/elegir.ts`), corre en la app (motor en un Web Worker) y en la calibración (motor en Node). Se calibra lo que se juega.
 5. **Riesgo bajo:** ya está instalado y probado en los dos perfiles. El riesgo que queda es que los números de ELO son aproximados; lo que se garantiza y se mide es el orden (T4).
@@ -94,7 +94,7 @@ El bot se toma de todos modos entre 0.4 y 1.2 s por jugada (para que se sienta c
 
 ## Cómo juega un bot (lo que está construido)
 
-1. **Libro de aperturas** del personaje (de la base, `conocimiento/`), unas 6 a 8 jugadas.
+1. **Libro de aperturas** del personaje (de la base, `conocimiento/`): hasta 8 jugadas suyas, según qué tan largas sean las variantes de su estilo (algunas tienen 1 o 2, como 1.b3 d5 de Olga). Si "Que juegue mis líneas" está prendido, el bot juega dentro de mi árbol, pero escoge primero las jugadas que también están en su libro.
 2. Fuera del libro, **`elegirJugada`** (`src/motor/elegir.ts`), con los parámetros de su nivel (`src/motor/niveles.json`, un solo archivo de datos):
    - `nodos` (cuántas posiciones revisa el motor) y `multipv` (cuántas candidatas pide). La v1 usaba `profundidad`; desde la v2 la fuerza se controla por nodos, que dan pasos más parejos.
    - `errorGrande`: probabilidad de una jugada que pierde al menos 150 centipeones contra la mejor (si no hay una entre las candidatas, una jugada legal que el motor ni consideró).
@@ -134,7 +134,7 @@ Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 par
 
 **El mismo camino en la app y en la calibración:**
 - Calibración: `scripts/calibrar.ts:84` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor de Node (`scripts/motor-node.ts`).
-- App: `src/pantallas/Partida.tsx:37` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:132` (`jugadaDelBot`) → `src/motor/bot.ts:39` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
+- App: `src/pantallas/Partida.tsx:37` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:132` (`jugadaDelBot`) → `src/motor/bot.ts:43` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
 - Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.
 
 ## Calibración de los niveles 100–3000 (T13)
