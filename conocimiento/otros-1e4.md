@@ -56,13 +56,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Defensa Owen
 
-### Defensa Owen
+### Defensa Owen: Defensa Guatemala
 
-**1.e4 b6**
+**1.e4 b6 2.d4 Aa6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras prepara ...Ab7 para presionar e4. Ocupa el centro con d4 y defiende e4 con Ad3 (o Cc3); luego Cf3, 0-0 y c3 o c4 según convenga.
-- Fuente: B00 · Owen Defense
+- Plan *(redactado por la IA)*: Negras quiere cambiar tu alfil de casillas blancas con ...Aa6. Ocupa el centro con d4, desarrolla con Cf3 y Cc3 y enroca: tendrás más espacio.
+- Fuente: B00 · Owen Defense: Guatemala Defense
 
 ## Defensa San Jorge
 
@@ -76,10 +76,10 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Defensa Carr
 
-### Defensa Carr
+### Defensa Carr: Gambito Zilbermints
 
-**1.e4 h6**
+**1.e4 h6 2.d4 e5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: ...h6 no desarrolla nada. Aprovéchalo: d4 para tener los dos peones centrales, Cc3 y Cf3, alfiles activos (Ac4 o Ad3) y enroque corto.
-- Fuente: B00 · Carr Defense
+- Plan *(redactado por la IA)*: ...h6 no desarrolla nada. Ocupa el centro con 2.d4; si negras da un peón con 2...e5, puedes tomarlo y desarrollar con Cc3, Cf3, alfiles activos y enroque corto.
+- Fuente: B00 · Carr Defense: Zilbermints Gambit

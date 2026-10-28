@@ -20,7 +20,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
   const [borrando, setBorrando] = useState<NodoArbol | null>(null)
   const [ultimoBorrado, setUltimoBorrado] = useState<Borrado | null>(null)
   const [editando, setEditando] = useState<LineaRepertorio | null>(null)
-  const [agregandoDesde, setAgregandoDesde] = useState<string[] | null>(null)
+  const [agregandoDesde, setAgregandoDesde] = useState<{ jugadas: string[]; apertura: string } | null>(null)
   const [menu, setMenu] = useState(false)
   const [reiniciar, setReiniciar] = useState(false)
   const [aviso, setAviso] = useState<string | null>(null)
@@ -94,6 +94,11 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
         {conFamilia?.familia && (
           <span className="rama-nombre">
             → {conFamilia.familia.nombre} <Puntos n={conFamilia.familia.frecuencia} />
+            {conFamilia.familia.ingles && (
+              <small className="ingles">
+                {conFamilia.familia.ingles} · {conFamilia.familia.eco}
+              </small>
+            )}
           </span>
         )}
         {soloBase && nombreBase && <span className="rama-nombre">→ {nombreBase}</span>}
@@ -206,7 +211,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
             <button type="button" role="menuitem" onClick={() => (setEditando(menuLinea.linea), setMenuLinea(null))}>
               Editar nombre, plan y frecuencia
             </button>
-            <button type="button" role="menuitem" onClick={() => (setAgregandoDesde(menuLinea.linea.jugadas), setMenuLinea(null))}>
+            <button type="button" role="menuitem" onClick={() => (setAgregandoDesde({ jugadas: menuLinea.linea.jugadas, apertura: menuLinea.linea.apertura }), setMenuLinea(null))}>
               Agregar una línea jugando desde aquí
             </button>
             <button type="button" role="menuitem" className="peligro" onClick={() => (setBorrando(menuLinea.nodo), setMenuLinea(null))} data-testid="borrar-rama">
@@ -270,9 +275,9 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
       {agregandoDesde && (
         <AgregarJugando
           color={color}
-          desde={agregandoDesde}
+          desde={agregandoDesde.jugadas}
           onGuardar={(jugadas, nombre) => {
-            setRep(agregarPropia(rep, color, jugadas, nombre))
+            setRep(agregarPropia(rep, color, jugadas, nombre, agregandoDesde.apertura))
             setAgregandoDesde(null)
           }}
           onCancelar={() => setAgregandoDesde(null)}

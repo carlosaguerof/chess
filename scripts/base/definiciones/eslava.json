@@ -11,7 +11,11 @@
       "id": "checa",
       "familia": "Variante Checa",
       "nombre": "Defensa Eslava: Variante Checa",
-      "fila": { "eco": "D17", "name": "Slav Defense: Czech Variation", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5" },
+      "fila": {
+        "eco": "D17",
+        "name": "Slav Defense: Czech Variation",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5"
+      },
       "lado": "negras",
       "plan": "Con los caballos ya fuera, tomas en c4 (...dxc4). 5.a4 impide ...b5, y entonces tu alfil sale a f5, donde frena el avance e4. Sigue ...e6, ...Ab4 y 0-0.",
       "frecuencia": null,
@@ -21,7 +25,11 @@
       "id": "tranquila-schallopp",
       "familia": "Variante Tranquila",
       "nombre": "Defensa Eslava: Variante Tranquila, Defensa Schallopp",
-      "fila": { "eco": "D12", "name": "Slav Defense: Quiet Variation, Schallopp Defense", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bf5 5. Nc3 e6" },
+      "fila": {
+        "eco": "D12",
+        "name": "Slav Defense: Quiet Variation, Schallopp Defense",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bf5 5. Nc3 e6"
+      },
       "lado": "negras",
       "plan": "Contra 4.e3 el alfil sale a f5 ANTES de ...e6; si no, se queda encerrado. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.",
       "frecuencia": null,
@@ -31,7 +39,11 @@
       "id": "cambio",
       "familia": "Variante del Cambio",
       "nombre": "Defensa Eslava: Variante del Cambio, Línea Simétrica",
-      "fila": { "eco": "D14", "name": "Slav Defense: Exchange Variation, Symmetrical Line", "pgn": "1. d4 d5 2. c4 c6 3. cxd5 cxd5 4. Nc3 Nf6 5. Nf3 Nc6 6. Bf4 Bf5" },
+      "fila": {
+        "eco": "D14",
+        "name": "Slav Defense: Exchange Variation, Symmetrical Line",
+        "pgn": "1. d4 d5 2. c4 c6 3. cxd5 cxd5 4. Nc3 Nf6 5. Nf3 Nc6 6. Bf4 Bf5"
+      },
       "lado": "negras",
       "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila. Desarrolla igual que blancas: ...Cf6, ...Cc6 y ...Af5; luego ...e6, ...Ae7 o ...Ad6 y 0-0. Vigila la jugada Db3 contra tu peón de b7.",
       "frecuencia": null,
@@ -40,20 +52,28 @@
     {
       "id": "cc3",
       "familia": "Variante 3.Cc3",
-      "nombre": "Defensa Eslava (3.Cc3)",
-      "fila": { "eco": "D10", "name": "Slav Defense", "pgn": "1. d4 d5 2. c4 c6 3. Nc3" },
+      "nombre": "Defensa Eslava: 3.Cc3 dxc4",
+      "fila": {
+        "eco": "D10",
+        "name": "Slav Defense",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nc3"
+      },
       "lado": "negras",
-      "plan": "Lo natural es 3...Cf6: si 4.Cf3, llegas a la Variante Checa (...dxc4 y ...Af5). Si 4.e3, desarrolla con ...e6 o ...a6; aquí ...Af5 es delicado, porque cxd5 y Db3 atacan b7 y d5 a la vez.",
+      "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
     {
       "id": "checa-clasica",
       "familia": "Variante Checa",
-      "nombre": "Defensa Eslava: Variante Checa, Sistema Clásico, Línea principal",
-      "fila": { "eco": "D19", "name": "Slav Defense: Czech Variation, Classical System, Main Line", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2" },
+      "nombre": "Defensa Eslava: Variante Checa, Variante Holandesa, Sämisch",
+      "fila": {
+        "eco": "D19",
+        "name": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2 Ne4 10. g4"
+      },
       "lado": "negras",
-      "plan": "Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Tras 9.De2 lo usual es ...Cbd7; si blancas empuja e4, el alfil se retira a g6.",
+      "plan": "Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Contra 9.De2, 9...Ce4 ocupa el centro; si blancas ataca con g4, el alfil se retira a g6.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -61,7 +81,11 @@
       "id": "alekhine-e3",
       "familia": "Variante de los Tres Caballos",
       "nombre": "Defensa Eslava: Variante Alekhine",
-      "fila": { "eco": "D15", "name": "Slav Defense: Alekhine Variation", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e3" },
+      "fila": {
+        "eco": "D15",
+        "name": "Slav Defense: Alekhine Variation",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e3"
+      },
       "lado": "negras",
       "plan": "Si blancas juega 5.e3 sin a4, ...b5 defiende el peón de c4. Si después a4, ...b4 ahuyenta el caballo de c3. Luego ...e6, ...Ae7 y 0-0.",
       "frecuencia": null,
@@ -71,7 +95,11 @@
       "id": "checa-carlsbad",
       "familia": "Variante Checa",
       "nombre": "Defensa Eslava: Variante Checa, Variante Carlsbad",
-      "fila": { "eco": "D17", "name": "Slav Defense: Czech Variation, Carlsbad Variation", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. Ne5 Nbd7 7. Nxc4 Qc7 8. g3 e5" },
+      "fila": {
+        "eco": "D17",
+        "name": "Slav Defense: Czech Variation, Carlsbad Variation",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. Ne5 Nbd7 7. Nxc4 Qc7 8. g3 e5"
+      },
       "lado": "negras",
       "plan": "Contra 6.Ce5, que quiere recuperar c4 y empujar f3 y e4, ...Cbd7 desafía ese caballo. Tras 7.Cxc4, ...Dc7 prepara ...e5, la ruptura que libera tu juego.",
       "frecuencia": null,
@@ -81,7 +109,11 @@
       "id": "tranquila-clavada",
       "familia": "Variante Tranquila",
       "nombre": "Defensa Eslava: Variante Tranquila, Defensa de la Clavada",
-      "fila": { "eco": "D11", "name": "Slav Defense: Quiet Variation, Pin Defense", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bg4" },
+      "fila": {
+        "eco": "D11",
+        "name": "Slav Defense: Quiet Variation, Pin Defense",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bg4"
+      },
       "lado": "negras",
       "plan": "Alternativa a ...Af5: el alfil sale a g4 y clava el Cf3. Sigue ...e6, ...Cbd7 y ...Ad6 o ...Ae7. Si 5.Db3 ataca b7, defiéndelo con la dama (...Db6 o ...Dc7).",
       "frecuencia": null,
@@ -91,7 +123,11 @@
       "id": "cambio-trifunovic",
       "familia": "Variante del Cambio",
       "nombre": "Defensa Eslava: Variante del Cambio, Variante Trifunovic",
-      "fila": { "eco": "D14", "name": "Slav Defense: Exchange Variation, Trifunovic Variation", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. cxd5 cxd5 5. Nc3 Nc6 6. Bf4 Bf5 7. e3 e6 8. Qb3 Bb4" },
+      "fila": {
+        "eco": "D14",
+        "name": "Slav Defense: Exchange Variation, Trifunovic Variation",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. cxd5 cxd5 5. Nc3 Nc6 6. Bf4 Bf5 7. e3 e6 8. Qb3 Bb4"
+      },
       "lado": "negras",
       "plan": "El mismo esquema simétrico, ahora por 3.Cf3. Cuando 8.Db3 ataca b7, la respuesta de libro es ...Ab4: desarrolla y clava el Cc3. Después, 0-0.",
       "frecuencia": null,
@@ -101,7 +137,11 @@
       "id": "moderna-g3",
       "familia": "Línea Moderna",
       "nombre": "Defensa Eslava: Línea Moderna",
-      "fila": { "eco": "D11", "name": "Slav Defense: Modern Line", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. g3 Bg4 5. Bg2 e6 6. O-O" },
+      "fila": {
+        "eco": "D11",
+        "name": "Slav Defense: Modern Line",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. g3 Bg4 5. Bg2 e6 6. O-O"
+      },
       "lado": "negras",
       "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a g4 antes de cerrar con ...e6. Sigue ...Cbd7, ...Ae7 o ...Ad6 y 0-0; tu centro de peones en c6, d5 y e6 es muy sólido.",
       "frecuencia": null,
@@ -111,7 +151,11 @@
       "id": "geller",
       "familia": "Variante de los Tres Caballos",
       "nombre": "Defensa Eslava: Gambito Geller",
-      "fila": { "eco": "D15", "name": "Slav Defense: Geller Gambit", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e4 b5 6. e5" },
+      "fila": {
+        "eco": "D15",
+        "name": "Slav Defense: Geller Gambit",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e4 b5 6. e5"
+      },
       "lado": "negras",
       "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea aguda: prioriza desarrollar y enrocar.",
       "frecuencia": null,
@@ -121,7 +165,11 @@
       "id": "semieslava",
       "familia": "Semieslava",
       "nombre": "Defensa Semieslava",
-      "fila": { "eco": "D43", "name": "Semi-Slav Defense", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6" },
+      "fila": {
+        "eco": "D43",
+        "name": "Semi-Slav Defense",
+        "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6"
+      },
       "lado": "negras",
       "plan": "Línea alterna: con ...e6 encierras tu alfil de c8 a cambio de un centro muy firme. Sigue ...Cbd7, ...Ad6 y 0-0; el alfil sale después por b7, tras ...dxc4 y ...b5. Tu línea principal sigue siendo la Checa (4...dxc4 y ...Af5).",
       "frecuencia": null,
@@ -131,7 +179,11 @@
       "id": "diemer",
       "familia": "Gambito Diemer",
       "nombre": "Defensa Eslava: Gambito Diemer",
-      "fila": { "eco": "D10", "name": "Slav Defense: Diemer Gambit", "pgn": "1. d4 d5 2. c4 c6 3. e4" },
+      "fila": {
+        "eco": "D10",
+        "name": "Slav Defense: Diemer Gambit",
+        "pgn": "1. d4 d5 2. c4 c6 3. e4"
+      },
       "lado": "negras",
       "plan": "Toma con 3...dxe4 y te quedas con un peón de más. No te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.",
       "frecuencia": null,
