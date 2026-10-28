@@ -283,13 +283,16 @@ function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { 
 }
 
 /** "Que juegue mis líneas": el bot escoge entre las jugadas del rival de mi árbol, por frecuencia. */
-export function jugadaDeMisLineas(rep: Repertorio, colorHumano: ColorCorto, historia: string[], azar: () => number): string | null {
+export function jugadaDeMisLineas(rep: Repertorio, colorHumano: ColorCorto, historia: string[], azar: () => number, preferidas?: string[]): string | null {
   if (esMiPly(colorHumano, historia.length)) return null
   const todas = siguientesEnRepertorio(rep, colorHumano, historia)
   if (todas.length === 0) return null
   // evita las respuestas donde mi línea se acaba (no tendría jugada mía que practicar), si hay otras
   const conSeguimiento = todas.filter((o) => siguientesEnRepertorio(rep, colorHumano, [...historia, o.san]).length > 0)
-  const ops = conSeguimiento.length > 0 ? conSeguimiento : todas
+  const posibles = conSeguimiento.length > 0 ? conSeguimiento : todas
+  // primero las que también están en el libro del bot (su estilo), si hay
+  const delLibro = preferidas?.length ? posibles.filter((o) => preferidas.includes(o.san)) : []
+  const ops = delLibro.length > 0 ? delLibro : posibles
   const pesos = ops.map((o) => Math.max(...o.lineas.map((l) => l.frecuencia)))
   const total = pesos.reduce((a, b) => a + b, 0)
   let r = azar() * total

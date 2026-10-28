@@ -5,7 +5,7 @@ import { personajePorId } from '../bots/personajes.ts'
 import { nivelDe } from '../motor/niveles.ts'
 import { jugadaDelBot, esperaDelBot, type FuenteJugadas } from '../motor/bot.ts'
 import { obtenerMotor, estadoMotor, alCambiarMotor, type EstadoMotor } from '../motor/navegador.ts'
-import { libroDe } from '../bots/libros.ts'
+import { libroDe, candidatasDeLibro } from '../bots/libros.ts'
 import { lineasDeLibro } from '../bots/fuente-libros.ts'
 import { intentar, type ColorCorto } from '../ajedrez/reglas.ts'
 import { arrancar, finPorTiempo, pausar, restante, seAcabo } from '../reloj/reloj.ts'
@@ -129,7 +129,7 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
     const t0 = performance.now()
     const colorBot: ColorCorto = partida.colorHumano === 'w' ? 'b' : 'w'
     const c = ajedrezDe(partida)
-    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro) }, Math.random, bot.temperamento)
+    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro), delLibro: candidatasDeLibro(bot, colorBot, lineasDeLibro) }, Math.random, bot.temperamento)
       .then((j) => {
         if (!vigente || !j) return
         const espera = esperaDelBot(performance.now() - t0)

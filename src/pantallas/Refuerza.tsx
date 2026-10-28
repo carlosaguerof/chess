@@ -3,7 +3,7 @@ import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { useRepertorio } from '../repertorio/estado.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
-import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo, nombreDeJugada, type JugadaARepasar } from '../registro/refuerza.ts'
+import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
 import { aperturaPorId } from '../base/base.ts'
 
 const nombreAp = (id: string) => aperturaPorId(id)?.nombre ?? id
@@ -61,7 +61,7 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
   const [i, setI] = useState(0)
   const actual = jugadas[i]
   const leccion: Leccion | null = actual
-    ? { id: 'refuerza', cursoId: 'refuerza', nombre: actual.linea.nombre, familia: actual.linea.familia, plan: actual.linea.plan, autorPlan: actual.linea.autorPlan, frecuencia: actual.linea.frecuencia, color: actual.linea.color, jugadas: [...actual.camino, actual.esperada] }
+    ? { id: 'refuerza', cursoId: 'refuerza', nombre: actual.linea.nombre, familia: actual.linea.familia, plan: actual.linea.plan, autorPlan: actual.linea.autorPlan, frecuencia: actual.linea.frecuencia, color: actual.linea.color, jugadas: lineaCompleta(actual) }
     : null
   const [estado, setEstado] = useState<EstadoLeccion>(() => ({ fase: 'preguntar', ply: actual?.camino.length ?? 0, paso: { fallos: 0, pista: false, respuesta: false }, ultimo: null }))
   const [aviso, setAviso] = useState<{ tipo: string; texto: string } | null>(null)

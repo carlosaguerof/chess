@@ -73,3 +73,14 @@ export function textoConteo(j: JugadaARepasar, ahora = Date.now()): string {
   const dias = Math.floor((ahora - (j.ultima ?? ahora)) / 86_400_000)
   return `bien ${j.intentos} de ${j.intentos} · ${dias === 0 ? 'hoy' : dias === 1 ? 'hace 1 día' : `hace ${dias} días`}`
 }
+
+/**
+ * Las jugadas de la lección de Refuerza: hasta la que se pregunta y, si la línea sigue por ahí, el resto de la línea
+ * (así la Pista sabe que esa jugada no es la última y no la confunde con la que define la variante).
+ */
+export function lineaCompleta(j: JugadaARepasar): string[] {
+  const hasta = [...j.camino, j.esperada]
+  const sigue = j.linea.jugadas.length > hasta.length && hasta.every((s, i) => j.linea.jugadas[i] === s)
+  return sigue ? j.linea.jugadas : hasta
+}
+

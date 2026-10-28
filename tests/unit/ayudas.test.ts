@@ -54,3 +54,11 @@ describe('T15 · amenazas solo con capturas legales (pase 2 de la T22)', () => {
     expect(amenazas(new Chess('4k3/8/4n3/8/3B4/8/8/6K1 b - - 0 1'), 'w')).toEqual([{ desde: 'e6', hasta: 'd4' }])
   })
 })
+
+describe('T15 · más atacantes que defensores (pase 3 de la T22)', () => {
+  it('el peón de e4 atacado por dos y defendido por uno es amenaza', () => {
+    const c = new Chess()
+    for (const s of ['e4', 'b6', 'Nc3', 'Bb7', 'Bc4', 'Nf6', 'a3', 'e6']) c.move(s)
+    expect(amenazas(c, 'w').map((a) => a.hasta)).toContain('e4')
+  })
+})

@@ -34,7 +34,7 @@ const TITULO = { gane: '¡Ganaste!', perdi: 'Perdiste', tablas: 'Tablas' } as co
 
 export function Partida() {
   const [rep] = useRepertorio()
-  const pb = usePartidaBot({ misLineas: (p) => (historia, azar) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar) })
+  const pb = usePartidaBot({ misLineas: (p) => (historia, azar, preferidas) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar, preferidas) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
   const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)
   // ---- ayudas de chess.com (T15): barra, amenazas y sugerencia, con un motor aparte a toda fuerza
