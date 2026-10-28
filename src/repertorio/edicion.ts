@@ -1,6 +1,7 @@
 import type { Base } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { lineaDeVariante, repertorioInicial, type LineaRepertorio, type Repertorio } from './modelo.ts'
+import { lineasDePgn, ErrorPgn } from './pgn.ts'
 
 /** Agregar a mi repertorio una variante de la base (lo principal de "escoger qué aprendo"). */
 export function agregarDeBase(rep: Repertorio, base: Base, clave: string, color: ColorCorto): Repertorio {
@@ -100,4 +101,35 @@ export function importar(texto: string): Respaldo {
     throw new ErrorImportar('Ese archivo no es un respaldo de tu repertorio. Escoge el archivo que exportaste desde esta app.')
   }
   return { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio as Repertorio, progreso: r.progreso ?? {}, registro: r.registro ?? [] }
+}
+
+/**
+ * R3: importar un PGN (con variantes) a mi repertorio de un color. Cada línea del PGN entra como línea mía,
+ * con el nombre del encabezado [Event] o "Importada de PGN", en el curso de la apertura con la que comparte
+ * más jugadas. Las que ya estaban (iguales o dentro de una línea más larga) no se repiten.
+ */
+export function importarPgn(rep: Repertorio, color: ColorCorto, pgn: string): { repertorio: Repertorio; nuevas: number; yaEstaban: number; nombre: string } {
+  const nombre = /\[Event\s+"([^"]+)"\]/.exec(pgn)?.[1]?.trim() || 'Importada de PGN'
+  const lineas = lineasDePgn(pgn)
+  if (lineas.length === 0) throw new ErrorPgn('No encontré jugadas en ese PGN.')
+  let r = rep
+  let nuevas = 0
+  let yaEstaban = 0
+  for (const jugadas of lineas) {
+    const mias = r.lineas.filter((l) => l.color === color)
+    if (mias.some((l) => l.jugadas.length >= jugadas.length && jugadas.every((s, i) => l.jugadas[i] === s))) {
+      yaEstaban++
+      continue
+    }
+    // la apertura (y su curso) de la línea mía que comparte más jugadas
+    let mejor: { apertura: string; comun: number } = { apertura: 'propia', comun: 0 }
+    for (const l of mias) {
+      let i = 0
+      while (i < l.jugadas.length && l.jugadas[i] === jugadas[i]) i++
+      if (i > mejor.comun) mejor = { apertura: l.apertura, comun: i }
+    }
+    r = agregarPropia(r, color, jugadas, nombre, mejor.apertura)
+    nuevas++
+  }
+  return { repertorio: r, nuevas, yaEstaban, nombre }
 }
