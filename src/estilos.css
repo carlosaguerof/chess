@@ -394,3 +394,5 @@ a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-
 .plan-leccion { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.45; }
 .empezar { display: flex; flex-direction: column; gap: 6px; }
 .empezar p { margin: 0; font-size: 13px; text-align: center; }
+/* L5, pase 3: un botón con aspecto de enlace (p. ej. "Repetir esta lección") no lleva fondo */
+button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }

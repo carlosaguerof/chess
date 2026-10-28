@@ -44,7 +44,7 @@ export function Ajustes() {
         />
         <Interruptor
           etiqueta="Repaso de hoy en el inicio"
-          detalle="Lo que aprendiste vuelve justo antes de olvidarlo"
+          detalle="Lo que toca repasar"
           activo={repaso}
           onCambiar={(v) => {
             activarRepaso(v)

@@ -22,6 +22,7 @@
 
 - Playwright, en los dos perfiles (`tests/e2e/l3-aprender.spec.ts`): Mis favoritas vacía la primera vez; en Todas, el ♡ de la Caro-Kann se rellena y aparece en Mis favoritas; recargar la conserva; tocarlo otra vez la quita. Con negras → Caro-Kann → Variante del Avance: avanzar y regresar en el tablero, y Practicar abre la lección. Una partida con "Que juegue mis líneas" y la Caro-Kann en favoritas llega a una variante de la Caro-Kann. Exportar e importar devuelve las favoritas.
 - Vitest (`tests/unit/aprender.test.ts`): un curso por apertura y color, de la más común a la más rara, con los mismos ids de antes; y el paso de lo guardado al modelo nuevo.
+- **Con favoritas vacías** (como arranca Carlos), cada lugar que usa el repertorio se prueba también: la guía y el resumen nombran la apertura de la base y ofrecen practicar su variante; "Que juegue mis líneas" deja jugar el libro del bot (`tests/unit/aprender.test.ts`, L5).
 
 ## Dónde vive en el código
 

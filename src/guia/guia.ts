@@ -2,7 +2,7 @@ import { Chess, type Square } from 'chess.js'
 import type { Base, Variante } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts'
-import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
+import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, lineaDeVariante, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import { ideaPorTipo, planDeMiLado } from '../cursos/modelo.ts'
 
 /** La guía de aperturas en una partida real (T9). Todo sale de mi repertorio y de la base; nunca del motor. */
@@ -322,16 +322,40 @@ export interface Resumen {
   ingles?: string
 }
 
+/** La partida no pasó por mis favoritas: se nombra la apertura de la base y la variante que se jugó, para practicarla. */
+function resumenFueraDeFavoritas(base: Base | undefined, color: ColorCorto, historia: string[]): Resumen {
+  const nombre = base ? nombreDeApertura(base, historia) : null
+  if (!base || !nombre) return { caso: 'completa', hastaPly: -1, texto: 'La partida no entró a tus favoritas ni a ninguna apertura que conozca.' }
+  // la variante de mi lado que más jugadas comparte con la partida (al menos 2); entre iguales, la más común
+  const lado = color === 'w' ? 'blancas' : 'negras'
+  let mejor: { v: Variante; a: Base['aperturas'][number]; comun: number } | null = null
+  for (const a of base.aperturas)
+    for (const v of a.variantes) {
+      if (v.lado !== 'ambos' && v.lado !== lado) continue
+      let comun = 0
+      while (comun < historia.length && comun < v.jugadas.length && v.jugadas[comun] === historia[comun]) comun++
+      if (comun >= 2 && (!mejor || comun > mejor.comun || (comun === mejor.comun && v.frecuencia > mejor.v.frecuencia))) mejor = { v, a, comun }
+    }
+  const linea = mejor ? lineaDeVariante(mejor.v, color, mejor.a.id, mejor.a.lado) : undefined
+  const n = nombre.variante && nombre.variante !== nombre.apertura ? `${nombre.apertura}: ${nombre.variante}` : nombre.apertura
+  return { caso: 'completa', hastaPly: -1, texto: `Jugaste la ${n}. No está en tus favoritas.`, linea, ingles: nombre.ingles }
+}
+
 const ctx_nombreApertura = (l: LineaRepertorio) => (GUIA.find((g) => g.color === l.color && g.apertura === l.apertura)?.curso ?? l.familia)
 
-/** El resumen al terminar: hasta qué jugada seguí mi línea, y dónde me salí yo o se salió el rival. */
-export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: string[]): Resumen {
+/**
+ * El resumen al terminar: hasta qué jugada seguí mi línea, y dónde me salí yo o se salió el rival. Si la partida no
+ * entró a mis favoritas (o no tengo), con la base se nombra la apertura que se jugó y se ofrece practicar su variante
+ * (L5, pase 3: la guía reconoce cualquier apertura de la base).
+ */
+export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: string[], base?: Base): Resumen {
   let ultimaLinea: LineaRepertorio | undefined
   for (let ply = 0; ply < historia.length; ply++) {
     const ops = siguientesEnRepertorio(rep, color, historia.slice(0, ply))
     const jugada = historia[ply]!
     if (ops.length === 0) {
-      const texto = ply === 0 ? 'La partida no entró a tus favoritas.' : `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
+      if (ply === 0) return resumenFueraDeFavoritas(base, color, historia)
+      const texto = `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
       return { caso: 'completa', hastaPly: ply - 1, texto, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
     }
     const op = ops.find((o) => o.san === jugada)

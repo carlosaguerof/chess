@@ -75,7 +75,7 @@ export function Partida() {
     anotarEstrellas(p.botId, n)
     // R2: al historial, con el resumen de la apertura (aunque la guía estuviera apagada)
     const h = ajedrezDe(p).history()
-    const rs = resumenDePartida(rep, p.colorHumano, h)
+    const rs = resumenDePartida(rep, p.colorHumano, h, BASE)
     anotarPartida({
       id: p.id,
       botId: p.botId,
@@ -132,7 +132,7 @@ export function Partida() {
   // al terminar por mate la barra se llena del lado del ganador; en tablas, a la mitad
   const finBarra = partida.fin && (partida.fin.tipo === 'mate' || partida.fin.ganador === null) ? (partida.fin.ganador === 'w' ? 100 : partida.fin.ganador === 'b' ? 0 : 50) : null
   const barra = ajustes.barra ? (finBarra ?? evaluacion?.pct ?? null) : null
-  const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
+  const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia, BASE) : null
   // T18: del resumen a practicar justo esa línea
   const practicar = (() => {
     const l = resumen?.linea

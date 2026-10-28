@@ -103,4 +103,28 @@ describe('Nota 1 · las favoritas son el repertorio', () => {
     expect(r.respuesta).not.toContain('(de la base)')
     expect(r.respuesta).toContain('Defensa Caro-Kann')
   })
+
+  it('el resumen final también nombra la apertura sin favoritas, y deja practicar su variante (L5, pase 3)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { resumenDePartida } = await import('../../src/guia/guia.ts')
+    const r = resumenDePartida(repertorioDeFavoritas([]), 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5'], BASE)
+    expect(r.texto).toContain('Defensa Caro-Kann')
+    expect(r.texto).not.toMatch(/no entró/)
+    expect(r.linea?.apertura).toBe('caro-kann')
+    expect(r.linea?.color).toBe('b')
+    // y la lección de esa variante existe (para "Practicar esta línea")
+    const curso = cursosDeLaBase(BASE).find((c) => c.id === 'caro-kann:b')!
+    expect(curso.lecciones.some((l) => l.id.endsWith('/' + r.linea!.id))).toBe(true)
+  })
+
+  it('la Respuesta al final de una línea no dice de dónde salen las jugadas (L5, pase 3)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { ayudaEnMiTurno } = await import('../../src/guia/guia.ts')
+    const rep = repertorioDeFavoritas(['caro-kann:b'])
+    // una línea de negras que termina con la jugada de blancas: ahí "mi línea termina"
+    const l = rep.lineas.find((x) => x.jugadas.length % 2 === 1)!
+    const a = ayudaEnMiTurno({ base: BASE, rep, color: 'b' }, l.jugadas)
+    expect(a.origen).toBe('fin-de-linea')
+    expect(a.respuesta).not.toMatch(/la fuente|de la base|Tu guía/)
+  })
 })
