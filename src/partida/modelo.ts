@@ -23,6 +23,10 @@ export interface PartidaGuardada {
   pausa?: 'desvio' | null
   /** el reloj (T14); null = sin tiempo */
   reloj?: EstadoReloj | null
+  /** si prendí la barra o las flechas durante la partida (T15; cuenta para las estrellas) */
+  usoBarraOFlechas?: boolean
+  /** las estrellas que gané al terminar (T16) */
+  estrellas?: number
 }
 
 export interface OpcionesPartida {
@@ -102,4 +106,14 @@ export function resultadoPara(p: PartidaGuardada): Resultado | null {
   if (!p.fin) return null
   if (p.fin.ganador === null) return 'tablas'
   return p.fin.ganador === p.colorHumano ? 'gane' : 'perdi'
+}
+
+/** Las ayudas que usé en la partida, para las estrellas (cuenta la peor). */
+export function ayudasUsadas(p: PartidaGuardada) {
+  return {
+    guia: p.opciones.guia,
+    pistaORespuesta: p.ayudas.pista + p.ayudas.respuesta > 0,
+    deshacer: p.deshechas > 0,
+    barraOFlechas: !!p.usoBarraOFlechas,
+  }
 }

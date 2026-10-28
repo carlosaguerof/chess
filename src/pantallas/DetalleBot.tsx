@@ -5,6 +5,8 @@ import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso, opcionesRecordadas, tiempoRecordado } from '../partida/usePartidaBot.ts'
 import { ElegirTiempo } from '../componentes/ElegirTiempo.tsx'
+import { Estrellas } from '../componentes/Estrellas.tsx'
+import { leerEstrellas } from '../estrellas/almacen.ts'
 import { controlPorId } from '../reloj/reloj.ts'
 import { navegar } from '../ruta.ts'
 import { IconoAtras } from '../componentes/Iconos.tsx'
@@ -35,6 +37,7 @@ export function DetalleBot({ id }: { id: string }) {
           {bot.nombre} <span className="nivel">{bot.elo}</span>
         </h1>
         <p className="frase">“{bot.frase}”</p>
+        {leerEstrellas()[bot.id] !== undefined && <Estrellas n={leerEstrellas()[bot.id]!} tam={22} />}
         <p className="estilo">
           <span className="chip">{NOMBRE_TEMPERAMENTO[bot.temperamento]}</span>
           Con blancas: {bot.estilo.blancas.map((k) => nombreApertura(k, 'blancas')).join(', ')} · Con negras: {bot.estilo.negras.map((k) => nombreApertura(k, 'negras')).join(', ')}
