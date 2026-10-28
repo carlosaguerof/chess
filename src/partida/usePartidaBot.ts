@@ -123,7 +123,7 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
     const t0 = performance.now()
     const colorBot: ColorCorto = partida.colorHumano === 'w' ? 'b' : 'w'
     const c = ajedrezDe(partida)
-    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro) })
+    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro) }, Math.random, bot.temperamento)
       .then((j) => {
         if (!vigente || !j) return
         const espera = esperaDelBot(performance.now() - t0)

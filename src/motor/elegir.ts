@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js'
 import { uciDe } from '../ajedrez/reglas.ts'
 import type { Candidata, MotorUci } from './uci.ts'
+import { bonoTemperamento } from './temperamento.ts'
 
 /** Los parámetros de un nivel. Viven todos en `niveles.json` (un solo archivo de datos). */
 export interface ParamsNivel {
@@ -43,7 +44,7 @@ export const UMBRAL_ERROR_CP = 150
  * y la calibración (en Node). Así lo que se calibró es lo que se juega.
  * `azar` devuelve un número en [0, 1): en la app es Math.random; en la calibración, una semilla fija.
  */
-export async function elegirJugada(motor: MotorUci, fen: string, nivel: ParamsNivel, azar: () => number = Math.random): Promise<Eleccion | null> {
+export async function elegirJugada(motor: MotorUci, fen: string, nivel: ParamsNivel, azar: () => number = Math.random, temperamento?: Temperamento): Promise<Eleccion | null> {
   const legales = new Chess(fen).moves({ verbose: true }).map(uciDe)
   if (legales.length === 0) return null
   if (legales.length === 1) return { uci: legales[0]!, motivo: 'unica', perdidaCp: 0, candidatas: [] }
@@ -79,9 +80,12 @@ export async function elegirJugada(motor: MotorUci, fen: string, nivel: ParamsNi
     }
   }
 
-  // 2) entre las candidatas, más probable la mejor; la temperatura decide qué tanto se aleja
+  // 2) entre las candidatas, más probable la mejor; la temperatura decide qué tanto se aleja.
+  //    El temperamento (T17) solo inclina entre jugadas casi iguales (ver temperamento.ts).
   const t = Math.max(1, nivel.temperatura ?? 50)
-  const pesos = cands.map((c) => Math.exp(-perdida(c) / t))
+  // la pérdida efectiva puede quedar por debajo de 0: así el bono también decide entre jugadas igual de buenas
+  const efectiva = (c: Candidata) => perdida(c) - bonoTemperamento(fen, c.uci, perdida(c), temperamento)
+  const pesos = cands.map((c) => Math.exp(-efectiva(c) / t))
   const total = pesos.reduce((s, p) => s + p, 0)
   let r = azar() * total
   for (let i = 0; i < cands.length; i++) {
