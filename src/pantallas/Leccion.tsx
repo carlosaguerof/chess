@@ -11,6 +11,7 @@ import { TableroJugable } from '../componentes/TableroJugable.tsx'
 import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
 import { IconoAtras, IconoFoco, IconoOjo } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
+import { siguienteEnSesion, actualizarFalladas, leerFalladas, guardarFalladas } from '../cursos/sesion.ts'
 
 const PAUSA_RIVAL_MS = 450
 
@@ -30,6 +31,8 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
   const [aviso, setAviso] = useState<Aviso>(null)
   const [flecha, setFlecha] = useState<DrawShape | null>(null)
   const [fasePrevia, setFasePrevia] = useState(estado.fase)
+  // T18: cuántos pasos fallé en las preguntas de esta lección (la que fallo vuelve antes en la sesión)
+  const [fallosLeccion, setFallosLeccion] = useState(0)
   const color = leccion.color
 
   // cuando cambia de fase (de enseñar a preguntar), el tablero vuelve al inicio
@@ -41,6 +44,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
         setAviso({ tipo: 'info', texto: 'Ya la viste. Ahora sin ayuda: ¿qué harías en cada paso?' })
       }
       if (estado.fase === 'terminada') {
+        guardarFalladas(actualizarFalladas(leerFalladas(), leccion.id, fallosLeccion))
         marcarLeccion(leccion.id)
         setEnTablero(leccion.jugadas.length)
       }
@@ -76,6 +80,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
     const r = intentar(leccion, estado, san, alternativasEn(curso, leccion, ply))
     setFlecha(null)
     if (r.resultado === 'incorrecta') {
+      if (estado.fase === 'preguntar') setFallosLeccion((n) => n + 1)
       setAviso({ tipo: 'incorrecta', texto: `Incorrecta: ${jugadaNumerada(sanAEspanol(san), ply)} no es la jugada de tu línea. Intenta otra vez.` })
       setEstado(r.estado)
       return
@@ -103,7 +108,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
   }
 
   const hechas = leerProgreso()
-  const siguiente = estado.fase === 'terminada' ? siguienteLeccion(curso, hechas, leccion.id) : undefined
+  const siguiente = estado.fase === 'terminada' ? (siguienteEnSesion(curso, hechas, leccion, leerFalladas()) ?? siguienteLeccion(curso, hechas, leccion.id)) : undefined
   const pasosMios = leccion.jugadas.filter((_, i) => (i % 2 === 0 ? 'w' : 'b') === color).length
   const pasoActual = leccion.jugadas.slice(0, estado.ply).filter((_, i) => (i % 2 === 0 ? 'w' : 'b') === color).length + 1
   const instruccion =
