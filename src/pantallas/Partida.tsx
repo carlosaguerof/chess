@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
-import { resultadoPara, puedeDeshacer } from '../partida/modelo.ts'
+import { resultadoPara, puedeDeshacer, ayudasUsadas } from '../partida/modelo.ts'
+import { estrellas as calcularEstrellas } from '../estrellas/estrellas.ts'
+import { anotarEstrellas } from '../estrellas/almacen.ts'
+import { Estrellas } from '../componentes/Estrellas.tsx'
 import { obtenerMotor } from '../motor/navegador.ts'
 import { largo, jugadasEnEspanol } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
@@ -35,6 +38,17 @@ export function Partida() {
   useEffect(() => {
     obtenerMotor().catch(() => undefined)
   }, [])
+
+  // al terminar: las estrellas (T16), una sola vez por partida, y la mejor se guarda por bot
+  useEffect(() => {
+    const p = pb.partida
+    if (!p?.fin || p.estrellas !== undefined) return
+    const r = resultadoPara(p)!
+    const n = calcularEstrellas(r, ayudasUsadas(p))
+    anotarEstrellas(p.botId, n)
+    pb.reemplazar({ ...p, estrellas: n })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pb.partida?.fin, pb.partida?.id])
 
   const { partida, bot, chess } = pb
   const historia = useMemo(() => chess?.history() ?? [], [chess])
@@ -212,6 +226,7 @@ export function Partida() {
               <IconoCerrar />
             </button>
             <h2>{TITULO[resultado]}</h2>
+            {partida.estrellas !== undefined && <Estrellas n={partida.estrellas} tam={30} testid="estrellas-final" />}
             <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin!.nombre}</p>
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
