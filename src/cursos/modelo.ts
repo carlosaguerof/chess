@@ -90,6 +90,11 @@ export function nuevoEstado(l: Leccion): EstadoLeccion {
 
 const limpio = () => ({ fallos: 0, pista: false, respuesta: false })
 
+/** R7: el repaso usa la lección en modo pregunta, sin la parte de enseñar. */
+export function estadoDeRepaso(l: Leccion): EstadoLeccion {
+  return avanzarRival(l, { fase: 'preguntar', ply: 0, paso: limpio(), ultimo: null })
+}
+
 /** Juega las jugadas del rival hasta que me toque (o termine la línea). */
 export function avanzarRival(l: Leccion, e: EstadoLeccion): EstadoLeccion {
   let ply = e.ply

@@ -3,7 +3,7 @@ import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { useRepertorio, leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
-import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
+import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { jugadasEnEspanol, uciAObjeto } from '../ajedrez/reglas.ts'
@@ -25,8 +25,19 @@ export function Leccion({ cursoId, indice }: { cursoId: string; indice: number }
   return <Practica key={leccion.id} curso={curso} leccion={leccion} indice={indice} />
 }
 
-function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion; indice: number }) {
-  const [estado, setEstado] = useState<EstadoLeccion>(() => nuevoEstado(leccion))
+/** R7: la lección como repaso (solo preguntas). Al terminar dice si fue limpia y quien la usa decide qué sigue. */
+export interface ModoRepaso {
+  indice: number
+  total: number
+  /** limpia = sin fallos, sin Pista y sin Respuesta; devuelve el texto de cuándo vuelve */
+  onTerminar: (limpia: boolean) => string
+  onSiguiente: () => void
+}
+
+export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; leccion: TLeccion; indice: number; repaso?: ModoRepaso }) {
+  const [estado, setEstado] = useState<EstadoLeccion>(() => (repaso ? estadoDeRepaso(leccion) : nuevoEstado(leccion)))
+  const [ayudaUsada, setAyudaUsada] = useState(false)
+  const [vuelve, setVuelve] = useState<string | null>(null)
   const [enTablero, setEnTablero] = useState(0)
   const [aviso, setAviso] = useState<Aviso>(null)
   const [flecha, setFlecha] = useState<DrawShape | null>(null)
@@ -44,8 +55,11 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
         setAviso({ tipo: 'info', texto: 'Ya la viste. Ahora sin ayuda: ¿qué harías en cada paso?' })
       }
       if (estado.fase === 'terminada') {
-        guardarFalladas(actualizarFalladas(leerFalladas(), leccion.id, fallosLeccion))
-        marcarLeccion(leccion.id)
+        if (repaso) setVuelve(repaso.onTerminar(fallosLeccion === 0 && !ayudaUsada))
+        else {
+          guardarFalladas(actualizarFalladas(leerFalladas(), leccion.id, fallosLeccion))
+          marcarLeccion(leccion.id)
+        }
         setEnTablero(leccion.jugadas.length)
       }
     }
@@ -96,12 +110,14 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
   }
 
   const pedirPista = () => {
+    setAyudaUsada(true)
     setEstado(marcarPista(estado))
     setAviso({ tipo: 'pista', texto: pista(leccion, estado) })
   }
   const pedirRespuesta = () => {
     const r = respuesta(leccion, estado)
     if (!r) return
+    setAyudaUsada(true)
     setEstado(marcarRespuesta(estado))
     setFlecha({ orig: r.desde as Key, dest: r.hasta as Key, brush: 'blue' })
     setAviso({ tipo: 'respuesta', texto: `${r.texto} — ${r.nombre}. ${r.plan}` })
@@ -132,11 +148,11 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
     <div className="leccion" data-testid="leccion-pantalla" data-fase={estado.fase}>
       <div className="leccion-columna">
         <div className="partida-arriba">
-          <a className="salir" href={`#/curso/${encodeURIComponent(curso.id)}`} aria-label="Volver al curso">
+          <a className="salir" href={repaso ? '#/' : `#/curso/${encodeURIComponent(curso.id)}`} aria-label={repaso ? 'Salir del repaso' : 'Volver al curso'}>
             <IconoAtras />
           </a>
           <div className="leccion-titulo">
-            <span className="apagado">{curso.nombre}</span>
+            <span className="apagado">{repaso ? `Repaso de hoy · ${repaso.indice + 1} de ${repaso.total} · ${curso.nombre}` : curso.nombre}</span>
             <strong data-testid="nombre-linea">{leccion.nombre}</strong>
             {leccion.ingles && (
               <small className="ingles">
@@ -188,6 +204,15 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
               </button>
             </div>
           </>
+        ) : repaso ? (
+          <div className="fin-leccion" data-testid="fin-repaso">
+            <p className="etiqueta">Línea repasada</p>
+            <h2>{leccion.nombre}</h2>
+            {vuelve && <p data-testid="cuando-vuelve">{vuelve}</p>}
+            <button type="button" className="boton primario grande" onClick={repaso.onSiguiente} data-testid="siguiente-repaso">
+              {repaso.indice + 1 < repaso.total ? `Siguiente (quedan ${repaso.total - repaso.indice - 1})` : 'Terminar'}
+            </button>
+          </div>
         ) : (
           <div className="fin-leccion" data-testid="fin-leccion">
             <p className="etiqueta">Lección terminada</p>

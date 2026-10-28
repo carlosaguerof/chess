@@ -3,6 +3,7 @@ import { BASE, variantePorClave, aperturaDeClave } from '../base/base.ts'
 import { arbolDe, GUIA, type NodoArbol, type LineaRepertorio } from '../repertorio/modelo.ts'
 import { agregarDeBase, borrarRama, deshacerBorrado, editarLinea, exportar, importar, repertorioOriginal, ErrorImportar, type Borrado, agregarPropia, importarPgn } from '../repertorio/edicion.ts'
 import { ErrorPgn } from '../repertorio/pgn.ts'
+import { leerRepaso, guardarRepaso } from '../repaso/repaso.ts'
 import { useRepertorio, leerProgreso, guardarProgreso } from '../repertorio/estado.ts'
 import { leerRegistro, guardarRegistro } from '../registro/almacen-registro.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
@@ -44,7 +45,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
   const lineaPorId = useMemo(() => new Map(rep.lineas.map((l) => [l.id, l])), [rep])
 
   const descargar = () => {
-    const texto = exportar({ repertorio: rep, progreso: leerProgreso(), registro: leerRegistro() })
+    const texto = exportar({ repertorio: rep, progreso: leerProgreso(), registro: leerRegistro(), repaso: leerRepaso() })
     const url = URL.createObjectURL(new Blob([texto], { type: 'application/json' }))
     const a = document.createElement('a')
     a.href = url
@@ -59,6 +60,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
       setRep(r.repertorio)
       guardarProgreso(r.progreso as ReturnType<typeof leerProgreso>)
       guardarRegistro(r.registro as EntradaRegistro[])
+      guardarRepaso(r.repaso ?? {})
       setAviso(`Listo: se cargó tu repertorio (${r.repertorio.lineas.length} líneas).`)
     } catch (e) {
       setAviso(e instanceof ErrorImportar ? e.message : 'No se pudo leer el archivo.')
