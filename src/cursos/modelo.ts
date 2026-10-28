@@ -15,6 +15,8 @@ export interface Leccion {
   frecuencia: number
   color: ColorCorto
   jugadas: string[]
+  ingles?: string
+  eco?: string
 }
 
 export interface Curso {
@@ -50,7 +52,7 @@ export function cursosDe(base: Base, rep: Repertorio): Curso[] {
       color: g.color,
       nombre: `${GUIA.find((x) => x.color === g.color && x.apertura === g.apertura)?.curso ?? nombreApertura(g.apertura)} (${nombreColor(g.color)})`,
       enRepertorio: true,
-      lecciones: porFrecuencia(lineas).map((l) => ({ id: `${id}/${l.id}`, cursoId: id, nombre: l.nombre, familia: l.familia, plan: l.plan, autorPlan: l.autorPlan, frecuencia: l.frecuencia, color: l.color, jugadas: l.jugadas })),
+      lecciones: porFrecuencia(lineas).map((l) => ({ id: `${id}/${l.id}`, cursoId: id, nombre: l.nombre, familia: l.familia, plan: l.plan, autorPlan: l.autorPlan, frecuencia: l.frecuencia, color: l.color, jugadas: l.jugadas, ingles: l.ingles, eco: l.eco })),
     })
   }
   // 2) lo demás de la base, del lado que le toca a cada variante
@@ -61,7 +63,7 @@ export function cursosDe(base: Base, rep: Repertorio): Curso[] {
       const vs = a.variantes.filter((v) => (v.lado === 'ambos' || (v.lado === 'blancas') === (color === 'w')) && !yaEnRep.has(v.clave))
       if (vs.length === 0) continue
       const existente = cursos.find((c) => c.id === id)
-      const lecciones = porFrecuencia(vs).map((v) => ({ id: `${id}/${v.clave}`, cursoId: id, nombre: v.nombre, familia: v.familia, plan: v.plan, autorPlan: v.autorPlan, frecuencia: v.frecuencia, color, jugadas: v.jugadas }))
+      const lecciones = porFrecuencia(vs).map((v) => ({ id: `${id}/${v.clave}`, cursoId: id, nombre: v.nombre, familia: v.familia, plan: v.plan, autorPlan: v.autorPlan, frecuencia: v.frecuencia, color, jugadas: v.jugadas, ingles: v.nombreIngles, eco: v.eco }))
       if (existente) continue // lo que ya está en mi repertorio se practica ahí; lo demás se agrega desde la base (T10)
       cursos.push({ id, apertura: a.id, color, nombre: `${a.nombre} (${nombreColor(color)})`, enRepertorio: false, lecciones })
     }

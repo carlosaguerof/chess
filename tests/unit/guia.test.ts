@@ -73,7 +73,33 @@ describe('T9 · la guía en una partida real', () => {
     expect(jugadaDeMisLineas(rep, 'b', ['e4', 'c6'], azar)).toMatch(/^(d4|Nc3|c4|d3|Bc4)$/)
   })
 
+  it('pase 1: si mi línea termina en la jugada del rival, la ayuda da su plan (no "fuera de teoría")', () => {
+    const a = ayudaEnMiTurno(blancas, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'd6'])
+    expect(a.origen).toBe('fin-de-linea')
+    expect(a.respuesta).toContain('termina aquí')
+    expect(a.respuesta).toContain('Defensa París')
+  })
+
+  it('pase 1: "Que juegue mis líneas" evita las respuestas donde mi línea se acaba', () => {
+    const azar = azarConSemilla(7)
+    const vistas = new Set<string>()
+    for (let i = 0; i < 300; i++) vistas.add(jugadaDeMisLineas(rep, 'w', ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4'], azar)!)
+    for (const callejon of ['d6', 'h6', 'Nd4', 'f5']) expect(vistas.has(callejon), callejon).toBe(false)
+    expect(vistas.has('Bc5') && vistas.has('Nf6')).toBe(true)
+  })
+
+  it('pase 1: la Pista no dice la jugada aunque el nombre de la variante la traiga entre paréntesis', () => {
+    const a = ayudaEnMiTurno(negras, ['e4', 'd5', 'exd5', 'Qxd5', 'Nc3'])
+    expect(a.origen).toBe('base')
+    expect(a.pista).not.toMatch(/a5|d6|d8/)
+  })
+
   describe('el resumen al final, en sus tres casos', () => {
+    it('nombra la familia si la partida no llegó a una subvariante (pase 1)', () => {
+      const r = resumenDePartida(rep, 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5'])
+      expect(r.texto).toContain('(Variante del Avance)')
+      expect(r.texto).not.toContain('Short')
+    })
     it('me salí yo', () => {
       const r = resumenDePartida(rep, 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'e6', 'c4'])
       expect(r.caso).toBe('me-sali')

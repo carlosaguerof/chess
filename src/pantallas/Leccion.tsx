@@ -133,6 +133,11 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
           <div className="leccion-titulo">
             <span className="apagado">{curso.nombre}</span>
             <strong data-testid="nombre-linea">{leccion.nombre}</strong>
+            {leccion.ingles && (
+              <small className="ingles">
+                {leccion.ingles} · {leccion.eco}
+              </small>
+            )}
           </div>
         </div>
         <div className="partida-tablero">

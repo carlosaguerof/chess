@@ -338,8 +338,8 @@
      "id": "hungara",
      "clave": "italiana/hungara",
      "familia": "Defensa Húngara",
-     "nombre": "Defensa Húngara",
-     "nombreIngles": "Italian Game: Hungarian Defense",
+     "nombre": "Defensa Húngara: Variante Tartakower",
+     "nombreIngles": "Italian Game: Hungarian Defense, Tartakower Variation",
      "eco": "C50",
      "jugadas": [
       "e4",
@@ -347,18 +347,24 @@
       "Nf3",
       "Nc6",
       "Bc4",
-      "Be7"
+      "Be7",
+      "d4",
+      "exd4",
+      "c3",
+      "Nf6",
+      "e5",
+      "Ne4"
      ],
      "lado": "blancas",
-     "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con d4 (o c3 y d4), desarrolla con Cc3 y enroca; tendrás más espacio.",
+     "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "C50",
-      "name": "Italian Game: Hungarian Defense",
-      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7"
+      "name": "Italian Game: Hungarian Defense, Tartakower Variation",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7 4. d4 exd4 5. c3 Nf6 6. e5 Ne4"
      }
     },
     {
@@ -854,8 +860,8 @@
      "id": "dragon-acelerado",
      "clave": "siciliana/dragon-acelerado",
      "familia": "Dragón Acelerado",
-     "nombre": "Dragón Acelerado: Variante Moderna con Ac4",
-     "nombreIngles": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
+     "nombre": "Variante del Dragón: Variante Moderna con Ac4",
+     "nombreIngles": "Sicilian Defense: Dragon Variation, Modern Bc4 Variation",
      "eco": "B35",
      "jugadas": [
       "e4",
@@ -870,18 +876,19 @@
       "Bg7",
       "Be3",
       "Nf6",
-      "Bc4"
+      "Bc4",
+      "d6"
      ],
      "lado": "negras",
-     "plan": "Enroca (...0-0) y elige entre ...d6 (estructura Dragón) o ...a5 si el A se va a b3. La ventaja de este orden es que, sin haber jugado ...d6, a veces llegas a ...d5 en un solo paso.",
+     "plan": "Con 7...d6 entras a la estructura del Dragón: enroca, desarrolla el alfil de c8 y busca juego por la columna c contra el flanco de dama de blancas.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B35",
-      "name": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
-      "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nc3 Bg7 6. Be3 Nf6 7. Bc4"
+      "name": "Sicilian Defense: Dragon Variation, Modern Bc4 Variation",
+      "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nc3 Bg7 6. Be3 Nf6 7. Bc4 d6"
      }
     },
     {
@@ -989,8 +996,8 @@
      "id": "kan-moderna",
      "clave": "siciliana/kan-moderna",
      "familia": "Variante Kan",
-     "nombre": "Variante Kan: Variante Moderna",
-     "nombreIngles": "Sicilian Defense: Kan Variation, Modern Variation",
+     "nombre": "Variante Kan: Variante Gipslis",
+     "nombreIngles": "Sicilian Defense: Kan Variation, Gipslis Variation",
      "eco": "B42",
      "jugadas": [
       "e4",
@@ -1001,18 +1008,23 @@
       "cxd4",
       "Nxd4",
       "a6",
-      "Bd3"
+      "Bd3",
+      "Nf6",
+      "O-O",
+      "d6",
+      "c4",
+      "g6"
      ],
      "lado": "negras",
-     "plan": "Sigue con ...Cf6 y ...Dc7 (o ...Ac5 para echar al C de d4), luego ...d6, ...Ae7 y ...0-0. Con ...b5 y ...Ab7 tienes juego en el flanco de dama.",
+     "plan": "Contra 5.Ad3 desarrolla con ...Cf6 y ...d6; si blancas juega c4, el fianchetto con ...g6 y ...Ag7 te da un alfil muy activo. Luego enroca y saca el caballo de b8.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B42",
-      "name": "Sicilian Defense: Kan Variation, Modern Variation",
-      "pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Bd3"
+      "name": "Sicilian Defense: Kan Variation, Gipslis Variation",
+      "pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Bd3 Nf6 6. O-O d6 7. c4 g6"
      }
     },
     {
@@ -1104,26 +1116,32 @@
      "id": "grand-prix",
      "clave": "siciliana/grand-prix",
      "familia": "Ataque Grand Prix",
-     "nombre": "Ataque Grand Prix",
-     "nombreIngles": "Sicilian Defense: Grand Prix Attack",
+     "nombre": "Ataque Grand Prix: Variante Schofman",
+     "nombreIngles": "Sicilian Defense: Grand Prix Attack, Schofman Variation",
      "eco": "B23",
      "jugadas": [
       "e4",
       "c5",
       "Nc3",
       "Nc6",
-      "f4"
+      "f4",
+      "g6",
+      "Nf3",
+      "Bg7",
+      "Bc4",
+      "e6",
+      "f5"
      ],
      "lado": "negras",
-     "plan": "Desarrolla con ...g6, ...Ag7, ...e6 y ...Cge7, y busca ...d5 para pelear el centro y cerrarle la diagonal a un Ac4. Si Blancas juega Ab5, ...Cd4 es buena respuesta.",
+     "plan": "Desarrolla con ...g6, ...Ag7 y ...e6 para cerrarle la diagonal al Ac4, y busca ...Cge7 y ...d5. Si blancas sacrifica con f5, termina el desarrollo y enroca antes de tomar nada.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B23",
-      "name": "Sicilian Defense: Grand Prix Attack",
-      "pgn": "1. e4 c5 2. Nc3 Nc6 3. f4"
+      "name": "Sicilian Defense: Grand Prix Attack, Schofman Variation",
+      "pgn": "1. e4 c5 2. Nc3 Nc6 3. f4 g6 4. Nf3 Bg7 5. Bc4 e6 6. f5"
      }
     },
     {
@@ -1414,7 +1432,7 @@
     {
      "id": "karpov",
      "clave": "caro-kann/karpov",
-     "familia": "Variante Clásica",
+     "familia": "Variante Karpov",
      "nombre": "Variante Karpov",
      "nombreIngles": "Caro-Kann Defense: Karpov Variation",
      "eco": "B17",
@@ -1432,7 +1450,7 @@
      "plan": "4...Cd7 prepara ...Cgf6 para cambiar el caballo de e4 sin doblar peones; luego ...e6, ...Ad6 o ...Ae7 y 0-0. Trampa famosa: si blancas juega De2, nunca ...Cgf6?? por Cd6 mate.",
      "autorPlan": "ia",
      "frecuencia": 4,
-     "fuenteFrecuencia": "guía de Carlos",
+     "fuenteFrecuencia": "guía de Carlos (Clásica: 4...Cd7)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B17",
@@ -1443,9 +1461,9 @@
     {
      "id": "karpov-moderna",
      "clave": "caro-kann/karpov-moderna",
-     "familia": "Variante Clásica",
-     "nombre": "Variante Karpov: Variante Moderna",
-     "nombreIngles": "Caro-Kann Defense: Karpov Variation, Modern Variation",
+     "familia": "Variante Karpov",
+     "nombre": "Variante Karpov: Línea principal moderna",
+     "nombreIngles": "Caro-Kann Defense: Karpov Variation, Modern Main Line",
      "eco": "B17",
      "jugadas": [
       "e4",
@@ -1456,25 +1474,35 @@
       "dxe4",
       "Nxe4",
       "Nd7",
-      "Ng5"
+      "Ng5",
+      "Ngf6",
+      "Bd3",
+      "e6",
+      "N1f3",
+      "Bd6",
+      "Qe2",
+      "h6",
+      "Ne4",
+      "Nxe4",
+      "Qxe4"
      ],
      "lado": "negras",
-     "plan": "5.Cg5 apunta a f7 y e6. Responde 5...Cgf6 y sigue con ...e6 y ...Ad6. Juega ...h6 solo después de ...Ad6: antes, el sacrificio Cxe6 es muy fuerte (así perdió Kasparov contra Deep Blue en 1997).",
+     "plan": "5.Cg5 apunta a f7 y e6. Responde 5...Cgf6 y sigue con ...e6 y ...Ad6. Juega ...h6 solo después de ...Ad6: antes, el sacrificio Cxe6 es muy fuerte. Después de los cambios en e4, termina el desarrollo con ...0-0 y rompe con ...c5 o ...e5.",
      "autorPlan": "ia",
      "frecuencia": 4,
-     "fuenteFrecuencia": "guía de Carlos",
+     "fuenteFrecuencia": "guía de Carlos (Clásica: 4...Cd7)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B17",
-      "name": "Caro-Kann Defense: Karpov Variation, Modern Variation",
-      "pgn": "1. e4 c6 2. d4 d5 3. Nd2 dxe4 4. Nxe4 Nd7 5. Ng5"
+      "name": "Caro-Kann Defense: Karpov Variation, Modern Main Line",
+      "pgn": "1. e4 c6 2. d4 d5 3. Nd2 dxe4 4. Nxe4 Nd7 5. Ng5 Ngf6 6. Bd3 e6 7. N1f3 Bd6 8. Qe2 h6 9. Ne4 Nxe4 10. Qxe4"
      }
     },
     {
      "id": "clasica-cc3",
      "clave": "caro-kann/clasica-cc3",
-     "familia": "Variante Clásica",
-     "nombre": "Variante Clásica con 3.Cc3",
+     "familia": "Defensa Caro-Kann (3.Cc3)",
+     "nombre": "Defensa Caro-Kann: 3.Cc3 dxe4",
      "nombreIngles": "Caro-Kann Defense",
      "eco": "B15",
      "jugadas": [
@@ -1489,7 +1517,7 @@
      "plan": "Contra 3.Cc3 (o 3.Cd2) tomas el peón central con 3...dxe4. Después de 4.Cxe4 escoges tu esquema: 4...Af5 (Clásica) o 4...Cd7 (Karpov), los dos sólidos y con poca teoría.",
      "autorPlan": "ia",
      "frecuencia": 4,
-     "fuenteFrecuencia": "guía de Carlos",
+     "fuenteFrecuencia": "guía de Carlos (Clásica: 3.Cc3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B15",
@@ -1500,8 +1528,8 @@
     {
      "id": "karpov-kasparov",
      "clave": "caro-kann/karpov-kasparov",
-     "familia": "Variante Clásica",
-     "nombre": "Variante Karpov con 3.Cc3: Ataque Kasparov",
+     "familia": "Variante Karpov",
+     "nombre": "Variante Karpov: Variante Moderna, Ataque Kasparov",
      "nombreIngles": "Caro-Kann Defense: Karpov Variation, Modern Variation, Kasparov Attack",
      "eco": "B17",
      "jugadas": [
@@ -1521,7 +1549,7 @@
      "plan": "Con ...Cd7 preparas ...Cgf6 sin que blancas te doble los peones con un cambio de caballos. Sigue con ...e6, el alfil a e7 o d6 y enroque corto: una posición muy sólida.",
      "autorPlan": "ia",
      "frecuencia": 4,
-     "fuenteFrecuencia": "guía de Carlos",
+     "fuenteFrecuencia": "guía de Carlos (Clásica: 4...Cd7)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B17",
@@ -1689,74 +1717,96 @@
      "id": "maroczy",
      "clave": "caro-kann/maroczy",
      "familia": "Variante Maróczy",
-     "nombre": "Variante Maróczy (Fantasía)",
-     "nombreIngles": "Caro-Kann Defense: Maróczy Variation",
+     "nombre": "Variante Maróczy: Gambito Maróczy",
+     "nombreIngles": "Caro-Kann Defense: Maróczy Variation, Maróczy Gambit",
      "eco": "B12",
      "jugadas": [
       "e4",
       "c6",
       "d4",
       "d5",
-      "f3"
+      "f3",
+      "dxe4",
+      "fxe4",
+      "e5",
+      "Nf3",
+      "exd4",
+      "Bc4"
      ],
      "lado": "negras",
-     "plan": "Blancas sostiene e4 con f3, pero debilita su flanco de rey y le quita la casilla f3 al caballo. Dos respuestas sólidas: 3...e6 y luego ...c5, o 3...dxe4 4.fxe4 e5 para golpear el centro de inmediato.",
+     "plan": "Blancas sostiene e4 con f3, pero debilita su flanco de rey. Con 3...dxe4 4.fxe4 e5 golpeas el centro de inmediato; si blancas da un peón con 6.Ac4, desarrolla rápido y enroca antes de que te ataque en f7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B12",
-      "name": "Caro-Kann Defense: Maróczy Variation",
-      "pgn": "1. e4 c6 2. d4 d5 3. f3"
+      "name": "Caro-Kann Defense: Maróczy Variation, Maróczy Gambit",
+      "pgn": "1. e4 c6 2. d4 d5 3. f3 dxe4 4. fxe4 e5 5. Nf3 exd4 6. Bc4"
      }
     },
     {
      "id": "breyer",
      "clave": "caro-kann/breyer",
      "familia": "Variante Breyer",
-     "nombre": "Variante Breyer",
-     "nombreIngles": "Caro-Kann Defense: Breyer Variation",
+     "nombre": "Variante Breyer: Ataque Stein",
+     "nombreIngles": "Caro-Kann Defense: Breyer Variation, Stein Attack",
      "eco": "B10",
      "jugadas": [
       "e4",
       "c6",
-      "d3"
+      "d3",
+      "d5",
+      "Nd2",
+      "g6",
+      "Ngf3",
+      "Bg7",
+      "g3",
+      "e5",
+      "Bg2",
+      "Ne7",
+      "O-O",
+      "O-O",
+      "b4"
      ],
      "lado": "negras",
-     "plan": "Blancas evita la lucha por el centro y suele seguir con Cd2, Cgf3, g3 y Ag2 (esquema de Ataque Indio de Rey). Negras ocupa el centro con 2...d5 y ...e5, desarrolla con ...Cf6 y ...Ad6, o con ...g6 y ...Ag7, y enroca.",
+     "plan": "Blancas evita la lucha por el centro y arma Cd2, Cgf3, g3 y Ag2. Ocupa el centro con 2...d5, haz el fianchetto con ...g6 y ...Ag7, juega ...e5, saca el caballo a e7 y enroca.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B10",
-      "name": "Caro-Kann Defense: Breyer Variation",
-      "pgn": "1. e4 c6 2. d3"
+      "name": "Caro-Kann Defense: Breyer Variation, Stein Attack",
+      "pgn": "1. e4 c6 2. d3 d5 3. Nd2 g6 4. Ngf3 Bg7 5. g3 e5 6. Bg2 Ne7 7. O-O O-O 8. b4"
      }
     },
     {
      "id": "hillbilly",
      "clave": "caro-kann/hillbilly",
      "familia": "Ataque Hillbilly",
-     "nombre": "Ataque Hillbilly",
-     "nombreIngles": "Caro-Kann Defense: Hillbilly Attack",
+     "nombre": "Ataque Hillbilly: Gambito Schaeffer",
+     "nombreIngles": "Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit",
      "eco": "B10",
      "jugadas": [
       "e4",
       "c6",
-      "Bc4"
+      "Bc4",
+      "d5",
+      "Bb3",
+      "dxe4",
+      "Qh5"
      ],
      "lado": "negras",
-     "plan": "2.Ac4 apunta a f7, pero 2...d5 ataca al alfil y gana tiempo. Tras 3.exd5 cxd5 tienes buen centro; si 4.Ab5+, tapa con ...Ad7 o ...Cc6 y sigue con ...Cf6 y ...e6.",
+     "plan": "2.Ac4 apunta a f7, pero 2...d5 ataca al alfil y gana tiempo. Tras 3.Ab3 dxe4 4.Dh5 blancas apunta a f7: tápalo con ...e6 o echa a la dama con ...g6, y te quedas con el peón de más.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B10",
-      "name": "Caro-Kann Defense: Hillbilly Attack",
-      "pgn": "1. e4 c6 2. Bc4"
+      "name": "Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit",
+      "pgn": "1. e4 c6 2. Bc4 d5 3. Bb3 dxe4 4. Qh5"
      }
     }
    ]
@@ -2455,23 +2505,25 @@
      "id": "owen",
      "clave": "otros-1e4/owen",
      "familia": "Defensa Owen",
-     "nombre": "Defensa Owen",
-     "nombreIngles": "Owen Defense",
+     "nombre": "Defensa Owen: Defensa Guatemala",
+     "nombreIngles": "Owen Defense: Guatemala Defense",
      "eco": "B00",
      "jugadas": [
       "e4",
-      "b6"
+      "b6",
+      "d4",
+      "Ba6"
      ],
      "lado": "blancas",
-     "plan": "Negras prepara ...Ab7 para presionar e4. Ocupa el centro con d4 y defiende e4 con Ad3 (o Cc3); luego Cf3, 0-0 y c3 o c4 según convenga.",
+     "plan": "Negras quiere cambiar tu alfil de casillas blancas con ...Aa6. Ocupa el centro con d4, desarrolla con Cf3 y Cc3 y enroca: tendrás más espacio.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B00",
-      "name": "Owen Defense",
-      "pgn": "1. e4 b6"
+      "name": "Owen Defense: Guatemala Defense",
+      "pgn": "1. e4 b6 2. d4 Ba6"
      }
     },
     {
@@ -2507,23 +2559,25 @@
      "id": "carr",
      "clave": "otros-1e4/carr",
      "familia": "Defensa Carr",
-     "nombre": "Defensa Carr",
-     "nombreIngles": "Carr Defense",
+     "nombre": "Defensa Carr: Gambito Zilbermints",
+     "nombreIngles": "Carr Defense: Zilbermints Gambit",
      "eco": "B00",
      "jugadas": [
       "e4",
-      "h6"
+      "h6",
+      "d4",
+      "e5"
      ],
      "lado": "blancas",
-     "plan": "...h6 no desarrolla nada. Aprovéchalo: d4 para tener los dos peones centrales, Cc3 y Cf3, alfiles activos (Ac4 o Ad3) y enroque corto.",
+     "plan": "...h6 no desarrolla nada. Ocupa el centro con 2.d4; si negras da un peón con 2...e5, puedes tomarlo y desarrollar con Cc3, Cf3, alfiles activos y enroque corto.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "B00",
-      "name": "Carr Defense",
-      "pgn": "1. e4 h6"
+      "name": "Carr Defense: Zilbermints Gambit",
+      "pgn": "1. e4 h6 2. d4 e5"
      }
     }
    ]
@@ -2641,7 +2695,7 @@
      "id": "cc3",
      "clave": "eslava/cc3",
      "familia": "Variante 3.Cc3",
-     "nombre": "Defensa Eslava (3.Cc3)",
+     "nombre": "Defensa Eslava: 3.Cc3 dxc4",
      "nombreIngles": "Slav Defense",
      "eco": "D10",
      "jugadas": [
@@ -2652,7 +2706,7 @@
       "Nc3"
      ],
      "lado": "negras",
-     "plan": "Lo natural es 3...Cf6: si 4.Cf3, llegas a la Variante Checa (...dxc4 y ...Af5). Si 4.e3, desarrolla con ...e6 o ...a6; aquí ...Af5 es delicado, porque cxd5 y Db3 atacan b7 y d5 a la vez.",
+     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2667,8 +2721,8 @@
      "id": "checa-clasica",
      "clave": "eslava/checa-clasica",
      "familia": "Variante Checa",
-     "nombre": "Defensa Eslava: Variante Checa, Sistema Clásico, Línea principal",
-     "nombreIngles": "Slav Defense: Czech Variation, Classical System, Main Line",
+     "nombre": "Defensa Eslava: Variante Checa, Variante Holandesa, Sämisch",
+     "nombreIngles": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
      "eco": "D19",
      "jugadas": [
       "d4",
@@ -2687,18 +2741,20 @@
       "Bb4",
       "O-O",
       "O-O",
-      "Qe2"
+      "Qe2",
+      "Ne4",
+      "g4"
      ],
      "lado": "negras",
-     "plan": "Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Tras 9.De2 lo usual es ...Cbd7; si blancas empuja e4, el alfil se retira a g6.",
+     "plan": "Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Contra 9.De2, 9...Ce4 ocupa el centro; si blancas ataca con g4, el alfil se retira a g6.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "D19",
-      "name": "Slav Defense: Czech Variation, Classical System, Main Line",
-      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2"
+      "name": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2 Ne4 10. g4"
      }
     },
     {
@@ -3286,25 +3342,26 @@
      "id": "d5-acelerado-c5",
      "clave": "londres/d5-acelerado-c5",
      "familia": "Londres Acelerado",
-     "nombre": "Londres Acelerado: Contragambito Steinitz",
-     "nombreIngles": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit",
+     "nombre": "Londres Acelerado: Contragambito Steinitz aceptado",
+     "nombreIngles": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted",
      "eco": "D00",
      "jugadas": [
       "d4",
       "d5",
       "Bf4",
-      "c5"
+      "c5",
+      "dxc5"
      ],
      "lado": "blancas",
-     "plan": "Es la respuesta más activa de Negras. Lo sencillo es e3 y luego c3, Cf3, Ad3 y Cbd2. Si ...Db6 ataca b2, Cc3 lo defiende de forma indirecta: si ...Dxb2, Cb5 amenaza Cc7+.",
+     "plan": "Lo más directo es tomar con 3.dxc5: negras recupera el peón con ...e6 y ...Axc5 o con ...Da5+, y tú desarrollas con e3, Cf3, c3 y Ad3. Si ...Db6 ataca b2, Cc3 lo defiende de forma indirecta.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
      "fuente": {
       "repo": "lichess-org/chess-openings",
       "eco": "D00",
-      "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit",
-      "pgn": "1. d4 d5 2. Bf4 c5"
+      "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted",
+      "pgn": "1. d4 d5 2. Bf4 c5 3. dxc5"
      }
     },
     {

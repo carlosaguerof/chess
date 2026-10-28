@@ -41,6 +41,8 @@ export type TipoMensaje = 'inicio' | 'en-linea' | 'desvio' | 'fuera'
 export interface Mensaje {
   tipo: TipoMensaje
   texto: string
+  /** el nombre en inglés y el ECO de la apertura (N2: a un lado, en chico) */
+  ingles?: string
   /** en un desvío: mi jugada y la de mi línea, para decidir si sigo o deshago */
   desvio?: { jugue: string; linea: string }
 }
@@ -74,18 +76,19 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
     partes.push(nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `Estás en la ${nombreAhora.apertura}: ${nombreAhora.variante}.` : `Estás en la ${nombreAhora.apertura}.`)
   }
   const familia = mio.lineas[0]!.familia
+  const ap = nombreAhora ? ctx.base.aperturas.find((a) => a.nombre === nombreAhora.apertura) : undefined
   const otras = opciones.filter((o) => o.san !== mia)
   if (otras.length > 0) {
     const otraFamilia = otras[0]!.lineas[0]!.familia
     const nombreOtra = otraFamilia !== familia ? `la ${otraFamilia} (${num(otras[0]!.san, ply)})` : num(otras[0]!.san, ply)
     partes.push(`Contestaste con ${num(mia, ply)}${familia ? `, la ${familia}` : ''}; otra opción era ${nombreOtra}.`)
   } else if (ply > 0) partes.push(`Contestaste con ${num(mia, ply)}, como dice tu línea.`)
-  return { tipo: 'en-linea', texto: partes.join(' ') }
+  return { tipo: 'en-linea', texto: partes.join(' '), ingles: ap ? `${ap.nombreIngles} · ${ap.eco}` : undefined }
 }
 
 export interface Ayuda {
-  /** de dónde sale: mi repertorio, la base o (fuera de teoría) nada */
-  origen: 'repertorio' | 'base' | 'fuera'
+  /** de dónde sale: mi repertorio, la base, el final de mi línea (su plan) o, fuera de teoría, nada */
+  origen: 'repertorio' | 'base' | 'fin-de-linea' | 'fuera'
   san?: string
   desde?: Square
   hasta?: Square
@@ -129,6 +132,14 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
       origen = 'base'
     }
   }
+  if (!san && esMiPly(ctx.color, ply)) {
+    // mi línea termina justo aquí (en la jugada del rival): no hay una jugada en la fuente, pero sí su plan
+    const termina = ctx.rep.lineas.find((l) => l.color === ctx.color && l.jugadas.length === historia.length && l.jugadas.every((s, i) => historia[i] === s))
+    if (termina) {
+      const texto = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Sigue su plan: ${planDeMiLado(termina.plan, ctx.color)}`
+      return { origen: 'fin-de-linea', nombre: termina.nombre, plan: termina.plan, pista: texto, respuesta: texto }
+    }
+  }
   if (!san || !esMiPly(ctx.color, ply)) {
     const otros = GUIA.find((g) => g.color === ctx.color && (g.apertura === 'otros-1e4' || g.apertura === 'otros-negras'))
     const texto = otros ? `${PRINCIPIOS} Tu guía dice: “${otros.textoGuia}”` : PRINCIPIOS
@@ -139,7 +150,9 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   const m = c.move(san)
   const pieza = m.flags.includes('k') || m.flags.includes('q') ? 'el rey' : `${nombrePieza(m.piece)} de ${m.from}`
   const previaCaptura = historia.length > 0 && /x/.test(historia[historia.length - 1]!)
-  const idea = `${ideaPorTipo(m, previaCaptura)}${nombre ? ` Sigues la ${nombre}.` : ''}`
+  // el nombre de la línea, sin lo que va entre paréntesis (a veces trae la jugada) ni la casilla de destino
+  const nombreSeguro = nombre?.replace(/\s*\([^)]*\)/g, '').trim()
+  const idea = `${ideaPorTipo(m, previaCaptura)}${nombreSeguro && !nombreSeguro.includes(m.to) ? ` Sigues la ${nombreSeguro}.` : ''}`
   return {
     origen,
     san,
@@ -148,7 +161,7 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     nombre,
     plan,
     pista: `${idea} Mueve ${pieza}.`,
-    respuesta: `${num(san, ply)} — ${nombre ?? ''}${origen === 'base' ? ' (de la base)' : ''}. ${plan ?? ''}`.trim(),
+    respuesta: `${num(san, ply)} — ${nombre ?? ''}${origen === 'base' ? ' (de la base)' : ''}. ${corto(plan ?? '')}`.trim(),
   }
 }
 
@@ -170,8 +183,11 @@ function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { 
 /** "Que juegue mis líneas": el bot escoge entre las jugadas del rival de mi árbol, por frecuencia. */
 export function jugadaDeMisLineas(rep: Repertorio, colorHumano: ColorCorto, historia: string[], azar: () => number): string | null {
   if (esMiPly(colorHumano, historia.length)) return null
-  const ops = siguientesEnRepertorio(rep, colorHumano, historia)
-  if (ops.length === 0) return null
+  const todas = siguientesEnRepertorio(rep, colorHumano, historia)
+  if (todas.length === 0) return null
+  // evita las respuestas donde mi línea se acaba (no tendría jugada mía que practicar), si hay otras
+  const conSeguimiento = todas.filter((o) => siguientesEnRepertorio(rep, colorHumano, [...historia, o.san]).length > 0)
+  const ops = conSeguimiento.length > 0 ? conSeguimiento : todas
   const pesos = ops.map((o) => Math.max(...o.lineas.map((l) => l.frecuencia)))
   const total = pesos.reduce((a, b) => a + b, 0)
   let r = azar() * total
@@ -192,6 +208,8 @@ export interface Resumen {
   /** dónde me salí yo: mi jugada y la de mi línea */
   salida?: { ply: number; jugue: string; linea: string }
 }
+
+const ctx_nombreApertura = (l: LineaRepertorio) => (GUIA.find((g) => g.color === l.color && g.apertura === l.apertura)?.curso ?? l.familia)
 
 /** El resumen al terminar: hasta qué jugada seguí mi línea, y dónde me salí yo o se salió el rival. */
 export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: string[]): Resumen {
@@ -222,8 +240,19 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
         linea: ultimaLinea,
       }
     }
-    ultimaLinea = op.lineas[0]
+    ultimaLinea = op.lineas.length > 1 && new Set(op.lineas.map((l) => l.familia)).size === 1 ? { ...op.lineas[0]!, nombre: op.lineas[0]!.familia } : op.lineas.length > 1 ? { ...op.lineas[0]!, nombre: ctx_nombreApertura(op.lineas[0]!) } : op.lineas[0]
   }
   const ultima = historia.length > 0 ? num(historia[historia.length - 1]!, historia.length - 1) : 'el inicio'
   return { caso: 'completa', hastaPly: historia.length - 1, texto: `Seguiste tu línea toda la partida, hasta ${ultima}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea }
+}
+
+/** Las primeras frases de un plan, sin pasar de unos 180 caracteres (la Respuesta cabe en el celular). */
+function corto(plan: string): string {
+  const frases = plan.split(/(?<=\.)\s+/)
+  let r = ''
+  for (const f of frases) {
+    if (r && (r + ' ' + f).length > 180) break
+    r = r ? `${r} ${f}` : f
+  }
+  return r
 }

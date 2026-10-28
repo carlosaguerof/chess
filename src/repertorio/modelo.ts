@@ -46,6 +46,9 @@ export interface LineaRepertorio {
   /** de dónde salió: una variante de la base, o una línea que agregué jugándola */
   origen: 'base' | 'propia'
   claveBase?: string
+  /** el nombre en inglés de la fuente y su código ECO (N2: a un lado, en chico) */
+  ingles?: string
+  eco?: string
 }
 
 export interface Repertorio {
@@ -78,6 +81,8 @@ export function lineaDeVariante(v: Variante, color: ColorCorto, apertura: string
     frecuencia: frecuenciaPara(v, color, ladoApertura),
     origen: 'base',
     claveBase: v.clave,
+    ingles: v.nombreIngles,
+    eco: v.eco,
   }
 }
 
@@ -114,7 +119,7 @@ export interface NodoArbol {
   /** claves de variantes de la base que pasan por aquí y no están en mi repertorio */
   soloBase: string[]
   /** si aquí empieza una familia (variante con nombre), su nombre, plan y frecuencia */
-  familia?: { nombre: string; plan: string; frecuencia: number; autorPlan: LineaRepertorio['autorPlan'] }
+  familia?: { nombre: string; plan: string; frecuencia: number; autorPlan: LineaRepertorio['autorPlan']; ingles?: string; eco?: string }
   /** si aquí termina una línea, su nombre */
   terminaLinea?: { id: string; nombre: string }
   /** jugada mía (del color del árbol) */
@@ -180,7 +185,7 @@ export function arbolDe(rep: Repertorio, color: ColorCorto, base?: Base): NodoAr
         if (f !== familiaPadre) {
           const ls = h.lineas.map((id) => familiaDe.get(id)!)
           const principal = ls.reduce((a, b) => (b.frecuencia > a.frecuencia ? b : a))
-          h.familia = { nombre: f, plan: principal.plan, frecuencia: Math.max(...ls.map((l) => l.frecuencia)), autorPlan: principal.autorPlan }
+          h.familia = { nombre: f, plan: principal.plan, frecuencia: Math.max(...ls.map((l) => l.frecuencia)), autorPlan: principal.autorPlan, ingles: principal.ingles?.split(',')[0], eco: principal.eco }
           actual = f
         }
       } else actual = null

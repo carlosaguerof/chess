@@ -40,8 +40,11 @@ describe('T7 · mi repertorio (nota 11: mi guía dice QUÉ; las líneas salen de
     const d4d5 = c6.hijos.find((h) => h.san === 'd4')!.hijos.find((h) => h.san === 'd5')!
     const fam = (n: typeof a) => n.familia && { nombre: n.familia.nombre, f: n.familia.frecuencia }
     expect(fam(d4d5.hijos.find((h) => h.san === 'e5')!)).toEqual({ nombre: 'Variante del Avance', f: 5 })
-    expect(fam(d4d5.hijos.find((h) => h.san === 'Nd2')!)).toEqual({ nombre: 'Variante Clásica', f: 4 })
-    expect(fam(d4d5.hijos.find((h) => h.san === 'Nc3')!)).toEqual({ nombre: 'Variante Clásica', f: 4 })
+    // 3.Cd2/3.Cc3 dxe4 4.Cxe4: ahí se separan la Clásica (4...Af5) y la Karpov (4...Cd7), como las nombra la fuente
+    const tras4 = d4d5.hijos.find((h) => h.san === 'Nd2')!.hijos.find((h) => h.san === 'dxe4')!.hijos.find((h) => h.san === 'Nxe4')!
+    expect(fam(tras4.hijos.find((h) => h.san === 'Bf5')!)).toEqual({ nombre: 'Variante Clásica', f: 4 })
+    expect(fam(tras4.hijos.find((h) => h.san === 'Nd7')!)).toEqual({ nombre: 'Variante Karpov', f: 4 })
+    expect(d4d5.hijos.find((h) => h.san === 'Nc3')!.enRepertorio).toBe(true)
     expect(fam(d4d5.hijos.find((h) => h.san === 'exd5')!)).toEqual({ nombre: 'Variante del Cambio', f: 3 })
     expect(fam(c6.hijos.find((h) => h.san === 'Nc3')!)).toEqual({ nombre: 'Ataque de los Dos Caballos', f: 2 })
     // la Siciliana con negras está en la base, no en mi repertorio

@@ -11,7 +11,11 @@
       "id": "giuoco-pianissimo-principal",
       "familia": "Giuoco Piano",
       "nombre": "Variante Clásica, Giuoco Pianissimo: línea principal",
-      "fila": { "eco": "C54", "name": "Italian Game: Classical Variation, Giuoco Pianissimo, Main Line", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O O-O 7. Re1 a6 8. Bb3 Ba7 9. h3" },
+      "fila": {
+        "eco": "C54",
+        "name": "Italian Game: Classical Variation, Giuoco Pianissimo, Main Line",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O O-O 7. Re1 a6 8. Bb3 Ba7 9. h3"
+      },
       "lado": "blancas",
       "plan": "El esquema lento y sólido: c3 y d3, 0-0 y Te1. Cuando negras juega ...a6 (amenaza ...b5), retiras el alfil a b3; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.",
       "frecuencia": null,
@@ -21,7 +25,11 @@
       "id": "giuoco-pianissimo-cbd2",
       "familia": "Giuoco Piano",
       "nombre": "Variante Clásica, Giuoco Pianissimo: con 6.Cbd2",
-      "fila": { "eco": "C54", "name": "Italian Game: Classical Variation, Giuoco Pianissimo", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. Nbd2 O-O 7. O-O" },
+      "fila": {
+        "eco": "C54",
+        "name": "Italian Game: Classical Variation, Giuoco Pianissimo",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. Nbd2 O-O 7. O-O"
+      },
       "lado": "blancas",
       "plan": "El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Sin prisa: d4 llega cuando tus piezas estén listas.",
       "frecuencia": null,
@@ -31,7 +39,11 @@
       "id": "clasica-la-bourdonnais",
       "familia": "Giuoco Piano",
       "nombre": "Variante Clásica: Variante La Bourdonnais",
-      "fila": { "eco": "C53", "name": "Italian Game: Classical Variation, La Bourdonnais Variation", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6" },
+      "fila": {
+        "eco": "C53",
+        "name": "Italian Game: Classical Variation, La Bourdonnais Variation",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6"
+      },
       "lado": "blancas",
       "plan": "Si negras responde pasivo con ...d6, aprovecha c3 para jugar d4 de inmediato: tras ...exd4 cxd4 tienes el centro ideal, con peones en e4 y d4. Sigue con Cc3, h3 (contra ...Ag4) y 0-0.",
       "frecuencia": null,
@@ -41,7 +53,11 @@
       "id": "pianissimo-canal",
       "familia": "Giuoco Piano",
       "nombre": "Giuoco Pianissimo: Variante Canal",
-      "fila": { "eco": "C50", "name": "Italian Game: Giuoco Pianissimo, Canal Variation", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. d3 Nf6 5. Nc3 d6 6. Bg5" },
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Giuoco Pianissimo, Canal Variation",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. d3 Nf6 5. Nc3 d6 6. Bg5"
+      },
       "lado": "blancas",
       "plan": "El Giuoco Pianissimo con d3 primero: desarrollo tranquilo con Cc3 y Ag5, que clava el caballo de f6 contra la dama. Si negras juega ...h6, puedes cambiar en f6 y llevar tu caballo a d5. Enroca corto pronto.",
       "frecuencia": null,
@@ -51,7 +67,11 @@
       "id": "dos-caballos-d3",
       "familia": "Defensa de los Dos Caballos",
       "nombre": "Defensa de los Dos Caballos: Apertura de Alfil Moderna",
-      "fila": { "eco": "C55", "name": "Italian Game: Two Knights Defense, Modern Bishop's Opening", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3" },
+      "fila": {
+        "eco": "C55",
+        "name": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3"
+      },
       "lado": "blancas",
       "plan": "La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.",
       "frecuencia": null,
@@ -61,7 +81,11 @@
       "id": "dos-caballos-lolli",
       "familia": "Defensa de los Dos Caballos",
       "nombre": "Defensa de los Dos Caballos: Ataque Lolli",
-      "fila": { "eco": "C57", "name": "Italian Game: Two Knights Defense, Lolli Attack", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. d4" },
+      "fila": {
+        "eco": "C57",
+        "name": "Italian Game: Two Knights Defense, Lolli Attack",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. d4"
+      },
       "lado": "blancas",
       "plan": "4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Se considera más fuerte que el famoso Hígado Frito (6.Cxf7).",
       "frecuencia": null,
@@ -71,7 +95,11 @@
       "id": "dos-caballos-polerio",
       "familia": "Defensa de los Dos Caballos",
       "nombre": "Defensa de los Dos Caballos: Defensa Polerio con 8.Ae2",
-      "fila": { "eco": "C58", "name": "Italian Game: Two Knights Defense", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ c6 7. dxc6 bxc6 8. Be2" },
+      "fila": {
+        "eco": "C58",
+        "name": "Italian Game: Two Knights Defense",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ c6 7. dxc6 bxc6 8. Be2"
+      },
       "lado": "blancas",
       "plan": "La respuesta buena de negras: 5...Ca5 ataca tu alfil y entrega un peón a cambio de tiempo. Con 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2 conservas el peón de más, pero negras gana actividad (...h6 echa a tu caballo). Termina tu desarrollo y enroca antes de buscar más.",
       "frecuencia": null,
@@ -81,7 +109,11 @@
       "id": "dos-caballos-traxler",
       "familia": "Defensa de los Dos Caballos",
       "nombre": "Defensa de los Dos Caballos: Contraataque Traxler, sacrificio de alfil",
-      "fila": { "eco": "C57", "name": "Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 Bc5 5. Bxf7+" },
+      "fila": {
+        "eco": "C57",
+        "name": "Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 Bc5 5. Bxf7+"
+      },
       "lado": "blancas",
       "plan": "4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (Ad5 o Ab3). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.",
       "frecuencia": null,
@@ -91,7 +123,11 @@
       "id": "paris",
       "familia": "Defensa París",
       "nombre": "Defensa París",
-      "fila": { "eco": "C50", "name": "Italian Game: Paris Defense", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 d6" },
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Paris Defense",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 d6"
+      },
       "lado": "blancas",
       "plan": "Negras juega sólido pero pasivo: ...d6 encierra su alfil de f8. Toma el centro con c3 y d4 (o sigue tranquilo con d3 y Cc3) y enroca. Si ...Ag4 clava tu caballo, h3 le pregunta al alfil.",
       "frecuencia": null,
@@ -101,7 +137,11 @@
       "id": "anti-higado-frito",
       "familia": "Defensa Anti-Hígado Frito",
       "nombre": "Defensa Anti-Hígado Frito",
-      "fila": { "eco": "C50", "name": "Italian Game: Anti-Fried Liver Defense", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 h6" },
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Anti-Fried Liver Defense",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 h6"
+      },
       "lado": "blancas",
       "plan": "...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo: c3 y d4 (o d3 y Cc3), desarrolla y enroca; tendrás ventaja de desarrollo.",
       "frecuencia": null,
@@ -110,10 +150,14 @@
     {
       "id": "hungara",
       "familia": "Defensa Húngara",
-      "nombre": "Defensa Húngara",
-      "fila": { "eco": "C50", "name": "Italian Game: Hungarian Defense", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7" },
+      "nombre": "Defensa Húngara: Variante Tartakower",
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Hungarian Defense, Tartakower Variation",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7 4. d4 exd4 5. c3 Nf6 6. e5 Ne4"
+      },
       "lado": "blancas",
-      "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con d4 (o c3 y d4), desarrolla con Cc3 y enroca; tendrás más espacio.",
+      "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -121,7 +165,11 @@
       "id": "blackburne-kostic",
       "familia": "Gambito Blackburne-Kostić",
       "nombre": "Gambito Blackburne-Kostić",
-      "fila": { "eco": "C50", "name": "Italian Game: Blackburne-Kostić Gambit", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4" },
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Blackburne-Kostić Gambit",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4"
+      },
       "lado": "blancas",
       "plan": "Es una trampa: si tomas 4.Cxe5?, 4...Dg5 ataca tu caballo y g2 a la vez, y negras gana material. Lo correcto es 4.Cxd4 exd4 y seguir con c3 o 0-0: negras perdió tiempo y tú desarrollas con ventaja.",
       "frecuencia": null,
@@ -131,7 +179,11 @@
       "id": "rousseau",
       "familia": "Gambito Rousseau",
       "nombre": "Gambito Rousseau",
-      "fila": { "eco": "C50", "name": "Italian Game: Rousseau Gambit", "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 f5" },
+      "fila": {
+        "eco": "C50",
+        "name": "Italian Game: Rousseau Gambit",
+        "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 f5"
+      },
       "lado": "blancas",
       "plan": "Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Responde con calma: d3, Cc3 y 0-0. Si negras cambia ...fxe4, retoma con el peón (dxe4).",
       "frecuencia": null,

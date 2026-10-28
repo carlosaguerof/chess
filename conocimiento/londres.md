@@ -34,13 +34,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Londres Acelerado
 
-### Londres Acelerado: Contragambito Steinitz
+### Londres Acelerado: Contragambito Steinitz aceptado
 
-**1.d4 d5 2.Af4 c5**
+**1.d4 d5 2.Af4 c5 3.dxc5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Es la respuesta más activa de Negras. Lo sencillo es e3 y luego c3, Cf3, Ad3 y Cbd2. Si ...Db6 ataca b2, Cc3 lo defiende de forma indirecta: si ...Dxb2, Cb5 amenaza Cc7+.
-- Fuente: D00 · Queen's Pawn Game: Accelerated London System, Steinitz Countergambit
+- Plan *(redactado por la IA)*: Lo más directo es tomar con 3.dxc5: negras recupera el peón con ...e6 y ...Axc5 o con ...Da5+, y tú desarrollas con e3, Cf3, c3 y Ad3. Si ...Db6 ataca b2, Cc3 lo defiende de forma indirecta.
+- Fuente: D00 · Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted
 
 ## Londres contra la India (...Cf6)
 

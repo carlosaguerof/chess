@@ -318,3 +318,11 @@ h1, h2, h3 { margin: 0; }
 .tarjeta-enlace { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .tarjeta-enlace div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
 .tarjeta-enlace > span { font-size: 26px; color: var(--texto-apagado); }
+
+/* N2: el nombre en inglés y el ECO, a un lado y en chico */
+.ingles { display: block; font-size: 11px; font-weight: 500; color: var(--texto-apagado); font-style: normal; }
+.rama-nombre .ingles { display: inline; margin-left: 4px; }
+/* en el celular, los tres botones de la partida siempre a la vista */
+@media (max-width: 899px) {
+  .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
+}

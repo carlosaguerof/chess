@@ -18,6 +18,7 @@ export function PanelGuia(props: {
       {props.mensaje && (
         <div className={`mensaje-guia ${props.mensaje.tipo}`} data-testid="mensaje-guia" data-tipo={props.mensaje.tipo} role="status">
           <p>{props.mensaje.texto}</p>
+          {props.mensaje.ingles && <small className="ingles">{props.mensaje.ingles}</small>}
           {props.desvioPendiente && (
             <div className="botones-desvio">
               <button type="button" className="boton secundario chico" onClick={props.onSeguir} data-testid="seguir-desvio">

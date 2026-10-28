@@ -96,13 +96,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Defensa Húngara
 
-### Defensa Húngara
+### Defensa Húngara: Variante Tartakower
 
-**1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7**
+**1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7 4.d4 exd4 5.c3 Cf6 6.e5 Ce4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con d4 (o c3 y d4), desarrolla con Cc3 y enroca; tendrás más espacio.
-- Fuente: C50 · Italian Game: Hungarian Defense
+- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.
+- Fuente: C50 · Italian Game: Hungarian Defense, Tartakower Variation
 
 ## Gambito Blackburne-Kostić
 

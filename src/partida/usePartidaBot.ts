@@ -45,6 +45,8 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
   const [reintento, setReintento] = useState(0)
   const opcionesRef = useRef(opciones)
   opcionesRef.current = opciones
+  const ultimaRef = useRef(partida)
+  ultimaRef.current = partida
 
   useEffect(() => alCambiarMotor(setMotor), [])
 
@@ -72,7 +74,10 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
         setTimeout(() => {
           if (!vigente) return
           setPensando(false)
-          cambiar(conJugada(partida, j.uci))
+          // sobre la partida más reciente (p. ej. si volteé el tablero mientras pensaba)
+          const ahora = ultimaRef.current ?? partida
+          if (ahora.id !== partida.id || ahora.jugadas.length !== partida.jugadas.length) return
+          cambiar(conJugada(ahora, j.uci))
         }, espera)
       })
       .catch(() => {
