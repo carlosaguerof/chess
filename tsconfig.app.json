@@ -28,8 +28,6 @@
     ]
   },
   "include": [
-    "src",
-    "tests/unit",
-    "conocimiento/**/*.json"
+    "src"
   ]
 }

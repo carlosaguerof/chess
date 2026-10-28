@@ -18,12 +18,13 @@
     "types": [
       "node"
     ],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "jsx": "react-jsx"
   },
   "include": [
     "vite.config.ts",
     "playwright.config.ts",
-    "tests/e2e",
+    "tests",
     "scripts"
   ]
 }

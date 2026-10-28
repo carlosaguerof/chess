@@ -1,0 +1,131 @@
+{
+  "id": "gambito-dama",
+  "nombre": "Gambito de Dama",
+  "nombreIngles": "Queen's Gambit",
+  "eco": "D06–D69",
+  "lado": "blancas",
+  "raiz": "d4 d5 c4",
+  "idea": "Con 2.c4 ofreces un peón para desviar el peón de d5 del centro. No es un gambito de verdad: si negras toma (...dxc4), casi siempre recuperas el peón con e3 y Axc4. El plan es dominar el centro, desarrollar (Cc3, Cf3, Ag5 o Af4) y enrocar.",
+  "variantes": [
+    {
+      "id": "declinado-ortodoxa",
+      "familia": "Gambito de Dama Declinado",
+      "nombre": "Gambito de Dama Declinado: Defensa Ortodoxa, Línea Ad3",
+      "fila": { "eco": "D66", "name": "Queen's Gambit Declined: Orthodox Defense, Bd3 Line", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 Nbd7 7. Rc1 c6 8. Bd3" },
+      "lado": "blancas",
+      "plan": "Desarrollo clásico: Cc3, Ag5 (clava el Cf6), e3, Cf3, Tc1 y Ad3, y luego 0-0. La torre en c1 presiona por la columna c; si negras toma en c4, recaptura con el alfil (Axc4).",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "aceptado-clasica",
+      "familia": "Gambito de Dama Aceptado",
+      "nombre": "Gambito de Dama Aceptado: Defensa Clásica, Línea normal",
+      "fila": { "eco": "D26", "name": "Queen's Gambit Accepted: Classical Defense, Normal Line", "pgn": "1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3 e6 5. Bxc4 c5 6. O-O" },
+      "lado": "blancas",
+      "plan": "No tengas prisa por el peón: Cf3 y e3 preparan Axc4, que lo recupera y desarrolla a la vez. Enroca; luego De2, Td1 y Cc3 apoyan el avance e4 en el centro.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "eslava",
+      "familia": "Defensa Eslava",
+      "nombre": "Defensa Eslava: Variante de los Tres Caballos",
+      "fila": { "eco": "D15", "name": "Slav Defense: Three Knights Variation", "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3" },
+      "lado": "blancas",
+      "plan": "Contra 2...c6, desarrolla los caballos (Cf3 y Cc3). Si negras toma en c4, a4 impide ...b5 y después e3 y Axc4 recuperan el peón.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "declinado-harrwitz",
+      "familia": "Gambito de Dama Declinado",
+      "nombre": "Gambito de Dama Declinado: Ataque Harrwitz",
+      "fila": { "eco": "D35", "name": "Queen's Gambit Declined: Harrwitz Attack", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bf4" },
+      "lado": "blancas",
+      "plan": "Alternativa moderna a Ag5: el alfil va a f4, fuera de la cadena de peones. Sigue e3, Cf3, Ad3 o Ae2 y 0-0. Si negras rompe con ...c5, lo habitual es dxc5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "declinado-cambio",
+      "familia": "Gambito de Dama Declinado",
+      "nombre": "Gambito de Dama Declinado: Variante del Cambio, Variante Reshevsky",
+      "fila": { "eco": "D36", "name": "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 c6 6. e3 Be7 7. Bd3 Nbd7 8. Nge2 O-O 9. O-O Re8 10. Qc2" },
+      "lado": "blancas",
+      "plan": "Con 4.cxd5 exd5 fijas la estructura. Ag5, e3, Ad3, Cge2 y 0-0: el caballo en e2 prepara f3 y e4 para ganar el centro. La otra idea típica es empujar b4 y b5 (ataque de minorías).",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "aceptado-e3",
+      "familia": "Gambito de Dama Aceptado",
+      "nombre": "Gambito de Dama Aceptado: Variante Antigua",
+      "fila": { "eco": "D20", "name": "Queen's Gambit Accepted: Old Variation", "pgn": "1. d4 d5 2. c4 dxc4 3. e3" },
+      "lado": "blancas",
+      "plan": "3.e3 abre la diagonal para recuperar el peón con Axc4. Si negras lo defiende con ...b5, juega a4: tras ...c6, axb5 cxb5 y Df3 ataca la torre de a8 y ganas material.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "aceptado-central",
+      "familia": "Gambito de Dama Aceptado",
+      "nombre": "Gambito de Dama Aceptado: Variante Saduleto (Central)",
+      "fila": { "eco": "D20", "name": "Queen's Gambit Accepted: Saduleto Variation", "pgn": "1. d4 d5 2. c4 dxc4 3. e4" },
+      "lado": "blancas",
+      "plan": "3.e4 ocupa todo el centro y el alfil recupera c4 después. Contra ...e5, Cf3; contra ...Cf6, e5 y el caballo tiene que moverse; contra ...c5, d5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "declinado-caballo-dama",
+      "familia": "Gambito de Dama Declinado",
+      "nombre": "Gambito de Dama Declinado: Variante Moderna, Defensa del Caballo",
+      "fila": { "eco": "D51", "name": "Queen's Gambit Declined: Modern Variation, Knight Defense", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7 5. e3" },
+      "lado": "blancas",
+      "plan": "Cuidado con la trampa del elefante: tras 4...Cbd7 parece que ganas un peón con 5.cxd5 exd5 6.Cxd5??, pero ...Cxd5 7.Axd8 Ab4+ y negras recupera la dama con una pieza de más. Juega 5.e3 y desarrollo normal (Cf3, Ad3 o Tc1).",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "declinado-tarrasch",
+      "familia": "Defensa Tarrasch",
+      "nombre": "Defensa Tarrasch: Sistema Rubinstein",
+      "fila": { "eco": "D33", "name": "Tarrasch Defense: Rubinstein System", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3" },
+      "lado": "blancas",
+      "plan": "Contra 3...c5, cxd5 exd5 deja a negras con un peón aislado en d5. Con g3 y Ag2 tu alfil apunta a ese peón; enroca y presiónalo con tus piezas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "chigorin",
+      "familia": "Defensa Chigorin",
+      "nombre": "Gambito de Dama Declinado: Defensa Chigorin, Variante Janowski",
+      "fila": { "eco": "D07", "name": "Queen's Gambit Declined: Chigorin Defense, Janowski Variation", "pgn": "1. d4 d5 2. c4 Nc6 3. Nc3 dxc4 4. Nf3" },
+      "lado": "blancas",
+      "plan": "Contra 2...Cc6, que tapa su propio peón de c, desarrolla con Cc3 y Cf3. Si negras toma en c4, ocupa el centro con e4 y recupera el peón con Axc4.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "albin",
+      "familia": "Contragambito Albin",
+      "nombre": "Gambito de Dama Declinado: Contragambito Albin, Variante del Fianchetto",
+      "fila": { "eco": "D09", "name": "Queen's Gambit Declined: Albin Countergambit, Fianchetto Variation", "pgn": "1. d4 d5 2. c4 e5 3. dxe5 d4 4. Nf3 Nc6 5. g3" },
+      "lado": "blancas",
+      "plan": "Toma con dxe5 y quédate con el peón: Cf3, g3, Ag2 y 0-0, y luego Cbd2 para atacar el peón de d4. No juegues 4.e3: tras ...Ab4+ te expones a la trampa de Lasker.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "baltica",
+      "familia": "Defensa Báltica",
+      "nombre": "Gambito de Dama Declinado: Defensa Báltica, Pseudo-Chigorin",
+      "fila": { "eco": "D06", "name": "Queen's Gambit Declined: Baltic Defense, Pseudo-Chigorin", "pgn": "1. d4 d5 2. c4 Bf5 3. Nc3 e6 4. Nf3 Nc6" },
+      "lado": "blancas",
+      "plan": "Desarrolla con calma (Cc3, Cf3) y sigue con Ag5 o e3. Su alfil salió pronto y dejó b7 sin protección, así que Db3 es una idea frecuente; antes de tomar en b7, revisa que tu dama no quede atrapada.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    }
+  ]
+}

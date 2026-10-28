@@ -6,8 +6,9 @@ import { Inicio } from './pantallas/Inicio.tsx'
 import { ListaBots } from './pantallas/ListaBots.tsx'
 import { DetalleBot } from './pantallas/DetalleBot.tsx'
 import { Partida } from './pantallas/Partida.tsx'
+import { Licencias } from './pantallas/Licencias.tsx'
 
-const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', href: 'https://github.com/carlosaguerof/chess#readme', externo: true }]
+const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', ruta: '/licencias' }]
 
 export function App() {
   const ruta = useRuta()
@@ -25,6 +26,7 @@ export function App() {
   let pantalla
   if (primera === 'bots') pantalla = <ListaBots />
   else if (primera === 'bot' && segunda) pantalla = <DetalleBot id={segunda} />
+  else if (primera === 'licencias') pantalla = <Licencias />
   else pantalla = <Inicio />
   return (
     <Marco actual={ruta.camino} secciones={SECCIONES} mas={MAS}>
