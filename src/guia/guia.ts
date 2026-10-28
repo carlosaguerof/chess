@@ -34,18 +34,67 @@ function posicionesDe(historia: string[]): Set<string> {
   return r
 }
 
-/** El nombre de la apertura en cuanto se puede saber: la raíz de una apertura de la base, o una variante completa. */
-export function nombreDeApertura(base: Base, historia: string[]): { apertura: string; variante?: string } | null {
-  const v = variantesQueCoinciden(base, historia)[0]
-  let mejor: { apertura: string; largo: number } | null = null
-  for (const a of base.aperturas) {
-    if (a.raiz.length < 2) continue
-    const llega = a.raiz.length <= historia.length && (a.raiz.every((s, i) => historia[i] === s) || posicionesDe(historia).has(posicionDe(a.raiz)))
-    if (llega && (!mejor || a.raiz.length > mejor.largo)) mejor = { apertura: a.nombre, largo: a.raiz.length }
+/** Las aperturas de la base que juntan varias ("Otras defensas contra 1.e4"): ahí el nombre es el de la familia. */
+const esGrupo = (a: Base['aperturas'][number]) => a.id.startsWith('otros')
+
+/** El nombre en inglés y el ECO de un grupo de variantes (N2): el nombre de la apertura en la fuente y sus códigos. */
+function inglesDeVariantes(vs: Variante[]): string {
+  const ecos = [...new Set(vs.map((v) => v.eco))].sort()
+  return `${vs[0]!.nombreIngles.split(':')[0]} · ${ecos.length > 1 ? `${ecos[0]}–${ecos[ecos.length - 1]}` : ecos[0]}`
+}
+
+/**
+ * Las familias de los grupos ("Defensa Alekhine") con las jugadas que ya las distinguen de todo lo demás
+ * de la base: 1...Cf6 ya es la Alekhine, 1.c4 ya es la Inglesa.
+ */
+function familiasDeGrupos(base: Base): { familia: string; prefijo: string[]; ingles: string }[] {
+  const todas = base.aperturas.flatMap((a) => a.variantes)
+  const r: { familia: string; prefijo: string[]; ingles: string }[] = []
+  for (const a of base.aperturas.filter(esGrupo)) {
+    const familias = new Map<string, Variante[]>()
+    for (const v of a.variantes) familias.set(v.familia, [...(familias.get(v.familia) ?? []), v])
+    for (const [familia, vs] of familias) {
+      let comun = vs[0]!.jugadas
+      for (const v of vs) {
+        let i = 0
+        while (i < comun.length && comun[i] === v.jugadas[i]) i++
+        comun = comun.slice(0, i)
+      }
+      for (let k = 1; k <= comun.length; k++) {
+        const p = comun.slice(0, k)
+        if (todas.every((v) => v.familia === familia || !p.every((s, i) => v.jugadas[i] === s))) {
+          r.push({ familia, prefijo: p, ingles: inglesDeVariantes(vs) })
+          break
+        }
+      }
+    }
   }
-  if (v && v.v.jugadas.length >= (mejor?.largo ?? 0) && v.v.jugadas.length >= 2) return { apertura: v.apertura, variante: v.v.familia }
-  if (mejor) return { apertura: mejor.apertura }
+  return r
+}
+
+/** El nombre de la apertura en cuanto se puede saber: la raíz de una apertura de la base, o una variante completa. */
+export function nombreDeApertura(base: Base, historia: string[]): { apertura: string; variante?: string; ingles?: string } | null {
+  const v = variantesQueCoinciden(base, historia)[0]
+  const posiciones = posicionesDe(historia)
+  const llega = (jugadas: string[]) => jugadas.length <= historia.length && (jugadas.every((s, i) => historia[i] === s) || posiciones.has(posicionDe(jugadas)))
+  let mejor: { apertura: string; largo: number; ingles: string } | null = null
+  for (const a of base.aperturas) {
+    if (a.raiz.length < 2 || esGrupo(a)) continue
+    if (llega(a.raiz) && (!mejor || a.raiz.length > mejor.largo)) mejor = { apertura: a.nombre, largo: a.raiz.length, ingles: `${a.nombreIngles} · ${a.eco}` }
+  }
+  for (const f of familiasDeGrupos(base)) if (llega(f.prefijo) && (!mejor || f.prefijo.length > mejor.largo)) mejor = { apertura: f.familia, largo: f.prefijo.length, ingles: f.ingles }
+  if (v && v.v.jugadas.length >= (mejor?.largo ?? 0) && v.v.jugadas.length >= 2) {
+    const ap = base.aperturas.find((a) => a.nombre === v.apertura)!
+    if (esGrupo(ap)) return { apertura: v.v.familia, ingles: inglesDeVariantes(ap.variantes.filter((x) => x.familia === v.v.familia)) }
+    return { apertura: v.apertura, variante: v.v.familia, ingles: `${ap.nombreIngles} · ${ap.eco}` }
+  }
+  if (mejor) return { apertura: mejor.apertura, ingles: mejor.ingles }
   return null
+}
+
+/** N2: el nombre en inglés y el ECO de una línea de mi repertorio. */
+function inglesDeLinea(l: LineaRepertorio | undefined): string | undefined {
+  return l?.ingles ? `${l.ingles}${l.eco ? ` · ${l.eco}` : ''}` : undefined
 }
 
 export type TipoMensaje = 'inicio' | 'en-linea' | 'desvio' | 'fuera'
@@ -68,10 +117,11 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
   const nombreAntes = nombreDeApertura(ctx.base, antes)
   const nombreAhora = nombreDeApertura(ctx.base, historia)
   const partes: string[] = []
-  if (opciones.length === 0 && estaEnRepertorio(ctx.rep, ctx.color, historia)) {
-    // llegué a mi repertorio por otro orden de jugadas (transposición)
+  const mioEnLinea = opciones.some((o) => o.san === mia)
+  if (!mioEnLinea && estaEnRepertorio(ctx.rep, ctx.color, historia)) {
+    // llegué a una posición de mi repertorio por otro orden de jugadas (transposición): no es desvío
     const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : 'tu repertorio'
-    return { tipo: 'en-linea', texto: `Con ${num(mia, ply)} llegaste a ${n === 'tu repertorio' ? n : `la ${n}`} por otro orden de jugadas: ya estás en tu línea.` }
+    return { tipo: 'en-linea', texto: `Con ${num(mia, ply)} llegaste a ${n === 'tu repertorio' ? n : `la ${n}`} por otro orden de jugadas: ya estás en tu línea.`, ingles: nombreAhora?.ingles }
   }
   if (opciones.length === 0) {
     // mi repertorio ya no tiene nada aquí
@@ -85,6 +135,7 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
     return {
       tipo: 'desvio',
       texto: `Te desviaste ${donde}: jugaste ${num(mia, ply)} y tu línea dice ${num(linea.san, ply)}.`,
+      ingles: nombreAntes?.ingles ?? inglesDeLinea(linea.lineas[0]),
       desvio: { jugue: mia, linea: linea.san },
     }
   }
@@ -93,14 +144,13 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
     partes.push(nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `Estás en la ${nombreAhora.apertura}: ${nombreAhora.variante}.` : `Estás en la ${nombreAhora.apertura}.`)
   }
   const familia = mio.lineas[0]!.familia
-  const ap = nombreAhora ? ctx.base.aperturas.find((a) => a.nombre === nombreAhora.apertura) : undefined
   const otras = opciones.filter((o) => o.san !== mia)
   if (otras.length > 0) {
     const otraFamilia = otras[0]!.lineas[0]!.familia
     const nombreOtra = otraFamilia !== familia ? `la ${otraFamilia} (${num(otras[0]!.san, ply)})` : num(otras[0]!.san, ply)
     partes.push(`Contestaste con ${num(mia, ply)}${familia ? `, la ${familia}` : ''}; otra opción era ${nombreOtra}.`)
   } else if (ply > 0) partes.push(`Contestaste con ${num(mia, ply)}, como dice tu línea.`)
-  return { tipo: 'en-linea', texto: partes.join(' '), ingles: ap ? `${ap.nombreIngles} · ${ap.eco}` : undefined }
+  return { tipo: 'en-linea', texto: partes.join(' '), ingles: nombreAhora?.ingles }
 }
 
 export interface Ayuda {
@@ -112,6 +162,8 @@ export interface Ayuda {
   pista: string
   respuesta: string
   nombre?: string
+  /** el nombre en inglés y el ECO (N2: a un lado, en chico) */
+  ingles?: string
   plan?: string
 }
 
@@ -124,6 +176,7 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   let san: string | undefined
   let nombre: string | undefined
   let plan: string | undefined
+  let ingles: string | undefined
   let origen: Ayuda['origen'] = 'fuera'
   if (deRep.length > 0) {
     const lineas: LineaRepertorio[] = deRep[0]!.lineas
@@ -135,9 +188,11 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     if (familias.size > 1 && apertura) {
       nombre = apertura.nombre
       plan = apertura.idea
+      ingles = esGrupo(apertura) ? undefined : `${apertura.nombreIngles} · ${apertura.eco}`
     } else {
       nombre = familias.size === 1 ? l.familia : l.nombre
       plan = planDeMiLado(l.plan, ctx.color)
+      ingles = lineas.length === 1 ? inglesDeLinea(l) : nombreDeApertura(ctx.base, [...historia, san])?.ingles
     }
     origen = 'repertorio'
   } else {
@@ -146,6 +201,7 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
       san = deBase.san
       nombre = deBase.v.familia
       plan = planDeMiLado(deBase.v.plan, ctx.color)
+      ingles = `${deBase.v.nombreIngles} · ${deBase.v.eco}`
       origen = 'base'
     }
   }
@@ -160,12 +216,12 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
         .join(' ')
       const pista = `Tu línea (${termina.nombre}) termina aquí. ${sinJugadas || 'Pide la Respuesta para ver su plan.'}`
       const respuesta = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
-      return { origen: 'fin-de-linea', nombre: termina.nombre, plan: termina.plan, pista, respuesta }
+      return { origen: 'fin-de-linea', nombre: termina.nombre, ingles: inglesDeLinea(termina), plan: termina.plan, pista, respuesta }
     }
   }
   if (!san || !esMiPly(ctx.color, ply)) {
     const otros = GUIA.find((g) => g.color === ctx.color && (g.apertura === 'otros-1e4' || g.apertura === 'otros-negras'))
-    const texto = otros ? `${PRINCIPIOS} Tu guía dice: “${otros.textoGuia}”` : PRINCIPIOS
+    const texto = otros && rivalSalioAlInicio(ctx, historia) ? `${PRINCIPIOS} Tu guía dice: “${otros.textoGuia}”` : PRINCIPIOS
     return { origen: 'fuera', pista: texto, respuesta: texto }
   }
   const c = new Chess()
@@ -182,10 +238,25 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     desde: m.from,
     hasta: m.to,
     nombre,
+    ingles,
     plan,
     pista: `${idea} Mueve ${pieza}.`,
     respuesta: `${num(san, ply)} — ${nombre ?? ''}${origen === 'base' ? ' (de la base)' : ''}. ${corto(plan ?? '')}`.trim(),
   }
+}
+
+/**
+ * ¿El rival salió de mi árbol en su primera jugada, o entró a lo que mi guía llama "otras"?
+ * Solo ahí aplica el texto de mi guía sobre las otras aperturas.
+ */
+function rivalSalioAlInicio(ctx: Contexto, historia: string[]): boolean {
+  const primera = ctx.color === 'w' ? 1 : 0
+  if (historia.length <= primera) return false
+  const hasta = historia.slice(0, primera + 1)
+  const sigue = siguientesEnRepertorio(ctx.rep, ctx.color, hasta).flatMap((o) => o.lineas)
+  const termina = lineaQueTerminaEn(ctx.rep, ctx.color, hasta)
+  const lineas = termina ? [...sigue, termina] : sigue
+  return lineas.length === 0 || lineas.every((l) => l.apertura.startsWith('otros'))
 }
 
 function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { san: string; v: Variante } | null {
@@ -238,6 +309,8 @@ export interface Resumen {
   linea?: LineaRepertorio
   /** dónde me salí yo: mi jugada y la de mi línea */
   salida?: { ply: number; jugue: string; linea: string }
+  /** el nombre en inglés y el ECO de esa línea (N2) */
+  ingles?: string
 }
 
 const ctx_nombreApertura = (l: LineaRepertorio) => (GUIA.find((g) => g.color === l.color && g.apertura === l.apertura)?.curso ?? l.familia)
@@ -250,9 +323,15 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
     const jugada = historia[ply]!
     if (ops.length === 0) {
       const texto = ply === 0 ? 'La partida no entró a tu repertorio.' : `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
-      return { caso: 'completa', hastaPly: ply - 1, texto, linea: ultimaLinea }
+      return { caso: 'completa', hastaPly: ply - 1, texto, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
     }
     const op = ops.find((o) => o.san === jugada)
+    if (!op && estaEnRepertorio(rep, color, historia.slice(0, ply + 1))) {
+      // otro orden de jugadas que llega a una posición de mi repertorio (transposición): sigo en mi línea
+      const termina = lineaQueTerminaEn(rep, color, historia.slice(0, ply + 1))
+      if (termina) ultimaLinea = termina
+      continue
+    }
     if (!op) {
       if (esMiPly(color, ply)) {
         const linea = ops[0]!
@@ -262,6 +341,7 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
           texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} te saliste tú: tu línea decía ${num(linea.san, ply)} (${linea.lineas[0]!.nombre}).`,
           linea: linea.lineas[0],
           salida: { ply, jugue: jugada, linea: linea.san },
+          ingles: inglesDeLinea(linea.lineas[0]),
         }
       }
       return {
@@ -269,12 +349,25 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
         hastaPly: ply - 1,
         texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} se salió el rival; tu repertorio esperaba ${ops.map((o) => num(o.san, ply)).join(' o ')}.`,
         linea: ultimaLinea,
+        ingles: inglesDeResumen(ultimaLinea),
       }
     }
     ultimaLinea = op.lineas.length > 1 && new Set(op.lineas.map((l) => l.familia)).size === 1 ? { ...op.lineas[0]!, nombre: op.lineas[0]!.familia } : op.lineas.length > 1 ? { ...op.lineas[0]!, nombre: ctx_nombreApertura(op.lineas[0]!) } : op.lineas[0]
   }
   const ultima = historia.length > 0 ? num(historia[historia.length - 1]!, historia.length - 1) : 'el inicio'
-  return { caso: 'completa', hastaPly: historia.length - 1, texto: `Seguiste tu línea toda la partida, hasta ${ultima}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea }
+  return { caso: 'completa', hastaPly: historia.length - 1, texto: `Seguiste tu línea toda la partida, hasta ${ultima}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
+}
+
+/** En el resumen, si la línea se nombra por su familia o su curso, solo la apertura en inglés (sin la variante). */
+function inglesDeResumen(l: LineaRepertorio | undefined): string | undefined {
+  if (!l?.ingles) return undefined
+  const propio = rep_nombreEsDeLaLinea(l)
+  return propio ? inglesDeLinea(l) : l.ingles.split(':')[0]
+}
+
+/** ¿El nombre que muestro es el de la línea misma (no el de su familia o su curso)? */
+function rep_nombreEsDeLaLinea(l: LineaRepertorio): boolean {
+  return l.nombre !== l.familia && l.nombre !== ctx_nombreApertura(l)
 }
 
 /** Las primeras frases de un plan, sin pasar de unos 180 caracteres (la Respuesta cabe en el celular). */

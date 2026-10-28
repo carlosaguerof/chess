@@ -3325,7 +3325,7 @@
       "c3"
      ],
      "lado": "blancas",
-     "plan": "La pirámide c3-d4-e3 sostiene el centro. Sigue con Ad3, 0-0 y Ce5 (a veces con f4 para atacar). Si Negras ofrece cambiar alfiles con ...Ad6, retira Ag3 para conservar el tuyo.",
+     "plan": "La pirámide c3-d4-e3 sostiene el centro. Sigue con Ad3, 0-0 y Ce5; si el alfil pasa a g3, f4 para atacar. Si Negras ofrece cambiar alfiles con ...Ad6, retira Ag3 para conservar el tuyo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
