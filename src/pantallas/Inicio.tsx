@@ -46,6 +46,13 @@ export function Inicio() {
           Escoger otro bot o color
         </a>
       </section>
+      <a className="tarjeta tarjeta-enlace" href="#/refuerza" data-testid="ir-refuerza">
+        <div>
+          <strong>Refuerza lo que fallas</strong>
+          <span className="apagado">Las jugadas de tu repertorio que más fallas, y las que no has practicado</span>
+        </div>
+        <span aria-hidden="true">›</span>
+      </a>
       {confirmar && (
         <Dialogo
           titulo="¿Empezar otra partida?"

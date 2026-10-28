@@ -16,7 +16,7 @@ import { BASE } from '../base/base.ts'
 import { useRepertorio } from '../repertorio/estado.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
-import { registrar } from '../registro/registro.ts'
+import { registrarJugadaPartida } from '../registro/eventos.ts'
 import { PanelGuia } from '../componentes/PanelGuia.tsx'
 import { uciAObjeto } from '../ajedrez/reglas.ts'
 import { Chess } from 'chess.js'
@@ -87,8 +87,7 @@ export function Partida() {
     const despues = [...antes, san]
     const m = mensajeTrasMiJugada(ctx, despues)
     if (ops.length > 0) {
-      const resultado = m.tipo === 'desvio' ? 'fallo' : ayudaVigente?.tipo === 'respuesta' ? 'respuesta' : ayudaVigente?.tipo === 'pista' ? 'pista' : 'acierto'
-      registrar({ fen: chess.fen(), esperada: ops[0]!.san, resultado, lugar: 'partida', linea: ops[0]!.lineas[0]!.nombre, camino: antes })
+      registrarJugadaPartida({ fen: chess.fen(), esperada: ops[0]!.san, desvio: m.tipo === 'desvio', ayuda: ayudaVigente?.tipo ?? null, linea: ops[0]!.lineas[0]!.nombre, camino: antes })
     }
     setAyuda(null)
     pb.jugar(uci, () => (m.tipo === 'desvio' ? { pausa: 'desvio' } : {}))

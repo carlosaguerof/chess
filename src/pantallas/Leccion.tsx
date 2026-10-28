@@ -4,7 +4,7 @@ import type { Key } from 'chessground/types'
 import { useRepertorio, leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
 import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
-import { registrar, resultadoDelPaso } from '../registro/registro.ts'
+import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { jugadasEnEspanol, uciAObjeto } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
@@ -81,7 +81,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
       return
     }
     if (estado.fase === 'preguntar' && r.pasoTerminado) {
-      registrar({ fen: posicion(leccion, ply).fen(), esperada: leccion.jugadas[ply]!, resultado: resultadoDelPaso(r.pasoTerminado), lugar: 'curso', linea: leccion.nombre, camino: leccion.jugadas.slice(0, ply) })
+      registrarPasoCurso({ fen: posicion(leccion, ply).fen(), esperada: leccion.jugadas[ply]!, paso: r.pasoTerminado, linea: leccion.nombre, camino: leccion.jugadas.slice(0, ply) })
     }
     if (r.resultado === 'alternativa')
       setAviso({ tipo: 'alternativa', texto: `También es buena: ${jugadaNumerada(sanAEspanol(san), ply)} está en tu repertorio. Esta lección sigue con ${jugadaNumerada(sanAEspanol(leccion.jugadas[ply]!), ply)}.` })

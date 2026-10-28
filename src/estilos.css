@@ -306,3 +306,15 @@ h1, h2, h3 { margin: 0; }
 .interruptor input:checked + i { background: var(--acento); }
 .interruptor input:checked + i::after { transform: translateX(18px); }
 .interruptor input:focus-visible + i { outline: 2px solid #fff; }
+
+/* ---------- refuerza ---------- */
+.refuerza { display: flex; flex-direction: column; gap: 14px; }
+.refuerza h1 { font-size: 24px; }
+.lista-refuerza { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.lista-refuerza li { background: var(--fondo-panel); border-radius: var(--radio); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.lista-refuerza .nombre { font-weight: 700; }
+.lista-refuerza .apagado { font-size: 13px; }
+.conteo-fallo { color: #ffb4ab; font-weight: 700; }
+.tarjeta-enlace { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.tarjeta-enlace div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.tarjeta-enlace > span { font-size: 26px; color: var(--texto-apagado); }
