@@ -111,3 +111,18 @@ Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 par
 - Calibración: `scripts/calibrar.ts:71` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor de Node (`scripts/motor-node.ts`).
 - App: `src/pantallas/Partida.tsx:28` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:70` (`jugadaDelBot`) → `src/motor/bot.ts:38` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
 - Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.
+
+## El temperamento (T17)
+
+En `elegirJugada`, entre las candidatas que pierden **30 centipeones o menos** contra la mejor (`MARGEN_CP`), el temperamento les baja **25 cp** de "pérdida" (`BONO_CP`) a las que prefiere (`src/motor/temperamento.ts`):
+- **Agresivo:** jaques, capturas y jugadas que llegan a dos casillas o menos del rey rival, acercándose.
+- **Defensivo:** cambios (capturar una pieza que vale lo mismo o más) y jugadas a casillas que el rival no ataca (sin dar jaque).
+- **Equilibrado:** nada. Es el que se usa en la calibración de los niveles.
+
+Así el temperamento solo decide entre jugadas casi iguales: no cambia la fuerza. Medido con `node scripts/calibrar.ts partido <a> <b> 48 <semilla> <salida> --temperamentos <ta>,<tb>`, nivel 700, 48 partidas cada uno (`iterations/v1/mediciones/t17-temperamento.json`):
+
+| Partido | Resultado del primero | Jaques + capturas en sus primeras 30 jugadas |
+|---|---|---|
+| 700 agresivo vs 700 defensivo | 22 / 48 (45.8 %) | **359 vs 309** (el agresivo, +16 %) |
+| 700 agresivo vs 500 | 40.5 / 48 (84.4 %): cumple el ≥ 60 % de la T4 | 377 vs 304 |
+| 700 defensivo vs 500 | 41 / 48 (85.4 %): cumple el ≥ 60 % de la T4 | 340 vs 284 |
