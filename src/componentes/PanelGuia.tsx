@@ -34,6 +34,7 @@ export function PanelGuia(props: {
       {props.ayuda && (
         <p className={`aviso-leccion ${props.ayuda.tipo}`} data-testid="ayuda-guia" data-origen={props.ayuda.datos.origen}>
           {props.ayuda.tipo === 'pista' ? props.ayuda.datos.pista : props.ayuda.datos.respuesta}
+          {props.ayuda.tipo === 'respuesta' && props.ayuda.datos.ingles && <small className="ingles">{props.ayuda.datos.ingles}</small>}
         </p>
       )}
       <div className="botones-ayuda">
