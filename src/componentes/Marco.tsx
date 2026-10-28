@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { IconoArbol, IconoCasa, IconoJugar, IconoLibro, IconoMas } from './Iconos.tsx'
 
 export interface EntradaMenu {
@@ -25,6 +25,8 @@ export interface EntradaMas {
 
 export function Marco(props: { actual: string; secciones: EntradaMenu[]; mas: EntradaMas[]; children: ReactNode }) {
   const [abierto, setAbierto] = useState(false)
+  // al cambiar de pantalla (también con "atrás" del navegador), el menú se cierra
+  useEffect(() => setAbierto(false), [props.actual])
   const activo = (r: string) => (r === '/' ? props.actual === '/' : props.actual.startsWith(r) || (r === '/cursos' && props.actual.startsWith('/curso')))
   return (
     <div className="marco">

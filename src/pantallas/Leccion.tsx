@@ -3,7 +3,7 @@ import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { useRepertorio, leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
-import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
+import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, planDeMiLado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { jugadasEnEspanol, uciAObjeto } from '../ajedrez/reglas.ts'
@@ -185,7 +185,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
             </p>
             {estado.fase === 'ensenar' && estado.ply === leccion.jugadas.findIndex((_, i) => (i % 2 === 0 ? 'w' : 'b') === color) && leccion.plan && (
               <p className="plan">
-                {leccion.plan} <span className="autor">{leccion.autorPlan === 'ia' ? 'redactado por la IA' : leccion.autorPlan === 'yo' ? 'escrito por ti' : 'de tu guía'}</span>
+                {planDeMiLado(leccion.plan, color)} <span className="autor">{leccion.autorPlan === 'ia' ? 'redactado por la IA' : leccion.autorPlan === 'yo' ? 'escrito por ti' : 'de tu guía'}</span>
               </p>
             )}
             {aviso && (
@@ -217,7 +217,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
           <div className="fin-leccion" data-testid="fin-leccion">
             <p className="etiqueta">Lección terminada</p>
             <h2>{leccion.nombre}</h2>
-            {leccion.plan && <p className="plan">{leccion.plan}</p>}
+            {leccion.plan && <p className="plan">{planDeMiLado(leccion.plan, color)}</p>}
             {siguiente && siguiente.id !== leccion.id ? (
               <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente)}`)} data-testid="siguiente-leccion">
                 Siguiente: {siguiente.nombre}
