@@ -12,8 +12,7 @@ Por qué GPL: el tablero (chessground) y el motor (Stockfish) son GPL-3.0, y la 
 | stockfish (stockfish.js de Nathan Rugg, basado en Stockfish) | 19.0.1 | GPL-3.0 | <https://github.com/nmrugg/stockfish.js> · <https://github.com/official-stockfish/Stockfish> | el motor de los bots: `stockfish-19-lite-single.js` + `.wasm`, copiado a `public/motor/` con su licencia (`COPYING-stockfish.txt`) |
 | chess.js | 1.4.0 | BSD-2-Clause | <https://github.com/jhlywa/chess.js> | las reglas del ajedrez |
 | react, react-dom | 19.3.1 | MIT | <https://github.com/facebook/react> | la interfaz |
-| @fontsource/inter (tipografía Inter, Rasmus Andersson) | 5.3.0 | OFL-1.1 | <https://github.com/fontsource/font-files> · <https://rsms.me/inter/> | letra de la interfaz, instalada en el proyecto |
-| @fontsource/jetbrains-mono (JetBrains Mono) | 5.3.0 | OFL-1.1 | <https://github.com/fontsource/font-files> · <https://www.jetbrains.com/lp/mono/> | letra de las jugadas |
+| @fontsource/inter (tipografía Inter, Rasmus Andersson) | 5.3.0 | OFL-1.1 | <https://github.com/fontsource/font-files> · <https://rsms.me/inter/> | la única letra de la interfaz (§3.6 de la limpieza), instalada en el proyecto |
 | @dicebear/core, @dicebear/toon-head, @dicebear/avataaars, @dicebear/open-peeps (DiceBear, Florian Körner) | 9.4.2 | MIT (el código; los dibujos, abajo) | <https://github.com/dicebear/dicebear> · <https://www.dicebear.com/licenses/> | dibujan en el navegador el retrato de cada personaje (L1) |
 
 ## Herramientas (no van dentro de la app)

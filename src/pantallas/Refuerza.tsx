@@ -30,6 +30,17 @@ export function Refuerza() {
   if (ronda) return <Ronda jugadas={ronda} rep={repertorioCompleto()} onTerminar={() => (setRonda(null), setVuelta(vuelta + 1))} />
   const falladas = orden.filter((j) => j.fallos > 0).length
   const nunca = orden.filter((j) => j.intentos === 0).length
+  // sin nada practicado ni favoritas, no hay qué reforzar: se dice y se lleva a Aprender
+  if (orden.length === 0)
+    return (
+      <div className="refuerza vacio" data-testid="refuerza-vacia">
+        <h1>Refuerza lo que fallas</h1>
+        <p className="apagado">Todavía no hay jugadas para reforzar.</p>
+        <a className="boton primario" href="#/cursos">
+          Ir a Aprender
+        </a>
+      </div>
+    )
   return (
     <div className="refuerza">
       <h1>Refuerza lo que fallas</h1>

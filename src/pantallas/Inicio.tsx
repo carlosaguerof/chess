@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { recomendado, personajePorId } from '../bots/personajes.ts'
+import { botParaJugar, personajePorId } from '../bots/personajes.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso } from '../partida/usePartidaBot.ts'
@@ -10,7 +10,8 @@ import { leerRegistro } from '../registro/almacen-registro.ts'
 import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
 
 export function Inicio() {
-  const bot = recomendado()
+  // L4: el último bot con el que jugué (Brisa, 700, la primera vez), igual que en Jugar
+  const bot = botParaJugar()
   const enCurso = partidaEnCurso()
   const rival = personajePorId(enCurso?.botId)
   const [confirmar, setConfirmar] = useState(false)
@@ -40,17 +41,14 @@ export function Inicio() {
           <span className="boton primario chico">Continuar</span>
         </a>
       )}
-      <section className="tarjeta recomendado" aria-labelledby="titulo-recomendado">
-        <p className="etiqueta" id="titulo-recomendado">
-          Juega contra un bot de tu nivel
-        </p>
+      <section className="tarjeta recomendado" aria-label="Jugar">
         <div className="recomendado-bot">
-          <Avatar personaje={bot} tam={96} />
+          <Avatar personaje={bot} tam={88} />
           <div>
             <h1>
               {bot.nombre} <span className="nivel">{bot.elo}</span>
             </h1>
-            <p className="frase">“{bot.frase}”</p>
+            <p className="frase">{bot.frase}</p>
           </div>
         </div>
         <button type="button" className="boton primario grande" data-testid="jugar-recomendado" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
@@ -63,28 +61,22 @@ export function Inicio() {
       {repaso &&
         (repaso.n > 0 ? (
           <a className="tarjeta tarjeta-enlace repaso-hoy" href="#/repaso" data-testid="repaso-hoy" data-n={repaso.n}>
-            <div>
-              <strong>
-                Repaso de hoy: {repaso.n} {repaso.n === 1 ? 'línea' : 'líneas'}, unos {repaso.min} {repaso.min === 1 ? 'minuto' : 'minutos'}
-              </strong>
-              <span className="apagado">Las líneas que aprendiste, justo antes de olvidarlas</span>
-            </div>
+            <strong>
+              Repaso de hoy: {repaso.n} {repaso.n === 1 ? 'línea' : 'líneas'}, unos {repaso.min} {repaso.min === 1 ? 'minuto' : 'minutos'}
+            </strong>
             <span className="boton primario chico">Repasar</span>
           </a>
         ) : (
           <div className="tarjeta repaso-hoy" data-testid="repaso-hoy" data-n={0}>
             <strong>{repaso.aprendidas ? 'Repaso de hoy: listo' : 'Repaso de hoy'}</strong>
-            <span className="apagado">
-              {repaso.aprendidas ? `Mañana ${repaso.manana === 1 ? 'toca 1 línea' : `tocan ${repaso.manana} líneas`}.` : 'Cuando termines una lección en Aprender, aquí vuelve antes de que la olvides.'}
-            </span>
+            <span className="apagado">{repaso.aprendidas ? `Mañana ${repaso.manana === 1 ? 'toca 1 línea' : `tocan ${repaso.manana} líneas`}.` : 'Aquí vuelven las lecciones que termines.'}</span>
           </div>
         ))}
       <a className="tarjeta tarjeta-enlace" href="#/refuerza" data-testid="ir-refuerza">
         <div>
           <strong>Refuerza lo que fallas</strong>
-          <span className="apagado">Las jugadas de tu repertorio que más fallas, y las que no has practicado</span>
+          <span className="apagado">Las jugadas que más fallas</span>
         </div>
-        <span aria-hidden="true">›</span>
       </a>
       {confirmar && (
         <Dialogo

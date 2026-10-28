@@ -14,7 +14,6 @@
   --peligro-sombra: #a3352d;
   --casilla-clara: #ebecd0;
   --casilla-oscura: #779556;
-  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --radio: 8px;
   --alto-nav: 64px;
@@ -86,7 +85,7 @@ h1, h2, h3 { margin: 0; }
 .en-curso { display: flex; align-items: center; gap: 12px; text-decoration: none; border: 2px solid var(--acento-sombra); }
 .en-curso div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .recomendado { display: flex; flex-direction: column; gap: 14px; }
-.etiqueta { margin: 0; color: var(--texto-apagado); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.etiqueta { margin: 0; color: var(--texto-apagado); font-weight: 700; font-size: 13px; }
 .recomendado-bot { display: flex; gap: 16px; align-items: center; }
 .recomendado-bot h1 { font-size: 28px; }
 .frase { margin: 6px 0 0; color: var(--texto-suave); font-size: 16px; line-height: 1.35; }
@@ -196,12 +195,12 @@ h1, h2, h3 { margin: 0; }
 @media (min-width: 900px) { .libre { grid-template-columns: 560px 1fr; } }
 .aviso-fin { background: var(--fondo-panel-2); border-left: 4px solid var(--acento); padding: 10px 12px; font-weight: 700; border-radius: 4px; margin-bottom: 8px; }
 .aviso-jaque { color: #ff8a80; font-weight: 700; margin-bottom: 8px; }
-.lista-jugadas { list-style: none; margin: 0; padding: 0; background: var(--fondo-panel); border-radius: 6px; max-height: 260px; overflow-y: auto; font-family: var(--mono); font-size: 14px; }
+.lista-jugadas { list-style: none; margin: 0; padding: 0; background: var(--fondo-panel); border-radius: 6px; max-height: 260px; overflow-y: auto; font-size: 14px; font-variant-numeric: tabular-nums; }
 .lista-jugadas li { display: grid; grid-template-columns: 40px 1fr 1fr; padding: 4px 10px; }
 .lista-jugadas li:nth-child(even) { background: rgba(255,255,255,0.03); }
 .lista-jugadas .numero { color: var(--texto-apagado); }
 .lista-jugadas .jugada.actual { background: rgba(255,255,255,0.14); border-radius: 3px; padding: 0 4px; justify-self: start; }
-.lista-jugadas .sin-jugadas { display: block; padding: 8px 10px; font-family: var(--sans); }
+.lista-jugadas .sin-jugadas { display: block; padding: 8px 10px; }
 .botones { display: flex; gap: 8px; margin-top: 10px; }
 .botones button { flex: 1; background: var(--fondo-panel-2); color: var(--texto); border: 0; border-radius: 6px; padding: 12px; font-weight: 600; cursor: pointer; }
 .botones button:disabled { opacity: .4; cursor: default; }
@@ -285,7 +284,7 @@ h1, h2, h3 { margin: 0; }
 
 /* ---------- la guía en la partida ---------- */
 .panel-guia { display: flex; flex-direction: column; gap: 8px; background: #21201d; border-radius: 8px; padding: 10px; }
-.panel-guia-titulo { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--texto-apagado); }
+.panel-guia-titulo { margin: 0; font-size: 13px; font-weight: 700; color: var(--texto-apagado); }
 .mensaje-guia { border-radius: 8px; padding: 10px 12px; background: #2e3a24; color: #e3f0d0; line-height: 1.4; }
 .mensaje-guia p { margin: 0; }
 .mensaje-guia.desvio { background: #4a3a1f; color: #ffe2b0; }
@@ -314,11 +313,7 @@ h1, h2, h3 { margin: 0; }
 .conteo-fallo { color: #ffb4ab; font-weight: 700; }
 .tarjeta-enlace { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .tarjeta-enlace div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
-.tarjeta-enlace > span { font-size: 26px; color: var(--texto-apagado); }
 
-/* N2: el nombre en inglés y el ECO, a un lado y en chico */
-.ingles { display: block; font-size: 11px; font-weight: 500; color: var(--texto-apagado); font-style: normal; }
-.rama-nombre .ingles { display: inline; margin-left: 4px; }
 /* en el celular, los tres botones de la partida siempre a la vista */
 @media (max-width: 899px) {
   .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
@@ -332,7 +327,7 @@ h1, h2, h3 { margin: 0; }
 .opciones-tiempo.una { grid-template-columns: 1fr; margin-top: 8px; }
 .opciones-tiempo button { background: var(--fondo-panel-2); border: 2px solid transparent; border-radius: 8px; padding: 12px 4px; font-weight: 700; cursor: pointer; }
 .opciones-tiempo button.activo { border-color: var(--acento); }
-.reloj { margin-left: auto; font-family: var(--mono); font-weight: 700; font-size: 18px; background: #1b1a18; color: #bdbbb8; padding: 4px 10px; border-radius: 6px; min-width: 76px; text-align: right; }
+.reloj { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px; background: #1b1a18; color: #bdbbb8; padding: 4px 10px; border-radius: 6px; min-width: 76px; text-align: right; }
 .reloj.corriendo { background: #fff; color: #1b1a18; }
 .reloj.corriendo.poco { background: #e05a50; color: #fff; }
 .estrellas { display: inline-flex; gap: 2px; vertical-align: middle; }
@@ -394,3 +389,6 @@ a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-
 .galeria-retratos h1 small { font-size: 14px; font-weight: 500; }
 .galeria-retratos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
 .galeria-retratos li { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; }
+
+/* ---------- lección: el plan, sin etiqueta de quién lo escribió (L4) ---------- */
+.plan-leccion { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.45; }

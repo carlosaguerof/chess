@@ -235,7 +235,6 @@ export function Partida() {
           <div className="resumen-guia" data-testid="resumen" data-caso={resumen.caso}>
             <p className="panel-guia-titulo">Resumen de tu apertura</p>
             <p>{resumen.texto}</p>
-            {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
             {practicar && (
               <button type="button" className="enlace-chico" onClick={() => navegar(practicar)}>
                 Practicar esta línea
@@ -317,7 +316,6 @@ export function Partida() {
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
                 {resumen.texto}
-                {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
               </p>
             )}
             {practicar && (

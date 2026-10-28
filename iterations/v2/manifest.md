@@ -21,4 +21,6 @@ CAPTURAS=antes   npx playwright test --grep @capturas
 CAPTURAS=despues npx playwright test --grep @capturas
 ```
 
+Desde la Nota 1, Repertorio y Aperturas son "Aperturas y defensas", así que en `despues/` cambian algunas: 03 = Jugar con otro bot escogido, 07 = Mis favoritas, 08 = la página de una apertura, 12 = Todas, 13 = una variante, 14 = Mis favoritas vacía y 15 = Tus datos (exportar e importar, en Más).
+
 Además: `capturas/l1/` (los 47 personajes en cada estilo y el ajuste del estilo) y `capturas/pruebas/` (las que toma cada prueba de `npm run e2e`; las de la v1 se quedan como estaban en `iterations/v1/capturas/`).

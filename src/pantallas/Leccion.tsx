@@ -153,11 +153,6 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
           <div className="leccion-titulo">
             <span className="apagado">{repaso ? `Repaso de hoy · ${repaso.indice + 1} de ${repaso.total} · ${curso.nombre}` : curso.nombre}</span>
             <strong data-testid="nombre-linea">{leccion.nombre}</strong>
-            {leccion.ingles && (
-              <small className="ingles">
-                {leccion.ingles} · {leccion.eco}
-              </small>
-            )}
           </div>
         </div>
         <div className="partida-tablero">
@@ -183,9 +178,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
               {instruccion}
             </p>
             {estado.fase === 'ensenar' && estado.ply === leccion.jugadas.findIndex((_, i) => (i % 2 === 0 ? 'w' : 'b') === color) && leccion.plan && (
-              <p className="plan">
-                {planDeMiLado(leccion.plan, color)} <span className="autor">{leccion.autorPlan === 'ia' ? 'redactado por la IA' : leccion.autorPlan === 'yo' ? 'escrito por ti' : 'de tu guía'}</span>
-              </p>
+              <p className="plan-leccion">{planDeMiLado(leccion.plan, color)}</p>
             )}
             {aviso && (
               <p className={`aviso-leccion ${aviso.tipo}`} role="status" data-testid="aviso-leccion" data-resultado={aviso.tipo}>
