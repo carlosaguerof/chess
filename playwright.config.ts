@@ -8,6 +8,8 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   reporter: [['list']],
+  // las mediciones (@medicion) se corren aparte con `npm run medir`
+  grepInvert: process.argv.includes('--grep') ? undefined : /@medicion/,
   outputDir: './test-results',
   use: {
     baseURL: 'http://localhost:5174',

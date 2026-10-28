@@ -1,0 +1,17 @@
+{
+  "nota": "Parámetros de cada nivel. Los usa elegirJugada (src/motor/elegir.ts) en la app y en la calibración. Ver specs/motor.md.",
+  "niveles": [
+    { "elo": 100, "modo": "debil", "profundidad": 1, "multipv": 20, "errorGrande": 0.45, "temperatura": 600 },
+    { "elo": 200, "modo": "debil", "profundidad": 1, "multipv": 16, "errorGrande": 0.35, "temperatura": 450 },
+    { "elo": 300, "modo": "debil", "profundidad": 2, "multipv": 14, "errorGrande": 0.28, "temperatura": 350 },
+    { "elo": 400, "modo": "debil", "profundidad": 2, "multipv": 12, "errorGrande": 0.22, "temperatura": 280 },
+    { "elo": 500, "modo": "debil", "profundidad": 3, "multipv": 10, "errorGrande": 0.17, "temperatura": 220 },
+    { "elo": 600, "modo": "debil", "profundidad": 3, "multipv": 10, "errorGrande": 0.13, "temperatura": 170 },
+    { "elo": 700, "modo": "debil", "profundidad": 4, "multipv": 8, "errorGrande": 0.1, "temperatura": 130 },
+    { "elo": 800, "modo": "debil", "profundidad": 4, "multipv": 8, "errorGrande": 0.08, "temperatura": 100 },
+    { "elo": 900, "modo": "debil", "profundidad": 5, "multipv": 6, "errorGrande": 0.06, "temperatura": 80 },
+    { "elo": 1000, "modo": "debil", "profundidad": 6, "multipv": 6, "errorGrande": 0.045, "temperatura": 60 },
+    { "elo": 1100, "modo": "debil", "profundidad": 7, "multipv": 5, "errorGrande": 0.03, "temperatura": 45 },
+    { "elo": 1200, "modo": "debil", "profundidad": 8, "multipv": 5, "errorGrande": 0.02, "temperatura": 35 }
+  ]
+}

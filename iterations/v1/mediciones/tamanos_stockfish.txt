@@ -1,0 +1,5 @@
+stockfish-19-lite-single.js raw=28230 gzip9=11382 brotli=10335
+stockfish-19-lite-single.wasm raw=1845971 gzip9=1201901 brotli=1094255
+stockfish-19-single.wasm raw=99169054 gzip6=79367635
+stockfish-19-asm.js raw=3155627 gzip6=1492511
+fairy stockfish.wasm raw=1636293 gzip9=489751

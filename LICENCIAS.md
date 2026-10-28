@@ -23,6 +23,7 @@ La app es de uso personal y no se distribuye. Si algún día se distribuye, por 
 | Recurso | Licencia | Dónde está | Para qué |
 |---|---|---|---|
 | Piezas cburnett (Colin M.L. Burnett), vía `chessground/assets/chessground.cburnett.css` | CC BY-SA 3.0 | `node_modules/chessground/assets/` | las piezas del tablero |
-| (lista de aperturas: se agrega en la T6 con su licencia confirmada) | | | |
+| Lista de aperturas de lichess (`lichess-org/chess-openings`, commit `f06a50d`): nombres, ECO y jugadas | CC0 1.0 (dominio público), confirmada en su `COPYING.txt` y en la API de GitHub | `input/lichess-chess-openings/` | nombres y jugadas de la base; aperturas de la calibración |
+| Motor copiado a `public/motor/` al construir (`scripts/copiar-motor.mjs`) | GPL-3.0 (`COPYING-stockfish.txt` va junto) | `public/motor/` (no se sube a git) | el motor del bot en el navegador |
 
 Lo que no se usa, a propósito: ningún archivo de chess.com (logo, piezas, sonidos, imágenes, avatares, nombres de sus bots).
