@@ -19,6 +19,8 @@ import { Aperturas, Apertura } from './pantallas/Aperturas.tsx'
 import { Historial } from './pantallas/Historial.tsx'
 import { Ajustes } from './pantallas/Ajustes.tsx'
 import { Repaso } from './pantallas/Repaso.tsx'
+import { GaleriaRetratos } from './pantallas/GaleriaRetratos.tsx'
+import type { EstiloRetrato } from './bots/retratos.ts'
 
 const MAS: EntradaMas[] = [
   { nombre: 'Mis partidas', ruta: '/historial' },
@@ -38,6 +40,7 @@ export function App() {
     )
   }
   if (import.meta.env.DEV && primera === 'medir-motor') return <MedirMotor />
+  if (import.meta.env.DEV && primera === 'retratos') return <GaleriaRetratos estilo={(segunda ?? 'toon') as EstiloRetrato} />
   if (import.meta.env.DEV && primera === 'prueba-partida') return <PruebaPartida consulta={ruta.consulta} />
   // la partida ocupa toda la pantalla (N8: solo lo que importa)
   if (primera === 'partida') return <Partida />

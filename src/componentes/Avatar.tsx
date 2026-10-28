@@ -1,23 +1,20 @@
 import type { Personaje } from '../bots/personajes.ts'
-import { CaraGenerada } from './CaraGenerada.tsx'
+import { retrato, useEstiloRetratos, type EstiloRetrato } from '../bots/retratos.ts'
 
-/** Avatar propio: el mío es una silueta; el de cada personaje, una cara dibujada en el código (R4). */
-export function Avatar({ personaje, tam = 40, yo = false }: { personaje?: Personaje; tam?: number; yo?: boolean }) {
-  if (!yo && personaje) return <CaraGenerada id={personaje.id} fondo={personaje.color} tam={tam} etiqueta={personaje.nombre} />
-  const color = yo ? '#5d9948' : (personaje?.color ?? '#555')
+/** Avatar propio: el mío es una silueta; el de cada personaje, su retrato en el estilo escogido en Ajustes (L1). */
+export function Avatar({ personaje, tam = 40, yo = false, estilo }: { personaje?: Personaje; tam?: number; yo?: boolean; estilo?: EstiloRetrato }) {
+  const actual = useEstiloRetratos()
+  if (!yo && personaje) {
+    const e = estilo ?? actual
+    return <img className="avatar retrato" src={retrato(e, personaje)} width={tam} height={tam} alt={personaje.nombre} data-retrato={personaje.id} data-estilo={e} draggable={false} />
+  }
   return (
-    <svg className="avatar" width={tam} height={tam} viewBox="0 0 40 40" role="img" aria-label={yo ? 'Tú' : (personaje?.nombre ?? 'Bot')}>
-      <rect width="40" height="40" rx="6" fill={color} />
-      {yo ? (
-        <g fill="#fff">
-          <circle cx="20" cy="15" r="7" />
-          <path d="M7 36c1.5-8 7-12 13-12s11.5 4 13 12z" />
-        </g>
-      ) : (
-        <text x="20" y="21" textAnchor="middle" dominantBaseline="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize={20} fill="#fff">
-          {personaje?.nombre[0] ?? '?'}
-        </text>
-      )}
+    <svg className="avatar" width={tam} height={tam} viewBox="0 0 40 40" role="img" aria-label={yo ? 'Tú' : 'Bot'}>
+      <rect width="40" height="40" rx="6" fill={yo ? '#5d9948' : '#555'} />
+      <g fill="#fff">
+        <circle cx="20" cy="15" r="7" />
+        <path d="M7 36c1.5-8 7-12 13-12s11.5 4 13 12z" />
+      </g>
     </svg>
   )
 }

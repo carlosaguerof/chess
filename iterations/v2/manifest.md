@@ -20,3 +20,5 @@
 CAPTURAS=antes   npx playwright test --grep @capturas
 CAPTURAS=despues npx playwright test --grep @capturas
 ```
+
+Además: `capturas/l1/` (los 47 personajes en cada estilo y el ajuste del estilo) y `capturas/pruebas/` (las que toma cada prueba de `npm run e2e`; las de la v1 se quedan como estaban en `iterations/v1/capturas/`).

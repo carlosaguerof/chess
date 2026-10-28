@@ -26,7 +26,26 @@ export function Licencias() {
         <li>Tablero: chessground de lichess (GPL-3.0). Piezas cburnett (CC BY-SA 3.0).</li>
         <li>Aperturas: lista abierta de lichess (CC0). Planes redactados por la IA.</li>
         <li>Tipografías: Inter y JetBrains Mono (OFL-1.1), instaladas en la app.</li>
-        <li>Avatares, íconos y sonidos: hechos en el código de esta app (GPL-3.0 o posterior).</li>
+        <li>
+          Retratos de los personajes, dibujados con DiceBear (MIT) y adaptados con rasgos y colores para cada personaje:{' '}
+          <a href="https://www.figma.com/community/file/1589627891082866389" target="_blank" rel="noreferrer">
+            ToonHead
+          </a>{' '}
+          de Johan Melin (
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+            CC BY 4.0
+          </a>
+          ),{' '}
+          <a href="https://avataaars.com/" target="_blank" rel="noreferrer">
+            Avataaars
+          </a>{' '}
+          de Pablo Stanley (libre para uso personal y comercial) y{' '}
+          <a href="https://www.openpeeps.com/" target="_blank" rel="noreferrer">
+            Open Peeps
+          </a>{' '}
+          de Pablo Stanley (CC0).
+        </li>
+        <li>Íconos y sonidos: hechos en el código de esta app (GPL-3.0 o posterior).</li>
       </ul>
     </div>
   )

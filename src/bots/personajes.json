@@ -1,5 +1,5 @@
 {
- "nota": "Personajes inventados (ningún nombre de bots de chess.com). estilo = sus aperturas: ids de la base (conocimiento/). blancas: lo que abre; negras: cómo se defiende. Temperamento: agresivo, equilibrado o defensivo.",
+ "nota": "Personajes inventados (ningún nombre ni frase de bots de chess.com). estilo = sus aperturas: ids de la base (conocimiento/). blancas: lo que abre; negras: cómo se defiende. Temperamento: agresivo, equilibrado o defensivo. aspecto = los rasgos con los que se dibuja su retrato en cada estilo (src/bots/retratos.ts). frase: de personalidad, sin aperturas ni jugadas.",
  "personajes": [
   {
    "id": "pipo",
@@ -16,6 +16,14 @@
      "italiana",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "nino",
+    "piel": 2,
+    "peinado": "puntas",
+    "colorPelo": "castano-claro",
+    "ropa": "playera",
+    "gesto": "risa"
    }
   },
   {
@@ -33,6 +41,14 @@
      "escandinava",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "nino",
+    "piel": 3,
+    "peinado": "chongo",
+    "colorPelo": "negro",
+    "ropa": "playera",
+    "gesto": "picaro"
    }
   },
   {
@@ -50,6 +66,15 @@
      "italiana",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "nino",
+    "piel": 1,
+    "peinado": "corto",
+    "colorPelo": "rubio",
+    "ropa": "sudadera",
+    "gesto": "sonrisa",
+    "gorro": "gorra"
    }
   },
   {
@@ -67,6 +92,14 @@
      "caro-kann",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "trenzas",
+    "colorPelo": "negro",
+    "ropa": "sueter",
+    "gesto": "tranquilo"
    }
   },
   {
@@ -86,6 +119,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 3,
+    "peinado": "rapado",
+    "colorPelo": "negro",
+    "ropa": "playera",
+    "gesto": "retador",
+    "barba": "bigote"
    }
   },
   {
@@ -105,6 +147,14 @@
      "italiana",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "nino",
+    "piel": 2,
+    "peinado": "largo",
+    "colorPelo": "castano",
+    "ropa": "vestido",
+    "gesto": "sonrisa"
    }
   },
   {
@@ -123,6 +173,15 @@
      "francesa",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 5,
+    "peinado": "afro",
+    "colorPelo": "negro",
+    "ropa": "sudadera",
+    "gesto": "serio",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -142,6 +201,14 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 3,
+    "peinado": "ondulado",
+    "colorPelo": "negro",
+    "ropa": "camisa",
+    "gesto": "retador"
    }
   },
   {
@@ -160,6 +227,15 @@
      "escandinava",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "corto",
+    "colorPelo": "castano",
+    "ropa": "sueter",
+    "gesto": "sonrisa",
+    "lentes": "redondos"
    }
   },
   {
@@ -177,6 +253,15 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 1,
+    "peinado": "chongo",
+    "colorPelo": "canoso",
+    "ropa": "cuello",
+    "gesto": "tranquilo",
+    "lentes": "redondos"
    }
   },
   {
@@ -185,7 +270,7 @@
    "elo": 700,
    "temperamento": "equilibrado",
    "color": "#76a5af",
-   "frase": "Juego Rapid todas las noches. Te va a costar ganarme.",
+   "frase": "Juego partidas rápidas todas las noches. Te va a costar ganarme.",
    "estilo": {
     "blancas": [
      "italiana",
@@ -198,6 +283,14 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "melena",
+    "colorPelo": "castano",
+    "ropa": "playera",
+    "gesto": "sonrisa"
    }
   },
   {
@@ -216,6 +309,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 1,
+    "peinado": "puntas",
+    "colorPelo": "pelirrojo",
+    "ropa": "sudadera",
+    "gesto": "retador",
+    "barba": "completa"
    }
   },
   {
@@ -233,6 +335,15 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 3,
+    "peinado": "largo",
+    "colorPelo": "negro",
+    "ropa": "saco",
+    "gesto": "serio",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -253,6 +364,15 @@
      "escandinava",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 2,
+    "peinado": "rapado",
+    "colorPelo": "castano",
+    "ropa": "playera",
+    "gesto": "picaro",
+    "barba": "candado"
    }
   },
   {
@@ -272,6 +392,14 @@
      "francesa",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "ondulado",
+    "colorPelo": "pelirrojo",
+    "ropa": "sueter",
+    "gesto": "sonrisa"
    }
   },
   {
@@ -280,7 +408,7 @@
    "elo": 800,
    "temperamento": "defensivo",
    "color": "#6d9eeb",
-   "frase": "Yo me enroco y luego vemos.",
+   "frase": "Primero pongo a mi rey a salvo, y luego vemos.",
    "estilo": {
     "blancas": [
      "otros-negras:reti"
@@ -289,6 +417,16 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 3,
+    "peinado": "calvo",
+    "colorPelo": "canoso",
+    "ropa": "camisa",
+    "gesto": "tranquilo",
+    "barba": "bigote",
+    "gorro": "sombrero"
    }
   },
   {
@@ -297,7 +435,7 @@
    "elo": 900,
    "temperamento": "agresivo",
    "color": "#e06666",
-   "frase": "Juego la Siciliana porque me gusta el caos.",
+   "frase": "Me gusta el caos: mientras más piezas en peligro, mejor.",
    "estilo": {
     "blancas": [
      "siciliana",
@@ -308,6 +446,14 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 1,
+    "peinado": "largo",
+    "colorPelo": "morado",
+    "ropa": "sudadera",
+    "gesto": "picaro"
    }
   },
   {
@@ -325,6 +471,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "corto",
+    "colorPelo": "negro",
+    "ropa": "sudadera",
+    "gesto": "sonrisa",
+    "gorro": "gorro"
    }
   },
   {
@@ -342,6 +497,15 @@
      "francesa",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 1,
+    "peinado": "melena",
+    "colorPelo": "blanco",
+    "ropa": "saco",
+    "gesto": "serio",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -361,6 +525,15 @@
      "escandinava",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "puntas",
+    "colorPelo": "negro",
+    "ropa": "playera",
+    "gesto": "retador",
+    "barba": "chivo"
    }
   },
   {
@@ -380,6 +553,15 @@
      "caro-kann",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "chongo",
+    "colorPelo": "castano",
+    "ropa": "saco",
+    "gesto": "picaro",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -398,6 +580,14 @@
      "italiana",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 1,
+    "peinado": "flequillo",
+    "colorPelo": "castano-claro",
+    "ropa": "sueter",
+    "gesto": "tranquilo"
    }
   },
   {
@@ -417,6 +607,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 3,
+    "peinado": "corto",
+    "colorPelo": "negro",
+    "ropa": "camisa",
+    "gesto": "retador",
+    "barba": "completa"
    }
   },
   {
@@ -436,6 +635,14 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 5,
+    "peinado": "afro",
+    "colorPelo": "negro",
+    "ropa": "cuello",
+    "gesto": "tranquilo"
    }
   },
   {
@@ -456,6 +663,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 2,
+    "peinado": "ondulado",
+    "colorPelo": "castano",
+    "ropa": "sudadera",
+    "gesto": "sonrisa",
+    "lentes": "redondos"
    }
   },
   {
@@ -475,6 +691,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 3,
+    "peinado": "largo",
+    "colorPelo": "negro",
+    "ropa": "camisa",
+    "gesto": "picaro",
+    "lentes": "sol"
    }
   },
   {
@@ -495,6 +720,16 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "corto",
+    "colorPelo": "castano",
+    "ropa": "saco",
+    "gesto": "serio",
+    "lentes": "cuadrados",
+    "barba": "candado"
    }
   },
   {
@@ -503,7 +738,7 @@
    "elo": 1300,
    "temperamento": "agresivo",
    "color": "#c27ba0",
-   "frase": "Gambito aceptado, partida ganada.",
+   "frase": "Si me ofreces algo, lo acepto. Y luego te lo cobro.",
    "estilo": {
     "blancas": [
      "siciliana",
@@ -514,6 +749,14 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "rizado",
+    "colorPelo": "negro",
+    "ropa": "playera",
+    "gesto": "risa"
    }
   },
   {
@@ -533,6 +776,15 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 1,
+    "peinado": "corto",
+    "colorPelo": "rubio",
+    "ropa": "sueter",
+    "gesto": "tranquilo",
+    "barba": "larga"
    }
   },
   {
@@ -553,6 +805,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 3,
+    "peinado": "melena",
+    "colorPelo": "castano-claro",
+    "ropa": "sudadera",
+    "gesto": "sonrisa",
+    "lentes": "redondos"
    }
   },
   {
@@ -561,7 +822,7 @@
    "elo": 1500,
    "temperamento": "agresivo",
    "color": "#e69138",
-   "frase": "El peón de rey avanza solo.",
+   "frase": "Mis peones avanzan sin pedir permiso.",
    "estilo": {
     "blancas": [
      "siciliana",
@@ -572,6 +833,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 4,
+    "peinado": "rapado",
+    "colorPelo": "negro",
+    "ropa": "saco",
+    "gesto": "retador",
+    "barba": "bigote"
    }
   },
   {
@@ -580,7 +850,7 @@
    "elo": 1500,
    "temperamento": "defensivo",
    "color": "#8e7cc3",
-   "frase": "La Eslava es mi casa.",
+   "frase": "Construyo muros. Tú decides si los quieres saltar.",
    "estilo": {
     "blancas": [
      "gambito-dama",
@@ -591,6 +861,15 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "largo",
+    "colorPelo": "castano",
+    "ropa": "vestido",
+    "gesto": "tranquilo",
+    "gorro": "hiyab"
    }
   },
   {
@@ -611,6 +890,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 2,
+    "peinado": "corto",
+    "colorPelo": "canoso",
+    "ropa": "saco",
+    "gesto": "sonrisa",
+    "barba": "bigote"
    }
   },
   {
@@ -630,6 +918,14 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 1,
+    "peinado": "flequillo",
+    "colorPelo": "rubio",
+    "ropa": "camisa",
+    "gesto": "picaro"
    }
   },
   {
@@ -649,6 +945,15 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 5,
+    "peinado": "corto",
+    "colorPelo": "negro",
+    "ropa": "cuello",
+    "gesto": "serio",
+    "lentes": "redondos"
    }
   },
   {
@@ -669,6 +974,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 4,
+    "peinado": "chongo",
+    "colorPelo": "negro",
+    "ropa": "saco",
+    "gesto": "serio",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -688,6 +1002,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 2,
+    "peinado": "puntas",
+    "colorPelo": "negro",
+    "ropa": "sudadera",
+    "gesto": "retador",
+    "barba": "candado"
    }
   },
   {
@@ -708,6 +1031,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 1,
+    "peinado": "largo",
+    "colorPelo": "rubio",
+    "ropa": "sueter",
+    "gesto": "sonrisa",
+    "lentes": "redondos"
    }
   },
   {
@@ -727,6 +1059,16 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 4,
+    "peinado": "corto",
+    "colorPelo": "negro",
+    "ropa": "cuello",
+    "gesto": "tranquilo",
+    "barba": "larga",
+    "gorro": "turbante"
    }
   },
   {
@@ -746,6 +1088,14 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 3,
+    "peinado": "rizado",
+    "colorPelo": "castano",
+    "ropa": "saco",
+    "gesto": "picaro"
    }
   },
   {
@@ -766,6 +1116,16 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 1,
+    "peinado": "calvo",
+    "colorPelo": "castano",
+    "ropa": "saco",
+    "gesto": "sonrisa",
+    "barba": "completa",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -785,6 +1145,14 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 4,
+    "peinado": "chongo",
+    "colorPelo": "blanco",
+    "ropa": "cuello",
+    "gesto": "tranquilo"
    }
   },
   {
@@ -804,6 +1172,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 2,
+    "peinado": "ondulado",
+    "colorPelo": "canoso",
+    "ropa": "saco",
+    "gesto": "retador",
+    "barba": "larga"
    }
   },
   {
@@ -824,6 +1201,14 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "joven",
+    "piel": 4,
+    "peinado": "trenzas",
+    "colorPelo": "negro",
+    "ropa": "vestido",
+    "gesto": "picaro"
    }
   },
   {
@@ -843,6 +1228,16 @@
      "caro-kann",
      "gambito-dama-declinado"
     ]
+   },
+   "aspecto": {
+    "edad": "mayor",
+    "piel": 1,
+    "peinado": "calvo",
+    "colorPelo": "blanco",
+    "ropa": "sueter",
+    "gesto": "serio",
+    "barba": "bigote",
+    "lentes": "redondos"
    }
   },
   {
@@ -862,6 +1257,15 @@
      "siciliana",
      "gambito-dama:aceptado"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 5,
+    "peinado": "rapado",
+    "colorPelo": "negro",
+    "ropa": "camisa",
+    "gesto": "retador",
+    "lentes": "cuadrados"
    }
   },
   {
@@ -882,6 +1286,15 @@
      "italiana",
      "eslava"
     ]
+   },
+   "aspecto": {
+    "edad": "adulto",
+    "piel": 3,
+    "peinado": "rapado",
+    "colorPelo": "negro",
+    "ropa": "sudadera",
+    "gesto": "serio",
+    "lentes": "sol"
    }
   }
  ]
