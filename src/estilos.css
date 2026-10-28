@@ -326,3 +326,16 @@ h1, h2, h3 { margin: 0; }
 @media (max-width: 899px) {
   .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
 }
+
+/* ---------- reloj, tiempo y estrellas ---------- */
+.elegir-tiempo h3 { margin: 6px 0; font-size: 14px; color: var(--texto-suave); }
+.opciones-tiempo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.opciones-tiempo.una { grid-template-columns: 1fr; margin-top: 8px; }
+.opciones-tiempo button { background: var(--fondo-panel-2); border: 2px solid transparent; border-radius: 8px; padding: 12px 4px; font-weight: 700; cursor: pointer; }
+.opciones-tiempo button.activo { border-color: var(--acento); }
+.reloj { margin-left: auto; font-family: var(--mono); font-weight: 700; font-size: 18px; background: #1b1a18; color: #bdbbb8; padding: 4px 10px; border-radius: 6px; min-width: 76px; text-align: right; }
+.reloj.corriendo { background: #fff; color: #1b1a18; }
+.reloj.corriendo.poco { background: #e05a50; color: #fff; }
+.estrellas { display: inline-flex; gap: 2px; vertical-align: middle; }
+.boton-tiempo { display: flex; align-items: center; justify-content: space-between; background: var(--fondo-panel); border: 0; border-radius: var(--radio); padding: 12px 14px; font-weight: 700; cursor: pointer; }
+.boton-tiempo span { color: var(--texto-apagado); font-weight: 600; }

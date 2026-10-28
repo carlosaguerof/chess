@@ -18,6 +18,7 @@ import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
 import { registrarJugadaPartida } from '../registro/eventos.ts'
 import { PanelGuia } from '../componentes/PanelGuia.tsx'
+import { Reloj } from '../componentes/Reloj.tsx'
 import { uciAObjeto } from '../ajedrez/reglas.ts'
 import { Chess } from 'chess.js'
 
@@ -96,8 +97,10 @@ export function Partida() {
     setAyuda({ tipo, datos: ayudaEnMiTurno(ctx, historia), ply: historia.length })
     pb.contarAyuda(tipo)
   }
-  const barraRival = <BarraJugador personaje={bot} estado={estadoBot} pensando={!!estadoBot} testid="barra-rival" />
-  const barraYo = <BarraJugador yo testid="barra-yo" />
+  const colorBot = partida.colorHumano === 'w' ? 'b' : 'w'
+  const relojDe = (c: 'w' | 'b', testid: string) => (pb.tiempos ? <Reloj ms={pb.tiempos[c]} corriendo={pb.tiempos.corriendo === c} testid={testid} /> : undefined)
+  const barraRival = <BarraJugador personaje={bot} estado={estadoBot} pensando={!!estadoBot} testid="barra-rival" reloj={relojDe(colorBot, 'reloj-rival')} />
+  const barraYo = <BarraJugador yo testid="barra-yo" reloj={relojDe(partida.colorHumano, 'reloj-yo')} />
   const verAviso = !!partida.fin && avisoCerrado !== partida.id
 
   const revancha = () => {
@@ -156,7 +159,7 @@ export function Partida() {
         {partida.fin ? (
           <div className="panel-final">
             <p className="resultado" data-testid="resultado">
-              {TITULO[resultado!]} · {partida.fin.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin.nombre}
+              {TITULO[resultado!]} · {partida.fin.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin.nombre}
             </p>
             <div className="botones-partida">
               <button type="button" className="boton primario" onClick={revancha}>
@@ -208,7 +211,7 @@ export function Partida() {
               <IconoCerrar />
             </button>
             <h2>{TITULO[resultado]}</h2>
-            <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.nombre}</p>
+            <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin!.nombre}</p>
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
                 {resumen.texto}

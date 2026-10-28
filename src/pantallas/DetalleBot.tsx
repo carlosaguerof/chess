@@ -3,7 +3,9 @@ import { personajePorId, NOMBRE_TEMPERAMENTO } from '../bots/personajes.ts'
 import { nombreApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
-import { empezarPartida, partidaEnCurso, opcionesRecordadas } from '../partida/usePartidaBot.ts'
+import { empezarPartida, partidaEnCurso, opcionesRecordadas, tiempoRecordado } from '../partida/usePartidaBot.ts'
+import { ElegirTiempo } from '../componentes/ElegirTiempo.tsx'
+import { controlPorId } from '../reloj/reloj.ts'
 import { navegar } from '../ruta.ts'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 
@@ -14,10 +16,12 @@ export function DetalleBot({ id }: { id: string }) {
   const [color, setColor] = useState<Color>('w')
   const [confirmar, setConfirmar] = useState(false)
   const [opciones, setOpciones] = useState(opcionesRecordadas)
+  const [tiempo, setTiempo] = useState(tiempoRecordado)
+  const [eligiendoTiempo, setEligiendoTiempo] = useState(false)
   if (!bot) return <p>No encontré a ese bot. <a href="#/bots">Ver todos</a></p>
   const enCurso = partidaEnCurso()
   const jugar = () => {
-    empezarPartida(bot.id, color, undefined, opciones)
+    empezarPartida(bot.id, color, undefined, opciones, tiempo)
     navegar('/partida')
   }
   return (
@@ -50,6 +54,19 @@ export function DetalleBot({ id }: { id: string }) {
           </button>
         ))}
       </div>
+      <button type="button" className="boton-tiempo" onClick={() => setEligiendoTiempo(true)} data-testid="elegir-tiempo">
+        ⏱ Tiempo <span>{controlPorId(tiempo).nombre}</span>
+      </button>
+      {eligiendoTiempo && (
+        <ElegirTiempo
+          actual={tiempo}
+          onEscoger={(c) => {
+            setTiempo(c.id)
+            setEligiendoTiempo(false)
+          }}
+          onCerrar={() => setEligiendoTiempo(false)}
+        />
+      )}
       <div className="interruptores">
         <Interruptor
           etiqueta="Guía de aperturas"
