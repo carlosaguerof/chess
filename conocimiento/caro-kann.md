@@ -66,7 +66,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Variante Clásica
 
-### Variante Clásica: línea principal
+### Variante Clásica
 
 **1.e4 c6 2.d4 d5 3.Cd2 dxe4 4.Cxe4 Af5 5.Cg3 Ag6 6.h4 h6 7.Cf3 Cd7**
 
@@ -147,6 +147,22 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●○○○ (2 de 5; guía de Carlos)
 - Plan *(redactado por la IA)*: Contra los dos caballos, 3...Ag4 clava el de f3. Tras 4.h3 lo cambias (...Axf3) y sigues con ...e6, ...Cf6 o ...Cd7, y 0-0. Blancas se queda con la pareja de alfiles, pero tu cadena c6-d5-e6 es muy sólida.
 - Fuente: B11 · Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line
+
+### Defensa Caro-Kann: Oferta de Final (2.Cf3 d5 3.d3)
+
+**1.e4 c6 2.Cf3 d5 3.d3**
+
+- Frecuencia: ●●○○○ (2 de 5; guía de Carlos (Dos Caballos: 2.Cf3))
+- Plan *(redactado por la IA)*: Contra 2.Cf3 juega 2...d5 como siempre; si blancas sigue con Cc3, llegas a los Dos Caballos. Contra 3.d3, desarrolla con ...Cf6, saca el alfil de c8 (a g4 o f5), juega ...e6 y enroca.
+- Fuente: B10 · Caro-Kann Defense: Endgame Offer
+
+### Defensa Caro-Kann: Ataque Apocalipsis (2.Cf3 d5 3.exd5)
+
+**1.e4 c6 2.Cf3 d5 3.exd5 cxd5 4.Ce5**
+
+- Frecuencia: ●●○○○ (2 de 5; guía de Carlos (Dos Caballos: 2.Cf3))
+- Plan *(redactado por la IA)*: Tras el cambio en d5 tienes un buen centro. Contra el caballo en e5, desarrolla con ...Cf6 y ...e6 y no te apures a sacar la dama.
+- Fuente: B10 · Caro-Kann Defense: Apocalypse Attack
 
 ## Ataque Panov Acelerado
 

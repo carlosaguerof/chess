@@ -46,3 +46,15 @@ export function nombreApertura(clave: string, lado?: 'blancas' | 'negras'): stri
   if (ap === 'otros-negras') return VARIANTES[v] ?? v
   return `${corto}: ${VARIANTES[v] ?? v}`
 }
+
+/** El nombre en inglés y el ECO de una clave de estilo (N2: a un lado, en chico). */
+export function inglesApertura(clave: string): string {
+  const [ap, v] = clave.split(':')
+  const a = BASE.aperturas.find((x) => x.id === ap)
+  if (!a) return ''
+  if (v) {
+    const vs = a.variantes.filter((x) => x.id.startsWith(v))
+    if (vs.length) return `${vs[0]!.nombreIngles.split(',')[0]} · ${vs[0]!.eco}`
+  }
+  return `${a.nombreIngles} · ${a.eco}`
+}

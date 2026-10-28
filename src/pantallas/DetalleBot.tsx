@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { personajePorId, NOMBRE_TEMPERAMENTO } from '../bots/personajes.ts'
-import { nombreApertura } from '../bots/nombres-aperturas.ts'
+import { nombreApertura, inglesApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso, opcionesRecordadas, tiempoRecordado } from '../partida/usePartidaBot.ts'
@@ -39,6 +39,7 @@ export function DetalleBot({ id }: { id: string }) {
           <span className="chip">{NOMBRE_TEMPERAMENTO[bot.temperamento]}</span>
           Con blancas: {bot.estilo.blancas.map((k) => nombreApertura(k, 'blancas')).join(', ')} · Con negras: {bot.estilo.negras.map((k) => nombreApertura(k, 'negras')).join(', ')}
         </p>
+        <small className="ingles">{[...bot.estilo.blancas, ...bot.estilo.negras].map(inglesApertura).join(' / ')}</small>
       </div>
       <div className="selector-color" role="radiogroup" aria-label="Tu color">
         {(

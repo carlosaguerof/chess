@@ -56,7 +56,7 @@
       "fila": {
         "eco": "D10",
         "name": "Slav Defense",
-        "pgn": "1. d4 d5 2. c4 c6 3. Nc3"
+        "pgn": "1. d4 d5 2. c4 c6 3. Nc3 dxc4"
       },
       "lado": "negras",
       "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
