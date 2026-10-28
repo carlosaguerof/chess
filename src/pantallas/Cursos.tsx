@@ -32,6 +32,9 @@ export function Cursos() {
   return (
     <div className="cursos">
       <h1>Aprender</h1>
+      <a className="enlace-base" href="#/aperturas" data-testid="ver-aperturas">
+        Ver todas las aperturas de la base ›
+      </a>
       <section aria-label="Tu repertorio">
         <h2>Tu repertorio</h2>
         <ul className="lista-cursos">{lista.filter((c) => c.enRepertorio).map(fila)}</ul>
