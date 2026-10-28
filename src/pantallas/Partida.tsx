@@ -21,7 +21,7 @@ import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear, Ico
 import { navegar } from '../ruta.ts'
 import { cursos as listaCursos } from '../cursos/datos.ts'
 import { BASE } from '../base/base.ts'
-import { useRepertorio } from '../repertorio/estado.ts'
+import { useRepertorioFavoritas } from '../aprender/favoritas.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
 import { registrarJugadaPartida } from '../registro/eventos.ts'
@@ -33,7 +33,8 @@ import { Chess } from 'chess.js'
 const TITULO = { gane: '¡Ganaste!', perdi: 'Perdiste', tablas: 'Tablas' } as const
 
 export function Partida() {
-  const [rep] = useRepertorio()
+  // Nota 1: mi repertorio son las variantes de mis favoritas (sin favoritas, el bot juega su libro)
+  const rep = useRepertorioFavoritas()
   const pb = usePartidaBot({ misLineas: (p) => (historia, azar, preferidas) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar, preferidas) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
   const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)
@@ -136,7 +137,7 @@ export function Partida() {
   const practicar = (() => {
     const l = resumen?.linea
     if (!l) return null
-    const curso = listaCursos(rep).find((c) => c.id === `${l.apertura}:${l.color}`)
+    const curso = listaCursos().find((c) => c.id === `${l.apertura}:${l.color}`)
     const i = curso ? curso.lecciones.findIndex((x) => x.id.endsWith('/' + l.id)) : -1
     return curso && i >= 0 ? `/leccion/${encodeURIComponent(curso.id)}/${i}` : null
   })()
@@ -177,7 +178,7 @@ export function Partida() {
   }
 
   return (
-    <div className="partida" data-testid="partida" data-motor={pb.motor.tipo === 'listo' ? pb.motor.version : pb.motor.tipo}>
+    <div className="partida" data-testid="partida" data-motor={pb.motor.tipo === 'listo' ? pb.motor.version : pb.motor.tipo} data-jugadas={historia.join(' ')}>
       <div className="partida-columna">
         <div className="partida-arriba">
           <a className="salir" href="#/" aria-label="Salir al inicio (la partida se guarda)" title="Salir al inicio (la partida se guarda)">

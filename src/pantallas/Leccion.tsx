@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
-import { useRepertorio, leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
-import { cursos } from '../cursos/datos.ts'
+import { leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
+import { cursoPorId } from '../cursos/datos.ts'
 import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, planDeMiLado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
@@ -18,8 +18,7 @@ const PAUSA_RIVAL_MS = 450
 type Aviso = { tipo: 'correcta' | 'incorrecta' | 'alternativa' | 'pista' | 'respuesta' | 'info'; texto: string } | null
 
 export function Leccion({ cursoId, indice }: { cursoId: string; indice: number }) {
-  const [rep] = useRepertorio()
-  const curso = cursos(rep).find((c) => c.id === cursoId)
+  const curso = cursoPorId(cursoId)
   const leccion = curso?.lecciones[indice]
   if (!curso || !leccion) return <p className="vacio">No encontré esa lección. <a href="#/cursos">Ver los cursos</a></p>
   return <Practica key={leccion.id} curso={curso} leccion={leccion} indice={indice} />

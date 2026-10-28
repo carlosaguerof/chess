@@ -6,6 +6,10 @@ import '@fontsource/inter/700.css'
 import '@fontsource/jetbrains-mono/500.css'
 import './estilos.css'
 import { App } from './App.tsx'
+import { migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
+
+// Nota 1: lo guardado pasa al modelo de favoritas (una sola vez)
+migrarAlModeloDeFavoritas()
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>

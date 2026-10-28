@@ -12,6 +12,8 @@ test.describe('T9 · la guía de aperturas en una partida real', () => {
 
   test('mensajes en R D T A C, silencio tras el rival, Respuesta de mi línea aunque el motor prefiera otra, y deshacer al desviarme', async ({ page }, info) => {
     // Brisa ya jugó 1.e4; yo con negras, guía prendida, el bot con su libro (Avance contra la Caro-Kann)
+    // mi repertorio (Nota 1): la Caro-Kann en mis favoritas
+    await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
     await page.goto('/#/prueba-partida?bot=brisa&color=b&jugadas=e2e4&guia=1&mislineas=0')
     const panel = page.getByTestId('panel-guia')
     await expect(panel).toBeVisible()

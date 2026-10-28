@@ -3,13 +3,13 @@ import { captura, jugar, tocar } from './_util.ts'
 
 test.describe('T8 · practicar con cursos', () => {
   test('Caro-Kann, lección del Avance: enseña 1...c6, pregunta tras 1.e4 y 2.d4, marca lo incorrecto, Pista, Respuesta y al final la siguiente', async ({ page }, info) => {
-    await page.goto('/#/cursos')
-    await expect(page.getByRole('heading', { name: 'Aprender' })).toBeVisible()
+    await page.goto('/#/cursos/todas')
+    await expect(page.getByRole('heading', { name: 'Aperturas y defensas' })).toBeVisible()
     await captura(page, info, 't8-cursos')
-    await page.getByTestId('curso-caro-kann:b').click()
-    await expect(page.getByTestId('leccion').first()).toContainText('Variante del Avance')
+    await page.getByTestId('tarjeta-caro-kann:b').locator('a').click()
+    await expect(page.getByTestId('variante').first()).toContainText('Variante del Avance')
     await captura(page, info, 't8-curso-caro-kann')
-    await page.getByTestId('leccion').first().click()
+    await page.getByTestId('empezar-leccion').click()
     const instr = page.getByTestId('instruccion')
     const aviso = page.getByTestId('aviso-leccion')
     await expect(page.getByTestId('nombre-linea')).toContainText('Variante del Avance')
@@ -62,6 +62,7 @@ test.describe('T8 · practicar con cursos', () => {
     await expect(page.getByTestId('fase')).toContainText('Te la enseño')
     // el avance quedó guardado
     await page.goto('/#/curso/' + encodeURIComponent('caro-kann:b'))
-    await expect(page.getByTestId('leccion').first()).toHaveClass(/hecha/)
+    await expect(page.getByTestId('variante').first()).toContainText('Aprendida')
+    await expect(page.getByTestId('avance')).toContainText('1 de 22 variantes aprendidas')
   })
 })

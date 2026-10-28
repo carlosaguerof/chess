@@ -32,6 +32,8 @@ function datosDeEjemplo() {
       { fen, esperada: 'c6', resultado: 'fallo', lugar: 'curso', fecha: ayer, linea: a.nombre, camino: ['e4'] },
       { fen, esperada: 'c6', resultado: 'acierto', lugar: 'curso', fecha: ayer + 1000, linea: a.nombre, camino: ['e4'] },
     ],
+    // Nota 1: dos favoritas, para que "Mis favoritas" no salga vacía en las capturas de después
+    favoritas: ['caro-kann:b', 'italiana:w'],
     historial: [
       { id: 'p2', botId: 'brisa', colorHumano: 'b', resultado: 'perdi', fin: 'abandono', jugadas: 7, fecha: ayer, resumen: { caso: 'desvio', linea: 'Variante del Avance', jugue: '3...e6', tuLinea: '3...Af5', ply: 5 } },
       { id: 'p1', botId: 'brisa', colorHumano: 'w', resultado: 'gane', fin: 'jaque mate', jugadas: 7, fecha: ayer - 3_600_000 },
@@ -44,33 +46,64 @@ test('capturas de todas las pantallas @capturas', async ({ page }, info) => {
   await page.clock.setFixedTime(HOY)
   const datos = datosDeEjemplo()
   await page.goto('/')
-  await page.evaluate((d) => {
+  await page.evaluate(({ d, antes }) => {
     localStorage.setItem('ajedrez.v1.progreso', JSON.stringify(d.progreso))
     localStorage.setItem('ajedrez.v1.registro', JSON.stringify(d.registro))
     localStorage.setItem('ajedrez.v1.historial', JSON.stringify(d.historial))
-  }, datos)
+    if (!antes) localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(d.favoritas))
+  }, { d: datos, antes: ETAPA === 'antes' })
 
-  const pantallas: [string, string][] = [
-    ['01-inicio', '/'],
-    ['02-jugar', '/bots'],
-    ['03-jugar-bot', '/bot/brisa'],
-    ['07-aprender', '/cursos'],
-    ['08-curso', '/curso/' + encodeURIComponent('caro-kann:b')],
-    ['10-refuerza', '/refuerza'],
-    ['11-repaso', '/repaso'],
-    ['12-aperturas', '/aperturas'],
-    ['13-apertura', '/apertura/caro-kann'],
-    ['14-repertorio-blancas', '/repertorio'],
-    ['15-repertorio-negras', '/repertorio/negras'],
-    ['16-historial', '/historial'],
-    ['18-ajustes', '/ajustes'],
-    ['19-licencias', '/licencias'],
-  ]
+  // las de "antes" (código de 525a3d3) usaron las rutas de entonces; desde la Nota 1, Repertorio y Aperturas son
+  // "Aperturas y defensas": 07 = Mis favoritas, 08 = la página de una apertura, 12 = Todas, 13 = una variante,
+  // 14 = Mis favoritas vacía y 15 = Tus datos (exportar e importar, en Más)
+  const pantallas: [string, string][] =
+    ETAPA === 'antes'
+      ? [
+          ['01-inicio', '/'],
+          ['02-jugar', '/bots'],
+          ['03-jugar-bot', '/bot/brisa'],
+          ['07-aprender', '/cursos'],
+          ['08-curso', '/curso/' + encodeURIComponent('caro-kann:b')],
+          ['10-refuerza', '/refuerza'],
+          ['11-repaso', '/repaso'],
+          ['12-aperturas', '/aperturas'],
+          ['13-apertura', '/apertura/caro-kann'],
+          ['14-repertorio-blancas', '/repertorio'],
+          ['15-repertorio-negras', '/repertorio/negras'],
+          ['16-historial', '/historial'],
+          ['18-ajustes', '/ajustes'],
+          ['19-licencias', '/licencias'],
+        ]
+      : [
+          ['01-inicio', '/'],
+          ['02-jugar', '/bots'],
+          ['03-jugar-bot', '/bot/octavio'],
+          ['07-aprender', '/cursos'],
+          ['08-curso', '/curso/' + encodeURIComponent('caro-kann:b')],
+          ['10-refuerza', '/refuerza'],
+          ['11-repaso', '/repaso'],
+          ['12-aperturas', '/cursos/todas'],
+          ['13-apertura', '/curso/' + encodeURIComponent('caro-kann:b') + '/0'],
+          ['15-tus-datos', '/datos'],
+          ['16-historial', '/historial'],
+          ['18-ajustes', '/ajustes'],
+          ['19-licencias', '/licencias'],
+        ]
   for (const [nombre, ruta] of pantallas) {
     await page.goto('/#' + ruta)
     await page.reload()
     await expect(page.locator('main').first()).toBeVisible()
     await foto(page, info, nombre)
+  }
+
+  // Mis favoritas vacía (después)
+  if (ETAPA !== 'antes') {
+    await page.evaluate(() => localStorage.setItem('ajedrez.v1.favoritas', '[]'))
+    await page.goto('/#/cursos')
+    await page.reload()
+    await expect(page.getByTestId('favoritas-vacia')).toBeVisible()
+    await foto(page, info, '14-favoritas-vacia')
+    await page.evaluate((f) => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(f)), datos.favoritas)
   }
 
   // el menú Más

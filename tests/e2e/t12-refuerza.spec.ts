@@ -2,6 +2,8 @@ import { expect, test } from '@playwright/test'
 import { captura, jugar, tocar } from './_util.ts'
 
 test('fallo una jugada en un curso y aparece primera en "Refuerza lo que fallas"', async ({ page }, info) => {
+  // Nota 1: Refuerza propone lo que ya practiqué y, de mis favoritas, lo que aún no
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
   await page.goto('/#/leccion/' + encodeURIComponent('caro-kann:b') + '/0')
   const instr = page.getByTestId('instruccion')
   for (const j of ['c7c6', 'd7d5', 'c8f5', 'e7e6']) {

@@ -65,7 +65,7 @@ describe('R7 · las fechas del repaso entran al exportar e importar', () => {
   it('exportar → importar conserva los escalones y las fechas', async () => {
     const { exportar, importar } = await import('../../src/repertorio/edicion.ts')
     const repaso = { 'caro-kann:b/avance': { escalon: 3, proxima: '2026-11-04' } }
-    const texto = exportar({ repertorio: { version: 1, lineas: [] }, progreso: {}, registro: [], repaso })
+    const texto = exportar({ favoritas: [], progreso: {}, registro: [], repaso })
     const leido = importar(texto)
     expect(leido.repaso).toEqual(repaso)
     expect(exportar(leido)).toBe(texto)
