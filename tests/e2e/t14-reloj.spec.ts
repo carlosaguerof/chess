@@ -4,18 +4,22 @@ import { captura, jugar, tocar } from './_util.ts'
 test.describe('T14 · reloj', () => {
   test('"Elegir tiempo": tres grupos, "Sin tiempo" la primera vez, y se recuerda', async ({ page }, info) => {
     await page.goto('/#/bot/brisa')
+    await expect(page.getByTestId('opciones')).toContainText('Sin tiempo')
+    await page.getByTestId('opciones').click()
     await expect(page.getByTestId('elegir-tiempo')).toContainText('Sin tiempo')
     await page.getByTestId('elegir-tiempo').click()
     const v = page.getByRole('dialog', { name: 'Elegir tiempo' })
-    for (const g of ['Bullet', 'Blitz', 'Rapid']) await expect(v.getByRole('region', { name: g }).getByRole('button')).toHaveCount(3)
+    for (const g of ['Bala', 'Relámpago', 'Rápida']) await expect(v.getByRole('region', { name: g }).getByRole('button')).toHaveCount(3)
     await expect(v.getByTestId('tiempo-sin')).toHaveAttribute('aria-pressed', 'true')
     await captura(page, info, 't14-elegir-tiempo')
     await v.getByTestId('tiempo-3+2').click()
     await expect(page.getByTestId('elegir-tiempo')).toContainText('3 | 2')
+    await page.getByTestId('opciones-listo').click()
+    await expect(page.getByTestId('opciones')).toContainText('3 | 2')
     await page.getByTestId('jugar').click()
     await expect(page.getByTestId('reloj-yo')).toContainText('3:00')
     await page.goto('/#/bot/hugo')
-    await expect(page.getByTestId('elegir-tiempo')).toContainText('3 | 2')
+    await expect(page.getByTestId('opciones')).toContainText('3 | 2')
   })
 
   test('una partida de 1 minuto termina por tiempo con su aviso; recargar conserva el tiempo (tolerancia: 1.5 s)', async ({ page }, info) => {

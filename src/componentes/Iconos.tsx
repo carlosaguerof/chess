@@ -13,3 +13,37 @@ export const IconoMas = (p: P) => (<svg {...base} {...p}><circle cx="5" cy="12" 
 export const IconoCerrar = (p: P) => (<svg {...base} {...p}><path d="M6 6l12 12M18 6 6 18" /></svg>)
 export const IconoFoco = (p: P) => (<svg {...base} {...p}><path d="M9 18h6" /><path d="M10 21h4" /><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z" /></svg>)
 export const IconoOjo = (p: P) => (<svg {...base} {...p}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>)
+export const IconoOpciones = (p: P) => (<svg {...base} {...p}><path d="M4 7h10" /><path d="M18 7h2" /><circle cx="16" cy="7" r="2" /><path d="M4 17h4" /><path d="M12 17h8" /><circle cx="10" cy="17" r="2" /></svg>)
+export const IconoAbajo = (p: P) => (<svg {...base} {...p}><path d="m6 9 6 6 6-6" /></svg>)
+
+/** El rey para escoger color (dibujo propio): relleno blanco o negro, con contorno. */
+const TrazosRey = ({ color }: { color: 'w' | 'b' }) => (
+  <g fill={color === 'w' ? '#f4f4f2' : '#262522'} stroke={color === 'w' ? '#262522' : '#f4f4f2'} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
+    <path d="M18 3v6M15 6h6" fill="none" />
+    <path d="M18 10.5c-1.8 0-3 1.2-3 2.6 0 .8.3 1.4.7 1.9H12.3c-1.6 0-2.8 1.3-2.5 2.9l1.4 6.6h13.6l1.4-6.6c.3-1.6-.9-2.9-2.5-2.9h-3.4c.4-.5.7-1.1.7-1.9 0-1.4-1.2-2.6-3-2.6z" />
+    <path d="M11.2 24.5h13.6v2.8H11.2z" />
+    <path d="M9.6 27.3h16.8l-1 4.7H10.6z" />
+  </g>
+)
+export const IconoRey = ({ color }: { color: 'w' | 'b' }) => (
+  <svg width="40" height="40" viewBox="0 0 36 36" aria-hidden="true">
+    <TrazosRey color={color} />
+  </svg>
+)
+/** "Al azar": el rey mitad blanco y mitad negro. */
+export const IconoAzar = () => (
+  <svg width="40" height="40" viewBox="0 0 36 36" aria-hidden="true">
+    <clipPath id="rey-izquierda">
+      <rect x="0" y="0" width="18" height="36" />
+    </clipPath>
+    <clipPath id="rey-derecha">
+      <rect x="18" y="0" width="18" height="36" />
+    </clipPath>
+    <g clipPath="url(#rey-izquierda)">
+      <TrazosRey color="w" />
+    </g>
+    <g clipPath="url(#rey-derecha)">
+      <TrazosRey color="b" />
+    </g>
+  </svg>
+)

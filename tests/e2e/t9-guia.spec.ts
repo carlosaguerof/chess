@@ -4,6 +4,7 @@ import { captura, jugar, tocar } from './_util.ts'
 test.describe('T9 · la guía de aperturas en una partida real', () => {
   test('interruptores al escoger el bot (prendidos por defecto)', async ({ page }, info) => {
     await page.goto('/#/bot/brisa')
+    await page.getByTestId('opciones').click()
     await expect(page.getByTestId('interruptor-guia')).toBeChecked()
     await expect(page.getByTestId('interruptor-mis-lineas')).toBeChecked()
     await captura(page, info, 't9-interruptores')

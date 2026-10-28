@@ -2,6 +2,7 @@ import datos from './personajes.json' with { type: 'json' }
 import type { Temperamento } from '../motor/elegir.ts'
 import { NIVELES } from '../motor/niveles.ts'
 import type { Aspecto } from './retratos.ts'
+import { guardar, leer } from '../estado/almacen.ts'
 
 export interface Personaje {
   id: string
@@ -29,7 +30,7 @@ export function personajePorId(id: string | undefined | null): Personaje | undef
   return PERSONAJES.find((p) => p.id === id)
 }
 
-/** El bot recomendado en el inicio: el primero de 700 (mi nivel). */
+/** El bot recomendado la primera vez: el primero de 700 (mi nivel), Brisa. */
 export function recomendado(): Personaje {
   return personajesDisponibles().find((p) => p.elo === 700) ?? personajesDisponibles()[0]!
 }
@@ -40,15 +41,21 @@ export interface Grupo {
   personajes: Personaje[]
 }
 
-/** Mi zona (500–1000) primero; lo demás agrupado. */
+/** Los grupos de la pantalla Jugar (L2), como en "Play Bots": por nivel, de menos a más. */
 export function gruposDePersonajes(lista = personajesDisponibles()): Grupo[] {
-  const g = (titulo: string, detalle: string, f: (p: Personaje) => boolean): Grupo => ({ titulo, detalle, personajes: lista.filter(f) })
-  return [
-    g('Tu zona', '500 a 1000', (p) => p.elo >= 500 && p.elo <= 1000),
-    g('Principiantes', '100 a 400', (p) => p.elo < 500),
-    g('Intermedios', '1100 a 1500', (p) => p.elo >= 1100 && p.elo <= 1500),
-    g('Avanzados', '1600 a 3000', (p) => p.elo >= 1600),
-  ].filter((x) => x.personajes.length > 0)
+  const g = (titulo: string, desde: number, hasta: number): Grupo => ({ titulo, detalle: `${desde}–${hasta}`, personajes: lista.filter((p) => p.elo >= desde && p.elo <= hasta) })
+  return [g('Principiante', 100, 800), g('Intermedio', 900, 1500), g('Avanzado', 1600, 2200), g('Maestro', 2300, 3000)].filter((x) => x.personajes.length > 0)
+}
+
+const CLAVE_ULTIMO = 'ultimo-bot'
+
+/** El bot con el que entra Jugar (y el del inicio): el último con el que jugué o, la primera vez, Brisa (700). */
+export function botParaJugar(): Personaje {
+  return personajePorId(leer<string | null>(CLAVE_ULTIMO, null)) ?? recomendado()
+}
+
+export function anotarUltimoBot(id: string): void {
+  guardar(CLAVE_ULTIMO, id)
 }
 
 export const NOMBRE_TEMPERAMENTO: Record<Temperamento, string> = {
