@@ -11,7 +11,11 @@
       "id": "pirc-clasica",
       "familia": "Defensa Pirc",
       "nombre": "Defensa Pirc: Variante Clásica, Sistema Tranquilo",
-      "fila": { "eco": "B08", "name": "Pirc Defense: Classical Variation, Quiet System", "pgn": "1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. Nf3 Bg7 5. Be2" },
+      "fila": {
+        "eco": "B08",
+        "name": "Pirc Defense: Classical Variation, Quiet System",
+        "pgn": "1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. Nf3 Bg7 5. Be2"
+      },
       "lado": "blancas",
       "plan": "Sistema clásico y tranquilo: centro con e4 y d4, caballos en c3 y f3, Ae2 y 0-0. Después, h3 (le quita g4 al alfil negro) y Ae3 o Te1. Sin ataques prematuros: el centro es tu ventaja.",
       "frecuencia": null,
@@ -21,7 +25,11 @@
       "id": "moderna-dos-caballos",
       "familia": "Defensa Moderna",
       "nombre": "Defensa Moderna: Variante de los Dos Caballos",
-      "fila": { "eco": "B06", "name": "Modern Defense: Two Knights Variation", "pgn": "1. e4 g6 2. d4 Bg7 3. Nc3 d6 4. Nf3" },
+      "fila": {
+        "eco": "B06",
+        "name": "Modern Defense: Two Knights Variation",
+        "pgn": "1. e4 g6 2. d4 Bg7 3. Nc3 d6 4. Nf3"
+      },
       "lado": "blancas",
       "plan": "Negras te deja el centro para atacarlo después. Ocúpalo con e4 y d4, desarrolla Cc3 y Cf3, y sigue con Ae2 y 0-0 (o Ae3 y Dd2). Si negras juega ...Cf6, llegas a la Pirc clásica.",
       "frecuencia": null,
@@ -31,7 +39,11 @@
       "id": "alekhine-moderna",
       "familia": "Defensa Alekhine",
       "nombre": "Defensa Alekhine: Variante Moderna",
-      "fila": { "eco": "B04", "name": "Alekhine Defense: Modern Variation", "pgn": "1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3" },
+      "fila": {
+        "eco": "B04",
+        "name": "Alekhine Defense: Modern Variation",
+        "pgn": "1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3"
+      },
       "lado": "blancas",
       "plan": "El caballo negro te invita a avanzar peones para atacarlos después. Con 4.Cf3 juegas tranquilo: Ae2, 0-0 y c4 cuando convenga para echar al caballo de d5. Si negras juega ...Ag4, sigue igual con Ae2 y 0-0; h3 más adelante le pregunta al alfil.",
       "frecuencia": null,
@@ -41,7 +53,11 @@
       "id": "nimzowitsch-cf3",
       "familia": "Defensa Nimzowitsch",
       "nombre": "Defensa Nimzowitsch: Variante Rehusada",
-      "fila": { "eco": "B00", "name": "Nimzowitsch Defense: Declined Variation", "pgn": "1. e4 Nc6 2. Nf3" },
+      "fila": {
+        "eco": "B00",
+        "name": "Nimzowitsch Defense: Declined Variation",
+        "pgn": "1. e4 Nc6 2. Nf3"
+      },
       "lado": "blancas",
       "plan": "2.Cf3 desarrolla y espera: si negras responde ...e5, ya estás en terreno conocido (3.Ac4, la Italiana). Si juega otra cosa, sigue con principios: Cc3 para sostener e4, d4 para ocupar el centro y enroque corto.",
       "frecuencia": null,
@@ -51,7 +67,11 @@
       "id": "nimzowitsch-avance",
       "familia": "Defensa Nimzowitsch",
       "nombre": "Defensa Nimzowitsch: Variante Escandinava, Variante del Avance",
-      "fila": { "eco": "B00", "name": "Nimzowitsch Defense: Scandinavian Variation, Advance Variation", "pgn": "1. e4 Nc6 2. d4 d5 3. e5" },
+      "fila": {
+        "eco": "B00",
+        "name": "Nimzowitsch Defense: Scandinavian Variation, Advance Variation",
+        "pgn": "1. e4 Nc6 2. d4 d5 3. e5"
+      },
       "lado": "blancas",
       "plan": "Si prefieres 2.d4 y negras responde ...d5, avanza 3.e5: la estructura se parece a tu Avance contra la Francesa y la Caro-Kann, y el caballo de c6 le estorba a negras para atacar d4 con ...c5. Sigue con Cf3, Ae2 o Ad3 y 0-0 (c3 si hace falta sostener d4).",
       "frecuencia": null,
@@ -60,10 +80,14 @@
     {
       "id": "owen",
       "familia": "Defensa Owen",
-      "nombre": "Defensa Owen",
-      "fila": { "eco": "B00", "name": "Owen Defense", "pgn": "1. e4 b6" },
+      "nombre": "Defensa Owen: Defensa Guatemala",
+      "fila": {
+        "eco": "B00",
+        "name": "Owen Defense: Guatemala Defense",
+        "pgn": "1. e4 b6 2. d4 Ba6"
+      },
       "lado": "blancas",
-      "plan": "Negras prepara ...Ab7 para presionar e4. Ocupa el centro con d4 y defiende e4 con Ad3 (o Cc3); luego Cf3, 0-0 y c3 o c4 según convenga.",
+      "plan": "Negras quiere cambiar tu alfil de casillas blancas con ...Aa6. Ocupa el centro con d4, desarrolla con Cf3 y Cc3 y enroca: tendrás más espacio.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -71,7 +95,11 @@
       "id": "san-jorge-polaca",
       "familia": "Defensa San Jorge",
       "nombre": "Defensa San Jorge: Variante Polaca",
-      "fila": { "eco": "B00", "name": "St. George Defense: Polish Variation", "pgn": "1. e4 a6 2. d4 b5 3. Nf3 Bb7 4. Bd3 e6" },
+      "fila": {
+        "eco": "B00",
+        "name": "St. George Defense: Polish Variation",
+        "pgn": "1. e4 a6 2. d4 b5 3. Nf3 Bb7 4. Bd3 e6"
+      },
       "lado": "blancas",
       "plan": "Negras gasta jugadas con peones del flanco de dama. Tú ya tienes centro y desarrollo: Ad3 cuida e4 del alfil de b7. Sigue con 0-0, c3 y a4 para cuestionar el peón de b5.",
       "frecuencia": null,
@@ -80,10 +108,14 @@
     {
       "id": "carr",
       "familia": "Defensa Carr",
-      "nombre": "Defensa Carr",
-      "fila": { "eco": "B00", "name": "Carr Defense", "pgn": "1. e4 h6" },
+      "nombre": "Defensa Carr: Gambito Zilbermints",
+      "fila": {
+        "eco": "B00",
+        "name": "Carr Defense: Zilbermints Gambit",
+        "pgn": "1. e4 h6 2. d4 e5"
+      },
       "lado": "blancas",
-      "plan": "...h6 no desarrolla nada. Aprovéchalo: d4 para tener los dos peones centrales, Cc3 y Cf3, alfiles activos (Ac4 o Ad3) y enroque corto.",
+      "plan": "...h6 no desarrolla nada. Ocupa el centro con 2.d4; si negras da un peón con 2...e5, puedes tomarlo y desarrollar con Cc3, Cf3, alfiles activos y enroque corto.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     }

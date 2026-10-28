@@ -1,0 +1,59 @@
+{
+ "700ag-vs-500.json": {
+  "eloA": 700,
+  "eloB": 500,
+  "temperamentos": [
+   "agresivo",
+   "equilibrado"
+  ],
+  "jaquesYCapturas": {
+   "a": 377,
+   "b": 304
+  },
+  "juegos": 48,
+  "puntosA": 40.5,
+  "ganadas": 40,
+  "tablas": 1,
+  "perdidas": 7,
+  "porcentajeA": 0.84375,
+  "version": "Stockfish 19 Lite WASM"
+ },
+ "700ag-vs-700def.json": {
+  "eloA": 700,
+  "eloB": 700,
+  "temperamentos": [
+   "agresivo",
+   "defensivo"
+  ],
+  "jaquesYCapturas": {
+   "a": 359,
+   "b": 309
+  },
+  "juegos": 48,
+  "puntosA": 22,
+  "ganadas": 21,
+  "tablas": 2,
+  "perdidas": 25,
+  "porcentajeA": 0.4583333333333333,
+  "version": "Stockfish 19 Lite WASM"
+ },
+ "700def-vs-500.json": {
+  "eloA": 700,
+  "eloB": 500,
+  "temperamentos": [
+   "defensivo",
+   "equilibrado"
+  ],
+  "jaquesYCapturas": {
+   "a": 340,
+   "b": 284
+  },
+  "juegos": 48,
+  "puntosA": 41,
+  "ganadas": 40,
+  "tablas": 2,
+  "perdidas": 6,
+  "porcentajeA": 0.8541666666666666,
+  "version": "Stockfish 19 Lite WASM"
+ }
+}

@@ -8,11 +8,15 @@ import { obtenerMotor, estadoMotor, alCambiarMotor, type EstadoMotor } from '../
 import { libroDe } from '../bots/libros.ts'
 import { lineasDeLibro } from '../bots/fuente-libros.ts'
 import { intentar, type ColorCorto } from '../ajedrez/reglas.ts'
+import { arrancar, finPorTiempo, pausar, restante, seAcabo } from '../reloj/reloj.ts'
 
 export function partidaGuardada(): PartidaGuardada | null {
   const p = leer<PartidaGuardada | null>(CLAVES.partida, null)
+  if (!p) return null
+  // al volver a abrir, el reloj sigue donde se guardó por última vez (no cuenta el tiempo que la app estuvo cerrada)
+  const reloj = p.reloj ? { ...p.reloj, corriendo: null, desde: null } : null
   // partidas guardadas antes de la guía: se completan
-  return p ? { ...p, opciones: p.opciones ?? OPCIONES_POR_DEFECTO, ayudas: p.ayudas ?? { pista: 0, respuesta: 0 } } : null
+  return { ...p, reloj, opciones: p.opciones ?? OPCIONES_POR_DEFECTO, ayudas: p.ayudas ?? { pista: 0, respuesta: 0 } }
 }
 
 /** Lo último que escogí al empezar (guía, mis líneas) se recuerda. */
@@ -20,10 +24,16 @@ export function opcionesRecordadas(): OpcionesPartida {
   return leer<OpcionesPartida>('opciones-partida', OPCIONES_POR_DEFECTO)
 }
 
-export function empezarPartida(botId: string, color: ColorCorto | 'azar', fen?: string, opciones: OpcionesPartida = opcionesRecordadas()): PartidaGuardada {
+/** El tiempo que escogí la última vez (la primera vez, "Sin tiempo"). */
+export function tiempoRecordado(): string {
+  return leer<string>('tiempo', 'sin')
+}
+
+export function empezarPartida(botId: string, color: ColorCorto | 'azar', fen?: string, opciones: OpcionesPartida = opcionesRecordadas(), tiempo: string = tiempoRecordado()): PartidaGuardada {
   const c: ColorCorto = color === 'azar' ? (Math.random() < 0.5 ? 'w' : 'b') : color
   guardar('opciones-partida', opciones)
-  const p = nuevaPartida(botId, c, fen, opciones)
+  guardar('tiempo', tiempo)
+  const p = nuevaPartida(botId, c, fen, opciones, tiempo)
   guardar(CLAVES.partida, p)
   return p
 }
@@ -45,8 +55,56 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
   const [reintento, setReintento] = useState(0)
   const opcionesRef = useRef(opciones)
   opcionesRef.current = opciones
+  const ultimaRef = useRef(partida)
+  ultimaRef.current = partida
 
   useEffect(() => alCambiarMotor(setMotor), [])
+
+  // ---- el reloj (T14)
+  const [ahora, setAhora] = useState(() => Date.now())
+  const relojActivo = !!partida?.reloj && !partida.fin
+  useEffect(() => {
+    if (!partida?.reloj || partida.fin) return
+    const p = partida
+    const turno = ajedrezDe(p).turn()
+    // que corra el reloj del que tiene el turno (si la app está a la vista)
+    if (document.visibilityState === 'visible' && p.reloj!.corriendo !== turno) {
+      cambiar({ ...p, reloj: arrancar(p.reloj!, turno, Date.now()) })
+      return
+    }
+    const t = setInterval(() => {
+      const n = Date.now()
+      setAhora(n)
+      const sin = seAcabo(ultimaRef.current!.reloj!, n)
+      if (sin) {
+        const actual = ultimaRef.current!
+        cambiar({ ...actual, reloj: pausar(actual.reloj!, n), fin: finPorTiempo(ajedrezDe(actual), sin), pausa: null })
+      }
+    }, 100)
+    const guardarCada = setInterval(() => {
+      const actual = ultimaRef.current
+      if (actual?.reloj?.corriendo) guardar(CLAVES.partida, { ...actual, reloj: { ...pausar(actual.reloj, Date.now()), corriendo: actual.reloj.corriendo, desde: Date.now() } })
+    }, 1000)
+    const alOcultar = () => {
+      const actual = ultimaRef.current
+      if (!actual?.reloj || actual.fin) return
+      if (document.visibilityState === 'hidden') cambiar({ ...actual, reloj: pausar(actual.reloj, Date.now()) })
+      else cambiar({ ...actual, reloj: arrancar(actual.reloj, ajedrezDe(actual).turn(), Date.now()) })
+    }
+    const alSalir = () => {
+      const actual = ultimaRef.current
+      if (actual?.reloj && !actual.fin) guardar(CLAVES.partida, { ...actual, reloj: pausar(actual.reloj, Date.now()) })
+    }
+    document.addEventListener('visibilitychange', alOcultar)
+    window.addEventListener('pagehide', alSalir)
+    return () => {
+      clearInterval(t)
+      clearInterval(guardarCada)
+      document.removeEventListener('visibilitychange', alOcultar)
+      window.removeEventListener('pagehide', alSalir)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [partida?.id, partida?.jugadas.length, partida?.fin, partida?.reloj?.corriendo])
 
   const cambiar = useCallback((p: PartidaGuardada | null) => {
     setPartida(p)
@@ -65,14 +123,17 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
     const t0 = performance.now()
     const colorBot: ColorCorto = partida.colorHumano === 'w' ? 'b' : 'w'
     const c = ajedrezDe(partida)
-    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro) })
+    jugadaDelBot(c, nivelDe(bot.elo), obtenerMotor, { misLineas: partida.opciones.misLineas ? (opcionesRef.current.misLineas?.(partida) ?? null) : null, libro: libroDe(bot, colorBot, lineasDeLibro) }, Math.random, bot.temperamento)
       .then((j) => {
         if (!vigente || !j) return
         const espera = esperaDelBot(performance.now() - t0)
         setTimeout(() => {
           if (!vigente) return
           setPensando(false)
-          cambiar(conJugada(partida, j.uci))
+          // sobre la partida más reciente (p. ej. si volteé el tablero mientras pensaba)
+          const ahora = ultimaRef.current ?? partida
+          if (ahora.id !== partida.id || ahora.jugadas.length !== partida.jugadas.length) return
+          cambiar(conJugada(ahora, j.uci))
         }, espera)
       })
       .catch(() => {
@@ -98,10 +159,14 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
     [partida, pensando, cambiar],
   )
 
+  const tiempos = partida?.reloj ? { w: restante(partida.reloj, 'w', ahora), b: restante(partida.reloj, 'b', ahora), corriendo: partida.reloj.corriendo } : null
+
   return {
     partida,
     bot,
     chess,
+    tiempos,
+    relojActivo,
     pensando,
     turnoBot,
     motor,

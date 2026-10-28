@@ -15,8 +15,17 @@ import { Cursos } from './pantallas/Cursos.tsx'
 import { Curso } from './pantallas/Curso.tsx'
 import { Leccion } from './pantallas/Leccion.tsx'
 import { Refuerza } from './pantallas/Refuerza.tsx'
+import { Aperturas, Apertura } from './pantallas/Aperturas.tsx'
+import { Historial } from './pantallas/Historial.tsx'
+import { Ajustes } from './pantallas/Ajustes.tsx'
+import { Repaso } from './pantallas/Repaso.tsx'
 
-const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', ruta: '/licencias' }]
+const MAS: EntradaMas[] = [
+  { nombre: 'Mis partidas', ruta: '/historial' },
+  { nombre: 'Aperturas (la base)', ruta: '/aperturas' },
+  { nombre: 'Ajustes', ruta: '/ajustes' },
+  { nombre: 'Código fuente y licencias', ruta: '/licencias' },
+]
 
 export function App() {
   const ruta = useRuta()
@@ -39,6 +48,11 @@ export function App() {
   else if (primera === 'licencias') pantalla = <Licencias />
   else if (primera === 'cursos') pantalla = <Cursos />
   else if (primera === 'refuerza') pantalla = <Refuerza />
+  else if (primera === 'aperturas') pantalla = <Aperturas />
+  else if (primera === 'historial') pantalla = <Historial />
+  else if (primera === 'ajustes') pantalla = <Ajustes />
+  else if (primera === 'repaso') pantalla = <Repaso />
+  else if (primera === 'apertura' && segunda) pantalla = <Apertura id={segunda} />
   else if (primera === 'curso' && segunda) pantalla = <Curso id={decodeURIComponent(segunda)} />
   else if (primera === 'repertorio') pantalla = <Repertorio colorInicial={segunda === 'negras' ? 'b' : 'w'} />
   else pantalla = <Inicio />

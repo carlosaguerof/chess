@@ -38,23 +38,23 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Variante 3.Cc3
 
-### Defensa Eslava (3.Cc3)
+### Defensa Eslava: 3.Cc3 dxc4
 
-**1.d4 d5 2.c4 c6 3.Cc3**
+**1.d4 d5 2.c4 c6 3.Cc3 dxc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Lo natural es 3...Cf6: si 4.Cf3, llegas a la Variante Checa (...dxc4 y ...Af5). Si 4.e3, desarrolla con ...e6 o ...a6; aquí ...Af5 es delicado, porque cxd5 y Db3 atacan b7 y d5 a la vez.
+- Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.
 - Fuente: D10 · Slav Defense
 
 ## Variante Checa
 
-### Defensa Eslava: Variante Checa, Sistema Clásico, Línea principal
+### Defensa Eslava: Variante Checa, Variante Holandesa, Sämisch
 
-**1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.a4 Af5 6.e3 e6 7.Axc4 Ab4 8.0-0 0-0 9.De2**
+**1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.a4 Af5 6.e3 e6 7.Axc4 Ab4 8.0-0 0-0 9.De2 Ce4 10.g4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Tras 9.De2 lo usual es ...Cbd7; si blancas empuja e4, el alfil se retira a g6.
-- Fuente: D19 · Slav Defense: Czech Variation, Classical System, Main Line
+- Plan *(redactado por la IA)*: Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Contra 9.De2, 9...Ce4 ocupa el centro; si blancas ataca con g4, el alfil se retira a g6.
+- Fuente: D19 · Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation
 
 ## Variante de los Tres Caballos
 

@@ -13,6 +13,8 @@ import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { uciAObjeto } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
+import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
+import { jugadasEnEspanol } from '../ajedrez/reglas.ts'
 import { IconoAtras, IconoFoco, IconoOjo } from '../componentes/Iconos.tsx'
 import { Chess } from 'chess.js'
 
@@ -120,7 +122,10 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
         <p className="leccion-instruccion">
           <strong>¿Qué harías?</strong>
         </p>
-        <p className="apagado">{textoConteo(actual)}</p>
+        <p className="apagado">
+          {textoConteo(actual)} · {actual.familias.size > 1 ? `está en ${actual.familias.size} variantes, como ${actual.linea.nombre}` : actual.linea.nombre}
+        </p>
+        <ListaJugadas sanes={jugadasEnEspanol(chess)} />
         {aviso && (
           <p className={`aviso-leccion ${aviso.tipo}`} role="status" data-testid="aviso-leccion" data-resultado={aviso.tipo}>
             {aviso.texto}

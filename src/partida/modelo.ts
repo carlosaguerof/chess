@@ -1,5 +1,6 @@
 import type { Chess } from 'chess.js'
 import { FEN_INICIAL, finPorReglas, partidaDesde, type ColorCorto, type Fin } from '../ajedrez/reglas.ts'
+import { alJugar, controlPorId, nuevoReloj, type EstadoReloj } from '../reloj/reloj.ts'
 
 /** Una partida contra un bot, como se guarda en el navegador. */
 export interface PartidaGuardada {
@@ -20,6 +21,12 @@ export interface PartidaGuardada {
   ayudas: { pista: number; respuesta: number }
   /** el bot espera: me desvié de mi línea y tengo que decidir si sigo o deshago */
   pausa?: 'desvio' | null
+  /** el reloj (T14); null = sin tiempo */
+  reloj?: EstadoReloj | null
+  /** si prendí la barra o las flechas durante la partida (T15; cuenta para las estrellas) */
+  usoBarraOFlechas?: boolean
+  /** las estrellas que gané al terminar (T16) */
+  estrellas?: number
 }
 
 export interface OpcionesPartida {
@@ -29,8 +36,10 @@ export interface OpcionesPartida {
 
 export const OPCIONES_POR_DEFECTO: OpcionesPartida = { guia: true, misLineas: true }
 
-export function nuevaPartida(botId: string, colorHumano: ColorCorto, fenInicial = FEN_INICIAL, opciones: OpcionesPartida = OPCIONES_POR_DEFECTO): PartidaGuardada {
+export function nuevaPartida(botId: string, colorHumano: ColorCorto, fenInicial = FEN_INICIAL, opciones: OpcionesPartida = OPCIONES_POR_DEFECTO, tiempo = 'sin'): PartidaGuardada {
+  const control = controlPorId(tiempo)
   return {
+    reloj: control.grupo === 'sin' ? null : nuevoReloj(control),
     opciones,
     ayudas: { pista: 0, respuesta: 0 },
     pausa: null,
@@ -52,11 +61,15 @@ export function ajedrezDe(p: PartidaGuardada): Chess {
 
 export const turnoDe = (p: PartidaGuardada): ColorCorto => ajedrezDe(p).turn()
 
-/** Agrega una jugada y revisa si la partida terminó. */
-export function conJugada(p: PartidaGuardada, uci: string): PartidaGuardada {
+/** Agrega una jugada y revisa si la partida terminó. Con reloj: descuenta, suma el incremento y arranca el del otro. */
+export function conJugada(p: PartidaGuardada, uci: string, ahora = Date.now()): PartidaGuardada {
+  const antes = partidaDesde(p.fenInicial, p.jugadas)
+  const quien = antes.turn()
   const jugadas = [...p.jugadas, uci]
   const chess = partidaDesde(p.fenInicial, jugadas)
-  return { ...p, jugadas, fin: finPorReglas(chess) }
+  const fin = finPorReglas(chess)
+  const reloj = p.reloj ? (fin ? { ...alJugar(p.reloj, quien, ahora), corriendo: null, desde: null } : alJugar(p.reloj, quien, ahora)) : p.reloj
+  return { ...p, jugadas, fin, reloj }
 }
 
 /**
@@ -93,4 +106,14 @@ export function resultadoPara(p: PartidaGuardada): Resultado | null {
   if (!p.fin) return null
   if (p.fin.ganador === null) return 'tablas'
   return p.fin.ganador === p.colorHumano ? 'gane' : 'perdi'
+}
+
+/** Las ayudas que usé en la partida, para las estrellas (cuenta la peor). */
+export function ayudasUsadas(p: PartidaGuardada) {
+  return {
+    guia: p.opciones.guia,
+    pistaORespuesta: p.ayudas.pista + p.ayudas.respuesta > 0,
+    deshacer: p.deshechas > 0,
+    barraOFlechas: !!p.usoBarraOFlechas,
+  }
 }

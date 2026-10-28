@@ -58,7 +58,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: 4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Se considera más fuerte que el famoso Hígado Frito (6.Cxf7).
 - Fuente: C57 · Italian Game: Two Knights Defense, Lolli Attack
 
-### Defensa de los Dos Caballos: Defensa Polerio con 8.Ae2
+### Defensa de los Dos Caballos (4.Cg5 d5 5.exd5 Ca5)
 
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 d5 5.exd5 Ca5 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2**
 
@@ -96,13 +96,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Defensa Húngara
 
-### Defensa Húngara
+### Defensa Húngara: Variante Tartakower
 
-**1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7**
+**1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7 4.d4 exd4 5.c3 Cf6 6.e5 Ce4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con d4 (o c3 y d4), desarrolla con Cc3 y enroca; tendrás más espacio.
-- Fuente: C50 · Italian Game: Hungarian Defense
+- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.
+- Fuente: C50 · Italian Game: Hungarian Defense, Tartakower Variation
 
 ## Gambito Blackburne-Kostić
 

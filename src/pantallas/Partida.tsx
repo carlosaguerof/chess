@@ -2,7 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
-import { resultadoPara, puedeDeshacer } from '../partida/modelo.ts'
+import { resultadoPara, puedeDeshacer, ayudasUsadas, ajedrezDe } from '../partida/modelo.ts'
+import { estrellas as calcularEstrellas } from '../estrellas/estrellas.ts'
+import { anotarEstrellas } from '../estrellas/almacen.ts'
+import { anotarPartida } from '../historial/historial.ts'
+import { Estrellas } from '../componentes/Estrellas.tsx'
+import { MenuAyudas, BarraEvaluacion, leerAyudas, guardarAyudas } from '../componentes/Ayudas.tsx'
+import { amenazas, porcentajeBlancas } from '../ayudas/amenazas.ts'
+import { evaluar } from '../ayudas/analisis.ts'
 import { obtenerMotor } from '../motor/navegador.ts'
 import { largo, jugadasEnEspanol } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
@@ -10,14 +17,16 @@ import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
 import { BarraJugador } from '../componentes/BarraJugador.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { Avatar } from '../componentes/Avatar.tsx'
-import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear } from '../componentes/Iconos.tsx'
+import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear, IconoFoco } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
+import { cursos as listaCursos } from '../cursos/datos.ts'
 import { BASE } from '../base/base.ts'
 import { useRepertorio } from '../repertorio/estado.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
 import { registrarJugadaPartida } from '../registro/eventos.ts'
 import { PanelGuia } from '../componentes/PanelGuia.tsx'
+import { Reloj } from '../componentes/Reloj.tsx'
 import { uciAObjeto } from '../ajedrez/reglas.ts'
 import { Chess } from 'chess.js'
 
@@ -28,12 +37,57 @@ export function Partida() {
   const pb = usePartidaBot({ misLineas: (p) => (historia, azar) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
   const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)
+  // ---- ayudas de chess.com (T15): barra, amenazas y sugerencia, con un motor aparte a toda fuerza
+  const [ajustes, setAjustes] = useState(leerAyudas)
+  const [menuAyudas, setMenuAyudas] = useState(false)
+  const [evaluacion, setEvaluacion] = useState<{ fen: string; pct: number; mejor: string | null } | null>(null)
+  const fenActual = pb.chess?.fen()
+  useEffect(() => {
+    if (!fenActual || !(ajustes.barra || ajustes.sugerencia)) return
+    let vigente = true
+    evaluar(fenActual)
+      .then((e) => vigente && setEvaluacion({ fen: fenActual, pct: porcentajeBlancas(e.cpBlancas, e.mate), mejor: e.mejor }))
+      .catch(() => undefined)
+    return () => {
+      vigente = false
+    }
+  }, [fenActual, ajustes.barra, ajustes.sugerencia])
+  // prender barra o flechas en una partida en curso cuenta para las estrellas
+  useEffect(() => {
+    const p = pb.partida
+    if (p && !p.fin && (ajustes.barra || ajustes.amenazas || ajustes.sugerencia) && !p.usoBarraOFlechas) pb.reemplazar({ ...p, usoBarraOFlechas: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ajustes, pb.partida?.id, pb.partida?.fin])
   const [avisoCerrado, setAvisoCerrado] = useState<string | null>(null)
 
   // el motor empieza a cargar en cuanto se abre la partida
   useEffect(() => {
     obtenerMotor().catch(() => undefined)
   }, [])
+
+  // al terminar: las estrellas (T16), una sola vez por partida, y la mejor se guarda por bot
+  useEffect(() => {
+    const p = pb.partida
+    if (!p?.fin || p.estrellas !== undefined) return
+    const r = resultadoPara(p)!
+    const n = calcularEstrellas(r, ayudasUsadas(p))
+    anotarEstrellas(p.botId, n)
+    // R2: al historial, con el resumen de la apertura (aunque la guía estuviera apagada)
+    const h = ajedrezDe(p).history()
+    const rs = resumenDePartida(rep, p.colorHumano, h)
+    anotarPartida({
+      id: p.id,
+      botId: p.botId,
+      colorHumano: p.colorHumano,
+      resultado: r,
+      fin: p.fin.tipo === 'rendicion' && r === 'perdi' ? 'Te rendiste' : p.fin.nombre,
+      jugadas: h.length,
+      fecha: Date.now(),
+      resumen: { caso: rs.caso, linea: rs.linea?.nombre, jugue: rs.salida?.jugue, tuLinea: rs.salida?.linea, ply: rs.salida?.ply },
+    })
+    pb.reemplazar({ ...p, estrellas: n })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pb.partida?.fin, pb.partida?.id])
 
   const { partida, bot, chess } = pb
   const historia = useMemo(() => chess?.history() ?? [], [chess])
@@ -71,7 +125,19 @@ export function Partida() {
   const miTurno = !partida.fin && !pb.turnoBot && !partida.pausa && chess.turn() === partida.colorHumano
   const ayudaVigente = ayuda && ayuda.ply === historia.length ? ayuda : null
   const flechas: DrawShape[] = ayudaVigente?.tipo === 'respuesta' && ayudaVigente.datos.desde ? [{ orig: ayudaVigente.datos.desde as Key, dest: ayudaVigente.datos.hasta as Key, brush: 'blue' }] : []
+  if (ajustes.amenazas && !partida.fin) for (const a of amenazas(chess, partida.colorHumano)) flechas.push({ orig: a.desde as Key, dest: a.hasta as Key, brush: 'red' })
+  const sugerencia = ajustes.sugerencia && miTurno && evaluacion?.fen === chess.fen() ? evaluacion.mejor : null
+  if (sugerencia) flechas.push({ orig: sugerencia.slice(0, 2) as Key, dest: sugerencia.slice(2, 4) as Key, brush: 'green' })
+  const barra = ajustes.barra && evaluacion ? evaluacion.pct : null
   const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
+  // T18: del resumen a practicar justo esa línea
+  const practicar = (() => {
+    const l = resumen?.linea
+    if (!l) return null
+    const curso = listaCursos(rep).find((c) => c.id === `${l.apertura}:${l.color}`)
+    const i = curso ? curso.lecciones.findIndex((x) => x.id.endsWith('/' + l.id)) : -1
+    return curso && i >= 0 ? `/leccion/${encodeURIComponent(curso.id)}/${i}` : null
+  })()
 
   const alJugar = (uci: string) => {
     if (!guia) return pb.jugar(uci)
@@ -87,7 +153,8 @@ export function Partida() {
     const despues = [...antes, san]
     const m = mensajeTrasMiJugada(ctx, despues)
     if (ops.length > 0) {
-      registrarJugadaPartida({ fen: chess.fen(), esperada: ops[0]!.san, desvio: m.tipo === 'desvio', ayuda: ayudaVigente?.tipo ?? null, linea: ops[0]!.lineas[0]!.nombre, camino: antes })
+      const jugada = ops.find((o) => o.san === san) ?? ops[0]!
+      registrarJugadaPartida({ fen: chess.fen(), esperada: jugada.san, desvio: m.tipo === 'desvio', ayuda: ayudaVigente?.tipo ?? null, linea: jugada.lineas[0]!.nombre, camino: antes })
     }
     setAyuda(null)
     pb.jugar(uci, () => (m.tipo === 'desvio' ? { pausa: 'desvio' } : {}))
@@ -96,8 +163,10 @@ export function Partida() {
     setAyuda({ tipo, datos: ayudaEnMiTurno(ctx, historia), ply: historia.length })
     pb.contarAyuda(tipo)
   }
-  const barraRival = <BarraJugador personaje={bot} estado={estadoBot} pensando={!!estadoBot} testid="barra-rival" />
-  const barraYo = <BarraJugador yo testid="barra-yo" />
+  const colorBot = partida.colorHumano === 'w' ? 'b' : 'w'
+  const relojDe = (c: 'w' | 'b', testid: string) => (pb.tiempos ? <Reloj ms={pb.tiempos[c]} corriendo={pb.tiempos.corriendo === c} testid={testid} /> : undefined)
+  const barraRival = <BarraJugador personaje={bot} estado={estadoBot} pensando={!!estadoBot} testid="barra-rival" reloj={relojDe(colorBot, 'reloj-rival')} />
+  const barraYo = <BarraJugador yo testid="barra-yo" reloj={relojDe(partida.colorHumano, 'reloj-yo')} />
   const verAviso = !!partida.fin && avisoCerrado !== partida.id
 
   const revancha = () => {
@@ -122,8 +191,20 @@ export function Partida() {
             </button>
           </div>
         )}
-        <div className="partida-tablero">
-          <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={miTurno ? colorHumano : undefined} onJugada={alJugar} flechas={flechas} />
+        {barra !== null && (
+          <div className="solo-celular">
+            <BarraEvaluacion porcentajeBlancas={barra} deBlancas={partida.orientacion === 'white'} horizontal />
+          </div>
+        )}
+        <div className="tablero-con-barra">
+          {barra !== null && (
+            <div className="solo-escritorio barra-vertical">
+              <BarraEvaluacion porcentajeBlancas={barra} deBlancas={partida.orientacion === 'white'} />
+            </div>
+          )}
+          <div className="partida-tablero" data-testid="flechas" data-flechas={flechas.map((f) => `${f.brush}:${f.orig}${f.dest ?? ''}`).join(' ')}>
+            <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={miTurno ? colorHumano : undefined} onJugada={alJugar} flechas={flechas} />
+          </div>
         </div>
         {rivalArriba ? barraYo : barraRival}
       </div>
@@ -151,12 +232,18 @@ export function Partida() {
           <div className="resumen-guia" data-testid="resumen" data-caso={resumen.caso}>
             <p className="panel-guia-titulo">Resumen de tu apertura</p>
             <p>{resumen.texto}</p>
+            {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
+            {practicar && (
+              <button type="button" className="enlace-chico" onClick={() => navegar(practicar)}>
+                Practicar esta línea
+              </button>
+            )}
           </div>
         )}
         {partida.fin ? (
           <div className="panel-final">
             <p className="resultado" data-testid="resultado">
-              {TITULO[resultado!]} · {partida.fin.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin.nombre}
+              {TITULO[resultado!]} · {partida.fin.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin.nombre}
             </p>
             <div className="botones-partida">
               <button type="button" className="boton primario" onClick={revancha}>
@@ -168,7 +255,7 @@ export function Partida() {
             </div>
           </div>
         ) : (
-          <div className="botones-partida">
+          <div className="botones-partida cuatro">
             <button type="button" className="boton-icono" onClick={() => pb.deshacer()} disabled={!puedeDeshacer(partida) || pb.turnoBot || pb.pensando} data-testid="deshacer">
               <IconoDeshacer />
               <span>Deshacer</span>
@@ -176,6 +263,10 @@ export function Partida() {
             <button type="button" className="boton-icono" onClick={() => pb.voltear()} data-testid="voltear">
               <IconoVoltear />
               <span>Voltear</span>
+            </button>
+            <button type="button" className="boton-icono" onClick={() => setMenuAyudas(true)} data-testid="ayudas" aria-label="Ayudas: barra y flechas">
+              <IconoFoco />
+              <span>Ayudas</span>
             </button>
             <button type="button" className="boton-icono" onClick={() => setConfirmarRendirse(true)} data-testid="rendirse">
               <IconoBandera />
@@ -185,6 +276,16 @@ export function Partida() {
         )}
       </aside>
 
+      {menuAyudas && (
+        <MenuAyudas
+          ajustes={ajustes}
+          onCambiar={(a) => {
+            setAjustes(a)
+            guardarAyudas(a)
+          }}
+          onCerrar={() => setMenuAyudas(false)}
+        />
+      )}
       {confirmarRendirse && (
         <Dialogo
           titulo="¿Rendirte?"
@@ -208,11 +309,18 @@ export function Partida() {
               <IconoCerrar />
             </button>
             <h2>{TITULO[resultado]}</h2>
-            <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.nombre}</p>
+            {partida.estrellas !== undefined && <Estrellas n={partida.estrellas} tam={30} testid="estrellas-final" />}
+            <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin!.nombre}</p>
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
                 {resumen.texto}
+                {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
               </p>
+            )}
+            {practicar && (
+              <button type="button" className="boton secundario chico" onClick={() => navegar(practicar)} data-testid="practicar-linea">
+                Practicar esta línea
+              </button>
             )}
             <div className="aviso-jugadores">
               <Avatar yo tam={56} />

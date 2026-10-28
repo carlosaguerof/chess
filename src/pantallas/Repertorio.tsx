@@ -1,7 +1,9 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react'
 import { BASE, variantePorClave, aperturaDeClave } from '../base/base.ts'
 import { arbolDe, GUIA, type NodoArbol, type LineaRepertorio } from '../repertorio/modelo.ts'
-import { agregarDeBase, borrarRama, deshacerBorrado, editarLinea, exportar, importar, repertorioOriginal, ErrorImportar, type Borrado, agregarPropia } from '../repertorio/edicion.ts'
+import { agregarDeBase, borrarRama, deshacerBorrado, editarLinea, exportar, importar, repertorioOriginal, ErrorImportar, type Borrado, agregarPropia, importarPgn } from '../repertorio/edicion.ts'
+import { ErrorPgn } from '../repertorio/pgn.ts'
+import { leerRepaso, guardarRepaso } from '../repaso/repaso.ts'
 import { useRepertorio, leerProgreso, guardarProgreso } from '../repertorio/estado.ts'
 import { leerRegistro, guardarRegistro } from '../registro/almacen-registro.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
@@ -20,9 +22,13 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
   const [borrando, setBorrando] = useState<NodoArbol | null>(null)
   const [ultimoBorrado, setUltimoBorrado] = useState<Borrado | null>(null)
   const [editando, setEditando] = useState<LineaRepertorio | null>(null)
-  const [agregandoDesde, setAgregandoDesde] = useState<string[] | null>(null)
+  const [agregandoDesde, setAgregandoDesde] = useState<{ jugadas: string[]; apertura: string } | null>(null)
   const [menu, setMenu] = useState(false)
   const [reiniciar, setReiniciar] = useState(false)
+  // R3: importar un PGN (pegado o de un archivo .pgn) al repertorio del color que estoy viendo
+  const [pgn, setPgn] = useState<string | null>(null)
+  const [errorPgn, setErrorPgn] = useState<string | null>(null)
+  const archivoPgn = useRef<HTMLInputElement>(null)
   const [aviso, setAviso] = useState<string | null>(null)
   const [menuLinea, setMenuLinea] = useState<{ linea: LineaRepertorio; nodo: NodoArbol } | null>(null)
   const [abiertos, setAbiertos] = useState<Set<string>>(new Set())
@@ -39,7 +45,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
   const lineaPorId = useMemo(() => new Map(rep.lineas.map((l) => [l.id, l])), [rep])
 
   const descargar = () => {
-    const texto = exportar({ repertorio: rep, progreso: leerProgreso(), registro: leerRegistro() })
+    const texto = exportar({ repertorio: rep, progreso: leerProgreso(), registro: leerRegistro(), repaso: leerRepaso() })
     const url = URL.createObjectURL(new Blob([texto], { type: 'application/json' }))
     const a = document.createElement('a')
     a.href = url
@@ -54,6 +60,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
       setRep(r.repertorio)
       guardarProgreso(r.progreso as ReturnType<typeof leerProgreso>)
       guardarRegistro(r.registro as EntradaRegistro[])
+      guardarRepaso(r.repaso ?? {})
       setAviso(`Listo: se cargó tu repertorio (${r.repertorio.lineas.length} líneas).`)
     } catch (e) {
       setAviso(e instanceof ErrorImportar ? e.message : 'No se pudo leer el archivo.')
@@ -94,6 +101,11 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
         {conFamilia?.familia && (
           <span className="rama-nombre">
             → {conFamilia.familia.nombre} <Puntos n={conFamilia.familia.frecuencia} />
+            {conFamilia.familia.ingles && (
+              <small className="ingles">
+                {conFamilia.familia.ingles} · {conFamilia.familia.eco}
+              </small>
+            )}
           </span>
         )}
         {soloBase && nombreBase && <span className="rama-nombre">→ {nombreBase}</span>}
@@ -177,6 +189,9 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
             <button type="button" role="menuitem" onClick={() => archivo.current?.click()}>
               Importar de un archivo
             </button>
+            <button type="button" role="menuitem" onClick={() => (setPgn(''), setErrorPgn(null), setMenu(false))} data-testid="importar-pgn">
+              Importar un PGN
+            </button>
             <button type="button" role="menuitem" className="peligro" onClick={() => (setReiniciar(true), setMenu(false))}>
               Volver al repertorio original
             </button>
@@ -206,7 +221,7 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
             <button type="button" role="menuitem" onClick={() => (setEditando(menuLinea.linea), setMenuLinea(null))}>
               Editar nombre, plan y frecuencia
             </button>
-            <button type="button" role="menuitem" onClick={() => (setAgregandoDesde(menuLinea.linea.jugadas), setMenuLinea(null))}>
+            <button type="button" role="menuitem" onClick={() => (setAgregandoDesde({ jugadas: menuLinea.linea.jugadas, apertura: menuLinea.linea.apertura }), setMenuLinea(null))}>
               Agregar una línea jugando desde aquí
             </button>
             <button type="button" role="menuitem" className="peligro" onClick={() => (setBorrando(menuLinea.nodo), setMenuLinea(null))} data-testid="borrar-rama">
@@ -252,6 +267,35 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
           Se quitan de tu repertorio {borrando.lineas.length === 1 ? 'esta línea' : `estas ${borrando.lineas.length} líneas`}. Puedes deshacerlo después.
         </Dialogo>
       )}
+      {pgn !== null && (
+        <Dialogo
+          titulo={`Importar un PGN ${color === 'w' ? 'con blancas' : 'con negras'}`}
+          confirmar="Importar"
+          onConfirmar={() => {
+            try {
+              const r = importarPgn(rep, color, pgn)
+              setRep(r.repertorio)
+              setPgn(null)
+              setAviso(`Listo: ${r.nuevas} ${r.nuevas === 1 ? 'línea nueva' : 'líneas nuevas'} ${color === 'w' ? 'con blancas' : 'con negras'} ("${r.nombre}")${r.yaEstaban > 0 ? `; ${r.yaEstaban} ya ${r.yaEstaban === 1 ? 'estaba' : 'estaban'}` : ''}.`)
+            } catch (e) {
+              setErrorPgn(e instanceof ErrorPgn ? e.message : 'No pude leer ese PGN.')
+            }
+          }}
+          onCancelar={() => setPgn(null)}
+        >
+          <p>Pega las jugadas (con variantes entre paréntesis), en inglés o con R D T A C. Entran como líneas tuyas, sin plan.</p>
+          <textarea className="campo-pgn" rows={6} value={pgn} onChange={(e) => (setPgn(e.target.value), setErrorPgn(null))} placeholder="1. e4 c6 2. d4 d5 3. e5 Af5 (3... c5) 4. Cf3 e6" aria-label="PGN" data-testid="texto-pgn" />
+          <button type="button" className="enlace-chico" onClick={() => archivoPgn.current?.click()}>
+            O abre un archivo .pgn
+          </button>
+          <input ref={archivoPgn} type="file" accept=".pgn,text/plain" hidden onChange={async (e) => e.target.files?.[0] && (setPgn(await e.target.files[0].text()), setErrorPgn(null))} />
+          {errorPgn && (
+            <p className="error-campo" role="alert" data-testid="error-pgn">
+              {errorPgn}
+            </p>
+          )}
+        </Dialogo>
+      )}
       {reiniciar && (
         <Dialogo
           titulo="¿Volver al repertorio original?"
@@ -270,9 +314,9 @@ export function Repertorio({ colorInicial }: { colorInicial?: ColorCorto }) {
       {agregandoDesde && (
         <AgregarJugando
           color={color}
-          desde={agregandoDesde}
+          desde={agregandoDesde.jugadas}
           onGuardar={(jugadas, nombre) => {
-            setRep(agregarPropia(rep, color, jugadas, nombre))
+            setRep(agregarPropia(rep, color, jugadas, nombre, agregandoDesde.apertura))
             setAgregandoDesde(null)
           }}
           onCancelar={() => setAgregandoDesde(null)}

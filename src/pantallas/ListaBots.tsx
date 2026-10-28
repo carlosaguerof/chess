@@ -1,8 +1,11 @@
 import { gruposDePersonajes } from '../bots/personajes.ts'
-import { nombreApertura } from '../bots/nombres-aperturas.ts'
+import { nombreApertura, inglesApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
+import { Estrellas } from '../componentes/Estrellas.tsx'
+import { leerEstrellas } from '../estrellas/almacen.ts'
 
 export function ListaBots() {
+  const ganadas = leerEstrellas()
   return (
     <div className="lista-bots">
       <h1>Jugar contra un bot</h1>
@@ -18,9 +21,10 @@ export function ListaBots() {
                   <Avatar personaje={p} tam={48} />
                   <div className="fila-bot-texto">
                     <span className="nombre">
-                      {p.nombre} <span className="nivel">{p.elo}</span>
+                      {p.nombre} <span className="nivel">{p.elo}</span> {ganadas[p.id] !== undefined && <Estrellas n={ganadas[p.id]!} tam={14} testid={`estrellas-${p.id}`} />}
                     </span>
                     <span className="aperturas">{[nombreApertura(p.estilo.blancas[0]!, 'blancas'), nombreApertura(p.estilo.negras[0]!, 'negras')].join(' · ')}</span>
+                    <small className="ingles aperturas">{[inglesApertura(p.estilo.blancas[0]!), inglesApertura(p.estilo.negras[0]!)].join(' / ')}</small>
                   </div>
                 </a>
               </li>

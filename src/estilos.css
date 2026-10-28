@@ -96,8 +96,8 @@ h1, h2, h3 { margin: 0; }
 .grupo-bots { margin-bottom: 18px; }
 .grupo-bots h2 { font-size: 15px; color: var(--texto-suave); margin: 0 0 8px; }
 .grupo-bots h2 small { color: var(--texto-apagado); font-weight: 500; margin-left: 6px; }
-.grupo-bots ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-@media (min-width: 900px) { .grupo-bots ul { grid-template-columns: 1fr 1fr; } }
+.grupo-bots ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+@media (min-width: 900px) { .grupo-bots ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .fila-bot { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--fondo-panel); border-radius: var(--radio); text-decoration: none; }
 .fila-bot:hover { background: #2e2c29; }
 .fila-bot-texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -318,3 +318,73 @@ h1, h2, h3 { margin: 0; }
 .tarjeta-enlace { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .tarjeta-enlace div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
 .tarjeta-enlace > span { font-size: 26px; color: var(--texto-apagado); }
+
+/* N2: el nombre en inglés y el ECO, a un lado y en chico */
+.ingles { display: block; font-size: 11px; font-weight: 500; color: var(--texto-apagado); font-style: normal; }
+.rama-nombre .ingles { display: inline; margin-left: 4px; }
+/* en el celular, los tres botones de la partida siempre a la vista */
+@media (max-width: 899px) {
+  .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
+}
+
+/* ---------- reloj, tiempo y estrellas ---------- */
+.elegir-tiempo h3 { margin: 6px 0; font-size: 14px; color: var(--texto-suave); }
+.opciones-tiempo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.opciones-tiempo.una { grid-template-columns: 1fr; margin-top: 8px; }
+.opciones-tiempo button { background: var(--fondo-panel-2); border: 2px solid transparent; border-radius: 8px; padding: 12px 4px; font-weight: 700; cursor: pointer; }
+.opciones-tiempo button.activo { border-color: var(--acento); }
+.reloj { margin-left: auto; font-family: var(--mono); font-weight: 700; font-size: 18px; background: #1b1a18; color: #bdbbb8; padding: 4px 10px; border-radius: 6px; min-width: 76px; text-align: right; }
+.reloj.corriendo { background: #fff; color: #1b1a18; }
+.reloj.corriendo.poco { background: #e05a50; color: #fff; }
+.estrellas { display: inline-flex; gap: 2px; vertical-align: middle; }
+.boton-tiempo { display: flex; align-items: center; justify-content: space-between; background: var(--fondo-panel); border: 0; border-radius: var(--radio); padding: 12px 14px; font-weight: 700; cursor: pointer; }
+.boton-tiempo span { color: var(--texto-apagado); font-weight: 600; }
+.partida .lista-jugadas li.sin-jugadas { display: block; }
+
+/* ---------- ayudas: barra y flechas (T15) ---------- */
+.barra-eval { position: relative; width: 14px; background: #403e3b; border-radius: 3px; overflow: hidden; align-self: stretch; }
+.barra-eval i { position: absolute; left: 0; right: 0; bottom: 0; background: #f0f0f0; transition: height .3s, width .3s; }
+.barra-eval.negras { background: #f0f0f0; }
+.barra-eval.negras i { background: #403e3b; }
+.barra-eval.horizontal { width: auto; height: 8px; margin: 0 4px; }
+.barra-eval.horizontal i { top: 0; bottom: 0; right: auto; }
+.tablero-con-barra { display: flex; gap: 6px; }
+.tablero-con-barra .partida-tablero { flex: 1; }
+.partida-panel .botones-partida.cuatro { grid-template-columns: repeat(4, 1fr); }
+.solo-escritorio { display: none; }
+.barra-vertical { display: none; }
+@media (min-width: 900px) {
+  .solo-celular { display: none; }
+  .solo-escritorio, .barra-vertical { display: flex; }
+}
+
+/* ---------- aperturas (la base, T19) ---------- */
+.aperturas { display: flex; flex-direction: column; gap: 12px; }
+.aperturas h1 { font-size: 24px; }
+.aperturas > .ingles { margin-top: -8px; }
+.enlace-base { color: var(--acento-claro); font-weight: 700; text-decoration: none; }
+
+/* ---------- historial (R2) ---------- */
+.historial { display: flex; flex-direction: column; gap: 12px; }
+.historial h1 { font-size: 24px; }
+.historial h2 { font-size: 16px; margin-bottom: 8px; }
+.lista-salidas, .lista-partidas { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.lista-salidas li { display: flex; justify-content: space-between; gap: 12px; }
+.lista-partidas li { display: flex; align-items: center; gap: 12px; background: var(--fondo-panel); border-radius: var(--radio); padding: 10px 12px; }
+.lista-partidas .detalle { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.resultado-chico { font-weight: 700; font-size: 14px; }
+.resultado-chico.gane { color: var(--acento-claro); }
+.resultado-chico.perdi { color: #e05a50; }
+.resultado-chico.tablas { color: var(--texto-suave); }
+.historial .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 12px 14px; }
+.campo-pgn { width: 100%; margin: 8px 0; padding: 10px; border-radius: 8px; border: 1px solid #4b4847; background: #1f1e1c; color: var(--texto-suave); font-family: var(--mono); font-size: 14px; resize: vertical; }
+.error-campo { color: #e05a50; font-weight: 600; margin-top: 6px; }
+
+/* ---------- ajustes (R6, R7) ---------- */
+.ajustes { display: flex; flex-direction: column; gap: 12px; }
+.ajustes h1 { font-size: 24px; }
+.ajustes .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 4px 14px; display: flex; flex-direction: column; }
+.repaso-hoy { display: flex; flex-direction: column; gap: 2px; }
+a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+.listo-por-hoy { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.listo-por-hoy h1 { font-size: 26px; }

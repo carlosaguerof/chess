@@ -10,7 +10,7 @@
 
 Por qué:
 1. **Cubre todo el rango, 100–3000,** incluida mi zona (500–1000), que ninguna opción hecha cubre: el `UCI_Elo` de Stockfish no baja de 1320 y Maia no distingue niveles debajo de 1100.
-2. **Es ligero y rápido en el iPhone:** 1.85 MB (1.1 MB comprimido), carga en 0.24 s y elige jugada en 9–33 ms en WebKit con pantalla de iPhone (medido). No necesita encabezados especiales del servidor, así que `npm run casa` y cualquier hosting estático sirven.
+2. **Es ligero y rápido en el iPhone:** 1.85 MB (1.2 MB con gzip, 1.1 MB con brotli), carga en 0.24 s y elige jugada en milisegundos en WebKit con pantalla de iPhone (medido; ver la tabla de mediciones con los niveles actuales). No necesita encabezados especiales del servidor, así que `npm run casa` y cualquier hosting estático sirven.
 3. **Sirve para estilos:** las aperturas son el libro de cada personaje (aparte del motor, como hace lichess); el temperamento (T17) se engancha al escoger entre candidatas parecidas. Con `UCI_Elo` no hay dónde engancharlo.
 4. **Un solo camino:** la misma función, `elegirJugada` (`src/motor/elegir.ts`), corre en la app (motor en un Web Worker) y en la calibración (motor en Node). Se calibra lo que se juega.
 5. **Riesgo bajo:** ya está instalado y probado en los dos perfiles. El riesgo que queda es que los números de ELO son aproximados; lo que se garantiza y se mide es el orden (T4).
@@ -71,7 +71,7 @@ El bot se toma de todos modos entre 0.4 y 1.2 s por jugada (para que se sienta c
 
 1. **Libro de aperturas** del personaje (de la base, `conocimiento/`), unas 6 a 8 jugadas.
 2. Fuera del libro, **`elegirJugada`** (`src/motor/elegir.ts`), con los parámetros de su nivel (`src/motor/niveles.json`, un solo archivo de datos):
-   - `profundidad` y `multipv`: cuánto piensa y cuántas candidatas pide.
+   - `nodos` (cuántas posiciones revisa el motor) y `multipv` (cuántas candidatas pide). La v1 usaba `profundidad`; desde la v2 la fuerza se controla por nodos, que dan pasos más parejos.
    - `errorGrande`: probabilidad de una jugada que pierde al menos 150 centipeones contra la mejor (si no hay una entre las candidatas, una jugada legal que el motor ni consideró).
    - `temperatura`: entre las candidatas, la probabilidad de cada una baja con lo que pierde contra la mejor (exp(−pérdida / temperatura)).
    - Cada jugada se piensa desde cero (se borra la memoria del motor), igual en la app y en la calibración.
@@ -109,5 +109,20 @@ Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 par
 
 **El mismo camino en la app y en la calibración:**
 - Calibración: `scripts/calibrar.ts:71` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor de Node (`scripts/motor-node.ts`).
-- App: `src/pantallas/Partida.tsx:17` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:60` (`jugadaDelBot`) → `src/motor/bot.ts:38` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
+- App: `src/pantallas/Partida.tsx:28` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:70` (`jugadaDelBot`) → `src/motor/bot.ts:38` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
 - Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.
+
+## El temperamento (T17)
+
+En `elegirJugada`, entre las candidatas que pierden **30 centipeones o menos** contra la mejor (`MARGEN_CP`), el temperamento les baja **25 cp** de "pérdida" (`BONO_CP`) a las que prefiere (`src/motor/temperamento.ts`):
+- **Agresivo:** jaques, capturas y jugadas que llegan a dos casillas o menos del rey rival, acercándose.
+- **Defensivo:** cambios (capturar una pieza que vale lo mismo o más) y jugadas a casillas que el rival no ataca (sin dar jaque).
+- **Equilibrado:** nada. Es el que se usa en la calibración de los niveles.
+
+Así el temperamento solo decide entre jugadas casi iguales: no cambia la fuerza. Medido con `node scripts/calibrar.ts partido <a> <b> 48 <semilla> <salida> --temperamentos <ta>,<tb>`, nivel 700, 48 partidas cada uno (`iterations/v1/mediciones/t17-temperamento.json`):
+
+| Partido | Resultado del primero | Jaques + capturas en sus primeras 30 jugadas |
+|---|---|---|
+| 700 agresivo vs 700 defensivo | 22 / 48 (45.8 %) | **359 vs 309** (el agresivo, +16 %) |
+| 700 agresivo vs 500 | 40.5 / 48 (84.4 %): cumple el ≥ 60 % de la T4 | 377 vs 304 |
+| 700 defensivo vs 500 | 41 / 48 (85.4 %): cumple el ≥ 60 % de la T4 | 340 vs 284 |

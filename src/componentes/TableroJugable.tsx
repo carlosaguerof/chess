@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Chess } from 'chess.js'
 import type { DrawShape } from 'chessground/draw'
 import { destinos, esCoronacion, largo, type ColorLargo } from '../ajedrez/reglas.ts'
 import { Tablero } from './Tablero.tsx'
 import { SelectorCoronacion } from './SelectorCoronacion.tsx'
+import { sonar } from '../sonido/sonido.ts'
 
 /**
  * Tablero + reglas: solo jugadas legales (con sus casillas marcadas), coronación con selector,
@@ -26,6 +27,13 @@ export function TableroJugable(props: {
   const ultimaJ = historia[historia.length - 1]
   const turno = largo(chess.turn())
   const puede = props.puedeMover === 'both' || props.puedeMover === turno ? props.puedeMover : undefined
+
+  // R6: un sonido cuando hay una jugada nueva (mía o del rival), distinto si captura; nada al abrir ni al deshacer
+  const jugadasAntes = useRef(historia.length)
+  useEffect(() => {
+    if (historia.length === jugadasAntes.current + 1 && ultimaJ) sonar(ultimaJ.captured ? 'capturar' : 'mover')
+    jugadasAntes.current = historia.length
+  }, [fen]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const alJugar = (desde: string, hasta: string) => {
     if (esCoronacion(chess, desde, hasta)) {

@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { personajePorId, NOMBRE_TEMPERAMENTO } from '../bots/personajes.ts'
-import { nombreApertura } from '../bots/nombres-aperturas.ts'
+import { nombreApertura, inglesApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
+import { Interruptor } from '../componentes/Interruptor.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
-import { empezarPartida, partidaEnCurso, opcionesRecordadas } from '../partida/usePartidaBot.ts'
+import { empezarPartida, partidaEnCurso, opcionesRecordadas, tiempoRecordado } from '../partida/usePartidaBot.ts'
+import { ElegirTiempo } from '../componentes/ElegirTiempo.tsx'
+import { Estrellas } from '../componentes/Estrellas.tsx'
+import { leerEstrellas } from '../estrellas/almacen.ts'
+import { controlPorId } from '../reloj/reloj.ts'
 import { navegar } from '../ruta.ts'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 
@@ -14,10 +19,12 @@ export function DetalleBot({ id }: { id: string }) {
   const [color, setColor] = useState<Color>('w')
   const [confirmar, setConfirmar] = useState(false)
   const [opciones, setOpciones] = useState(opcionesRecordadas)
+  const [tiempo, setTiempo] = useState(tiempoRecordado)
+  const [eligiendoTiempo, setEligiendoTiempo] = useState(false)
   if (!bot) return <p>No encontré a ese bot. <a href="#/bots">Ver todos</a></p>
   const enCurso = partidaEnCurso()
   const jugar = () => {
-    empezarPartida(bot.id, color, undefined, opciones)
+    empezarPartida(bot.id, color, undefined, opciones, tiempo)
     navegar('/partida')
   }
   return (
@@ -31,10 +38,12 @@ export function DetalleBot({ id }: { id: string }) {
           {bot.nombre} <span className="nivel">{bot.elo}</span>
         </h1>
         <p className="frase">“{bot.frase}”</p>
+        {leerEstrellas()[bot.id] !== undefined && <Estrellas n={leerEstrellas()[bot.id]!} tam={22} />}
         <p className="estilo">
           <span className="chip">{NOMBRE_TEMPERAMENTO[bot.temperamento]}</span>
           Con blancas: {bot.estilo.blancas.map((k) => nombreApertura(k, 'blancas')).join(', ')} · Con negras: {bot.estilo.negras.map((k) => nombreApertura(k, 'negras')).join(', ')}
         </p>
+        <small className="ingles">{[...bot.estilo.blancas, ...bot.estilo.negras].map(inglesApertura).join(' / ')}</small>
       </div>
       <div className="selector-color" role="radiogroup" aria-label="Tu color">
         {(
@@ -50,6 +59,19 @@ export function DetalleBot({ id }: { id: string }) {
           </button>
         ))}
       </div>
+      <button type="button" className="boton-tiempo" onClick={() => setEligiendoTiempo(true)} data-testid="elegir-tiempo">
+        ⏱ Tiempo <span>{controlPorId(tiempo).nombre}</span>
+      </button>
+      {eligiendoTiempo && (
+        <ElegirTiempo
+          actual={tiempo}
+          onEscoger={(c) => {
+            setTiempo(c.id)
+            setEligiendoTiempo(false)
+          }}
+          onCerrar={() => setEligiendoTiempo(false)}
+        />
+      )}
       <div className="interruptores">
         <Interruptor
           etiqueta="Guía de aperturas"
@@ -75,18 +97,5 @@ export function DetalleBot({ id }: { id: string }) {
         </Dialogo>
       )}
     </div>
-  )
-}
-
-function Interruptor(props: { etiqueta: string; detalle: string; activo: boolean; onCambiar: (v: boolean) => void; testid: string }) {
-  return (
-    <label className="interruptor">
-      <span>
-        <strong>{props.etiqueta}</strong>
-        <small className="apagado">{props.detalle}</small>
-      </span>
-      <input type="checkbox" role="switch" checked={props.activo} onChange={(e) => props.onCambiar(e.target.checked)} data-testid={props.testid} />
-      <i aria-hidden="true" />
-    </label>
   )
 }

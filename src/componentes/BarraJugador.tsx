@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react'
 import type { Personaje } from '../bots/personajes.ts'
 import { Avatar } from './Avatar.tsx'
 
 /** El jugador arriba o abajo del tablero: avatar, nombre, nivel y, si es el bot, si está pensando. */
-export function BarraJugador(props: { personaje?: Personaje; yo?: boolean; estado?: string; pensando?: boolean; testid?: string }) {
+export function BarraJugador(props: { personaje?: Personaje; yo?: boolean; estado?: string; pensando?: boolean; testid?: string; reloj?: ReactNode }) {
   return (
     <div className="barra-jugador" data-testid={props.testid}>
       <Avatar personaje={props.personaje} yo={props.yo} tam={36} />
@@ -22,6 +23,7 @@ export function BarraJugador(props: { personaje?: Personaje; yo?: boolean; estad
           )}
         </div>
       )}
+      {props.reloj}
     </div>
   )
 }

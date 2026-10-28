@@ -3,7 +3,7 @@ import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { useRepertorio, leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
-import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
+import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, planDeMiLado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { jugadasEnEspanol, uciAObjeto } from '../ajedrez/reglas.ts'
@@ -11,6 +11,7 @@ import { TableroJugable } from '../componentes/TableroJugable.tsx'
 import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
 import { IconoAtras, IconoFoco, IconoOjo } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
+import { siguienteEnSesion, actualizarFalladas, leerFalladas, guardarFalladas } from '../cursos/sesion.ts'
 
 const PAUSA_RIVAL_MS = 450
 
@@ -24,12 +25,25 @@ export function Leccion({ cursoId, indice }: { cursoId: string; indice: number }
   return <Practica key={leccion.id} curso={curso} leccion={leccion} indice={indice} />
 }
 
-function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion; indice: number }) {
-  const [estado, setEstado] = useState<EstadoLeccion>(() => nuevoEstado(leccion))
+/** R7: la lección como repaso (solo preguntas). Al terminar dice si fue limpia y quien la usa decide qué sigue. */
+export interface ModoRepaso {
+  indice: number
+  total: number
+  /** limpia = sin fallos, sin Pista y sin Respuesta; devuelve el texto de cuándo vuelve */
+  onTerminar: (limpia: boolean) => string
+  onSiguiente: () => void
+}
+
+export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; leccion: TLeccion; indice: number; repaso?: ModoRepaso }) {
+  const [estado, setEstado] = useState<EstadoLeccion>(() => (repaso ? estadoDeRepaso(leccion) : nuevoEstado(leccion)))
+  const [ayudaUsada, setAyudaUsada] = useState(false)
+  const [vuelve, setVuelve] = useState<string | null>(null)
   const [enTablero, setEnTablero] = useState(0)
   const [aviso, setAviso] = useState<Aviso>(null)
   const [flecha, setFlecha] = useState<DrawShape | null>(null)
   const [fasePrevia, setFasePrevia] = useState(estado.fase)
+  // T18: cuántos pasos fallé en las preguntas de esta lección (la que fallo vuelve antes en la sesión)
+  const [fallosLeccion, setFallosLeccion] = useState(0)
   const color = leccion.color
 
   // cuando cambia de fase (de enseñar a preguntar), el tablero vuelve al inicio
@@ -41,7 +55,11 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
         setAviso({ tipo: 'info', texto: 'Ya la viste. Ahora sin ayuda: ¿qué harías en cada paso?' })
       }
       if (estado.fase === 'terminada') {
-        marcarLeccion(leccion.id)
+        if (repaso) setVuelve(repaso.onTerminar(fallosLeccion === 0 && !ayudaUsada))
+        else {
+          guardarFalladas(actualizarFalladas(leerFalladas(), leccion.id, fallosLeccion))
+          marcarLeccion(leccion.id)
+        }
         setEnTablero(leccion.jugadas.length)
       }
     }
@@ -76,6 +94,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
     const r = intentar(leccion, estado, san, alternativasEn(curso, leccion, ply))
     setFlecha(null)
     if (r.resultado === 'incorrecta') {
+      if (estado.fase === 'preguntar') setFallosLeccion((n) => n + 1)
       setAviso({ tipo: 'incorrecta', texto: `Incorrecta: ${jugadaNumerada(sanAEspanol(san), ply)} no es la jugada de tu línea. Intenta otra vez.` })
       setEstado(r.estado)
       return
@@ -91,19 +110,21 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
   }
 
   const pedirPista = () => {
+    setAyudaUsada(true)
     setEstado(marcarPista(estado))
     setAviso({ tipo: 'pista', texto: pista(leccion, estado) })
   }
   const pedirRespuesta = () => {
     const r = respuesta(leccion, estado)
     if (!r) return
+    setAyudaUsada(true)
     setEstado(marcarRespuesta(estado))
     setFlecha({ orig: r.desde as Key, dest: r.hasta as Key, brush: 'blue' })
     setAviso({ tipo: 'respuesta', texto: `${r.texto} — ${r.nombre}. ${r.plan}` })
   }
 
   const hechas = leerProgreso()
-  const siguiente = estado.fase === 'terminada' ? siguienteLeccion(curso, hechas, leccion.id) : undefined
+  const siguiente = estado.fase === 'terminada' ? (siguienteEnSesion(curso, hechas, leccion, leerFalladas()) ?? siguienteLeccion(curso, hechas, leccion.id)) : undefined
   const pasosMios = leccion.jugadas.filter((_, i) => (i % 2 === 0 ? 'w' : 'b') === color).length
   const pasoActual = leccion.jugadas.slice(0, estado.ply).filter((_, i) => (i % 2 === 0 ? 'w' : 'b') === color).length + 1
   const instruccion =
@@ -127,12 +148,17 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
     <div className="leccion" data-testid="leccion-pantalla" data-fase={estado.fase}>
       <div className="leccion-columna">
         <div className="partida-arriba">
-          <a className="salir" href={`#/curso/${encodeURIComponent(curso.id)}`} aria-label="Volver al curso">
+          <a className="salir" href={repaso ? '#/' : `#/curso/${encodeURIComponent(curso.id)}`} aria-label={repaso ? 'Salir del repaso' : 'Volver al curso'}>
             <IconoAtras />
           </a>
           <div className="leccion-titulo">
-            <span className="apagado">{curso.nombre}</span>
+            <span className="apagado">{repaso ? `Repaso de hoy · ${repaso.indice + 1} de ${repaso.total} · ${curso.nombre}` : curso.nombre}</span>
             <strong data-testid="nombre-linea">{leccion.nombre}</strong>
+            {leccion.ingles && (
+              <small className="ingles">
+                {leccion.ingles} · {leccion.eco}
+              </small>
+            )}
           </div>
         </div>
         <div className="partida-tablero">
@@ -159,7 +185,7 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
             </p>
             {estado.fase === 'ensenar' && estado.ply === leccion.jugadas.findIndex((_, i) => (i % 2 === 0 ? 'w' : 'b') === color) && leccion.plan && (
               <p className="plan">
-                {leccion.plan} <span className="autor">{leccion.autorPlan === 'ia' ? 'redactado por la IA' : leccion.autorPlan === 'yo' ? 'escrito por ti' : 'de tu guía'}</span>
+                {planDeMiLado(leccion.plan, color)} <span className="autor">{leccion.autorPlan === 'ia' ? 'redactado por la IA' : leccion.autorPlan === 'yo' ? 'escrito por ti' : 'de tu guía'}</span>
               </p>
             )}
             {aviso && (
@@ -178,11 +204,20 @@ function Practica({ curso, leccion, indice }: { curso: Curso; leccion: TLeccion;
               </button>
             </div>
           </>
+        ) : repaso ? (
+          <div className="fin-leccion" data-testid="fin-repaso">
+            <p className="etiqueta">Línea repasada</p>
+            <h2>{leccion.nombre}</h2>
+            {vuelve && <p data-testid="cuando-vuelve">{vuelve}</p>}
+            <button type="button" className="boton primario grande" onClick={repaso.onSiguiente} data-testid="siguiente-repaso">
+              {repaso.indice + 1 < repaso.total ? `Siguiente (quedan ${repaso.total - repaso.indice - 1})` : 'Terminar'}
+            </button>
+          </div>
         ) : (
           <div className="fin-leccion" data-testid="fin-leccion">
             <p className="etiqueta">Lección terminada</p>
             <h2>{leccion.nombre}</h2>
-            {leccion.plan && <p className="plan">{leccion.plan}</p>}
+            {leccion.plan && <p className="plan">{planDeMiLado(leccion.plan, color)}</p>}
             {siguiente && siguiente.id !== leccion.id ? (
               <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente)}`)} data-testid="siguiente-leccion">
                 Siguiente: {siguiente.nombre}

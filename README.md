@@ -10,6 +10,10 @@ npm run e2e      # punta a punta (Playwright, iPhone y escritorio)
 npm run casa     # para jugar desde el iPhone en la red de la casa (puerto 4173)
 ```
 
+**Desde el iPhone, en casa:** en la Air corre `npm run casa` (déjalo abierto) y en Safari del iPhone abre <http://air-station.local:4173/>. El iPhone y la Air tienen que estar en la misma red. Para cerrarlo, Ctrl+C en la Air.
+
+**Instalarla en el iPhone (R1):** abre la página en Safari → Compartir → "Agregar a inicio". La primera vez guarda lo que necesita; después abre y el bot juega sin internet. (Solo en la app construida: `npm run casa` o la página publicada, no en `npm run dev`.)
+
 Licencia: GPL-3.0-or-later (`LICENSE`); lo de fuera, con su licencia, en `LICENCIAS.md`. Reglas para trabajar aquí: `AGENTS.md`. Qué es y para quién: `context/producto.md`.
 
 ## Publicar (GitHub Pages)

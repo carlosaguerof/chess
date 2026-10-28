@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cf6 5.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Rompe la clavada con Ae2, pregúntale al A con h3 y enroca. Luego Ae3 y Cc3, que gana tiempo atacando la D de d5.
+- Plan *(redactado por la IA)*: Rompe la clavada con Ae2, pregúntale al alfil con h3 y enroca. Si negras cambia en d4 y recapturas con el peón (cxd4), Cc3 gana tiempo atacando la dama de d5.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line
 
 ### Variante Alapin: Smith-Morra Rehusado
@@ -53,7 +53,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 g6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la D de d5 con Cc3 o c4 cuando sea seguro.
+- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la dama de d5 con c4, o con Cc3 después de recapturar en d4 con el peón de c3.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
 
 ### Variante Heidenfeld
@@ -116,15 +116,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: Enroca (...0-0) y sigue con ...Ae6 o ...Ad7 y ...Tc8; tu A de g7 presiona la gran diagonal. Si se presenta, la ruptura ...d5 libera tu juego.
 - Fuente: B73 · Sicilian Defense: Dragon Variation, Classical Variation
 
-## Dragón Acelerado
+### Variante del Dragón: Variante Moderna con Ac4
 
-### Dragón Acelerado: Variante Moderna con Ac4
-
-**1.e4 c5 2.Cf3 Cc6 3.d4 cxd4 4.Cxd4 g6 5.Cc3 Ag7 6.Ae3 Cf6 7.Ac4**
+**1.e4 c5 2.Cf3 Cc6 3.d4 cxd4 4.Cxd4 g6 5.Cc3 Ag7 6.Ae3 Cf6 7.Ac4 d6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Enroca (...0-0) y elige entre ...d6 (estructura Dragón) o ...a5 si el A se va a b3. La ventaja de este orden es que, sin haber jugado ...d6, a veces llegas a ...d5 en un solo paso.
-- Fuente: B35 · Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation
+- Plan *(redactado por la IA)*: Con 7...d6 entras a la estructura del Dragón: enroca, desarrolla el alfil de c8 y busca juego por la columna c contra el flanco de dama de blancas.
+- Fuente: B35 · Sicilian Defense: Dragon Variation, Modern Bc4 Variation
 
 ## Variante Clásica
 
@@ -158,13 +156,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Variante Kan
 
-### Variante Kan: Variante Moderna
+### Variante Kan: Variante Gipslis
 
-**1.e4 c5 2.Cf3 e6 3.d4 cxd4 4.Cxd4 a6 5.Ad3**
+**1.e4 c5 2.Cf3 e6 3.d4 cxd4 4.Cxd4 a6 5.Ad3 Cf6 6.0-0 d6 7.c4 g6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sigue con ...Cf6 y ...Dc7 (o ...Ac5 para echar al C de d4), luego ...d6, ...Ae7 y ...0-0. Con ...b5 y ...Ab7 tienes juego en el flanco de dama.
-- Fuente: B42 · Sicilian Defense: Kan Variation, Modern Variation
+- Plan *(redactado por la IA)*: Contra 5.Ad3 desarrolla con ...Cf6 y ...d6; si blancas juega c4, el fianchetto con ...g6 y ...Ag7 te da un alfil muy activo. Luego enroca y saca el caballo de b8.
+- Fuente: B42 · Sicilian Defense: Kan Variation, Gipslis Variation
 
 ## Ataque Nyezhmetdinov-Rossolimo
 
@@ -198,13 +196,13 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Ataque Grand Prix
 
-### Ataque Grand Prix
+### Ataque Grand Prix: Variante Schofman
 
-**1.e4 c5 2.Cc3 Cc6 3.f4**
+**1.e4 c5 2.Cc3 Cc6 3.f4 g6 4.Cf3 Ag7 5.Ac4 e6 6.f5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Desarrolla con ...g6, ...Ag7, ...e6 y ...Cge7, y busca ...d5 para pelear el centro y cerrarle la diagonal a un Ac4. Si Blancas juega Ab5, ...Cd4 es buena respuesta.
-- Fuente: B23 · Sicilian Defense: Grand Prix Attack
+- Plan *(redactado por la IA)*: Desarrolla con ...g6, ...Ag7 y ...e6 para cerrarle la diagonal al Ac4, y busca ...Cge7 y ...d5. Si blancas sacrifica con f5, termina el desarrollo y enroca antes de tomar nada.
+- Fuente: B23 · Sicilian Defense: Grand Prix Attack, Schofman Variation
 
 ## Gambito Smith-Morra
 

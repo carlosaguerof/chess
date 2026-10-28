@@ -1,0 +1,13 @@
+# T21 · jugar desde el iPhone en casa (2026-10-28 07:31, MacBook Air "air-station")
+$ npm run casa        # vite build && vite preview --host 0.0.0.0 --port 4173
+$ curl -sI http://air-station.local:4173/
+HTTP/1.1 200 OK
+Content-Type: text/html
+$ curl -sI http://air-station.local:4173/motor/stockfish-19-lite-single.wasm
+HTTP/1.1 200 OK
+Content-Length: 1845971
+Content-Type: application/wasm
+$ curl -sI http://air-station.local:4173/motor/stockfish-19-lite-single.js
+HTTP/1.1 200 OK
+Content-Type: text/javascript
+(Antes de permitir el nombre en vite.config.ts → preview.allowedHosts, la respuesta era 403 Forbidden.)
