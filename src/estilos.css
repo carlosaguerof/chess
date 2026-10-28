@@ -377,3 +377,5 @@ h1, h2, h3 { margin: 0; }
 .resultado-chico.perdi { color: #e05a50; }
 .resultado-chico.tablas { color: var(--texto-suave); }
 .historial .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 12px 14px; }
+.campo-pgn { width: 100%; margin: 8px 0; padding: 10px; border-radius: 8px; border: 1px solid #4b4847; background: #1f1e1c; color: var(--texto-suave); font-family: var(--mono); font-size: 14px; resize: vertical; }
+.error-campo { color: #e05a50; font-weight: 600; margin-top: 6px; }
