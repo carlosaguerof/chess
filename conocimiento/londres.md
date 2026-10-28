@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.Cf3 Cf6 3.Af4 c5 4.e3 Cc6 5.Cbd2 e6 6.c3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La pirámide c3-d4-e3 sostiene el centro. Sigue con Ad3, 0-0 y Ce5 (a veces con f4 para atacar). Si Negras ofrece cambiar alfiles con ...Ad6, retira Ag3 para conservar el tuyo.
+- Plan *(redactado por la IA)*: La pirámide c3-d4-e3 sostiene el centro. Sigue con Ad3, 0-0 y Ce5; si el alfil pasa a g3, f4 para atacar. Si Negras ofrece cambiar alfiles con ...Ad6, retira Ag3 para conservar el tuyo.
 - Fuente: D02 · Queen's Pawn Game: London System
 
 ### Sistema Londres: Variante del Peón Envenenado
