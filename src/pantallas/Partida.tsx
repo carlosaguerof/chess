@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
-import { resultadoPara, puedeDeshacer, ayudasUsadas } from '../partida/modelo.ts'
+import { resultadoPara, puedeDeshacer, ayudasUsadas, ajedrezDe } from '../partida/modelo.ts'
 import { estrellas as calcularEstrellas } from '../estrellas/estrellas.ts'
 import { anotarEstrellas } from '../estrellas/almacen.ts'
+import { anotarPartida } from '../historial/historial.ts'
 import { Estrellas } from '../componentes/Estrellas.tsx'
 import { MenuAyudas, BarraEvaluacion, leerAyudas, guardarAyudas } from '../componentes/Ayudas.tsx'
 import { amenazas, porcentajeBlancas } from '../ayudas/amenazas.ts'
@@ -71,6 +72,19 @@ export function Partida() {
     const r = resultadoPara(p)!
     const n = calcularEstrellas(r, ayudasUsadas(p))
     anotarEstrellas(p.botId, n)
+    // R2: al historial, con el resumen de la apertura (aunque la guía estuviera apagada)
+    const h = ajedrezDe(p).history()
+    const rs = resumenDePartida(rep, p.colorHumano, h)
+    anotarPartida({
+      id: p.id,
+      botId: p.botId,
+      colorHumano: p.colorHumano,
+      resultado: r,
+      fin: p.fin.tipo === 'rendicion' && r === 'perdi' ? 'Te rendiste' : p.fin.nombre,
+      jugadas: h.length,
+      fecha: Date.now(),
+      resumen: { caso: rs.caso, linea: rs.linea?.nombre, jugue: rs.salida?.jugue, tuLinea: rs.salida?.linea, ply: rs.salida?.ply },
+    })
     pb.reemplazar({ ...p, estrellas: n })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pb.partida?.fin, pb.partida?.id])

@@ -363,3 +363,17 @@ h1, h2, h3 { margin: 0; }
 .aperturas h1 { font-size: 24px; }
 .aperturas > .ingles { margin-top: -8px; }
 .enlace-base { color: var(--acento-claro); font-weight: 700; text-decoration: none; }
+
+/* ---------- historial (R2) ---------- */
+.historial { display: flex; flex-direction: column; gap: 12px; }
+.historial h1 { font-size: 24px; }
+.historial h2 { font-size: 16px; margin-bottom: 8px; }
+.lista-salidas, .lista-partidas { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.lista-salidas li { display: flex; justify-content: space-between; gap: 12px; }
+.lista-partidas li { display: flex; align-items: center; gap: 12px; background: var(--fondo-panel); border-radius: var(--radio); padding: 10px 12px; }
+.lista-partidas .detalle { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.resultado-chico { font-weight: 700; font-size: 14px; }
+.resultado-chico.gane { color: var(--acento-claro); }
+.resultado-chico.perdi { color: #e05a50; }
+.resultado-chico.tablas { color: var(--texto-suave); }
+.historial .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 12px 14px; }
