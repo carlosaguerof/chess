@@ -340,3 +340,20 @@ h1, h2, h3 { margin: 0; }
 .boton-tiempo { display: flex; align-items: center; justify-content: space-between; background: var(--fondo-panel); border: 0; border-radius: var(--radio); padding: 12px 14px; font-weight: 700; cursor: pointer; }
 .boton-tiempo span { color: var(--texto-apagado); font-weight: 600; }
 .partida .lista-jugadas li.sin-jugadas { display: block; }
+
+/* ---------- ayudas: barra y flechas (T15) ---------- */
+.barra-eval { position: relative; width: 14px; background: #403e3b; border-radius: 3px; overflow: hidden; align-self: stretch; }
+.barra-eval i { position: absolute; left: 0; right: 0; bottom: 0; background: #f0f0f0; transition: height .3s, width .3s; }
+.barra-eval.negras { background: #f0f0f0; }
+.barra-eval.negras i { background: #403e3b; }
+.barra-eval.horizontal { width: auto; height: 8px; margin: 0 4px; }
+.barra-eval.horizontal i { top: 0; bottom: 0; right: auto; }
+.tablero-con-barra { display: flex; gap: 6px; }
+.tablero-con-barra .partida-tablero { flex: 1; }
+.partida-panel .botones-partida.cuatro { grid-template-columns: repeat(4, 1fr); }
+.solo-escritorio { display: none; }
+.barra-vertical { display: none; }
+@media (min-width: 900px) {
+  .solo-celular { display: none; }
+  .solo-escritorio, .barra-vertical { display: flex; }
+}
