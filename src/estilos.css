@@ -357,3 +357,9 @@ h1, h2, h3 { margin: 0; }
   .solo-celular { display: none; }
   .solo-escritorio, .barra-vertical { display: flex; }
 }
+
+/* ---------- aperturas (la base, T19) ---------- */
+.aperturas { display: flex; flex-direction: column; gap: 12px; }
+.aperturas h1 { font-size: 24px; }
+.aperturas > .ingles { margin-top: -8px; }
+.enlace-base { color: var(--acento-claro); font-weight: 700; text-decoration: none; }
