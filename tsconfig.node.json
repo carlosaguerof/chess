@@ -25,6 +25,7 @@
     "vite.config.ts",
     "playwright.config.ts",
     "tests",
-    "scripts"
+    "scripts",
+    "playwright.publicado.config.ts"
   ]
 }

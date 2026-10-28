@@ -11,3 +11,17 @@ npm run casa     # para jugar desde el iPhone en la red de la casa (puerto 4173)
 ```
 
 Licencia: GPL-3.0-or-later (`LICENSE`); lo de fuera, con su licencia, en `LICENCIAS.md`. Reglas para trabajar aquí: `AGENTS.md`. Qué es y para quién: `context/producto.md`.
+
+## Publicar (GitHub Pages)
+
+La app se publica desde este mismo repo, en la rama `gh-pages`: <https://carlosaguerof.github.io/chess/>.
+
+```
+npm run publicar -- --prueba   # construye con la ruta /chess/ y lista lo que subiría, sin subir nada
+npm run e2e:pages              # prueba ese sitio servido en local en /chess/ (el motor carga y el bot juega)
+npm run publicar               # sube el sitio a gh-pages (solo si el repo es público; un commit nuevo, nunca forzado)
+SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages   # prueba la página ya publicada
+```
+
+GitHub Pages se prende una sola vez, con la rama `gh-pages` en la raíz como fuente:
+`gh api -X POST repos/carlosaguerof/chess/pages -f "source[branch]=gh-pages" -f "source[path]=/"`.
