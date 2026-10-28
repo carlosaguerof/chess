@@ -240,3 +240,9 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué importa:** las pruebas usaban favoritas sembradas y no lo vieron; lo encontraron los pases adversariales. Regla: al cambiar el origen de un dato, probar cada pantalla con ese dato vacío.
 - **Quién:** la corrida, en los pases 2 y 3.
 - **Dónde:** `tests/unit/aprender.test.ts`; `specs/aprender.md` (regla 8).
+
+## [2026-10-28] cambio | L6: pruebas finales en verde, publicación y comprobación
+- **Qué:** sobre `main` `d1d20a2`: `npm test` → 144 de 144; `npm run e2e` → 82 de 82 (iPhone y escritorio). `npm run publicar` subió el sitio a `gh-pages` (`ad94e9d`). Comprobación: la página da 200, el motor sale como `application/wasm`, y Playwright contra la página publicada pasa 6 de 6 (el bot juega, sin internet funciona, y la página ya trae Jugar con los 47 retratos y "Aperturas y defensas": `tests/publicado/limpieza.spec.ts`).
+- **Por qué:** solo se publica con todo en verde, y lo publicado se comprueba en la página de verdad (decisión 15; `specs/publicacion.md`).
+- **Quién:** autorizado por Carlos en el instructivo de la limpieza (regla 5).
+- **Dónde:** <https://carlosaguerof.github.io/chess/>; `gh-pages` `ad94e9d`.
