@@ -1,5 +1,5 @@
 import type { Chess } from 'chess.js'
-import { elegirJugada, type ParamsNivel } from './elegir.ts'
+import { elegirJugada, type ParamsNivel, type Temperamento } from './elegir.ts'
 import type { MotorUci } from './uci.ts'
 import { uciDe } from '../ajedrez/reglas.ts'
 
@@ -23,6 +23,7 @@ export async function jugadaDelBot(
   motor: () => Promise<MotorUci>,
   fuentes: { misLineas?: FuenteJugadas | null; libro?: FuenteJugadas | null },
   azar: () => number = Math.random,
+  temperamento?: Temperamento,
 ): Promise<JugadaBot | null> {
   const historia = chess.history()
   for (const [origen, fuente] of [
@@ -35,7 +36,7 @@ export async function jugadaDelBot(
     const legal = chess.moves({ verbose: true }).find((m) => m.san === san)
     if (legal) return { uci: uciDe(legal), origen }
   }
-  const e = await elegirJugada(await motor(), chess.fen(), nivel, azar)
+  const e = await elegirJugada(await motor(), chess.fen(), nivel, azar, temperamento)
   return e ? { uci: e.uci, origen: 'motor' } : null
 }
 

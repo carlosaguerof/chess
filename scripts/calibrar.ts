@@ -10,7 +10,8 @@ import { spawn } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { Chess } from 'chess.js'
 import { motorNode } from './motor-node.ts'
-import { elegirJugada, azarConSemilla, type ParamsNivel } from '../src/motor/elegir.ts'
+import { elegirJugada, azarConSemilla, type ParamsNivel, type Temperamento } from '../src/motor/elegir.ts'
+import { contarJaquesYCapturas } from '../src/motor/temperamento.ts'
 import { finPorReglas, uciDe } from '../src/ajedrez/reglas.ts'
 import { APERTURAS_CALIBRACION } from './aperturas-calibracion.ts'
 import datosNiveles from '../src/motor/niveles.json' with { type: 'json' }
@@ -44,9 +45,20 @@ interface ResultadoPartida {
   mediasJugadas: number
   pgn: string
   errores: { blancas: number; negras: number }
+  /** jaques + capturas de cada nivel en sus primeras 30 jugadas (T17) */
+  jaquesYCapturas: { a: number; b: number }
+}
+
+/** Temperamentos de cada lado (T17): --temperamentos agresivo,defensivo (A,B). Sin el argumento, equilibrado. */
+function temperamentos(): [Temperamento | undefined, Temperamento | undefined] {
+  const t = arg('--temperamentos', '')
+  if (!t) return [undefined, undefined]
+  const [a, b] = t.split(',') as [Temperamento, Temperamento]
+  return [a, b]
 }
 
 async function partido(eloA: number, eloB: number, juegos: number, semilla: number, salida: string) {
+  const [tA, tB] = temperamentos()
   const niveles = cargarNiveles()
   const a = nivel(niveles, eloA)
   const b = nivel(niveles, eloB)
@@ -68,13 +80,20 @@ async function partido(eloA: number, eloB: number, juegos: number, semilla: numb
     let fin = finPorReglas(chess)
     while (!fin && chess.history().length < MAX_MEDIAS_JUGADAS) {
       const blancas = chess.turn() === 'w'
-      const e = await elegirJugada(motor, chess.fen(), blancas ? pb : pn, azar)
+      const tempMueve = (blancas ? aConBlancas : !aConBlancas) ? tA : tB
+      const e = await elegirJugada(motor, chess.fen(), blancas ? pb : pn, azar, tempMueve)
       if (!e) break
       if (e.motivo === 'error') errores[blancas ? 'blancas' : 'negras']++
       chess.move({ from: e.uci.slice(0, 2), to: e.uci.slice(2, 4), promotion: e.uci[4] })
       fin = finPorReglas(chess)
     }
     const resultado = fin?.ganador === 'w' ? 1 : fin?.ganador === 'b' ? 0 : 0.5
+    // jaques y capturas de cada lado en sus primeras 30 jugadas (desde el inicio, sin contar las de la apertura de salida)
+    const sanes = chess.history()
+    const inicio = apertura.jugadas.length
+    const deColor = (c: 'w' | 'b') => sanes.filter((_, i) => i >= inicio && i < 60 && (i % 2 === 0 ? 'w' : 'b') === c)
+    const aColor = aConBlancas ? 'w' : 'b'
+    const jaquesYCapturas = { a: contarJaquesYCapturas(deColor(aColor)), b: contarJaquesYCapturas(deColor(aColor === 'w' ? 'b' : 'w')) }
     partidas.push({
       apertura: apertura.nombre,
       blancas: pb.elo,
@@ -84,6 +103,7 @@ async function partido(eloA: number, eloB: number, juegos: number, semilla: numb
       mediasJugadas: chess.history().length,
       pgn: chess.history({ verbose: true }).map(uciDe).join(' '),
       errores,
+      jaquesYCapturas,
     })
   }
   motor.cerrar()
@@ -96,9 +116,10 @@ async function partido(eloA: number, eloB: number, juegos: number, semilla: numb
     else if (deA === 0) p++
     else t++
   }
-  const resumen = { version, eloA, eloB, juegos, semilla, puntosA, ganadas: g, tablas: t, perdidas: p, porcentajeA: puntosA / juegos, segundos: (Date.now() - t0) / 1000, partidas }
+  const jyc = { a: partidas.reduce((x, p) => x + p.jaquesYCapturas.a, 0), b: partidas.reduce((x, p) => x + p.jaquesYCapturas.b, 0) }
+  const resumen = { version, eloA, eloB, temperamentos: [tA ?? 'equilibrado', tB ?? 'equilibrado'], jaquesYCapturas: jyc, juegos, semilla, puntosA, ganadas: g, tablas: t, perdidas: p, porcentajeA: puntosA / juegos, segundos: (Date.now() - t0) / 1000, partidas }
   writeFileSync(salida, JSON.stringify(resumen, null, 1))
-  console.log(`${eloA} vs ${eloB}: ${puntosA}/${juegos} (${((100 * puntosA) / juegos).toFixed(1)} %) +${g} =${t} -${p} en ${resumen.segundos.toFixed(0)} s`)
+  console.log(`${eloA}${tA ? ' ' + tA : ''} vs ${eloB}${tB ? ' ' + tB : ''}: ${puntosA}/${juegos} (${((100 * puntosA) / juegos).toFixed(1)} %) +${g} =${t} -${p} en ${resumen.segundos.toFixed(0)} s · jaques+capturas (30 jugadas): ${jyc.a} vs ${jyc.b}`)
 }
 
 function diferenciaElo(s: number, n: number): number {
