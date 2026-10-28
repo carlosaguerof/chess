@@ -1,0 +1,30 @@
+CARGA: init->uciok 493 ms
+id name Fairy-Stockfish [commit: b2e693ef, upstream: , emscripten: 2.0.26] LB
+option name MultiPV type spin default 1 min 1 max 500
+option name Skill Level type spin default 20 min -20 max 20
+option name UCI_Variant type combo default chess var 3check var 5check var ai-wok var almost var amazon var amazons var antichess var armageddon var asean var ataxx var atomar var atomic var berolina var breakthrough var bughouse var cambodian var capablanca var capahouse var caparandom var centaur var chancellor var chaturanga var checkshogi var chess var chessgi var chigorin var clobber var clobber10 var codrus var coregal var courier var crazyhouse var dobutsu var dragon var duck var embassy var euroshogi var extinction var fairy var fischerandom var flipello var flipello10 var flipersi var fox-and-hounds var gardner var georgian var giveaway var gorogoro var gothic var grand var grasshopper var gustav3 var hoppelpoppel var horde var isolation var isolation7x7 var janggi var janggicasual var janggimodern var janggitraditional var janus var jesonmor var joust var judkins var karouk var kinglet var kingofthehill var knightmate var koedem var kyotoshogi var legan var loop var losalamos var losers var makpong var makruk var manchu var micro var mini var minishogi var minixiangqi var misere var modern var newzealand var nightrider var nocastle var nocheckatomic var normal var okisakishogi var omicron var opulent var paradigm var pawnback var pawnsideways var perfect var petrified var placement var pocketknight var raazuvaa var racingkings var seirawan var shako var shatar var shatranj var shogi var shoshogi var shouse var sittuyin var snailtrail var sortofalmost var spartan var suicide var supply var tencubed var threekings var torishogi var torpedo var troitzky var wolf var xiangqi var yarishogi
+option name UCI_LimitStrength type check default false
+option name UCI_Elo type spin default 1350 min 500 max 2850
+option name Use NNUE type check default true
+option name EvalFile type string default <empty>
+
+== lichess nivel 1: setoption Skill Level -9; go movetime 50 depth 5 ==
+     33 ms  depth 5  bestmove d2g5 ponder b4c3
+     33 ms  depth 5  bestmove f5d3 ponder f1f3
+     22 ms  depth 5  bestmove f6g4 ponder e3f4
+      7 ms  depth 5  bestmove h2h3 ponder g7g6
+      7 ms  depth 5  bestmove e3d4 ponder c6c5
+
+== Skill -20: setoption Skill Level -20; go movetime 50 depth 5 ==
+     13 ms  depth 5  bestmove d2g5 ponder b4c3
+      7 ms  depth 5  bestmove e5e4 ponder g3f5
+      5 ms  depth 5  bestmove e6g4 ponder a2a3
+      5 ms  depth 5  bestmove a1e1 ponder g7g6
+      6 ms  depth 5  bestmove e3d4 ponder c6c5
+
+== lichess nivel 8: setoption Skill Level 20; go movetime 1000 depth 22 ==
+   1002 ms  depth 15  bestmove e2a6 ponder b4c3
+   1001 ms  depth 16  bestmove f5d3 ponder f1f8
+   1001 ms  depth 15  bestmove b4b2 ponder e3d2
+   1000 ms  depth 16  bestmove a1e1 ponder f7f5
+   1000 ms  depth 19  bestmove f4f6 ponder g7f6

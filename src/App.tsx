@@ -1,5 +1,6 @@
 import { useRuta } from './ruta.ts'
 import { TableroLibre } from './pantallas/TableroLibre.tsx'
+import { MedirMotor } from './pantallas/MedirMotor.tsx'
 
 export function App() {
   const ruta = useRuta()
@@ -10,6 +11,7 @@ export function App() {
       </main>
     )
   }
+  if (import.meta.env.DEV && ruta.partes[0] === 'medir-motor') return <MedirMotor />
   return (
     <main className="app">
       <h1 data-testid="titulo">Ajedrez · mis aperturas</h1>

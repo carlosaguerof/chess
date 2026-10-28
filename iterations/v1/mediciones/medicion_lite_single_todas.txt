@@ -1,0 +1,17 @@
+CARGA: spawn->uciok 209 ms, spawn->readyok 210 ms
+
+== MultiPV 256 (todas las jugadas), go depth 6 ==
+     71 ms  depth  6  nodes    68692  best e2a6  jugadas_evaluadas 48
+     32 ms  depth  6  nodes    42038  best f5c2  jugadas_evaluadas 38
+     33 ms  depth  6  nodes    41606  best b4b2  jugadas_evaluadas 48
+     61 ms  depth  6  nodes    73238  best a1e1  jugadas_evaluadas 50
+     73 ms  depth  6  nodes   102982  best f4f6  jugadas_evaluadas 54
+  PROMEDIO 54 ms  (min 32, max 73)
+
+== MultiPV 256 (todas las jugadas), go depth 8 ==
+    126 ms  depth  8  nodes   143748  best e2a6  jugadas_evaluadas 48
+    128 ms  depth  8  nodes   126179  best f5d3  jugadas_evaluadas 38
+     90 ms  depth  8  nodes    89889  best b4b2  jugadas_evaluadas 48
+    219 ms  depth  8  nodes   205723  best b3c2  jugadas_evaluadas 50
+    303 ms  depth  8  nodes   335242  best f4f6  jugadas_evaluadas 54
+  PROMEDIO 173 ms  (min 90, max 303)

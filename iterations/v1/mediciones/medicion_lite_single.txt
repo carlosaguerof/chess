@@ -1,0 +1,49 @@
+CARGA: spawn->uciok 206 ms, spawn->readyok 206 ms
+
+== MultiPV 1, go depth 8 ==
+     13 ms  depth  8  nodes     5196  best d5e6  mpv {"1":"d5e6:cp-130"}
+      3 ms  depth  8  nodes     2332  best f5d3  mpv {"1":"f5d3:cp5"}
+     13 ms  depth  8  nodes    11867  best b4b2  mpv {"1":"b4b2:cp-42"}
+     14 ms  depth  8  nodes    11008  best b3c2  mpv {"1":"b3c2:cp67"}
+      3 ms  depth  8  nodes     2564  best f4f6  mpv {"1":"f4f6:cp165"}
+  PROMEDIO 9 ms  (min 3, max 14)
+
+== MultiPV 5, go depth 8 ==
+     28 ms  depth  8  nodes    32561  best e2a6  mpv {"1":"e2a6:cp-117","2":"d5e6:cp-242","3":"e5g6:cp-376","4":"c3b5:cp-392","5":"e5d7:cp-444"}
+     24 ms  depth  8  nodes    25098  best f5d3  mpv {"1":"f5d3:cp28","2":"d6b6:cp-61","3":"d6e6:cp-75","4":"d6a6:cp-77","5":"d6e7:cp-87"}
+     16 ms  depth  8  nodes    16474  best b4b2  mpv {"1":"b4b2:cp-28","2":"f6g4:cp-119","3":"e6g4:cp-184","4":"a8d8:cp-192","5":"a8c8:cp-207"}
+     41 ms  depth  8  nodes    35144  best a1e1  mpv {"1":"a1e1:cp50","2":"b3c2:cp46","3":"f1f3:cp41","4":"f1f2:cp33","5":"a1d1:cp26"}
+     37 ms  depth  8  nodes    41207  best f4f6  mpv {"1":"f4f6:cp147","2":"e3g3:cp47","3":"b3d4:cp21","4":"a1e1:cp6","5":"a1f1:cp-21"}
+  PROMEDIO 29 ms  (min 16, max 41)
+
+== MultiPV 5, go depth 12 ==
+    333 ms  depth 12  nodes   282261  best e2a6  mpv {"1":"e2a6:cp-202","2":"d5e6:cp-218","3":"e5f7:cp-443","4":"e5d7:cp-498","5":"e1c1:cp-514"}
+    340 ms  depth 12  nodes   294982  best f5d3  mpv {"1":"f5d3:cp9","2":"d6b6:cp-64","3":"d6c6:cp-85","4":"d6e6:cp-93","5":"d6a6:cp-99"}
+    209 ms  depth 12  nodes   172917  best b4b2  mpv {"1":"b4b2:cp-31","2":"f6g4:cp-62","3":"e6g4:cp-183","4":"a8d8:cp-189","5":"a6a5:cp-206"}
+    329 ms  depth 12  nodes   263422  best f1f3  mpv {"1":"f1f3:cp66","2":"a1e1:cp63","3":"f1f2:cp51","4":"b3c2:cp47","5":"a2a4:cp47"}
+    285 ms  depth 12  nodes   279944  best f4f6  mpv {"1":"f4f6:cp140","2":"e3g3:cp20","3":"f4f2:cp-15","4":"f4f1:cp-17","5":"e3f2:cp-26"}
+  PROMEDIO 299 ms  (min 209, max 340)
+
+== MultiPV 5, go movetime 100 ==
+    100 ms  depth  9  nodes    93085  best e2a6  mpv {"1":"e2a6:cp-103","2":"d5e6:cp-212","3":"c3b5:cp-379","4":"e5g6:cp-406","5":"e5f7:cp-461"}
+    100 ms  depth 10  nodes    91628  best f5d3  mpv {"1":"f5d3:cp11","2":"d6b6:cp-51","3":"d6a6:cp-71","4":"d6e7:cp-83","5":"d6f6:cp-102"}
+    100 ms  depth 10  nodes    88400  best b4b2  mpv {"1":"b4b2:cp-31","2":"f6g4:cp-89","3":"a8d8:cp-191","4":"e6g4:cp-200","5":"a6a5:cp-212"}
+    101 ms  depth  9  nodes    87543  best f1f3  mpv {"1":"a1e1:cp53","2":"f1f3:cp49","3":"b3c2:cp48","4":"a1d1:cp29","5":"f1f2:cp24"}
+    100 ms  depth 10  nodes   106919  best f4f6  mpv {"1":"f4f6:cp166","2":"e3g3:cp10","3":"a1f1:cp-14","4":"f4f1:cp-32","5":"e3f2:cp-44"}
+  PROMEDIO 100 ms  (min 100, max 101)
+
+== MultiPV 1, go movetime 100 ==
+    100 ms  depth 12  nodes    76454  best e2a6  mpv {"1":"e2a6:cp-208"}
+    101 ms  depth 16  nodes    76121  best f5d3  mpv {"1":"f5d3:cp19"}
+    100 ms  depth 15  nodes    79718  best b4b2  mpv {"1":"b4b2:cp-26"}
+    100 ms  depth 15  nodes    75628  best a1e1  mpv {"1":"a1e1:cp63"}
+    100 ms  depth 15  nodes    78123  best f4f6  mpv {"1":"f4f6:cp161"}
+  PROMEDIO 100 ms  (min 100, max 101)
+
+== UCI_LimitStrength true, UCI_Elo 1320, go movetime 100 ==
+    100 ms  depth 10  nodes    90327  best e2a6  mpv {"1":"e2a6:cp-193"}
+    100 ms  depth 11  nodes    95060  best f5d3  mpv {"1":"f5d3:cp22"}
+    101 ms  depth 11  nodes    88808  best f6g4  mpv {"1":"f6g4:cp-74"}
+    100 ms  depth  9  nodes    85318  best d2f3  mpv {"1":"d2f3:cp0"}
+    100 ms  depth 11  nodes   109948  best e3d4  mpv {"1":"e3d4:cp0"}
+  PROMEDIO 100 ms  (min 100, max 101)

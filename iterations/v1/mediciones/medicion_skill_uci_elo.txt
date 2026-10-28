@@ -1,0 +1,48 @@
+
+FEN r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 10
+  referencia d14: 48 jugadas, mejor -143cp
+  UCI_Elo 1320: jugadas {"c3b5":2,"d5e6":3,"d2g5":3,"e2a6":2}  cp loss prom 267 (max 490)
+  UCI_Elo 1600: jugadas {"e2a6":6,"d2g5":1,"d5e6":2,"c3b5":1}  cp loss prom 115 (max 490)
+  UCI_Elo 2000: jugadas {"d5e6":6,"d2g5":1,"e2a6":3}  cp loss prom 117 (max 490)
+  UCI_Elo 2400: jugadas {"e2a6":5,"d5e6":4,"d2g5":1}  cp loss prom 94 (max 490)
+
+FEN 4rrk1/pp1n3p/3q2pQ/2p1pb2/2PP4/2P3N1/P2B2PP/4RRK1 b - - 7 19
+  referencia d14: 38 jugadas, mejor 2cp
+  UCI_Elo 1320: jugadas {"e8e6":4,"f5d3":2,"d6c6":2,"f5c2":2}  cp loss prom 123 (max 171)
+  UCI_Elo 1600: jugadas {"f5d3":5,"d6a6":1,"f5g4":1,"f5c2":3}  cp loss prom 81 (max 255)
+  UCI_Elo 2000: jugadas {"f5c2":5,"f5d3":2,"f5g4":2,"d6a6":1}  cp loss prom 135 (max 255)
+  UCI_Elo 2400: jugadas {"d6b6":3,"d6a6":2,"d6e7":3,"f5d3":2}  cp loss prom 84 (max 116)
+
+FEN r3r1k1/2p2ppp/p1p1bn2/8/1q2P3/2NPQN2/PPP3PP/R4RK1 b - - 2 15
+  referencia d14: 48 jugadas, mejor -34cp
+  UCI_Elo 1320: jugadas {"f6d7":3,"a8b8":1,"b4b2":6}  cp loss prom 65 (max 164)
+  UCI_Elo 1600: jugadas {"f6g4":3,"a8d8":3,"b4b2":4}  cp loss prom 67 (max 174)
+  UCI_Elo 2000: jugadas {"b4b2":8,"c6c5":2}  cp loss prom 25 (max 127)
+  UCI_Elo 2400: jugadas {"b4b2":5,"f6g4":4,"a8d8":1}  cp loss prom 37 (max 174)
+
+FEN r1bq1rk1/ppp1nppp/4n3/3p3Q/3P4/1BP1B3/PP1N2PP/R4RK1 w - - 1 16
+  referencia d14: 50 jugadas, mejor 65cp
+  UCI_Elo 1320: jugadas {"d2f3":2,"a2a4":2,"a1e1":4,"b3c2":2}  cp loss prom 28 (max 93)
+  UCI_Elo 1600: jugadas {"b3c2":3,"d2f3":2,"f1f3":5}  cp loss prom 42 (max 93)
+  UCI_Elo 2000: jugadas {"a1e1":5,"d2f3":2,"b3c2":3}  cp loss prom 23 (max 93)
+  UCI_Elo 2400: jugadas {"f1f3":3,"b3c2":2,"a1e1":5}  cp loss prom 15 (max 39)
+
+FEN 4r1k1/r1q2ppp/ppp2n2/4P3/5Rb1/1N1BQ3/PPP3PP/R5K1 w - - 1 17
+  referencia d14: 54 jugadas, mejor 135cp
+  UCI_Elo 1320: jugadas {"e3d4":6,"a1e1":4}  cp loss prom 230 (max 230)
+  UCI_Elo 1600: jugadas {"f4f6":6,"d3h7":1,"e3d4":2,"e3g3":1}  cp loss prom 90 (max 330)
+  UCI_Elo 2000: jugadas {"e3g3":3,"f4a4":1,"f4f6":5,"e3d4":1}  cp loss prom 91 (max 337)
+  UCI_Elo 2400: jugadas {"f4f6":10}  cp loss prom 0 (max 0)
+
+FEN r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3
+  referencia d14: 31 jugadas, mejor -18cp
+  UCI_Elo 1320: jugadas {"g8e7":5,"d8e7":2,"g8f6":2,"a7a6":1}  cp loss prom 69 (max 97)
+  UCI_Elo 1600: jugadas {"d7d6":4,"g8e7":2,"g8f6":2,"a7a6":2}  cp loss prom 38 (max 97)
+  UCI_Elo 2000: jugadas {"g7g6":7,"f8e7":2,"a7a6":1}  cp loss prom 43 (max 65)
+  UCI_Elo 2400: jugadas {"h7h6":2,"c6a5":4,"d7d6":3,"g8f6":1}  cp loss prom 31 (max 51)
+
+RESUMEN (todas las posiciones):
+  UCI_Elo 1320: 60 jugadas, cp loss prom 130, jugadas con pérdida >=200cp: 15, peor 490
+  UCI_Elo 1600: 60 jugadas, cp loss prom 72, jugadas con pérdida >=200cp: 6, peor 490
+  UCI_Elo 2000: 60 jugadas, cp loss prom 72, jugadas con pérdida >=200cp: 5, peor 490
+  UCI_Elo 2400: 60 jugadas, cp loss prom 43, jugadas con pérdida >=200cp: 1, peor 490
