@@ -102,7 +102,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
       registrarPasoCurso({ fen: posicion(leccion, ply).fen(), esperada: leccion.jugadas[ply]!, paso: r.pasoTerminado, linea: leccion.nombre, camino: leccion.jugadas.slice(0, ply) })
     }
     if (r.resultado === 'alternativa')
-      setAviso({ tipo: 'alternativa', texto: `También es buena: ${jugadaNumerada(sanAEspanol(san), ply)} está en tu repertorio. Esta lección sigue con ${jugadaNumerada(sanAEspanol(leccion.jugadas[ply]!), ply)}.` })
+      setAviso({ tipo: 'alternativa', texto: `También es buena: ${jugadaNumerada(sanAEspanol(san), ply)} es de otra variante de esta apertura. Esta lección sigue con ${jugadaNumerada(sanAEspanol(leccion.jugadas[ply]!), ply)}.` })
     else setAviso({ tipo: 'correcta', texto: `¡Correcta! ${jugadaNumerada(sanAEspanol(san), ply)}` })
     setEnTablero(ply + 1)
     setEstado(r.estado)

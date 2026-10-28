@@ -2,7 +2,7 @@ import { Chess, type Square } from 'chess.js'
 import type { Base, Variante } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts'
-import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
+import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, lineaDeVariante, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import { ideaPorTipo, planDeMiLado } from '../cursos/modelo.ts'
 
 /** La guía de aperturas en una partida real (T9). Todo sale de mi repertorio y de la base; nunca del motor. */
@@ -120,18 +120,25 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
   const mioEnLinea = opciones.some((o) => o.san === mia)
   if (!mioEnLinea && estaEnRepertorio(ctx.rep, ctx.color, historia)) {
     // llegué a una posición de mi repertorio por otro orden de jugadas (transposición): no es desvío
-    const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : 'tu repertorio'
-    return { tipo: 'en-linea', texto: `Con ${num(mia, ply)} llegaste a ${n === 'tu repertorio' ? n : `la ${n}`} por otro orden de jugadas: ya estás en tu línea.`, ingles: nombreAhora?.ingles }
+    const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : null
+    return { tipo: 'en-linea', texto: n ? `Con ${num(mia, ply)} llegaste a la ${n} por otro orden de jugadas: ya estás en tu línea.` : `Con ${num(mia, ply)} llegaste a tu línea por otro orden de jugadas.`, ingles: nombreAhora?.ingles }
   }
   if (opciones.length === 0) {
-    // mi repertorio ya no tiene nada aquí
-    const fuera = ply === 0 ? `Iniciaste con ${num(mia, 0)}.` : `Jugaste ${num(mia, ply)}. Ya estás fuera de tu repertorio: sigue con los principios (desarrolla, controla el centro, enroca).`
-    return { tipo: 'fuera', texto: fuera }
+    // mi repertorio (mis favoritas) no tiene nada aquí. Si venía en una línea mía, me salí; si no (sin favoritas, o
+    // jugando otra apertura), la guía reconoce cualquier apertura de la base, como siempre (Nota 1)
+    if (ply > 0 && estaEnRepertorio(ctx.rep, ctx.color, antes))
+      return { tipo: 'fuera', texto: `Jugaste ${num(mia, ply)}. Ya saliste de tu línea: sigue con los principios (desarrolla, controla el centro, enroca).` }
+    const dichas: string[] = []
+    if (ply === 0) dichas.push(`Iniciaste con ${num(mia, 0)}.`)
+    if (nombreAhora && (nombreAhora.apertura !== nombreAntes?.apertura || nombreAhora.variante !== nombreAntes?.variante))
+      dichas.push(nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `Estás en la ${nombreAhora.apertura}: ${nombreAhora.variante}.` : `Estás en la ${nombreAhora.apertura}.`)
+    if (dichas.length === 0) dichas.push(nombreAhora ? `Jugaste ${num(mia, ply)}.` : `Jugaste ${num(mia, ply)}. Sigue con los principios (desarrolla, controla el centro, enroca).`)
+    return { tipo: 'fuera', texto: dichas.join(' '), ingles: nombreAhora?.ingles }
   }
   const mio = opciones.find((o) => o.san === mia)
   if (!mio) {
     const linea = opciones[0]!
-    const donde = nombreAntes ? `de la ${nombreAntes.variante ?? nombreAntes.apertura}` : 'de tu repertorio'
+    const donde = nombreAntes ? `de la ${nombreAntes.variante ?? nombreAntes.apertura}` : 'de tu línea'
     return {
       tipo: 'desvio',
       texto: `Te desviaste ${donde}: jugaste ${num(mia, ply)} y tu línea dice ${num(linea.san, ply)}.`,
@@ -199,8 +206,22 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     const deBase = siguientesEnBase(ctx.base, ctx.color, historia)
     if (deBase) {
       san = deBase.san
-      nombre = deBase.v.familia
-      plan = planDeMiLado(deBase.v.plan, ctx.color)
+      const despues = [...historia, deBase.san]
+      const apertura = ctx.base.aperturas.find((a) => a.variantes.includes(deBase.v))
+      const familias = new Set(
+        (apertura?.variantes ?? [])
+          .filter((v) => (v.lado === 'ambos' || (v.lado === 'blancas') === (ctx.color === 'w')) && despues.every((s, i) => v.jugadas[i] === s))
+          .map((v) => v.familia),
+      )
+      if (apertura && familias.size > 1) {
+        // la jugada todavía sirve a varias variantes: se nombra la apertura y su idea, si es de mi lado
+        nombre = apertura.nombre
+        const deMiLado = apertura.lado === 'ambos' || (apertura.lado === 'blancas') === (ctx.color === 'w')
+        plan = deMiLado ? planDeMiLado(apertura.idea, ctx.color) : undefined
+      } else {
+        nombre = deBase.v.familia
+        plan = planDeMiLado(deBase.v.plan, ctx.color)
+      }
       ingles = `${deBase.v.nombreIngles} · ${deBase.v.eco}`
       origen = 'base'
     }
@@ -215,14 +236,13 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
         .filter((f) => !/(\d+\.{1,3}\s?)?\b([RDTAC]?[a-h]?[1-8]?x?[a-h][1-8]|0-0(-0)?)\b/.test(f))
         .join(' ')
       const pista = `Tu línea (${termina.nombre}) termina aquí. ${sinJugadas || 'Pide la Respuesta para ver su plan.'}`
-      const respuesta = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
+      const respuesta = `Tu línea (${termina.nombre}) termina aquí: ahí acaba la teoría. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
       return { origen: 'fin-de-linea', nombre: termina.nombre, ingles: inglesDeLinea(termina), plan: termina.plan, pista, respuesta }
     }
   }
   if (!san || !esMiPly(ctx.color, ply)) {
-    const otros = GUIA.find((g) => g.color === ctx.color && (g.apertura === 'otros-1e4' || g.apertura === 'otros-negras'))
-    const texto = otros && rivalSalioAlInicio(ctx, historia) ? `${PRINCIPIOS} Tu guía dice: “${otros.textoGuia}”` : PRINCIPIOS
-    return { origen: 'fuera', pista: texto, respuesta: texto }
+    // (antes citaba el texto de mi guía sobre "otras" aperturas; desde la Nota 1 la guía no se cita: L5, pase 2)
+    return { origen: 'fuera', pista: PRINCIPIOS, respuesta: PRINCIPIOS }
   }
   const c = new Chess()
   for (const s of historia) c.move(s)
@@ -241,22 +261,8 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     ingles,
     plan,
     pista: `${idea} Mueve ${pieza}.`,
-    respuesta: `${num(san, ply)} — ${nombre ?? ''}${origen === 'base' ? ' (de la base)' : ''}. ${corto(plan ?? '')}`.trim(),
+    respuesta: `${num(san, ply)} — ${nombre ?? ''}. ${corto(plan ?? '')}`.trim(),
   }
-}
-
-/**
- * ¿El rival salió de mi árbol en su primera jugada, o entró a lo que mi guía llama "otras"?
- * Solo ahí aplica el texto de mi guía sobre las otras aperturas.
- */
-function rivalSalioAlInicio(ctx: Contexto, historia: string[]): boolean {
-  const primera = ctx.color === 'w' ? 1 : 0
-  if (historia.length <= primera) return false
-  const hasta = historia.slice(0, primera + 1)
-  const sigue = siguientesEnRepertorio(ctx.rep, ctx.color, hasta).flatMap((o) => o.lineas)
-  const termina = lineaQueTerminaEn(ctx.rep, ctx.color, hasta)
-  const lineas = termina ? [...sigue, termina] : sigue
-  return lineas.length === 0 || lineas.every((l) => l.apertura.startsWith('otros'))
 }
 
 function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { san: string; v: Variante } | null {
@@ -316,16 +322,40 @@ export interface Resumen {
   ingles?: string
 }
 
+/** La partida no pasó por mis favoritas: se nombra la apertura de la base y la variante que se jugó, para practicarla. */
+function resumenFueraDeFavoritas(base: Base | undefined, color: ColorCorto, historia: string[]): Resumen {
+  const nombre = base ? nombreDeApertura(base, historia) : null
+  if (!base || !nombre) return { caso: 'completa', hastaPly: -1, texto: 'La partida no entró a tus favoritas ni a ninguna apertura que conozca.' }
+  // la variante de mi lado que más jugadas comparte con la partida (al menos 2); entre iguales, la más común
+  const lado = color === 'w' ? 'blancas' : 'negras'
+  let mejor: { v: Variante; a: Base['aperturas'][number]; comun: number } | null = null
+  for (const a of base.aperturas)
+    for (const v of a.variantes) {
+      if (v.lado !== 'ambos' && v.lado !== lado) continue
+      let comun = 0
+      while (comun < historia.length && comun < v.jugadas.length && v.jugadas[comun] === historia[comun]) comun++
+      if (comun >= 2 && (!mejor || comun > mejor.comun || (comun === mejor.comun && v.frecuencia > mejor.v.frecuencia))) mejor = { v, a, comun }
+    }
+  const linea = mejor ? lineaDeVariante(mejor.v, color, mejor.a.id, mejor.a.lado) : undefined
+  const n = nombre.variante && nombre.variante !== nombre.apertura ? `${nombre.apertura}: ${nombre.variante}` : nombre.apertura
+  return { caso: 'completa', hastaPly: -1, texto: `Jugaste la ${n}. No está en tus favoritas.`, linea, ingles: nombre.ingles }
+}
+
 const ctx_nombreApertura = (l: LineaRepertorio) => (GUIA.find((g) => g.color === l.color && g.apertura === l.apertura)?.curso ?? l.familia)
 
-/** El resumen al terminar: hasta qué jugada seguí mi línea, y dónde me salí yo o se salió el rival. */
-export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: string[]): Resumen {
+/**
+ * El resumen al terminar: hasta qué jugada seguí mi línea, y dónde me salí yo o se salió el rival. Si la partida no
+ * entró a mis favoritas (o no tengo), con la base se nombra la apertura que se jugó y se ofrece practicar su variante
+ * (L5, pase 3: la guía reconoce cualquier apertura de la base).
+ */
+export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: string[], base?: Base): Resumen {
   let ultimaLinea: LineaRepertorio | undefined
   for (let ply = 0; ply < historia.length; ply++) {
     const ops = siguientesEnRepertorio(rep, color, historia.slice(0, ply))
     const jugada = historia[ply]!
     if (ops.length === 0) {
-      const texto = ply === 0 ? 'La partida no entró a tu repertorio.' : `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
+      if (ply === 0) return resumenFueraDeFavoritas(base, color, historia)
+      const texto = `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
       return { caso: 'completa', hastaPly: ply - 1, texto, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
     }
     const op = ops.find((o) => o.san === jugada)
@@ -352,7 +382,7 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
       return {
         caso: 'se-salio-rival',
         hastaPly: ply - 1,
-        texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} se salió el rival; tu repertorio esperaba ${ops.map((o) => num(o.san, ply)).join(' o ')}.`,
+        texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} se salió el rival; tu línea esperaba ${ops.map((o) => num(o.san, ply)).join(' o ')}.`,
         linea: ultimaLinea,
         ingles: inglesDeResumen(ultimaLinea),
       }

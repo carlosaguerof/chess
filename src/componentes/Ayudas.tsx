@@ -32,10 +32,10 @@ export function MenuAyudas(props: { ajustes: AjustesAyudas; onCambiar: (a: Ajust
     <div className="dialogo-fondo" onClick={props.onCerrar}>
       <div className="dialogo" role="dialog" aria-modal="true" aria-label="Ayudas" onClick={(e) => e.stopPropagation()}>
         <h2>Ayudas</h2>
-        <p className="apagado">Cuentan para las estrellas: con barra o flechas, ganar da 2.</p>
-        {fila('barra', 'Barra de ventaja', 'Quién va ganando, según el motor a toda fuerza')}
-        {fila('amenazas', 'Flechas de amenaza', 'Tus piezas atacadas sin defensa suficiente')}
-        {fila('sugerencia', 'Sugerencia', 'La mejor jugada del motor para ti')}
+        {fila('barra', 'Barra de ventaja', 'Quién va ganando')}
+        {fila('amenazas', 'Flechas de amenaza', 'Tus piezas en peligro')}
+        {fila('sugerencia', 'Sugerencia', 'La mejor jugada para ti')}
+        <p className="nota-estrellas">Con ayudas, ganar da menos estrellas.</p>
         <button type="button" className="boton primario" onClick={props.onCerrar}>
           Listo
         </button>

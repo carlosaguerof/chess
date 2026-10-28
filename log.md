@@ -222,3 +222,21 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué importa:** pasó en una prueba en la computadora y no en el iPhone; con llaves (`useEffect(() => { … })`) el efecto no devuelve nada.
 - **Quién:** la corrida, al probar la L3.
 - **Dónde:** `src/App.tsx`; merge `bbd14fa`.
+
+## [2026-10-28] cambio | L7 (Nota 2): esta bitácora, el cierre de la vuelta 1 y las reglas en specs/
+- **Qué:** `log.md` con las 26 decisiones, las dos corridas y cada cambio; `iterations/v1/feedback.md`, `changes.md` y `learning.md`; `specs/ux.md` (Pantalla limpia), `specs/aprender.md`, `specs/personajes.md` y `specs/publicacion.md`; `context/producto.md` con el objetivo y el papel de la guía; la regla en `AGENTS.md`.
+- **Por qué:** que la lógica de lo que Carlos pide no se quede en el chat y los próximos productos la traigan (decisión 26).
+- **Quién:** Carlos (Nota 2).
+- **Dónde:** merge `1922ecc`.
+
+## [2026-10-28] cambio | L5: tres pases adversariales sobre la limpieza (21 hallazgos, todos arreglados)
+- **Qué:** tres revisores nuevos, uno por pase, compararon cada pantalla antes y después contra la "Pantalla limpia" y las referencias. Pase 1: 9 hallazgos; pase 2: 7; pase 3: 5. Lo más importante que corrigieron: con "Mis favoritas" vacía la guía y el resumen ya no nombraban la apertura (ahora la base la nombra siempre); quedaban etiquetas de origen ("tu repertorio", "de la base", "Tu guía dice"); se había perdido la idea general de cada apertura; dos frases de personajes recordaban a bots de chess.com.
+- **Por qué:** al rehacer una pantalla se pierden avisos y datos sin que nadie lo note; un revisor que no hizo el trabajo los encuentra. El tercer pase no terminó en 0 (era el último permitido); sus 5 hallazgos se arreglaron con prueba.
+- **Quién:** la corrida (Limpieza L5).
+- **Dónde:** commits `ec8b0a2`, `b3c449d` y el de los arreglos del pase 3; las tablas de hallazgos en el ESTADO de la corrida.
+
+## [2026-10-28] aprendizaje | Cuando el repertorio pasa a "lo que el usuario escoge", cada lugar que lo usaba necesita su caso vacío
+- **Qué:** al cambiar el repertorio sembrado por favoritas que empiezan vacías, la guía, el resumen y Refuerza siguieron funcionando, pero en silencio: con cero favoritas ya no nombraban la apertura ni ofrecían práctica.
+- **Por qué importa:** las pruebas usaban favoritas sembradas y no lo vieron; lo encontraron los pases adversariales. Regla: al cambiar el origen de un dato, probar cada pantalla con ese dato vacío.
+- **Quién:** la corrida, en los pases 2 y 3.
+- **Dónde:** `tests/unit/aprender.test.ts`; `specs/aprender.md` (regla 8).

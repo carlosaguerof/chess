@@ -46,6 +46,8 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
     await expect(page.getByTestId('avance')).toContainText('0 de 22 variantes aprendidas')
     await expect(page.getByTestId('tablero-mini')).toHaveAttribute('data-orientacion', 'black')
     await expect(page.getByTestId(`corazon-${ck}`)).toBeVisible()
+    // L5: la idea general de la apertura, de mi lado y corta
+    await expect(page.getByTestId('idea')).toContainText('1...c6')
     const filas = page.getByTestId('variante')
     await expect(filas).toHaveCount(22)
     await expect(filas.first()).toContainText('Variante del Avance')

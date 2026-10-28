@@ -69,3 +69,62 @@ describe('Nota 1 · lo guardado pasa al modelo nuevo', () => {
     expect(JSON.parse(memoria.get('ajedrez.v1.progreso')!)).toEqual({})
   })
 })
+
+describe('Nota 1 · las favoritas son el repertorio', () => {
+  it('"Que juegue mis líneas": sin favoritas no hay jugada (el bot juega su libro); con la Caro-Kann, entra a ella', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { jugadaDeMisLineas } = await import('../../src/guia/guia.ts')
+    expect(repertorioDeFavoritas([]).lineas).toHaveLength(0)
+    expect(jugadaDeMisLineas(repertorioDeFavoritas([]), 'b', [], () => 0.5)).toBeNull()
+    const ck = repertorioDeFavoritas(['caro-kann:b'])
+    expect(ck.lineas).toHaveLength(22)
+    expect(jugadaDeMisLineas(ck, 'b', [], () => 0.5)).toBe('e4')
+    // tras 1.e4 c6, el bot sigue en alguna línea de la Caro-Kann
+    const segunda = jugadaDeMisLineas(ck, 'b', ['e4', 'c6'], () => 0.5)
+    expect(ck.lineas.some((l) => l.jugadas[2] === segunda)).toBe(true)
+  })
+
+  it('la guía reconoce cualquier apertura de la base aunque no esté en mis favoritas (L5, pase 2)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { mensajeTrasMiJugada, ayudaEnMiTurno } = await import('../../src/guia/guia.ts')
+    // sin favoritas, con negras: 1.e4 c6 se nombra, y no dice que me salí de nada
+    const vacia = { base: BASE, rep: repertorioDeFavoritas([]), color: 'b' as const }
+    const m = mensajeTrasMiJugada(vacia, ['e4', 'c6'])
+    expect(m.texto).toContain('Estás en la Defensa Caro-Kann')
+    expect(m.texto).not.toMatch(/saliste|repertorio/)
+    // con la Caro-Kann en favoritas, jugando la Italiana con blancas: también la nombra
+    const blancas = { base: BASE, rep: repertorioDeFavoritas(['caro-kann:b']), color: 'w' as const }
+    expect(mensajeTrasMiJugada(blancas, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4']).texto).toContain('Italiana')
+    // y si venía en mi línea y me salgo, sí lo dice
+    const ck = { base: BASE, rep: repertorioDeFavoritas(['caro-kann:b']), color: 'b' as const }
+    expect(mensajeTrasMiJugada(ck, ['e4', 'c6', 'd4', 'a6']).tipo).toBe('desvio')
+    // la Respuesta, sin etiqueta de origen, y nombrando la apertura mientras la jugada sirve a varias variantes
+    const r = ayudaEnMiTurno(vacia, ['e4'])
+    expect(r.respuesta).not.toContain('(de la base)')
+    expect(r.respuesta).toContain('Defensa Caro-Kann')
+  })
+
+  it('el resumen final también nombra la apertura sin favoritas, y deja practicar su variante (L5, pase 3)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { resumenDePartida } = await import('../../src/guia/guia.ts')
+    const r = resumenDePartida(repertorioDeFavoritas([]), 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5'], BASE)
+    expect(r.texto).toContain('Defensa Caro-Kann')
+    expect(r.texto).not.toMatch(/no entró/)
+    expect(r.linea?.apertura).toBe('caro-kann')
+    expect(r.linea?.color).toBe('b')
+    // y la lección de esa variante existe (para "Practicar esta línea")
+    const curso = cursosDeLaBase(BASE).find((c) => c.id === 'caro-kann:b')!
+    expect(curso.lecciones.some((l) => l.id.endsWith('/' + r.linea!.id))).toBe(true)
+  })
+
+  it('la Respuesta al final de una línea no dice de dónde salen las jugadas (L5, pase 3)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { ayudaEnMiTurno } = await import('../../src/guia/guia.ts')
+    const rep = repertorioDeFavoritas(['caro-kann:b'])
+    // una línea de negras que termina con la jugada de blancas: ahí "mi línea termina"
+    const l = rep.lineas.find((x) => x.jugadas.length % 2 === 1)!
+    const a = ayudaEnMiTurno({ base: BASE, rep, color: 'b' }, l.jugadas)
+    expect(a.origen).toBe('fin-de-linea')
+    expect(a.respuesta).not.toMatch(/la fuente|de la base|Tu guía/)
+  })
+})
