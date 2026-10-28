@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { personajePorId, NOMBRE_TEMPERAMENTO } from '../bots/personajes.ts'
 import { nombreApertura, inglesApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
+import { Interruptor } from '../componentes/Interruptor.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso, opcionesRecordadas, tiempoRecordado } from '../partida/usePartidaBot.ts'
 import { ElegirTiempo } from '../componentes/ElegirTiempo.tsx'
@@ -96,18 +97,5 @@ export function DetalleBot({ id }: { id: string }) {
         </Dialogo>
       )}
     </div>
-  )
-}
-
-function Interruptor(props: { etiqueta: string; detalle: string; activo: boolean; onCambiar: (v: boolean) => void; testid: string }) {
-  return (
-    <label className="interruptor">
-      <span>
-        <strong>{props.etiqueta}</strong>
-        <small className="apagado">{props.detalle}</small>
-      </span>
-      <input type="checkbox" role="switch" checked={props.activo} onChange={(e) => props.onCambiar(e.target.checked)} data-testid={props.testid} />
-      <i aria-hidden="true" />
-    </label>
   )
 }
