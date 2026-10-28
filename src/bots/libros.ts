@@ -13,25 +13,27 @@ export const JUGADAS_DE_LIBRO = 8
  * escoge la siguiente jugada entre ellas, más probable la que aparece en más líneas.
  */
 export function libroDe(p: Personaje, colorBot: ColorCorto, lineas: LineasPorClave): FuenteJugadas {
+  const candidatas = candidatasDeLibro(p, colorBot, lineas)
+  return (historia, azar) => {
+    const siguientes = candidatas(historia)
+    if (siguientes.length === 0) return null
+    return siguientes[Math.floor(azar() * siguientes.length)]!
+  }
+}
+
+/** Todas las jugadas que el libro podría jugar en esa posición (con repetición: más probable la que está en más líneas). */
+export function candidatasDeLibro(p: Personaje, colorBot: ColorCorto, lineas: LineasPorClave): (historia: string[]) => string[] {
   const claves = colorBot === 'w' ? p.estilo.blancas : p.estilo.negras
   const todas = claves.flatMap((c) => lineas(c))
-  return (historia, azar) => {
+  return (historia) => {
     const ply = historia.length
     const turnoBot = (ply % 2 === 0 ? 'w' : 'b') === colorBot
-    if (!turnoBot) return null
-    if (Math.floor(ply / 2) >= JUGADAS_DE_LIBRO) return null
+    if (!turnoBot || Math.floor(ply / 2) >= JUGADAS_DE_LIBRO) return []
     const siguientes: string[] = []
     for (const l of todas) {
       if (l.length <= ply) continue
-      let sigue = true
-      for (let i = 0; i < ply; i++)
-        if (l[i] !== historia[i]) {
-          sigue = false
-          break
-        }
-      if (sigue) siguientes.push(l[ply]!)
+      if (historia.every((s, i) => l[i] === s)) siguientes.push(l[ply]!)
     }
-    if (siguientes.length === 0) return null
-    return siguientes[Math.floor(azar() * siguientes.length)]!
+    return siguientes
   }
 }

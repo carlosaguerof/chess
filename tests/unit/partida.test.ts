@@ -49,10 +49,12 @@ describe('personajes', () => {
     for (let e = 1600; e <= 3000; e += 100) expect(por(e)).toBe(1)
     expect(new Set(PERSONAJES.map((p) => p.nombre)).size).toBe(47)
   })
-  it('solo se escogen los calibrados (300–1200), con mi zona primero y un 700 recomendado', () => {
+  it('solo se escogen los de niveles calibrados (T13: los 47), con mi zona primero y un 700 recomendado', async () => {
+    const { NIVELES } = await import('../../src/motor/niveles.ts')
+    const calibrados = new Set(NIVELES.filter((n) => (n as { calibrado?: boolean }).calibrado !== false).map((n) => n.elo))
     const disp = personajesDisponibles()
-    expect(Math.min(...disp.map((p) => p.elo))).toBe(300)
-    expect(Math.max(...disp.map((p) => p.elo))).toBe(1200)
+    expect(disp.every((p) => calibrados.has(p.elo))).toBe(true)
+    expect(disp).toHaveLength(PERSONAJES.filter((p) => calibrados.has(p.elo)).length)
     expect(gruposDePersonajes()[0]!.titulo).toBe('Tu zona')
     expect(gruposDePersonajes()[0]!.personajes.every((p) => p.elo >= 500 && p.elo <= 1000)).toBe(true)
     expect(recomendado().elo).toBe(700)
