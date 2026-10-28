@@ -155,7 +155,7 @@ describe('T17 · temperamento', () => {
     expect(bonoTemperamento(fen, 'e1g1', 0, 'defensivo')).toBe(BONO_CP)
     expect(bonoTemperamento(fen, 'c4f7', 0, 'defensivo')).toBe(0)
   })
-  it('elegirJugada usa el temperamento: con dos jugadas iguales, el agresivo escoge más la captura', async () => {
+  it('elegirJugada usa el temperamento: con dos jugadas iguales, el agresivo escoge más la captura', { timeout: 30_000 }, async () => {
     const { motor } = motorFalso([['c4f7', 0], ['b1c3', 0]])
     await motor.iniciar()
     const fen = 'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4'

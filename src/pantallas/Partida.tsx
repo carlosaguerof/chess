@@ -18,6 +18,7 @@ import { Dialogo } from '../componentes/Dialogo.tsx'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear, IconoFoco } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
+import { cursos as listaCursos } from '../cursos/datos.ts'
 import { BASE } from '../base/base.ts'
 import { useRepertorio } from '../repertorio/estado.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
@@ -115,6 +116,14 @@ export function Partida() {
   if (sugerencia) flechas.push({ orig: sugerencia.slice(0, 2) as Key, dest: sugerencia.slice(2, 4) as Key, brush: 'green' })
   const barra = ajustes.barra && evaluacion ? evaluacion.pct : null
   const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
+  // T18: del resumen a practicar justo esa línea
+  const practicar = (() => {
+    const l = resumen?.linea
+    if (!l) return null
+    const curso = listaCursos(rep).find((c) => c.id === `${l.apertura}:${l.color}`)
+    const i = curso ? curso.lecciones.findIndex((x) => x.id.endsWith('/' + l.id)) : -1
+    return curso && i >= 0 ? `/leccion/${encodeURIComponent(curso.id)}/${i}` : null
+  })()
 
   const alJugar = (uci: string) => {
     if (!guia) return pb.jugar(uci)
@@ -210,6 +219,11 @@ export function Partida() {
             <p className="panel-guia-titulo">Resumen de tu apertura</p>
             <p>{resumen.texto}</p>
             {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
+            {practicar && (
+              <button type="button" className="enlace-chico" onClick={() => navegar(practicar)}>
+                Practicar esta línea
+              </button>
+            )}
           </div>
         )}
         {partida.fin ? (
@@ -288,6 +302,11 @@ export function Partida() {
                 {resumen.texto}
                 {resumen.ingles && <small className="ingles">{resumen.ingles}</small>}
               </p>
+            )}
+            {practicar && (
+              <button type="button" className="boton secundario chico" onClick={() => navegar(practicar)} data-testid="practicar-linea">
+                Practicar esta línea
+              </button>
             )}
             <div className="aviso-jugadores">
               <Avatar yo tam={56} />
