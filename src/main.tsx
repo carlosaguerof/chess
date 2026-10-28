@@ -12,3 +12,10 @@ createRoot(document.getElementById('raiz')!).render(
     <App />
   </StrictMode>,
 )
+
+// R1: en la app construida, el service worker guarda lo que se usa para que funcione sin internet
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL }).catch(() => undefined)
+  })
+}
