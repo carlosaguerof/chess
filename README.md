@@ -10,4 +10,4 @@ npm run e2e      # punta a punta (Playwright, iPhone y escritorio)
 npm run casa     # para jugar desde el iPhone en la red de la casa (puerto 4173)
 ```
 
-Reglas para trabajar aquí: `AGENTS.md`. Qué es y para quién: `context/producto.md`. Licencias de todo lo de fuera: `LICENCIAS.md`.
+Licencia: GPL-3.0-or-later (`LICENSE`); lo de fuera, con su licencia, en `LICENCIAS.md`. Reglas para trabajar aquí: `AGENTS.md`. Qué es y para quién: `context/producto.md`.

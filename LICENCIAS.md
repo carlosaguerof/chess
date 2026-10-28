@@ -1,29 +1,38 @@
-# Licencias de lo que viene de fuera
+# Licencias
 
-La app es de uso personal y no se distribuye. Si algún día se distribuye, por `chessground` y `stockfish` (GPL-3.0) la app completa sería GPL-3.0; por eso `package.json` ya dice `GPL-3.0-only`.
+**La app** (todo el código propio de este repo) es software libre bajo la **GNU General Public License v3.0 o posterior** (`GPL-3.0-or-later`). El texto completo está en [`LICENSE`](LICENSE). Código fuente: <https://github.com/carlosaguerof/chess>.
 
-## Dependencias (npm)
+Por qué GPL: el tablero (chessground) y el motor (Stockfish) son GPL-3.0, y la app los incluye en el sitio que se publica. Al publicar el sitio, el código fuente completo queda disponible en este repo público, con la misma licencia.
 
-| Paquete | Versión | Licencia | Para qué |
+## Dependencias que van dentro de la app
+
+| Paquete | Versión | Licencia | Enlace | Para qué |
+|---|---|---|---|---|
+| chessground | 9.2.1 | GPL-3.0-or-later | <https://github.com/lichess-org/chessground> | el tablero (el de lichess) |
+| stockfish (stockfish.js de Nathan Rugg, basado en Stockfish) | 19.0.1 | GPL-3.0 | <https://github.com/nmrugg/stockfish.js> · <https://github.com/official-stockfish/Stockfish> | el motor de los bots: `stockfish-19-lite-single.js` + `.wasm`, copiado a `public/motor/` con su licencia (`COPYING-stockfish.txt`) |
+| chess.js | 1.4.0 | BSD-2-Clause | <https://github.com/jhlywa/chess.js> | las reglas del ajedrez |
+| react, react-dom | 19.3.1 | MIT | <https://github.com/facebook/react> | la interfaz |
+| @fontsource/inter (tipografía Inter, Rasmus Andersson) | 5.3.0 | OFL-1.1 | <https://github.com/fontsource/font-files> · <https://rsms.me/inter/> | letra de la interfaz, instalada en el proyecto |
+| @fontsource/jetbrains-mono (JetBrains Mono) | 5.3.0 | OFL-1.1 | <https://github.com/fontsource/font-files> · <https://www.jetbrains.com/lp/mono/> | letra de las jugadas |
+
+## Herramientas (no van dentro de la app)
+
+| Paquete | Versión | Licencia | Enlace |
 |---|---|---|---|
-| react, react-dom | 19.3.1 | MIT | la interfaz |
-| vite | 8.3.5 | MIT | construir y servir |
-| @vitejs/plugin-react | 6.1.2 | MIT | React en Vite |
-| typescript | 5.9.3 | Apache-2.0 | tipos |
-| vitest | 5.0.5 | MIT | pruebas de lógica |
-| @playwright/test | 1.64.1 | Apache-2.0 | pruebas de punta a punta (WebKit y Chromium) |
-| chess.js | 1.4.0 | BSD-2-Clause | reglas del ajedrez |
-| chessground | 9.2.1 | GPL-3.0 | el tablero (el de lichess) |
-| stockfish (stockfish.js, Nathan Rugg / Chess.com) | 19.0.1 | GPL-3.0 | el motor, versión lite de un solo hilo en WebAssembly |
-| @fontsource/inter | 5.3.0 | OFL-1.1 (Inter, Rasmus Andersson) | tipografía de la interfaz, instalada en el proyecto |
-| @fontsource/jetbrains-mono | 5.3.0 | OFL-1.1 (JetBrains) | tipografía de las jugadas |
+| vite | 8.3.5 | MIT | <https://github.com/vitejs/vite> |
+| @vitejs/plugin-react | 6.1.2 | MIT | <https://github.com/vitejs/vite-plugin-react> |
+| typescript | 5.9.3 | Apache-2.0 | <https://github.com/microsoft/TypeScript> |
+| vitest | 5.0.5 | MIT | <https://github.com/vitest-dev/vitest> |
+| @playwright/test | 1.64.1 | Apache-2.0 | <https://github.com/microsoft/playwright> |
 
-## Datos y recursos
+## Datos y recursos de fuera
 
-| Recurso | Licencia | Dónde está | Para qué |
-|---|---|---|---|
-| Piezas cburnett (Colin M.L. Burnett), vía `chessground/assets/chessground.cburnett.css` | CC BY-SA 3.0 | `node_modules/chessground/assets/` | las piezas del tablero |
-| Lista de aperturas de lichess (`lichess-org/chess-openings`, commit `f06a50d`): nombres, ECO y jugadas | CC0 1.0 (dominio público), confirmada en su `COPYING.txt` y en la API de GitHub | `input/lichess-chess-openings/` | nombres y jugadas de la base; aperturas de la calibración |
-| Motor copiado a `public/motor/` al construir (`scripts/copiar-motor.mjs`) | GPL-3.0 (`COPYING-stockfish.txt` va junto) | `public/motor/` (no se sube a git) | el motor del bot en el navegador |
+| Recurso | Licencia | Enlace | Dónde está | Para qué |
+|---|---|---|---|---|
+| Piezas cburnett (Colin M.L. Burnett), incluidas en chessground | CC BY-SA 3.0 (también GPL) | <https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces> | `node_modules/chessground/assets/chessground.cburnett.css` | las piezas del tablero |
+| Lista de aperturas de lichess (`lichess-org/chess-openings`, commit `f06a50d`) | CC0 1.0 (dominio público) | <https://github.com/lichess-org/chess-openings> | `input/lichess-chess-openings/` (con su `COPYING.txt`) | nombres, ECO y jugadas de la base; aperturas de la calibración |
+| Texto de la GPL v3 | se permite copiarlo tal cual | <https://www.gnu.org/licenses/gpl-3.0.txt> | `LICENSE` | la licencia de la app |
 
-Lo que no se usa, a propósito: ningún archivo de chess.com (logo, piezas, sonidos, imágenes, avatares, nombres de sus bots).
+Lo propio: el tema del tablero (verde y crema), los íconos, los avatares de los personajes, sus nombres y frases, y los planes de las aperturas (redactados por la IA) son de este repo, bajo la misma GPL.
+
+Lo que no se usa, a propósito: ningún archivo ni marca de chess.com (logo, piezas, sonidos, imágenes, avatares, nombres de sus bots).
