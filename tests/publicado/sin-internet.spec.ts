@@ -22,7 +22,9 @@ test('R1 · instalable (manifiesto y service worker) y, sin red, la app carga y 
   await expect(page.getByTestId('jugar-recomendado')).toBeVisible()
   await page.getByTestId('jugar-recomendado').click()
   await page.getByRole('dialog', { name: '¿Empezar otra partida?' }).getByRole('button', { name: 'Empezar otra' }).click()
-  await jugar(page, info, 'd2d4')
+  // 1.a3 está fuera del libro de Brisa: contesta el motor, cargado sin red
+  await jugar(page, info, 'a2a3')
   await expect(page.getByTestId('lista-jugadas').getByTestId('jugada')).toHaveCount(2, { timeout: 30_000 })
+  await expect(page.getByTestId('partida')).toHaveAttribute('data-motor', /Stockfish/)
   await context.setOffline(false)
 })

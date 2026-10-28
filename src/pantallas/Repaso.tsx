@@ -40,7 +40,7 @@ export function Repaso() {
         indice: i,
         total: hoy.length,
         onTerminar: (limpia) => {
-          const e = alRepasar(leerRepaso(), l.id, dia(), limpia, leerProgreso())
+          const e = alRepasar(leerRepaso(), l.id, dia(), limpia, leerProgreso(), Date.now(), leerRegistro(), l)
           guardarRepaso(e)
           const dias = ESCALONES[e[l.id]!.escalon - 1]!
           return limpia ? `Sin ayuda y sin errores: vuelve en ${dias} ${dias === 1 ? 'día' : 'días'}.` : 'Con un error o con ayuda: vuelve mañana.'

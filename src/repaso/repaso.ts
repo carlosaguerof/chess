@@ -10,7 +10,8 @@ import { fenCorto, type EntradaRegistro } from '../registro/registro.ts'
  * sin ayuda, sube un escalón y vuelve más tarde: 1, 3, 7, 14 y 30 días. Si fallo una jugada o pido Pista o
  * Respuesta, regresa al escalón 1 y vuelve mañana. Las fechas son días del calendario de este navegador.
  * Está construido sobre el registro de la nota 1: si después de su último repaso fallé (o pedí ayuda en) una jugada
- * de la línea en cualquier lugar (curso, Refuerza o la guía en una partida), la línea también vuelve al escalón 1.
+ * de la línea en Refuerza o con la guía en una partida (o en el curso de esa misma línea), la línea también vuelve al
+ * escalón 1.
  */
 export const ESCALONES = [1, 3, 7, 14, 30] as const
 
@@ -56,15 +57,19 @@ export function fichaDe(e: EstadoRepaso, id: string, hechas: Progreso, registro:
   if (!f || !leccion || registro.length === 0) return f
   const desde = f.ultima ?? h?.fecha ?? 0
   const pasos = pasosDe(leccion)
-  const fallo = registro.find((r) => r.fecha > desde && r.resultado !== 'acierto' && pasos.has(`${r.fen}|${r.esperada}`))
+  // en un curso (o un repaso) cuenta solo la lección de esa línea: fallar 1...c6 repasando otra línea no la regresa;
+  // en Refuerza o con la guía en una partida, la jugada es de todas las líneas que pasan por ahí
+  const cuenta = (r: EntradaRegistro) => r.lugar !== 'curso' || r.linea === leccion.nombre
+  const fallo = registro.find((r) => r.fecha > desde && r.resultado !== 'acierto' && cuenta(r) && pasos.has(`${r.fen}|${r.esperada}`))
   if (!fallo) return f
   const manana = sumarDias(dia(fallo.fecha), ESCALONES[0])
   return { ...f, escalon: 1, proxima: manana < f.proxima ? manana : f.proxima }
 }
 
 /** Terminé el repaso de una línea: sube un escalón si fue sin ayuda ni fallos; si no, vuelve al primero. */
-export function alRepasar(e: EstadoRepaso, id: string, hoy: string, limpia: boolean, hechas: Progreso, ahora = Date.now()): EstadoRepaso {
-  const antes = fichaDe(e, id, hechas)?.escalon ?? 1
+export function alRepasar(e: EstadoRepaso, id: string, hoy: string, limpia: boolean, hechas: Progreso, ahora = Date.now(), registro: EntradaRegistro[] = [], leccion?: Leccion): EstadoRepaso {
+  // el escalón de antes cuenta lo que diga el registro (si un fallo la regresó al 1, sube al 2, no más)
+  const antes = fichaDe(e, id, hechas, registro, leccion)?.escalon ?? 1
   const escalon = limpia ? Math.min(antes + 1, ESCALONES.length) : 1
   return { ...e, [id]: { escalon, proxima: sumarDias(hoy, ESCALONES[escalon - 1]!), ultima: ahora } }
 }

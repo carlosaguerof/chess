@@ -50,3 +50,27 @@ test('al terminar por mate, la barra se llena del lado del ganador', async ({ pa
   await expect(page.getByTestId('aviso-final')).toContainText('¡Ganaste!')
   await expect(page.getByTestId('barra-eval').first()).toHaveAttribute('data-blancas', '100')
 })
+
+test('con negras, la barra marca la ventaja del lado correcto (y en el iPhone, Pista y Respuesta se ven con guía, reloj y barra)', async ({ page }, info) => {
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.ayudas', JSON.stringify({ barra: true, amenazas: false, sugerencia: false })))
+  // 1.e4 e5 2.Cf3 Dh4?? 3.Cxh4: blancas con una dama de más; juego con negras, con guía y 10 minutos
+  await page.goto('/#/prueba-partida?bot=brisa&color=b&guia=1&tiempo=10%2B0&jugadas=e2e4,e7e5,g1f3,d8h4,f3h4')
+  const barra = page.locator('[data-testid="barra-eval"]:visible')
+  await expect(barra).toHaveAttribute('data-blancas', /^(9\d|100)$/, { timeout: 15_000 })
+  // lo mío (negras) es la parte rellena: casi nada
+  const relleno = await barra.evaluate((b) => (b.querySelector('i') as HTMLElement).getBoundingClientRect())
+  const total = await barra.evaluate((b) => b.getBoundingClientRect())
+  const mio = info.project.name === 'iphone' ? relleno.width / total.width : relleno.height / total.height
+  expect(mio).toBeLessThan(0.15)
+  await captura(page, info, 't15-barra-negras')
+  // Pista y Respuesta se pueden tocar sin desplazarse (nada las tapa)
+  for (const b of ['pista', 'respuesta']) {
+    const tapada = await page.getByTestId(b).evaluate((el) => {
+      const r = el.getBoundingClientRect()
+      const arriba = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+      return !(arriba && el.contains(arriba))
+    })
+    expect(tapada, b).toBe(false)
+  }
+})
+

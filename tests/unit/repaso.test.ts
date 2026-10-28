@@ -90,3 +90,19 @@ describe('R7 · sobre el registro de la nota 1 (pase 1 de la T22)', () => {
     expect(paraHoy(e, hechas, [A], '2026-10-23', [...viejo, ...acierto])).toEqual([])
   })
 })
+
+describe('R7 · el escalón que puso el registro se guarda (pase 2 de la T22)', () => {
+  it('tras un fallo en Refuerza la línea vuelve al 1; repasada limpia sube al 2 (3 días), no salta al 4', () => {
+    const hechas = { [A.id]: { fecha: new Date(2026, 9, 1).getTime() } }
+    const e: EstadoRepaso = { [A.id]: { escalon: 3, proxima: '2026-10-27', ultima: new Date(2026, 9, 20, 10).getTime() } }
+    const registro = [{ fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -', esperada: 'c6', resultado: 'fallo' as const, lugar: 'refuerza' as const, fecha: new Date(2026, 9, 22, 18).getTime() }]
+    const tras = alRepasar(e, A.id, '2026-10-23', true, hechas, new Date(2026, 9, 23, 9).getTime(), registro, A)
+    expect(tras[A.id]).toMatchObject({ escalon: 2, proxima: '2026-10-26' })
+  })
+  it('un fallo repasando OTRA línea (en su curso) no regresa esta', () => {
+    const hechas = { [A.id]: { fecha: new Date(2026, 9, 1).getTime() } }
+    const e: EstadoRepaso = { [A.id]: { escalon: 2, proxima: '2026-10-30', ultima: new Date(2026, 9, 27, 10).getTime() } }
+    const deB = [{ fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -', esperada: 'c6', resultado: 'fallo' as const, lugar: 'curso' as const, linea: B.nombre, fecha: new Date(2026, 9, 27, 10, 5).getTime() }]
+    expect(fichaDe(e, A.id, hechas, deB, A)).toMatchObject({ escalon: 2, proxima: '2026-10-30' })
+  })
+})
