@@ -7,6 +7,7 @@ import { ListaBots } from './pantallas/ListaBots.tsx'
 import { DetalleBot } from './pantallas/DetalleBot.tsx'
 import { Partida } from './pantallas/Partida.tsx'
 import { Licencias } from './pantallas/Licencias.tsx'
+import { Repertorio } from './pantallas/Repertorio.tsx'
 
 const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', ruta: '/licencias' }]
 
@@ -27,6 +28,7 @@ export function App() {
   if (primera === 'bots') pantalla = <ListaBots />
   else if (primera === 'bot' && segunda) pantalla = <DetalleBot id={segunda} />
   else if (primera === 'licencias') pantalla = <Licencias />
+  else if (primera === 'repertorio') pantalla = <Repertorio colorInicial={segunda === 'negras' ? 'b' : 'w'} />
   else pantalla = <Inicio />
   return (
     <Marco actual={ruta.camino} secciones={SECCIONES} mas={MAS}>

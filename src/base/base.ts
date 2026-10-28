@@ -25,3 +25,7 @@ export function lineasDeClave(clave: string, base: Base = BASE): string[][] {
   if (!a) return []
   return a.variantes.filter((v) => v.id.startsWith(prefijo)).map((v) => v.jugadas)
 }
+
+export function aperturaDeClave(clave: string): Apertura | undefined {
+  return BASE.aperturas.find((a) => a.variantes.some((v) => v.clave === clave))
+}
