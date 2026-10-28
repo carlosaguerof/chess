@@ -7,8 +7,10 @@ export interface ParamsNivel {
   elo: number
   /** "debil": debilitamiento propio (varias candidatas + errores a propósito); "uci": el UCI_Elo de Stockfish */
   modo: 'debil' | 'uci'
-  /** debil: profundidad de búsqueda */
+  /** debil: profundidad de búsqueda (si no hay `nodos`) */
   profundidad?: number
+  /** debil: cuántas posiciones puede revisar el motor por jugada (control fino de la fuerza) */
+  nodos?: number
   /** debil: cuántas candidatas se piden al motor */
   multipv?: number
   /** debil: probabilidad (0–1) de cometer un error grande a propósito en una jugada */
@@ -52,7 +54,8 @@ export async function elegirJugada(motor: MotorUci, fen: string, nivel: ParamsNi
     return { uci, motivo: 'motor', perdidaCp: 0, candidatas: a.candidatas }
   }
 
-  const a = await motor.analizar(fen, { profundidad: nivel.profundidad ?? 4, multipv: Math.min(nivel.multipv ?? 6, legales.length), limpiar: true })
+  const limite = nivel.nodos ? { nodos: nivel.nodos } : { profundidad: nivel.profundidad ?? 4 }
+  const a = await motor.analizar(fen, { ...limite, multipv: Math.min(nivel.multipv ?? 6, legales.length), limpiar: true })
   const cands = a.candidatas.filter((c) => legales.includes(c.uci))
   if (cands.length === 0) {
     const uci = a.mejor && legales.includes(a.mejor) ? a.mejor : legales[0]!
