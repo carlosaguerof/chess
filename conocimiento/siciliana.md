@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cf6 5.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Rompe la clavada con Ae2, pregúntale al A con h3 y enroca. Luego Ae3 y Cc3, que gana tiempo atacando la D de d5.
+- Plan *(redactado por la IA)*: Rompe la clavada con Ae2, pregúntale al alfil con h3 y enroca. Si negras cambia en d4 y recapturas con el peón (cxd4), Cc3 gana tiempo atacando la dama de d5.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line
 
 ### Variante Alapin: Smith-Morra Rehusado
@@ -53,7 +53,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 g6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la D de d5 con Cc3 o c4 cuando sea seguro.
+- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la dama de d5 con c4, o con Cc3 después de recapturar en d4 con el peón de c3.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
 
 ### Variante Heidenfeld
@@ -115,8 +115,6 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Enroca (...0-0) y sigue con ...Ae6 o ...Ad7 y ...Tc8; tu A de g7 presiona la gran diagonal. Si se presenta, la ruptura ...d5 libera tu juego.
 - Fuente: B73 · Sicilian Defense: Dragon Variation, Classical Variation
-
-## Dragón Acelerado
 
 ### Variante del Dragón: Variante Moderna con Ac4
 

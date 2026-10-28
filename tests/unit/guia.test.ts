@@ -70,7 +70,7 @@ describe('T9 · la guía en una partida real', () => {
     const azar = azarConSemilla(4)
     for (let i = 0; i < 20; i++) expect(['e5', 'c5', 'c6', 'e6', 'd5', 'g6', 'Nf6', 'd6', 'Nc6', 'b6', 'a6', 'h6']).toContain(jugadaDeMisLineas(rep, 'w', ['e4'], azar))
     expect(jugadaDeMisLineas(rep, 'w', [], azar)).toBeNull() // me toca a mí
-    expect(jugadaDeMisLineas(rep, 'b', ['e4', 'c6'], azar)).toMatch(/^(d4|Nc3|c4|d3|Bc4)$/)
+    expect(jugadaDeMisLineas(rep, 'b', ['e4', 'c6'], azar)).toMatch(/^(d4|Nc3|Nf3|c4|d3|Bc4)$/)
   })
 
   it('pase 1: si mi línea termina en la jugada del rival, la ayuda da su plan (no "fuera de teoría")', () => {
@@ -92,6 +92,22 @@ describe('T9 · la guía en una partida real', () => {
     const a = ayudaEnMiTurno(negras, ['e4', 'd5', 'exd5', 'Qxd5', 'Nc3'])
     expect(a.origen).toBe('base')
     expect(a.pista).not.toMatch(/a5|d6|d8/)
+  })
+
+  it('pase 2: reconoce la misma posición por otro orden de jugadas (transposición)', () => {
+    const m = mensajeTrasMiJugada(negras, ['e4', 'c6', 'd4', 'd5', 'Nc3', 'dxe4', 'Nxe4', 'Bf5'])
+    expect(m.tipo).toBe('en-linea')
+    expect(m.texto).toContain('4...Af5')
+    const eslava = mensajeTrasMiJugada(negras, ['c4', 'c6', 'd4', 'd5'])
+    expect(eslava.tipo).toBe('en-linea')
+    expect(ayudaEnMiTurno(negras, ['c4', 'c6', 'd4', 'd5', 'Nc3']).origen).toBe('repertorio')
+  })
+
+  it('pase 2: la Pista de una línea que termina no dice jugadas; la Respuesta da el plan completo', () => {
+    const a = ayudaEnMiTurno(negras, ['d4', 'd5', 'c4', 'c6', 'e4'])
+    expect(a.origen).toBe('fin-de-linea')
+    expect(a.pista).not.toMatch(/\d+\.{1,3}\s?[RDTAC]?[a-h]?x?[a-h][1-8]/)
+    expect(a.respuesta).toContain('termina aquí')
   })
 
   describe('el resumen al final, en sus tres casos', () => {

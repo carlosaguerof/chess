@@ -1,5 +1,6 @@
 import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
+import { aperturaPorId } from '../base/base.ts'
 
 /** Aprender: un curso por apertura; primero los de mi repertorio. */
 export function Cursos() {
@@ -14,6 +15,9 @@ export function Cursos() {
           <span className={`ficha ficha-${c.color}`} aria-hidden="true" />
           <span className="fila-curso-texto">
             <span className="nombre">{c.nombre}</span>
+            <small className="ingles">
+              {aperturaPorId(c.apertura)?.nombreIngles} · {aperturaPorId(c.apertura)?.eco}
+            </small>
             <span className="apagado">
               {c.lecciones.length} lecciones · {n} hechas
             </span>

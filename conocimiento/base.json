@@ -218,7 +218,7 @@
      "id": "dos-caballos-polerio",
      "clave": "italiana/dos-caballos-polerio",
      "familia": "Defensa de los Dos Caballos",
-     "nombre": "Defensa de los Dos Caballos: Defensa Polerio con 8.Ae2",
+     "nombre": "Defensa de los Dos Caballos (4.Cg5 d5 5.exd5 Ca5)",
      "nombreIngles": "Italian Game: Two Knights Defense",
      "eco": "C58",
      "jugadas": [
@@ -455,7 +455,7 @@
       "Bg4"
      ],
      "lado": "blancas",
-     "plan": "Rompe la clavada con Ae2, pregúntale al A con h3 y enroca. Luego Ae3 y Cc3, que gana tiempo atacando la D de d5.",
+     "plan": "Rompe la clavada con Ae2, pregúntale al alfil con h3 y enroca. Si negras cambia en d4 y recapturas con el peón (cxd4), Cc3 gana tiempo atacando la dama de d5.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -609,7 +609,7 @@
       "Nf3"
      ],
      "lado": "blancas",
-     "plan": "Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la D de d5 con Cc3 o c4 cuando sea seguro.",
+     "plan": "Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la dama de d5 con c4, o con Cc3 después de recapturar en d4 con el peón de c3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -859,7 +859,7 @@
     {
      "id": "dragon-acelerado",
      "clave": "siciliana/dragon-acelerado",
-     "familia": "Dragón Acelerado",
+     "familia": "Variante del Dragón",
      "nombre": "Variante del Dragón: Variante Moderna con Ac4",
      "nombreIngles": "Sicilian Defense: Dragon Variation, Modern Bc4 Variation",
      "eco": "B35",
@@ -1398,7 +1398,7 @@
      "id": "clasica",
      "clave": "caro-kann/clasica",
      "familia": "Variante Clásica",
-     "nombre": "Variante Clásica: línea principal",
+     "nombre": "Variante Clásica",
      "nombreIngles": "Caro-Kann Defense: Classical Variation",
      "eco": "B19",
      "jugadas": [
@@ -1682,6 +1682,60 @@
       "eco": "B11",
       "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line",
       "pgn": "1. e4 c6 2. Nc3 d5 3. Nf3 Bg4 4. h3 Bxf3"
+     }
+    },
+    {
+     "id": "dos-caballos-cf3",
+     "clave": "caro-kann/dos-caballos-cf3",
+     "familia": "Ataque de los Dos Caballos",
+     "nombre": "Defensa Caro-Kann: Oferta de Final (2.Cf3 d5 3.d3)",
+     "nombreIngles": "Caro-Kann Defense: Endgame Offer",
+     "eco": "B10",
+     "jugadas": [
+      "e4",
+      "c6",
+      "Nf3",
+      "d5",
+      "d3"
+     ],
+     "lado": "negras",
+     "plan": "Contra 2.Cf3 juega 2...d5 como siempre; si blancas sigue con Cc3, llegas a los Dos Caballos. Contra 3.d3, desarrolla con ...Cf6, saca el alfil de c8 (a g4 o f5), juega ...e6 y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 2,
+     "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B10",
+      "name": "Caro-Kann Defense: Endgame Offer",
+      "pgn": "1. e4 c6 2. Nf3 d5 3. d3"
+     }
+    },
+    {
+     "id": "dos-caballos-cf3-apocalipsis",
+     "clave": "caro-kann/dos-caballos-cf3-apocalipsis",
+     "familia": "Ataque de los Dos Caballos",
+     "nombre": "Defensa Caro-Kann: Ataque Apocalipsis (2.Cf3 d5 3.exd5)",
+     "nombreIngles": "Caro-Kann Defense: Apocalypse Attack",
+     "eco": "B10",
+     "jugadas": [
+      "e4",
+      "c6",
+      "Nf3",
+      "d5",
+      "exd5",
+      "cxd5",
+      "Ne5"
+     ],
+     "lado": "negras",
+     "plan": "Tras el cambio en d5 tienes un buen centro. Contra el caballo en e5, desarrolla con ...Cf6 y ...e6 y no te apures a sacar la dama.",
+     "autorPlan": "ia",
+     "frecuencia": 2,
+     "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B10",
+      "name": "Caro-Kann Defense: Apocalypse Attack",
+      "pgn": "1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. Ne5"
      }
     },
     {
@@ -2703,7 +2757,8 @@
       "d5",
       "c4",
       "c6",
-      "Nc3"
+      "Nc3",
+      "dxc4"
      ],
      "lado": "negras",
      "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
@@ -2714,7 +2769,7 @@
       "repo": "lichess-org/chess-openings",
       "eco": "D10",
       "name": "Slav Defense",
-      "pgn": "1. d4 d5 2. c4 c6 3. Nc3"
+      "pgn": "1. d4 d5 2. c4 c6 3. Nc3 dxc4"
      }
     },
     {
@@ -3368,7 +3423,7 @@
      "id": "cf6-g6",
      "clave": "londres/cf6-g6",
      "familia": "Londres contra la India (...Cf6)",
-     "nombre": "Sistema Londres contra el fianchetto, con Ae2",
+     "nombre": "Sistema Londres, con Ae2",
      "nombreIngles": "London System, with Be2",
      "eco": "A48",
      "jugadas": [

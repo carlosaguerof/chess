@@ -1,3 +1,4 @@
+import { Chess } from 'chess.js'
 import type { Base, Variante } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 
@@ -203,16 +204,55 @@ export function arbolDe(rep: Repertorio, color: ColorCorto, base?: Base): NodoAr
   return raiz
 }
 
-/** Las jugadas de mi repertorio en una posición (por historial): mi jugada esperada y sus alternativas, o las del rival. */
-export function siguientesEnRepertorio(rep: Repertorio, color: ColorCorto, historia: string[]): { san: string; lineas: LineaRepertorio[] }[] {
-  const mapa = new Map<string, LineaRepertorio[]>()
+/** La posición de una lista de jugadas, sin los contadores (para reconocer transposiciones). */
+export function posicionDe(jugadas: string[]): string {
+  const c = new Chess()
+  for (const s of jugadas) c.move(s)
+  return c.fen().split(' ').slice(0, 4).join(' ')
+}
+
+const indices = new WeakMap<Repertorio, Map<string, Map<string, Map<string, LineaRepertorio[]>>>>()
+
+/** Para cada color: posición → jugada → líneas que la juegan ahí. Se calcula una vez por repertorio. */
+function indice(rep: Repertorio): Map<string, Map<string, Map<string, LineaRepertorio[]>>> {
+  let i = indices.get(rep)
+  if (i) return i
+  i = new Map()
   for (const l of rep.lineas) {
-    if (l.color !== color || l.jugadas.length <= historia.length) continue
-    if (historia.some((s, i) => l.jugadas[i] !== s)) continue
-    const s = l.jugadas[historia.length]!
-    mapa.set(s, [...(mapa.get(s) ?? []), l])
+    const porColor = i.get(l.color) ?? new Map<string, Map<string, LineaRepertorio[]>>()
+    i.set(l.color, porColor)
+    const c = new Chess()
+    l.jugadas.forEach((san) => {
+      const fen = c.fen().split(' ').slice(0, 4).join(' ')
+      c.move(san)
+      const porJugada = porColor.get(fen) ?? new Map<string, LineaRepertorio[]>()
+      porColor.set(fen, porJugada)
+      porJugada.set(san, [...(porJugada.get(san) ?? []), l])
+    })
   }
-  return [...mapa.entries()]
+  indices.set(rep, i)
+  return i
+}
+
+/**
+ * Las jugadas de mi repertorio en una posición: mi jugada esperada y sus alternativas, o las del rival.
+ * Se compara por POSICIÓN, no por orden de jugadas: si llego a la misma posición por otro camino, cuenta igual.
+ */
+export function siguientesEnRepertorio(rep: Repertorio, color: ColorCorto, historia: string[]): { san: string; lineas: LineaRepertorio[] }[] {
+  const porJugada = indice(rep).get(color)?.get(posicionDe(historia))
+  if (!porJugada) return []
+  return [...porJugada.entries()]
     .map(([san, lineas]) => ({ san, lineas }))
     .sort((a, b) => Math.max(...b.lineas.map((l) => l.frecuencia)) - Math.max(...a.lineas.map((l) => l.frecuencia)))
+}
+
+/** ¿Alguna línea de mi repertorio termina justo en esta posición? */
+export function lineaQueTerminaEn(rep: Repertorio, color: ColorCorto, historia: string[]): LineaRepertorio | undefined {
+  const fen = posicionDe(historia)
+  return rep.lineas.find((l) => l.color === color && posicionDe(l.jugadas) === fen)
+}
+
+/** ¿La posición actual está en mi repertorio (alguna línea mía pasa por ella o termina en ella)? */
+export function estaEnRepertorio(rep: Repertorio, color: ColorCorto, historia: string[]): boolean {
+  return !!indice(rep).get(color)?.has(posicionDe(historia)) || !!lineaQueTerminaEn(rep, color, historia)
 }
