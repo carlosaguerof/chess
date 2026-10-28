@@ -9,6 +9,9 @@ export interface JugadaARepasar {
   esperada: string
   camino: string[]
   linea: LineaRepertorio
+  /** las familias y aperturas de mi repertorio que pasan por esta jugada (para nombrarla bien) */
+  familias: Set<string>
+  aperturas: Set<string>
   intentos: number
   fallos: number
   ultima: number | null
@@ -26,7 +29,9 @@ export function jugadasDeMiRepertorio(rep: Repertorio, registro: EntradaRegistro
       c.move(san)
       if (!esMiPly(l.color, ply)) return
       const k = clave(fen, san)
-      if (!porClave.has(k)) porClave.set(k, { fen, esperada: san, camino: l.jugadas.slice(0, ply), linea: l, intentos: 0, fallos: 0, ultima: null })
+      if (!porClave.has(k)) porClave.set(k, { fen, esperada: san, camino: l.jugadas.slice(0, ply), linea: l, familias: new Set(), aperturas: new Set(), intentos: 0, fallos: 0, ultima: null })
+      porClave.get(k)!.familias.add(l.familia)
+      porClave.get(k)!.aperturas.add(l.apertura)
     })
   }
   for (const e of registro) {
@@ -45,8 +50,21 @@ export function jugadasDeMiRepertorio(rep: Repertorio, registro: EntradaRegistro
  */
 export function ordenRefuerza(js: JugadaARepasar[]): JugadaARepasar[] {
   const falladas = js.filter((j) => j.fallos > 0).sort((a, b) => b.fallos - a.fallos || b.fallos / b.intentos - a.fallos / a.intentos || (a.ultima ?? 0) - (b.ultima ?? 0))
-  const demas = js.filter((j) => j.fallos === 0).sort((a, b) => (a.ultima ?? -1) - (b.ultima ?? -1))
-  return [...falladas, ...demas]
+  // las nunca practicadas se alternan entre líneas, para que una ronda toque varias
+  const nunca = js.filter((j) => j.intentos === 0)
+  const porLinea = new Map<string, JugadaARepasar[]>()
+  for (const j of nunca) porLinea.set(j.linea.id, [...(porLinea.get(j.linea.id) ?? []), j])
+  const alternadas: JugadaARepasar[] = []
+  for (let i = 0; alternadas.length < nunca.length; i++) for (const grupo of porLinea.values()) if (grupo[i]) alternadas.push(grupo[i]!)
+  const practicadas = js.filter((j) => j.fallos === 0 && j.intentos > 0).sort((a, b) => (a.ultima ?? 0) - (b.ultima ?? 0))
+  return [...falladas, ...alternadas, ...practicadas]
+}
+
+/** Cómo se nombra una jugada: si la comparten varias aperturas, por el color; si varias variantes, por la apertura. */
+export function nombreDeJugada(j: JugadaARepasar, nombreApertura: (id: string) => string): string {
+  if (j.aperturas.size > 1) return j.linea.color === 'w' ? 'Tu repertorio con blancas' : 'Tu repertorio con negras'
+  if (j.familias.size > 1) return nombreApertura(j.linea.apertura)
+  return j.linea.familia
 }
 
 export function textoConteo(j: JugadaARepasar, ahora = Date.now()): string {

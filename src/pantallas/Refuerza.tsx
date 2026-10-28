@@ -3,7 +3,10 @@ import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { useRepertorio } from '../repertorio/estado.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
-import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo, type JugadaARepasar } from '../registro/refuerza.ts'
+import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo, nombreDeJugada, type JugadaARepasar } from '../registro/refuerza.ts'
+import { aperturaPorId } from '../base/base.ts'
+
+const nombreAp = (id: string) => aperturaPorId(id)?.nombre ?? id
 import { registrarPasoRefuerza } from '../registro/eventos.ts'
 import { intentar, pista, respuesta, marcarPista, marcarRespuesta, type EstadoLeccion, type Leccion } from '../cursos/modelo.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
@@ -36,7 +39,7 @@ export function Refuerza() {
       <ol className="lista-refuerza" data-testid="lista-refuerza">
         {orden.slice(0, POR_RONDA).map((j) => (
           <li key={j.fen + j.esperada} data-testid="jugada-refuerza">
-            <span className="nombre">{j.linea.nombre}</span>
+            <span className="nombre">{nombreDeJugada(j, nombreAp)}</span>
             <span className="apagado">
               {posicionCorta(j)} · <span className={j.fallos > 0 ? 'conteo-fallo' : ''}>{textoConteo(j)}</span>
             </span>
@@ -106,7 +109,7 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
             <span className="apagado">
               Refuerza · {i + 1} de {jugadas.length}
             </span>
-            <strong data-testid="nombre-linea">{actual.linea.nombre}</strong>
+            <strong data-testid="nombre-linea">{nombreDeJugada(actual, nombreAp)}</strong>
           </div>
         </div>
         <div className="partida-tablero">
