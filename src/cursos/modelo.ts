@@ -206,3 +206,16 @@ export function ideaDelPlan(plan: string, color: ColorCorto, prohibidas: string[
   if (deMiLado) return deMiLado.replace(new RegExp(`^con ${mio}:?\\s*`, 'i'), '').replace(/^./, (c) => c.toUpperCase())
   return frases.find((f) => !f.toLowerCase().includes(otro)) ?? null
 }
+
+/** Del plan, solo lo que toca a mi lado (si el plan habla de los dos). */
+export function planDeMiLado(plan: string, color: ColorCorto): string {
+  const mio = color === 'w' ? 'blancas' : 'negras'
+  const otro = color === 'w' ? 'negras' : 'blancas'
+  const frases = plan.split(/(?<=\.)\s+/).map((f) => f.trim()).filter(Boolean)
+  const hablaDeLosDos = frases.some((f) => f.toLowerCase().includes(mio)) && frases.some((f) => f.toLowerCase().includes(otro))
+  if (!hablaDeLosDos) return plan
+  return frases
+    .filter((f) => !f.toLowerCase().includes(otro) || f.toLowerCase().includes(mio))
+    .map((f) => f.replace(new RegExp(`^con ${mio}:?\\s*`, 'i'), '').replace(/^./, (c) => c.toUpperCase()))
+    .join(' ')
+}

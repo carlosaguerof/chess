@@ -3,7 +3,7 @@ import type { Base, Variante } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts'
 import { GUIA, esMiPly, siguientesEnRepertorio, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
-import { ideaPorTipo } from '../cursos/modelo.ts'
+import { ideaPorTipo, planDeMiLado } from '../cursos/modelo.ts'
 
 /** La guía de aperturas en una partida real (T9). Todo sale de mi repertorio y de la base; nunca del motor. */
 export interface Contexto {
@@ -106,17 +106,26 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   let plan: string | undefined
   let origen: Ayuda['origen'] = 'fuera'
   if (deRep.length > 0) {
-    const l: LineaRepertorio = deRep[0]!.lineas[0]!
+    const lineas: LineaRepertorio[] = deRep[0]!.lineas
+    const l = lineas[0]!
     san = deRep[0]!.san
-    nombre = l.nombre
-    plan = l.plan
+    // si esta jugada todavía sirve a varias variantes, se nombra la apertura; si ya es de una sola, esa variante
+    const familias = new Set(lineas.map((x) => x.familia))
+    const apertura = ctx.base.aperturas.find((a) => a.id === l.apertura)
+    if (familias.size > 1 && apertura) {
+      nombre = apertura.nombre
+      plan = apertura.idea
+    } else {
+      nombre = familias.size === 1 ? l.familia : l.nombre
+      plan = planDeMiLado(l.plan, ctx.color)
+    }
     origen = 'repertorio'
   } else {
     const deBase = siguientesEnBase(ctx.base, ctx.color, historia)
     if (deBase) {
       san = deBase.san
-      nombre = deBase.v.nombre
-      plan = deBase.v.plan
+      nombre = deBase.v.familia
+      plan = planDeMiLado(deBase.v.plan, ctx.color)
       origen = 'base'
     }
   }
@@ -215,5 +224,6 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
     }
     ultimaLinea = op.lineas[0]
   }
-  return { caso: 'completa', hastaPly: historia.length - 1, texto: `Toda la partida siguió tu línea${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea }
+  const ultima = historia.length > 0 ? num(historia[historia.length - 1]!, historia.length - 1) : 'el inicio'
+  return { caso: 'completa', hastaPly: historia.length - 1, texto: `Seguiste tu línea toda la partida, hasta ${ultima}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea }
 }

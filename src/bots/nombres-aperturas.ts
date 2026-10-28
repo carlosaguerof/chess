@@ -15,8 +15,30 @@ const VARIANTES: Record<string, string> = {
   larsen: 'Larsen (1.b3)',
 }
 
-/** Nombre corto en español de una clave de estilo ("caro-kann:avance" → "Caro-Kann: Avance"). */
-export function nombreApertura(clave: string): string {
+/** Cómo se ve cada estilo según el lado del bot (con blancas abre; con negras se defiende). */
+const CON_BLANCAS: Record<string, string> = {
+  'siciliana:alapin': 'Alapin contra la Siciliana',
+  'siciliana:smith-morra': 'Gambito Smith-Morra',
+  'siciliana:grand-prix': 'Ataque Grand Prix',
+  siciliana: 'Siciliana abierta (con blancas)',
+  'caro-kann:avance': 'Avance contra la Caro-Kann',
+  'caro-kann:clasica': 'Clásica contra la Caro-Kann',
+  'caro-kann:cambio': 'Cambio contra la Caro-Kann',
+  'caro-kann:panov': 'Ataque Panov',
+  'caro-kann:dos-caballos': 'Dos Caballos contra la Caro-Kann',
+  francesa: 'Avance contra la Francesa',
+  escandinava: 'Captura contra la Escandinava',
+  eslava: 'Gambito de Dama contra la Eslava',
+}
+const CON_NEGRAS: Record<string, string> = {
+  italiana: '1...e5',
+  'gambito-dama:aceptado': 'Gambito de Dama Aceptado',
+}
+
+/** Nombre corto en español de una clave de estilo ("caro-kann:avance" → "Avance contra la Caro-Kann"). */
+export function nombreApertura(clave: string, lado?: 'blancas' | 'negras'): string {
+  if (lado === 'blancas' && CON_BLANCAS[clave]) return CON_BLANCAS[clave]
+  if (lado === 'negras' && CON_NEGRAS[clave]) return CON_NEGRAS[clave]
   const [ap, v] = clave.split(':')
   const a = BASE.aperturas.find((x) => x.id === ap)
   const corto = (a?.nombre ?? ap!).replace(/^(Defensa|Apertura) /, '')

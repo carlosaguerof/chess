@@ -1,4 +1,7 @@
-import { useRuta } from './ruta.ts'
+import { useEffect } from 'react'
+import { useRuta, navegar } from './ruta.ts'
+import { empezarPartida } from './partida/usePartidaBot.ts'
+import { CLAVES, guardar } from './estado/almacen.ts'
 import { TableroLibre } from './pantallas/TableroLibre.tsx'
 import { MedirMotor } from './pantallas/MedirMotor.tsx'
 import { Marco, SECCIONES, type EntradaMas } from './componentes/Marco.tsx'
@@ -25,6 +28,7 @@ export function App() {
     )
   }
   if (import.meta.env.DEV && primera === 'medir-motor') return <MedirMotor />
+  if (import.meta.env.DEV && primera === 'prueba-partida') return <PruebaPartida consulta={ruta.consulta} />
   // la partida ocupa toda la pantalla (N8: solo lo que importa)
   if (primera === 'partida') return <Partida />
   if (primera === 'leccion' && segunda) return <Leccion key={ruta.consulta.get('otra') ?? ''} cursoId={decodeURIComponent(segunda)} indice={Number(ruta.partes[2] ?? 0)} />
@@ -41,4 +45,15 @@ export function App() {
       {pantalla}
     </Marco>
   )
+}
+
+/** Solo en desarrollo: arma una partida con jugadas fijas para las pruebas y abre la partida. */
+function PruebaPartida({ consulta }: { consulta: URLSearchParams }) {
+  useEffect(() => {
+    const p = empezarPartida(consulta.get('bot') ?? 'brisa', (consulta.get('color') as 'w' | 'b') ?? 'w', undefined, { guia: consulta.get('guia') !== '0', misLineas: consulta.get('mislineas') === '1' })
+    const jugadas = (consulta.get('jugadas') ?? '').split(',').filter(Boolean)
+    guardar(CLAVES.partida, { ...p, jugadas })
+    navegar('/partida', true)
+  }, [consulta])
+  return null
 }

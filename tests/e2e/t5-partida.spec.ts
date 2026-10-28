@@ -4,6 +4,11 @@ import { captura, esCelular, jugar, tocar } from './_util.ts'
 const jugadas = (page: Page) => page.getByTestId('lista-jugadas').getByTestId('jugada')
 
 test.describe('T5 · jugar contra un bot', () => {
+  // la guía (T9) se prueba aparte: aquí se apaga para probar solo la partida
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('ajedrez.v1.opciones-partida', JSON.stringify({ guia: false, misLineas: false })))
+  })
+
   test('del inicio a mi primera jugada en 3 toques, y el bot contesta pensando', async ({ page }, info) => {
     await page.goto('/')
     await expect(page.getByTestId('jugar-recomendado')).toBeVisible()

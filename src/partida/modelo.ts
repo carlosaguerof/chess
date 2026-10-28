@@ -14,10 +14,26 @@ export interface PartidaGuardada {
   /** cuántas veces deshice (para las estrellas, T16) */
   deshechas: number
   iniciada: number
+  /** la guía de aperturas (T9) y "que juegue mis líneas" */
+  opciones: OpcionesPartida
+  /** cuántas veces pedí Pista o Respuesta (para las estrellas, T16) */
+  ayudas: { pista: number; respuesta: number }
+  /** el bot espera: me desvié de mi línea y tengo que decidir si sigo o deshago */
+  pausa?: 'desvio' | null
 }
 
-export function nuevaPartida(botId: string, colorHumano: ColorCorto, fenInicial = FEN_INICIAL): PartidaGuardada {
+export interface OpcionesPartida {
+  guia: boolean
+  misLineas: boolean
+}
+
+export const OPCIONES_POR_DEFECTO: OpcionesPartida = { guia: true, misLineas: true }
+
+export function nuevaPartida(botId: string, colorHumano: ColorCorto, fenInicial = FEN_INICIAL, opciones: OpcionesPartida = OPCIONES_POR_DEFECTO): PartidaGuardada {
   return {
+    opciones,
+    ayudas: { pista: 0, respuesta: 0 },
+    pausa: null,
     id: Math.random().toString(36).slice(2, 10),
     botId,
     colorHumano,
@@ -59,7 +75,7 @@ export function deshacer(p: PartidaGuardada): PartidaGuardada {
       break
     }
   if (ultimaMia < 0) return p
-  return { ...p, jugadas: p.jugadas.slice(0, ultimaMia), deshechas: p.deshechas + 1 }
+  return { ...p, jugadas: p.jugadas.slice(0, ultimaMia), deshechas: p.deshechas + 1, pausa: null }
 }
 
 export function puedeDeshacer(p: PartidaGuardada): boolean {
