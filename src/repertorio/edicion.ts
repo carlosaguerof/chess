@@ -1,6 +1,7 @@
 import type { Base } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { lineaDeVariante, repertorioInicial, type LineaRepertorio, type Repertorio } from './modelo.ts'
+import { migrarIds } from '../aprender/migracion.ts'
 import { lineasDePgn, ErrorPgn } from './pgn.ts'
 
 /** Agregar a mi repertorio una variante de la base (lo principal de "escoger qué aprendo"). */
@@ -70,10 +71,12 @@ export function repertorioOriginal(base: Base): Repertorio {
 
 // ----------------------------------------------------------- exportar e importar (todo en un archivo)
 
+/** El archivo de respaldo (versión 2, Nota 1): mis favoritas, el avance, el registro y el repaso. */
 export interface Respaldo {
   app: 'chess-mis-aperturas'
-  version: 1
-  repertorio: Repertorio
+  version: 2
+  /** mis favoritas: "caro-kann:b", "italiana:w"… */
+  favoritas: string[]
   /** lecciones terminadas */
   progreso: Record<string, { fecha: number }>
   /** registro por jugada (nota 1) */
@@ -84,13 +87,16 @@ export interface Respaldo {
 
 /** El archivo que se descarga: JSON con formato fijo (exportar → importar → exportar da los mismos bytes). */
 export function exportar(r: Omit<Respaldo, 'app' | 'version'>): string {
-  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio, progreso: r.progreso, registro: r.registro, repaso: r.repaso ?? {} }
+  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 2, favoritas: r.favoritas, progreso: r.progreso, registro: r.registro, repaso: r.repaso ?? {} }
   return JSON.stringify(respaldo, null, 1) + '\n'
 }
 
 export class ErrorImportar extends Error {}
 
-/** Lee un archivo exportado. Si no es de esta app, dice qué pasó (N9). */
+/**
+ * Lee un archivo exportado. Si no es de esta app, dice qué pasó (N9). Un respaldo de antes de las favoritas
+ * (versión 1, con el repertorio de la guía) también se lee: su avance pasa a los ids nuevos y las favoritas quedan vacías.
+ */
 export function importar(texto: string): Respaldo {
   let d: unknown
   try {
@@ -98,11 +104,22 @@ export function importar(texto: string): Respaldo {
   } catch {
     throw new ErrorImportar('El archivo no se pudo leer: no es un respaldo de esta app (JSON dañado).')
   }
-  const r = d as Partial<Respaldo>
-  if (r?.app !== 'chess-mis-aperturas' || r.version !== 1 || !r.repertorio || !Array.isArray(r.repertorio.lineas)) {
-    throw new ErrorImportar('Ese archivo no es un respaldo de tu repertorio. Escoge el archivo que exportaste desde esta app.')
+  const r = d as Partial<Omit<Respaldo, 'version'>> & { version?: number; repertorio?: { lineas?: unknown } }
+  const v1 = r?.version === 1 && !!r.repertorio && Array.isArray(r.repertorio.lineas)
+  const v2 = r?.version === 2 && Array.isArray(r.favoritas)
+  if (r?.app !== 'chess-mis-aperturas' || !(v1 || v2)) {
+    throw new ErrorImportar('Ese archivo no es un respaldo de esta app. Escoge el archivo que exportaste desde aquí.')
   }
-  return { app: 'chess-mis-aperturas', version: 1, repertorio: r.repertorio as Repertorio, progreso: r.progreso ?? {}, registro: r.registro ?? [], repaso: r.repaso ?? {} }
+  const progreso = r.progreso ?? {}
+  const repaso = r.repaso ?? {}
+  return {
+    app: 'chess-mis-aperturas',
+    version: 2,
+    favoritas: v2 ? r.favoritas!.filter((x) => typeof x === 'string') : [],
+    progreso: v1 ? migrarIds(progreso) : progreso,
+    registro: r.registro ?? [],
+    repaso: v1 ? migrarIds(repaso) : repaso,
+  }
 }
 
 /**

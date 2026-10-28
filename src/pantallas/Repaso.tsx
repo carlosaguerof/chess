@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
+import { leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { Practica } from './Leccion.tsx'
@@ -7,8 +7,7 @@ import { alRepasar, dia, ESCALONES, guardarRepaso, leerRepaso, paraHoy, sumarDia
 
 /** R7: el "Repaso de hoy": las líneas que tocan hoy, una tras otra, solo con preguntas. */
 export function Repaso() {
-  const [rep] = useRepertorio()
-  const lista = useMemo(() => cursos(rep), [rep])
+  const lista = useMemo(() => cursos(), [])
   const lecciones = useMemo(() => lista.flatMap((c) => c.lecciones), [lista])
   // la lista de hoy se fija al abrir: lo que repaso ya no se reordena mientras repaso
   const [hoy] = useState(() => paraHoy(leerRepaso(), leerProgreso(), lecciones, dia(), leerRegistro()))

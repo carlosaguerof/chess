@@ -15,14 +15,13 @@ test('T20 · recorrido de pantallas que faltaban en las capturas', async ({ page
   await page.goto('/#/historial')
   await expect(page.getByText('Todavía no terminas ninguna partida')).toBeVisible()
   await captura(page, info, 't20-historial-vacio')
-  // Aprender, con el enlace a la base
+  // Aprender (Nota 1): "Aperturas y defensas", vacía la primera vez, con su botón a Todas
   await page.goto('/#/cursos')
-  await expect(page.getByTestId('ver-aperturas')).toBeVisible()
+  await expect(page.getByTestId('ir-a-todas')).toBeVisible()
   await captura(page, info, 't20-aprender')
-  // Repertorio: el menú de opciones (el de cada línea sale en las capturas de la T10)
-  await page.goto('/#/repertorio')
-  await page.getByTestId('menu-repertorio').click()
-  await expect(page.getByTestId('importar-pgn')).toBeVisible()
+  // Tus datos (exportar e importar, en el menú Más)
+  await page.goto('/#/datos')
+  await expect(page.getByTestId('exportar')).toBeVisible()
   await captura(page, info, 't20-repertorio-menu')
   // el motor tarda en cargar: se ve que está cargando (N1)
   await page.route('**/motor/*.wasm', async (r) => {

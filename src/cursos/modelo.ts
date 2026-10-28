@@ -1,7 +1,7 @@
 import { Chess, type Square } from 'chess.js'
-import type { Base } from '../base/tipos.ts'
+import type { Apertura, Base } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
-import { esMiPly, GUIA, type Repertorio } from '../repertorio/modelo.ts'
+import { esMiPly, frecuenciaPara, GUIA, type Repertorio } from '../repertorio/modelo.ts'
 import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts'
 
 /** Un curso por apertura (y color), primero los de mi repertorio; una lección por variante, por frecuencia. */
@@ -26,6 +26,8 @@ export interface Curso {
   nombre: string
   enRepertorio: boolean
   lecciones: Leccion[]
+  /** las jugadas que definen la apertura (el tablero chico de su tarjeta) */
+  raiz?: string[]
 }
 
 const nombreColor = (c: ColorCorto) => (c === 'w' ? 'con blancas' : 'con negras')
@@ -68,6 +70,33 @@ export function cursosDe(base: Base, rep: Repertorio): Curso[] {
       cursos.push({ id, apertura: a.id, color, nombre: `${a.nombre} (${nombreColor(color)})`, enRepertorio: false, lecciones })
     }
   return cursos
+}
+
+/**
+ * Nota 1 (L3): "Aperturas y defensas". Un curso por cada apertura de la base y cada color con que se juega; una
+ * lección por variante, de la más común a la más rara. Los ids de las lecciones son los de siempre
+ * ("caro-kann:b/b:caro-kann/avance-short"), para que el avance guardado se conserve.
+ */
+export function cursosDeLaBase(base: Base): Curso[] {
+  const r: Curso[] = []
+  for (const a of base.aperturas)
+    for (const color of ['w', 'b'] as ColorCorto[]) {
+      const vs = a.variantes.filter((v) => v.lado === 'ambos' || (v.lado === 'blancas') === (color === 'w'))
+      if (vs.length === 0) continue
+      const id = `${a.id}:${color}`
+      const lecciones = porFrecuencia(
+        vs.map((v) => ({ id: `${id}/${color}:${v.clave}`, cursoId: id, nombre: v.nombre, familia: v.familia, plan: v.plan, autorPlan: v.autorPlan, frecuencia: frecuenciaPara(v, color, a.lado), color, jugadas: v.jugadas, ingles: v.nombreIngles, eco: v.eco })),
+      )
+      r.push({ id, apertura: a.id, color, nombre: nombreCurso(a, color), enRepertorio: false, lecciones, raiz: a.raiz })
+    }
+  return r
+}
+
+/** "Defensa Caro-Kann" con negras; "Contra la Caro-Kann" con blancas. */
+export function nombreCurso(a: Apertura, color: ColorCorto): string {
+  if (a.id === 'otros-negras') return 'Otras aperturas de blancas'
+  if (color === 'w' && a.nombre.startsWith('Defensa ')) return 'Contra la ' + a.nombre.slice('Defensa '.length)
+  return a.nombre
 }
 
 // ------------------------------------------------------------------ una lección

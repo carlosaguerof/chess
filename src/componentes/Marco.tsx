@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { IconoArbol, IconoCasa, IconoJugar, IconoLibro, IconoMas } from './Iconos.tsx'
+import { IconoCasa, IconoJugar, IconoLibro, IconoMas } from './Iconos.tsx'
 
 export interface EntradaMenu {
   ruta: string
@@ -12,7 +12,6 @@ export const SECCIONES: EntradaMenu[] = [
   { ruta: '/', nombre: 'Inicio', icono: <IconoCasa /> },
   { ruta: '/bots', nombre: 'Jugar', icono: <IconoJugar /> },
   { ruta: '/cursos', nombre: 'Aprender', icono: <IconoLibro /> },
-  { ruta: '/repertorio', nombre: 'Repertorio', icono: <IconoArbol /> },
 ]
 
 /** Lo secundario va en el menú "Más" (nota 5). */

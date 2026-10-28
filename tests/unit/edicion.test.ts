@@ -36,15 +36,32 @@ describe('T10 · escoger qué aprendo (editar mi repertorio)', () => {
     expect(deshacerBorrado(b.repertorio, b)).toEqual(inicial)
   })
 
-  it('exportar → importar → exportar da exactamente los mismos bytes, con el registro y el avance', () => {
-    const rep = editarLinea(agregarDeBase(inicial, base, najdorf.clave, 'b'), inicial.lineas[2]!.id, { plan: 'ñandú «acentos» y comillas' })
+  it('exportar → importar → exportar da exactamente los mismos bytes, con las favoritas, el registro y el avance', () => {
+    const favoritas = ['caro-kann:b', 'italiana:w']
     const progreso = { 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1793190000000 } }
-    const registro = [{ fen: 'x', esperada: 'c6', resultado: 'fallo', lugar: 'curso', fecha: 1793190000001 }]
-    const texto = exportar({ repertorio: rep, progreso, registro })
+    const registro = [{ fen: 'x', esperada: 'c6', resultado: 'fallo', lugar: 'curso', fecha: 1793190000001, linea: 'ñandú «acentos» y comillas' }]
+    const texto = exportar({ favoritas, progreso, registro })
     const leido = importar(texto)
     expect(exportar(leido)).toBe(texto)
-    expect(leido.repertorio).toEqual(rep)
+    expect(leido.favoritas).toEqual(favoritas)
     expect(leido.registro).toEqual(registro)
+  })
+
+  it('un respaldo de antes de las favoritas (versión 1) se lee: el avance pasa a los ids nuevos y las favoritas quedan vacías', () => {
+    const rep = editarLinea(agregarDeBase(inicial, base, najdorf.clave, 'b'), inicial.lineas[2]!.id, { plan: 'otro plan' })
+    const viejo = JSON.stringify({
+      app: 'chess-mis-aperturas',
+      version: 1,
+      repertorio: rep,
+      progreso: { 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1 }, 'siciliana:w/siciliana/smith-morra': { fecha: 2 } },
+      registro: [],
+      repaso: { 'siciliana:w/siciliana/smith-morra': { escalon: 2, proxima: '2026-11-01' } },
+    })
+    const leido = importar(viejo)
+    expect(leido.version).toBe(2)
+    expect(leido.favoritas).toEqual([])
+    expect(leido.progreso).toEqual({ 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1 }, 'siciliana:w/w:siciliana/smith-morra': { fecha: 2 } })
+    expect(leido.repaso).toEqual({ 'siciliana:w/w:siciliana/smith-morra': { escalon: 2, proxima: '2026-11-01' } })
   })
 
   it('importar un archivo que no es de la app dice qué pasó, sin códigos', () => {

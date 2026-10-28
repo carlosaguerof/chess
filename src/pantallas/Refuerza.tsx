@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
-import { useRepertorio } from '../repertorio/estado.ts'
+import { repertorioCompleto, useRepertorioFavoritas } from '../aprender/favoritas.ts'
+import type { Repertorio } from '../repertorio/modelo.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
-import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
+import { jugadasParaRefuerza, ordenRefuerza, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
 import { aperturaPorId } from '../base/base.ts'
 
 const nombreAp = (id: string) => aperturaPorId(id)?.nombre ?? id
@@ -22,11 +23,11 @@ const POR_RONDA = 10
 
 /** "Refuerza lo que fallas" (nota 1): primero lo que más fallo, después lo que llevo más tiempo sin practicar. */
 export function Refuerza() {
-  const [rep] = useRepertorio()
+  const rep = useRepertorioFavoritas()
   const [ronda, setRonda] = useState<JugadaARepasar[] | null>(null)
   const [vuelta, setVuelta] = useState(0)
-  const orden = useMemo(() => ordenRefuerza(jugadasDeMiRepertorio(rep, leerRegistro())), [rep, vuelta, ronda]) // eslint-disable-line react-hooks/exhaustive-deps
-  if (ronda) return <Ronda jugadas={ronda} rep={rep} onTerminar={() => (setRonda(null), setVuelta(vuelta + 1))} />
+  const orden = useMemo(() => ordenRefuerza(jugadasParaRefuerza(rep, repertorioCompleto(), leerRegistro())), [rep, vuelta, ronda]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (ronda) return <Ronda jugadas={ronda} rep={repertorioCompleto()} onTerminar={() => (setRonda(null), setVuelta(vuelta + 1))} />
   const falladas = orden.filter((j) => j.fallos > 0).length
   const nunca = orden.filter((j) => j.intentos === 0).length
   return (
@@ -57,7 +58,7 @@ function posicionCorta(j: JugadaARepasar): string {
   return j.camino.length > 0 ? `después de ${ultima}` : 'tu primera jugada'
 }
 
-function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: ReturnType<typeof useRepertorio>[0]; onTerminar: () => void }) {
+function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: Repertorio; onTerminar: () => void }) {
   const [i, setI] = useState(0)
   const actual = jugadas[i]
   const leccion: Leccion | null = actual

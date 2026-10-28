@@ -55,7 +55,8 @@ test.describe('T14 · reloj', () => {
 })
 
 test('el reloj no corre con la app oculta aunque el bot juegue mientras tanto, ni mientras decido tras un desvío', async ({ page }, info) => {
-  // la app "oculta" a voluntad (como al bloquear el iPhone)
+  // la app "oculta" a voluntad (como al bloquear el iPhone); la Caro-Kann en mis favoritas para el desvío (Nota 1)
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
   await page.addInitScript(() => {
     const w = window as unknown as { __vis?: string }
     Object.defineProperty(document, 'visibilityState', { get: () => w.__vis ?? 'visible', configurable: true })

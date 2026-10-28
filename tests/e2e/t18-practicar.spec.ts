@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test'
 import { captura, tocar } from './_util.ts'
 
 test('del resumen con una salida de línea a "Practicar esta línea", y la práctica arranca en esa línea', async ({ page }, info) => {
-  // con negras: 1.e4 c6 2.d4 d5 3.e5, y me salgo con 3...e6 (mi línea dice 3...Af5)
+  // con negras: 1.e4 c6 2.d4 d5 3.e5, y me salgo con 3...e6 (mi línea dice 3...Af5); la Caro-Kann en mis favoritas (Nota 1)
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
   await page.goto('/#/prueba-partida?bot=brisa&color=b&guia=1&mislineas=0&jugadas=e2e4,c7c6,d2d4,d7d5,e4e5')
   await tocar(page, info, 'e7')
   await tocar(page, info, 'e6')

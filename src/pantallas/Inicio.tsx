@@ -4,7 +4,7 @@ import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { empezarPartida, partidaEnCurso } from '../partida/usePartidaBot.ts'
 import { navegar } from '../ruta.ts'
-import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
+import { leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
@@ -14,11 +14,10 @@ export function Inicio() {
   const enCurso = partidaEnCurso()
   const rival = personajePorId(enCurso?.botId)
   const [confirmar, setConfirmar] = useState(false)
-  const [rep] = useRepertorio()
   // R7: el repaso de hoy (si el interruptor está prendido)
   const repaso = (() => {
     if (!repasoActivo()) return null
-    const lecciones = cursos(rep).flatMap((c) => c.lecciones)
+    const lecciones = cursos().flatMap((c) => c.lecciones)
     const hechas = leerProgreso()
     const registro = leerRegistro()
     const hoy = paraHoy(leerRepaso(), hechas, lecciones, dia(), registro)

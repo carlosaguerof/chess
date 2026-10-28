@@ -9,12 +9,10 @@ import { Inicio } from './pantallas/Inicio.tsx'
 import { Jugar } from './pantallas/Jugar.tsx'
 import { Partida } from './pantallas/Partida.tsx'
 import { Licencias } from './pantallas/Licencias.tsx'
-import { Repertorio } from './pantallas/Repertorio.tsx'
-import { Cursos } from './pantallas/Cursos.tsx'
-import { Curso } from './pantallas/Curso.tsx'
 import { Leccion } from './pantallas/Leccion.tsx'
 import { Refuerza } from './pantallas/Refuerza.tsx'
-import { Aperturas, Apertura } from './pantallas/Aperturas.tsx'
+import { AperturasYDefensas, PaginaApertura, PaginaVariante } from './pantallas/AperturasYDefensas.tsx'
+import { Respaldo } from './pantallas/Respaldo.tsx'
 import { Historial } from './pantallas/Historial.tsx'
 import { Ajustes } from './pantallas/Ajustes.tsx'
 import { Repaso } from './pantallas/Repaso.tsx'
@@ -23,13 +21,18 @@ import type { EstiloRetrato } from './bots/retratos.ts'
 
 const MAS: EntradaMas[] = [
   { nombre: 'Mis partidas', ruta: '/historial' },
-  { nombre: 'Aperturas (la base)', ruta: '/aperturas' },
   { nombre: 'Ajustes', ruta: '/ajustes' },
+  { nombre: 'Tus datos', ruta: '/datos' },
   { nombre: 'Código fuente y licencias', ruta: '/licencias' },
 ]
 
 export function App() {
   const ruta = useRuta()
+  // cada pantalla nueva empieza arriba (antes se quedaba en la altura de la anterior)
+  // (con llaves: en Chromium, scrollTo devuelve una promesa y React no debe tomarla como limpieza)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [ruta.camino])
   const [primera, segunda] = ruta.partes
   if (import.meta.env.DEV && primera === 'libre') {
     return (
@@ -48,15 +51,17 @@ export function App() {
   if (primera === 'bots') pantalla = <Jugar />
   else if (primera === 'bot' && segunda) pantalla = <Jugar key={segunda} inicial={segunda} />
   else if (primera === 'licencias') pantalla = <Licencias />
-  else if (primera === 'cursos') pantalla = <Cursos />
+  // Nota 1: Aprender es "Aperturas y defensas" (Mis favoritas / Todas); Repertorio y Aperturas ya no son pantallas aparte
+  else if (primera === 'cursos') pantalla = <AperturasYDefensas key={segunda ?? ''} pestana={segunda === 'todas' ? 'todas' : 'favoritas'} />
+  else if (primera === 'curso' && segunda && ruta.partes[2] !== undefined) pantalla = <PaginaVariante key={ruta.camino} id={decodeURIComponent(segunda)} indice={Number(ruta.partes[2])} />
+  else if (primera === 'curso' && segunda) pantalla = <PaginaApertura id={decodeURIComponent(segunda)} />
+  else if (primera === 'repertorio') pantalla = <AperturasYDefensas pestana="favoritas" />
+  else if (primera === 'aperturas' || primera === 'apertura') pantalla = <AperturasYDefensas pestana="todas" />
   else if (primera === 'refuerza') pantalla = <Refuerza />
-  else if (primera === 'aperturas') pantalla = <Aperturas />
   else if (primera === 'historial') pantalla = <Historial />
   else if (primera === 'ajustes') pantalla = <Ajustes />
+  else if (primera === 'datos') pantalla = <Respaldo />
   else if (primera === 'repaso') pantalla = <Repaso />
-  else if (primera === 'apertura' && segunda) pantalla = <Apertura id={segunda} />
-  else if (primera === 'curso' && segunda) pantalla = <Curso id={decodeURIComponent(segunda)} />
-  else if (primera === 'repertorio') pantalla = <Repertorio colorInicial={segunda === 'negras' ? 'b' : 'w'} />
   else pantalla = <Inicio />
   return (
     <Marco actual={ruta.camino} secciones={SECCIONES} mas={MAS}>

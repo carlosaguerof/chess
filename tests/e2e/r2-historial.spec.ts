@@ -2,6 +2,8 @@ import { expect, test } from '@playwright/test'
 import { captura, jugar, tocar } from './_util.ts'
 
 test('R2 · las partidas terminadas quedan en "Mis partidas", con dónde me salgo más', async ({ page }, info) => {
+  // mi repertorio (Nota 1): la Caro-Kann en mis favoritas
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
   await page.goto('/#/historial')
   await expect(page.getByText('Todavía no terminas ninguna partida')).toBeVisible()
   // 1) una que gano (mate del pastor preparado)

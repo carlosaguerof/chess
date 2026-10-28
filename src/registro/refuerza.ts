@@ -45,6 +45,17 @@ export function jugadasDeMiRepertorio(rep: Repertorio, registro: EntradaRegistro
 }
 
 /**
+ * Nota 1: lo que Refuerza propone son las jugadas de mis favoritas (aunque no las haya practicado) y todas las que ya
+ * practiqué en cualquier apertura de la base (en un curso, un repaso o una partida con la guía).
+ */
+export function jugadasParaRefuerza(favoritas: Repertorio, todas: Repertorio, registro: EntradaRegistro[]): JugadaARepasar[] {
+  const deFavoritas = jugadasDeMiRepertorio(favoritas, registro)
+  const ya = new Set(deFavoritas.map((j) => clave(j.fen, j.esperada)))
+  const practicadas = jugadasDeMiRepertorio(todas, registro).filter((j) => j.intentos > 0 && !ya.has(clave(j.fen, j.esperada)))
+  return [...deFavoritas, ...practicadas]
+}
+
+/**
  * "Refuerza lo que fallas": primero las jugadas que más fallo; después las que llevo más tiempo sin practicar
  * (las que nunca he practicado, antes que todas).
  */

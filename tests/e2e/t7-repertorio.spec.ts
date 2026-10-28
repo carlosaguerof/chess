@@ -1,26 +1,23 @@
 import { expect, test } from '@playwright/test'
 import { captura } from './_util.ts'
 
-test.describe('T7 · mi repertorio, visible', () => {
-  test('el árbol de negras muestra las 4 variantes de la Caro-Kann con su frecuencia, y distingue lo de la base', async ({ page }, info) => {
-    await page.goto('/#/repertorio')
-    await expect(page.getByRole('heading', { name: 'Mi repertorio' })).toBeVisible()
+test.describe('T7 · mi repertorio (mis favoritas), visible', () => {
+  test('con la Caro-Kann en favoritas: sus variantes de la más común a la más rara, sin etiquetas de dónde sale cada cosa', async ({ page }, info) => {
+    await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
+    await page.goto('/#/cursos')
     await captura(page, info, 't7-repertorio-blancas')
-    await page.getByTestId('tab-negras').click()
-    const arbol = page.getByTestId('arbol-negras')
-    await expect(arbol).toBeVisible()
-    const familia = (nombre: string) => arbol.locator(`[data-familia="${nombre}"]`).first()
-    await expect(familia('Variante del Avance').locator('.rama-fila').first()).toContainText('3.e5')
-    await expect(familia('Variante del Avance').locator('[data-frecuencia]').first()).toHaveAttribute('data-frecuencia', '5')
-    await expect(familia('Variante Clásica').locator('[data-frecuencia]').first()).toHaveAttribute('data-frecuencia', '4')
-    await expect(familia('Variante del Cambio').locator('[data-frecuencia]').first()).toHaveAttribute('data-frecuencia', '3')
-    await expect(familia('Ataque de los Dos Caballos').locator('[data-frecuencia]').first()).toHaveAttribute('data-frecuencia', '2')
-    // lo mío contra lo de la base
-    await expect(arbol.locator('.chip-rep').first()).toHaveText('en tu repertorio')
-    await expect(arbol.locator('.solo-base .chip-base').first()).toHaveText('solo en la base')
-    // el texto de mi guía donde coincide con la teoría, y el plan de la base marcado como de la IA
-    await expect(arbol.locator('.plan').first()).toContainText('de tu guía')
-    await expect(familia('Variante del Avance').locator('.plan').first()).toContainText('redactado por la IA')
+    await page.getByTestId('tarjeta-caro-kann:b').locator('a').click()
+    const filas = page.getByTestId('variante')
+    // el orden: el Avance (5), luego la Clásica (4), el Cambio (3) y los Dos Caballos (2)
+    const frec = await filas.evaluateAll((fs) => fs.map((f) => Number(f.getAttribute('data-frecuencia'))))
+    expect(frec).toEqual([...frec].sort((a, b) => b - a))
+    const nombres = await filas.allTextContents()
+    const primero = (familia: string) => nombres.findIndex((n) => n.includes(familia))
+    expect(primero('Variante del Avance')).toBe(0)
+    expect(primero('Variante Clásica')).toBeLessThan(primero('Variante del Cambio'))
+    expect(primero('Variante del Cambio')).toBeLessThan(primero('Ataque de los Dos Caballos'))
+    // §3: nada de "de tu guía", "en tu repertorio" ni "redactado por la IA" en la vista
+    await expect(page.locator('main')).not.toContainText(/de tu guía|en tu repertorio|solo en la base|redactado por la IA/)
     await captura(page, info, 't7-repertorio-negras')
   })
 })

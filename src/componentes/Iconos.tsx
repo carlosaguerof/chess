@@ -15,6 +15,11 @@ export const IconoFoco = (p: P) => (<svg {...base} {...p}><path d="M9 18h6" /><p
 export const IconoOjo = (p: P) => (<svg {...base} {...p}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>)
 export const IconoOpciones = (p: P) => (<svg {...base} {...p}><path d="M4 7h10" /><path d="M18 7h2" /><circle cx="16" cy="7" r="2" /><path d="M4 17h4" /><path d="M12 17h8" /><circle cx="10" cy="17" r="2" /></svg>)
 export const IconoAbajo = (p: P) => (<svg {...base} {...p}><path d="m6 9 6 6 6-6" /></svg>)
+export const IconoAdelante = (p: P) => (<svg {...base} {...p}><path d="m9 18 6-6-6-6" /></svg>)
+export const IconoInicio = (p: P) => (<svg {...base} {...p}><path d="M6 6v12" /><path d="m17 18-6-6 6-6" /></svg>)
+export const IconoFinal = (p: P) => (<svg {...base} {...p}><path d="M18 6v12" /><path d="m7 18 6-6-6-6" /></svg>)
+/** El corazón de las favoritas: sin rellenar, o relleno al guardarla (Nota 1). */
+export const IconoCorazon = ({ lleno, className }: { lleno: boolean; className?: string }) => (<svg {...base} className={className} fill={lleno ? 'currentColor' : 'none'}><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.7 7.8 3.9 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.4 0 5.6 3.3 4.5 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" /></svg>)
 
 /** El rey para escoger color (dibujo propio): relleno blanco o negro, con contorno. */
 const TrazosRey = ({ color }: { color: 'w' | 'b' }) => (
