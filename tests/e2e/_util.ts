@@ -1,8 +1,8 @@
 import { expect, type Page, type TestInfo } from '@playwright/test'
 
-/** Guarda una captura en iterations/v1/capturas/<perfil>/<nombre>.png */
+/** Guarda una captura en iterations/v2/capturas/pruebas/<perfil>/<nombre>.png (las de la v1 se quedan como estaban) */
 export async function captura(page: Page, info: TestInfo, nombre: string) {
-  await page.screenshot({ path: `iterations/v1/capturas/${info.project.name}/${nombre}.png`, fullPage: false })
+  await page.screenshot({ path: `iterations/v2/capturas/pruebas/${info.project.name}/${nombre}.png`, fullPage: false })
 }
 
 export const esCelular = (info: TestInfo) => info.project.name === 'iphone'

@@ -1,6 +1,7 @@
 import datos from './personajes.json' with { type: 'json' }
 import type { Temperamento } from '../motor/elegir.ts'
 import { NIVELES } from '../motor/niveles.ts'
+import type { Aspecto } from './retratos.ts'
 
 export interface Personaje {
   id: string
@@ -9,11 +10,13 @@ export interface Personaje {
   temperamento: Temperamento
   color: string
   frase: string
+  /** los rasgos de su retrato (L1) */
+  aspecto: Aspecto
   /** sus aperturas: ids de la base. blancas = lo que abre; negras = cómo se defiende */
   estilo: { blancas: string[]; negras: string[] }
 }
 
-export const PERSONAJES = datos.personajes as Personaje[]
+export const PERSONAJES = datos.personajes as unknown as Personaje[]
 
 /** Niveles calibrados: solo esos personajes se pueden escoger (T4: 300–1200; T13 completa el resto). */
 export const NIVELES_CALIBRADOS = new Set(NIVELES.filter((n) => (n as { calibrado?: boolean }).calibrado !== false).map((n) => n.elo))
