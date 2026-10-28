@@ -96,8 +96,8 @@ h1, h2, h3 { margin: 0; }
 .grupo-bots { margin-bottom: 18px; }
 .grupo-bots h2 { font-size: 15px; color: var(--texto-suave); margin: 0 0 8px; }
 .grupo-bots h2 small { color: var(--texto-apagado); font-weight: 500; margin-left: 6px; }
-.grupo-bots ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-@media (min-width: 900px) { .grupo-bots ul { grid-template-columns: 1fr 1fr; } }
+.grupo-bots ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+@media (min-width: 900px) { .grupo-bots ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .fila-bot { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--fondo-panel); border-radius: var(--radio); text-decoration: none; }
 .fila-bot:hover { background: #2e2c29; }
 .fila-bot-texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; }

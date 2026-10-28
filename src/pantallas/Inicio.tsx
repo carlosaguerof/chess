@@ -72,7 +72,7 @@ export function Inicio() {
           </a>
         ) : (
           <div className="tarjeta repaso-hoy" data-testid="repaso-hoy" data-n={0}>
-            <strong>Repaso de hoy: listo</strong>
+            <strong>{repaso.aprendidas ? 'Repaso de hoy: listo' : 'Repaso de hoy'}</strong>
             <span className="apagado">
               {repaso.aprendidas ? `Mañana ${repaso.manana === 1 ? 'toca 1 línea' : `tocan ${repaso.manana} líneas`}.` : 'Cuando termines una lección en Aprender, aquí vuelve antes de que la olvides.'}
             </span>

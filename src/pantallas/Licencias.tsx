@@ -25,6 +25,8 @@ export function Licencias() {
         <li>Motor: Stockfish 19 lite (GPL-3.0){motor.tipo === 'listo' ? ` · cargado: ${motor.version}` : ''}.</li>
         <li>Tablero: chessground de lichess (GPL-3.0). Piezas cburnett (CC BY-SA 3.0).</li>
         <li>Aperturas: lista abierta de lichess (CC0). Planes redactados por la IA.</li>
+        <li>Tipografías: Inter y JetBrains Mono (OFL-1.1), instaladas en la app.</li>
+        <li>Avatares, íconos y sonidos: hechos en el código de esta app (GPL-3.0 o posterior).</li>
       </ul>
     </div>
   )
