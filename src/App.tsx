@@ -14,6 +14,7 @@ import { Repertorio } from './pantallas/Repertorio.tsx'
 import { Cursos } from './pantallas/Cursos.tsx'
 import { Curso } from './pantallas/Curso.tsx'
 import { Leccion } from './pantallas/Leccion.tsx'
+import { Refuerza } from './pantallas/Refuerza.tsx'
 
 const MAS: EntradaMas[] = [{ nombre: 'Código fuente y licencias', ruta: '/licencias' }]
 
@@ -37,6 +38,7 @@ export function App() {
   else if (primera === 'bot' && segunda) pantalla = <DetalleBot id={segunda} />
   else if (primera === 'licencias') pantalla = <Licencias />
   else if (primera === 'cursos') pantalla = <Cursos />
+  else if (primera === 'refuerza') pantalla = <Refuerza />
   else if (primera === 'curso' && segunda) pantalla = <Curso id={decodeURIComponent(segunda)} />
   else if (primera === 'repertorio') pantalla = <Repertorio colorInicial={segunda === 'negras' ? 'b' : 'w'} />
   else pantalla = <Inicio />
