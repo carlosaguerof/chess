@@ -335,13 +335,15 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
     if (!op) {
       if (esMiPly(color, ply)) {
         const linea = ops[0]!
+        // si esa jugada todavía sirve a varias líneas, se nombra lo que comparten (la familia o la apertura)
+        const nombrada = lineaNombrada(linea.lineas)
         return {
           caso: 'me-sali',
           hastaPly: ply - 1,
-          texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} te saliste tú: tu línea decía ${num(linea.san, ply)} (${linea.lineas[0]!.nombre}).`,
-          linea: linea.lineas[0],
+          texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} te saliste tú: tu línea decía ${num(linea.san, ply)} (${nombrada.nombre}).`,
+          linea: nombrada,
           salida: { ply, jugue: jugada, linea: linea.san },
-          ingles: inglesDeLinea(linea.lineas[0]),
+          ingles: inglesDeResumen(nombrada),
         }
       }
       return {
@@ -352,10 +354,17 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
         ingles: inglesDeResumen(ultimaLinea),
       }
     }
-    ultimaLinea = op.lineas.length > 1 && new Set(op.lineas.map((l) => l.familia)).size === 1 ? { ...op.lineas[0]!, nombre: op.lineas[0]!.familia } : op.lineas.length > 1 ? { ...op.lineas[0]!, nombre: ctx_nombreApertura(op.lineas[0]!) } : op.lineas[0]
+    ultimaLinea = lineaNombrada(op.lineas)
   }
   const ultima = historia.length > 0 ? num(historia[historia.length - 1]!, historia.length - 1) : 'el inicio'
   return { caso: 'completa', hastaPly: historia.length - 1, texto: `Seguiste tu línea toda la partida, hasta ${ultima}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}.`, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
+}
+
+/** La línea con el nombre de lo que comparten: ella misma si es una; su familia; o su apertura (el curso). */
+function lineaNombrada(lineas: LineaRepertorio[]): LineaRepertorio {
+  const l = lineas[0]!
+  if (lineas.length === 1) return l
+  return new Set(lineas.map((x) => x.familia)).size === 1 ? { ...l, nombre: l.familia } : { ...l, nombre: ctx_nombreApertura(l) }
 }
 
 /** En el resumen, si la línea se nombra por su familia o su curso, solo la apertura en inglés (sin la variante). */
