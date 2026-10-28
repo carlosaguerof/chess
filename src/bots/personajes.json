@@ -32,7 +32,7 @@
    "elo": 200,
    "temperamento": "agresivo",
    "color": "#d9534f",
-   "frase": "Saco la dama temprano. ¿Qué podría salir mal?",
+   "frase": "Si algo se mueve en el tablero, lo persigo.",
    "estilo": {
     "blancas": [
      "italiana"
@@ -570,7 +570,7 @@
    "elo": 1000,
    "temperamento": "defensivo",
    "color": "#741b47",
-   "frase": "No me gusta perder, así que casi no ataco.",
+   "frase": "Me gustan las posiciones cerradas y tranquilas.",
    "estilo": {
     "blancas": [
      "londres",

@@ -77,6 +77,7 @@ export function Inicio() {
           <strong>Refuerza lo que fallas</strong>
           <span className="apagado">Las jugadas que más fallas</span>
         </div>
+        <span className="boton secundario chico">Reforzar</span>
       </a>
       {confirmar && (
         <Dialogo

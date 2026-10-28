@@ -69,3 +69,18 @@ describe('Nota 1 · lo guardado pasa al modelo nuevo', () => {
     expect(JSON.parse(memoria.get('ajedrez.v1.progreso')!)).toEqual({})
   })
 })
+
+describe('Nota 1 · las favoritas son el repertorio', () => {
+  it('"Que juegue mis líneas": sin favoritas no hay jugada (el bot juega su libro); con la Caro-Kann, entra a ella', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { jugadaDeMisLineas } = await import('../../src/guia/guia.ts')
+    expect(repertorioDeFavoritas([]).lineas).toHaveLength(0)
+    expect(jugadaDeMisLineas(repertorioDeFavoritas([]), 'b', [], () => 0.5)).toBeNull()
+    const ck = repertorioDeFavoritas(['caro-kann:b'])
+    expect(ck.lineas).toHaveLength(22)
+    expect(jugadaDeMisLineas(ck, 'b', [], () => 0.5)).toBe('e4')
+    // tras 1.e4 c6, el bot sigue en alguna línea de la Caro-Kann
+    const segunda = jugadaDeMisLineas(ck, 'b', ['e4', 'c6'], () => 0.5)
+    expect(ck.lineas.some((l) => l.jugadas[2] === segunda)).toBe(true)
+  })
+})

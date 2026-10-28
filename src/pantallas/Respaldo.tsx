@@ -36,7 +36,7 @@ export function Respaldo() {
   return (
     <div className="respaldo">
       <h1>Tus datos</h1>
-      <p className="apagado">Tus favoritas y tu avance viven en este navegador. Guárdalos en un archivo para pasarlos a otro.</p>
+      <p className="apagado">Guarda tus favoritas y tu avance en un archivo.</p>
       <div className="tarjeta botones-respaldo">
         <button type="button" className="boton secundario" onClick={descargar} data-testid="exportar">
           Exportar a un archivo

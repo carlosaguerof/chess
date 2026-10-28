@@ -392,3 +392,5 @@ a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-
 
 /* ---------- lección: el plan, sin etiqueta de quién lo escribió (L4) ---------- */
 .plan-leccion { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.45; }
+.empezar { display: flex; flex-direction: column; gap: 6px; }
+.empezar p { margin: 0; font-size: 13px; text-align: center; }

@@ -25,6 +25,24 @@ describe('L1 · retratos de los personajes en tres estilos', () => {
       for (const s of svgs) expect(s).not.toMatch(/<image\b/)
     })
 
+  // L5 (pase 1): la variedad se mide sobre lo que cada estilo DIBUJA, no solo sobre los datos del personaje
+  for (const e of ESTILOS)
+    it(`${e.nombre}: el dibujo es variado (5 pieles, varios peinados y colores de pelo, y barbas, lentes o gorros)`, () => {
+      const ops = PERSONAJES.map((p) => opcionesRetrato(e.id, p) as Record<string, unknown>)
+      const distintos = (k: string) => new Set(ops.map((o) => JSON.stringify(o[k]))).size
+      expect(distintos('skinColor')).toBe(5)
+      const peinado = e.id === 'toon' ? ['hair', 'rearHair'] : e.id === 'avataaars' ? ['top'] : ['head']
+      expect(new Set(ops.map((o) => JSON.stringify(peinado.map((k) => o[k])))).size).toBeGreaterThanOrEqual(8)
+      expect(distintos(e.id === 'peeps' ? 'headContrastColor' : 'hairColor')).toBeGreaterThanOrEqual(7)
+      const sombreros = /hat|hijab|turban|winterHat|hatHip|hatBeanie/
+      const conAlgo = ops.filter((o) => o.beardProbability === 100 || o.facialHairProbability === 100 || o.accessoriesProbability === 100 || sombreros.test(JSON.stringify(o.top ?? o.head ?? ''))).length
+      expect(conAlgo).toBeGreaterThanOrEqual(12)
+      // lo que cada estilo puede dibujar: Ilustrado no trae lentes ni gorros (sus accesorios son las barbas)
+      const conLentes = ops.filter((o) => o.accessoriesProbability === 100).length
+      if (e.id === 'toon') expect(conLentes).toBe(0)
+      else expect(conLentes).toBeGreaterThanOrEqual(10)
+    })
+
   it('variados: edades, pieles, pelo y accesorios', () => {
     const cuenta = <K extends string | number>(f: (p: (typeof PERSONAJES)[number]) => K | undefined) => {
       const m = new Map<K, number>()

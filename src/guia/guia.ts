@@ -120,18 +120,18 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
   const mioEnLinea = opciones.some((o) => o.san === mia)
   if (!mioEnLinea && estaEnRepertorio(ctx.rep, ctx.color, historia)) {
     // llegué a una posición de mi repertorio por otro orden de jugadas (transposición): no es desvío
-    const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : 'tu repertorio'
-    return { tipo: 'en-linea', texto: `Con ${num(mia, ply)} llegaste a ${n === 'tu repertorio' ? n : `la ${n}`} por otro orden de jugadas: ya estás en tu línea.`, ingles: nombreAhora?.ingles }
+    const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : null
+    return { tipo: 'en-linea', texto: n ? `Con ${num(mia, ply)} llegaste a la ${n} por otro orden de jugadas: ya estás en tu línea.` : `Con ${num(mia, ply)} llegaste a tu línea por otro orden de jugadas.`, ingles: nombreAhora?.ingles }
   }
   if (opciones.length === 0) {
     // mi repertorio ya no tiene nada aquí
-    const fuera = ply === 0 ? `Iniciaste con ${num(mia, 0)}.` : `Jugaste ${num(mia, ply)}. Ya estás fuera de tu repertorio: sigue con los principios (desarrolla, controla el centro, enroca).`
+    const fuera = ply === 0 ? `Iniciaste con ${num(mia, 0)}.` : `Jugaste ${num(mia, ply)}. Ya saliste de tu línea: sigue con los principios (desarrolla, controla el centro, enroca).`
     return { tipo: 'fuera', texto: fuera }
   }
   const mio = opciones.find((o) => o.san === mia)
   if (!mio) {
     const linea = opciones[0]!
-    const donde = nombreAntes ? `de la ${nombreAntes.variante ?? nombreAntes.apertura}` : 'de tu repertorio'
+    const donde = nombreAntes ? `de la ${nombreAntes.variante ?? nombreAntes.apertura}` : 'de tu línea'
     return {
       tipo: 'desvio',
       texto: `Te desviaste ${donde}: jugaste ${num(mia, ply)} y tu línea dice ${num(linea.san, ply)}.`,
@@ -325,7 +325,7 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
     const ops = siguientesEnRepertorio(rep, color, historia.slice(0, ply))
     const jugada = historia[ply]!
     if (ops.length === 0) {
-      const texto = ply === 0 ? 'La partida no entró a tu repertorio.' : `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
+      const texto = ply === 0 ? 'La partida no entró a tus favoritas.' : `Seguiste tu línea completa hasta ${num(historia[ply - 1]!, ply - 1)}${ultimaLinea ? ` (${ultimaLinea.nombre})` : ''}. Ahí termina lo que tienes estudiado.`
       return { caso: 'completa', hastaPly: ply - 1, texto, linea: ultimaLinea, ingles: inglesDeResumen(ultimaLinea) }
     }
     const op = ops.find((o) => o.san === jugada)
@@ -352,7 +352,7 @@ export function resumenDePartida(rep: Repertorio, color: ColorCorto, historia: s
       return {
         caso: 'se-salio-rival',
         hastaPly: ply - 1,
-        texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} se salió el rival; tu repertorio esperaba ${ops.map((o) => num(o.san, ply)).join(' o ')}.`,
+        texto: `Seguiste tu línea hasta ${ply > 0 ? num(historia[ply - 1]!, ply - 1) : 'el inicio'}. En ${num(jugada, ply)} se salió el rival; tu línea esperaba ${ops.map((o) => num(o.san, ply)).join(' o ')}.`,
         linea: ultimaLinea,
         ingles: inglesDeResumen(ultimaLinea),
       }
