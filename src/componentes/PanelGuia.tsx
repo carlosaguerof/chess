@@ -14,11 +14,9 @@ export function PanelGuia(props: {
 }) {
   return (
     <div className="panel-guia" data-testid="panel-guia">
-      <p className="panel-guia-titulo">Guía de aperturas</p>
       {props.mensaje && (
         <div className={`mensaje-guia ${props.mensaje.tipo}`} data-testid="mensaje-guia" data-tipo={props.mensaje.tipo} role="status">
           <p>{props.mensaje.texto}</p>
-          {props.mensaje.ingles && <small className="ingles">{props.mensaje.ingles}</small>}
           {props.desvioPendiente && (
             <div className="botones-desvio">
               <button type="button" className="boton secundario chico" onClick={props.onSeguir} data-testid="seguir-desvio">
@@ -34,7 +32,6 @@ export function PanelGuia(props: {
       {props.ayuda && (
         <p className={`aviso-leccion ${props.ayuda.tipo}`} data-testid="ayuda-guia" data-origen={props.ayuda.datos.origen}>
           {props.ayuda.tipo === 'pista' ? props.ayuda.datos.pista : props.ayuda.datos.respuesta}
-          {props.ayuda.tipo === 'respuesta' && props.ayuda.datos.ingles && <small className="ingles">{props.ayuda.datos.ingles}</small>}
         </p>
       )}
       <div className="botones-ayuda">

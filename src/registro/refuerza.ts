@@ -73,7 +73,7 @@ export function ordenRefuerza(js: JugadaARepasar[]): JugadaARepasar[] {
 
 /** Cómo se nombra una jugada: si la comparten varias aperturas, por el color; si varias variantes, por la apertura. */
 export function nombreDeJugada(j: JugadaARepasar, nombreApertura: (id: string) => string): string {
-  if (j.aperturas.size > 1) return j.linea.color === 'w' ? 'Tu repertorio con blancas' : 'Tu repertorio con negras'
+  if (j.aperturas.size > 1) return j.linea.color === 'w' ? 'Con blancas' : 'Con negras'
   if (j.familias.size > 1) return nombreApertura(j.linea.apertura)
   return j.linea.familia
 }

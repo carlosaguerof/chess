@@ -13,7 +13,7 @@ export function Historial() {
     return (
       <div className="historial vacio">
         <h1>Mis partidas</h1>
-        <p className="apagado">Todavía no terminas ninguna partida. Aquí vas a ver cada una y en qué líneas te sales más.</p>
+        <p className="apagado">Todavía no terminas ninguna partida.</p>
         <a className="boton primario" href="#/bots">
           Jugar contra un bot
         </a>
@@ -26,11 +26,10 @@ export function Historial() {
       <p className="apagado" data-testid="totales">
         {h.length} {h.length === 1 ? 'partida' : 'partidas'} · {t.gane} {t.gane === 1 ? 'ganada' : 'ganadas'} · {t.perdi} {t.perdi === 1 ? 'perdida' : 'perdidas'} · {t.tablas} tablas
       </p>
-      <section className="tarjeta">
-        <h2>Dónde me salgo más de mi línea</h2>
-        {salidas.length === 0 ? (
-          <p className="apagado">En ninguna partida te has salido tú de tu repertorio.</p>
-        ) : (
+      {/* §3: la tarjeta solo aparece cuando hay algo que decir */}
+      {salidas.length > 0 && (
+        <section className="tarjeta">
+          <h2>Dónde me salgo más de mi línea</h2>
           <ol className="lista-salidas" data-testid="donde-me-salgo">
             {salidas.map((s) => (
               <li key={s.linea}>
@@ -41,8 +40,8 @@ export function Historial() {
               </li>
             ))}
           </ol>
-        )}
-      </section>
+        </section>
+      )}
       <ol className="lista-partidas" data-testid="lista-partidas">
         {h.map((p) => {
           const bot = personajePorId(p.botId)

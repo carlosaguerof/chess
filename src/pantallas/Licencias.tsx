@@ -25,7 +25,7 @@ export function Licencias() {
         <li>Motor: Stockfish 19 lite (GPL-3.0){motor.tipo === 'listo' ? ` · cargado: ${motor.version}` : ''}.</li>
         <li>Tablero: chessground de lichess (GPL-3.0). Piezas cburnett (CC BY-SA 3.0).</li>
         <li>Aperturas: lista abierta de lichess (CC0). Planes redactados por la IA.</li>
-        <li>Tipografías: Inter y JetBrains Mono (OFL-1.1), instaladas en la app.</li>
+        <li>Tipografía: Inter (OFL-1.1), instalada en la app.</li>
         <li>
           Retratos de los personajes, dibujados con DiceBear (MIT) y adaptados con rasgos y colores para cada personaje:{' '}
           <a href="https://www.figma.com/community/file/1589627891082866389" target="_blank" rel="noreferrer">
