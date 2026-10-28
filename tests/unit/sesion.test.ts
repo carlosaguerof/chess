@@ -17,4 +17,9 @@ describe('T18 · la línea fallada vuelve antes en la misma sesión', () => {
     falladas = actualizarFalladas(falladas, l0!.id, 0) // la repetí bien: sale
     expect(siguienteEnSesion(ck, { [l0!.id]: 1, [l1!.id]: 1 }, l0!, falladas)!.id).toBe(l2!.id)
   })
+  it('una fallada de otro curso no le quita el turno a la fallada de este curso (pase 1 de la T22)', () => {
+    const [l0, l1] = ck.lecciones
+    const falladas = ['eslava:b/x', l0!.id]
+    expect(siguienteEnSesion(ck, {}, l1!, falladas)!.id).toBe(l0!.id)
+  })
 })

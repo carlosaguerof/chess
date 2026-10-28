@@ -22,15 +22,31 @@ test('las tres ayudas se prenden y apagan, se recuerdan al recargar, y el bot si
   await page.getByTestId('ayudas').click()
   for (const a of ['barra', 'amenazas', 'sugerencia']) await expect(page.getByRole('dialog', { name: 'Ayudas' }).getByTestId(`ayuda-${a}`)).toBeChecked()
   await page.getByRole('dialog', { name: 'Ayudas' }).getByRole('button', { name: 'Listo' }).click()
-  // el bot contesta dentro de su rango con las tres prendidas
-  const t0 = Date.now()
+  // el bot contesta dentro de su rango (0.4 a 1.2 s) con las tres prendidas: se mide en la página, desde que mi
+  // jugada está en la lista hasta que aparece la suya (margen anotado: 0.5 s por el sondeo y la carga de la máquina)
   await jugar(page, info, 'c4b3')
-  await expect(page.getByTestId('lista-jugadas').getByTestId('jugada')).toHaveCount(6, { timeout: 10_000 })
-  expect(Date.now() - t0).toBeLessThan(5000)
+  const ms = await page.evaluate(
+    () =>
+      new Promise<number>((listo) => {
+        const lista = () => document.querySelectorAll('[data-testid="lista-jugadas"] [data-testid="jugada"]').length
+        const t0 = performance.now()
+        const ver = () => (lista() >= 6 ? listo(performance.now() - t0) : requestAnimationFrame(ver))
+        ver()
+      }),
+  )
+  expect(ms).toBeLessThanOrEqual(1200 + 500)
   // y se apagan
   await page.getByTestId('ayudas').click()
   for (const a of ['barra', 'amenazas', 'sugerencia']) await page.getByRole('dialog', { name: 'Ayudas' }).getByTestId(`ayuda-${a}`).uncheck({ force: true })
   await page.getByRole('dialog', { name: 'Ayudas' }).getByRole('button', { name: 'Listo' }).click()
   await expect(page.getByTestId('barra-eval')).toHaveCount(0)
   await expect(page.getByTestId('flechas')).toHaveAttribute('data-flechas', '')
+})
+
+test('al terminar por mate, la barra se llena del lado del ganador', async ({ page }, info) => {
+  await page.addInitScript(() => localStorage.setItem('ajedrez.v1.ayudas', JSON.stringify({ barra: true, amenazas: false, sugerencia: false })))
+  await page.goto('/#/prueba-partida?bot=brisa&color=w&guia=0&jugadas=e2e4,e7e5,d1h5,b8c6,f1c4,g8f6')
+  await jugar(page, info, 'h5f7')
+  await expect(page.getByTestId('aviso-final')).toContainText('¡Ganaste!')
+  await expect(page.getByTestId('barra-eval').first()).toHaveAttribute('data-blancas', '100')
 })

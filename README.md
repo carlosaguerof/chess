@@ -12,7 +12,7 @@ npm run casa     # para jugar desde el iPhone en la red de la casa (puerto 4173)
 
 **Desde el iPhone, en casa:** en la Air corre `npm run casa` (déjalo abierto) y en Safari del iPhone abre <http://air-station.local:4173/>. El iPhone y la Air tienen que estar en la misma red. Para cerrarlo, Ctrl+C en la Air.
 
-**Instalarla en el iPhone (R1):** abre la página en Safari → Compartir → "Agregar a inicio". La primera vez guarda lo que necesita; después abre y el bot juega sin internet. (Solo en la app construida: `npm run casa` o la página publicada, no en `npm run dev`.)
+**Instalarla en el iPhone (R1):** abre la página publicada (<https://carlosaguerof.github.io/chess/>) en Safari → Compartir → "Agregar a inicio". La primera vez guarda lo que necesita; después abre y el bot juega sin internet. Esto solo funciona en la página publicada, que va por HTTPS: con `npm run casa` el iPhone entra por `http://air-station.local:4173`, y Safari no deja guardar la app para usarla sin red en una dirección que no es segura (ahí se juega, pero con la Air prendida y en la misma red).
 
 Licencia: GPL-3.0-or-later (`LICENSE`); lo de fuera, con su licencia, en `LICENCIAS.md`. Reglas para trabajar aquí: `AGENTS.md`. Qué es y para quién: `context/producto.md`.
 

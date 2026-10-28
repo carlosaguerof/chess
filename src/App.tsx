@@ -66,7 +66,7 @@ export function App() {
 /** Solo en desarrollo: arma una partida con jugadas fijas para las pruebas y abre la partida. */
 function PruebaPartida({ consulta }: { consulta: URLSearchParams }) {
   useEffect(() => {
-    const p = empezarPartida(consulta.get('bot') ?? 'brisa', (consulta.get('color') as 'w' | 'b') ?? 'w', undefined, { guia: consulta.get('guia') !== '0', misLineas: consulta.get('mislineas') === '1' })
+    const p = empezarPartida(consulta.get('bot') ?? 'brisa', (consulta.get('color') as 'w' | 'b') ?? 'w', undefined, { guia: consulta.get('guia') !== '0', misLineas: consulta.get('mislineas') === '1' }, consulta.get('tiempo') ?? undefined)
     const jugadas = (consulta.get('jugadas') ?? '').split(',').filter(Boolean)
     guardar(CLAVES.partida, { ...p, jugadas })
     navegar('/partida', true)

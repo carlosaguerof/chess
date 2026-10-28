@@ -9,6 +9,10 @@ test('R6 · el sonido viene apagado, se prende en Ajustes, se guarda al recargar
     class Falso {
       currentTime = 0
       destination = {}
+      state = 'running'
+      resume() {
+        return Promise.resolve()
+      }
       createOscillator() {
         const o = { type: '', frequency: { value: 0 }, connect: (g: unknown) => g, start: () => w.__tonos.push(o.frequency.value), stop: () => undefined }
         return o
