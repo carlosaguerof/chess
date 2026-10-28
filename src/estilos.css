@@ -325,6 +325,8 @@ h1, h2, h3 { margin: 0; }
 /* en el celular, los tres botones de la partida siempre a la vista */
 @media (max-width: 899px) {
   .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
+  /* con la guía, Pista y Respuesta se quedan a la vista justo encima de la barra fija (pase 2 de la T22) */
+  .partida-panel .panel-guia .botones-ayuda { position: sticky; bottom: calc(var(--alto-barra-partida, 76px) + env(safe-area-inset-bottom)); background: var(--fondo-panel); padding-top: 6px; z-index: 4; }
 }
 
 /* ---------- reloj, tiempo y estrellas ---------- */

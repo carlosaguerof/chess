@@ -13,7 +13,7 @@ Claves de la lista: **N1a** se ve el estado al entrar · **N1b** cada clic se no
 | Lista de bots (`t5-lista-bots`, `r4-lista-completa`, `t16-lista-con-estrellas`) | ✓ nivel, estrellas, aperturas | ✓ | — | ✓ español, con inglés y ECO en chico | ✓ menú abajo | ✓ | — | ✓ | ✗→✓ en el iPhone la línea en inglés se salía de la tarjeta (desbordaba a lo ancho) | — | ✓ |
 | Bot en grande y Elegir tiempo (`t5-detalle-bot`, `t14-elegir-tiempo`) | ✓ frase, estilo, color, tiempo, guía | ✓ opción con borde verde | ✓ se recuerda lo último | ✓ | ✓ "‹ Bots" | ✓ | ✓ | ✓ | ✓ | — | ✓ |
 | Partida (`t5-partida`, `t5-bot-pensando`, `t14-reloj`, `t15-ayudas-prendidas`, `t15-menu-ayudas`) | ✓ "Brisa está pensando" con puntos que se mueven | ✓ casilla marcada en 2.0 ms (iPhone) / 13.6 ms (escritorio), T2 | ✓ recargar deja la partida y el reloj (T5, T14) | ✓ R D T A C | ✓ deshacer; salir sin perder | ✓ | ✓ solo legales; rendirse confirma (`t5-confirmar-rendirse`) | ✓ lista de jugadas siempre | ✓ 3 botones + Ayudas (un solo botón, §4.2 N8) | — | — |
-| Partida con guía (`t9-mensaje`, `t9-desvio`, `t9-respuesta`) | ✓ mensaje tras mi jugada | ✓ | ✓ resumen al final | ✓ con inglés y ECO en chico (pase 3) | ✓ Deshacer mi jugada / Seguir así | ✓ | ✓ el bot espera si me desvío | ✓ | ✓ mensaje + Pista + Respuesta | — | — |
+| Partida con guía (`t9-mensaje`, `t9-desvio`, `t9-respuesta`, `t15-barra-negras`) | ✓ mensaje tras mi jugada | ✓ | ✓ resumen al final | ✓ con inglés y ECO en chico (pase 3) | ✓ Deshacer mi jugada / Seguir así | ✓ | ✓ el bot espera si me desvío | ✗→✓ en el iPhone, la barra fija de abajo tapaba Pista y Respuesta; ahora quedan fijas encima (pase 2 de la T22) | ✓ mensaje + Pista + Respuesta | — | — |
 | Final de partida (`t5-final`, `t16-estrellas`, `t18-resumen`) | ✓ resultado, motivo, estrellas | ✓ | ✓ resumen de la apertura y "Practicar esta línea" | ✓ | ✓ cerrar (×), Revancha, Otro bot | ✓ | — | ✓ | ✓ | — | — |
 | Motor que no carga (`t20-error-motor`) | ✓ | ✓ | — | ✓ sin códigos | ✓ Reintentar | ✓ | — | ✓ | ✓ | ✓ qué pasó y qué hacer | — |
 | Aprender (`t20-aprender`, `t8-cursos`) | ✓ lecciones hechas por curso | ✓ | ✓ el avance se guarda | ✓ | ✓ | ✓ | — | ✓ | ✓ | — | ✓ |
@@ -33,7 +33,7 @@ Claves de la lista: **N1a** se ve el estado al entrar · **N1b** cada clic se no
 |---|---|---|
 | N1: casilla marcada en menos de 0.1 s | ✓ | T2: 2.0 ms (iPhone), 13.6 ms (escritorio) |
 | N1: "<Nombre> está pensando…" con una señal que se mueve; 0.4–1.2 s; Web Worker | ✓ | `t5-bot-pensando`; `esperaDelBot` en `src/motor/bot.ts`; prueba T5 |
-| N1: se ve que el motor está cargando | ✓ | estado `cargando` en `Partida.tsx` |
+| N1: se ve que el motor está cargando | ✓ | `t20-motor-cargando` ("Preparando a Brisa" con los puntos, con el motor demorado 4 s en la prueba) |
 | N2: español, R D T A C, `0-0`, inglés y ECO en chico | ✓ | todas las capturas; pases 1 a 3 |
 | N3: deshacer contra el bot; salir sin perder la partida | ✓ | prueba T5; `t5-inicio-partida-en-curso` |
 | N5: solo jugadas legales, con casillas marcadas; confirmar rendirse, otra partida y borrar rama; deshacer el borrado | ✓ | `t2-casillas-marcadas`, `t5-confirmar-rendirse`, `t10-confirmar-borrar` |
@@ -55,3 +55,5 @@ Claves de la lista: **N1a** se ve el estado al entrar · **N1b** cada clic se no
 5. "Código fuente y licencias" no decía las tipografías ni lo propio → agregado; `LICENCIAS.md` dice dónde está cada cosa propia.
 
 Nada quedó en "no cumple": la T20 no deja nada para BLOQUEADO.
+
+Después, el pase 2 de la T22 encontró dos cosas más que esta revisión no vio, ya arregladas: en el iPhone la barra fija tapaba Pista y Respuesta (captura `t15-barra-negras`), y con negras la barra de ventaja horizontal se veía al revés.

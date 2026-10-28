@@ -108,21 +108,32 @@ Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 par
 **Cómo se llegó a estos parámetros.** La v1 (por profundidad: 1 a 8) cumplía el 60 % pero con saltos disparejos (600→700 ganaba 89.6 %, 700→800 solo 59.4 %; cadena de 300 a 2268). La v2 controla la fuerza por **nodos** (de 60 a 7,444, ×1.55 por nivel), con errores y temperatura que bajan parejo: de 300 a 800 la cadena quedó casi igual al número nominal (300, 381, 447, 619, 731, 894), pero de 900 a 1200 volvió a crecer rápido. La v3 suaviza 900–1200 (nodos ×1.3, errores ×0.89, temperatura ×0.9 por nivel). Es la que está en `src/motor/niveles.json`. La corrida oficial desde ese archivo dio exactamente lo mismo que la v3: la calibración es determinista (semillas fijas).
 
 **El mismo camino en la app y en la calibración:**
-- Calibración: `scripts/calibrar.ts:71` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor de Node (`scripts/motor-node.ts`).
-- App: `src/pantallas/Partida.tsx:28` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:70` (`jugadaDelBot`) → `src/motor/bot.ts:38` → `elegirJugada` (`src/motor/elegir.ts:46`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
+- Calibración: `scripts/calibrar.ts:84` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor de Node (`scripts/motor-node.ts`).
+- App: `src/pantallas/Partida.tsx:37` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:132` (`jugadaDelBot`) → `src/motor/bot.ts:39` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
 - Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.
 
 ## El temperamento (T17)
 
-En `elegirJugada`, entre las candidatas que pierden **30 centipeones o menos** contra la mejor (`MARGEN_CP`), el temperamento les baja **25 cp** de "pérdida" (`BONO_CP`) a las que prefiere (`src/motor/temperamento.ts`):
-- **Agresivo:** jaques, capturas y jugadas que llegan a dos casillas o menos del rey rival, acercándose.
-- **Defensivo:** cambios (capturar una pieza que vale lo mismo o más) y jugadas a casillas que el rival no ataca (sin dar jaque).
+En `elegirJugada`, entre las candidatas que pierden **50 centipeones o menos** contra la mejor (`MARGEN_CP`), el temperamento les cambia la "pérdida" con un bono **B = máx(40, temperatura del nivel)** (`bonoDelNivel`; en el nivel 700, B = 105), para que pese lo mismo en todos los niveles (`src/motor/temperamento.ts`):
+- **Agresivo:** −B por dar jaque, −B por capturar (se suman) y −B/2 por acercarse al rey rival (llegar a dos casillas o menos de él).
+- **Defensivo:** −B por una jugada tranquila y segura (sin capturar ni dar jaque, a una casilla que el rival no ataca), −B/2 por un cambio parejo (pieza por pieza del mismo valor) y +B/2 a un jaque (lo evita).
 - **Equilibrado:** nada. Es el que se usa en la calibración de los niveles.
 
-Así el temperamento solo decide entre jugadas casi iguales: no cambia la fuerza. Medido con `node scripts/calibrar.ts partido <a> <b> 48 <semilla> <salida> --temperamentos <ta>,<tb>`, nivel 700, 48 partidas cada uno (`iterations/v1/mediciones/t17-temperamento.json`):
+Así el temperamento solo decide entre jugadas casi iguales y la fuerza queda dentro del criterio de la T4.
 
-| Partido | Resultado del primero | Jaques + capturas en sus primeras 30 jugadas |
+**Medición** (versión 3; nivel 700; 4 partidos de 48 partidas cara a cara, 2 en cada orden de colores, y 2 de fuerza contra el 500). Comando de cada partido: `node scripts/calibrar.ts partido 700 <700|500> 48 <semilla> <salida> --temperamentos <a>,<b>`; resumen con `node scripts/resumir-temperamento.ts <carpeta> iterations/v1/mediciones/t17-temperamento.json` (ahí están las semillas 801–806):
+
+| Partido (semilla) | Jaques + capturas en sus primeras 30 jugadas: agresivo / defensivo |
+|---|---|
+| agresivo vs defensivo (801) | 330 / 267 |
+| agresivo vs defensivo (803) | 339 / 296 |
+| defensivo vs agresivo (802) | 342 / 298 |
+| defensivo vs agresivo (804) | 366 / 271 |
+| **Total, 192 partidas** | **1377 / 1132**: +1.28 por partida (error estándar 0.25; t = 5.0) |
+
+| Fuerza (semilla) | Resultado | ¿≥ 60 % (T4)? |
 |---|---|---|
-| 700 agresivo vs 700 defensivo | 22 / 48 (45.8 %) | **359 vs 309** (el agresivo, +16 %) |
-| 700 agresivo vs 500 | 40.5 / 48 (84.4 %): cumple el ≥ 60 % de la T4 | 377 vs 304 |
-| 700 defensivo vs 500 | 41 / 48 (85.4 %): cumple el ≥ 60 % de la T4 | 340 vs 284 |
+| 700 agresivo vs 500 (805) | 44 / 48 (91.7 %) | sí |
+| 700 defensivo vs 500 (806) | 39.5 / 48 (82.3 %) | sí |
+
+Historia: la versión 1 (margen 30, bono fijo de 25; el defensivo también premiaba capturas) dio 359 contra 309 en un solo partido, pero con otras semillas no se repitió (pase 1 de la T22). La versión 2 (bono 0.6 × temperatura) dio +0.25 por partida en 192 partidas (t = 0.95): no alcanzaba. Por eso la 3.

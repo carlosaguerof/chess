@@ -1,6 +1,6 @@
 import type { Chess } from 'chess.js'
 import { FEN_INICIAL, finPorReglas, partidaDesde, type ColorCorto, type Fin } from '../ajedrez/reglas.ts'
-import { alJugar, controlPorId, nuevoReloj, type EstadoReloj } from '../reloj/reloj.ts'
+import { alJugar, controlPorId, finPorTiempo, nuevoReloj, pausar, restante, type EstadoReloj } from '../reloj/reloj.ts'
 
 /** Una partida contra un bot, como se guarda en el navegador. */
 export interface PartidaGuardada {
@@ -65,6 +65,10 @@ export const turnoDe = (p: PartidaGuardada): ColorCorto => ajedrezDe(p).turn()
 export function conJugada(p: PartidaGuardada, uci: string, ahora = Date.now()): PartidaGuardada {
   const antes = partidaDesde(p.fenInicial, p.jugadas)
   const quien = antes.turn()
+  // si a quien mueve ya se le acabó el tiempo, pierde por tiempo y la jugada no entra (el incremento no lo salva)
+  if (p.reloj && !p.fin && controlPorId(p.reloj.controlId).grupo !== 'sin' && restante(p.reloj, quien, ahora) <= 0) {
+    return { ...p, reloj: pausar(p.reloj, ahora), fin: finPorTiempo(antes, quien), pausa: null }
+  }
   const jugadas = [...p.jugadas, uci]
   const chess = partidaDesde(p.fenInicial, jugadas)
   const fin = finPorReglas(chess)

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useRepertorio, leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
+import { leerRegistro } from '../registro/almacen-registro.ts'
 import { Practica } from './Leccion.tsx'
 import { alRepasar, dia, ESCALONES, guardarRepaso, leerRepaso, paraHoy, sumarDias } from '../repaso/repaso.ts'
 
@@ -10,10 +11,10 @@ export function Repaso() {
   const lista = useMemo(() => cursos(rep), [rep])
   const lecciones = useMemo(() => lista.flatMap((c) => c.lecciones), [lista])
   // la lista de hoy se fija al abrir: lo que repaso ya no se reordena mientras repaso
-  const [hoy] = useState(() => paraHoy(leerRepaso(), leerProgreso(), lecciones, dia()))
+  const [hoy] = useState(() => paraHoy(leerRepaso(), leerProgreso(), lecciones, dia(), leerRegistro()))
   const [i, setI] = useState(0)
   if (i >= hoy.length) {
-    const manana = paraHoy(leerRepaso(), leerProgreso(), lecciones, sumarDias(dia(), 1)).length
+    const manana = paraHoy(leerRepaso(), leerProgreso(), lecciones, sumarDias(dia(), 1), leerRegistro()).length
     return (
       <div className="listo-por-hoy" data-testid="listo-por-hoy">
         <h1>Listo por hoy</h1>
@@ -39,7 +40,7 @@ export function Repaso() {
         indice: i,
         total: hoy.length,
         onTerminar: (limpia) => {
-          const e = alRepasar(leerRepaso(), l.id, dia(), limpia, leerProgreso())
+          const e = alRepasar(leerRepaso(), l.id, dia(), limpia, leerProgreso(), Date.now(), leerRegistro(), l)
           guardarRepaso(e)
           const dias = ESCALONES[e[l.id]!.escalon - 1]!
           return limpia ? `Sin ayuda y sin errores: vuelve en ${dias} ${dias === 1 ? 'día' : 'días'}.` : 'Con un error o con ayuda: vuelve mañana.'

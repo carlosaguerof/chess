@@ -17,6 +17,8 @@ export function sonar(tipo: 'mover' | 'capturar'): void {
   if (!sonidoPrendido()) return
   try {
     ctx ??= new AudioContext()
+    // Safari deja el audio suspendido hasta que se reanuda desde un toque: cada jugada mía es un toque
+    if (ctx.state === 'suspended') void ctx.resume()
     const o = ctx.createOscillator()
     const g = ctx.createGain()
     o.type = 'triangle'

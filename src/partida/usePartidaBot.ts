@@ -67,8 +67,14 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
     if (!partida?.reloj || partida.fin) return
     const p = partida
     const turno = ajedrezDe(p).turn()
-    // que corra el reloj del que tiene el turno (si la app está a la vista)
-    if (document.visibilityState === 'visible' && p.reloj!.corriendo !== turno) {
+    // corre el reloj del que tiene el turno, solo con la app a la vista y sin la pausa por desvío
+    // (si el bot jugó con la app oculta, su jugada arrancó mi reloj: aquí se vuelve a pausar)
+    const debeCorrer = document.visibilityState === 'visible' && !p.pausa
+    if (!debeCorrer && p.reloj!.corriendo) {
+      cambiar({ ...p, reloj: pausar(p.reloj!, Date.now()) })
+      return
+    }
+    if (debeCorrer && p.reloj!.corriendo !== turno) {
       cambiar({ ...p, reloj: arrancar(p.reloj!, turno, Date.now()) })
       return
     }
@@ -89,7 +95,7 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
       const actual = ultimaRef.current
       if (!actual?.reloj || actual.fin) return
       if (document.visibilityState === 'hidden') cambiar({ ...actual, reloj: pausar(actual.reloj, Date.now()) })
-      else cambiar({ ...actual, reloj: arrancar(actual.reloj, ajedrezDe(actual).turn(), Date.now()) })
+      else if (!actual.pausa) cambiar({ ...actual, reloj: arrancar(actual.reloj, ajedrezDe(actual).turn(), Date.now()) })
     }
     const alSalir = () => {
       const actual = ultimaRef.current
@@ -104,7 +110,7 @@ export function usePartidaBot(opciones: { misLineas?: (p: PartidaGuardada) => Fu
       window.removeEventListener('pagehide', alSalir)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partida?.id, partida?.jugadas.length, partida?.fin, partida?.reloj?.corriendo])
+  }, [partida?.id, partida?.jugadas.length, partida?.fin, partida?.reloj?.corriendo, partida?.pausa])
 
   const cambiar = useCallback((p: PartidaGuardada | null) => {
     setPartida(p)

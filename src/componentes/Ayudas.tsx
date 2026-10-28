@@ -49,7 +49,7 @@ export function BarraEvaluacion({ porcentajeBlancas, deBlancas, horizontal }: { 
   const mio = deBlancas ? porcentajeBlancas : 100 - porcentajeBlancas
   return (
     <div className={`barra-eval ${horizontal ? 'horizontal' : ''} ${deBlancas ? '' : 'negras'}`} data-testid="barra-eval" data-blancas={Math.round(porcentajeBlancas)} role="meter" aria-label="Ventaja" aria-valuenow={Math.round(mio)} aria-valuemin={0} aria-valuemax={100}>
-      <i style={horizontal ? { width: `${porcentajeBlancas}%` } : { height: `${deBlancas ? porcentajeBlancas : 100 - porcentajeBlancas}%` }} />
+      <i style={horizontal ? { width: `${mio}%` } : { height: `${mio}%` }} />
     </div>
   )
 }

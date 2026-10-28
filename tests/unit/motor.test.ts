@@ -143,17 +143,20 @@ describe('jugadaDelBot', () => {
 })
 
 describe('T17 · temperamento', () => {
-  it('solo inclina entre jugadas casi iguales (margen de 30 cp): el agresivo prefiere el jaque, el defensivo el cambio', async () => {
-    const { bonoTemperamento, MARGEN_CP, BONO_CP } = await import('../../src/motor/temperamento.ts')
+  it('solo inclina entre jugadas casi iguales (margen de 50 cp): el agresivo prefiere jaques y capturas; el defensivo, lo tranquilo y seguro', async () => {
+    const { bonoTemperamento, MARGEN_CP, BONO_CP, bonoDelNivel } = await import('../../src/motor/temperamento.ts')
     // 1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6: Axf7+ es jaque y captura
     const fen = 'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4'
-    expect(bonoTemperamento(fen, 'c4f7', 10, 'agresivo')).toBe(BONO_CP)
+    expect(bonoTemperamento(fen, 'c4f7', 10, 'agresivo')).toBe(2.5 * BONO_CP) // jaque + captura + se acerca al rey
     expect(bonoTemperamento(fen, 'c4f7', MARGEN_CP + 1, 'agresivo')).toBe(0) // fuera del margen, nada
     expect(bonoTemperamento(fen, 'c4f7', 10, 'equilibrado')).toBe(0)
     expect(bonoTemperamento(fen, 'b1c3', 10, 'agresivo')).toBe(0)
-    // el defensivo: una casilla segura sí, un jaque no
+    // el defensivo: lo tranquilo y seguro sí (enrocar), un jaque o una captura desigual no
     expect(bonoTemperamento(fen, 'e1g1', 0, 'defensivo')).toBe(BONO_CP)
-    expect(bonoTemperamento(fen, 'c4f7', 0, 'defensivo')).toBe(0)
+    expect(bonoTemperamento(fen, 'c4f7', 0, 'defensivo')).toBe(-BONO_CP / 2) // el jaque lo evita
+    // el bono crece con la temperatura del nivel
+    expect(bonoDelNivel(105)).toBe(105)
+    expect(bonoDelNivel(2)).toBe(BONO_CP)
   })
   it('elegirJugada usa el temperamento: con dos jugadas iguales, el agresivo escoge más la captura', { timeout: 30_000 }, async () => {
     const { motor } = motorFalso([['c4f7', 0], ['b1c3', 0]])

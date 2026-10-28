@@ -23,6 +23,8 @@ function fichas(pgn: string): string[] {
 
 export function lineasDePgn(pgn: string): string[][] {
   const ts = fichas(pgn)
+  // si hay letras que solo existen en español (D, T, A, C), se lee primero en español: ahí "R" es el rey, no la torre
+  const espanol = ts.some((t) => /^[DTAC][a-h]?[1-8]?x?[a-h][1-8]/.test(t))
   const lineas: string[][] = []
   // pila de "historias": cada variante empieza desde la posición ANTES de la última jugada de su padre
   let actual: string[] = []
@@ -32,7 +34,7 @@ export function lineasDePgn(pgn: string): string[][] {
   const jugar = (historia: string[], san: string): string => {
     const c = new Chess()
     for (const s of historia) c.move(s)
-    for (const intento of [san, sanDeEspanol(san)]) {
+    for (const intento of espanol ? [sanDeEspanol(san), san] : [san, sanDeEspanol(san)]) {
       try {
         return c.move(intento).san
       } catch {
