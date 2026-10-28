@@ -339,3 +339,4 @@ h1, h2, h3 { margin: 0; }
 .estrellas { display: inline-flex; gap: 2px; vertical-align: middle; }
 .boton-tiempo { display: flex; align-items: center; justify-content: space-between; background: var(--fondo-panel); border: 0; border-radius: var(--radio); padding: 12px 14px; font-weight: 700; cursor: pointer; }
 .boton-tiempo span { color: var(--texto-apagado); font-weight: 600; }
+.partida .lista-jugadas li.sin-jugadas { display: block; }
