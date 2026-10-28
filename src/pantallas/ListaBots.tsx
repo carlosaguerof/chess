@@ -1,5 +1,5 @@
 import { gruposDePersonajes } from '../bots/personajes.ts'
-import { nombreApertura } from '../bots/nombres-aperturas.ts'
+import { nombreApertura, inglesApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 
 export function ListaBots() {
@@ -21,6 +21,7 @@ export function ListaBots() {
                       {p.nombre} <span className="nivel">{p.elo}</span>
                     </span>
                     <span className="aperturas">{[nombreApertura(p.estilo.blancas[0]!, 'blancas'), nombreApertura(p.estilo.negras[0]!, 'negras')].join(' · ')}</span>
+                    <small className="ingles aperturas">{[inglesApertura(p.estilo.blancas[0]!), inglesApertura(p.estilo.negras[0]!)].join(' / ')}</small>
                   </div>
                 </a>
               </li>

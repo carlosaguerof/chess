@@ -87,7 +87,8 @@ export function Partida() {
     const despues = [...antes, san]
     const m = mensajeTrasMiJugada(ctx, despues)
     if (ops.length > 0) {
-      registrarJugadaPartida({ fen: chess.fen(), esperada: ops[0]!.san, desvio: m.tipo === 'desvio', ayuda: ayudaVigente?.tipo ?? null, linea: ops[0]!.lineas[0]!.nombre, camino: antes })
+      const jugada = ops.find((o) => o.san === san) ?? ops[0]!
+      registrarJugadaPartida({ fen: chess.fen(), esperada: jugada.san, desvio: m.tipo === 'desvio', ayuda: ayudaVigente?.tipo ?? null, linea: jugada.lineas[0]!.nombre, camino: antes })
     }
     setAyuda(null)
     pb.jugar(uci, () => (m.tipo === 'desvio' ? { pausa: 'desvio' } : {}))

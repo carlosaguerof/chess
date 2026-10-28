@@ -57,6 +57,11 @@ describe('T8 · practicar con cursos', () => {
     expect(bien.resultado).toBe('correcta')
   })
 
+  it('pase 2: en la lección Karpov con 3.Cc3 también se acepta 4...Af5 (misma posición que con 3.Cd2)', () => {
+    const k = ck.lecciones.find((l) => l.jugadas.join(' ').startsWith('e4 c6 d4 d5 Nc3 dxe4 Nxe4 Nd7'))!
+    expect(alternativasEn(ck, k, 7)).toContain('Bf5')
+  })
+
   it('la Pista nunca dice la casilla de destino (en todas las lecciones de todos los cursos)', () => {
     let revisadas = 0
     for (const c of cursos)

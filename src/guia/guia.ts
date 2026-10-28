@@ -2,7 +2,7 @@ import { Chess, type Square } from 'chess.js'
 import type { Base, Variante } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts'
-import { GUIA, esMiPly, siguientesEnRepertorio, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
+import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import { ideaPorTipo, planDeMiLado } from '../cursos/modelo.ts'
 
 /** La guía de aperturas en una partida real (T9). Todo sale de mi repertorio y de la base; nunca del motor. */
@@ -15,12 +15,23 @@ export interface Contexto {
 
 const num = (san: string, ply: number) => jugadaNumerada(sanAEspanol(san), ply)
 
-/** Variantes de la base cuyas jugadas son un prefijo de la historia (las más largas primero). */
+/** Variantes de la base que pasan por la posición actual o que ya se jugaron completas (las más largas primero). */
 function variantesQueCoinciden(base: Base, historia: string[]): { v: Variante; apertura: string }[] {
+  const fen = posicionDe(historia)
   const r: { v: Variante; apertura: string }[] = []
   for (const a of base.aperturas)
-    for (const v of a.variantes) if (v.jugadas.length <= historia.length && v.jugadas.every((s, i) => historia[i] === s)) r.push({ v, apertura: a.nombre })
+    for (const v of a.variantes) {
+      const prefijo = v.jugadas.length <= historia.length && v.jugadas.every((s, i) => historia[i] === s)
+      if (prefijo || (v.jugadas.length <= historia.length + 1 && posicionDe(v.jugadas) === fen)) r.push({ v, apertura: a.nombre })
+    }
   return r.sort((x, y) => y.v.jugadas.length - x.v.jugadas.length)
+}
+
+/** Todas las posiciones por las que pasó la partida. */
+function posicionesDe(historia: string[]): Set<string> {
+  const r = new Set<string>()
+  for (let i = 0; i <= historia.length; i++) r.add(posicionDe(historia.slice(0, i)))
+  return r
 }
 
 /** El nombre de la apertura en cuanto se puede saber: la raíz de una apertura de la base, o una variante completa. */
@@ -29,7 +40,8 @@ export function nombreDeApertura(base: Base, historia: string[]): { apertura: st
   let mejor: { apertura: string; largo: number } | null = null
   for (const a of base.aperturas) {
     if (a.raiz.length < 2) continue
-    if (a.raiz.length <= historia.length && a.raiz.every((s, i) => historia[i] === s) && (!mejor || a.raiz.length > mejor.largo)) mejor = { apertura: a.nombre, largo: a.raiz.length }
+    const llega = a.raiz.length <= historia.length && (a.raiz.every((s, i) => historia[i] === s) || posicionesDe(historia).has(posicionDe(a.raiz)))
+    if (llega && (!mejor || a.raiz.length > mejor.largo)) mejor = { apertura: a.nombre, largo: a.raiz.length }
   }
   if (v && v.v.jugadas.length >= (mejor?.largo ?? 0) && v.v.jugadas.length >= 2) return { apertura: v.apertura, variante: v.v.familia }
   if (mejor) return { apertura: mejor.apertura }
@@ -56,6 +68,11 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
   const nombreAntes = nombreDeApertura(ctx.base, antes)
   const nombreAhora = nombreDeApertura(ctx.base, historia)
   const partes: string[] = []
+  if (opciones.length === 0 && estaEnRepertorio(ctx.rep, ctx.color, historia)) {
+    // llegué a mi repertorio por otro orden de jugadas (transposición)
+    const n = nombreAhora ? (nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `${nombreAhora.apertura}: ${nombreAhora.variante}` : nombreAhora.apertura) : 'tu repertorio'
+    return { tipo: 'en-linea', texto: `Con ${num(mia, ply)} llegaste a ${n === 'tu repertorio' ? n : `la ${n}`} por otro orden de jugadas: ya estás en tu línea.` }
+  }
   if (opciones.length === 0) {
     // mi repertorio ya no tiene nada aquí
     const fuera = ply === 0 ? `Iniciaste con ${num(mia, 0)}.` : `Jugaste ${num(mia, ply)}. Ya estás fuera de tu repertorio: sigue con los principios (desarrolla, controla el centro, enroca).`
@@ -134,10 +151,16 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   }
   if (!san && esMiPly(ctx.color, ply)) {
     // mi línea termina justo aquí (en la jugada del rival): no hay una jugada en la fuente, pero sí su plan
-    const termina = ctx.rep.lineas.find((l) => l.color === ctx.color && l.jugadas.length === historia.length && l.jugadas.every((s, i) => historia[i] === s))
+    const termina = lineaQueTerminaEn(ctx.rep, ctx.color, historia)
     if (termina) {
-      const texto = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Sigue su plan: ${planDeMiLado(termina.plan, ctx.color)}`
-      return { origen: 'fin-de-linea', nombre: termina.nombre, plan: termina.plan, pista: texto, respuesta: texto }
+      // la Pista no dice jugadas: solo las frases del plan sin jugadas; la Respuesta, el plan completo
+      const sinJugadas = planDeMiLado(termina.plan, ctx.color)
+        .split(/(?<=\.)\s+/)
+        .filter((f) => !/(\d+\.{1,3}\s?)?\b([RDTAC]?[a-h]?[1-8]?x?[a-h][1-8]|0-0(-0)?)\b/.test(f))
+        .join(' ')
+      const pista = `Tu línea (${termina.nombre}) termina aquí. ${sinJugadas || 'Pide la Respuesta para ver su plan.'}`
+      const respuesta = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
+      return { origen: 'fin-de-linea', nombre: termina.nombre, plan: termina.plan, pista, respuesta }
     }
   }
   if (!san || !esMiPly(ctx.color, ply)) {
@@ -167,14 +190,22 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
 
 function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { san: string; v: Variante } | null {
   const lado = color === 'w' ? 'blancas' : 'negras'
+  const fen = posicionDe(historia)
   const cuenta = new Map<string, { v: Variante; f: number }>()
   for (const a of base.aperturas)
     for (const v of a.variantes) {
       if (v.lado !== 'ambos' && v.lado !== lado) continue
-      if (v.jugadas.length <= historia.length || historia.some((s, i) => v.jugadas[i] !== s)) continue
-      const s = v.jugadas[historia.length]!
-      const prev = cuenta.get(s)
-      if (!prev || v.frecuencia > prev.f) cuenta.set(s, { v, f: v.frecuencia })
+      const c = new Chess()
+      for (let i = 0; i < v.jugadas.length; i++) {
+        const aqui = c.fen().split(' ').slice(0, 4).join(' ')
+        const s = v.jugadas[i]!
+        if (aqui === fen) {
+          const prev = cuenta.get(s)
+          if (!prev || v.frecuencia > prev.f) cuenta.set(s, { v, f: v.frecuencia })
+          break
+        }
+        c.move(s)
+      }
     }
   const mejor = [...cuenta.entries()].sort((a, b) => b[1].f - a[1].f)[0]
   return mejor ? { san: mejor[0], v: mejor[1].v } : null

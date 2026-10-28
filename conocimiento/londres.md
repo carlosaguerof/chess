@@ -44,7 +44,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Londres contra la India (...Cf6)
 
-### Sistema Londres contra el fianchetto, con Ae2
+### Sistema Londres, con Ae2
 
 **1.d4 Cf6 2.Cf3 g6 3.Af4 Ag7 4.e3 d6 5.h3 c5 6.Ae2**
 

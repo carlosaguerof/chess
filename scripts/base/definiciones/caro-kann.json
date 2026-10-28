@@ -108,7 +108,7 @@
     {
       "id": "clasica",
       "familia": "Variante Clásica",
-      "nombre": "Variante Clásica: línea principal",
+      "nombre": "Variante Clásica",
       "fila": {
         "eco": "B19",
         "name": "Caro-Kann Defense: Classical Variation",
@@ -223,6 +223,34 @@
       "plan": "Contra los dos caballos, 3...Ag4 clava el de f3. Tras 4.h3 lo cambias (...Axf3) y sigues con ...e6, ...Cf6 o ...Cd7, y 0-0. Blancas se queda con la pareja de alfiles, pero tu cadena c6-d5-e6 es muy sólida.",
       "frecuencia": 2,
       "fuenteFrecuencia": "guía de Carlos"
+    },
+    {
+      "id": "dos-caballos-cf3",
+      "familia": "Ataque de los Dos Caballos",
+      "nombre": "Defensa Caro-Kann: Oferta de Final (2.Cf3 d5 3.d3)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Endgame Offer",
+        "pgn": "1. e4 c6 2. Nf3 d5 3. d3"
+      },
+      "lado": "negras",
+      "plan": "Contra 2.Cf3 juega 2...d5 como siempre; si blancas sigue con Cc3, llegas a los Dos Caballos. Contra 3.d3, desarrolla con ...Cf6, saca el alfil de c8 (a g4 o f5), juega ...e6 y enroca.",
+      "frecuencia": 2,
+      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)"
+    },
+    {
+      "id": "dos-caballos-cf3-apocalipsis",
+      "familia": "Ataque de los Dos Caballos",
+      "nombre": "Defensa Caro-Kann: Ataque Apocalipsis (2.Cf3 d5 3.exd5)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Apocalypse Attack",
+        "pgn": "1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. Ne5"
+      },
+      "lado": "negras",
+      "plan": "Tras el cambio en d5 tienes un buen centro. Contra el caballo en e5, desarrolla con ...Cf6 y ...e6 y no te apures a sacar la dama.",
+      "frecuencia": 2,
+      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)"
     },
     {
       "id": "panov-acelerado",

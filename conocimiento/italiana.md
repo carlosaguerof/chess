@@ -58,7 +58,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: 4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Se considera más fuerte que el famoso Hígado Frito (6.Cxf7).
 - Fuente: C57 · Italian Game: Two Knights Defense, Lolli Attack
 
-### Defensa de los Dos Caballos: Defensa Polerio con 8.Ae2
+### Defensa de los Dos Caballos (4.Cg5 d5 5.exd5 Ca5)
 
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 d5 5.exd5 Ca5 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2**
 

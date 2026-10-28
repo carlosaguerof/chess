@@ -40,7 +40,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ### Defensa Eslava: 3.Cc3 dxc4
 
-**1.d4 d5 2.c4 c6 3.Cc3**
+**1.d4 d5 2.c4 c6 3.Cc3 dxc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.

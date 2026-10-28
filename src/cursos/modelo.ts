@@ -174,16 +174,18 @@ export function marcarRespuesta(e: EstadoLeccion): EstadoLeccion {
   return { ...e, paso: { ...e.paso, respuesta: true } }
 }
 
-/** Las jugadas que también se aceptan en este paso: las de mi lado en las otras lecciones del curso, en la misma posición. */
+/** Las jugadas que también se aceptan en este paso: las de mi lado en las otras lecciones del curso, en la misma POSICIÓN. */
 export function alternativasEn(curso: Curso, leccion: Leccion, ply: number): string[] {
-  const historia = leccion.jugadas.slice(0, ply)
+  const fen = posicion(leccion, ply).fen().split(' ').slice(0, 4).join(' ')
   const r = new Set<string>()
   for (const l of curso.lecciones) {
-    if (l.jugadas.length <= ply) continue
-    if (historia.some((s, i) => l.jugadas[i] !== s)) continue
-    const s = l.jugadas[ply]!
-    if (s !== leccion.jugadas[ply]) r.add(s)
+    const c = new Chess()
+    l.jugadas.forEach((s, i) => {
+      if (c.fen().split(' ').slice(0, 4).join(' ') === fen && esMiPly(l.color, i)) r.add(s)
+      c.move(s)
+    })
   }
+  r.delete(leccion.jugadas[ply]!)
   return [...r]
 }
 
