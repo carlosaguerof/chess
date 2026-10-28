@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CLAVES, guardar, leer } from '../estado/almacen.ts'
 import { ajedrezDe, conJugada, deshacer as deshacerModelo, rendirse as rendirseModelo, nuevaPartida, OPCIONES_POR_DEFECTO, type OpcionesPartida, type PartidaGuardada } from './modelo.ts'
-import { personajePorId } from '../bots/personajes.ts'
+import { personajePorId, anotarUltimoBot } from '../bots/personajes.ts'
 import { nivelDe } from '../motor/niveles.ts'
 import { jugadaDelBot, esperaDelBot, type FuenteJugadas } from '../motor/bot.ts'
 import { obtenerMotor, estadoMotor, alCambiarMotor, type EstadoMotor } from '../motor/navegador.ts'
@@ -29,10 +29,30 @@ export function tiempoRecordado(): string {
   return leer<string>('tiempo', 'sin')
 }
 
+/** Opciones y tiempo se guardan en cuanto se cambian en Jugar → Opciones (L2). */
+export function guardarOpciones(o: OpcionesPartida): void {
+  guardar('opciones-partida', o)
+}
+
+export function guardarTiempo(t: string): void {
+  guardar('tiempo', t)
+}
+
+/** El color que escogí la última vez en Jugar (la primera vez, blancas). */
+export function colorRecordado(): ColorCorto | 'azar' {
+  const c = leer<string>('color-partida', 'w')
+  return c === 'b' || c === 'azar' ? c : 'w'
+}
+
+export function guardarColor(c: ColorCorto | 'azar'): void {
+  guardar('color-partida', c)
+}
+
 export function empezarPartida(botId: string, color: ColorCorto | 'azar', fen?: string, opciones: OpcionesPartida = opcionesRecordadas(), tiempo: string = tiempoRecordado()): PartidaGuardada {
   const c: ColorCorto = color === 'azar' ? (Math.random() < 0.5 ? 'w' : 'b') : color
   guardar('opciones-partida', opciones)
   guardar('tiempo', tiempo)
+  anotarUltimoBot(botId)
   const p = nuevaPartida(botId, c, fen, opciones, tiempo)
   guardar(CLAVES.partida, p)
   return p

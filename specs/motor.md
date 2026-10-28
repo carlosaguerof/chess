@@ -134,7 +134,7 @@ Comando: `npm run calibrar` (= `node scripts/calibrar.ts todo 300 1200`), 48 par
 
 **El mismo camino en la app y en la calibración:**
 - Calibración: `scripts/calibrar.ts:84` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor de Node (`scripts/motor-node.ts`).
-- App: `src/pantallas/Partida.tsx:37` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:132` (`jugadaDelBot`) → `src/motor/bot.ts:43` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
+- App: `src/pantallas/Partida.tsx:37` (`usePartidaBot`) → `src/partida/usePartidaBot.ts:152` (`jugadaDelBot`) → `src/motor/bot.ts:43` → `elegirJugada` (`src/motor/elegir.ts:47`), con el motor en un Web Worker (`src/motor/navegador.ts:38`). Lo ejercita `tests/e2e/t5-partida.spec.ts` (el bot contesta; `data-motor` dice `Stockfish 19 Lite WASM`).
 - Los parámetros de los dos salen del mismo archivo: `src/motor/niveles.json`.
 
 ## Calibración de los niveles 100–3000 (T13)

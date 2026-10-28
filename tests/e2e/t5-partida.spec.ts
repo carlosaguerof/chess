@@ -34,15 +34,15 @@ test.describe('T5 · jugar contra un bot', () => {
     await captura(page, info, 't5-partida')
   })
 
-  test('lista de bots: mi zona primero; el bot en grande; escoger negras', async ({ page }, info) => {
+  test('Jugar: grupos por nivel; el bot en grande; escoger negras', async ({ page }, info) => {
     await page.goto('/#/bots')
     const grupos = page.locator('.grupo-bots h2')
-    await expect(grupos.first()).toContainText('Tu zona')
-    await expect(grupos.first()).toContainText('500 a 1000')
+    await expect(grupos.first()).toContainText('Principiante')
+    await expect(grupos.first()).toContainText('100–800')
     await captura(page, info, 't5-lista-bots')
     await page.getByTestId('bot-itzel').click()
-    await expect(page.locator('.detalle-cabeza')).toContainText('Itzel')
-    await expect(page.locator('.detalle-cabeza')).toContainText('700')
+    await expect(page.getByTestId('bot-escogido')).toContainText('Itzel')
+    await expect(page.getByTestId('bot-escogido')).toContainText('700')
     await page.getByTestId('color-b').click()
     await expect(page.getByTestId('color-b')).toHaveAttribute('aria-checked', 'true')
     await captura(page, info, 't5-detalle-bot')

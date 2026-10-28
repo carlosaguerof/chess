@@ -1,9 +1,9 @@
 import { CONTROLES, type ControlTiempo } from '../reloj/reloj.ts'
 
 const GRUPOS = [
-  { id: 'bullet', nombre: 'Bullet', icono: '⚡' },
-  { id: 'blitz', nombre: 'Blitz', icono: '🔥' },
-  { id: 'rapid', nombre: 'Rapid', icono: '⏱' },
+  { id: 'bullet', nombre: 'Bala' },
+  { id: 'blitz', nombre: 'Relámpago' },
+  { id: 'rapid', nombre: 'Rápida' },
 ] as const
 
 /** La ventana "Elegir tiempo" (T14): tres grupos de 3 y "Sin tiempo". La escogida, con borde verde. */
@@ -14,9 +14,7 @@ export function ElegirTiempo(props: { actual: string; onEscoger: (c: ControlTiem
         <h2>Elegir tiempo</h2>
         {GRUPOS.map((g) => (
           <section key={g.id} aria-label={g.nombre}>
-            <h3>
-              <span aria-hidden="true">{g.icono}</span> {g.nombre}
-            </h3>
+            <h3>{g.nombre}</h3>
             <div className="opciones-tiempo">
               {CONTROLES.filter((c) => c.grupo === g.id).map((c) => (
                 <button key={c.id} type="button" className={c.id === props.actual ? 'activo' : ''} aria-pressed={c.id === props.actual} onClick={() => props.onEscoger(c)} data-testid={`tiempo-${c.id}`}>

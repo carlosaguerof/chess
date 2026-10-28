@@ -6,8 +6,7 @@ import { TableroLibre } from './pantallas/TableroLibre.tsx'
 import { MedirMotor } from './pantallas/MedirMotor.tsx'
 import { Marco, SECCIONES, type EntradaMas } from './componentes/Marco.tsx'
 import { Inicio } from './pantallas/Inicio.tsx'
-import { ListaBots } from './pantallas/ListaBots.tsx'
-import { DetalleBot } from './pantallas/DetalleBot.tsx'
+import { Jugar } from './pantallas/Jugar.tsx'
 import { Partida } from './pantallas/Partida.tsx'
 import { Licencias } from './pantallas/Licencias.tsx'
 import { Repertorio } from './pantallas/Repertorio.tsx'
@@ -46,8 +45,8 @@ export function App() {
   if (primera === 'partida') return <Partida />
   if (primera === 'leccion' && segunda) return <Leccion key={ruta.consulta.get('otra') ?? ''} cursoId={decodeURIComponent(segunda)} indice={Number(ruta.partes[2] ?? 0)} />
   let pantalla
-  if (primera === 'bots') pantalla = <ListaBots />
-  else if (primera === 'bot' && segunda) pantalla = <DetalleBot id={segunda} />
+  if (primera === 'bots') pantalla = <Jugar />
+  else if (primera === 'bot' && segunda) pantalla = <Jugar key={segunda} inicial={segunda} />
   else if (primera === 'licencias') pantalla = <Licencias />
   else if (primera === 'cursos') pantalla = <Cursos />
   else if (primera === 'refuerza') pantalla = <Refuerza />

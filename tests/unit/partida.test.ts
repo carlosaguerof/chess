@@ -49,14 +49,17 @@ describe('personajes', () => {
     for (let e = 1600; e <= 3000; e += 100) expect(por(e)).toBe(1)
     expect(new Set(PERSONAJES.map((p) => p.nombre)).size).toBe(47)
   })
-  it('solo se escogen los de niveles calibrados (T13: los 47), con mi zona primero y un 700 recomendado', async () => {
+  it('solo se escogen los de niveles calibrados (T13: los 47), en cuatro grupos por nivel y un 700 recomendado', async () => {
     const { NIVELES } = await import('../../src/motor/niveles.ts')
     const calibrados = new Set(NIVELES.filter((n) => (n as { calibrado?: boolean }).calibrado !== false).map((n) => n.elo))
     const disp = personajesDisponibles()
     expect(disp.every((p) => calibrados.has(p.elo))).toBe(true)
     expect(disp).toHaveLength(PERSONAJES.filter((p) => calibrados.has(p.elo)).length)
-    expect(gruposDePersonajes()[0]!.titulo).toBe('Tu zona')
-    expect(gruposDePersonajes()[0]!.personajes.every((p) => p.elo >= 500 && p.elo <= 1000)).toBe(true)
+    // L2: los grupos de "Play Bots", por nivel y sin huecos
+    const grupos = gruposDePersonajes()
+    expect(grupos.map((g) => g.titulo)).toEqual(['Principiante', 'Intermedio', 'Avanzado', 'Maestro'])
+    expect(grupos.map((g) => g.detalle)).toEqual(['100–800', '900–1500', '1600–2200', '2300–3000'])
+    expect(grupos.flatMap((g) => g.personajes)).toHaveLength(47)
     expect(recomendado().elo).toBe(700)
   })
   it('el libro juega las jugadas de su lado y se calla fuera de sus líneas', () => {
