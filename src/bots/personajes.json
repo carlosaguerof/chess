@@ -1,0 +1,816 @@
+{
+ "nota": "Personajes inventados (ningún nombre de bots de chess.com). estilo = sus aperturas: ids de la base (conocimiento/). blancas: lo que abre; negras: cómo se defiende. Temperamento: agresivo, equilibrado o defensivo.",
+ "personajes": [
+  {
+   "id": "pipo",
+   "nombre": "Pipo",
+   "elo": 100,
+   "temperamento": "equilibrado",
+   "color": "#e8a33d",
+   "frase": "Tengo siete años y me encanta mover el caballo.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "lupita",
+   "nombre": "Lupita",
+   "elo": 200,
+   "temperamento": "agresivo",
+   "color": "#d9534f",
+   "frase": "Saco la dama temprano. ¿Qué podría salir mal?",
+   "estilo": {
+    "blancas": [
+     "abierta:dama"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "tomas",
+   "nombre": "Tomás",
+   "elo": 300,
+   "temperamento": "equilibrado",
+   "color": "#5b9bd5",
+   "frase": "Aprendí a jugar en el recreo y no he parado.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "chela",
+   "nombre": "Chela",
+   "elo": 400,
+   "temperamento": "defensivo",
+   "color": "#8e7cc3",
+   "frase": "Juego tranquila: primero cuido mis piezas.",
+   "estilo": {
+    "blancas": [
+     "londres"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "beto",
+   "nombre": "Beto",
+   "elo": 500,
+   "temperamento": "agresivo",
+   "color": "#e06666",
+   "frase": "Si veo un jaque, lo doy.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "marisol",
+   "nombre": "Marisol",
+   "elo": 500,
+   "temperamento": "equilibrado",
+   "color": "#6aa84f",
+   "frase": "Juego los domingos con mi abuelo, y a veces le gano.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "rafa",
+   "nombre": "Rafa",
+   "elo": 500,
+   "temperamento": "defensivo",
+   "color": "#45818e",
+   "frase": "Las piezas no se regalan. Bueno, casi nunca.",
+   "estilo": {
+    "blancas": [
+     "caro-kann:avance",
+     "francesa"
+    ],
+    "negras": [
+     "francesa",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "nayeli",
+   "nombre": "Nayeli",
+   "elo": 600,
+   "temperamento": "agresivo",
+   "color": "#c27ba0",
+   "frase": "Me gusta abrir líneas contra el rey.",
+   "estilo": {
+    "blancas": [
+     "italiana",
+     "caro-kann:clasica"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "ulises",
+   "nombre": "Ulises",
+   "elo": 600,
+   "temperamento": "equilibrado",
+   "color": "#3d85c6",
+   "frase": "Estudio una apertura por semana. Esta semana: la tuya.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "escandinava",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "paz",
+   "nombre": "Paz",
+   "elo": 600,
+   "temperamento": "defensivo",
+   "color": "#93c47d",
+   "frase": "Sin prisa: el que se apura, se equivoca.",
+   "estilo": {
+    "blancas": [
+     "londres",
+     "caro-kann:cambio"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "brisa",
+   "nombre": "Brisa",
+   "elo": 700,
+   "temperamento": "equilibrado",
+   "color": "#76a5af",
+   "frase": "Juego Rapid todas las noches. Te va a costar ganarme.",
+   "estilo": {
+    "blancas": [
+     "italiana",
+     "caro-kann:avance",
+     "francesa"
+    ],
+    "negras": [
+     "abierta",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "hugo",
+   "nombre": "Hugo",
+   "elo": 700,
+   "temperamento": "agresivo",
+   "color": "#cc4125",
+   "frase": "Ataco primero y pregunto después.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa",
+     "caro-kann:clasica"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "itzel",
+   "nombre": "Itzel",
+   "elo": 700,
+   "temperamento": "defensivo",
+   "color": "#a64d79",
+   "frase": "Una estructura sólida gana más partidas que un ataque loco.",
+   "estilo": {
+    "blancas": [
+     "otros-negras:inglesa"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "damian",
+   "nombre": "Damián",
+   "elo": 800,
+   "temperamento": "agresivo",
+   "color": "#e69138",
+   "frase": "Si me das un peón, me lo como.",
+   "estilo": {
+    "blancas": [
+     "italiana",
+     "caro-kann:dos-caballos"
+    ],
+    "negras": [
+     "escandinava",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "renata",
+   "nombre": "Renata",
+   "elo": 800,
+   "temperamento": "equilibrado",
+   "color": "#674ea7",
+   "frase": "Repaso mis partidas cada noche. Las tuyas también.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola",
+     "caro-kann:avance"
+    ],
+    "negras": [
+     "francesa",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "chuy",
+   "nombre": "Chuy",
+   "elo": 800,
+   "temperamento": "defensivo",
+   "color": "#6d9eeb",
+   "frase": "Yo me enroco y luego vemos.",
+   "estilo": {
+    "blancas": [
+     "otros-negras:reti"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "ximena",
+   "nombre": "Ximena",
+   "elo": 900,
+   "temperamento": "agresivo",
+   "color": "#e06666",
+   "frase": "Juego la Siciliana porque me gusta el caos.",
+   "estilo": {
+    "blancas": [
+     "abierta:vienesa",
+     "caro-kann:clasica"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "gael",
+   "nombre": "Gael",
+   "elo": 900,
+   "temperamento": "equilibrado",
+   "color": "#38761d",
+   "frase": "Del club de la escuela al torneo del barrio.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "abierta",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "olga",
+   "nombre": "Olga",
+   "elo": 900,
+   "temperamento": "defensivo",
+   "color": "#b45f06",
+   "frase": "Cambio piezas hasta que el final es mío.",
+   "estilo": {
+    "blancas": [
+     "otros-negras:larsen"
+    ],
+    "negras": [
+     "francesa",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "leonel",
+   "nombre": "Leonel",
+   "elo": 1000,
+   "temperamento": "agresivo",
+   "color": "#990000",
+   "frase": "Mil de ELO y cero miedo.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa",
+     "caro-kann:avance"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "fernanda",
+   "nombre": "Fernanda",
+   "elo": 1000,
+   "temperamento": "equilibrado",
+   "color": "#0b5394",
+   "frase": "Conozco tu apertura mejor que tú. Por ahora.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola",
+     "caro-kann:cambio"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "abril",
+   "nombre": "Abril",
+   "elo": 1000,
+   "temperamento": "defensivo",
+   "color": "#741b47",
+   "frase": "No me gusta perder, así que casi no ataco.",
+   "estilo": {
+    "blancas": [
+     "londres",
+     "caro-kann:dos-caballos"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "rodrigo",
+   "nombre": "Rodrigo",
+   "elo": 1100,
+   "temperamento": "agresivo",
+   "color": "#cc0000",
+   "frase": "Cada partida es una final.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "valeria",
+   "nombre": "Valeria",
+   "elo": 1100,
+   "temperamento": "defensivo",
+   "color": "#3c78d8",
+   "frase": "Paciencia: el error lo vas a cometer tú.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "emiliano",
+   "nombre": "Emiliano",
+   "elo": 1200,
+   "temperamento": "equilibrado",
+   "color": "#274e13",
+   "frase": "Entreno con cursos, como tú.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "carmen",
+   "nombre": "Carmen",
+   "elo": 1200,
+   "temperamento": "agresivo",
+   "color": "#a61c00",
+   "frase": "Juego rápido y pienso más rápido.",
+   "estilo": {
+    "blancas": [
+     "abierta:vienesa"
+    ],
+    "negras": [
+     "escandinava",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "sergio",
+   "nombre": "Sergio",
+   "elo": 1300,
+   "temperamento": "equilibrado",
+   "color": "#45818e",
+   "frase": "Profe de matemáticas. Calculo todo.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "francesa",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "lucia",
+   "nombre": "Lucía",
+   "elo": 1300,
+   "temperamento": "agresivo",
+   "color": "#c27ba0",
+   "frase": "Gambito aceptado, partida ganada.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "ivan",
+   "nombre": "Iván",
+   "elo": 1400,
+   "temperamento": "defensivo",
+   "color": "#6aa84f",
+   "frase": "Me gustan los finales largos.",
+   "estilo": {
+    "blancas": [
+     "londres"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "daniela",
+   "nombre": "Daniela",
+   "elo": 1400,
+   "temperamento": "equilibrado",
+   "color": "#3d85c6",
+   "frase": "Juego en línea desde la secundaria.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "fausto",
+   "nombre": "Fausto",
+   "elo": 1500,
+   "temperamento": "agresivo",
+   "color": "#e69138",
+   "frase": "El peón de rey avanza solo.",
+   "estilo": {
+    "blancas": [
+     "abierta:vienesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "pilar",
+   "nombre": "Pilar",
+   "elo": 1500,
+   "temperamento": "defensivo",
+   "color": "#8e7cc3",
+   "frase": "La Eslava es mi casa.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "ernesto",
+   "nombre": "Ernesto",
+   "elo": 1600,
+   "temperamento": "equilibrado",
+   "color": "#76a5af",
+   "frase": "Campeón del club tres años seguidos.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola"
+    ],
+    "negras": [
+     "francesa",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "monica",
+   "nombre": "Mónica",
+   "elo": 1700,
+   "temperamento": "agresivo",
+   "color": "#cc4125",
+   "frase": "Mi alfil de casillas blancas es mi favorito.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "joaquin",
+   "nombre": "Joaquín",
+   "elo": 1800,
+   "temperamento": "defensivo",
+   "color": "#674ea7",
+   "frase": "Primero la estructura, luego todo lo demás.",
+   "estilo": {
+    "blancas": [
+     "londres"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "adriana",
+   "nombre": "Adriana",
+   "elo": 1900,
+   "temperamento": "equilibrado",
+   "color": "#38761d",
+   "frase": "Árbitra de torneos y jugadora de fin de semana.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "abierta",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "ramiro",
+   "nombre": "Ramiro",
+   "elo": 2000,
+   "temperamento": "agresivo",
+   "color": "#990000",
+   "frase": "Dos mil. Ya no regalo nada.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "elena",
+   "nombre": "Elena",
+   "elo": 2100,
+   "temperamento": "equilibrado",
+   "color": "#0b5394",
+   "frase": "Preparo cada apertura como un examen.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "ignacio",
+   "nombre": "Ignacio",
+   "elo": 2200,
+   "temperamento": "defensivo",
+   "color": "#741b47",
+   "frase": "Candidato a maestro. Paciente como una piedra.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "francesa",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "teresa",
+   "nombre": "Teresa",
+   "elo": 2300,
+   "temperamento": "agresivo",
+   "color": "#a61c00",
+   "frase": "Mis sacrificios casi siempre funcionan.",
+   "estilo": {
+    "blancas": [
+     "abierta:vienesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "bruno",
+   "nombre": "Bruno",
+   "elo": 2400,
+   "temperamento": "equilibrado",
+   "color": "#274e13",
+   "frase": "Maestro FIDE de día, profe de noche.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "aurora",
+   "nombre": "Aurora",
+   "elo": 2500,
+   "temperamento": "defensivo",
+   "color": "#45818e",
+   "frase": "Nunca pierdo un final igualado.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "octavio",
+   "nombre": "Octavio",
+   "elo": 2600,
+   "temperamento": "agresivo",
+   "color": "#cc0000",
+   "frase": "Gran maestro y amante del ataque.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "citlali",
+   "nombre": "Citlali",
+   "elo": 2700,
+   "temperamento": "equilibrado",
+   "color": "#3c78d8",
+   "frase": "Juego como si el tablero fuera mío.",
+   "estilo": {
+    "blancas": [
+     "italiana"
+    ],
+    "negras": [
+     "abierta",
+     "eslava"
+    ]
+   }
+  },
+  {
+   "id": "lorenzo",
+   "nombre": "Lorenzo",
+   "elo": 2800,
+   "temperamento": "defensivo",
+   "color": "#b45f06",
+   "frase": "Casi imposible de vencer.",
+   "estilo": {
+    "blancas": [
+     "gambito-dama"
+    ],
+    "negras": [
+     "caro-kann",
+     "gambito-dama-declinado"
+    ]
+   }
+  },
+  {
+   "id": "ines",
+   "nombre": "Inés",
+   "elo": 2900,
+   "temperamento": "agresivo",
+   "color": "#c27ba0",
+   "frase": "Calculo veinte jugadas antes del desayuno.",
+   "estilo": {
+    "blancas": [
+     "abierta:escocesa"
+    ],
+    "negras": [
+     "siciliana-alapin",
+     "gambito-dama-aceptado"
+    ]
+   }
+  },
+  {
+   "id": "atlas",
+   "nombre": "Atlas",
+   "elo": 3000,
+   "temperamento": "equilibrado",
+   "color": "#434343",
+   "frase": "Soy el motor a casi toda su fuerza. Suerte.",
+   "estilo": {
+    "blancas": [
+     "abierta:espanola"
+    ],
+    "negras": [
+     "caro-kann",
+     "eslava"
+    ]
+   }
+  }
+ ]
+}
