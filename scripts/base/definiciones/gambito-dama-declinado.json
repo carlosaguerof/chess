@@ -1,0 +1,111 @@
+{
+  "id": "gambito-dama-declinado",
+  "nombre": "Gambito de Dama Declinado",
+  "nombreIngles": "Queen's Gambit Declined",
+  "eco": "D30–D69",
+  "lado": "negras",
+  "raiz": "d4 d5 c4 e6",
+  "idea": "Con 2...e6 defiendes d5 con un peón y mantienes el centro firme. Es la defensa clásica contra 1.d4: sólida y fácil de entender. Su único problema es el alfil de c8, encerrado detrás de e6; el plan es desarrollar todo, enrocar y liberarlo con ...dxc4 y ...e5 o ...c5, o sacarlo por b7.",
+  "variantes": [
+    {
+      "id": "ortodoxa-capablanca",
+      "familia": "Defensa Ortodoxa",
+      "nombre": "Gambito de Dama Declinado: Defensa Ortodoxa, Sistema Capablanca",
+      "fila": { "eco": "D67", "name": "Queen's Gambit Declined: Orthodox Defense, Capablanca System", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 Nbd7 7. Rc1 c6 8. Bd3 dxc4 9. Bxc4 Nd5" },
+      "lado": "negras",
+      "plan": "Desarrollo clásico: ...Cf6, ...Ae7 (rompe la clavada), 0-0, ...Cbd7 y ...c6. Cuando blancas juega Ad3, tomas en c4 y ...Cd5 cambia piezas para darte aire; después ...e5 libera tu alfil de c8.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cambio",
+      "familia": "Variante del Cambio",
+      "nombre": "Gambito de Dama Declinado: Variante del Cambio, Variante Reshevsky",
+      "fila": { "eco": "D36", "name": "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 c6 6. e3 Be7 7. Bd3 Nbd7 8. Nge2 O-O 9. O-O Re8 10. Qc2 Nf8" },
+      "lado": "negras",
+      "plan": "Tras 4.cxd5 recaptura con el peón (...exd5): tu alfil de c8 queda libre. Desarrolla con ...c6, ...Ae7, ...Cbd7, 0-0 y ...Te8; el caballo pasa por f8 rumbo a g6 o e6 para cuidar tu flanco de rey.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "lasker",
+      "familia": "Defensa Lasker",
+      "nombre": "Gambito de Dama Declinado: Defensa Lasker",
+      "fila": { "eco": "D56", "name": "Queen's Gambit Declined: Lasker Defense", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Be7 4. Nf3 Nf6 5. Bg5 h6 6. Bh4 O-O 7. e3 Ne4" },
+      "lado": "negras",
+      "plan": "Aquí ...Ae7 sale antes que ...Cf6, pero se llega a lo mismo. ...h6 pregunta al alfil y ...Ce4 fuerza cambios de piezas menores, lo que aligera tu posición. Después, ...c6 y ...Cd7, buscando ...e5 o ...c5 para liberar tu alfil de c8.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "caballo-trampa",
+      "familia": "Variante Moderna",
+      "nombre": "Gambito de Dama Declinado: Variante Moderna, Defensa del Caballo",
+      "fila": { "eco": "D51", "name": "Queen's Gambit Declined: Modern Variation, Knight Defense", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7" },
+      "lado": "negras",
+      "plan": "4...Cbd7 es sólida y tiende la trampa del elefante: si 5.cxd5 exd5 6.Cxd5??, ...Cxd5! 7.Axd8 Ab4+ 8.Dd2 Axd2+ 9.Rxd2 Rxd8 y quedas con una pieza de más. Si blancas no cae, sigue con ...c6 y ...Ae7, o la Cambridge Springs.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cambridge-springs",
+      "familia": "Defensa Cambridge Springs",
+      "nombre": "Gambito de Dama Declinado: Defensa Cambridge Springs, Variante Argentina",
+      "fila": { "eco": "D52", "name": "Queen's Gambit Declined: Cambridge Springs Defense, Argentine Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7 5. e3 c6 6. Nf3 Qa5 7. Nd2 Bb4 8. Qc2 O-O 9. Bh4" },
+      "lado": "negras",
+      "plan": "...c6 y ...Da5 clavan el Cc3, y si abres la quinta fila con ...dxc4, la dama también ataca el Ag5. ...Ab4 y ...Ce4 suman presión sobre c3. Después de enrocar, busca ...c5 o ...e5 para abrir el centro.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "harrwitz",
+      "familia": "Ataque Harrwitz",
+      "nombre": "Gambito de Dama Declinado: Ataque Harrwitz, Defensa Ortodoxa",
+      "fila": { "eco": "D37", "name": "Queen's Gambit Declined: Harrwitz Attack, Orthodox Defense", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 c6" },
+      "lado": "negras",
+      "plan": "Contra Af4 mantén el mismo esquema: ...Ae7, 0-0 y ...c6. Sigue ...Cbd7 y prepara una ruptura central (...c5, o ...dxc4 y ...e5) para liberar tu alfil de c8.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "tres-caballos",
+      "familia": "Variante de los Tres Caballos",
+      "nombre": "Gambito de Dama Declinado: Variante de los Tres Caballos",
+      "fila": { "eco": "D37", "name": "Queen's Gambit Declined: Three Knights Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. e3 O-O" },
+      "lado": "negras",
+      "plan": "Si blancas no saca su alfil de c1 (5.e3), tu desarrollo es cómodo: ...Ae7 y 0-0, luego ...c5, o ...b6 y ...Ab7 para activar tu alfil de c8. Si blancas empieza con 3.Cf3, 3...Cf6 lleva a lo mismo.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cambio-e3",
+      "familia": "Variante del Cambio",
+      "nombre": "Gambito de Dama Declinado: Variante del Cambio (con 4.e3)",
+      "fila": { "eco": "D35", "name": "Queen's Gambit Declined: Exchange Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. e3 Be7 5. cxd5 exd5 6. Bd3 O-O 7. Nf3 c6" },
+      "lado": "negras",
+      "plan": "Contra 4.e3, que encierra el alfil de c1 de blancas, desarrolla tranquilo: ...Ae7, 0-0 y ...c6. Tras el cambio en d5 tu alfil de c8 ya tiene salida, por ejemplo a g4 o f5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "tartakower",
+      "familia": "Defensa Tartakower",
+      "nombre": "Gambito de Dama Declinado: Defensa Tartakower, Variante del Cambio",
+      "fila": { "eco": "D58", "name": "Queen's Gambit Declined: Tartakower Defense, Exchange Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Be7 4. Nf3 Nf6 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. cxd5 exd5" },
+      "lado": "negras",
+      "plan": "...h6 y ...b6 resuelven a su manera el problema del alfil de c8: saldrá por b7 (o a e6). Tras 8.cxd5 exd5 tu centro es firme; sigue ...Ab7, ...Cbd7 y prepara la ruptura ...c5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "tarrasch",
+      "familia": "Defensa Tarrasch",
+      "nombre": "Defensa Tarrasch: Variante de Praga",
+      "fila": { "eco": "D33", "name": "Tarrasch Defense: Prague Variation", "pgn": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6" },
+      "lado": "negras",
+      "plan": "Alternativa activa: con 3...c5 aceptas un peón aislado en d5 a cambio de piezas libres. Desarrolla ...Cc6, ...Cf6, ...Ae7 y 0-0; tu alfil de c8 sale sin problemas a e6 o g4. Exige jugar activo: si te quedas pasivo, el peón de d5 se vuelve débil.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    }
+  ]
+}

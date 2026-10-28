@@ -1,0 +1,241 @@
+{
+  "id": "siciliana",
+  "nombre": "Defensa Siciliana",
+  "nombreIngles": "Sicilian Defense",
+  "eco": "B20–B99",
+  "lado": "ambos",
+  "raiz": "e4 c5",
+  "idea": "Negras responde a 1.e4 con ...c5: pelea por la casilla d4 desde un lado y busca posiciones desequilibradas donde se juega para ganar. Con negras es de las defensas más recomendadas. Con blancas, la Alapin (2.c3) prepara d4 para tener dos peones en el centro y evita la teoría larga de la Siciliana abierta.",
+  "variantes": [
+    {
+      "id": "alapin-d5-moderna",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen, Línea Moderna",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line", "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nf6 5. Nf3 Bg4" },
+      "lado": "blancas",
+      "plan": "Rompe la clavada con Ae2, pregúntale al A con h3 y enroca. Luego Ae3 y Cc3, que gana tiempo atacando la D de d5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-cf6-d4",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Smith-Morra Rehusado",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Smith-Morra Declined", "pgn": "1. e4 c5 2. c3 Nf6 3. e5 Nd5 4. d4 cxd4" },
+      "lado": "blancas",
+      "plan": "Recaptura con cxd4 (o juega Cf3 primero) para quedarte con un centro grande. Desarrolla Cf3, Ac4 y 0-0, y sostén el peón de e5: si Negras lo ataca con ...d6, apóyalo o cambia exd6.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-d5-cc6",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen con 4...Cc6",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Barmen Defense", "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nc6 5. Nf3" },
+      "lado": "blancas",
+      "plan": "Sigue con Ae2 y 0-0. Si Negras cambia en d4, recaptura cxd4 y saca Cc3 ganando tiempo sobre la D. Si clava con ...Ag4, responde h3 y Ae3.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-cf6-stoltz",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Ataque Stoltz",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Stoltz Attack", "pgn": "1. e4 c5 2. c3 Nf6 3. e5 Nd5 4. Nf3 Nc6 5. Bc4 Nb6 6. Bb3" },
+      "lado": "blancas",
+      "plan": "Sigue con d4 para un centro grande, 0-0 y De2, sosteniendo el peón de e5. Si Negras juega ...c4, el A va a c2 y apunta al enroque negro.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-d5-cambio-central",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen, Cambio Central",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange", "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 cxd4 5. cxd4 Nc6 6. Nf3 Bg4" },
+      "lado": "blancas",
+      "plan": "Lo sólido es Ae2 para romper la clavada, enrocar y luego Cc3, que gana tiempo contra la D. Juegas con un peón aislado en d4: a cambio tienes piezas activas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-d5-g6",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen con 4...g6",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Barmen Defense", "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 g6 5. Nf3" },
+      "lado": "blancas",
+      "plan": "Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la D de d5 con Cc3 o c4 cuando sea seguro.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-cf6-heidenfeld",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Heidenfeld",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Heidenfeld Variation", "pgn": "1. e4 c5 2. c3 Nf6 3. e5 Nd5 4. Nf3 Nc6 5. Na3" },
+      "lado": "blancas",
+      "plan": "El C de a3 busca c4 o c2 (desde c2 apoya d4). Sigue con d4, Ae2 o Ac4 y 0-0, sosteniendo el peón de e5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-gambito-anti-alapin",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Gambito Anti-Alapin",
+      "fila": { "eco": "B22", "name": "Sicilian Defense: Alapin Variation, Anti-Alapin Gambit", "pgn": "1. e4 c5 2. c3 d5 3. exd5 Nf6" },
+      "lado": "blancas",
+      "plan": "Negras da un peón a cambio de desarrollo rápido. Lo práctico es Ab5+ y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "najdorf-ataque-ingles",
+      "familia": "Variante Najdorf",
+      "nombre": "Variante Najdorf: Ataque Inglés",
+      "fila": { "eco": "B90", "name": "Sicilian Defense: Najdorf Variation, English Attack", "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5 7. Nb3 Be6 8. f3" },
+      "lado": "negras",
+      "plan": "Con ...e5 y ...Ae6 controlas d5. Sigue con ...Ae7, ...0-0 y ...Cbd7, y prepara ...b5 (o la ruptura ...d5) para contraatacar en el flanco de dama.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "najdorf-opocensky",
+      "familia": "Variante Najdorf",
+      "nombre": "Variante Najdorf: Variante Opocensky, Línea Tradicional",
+      "fila": { "eco": "B92", "name": "Sicilian Defense: Najdorf Variation, Opocensky Variation, Traditional Line", "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be2 e5 7. Nb3 Be7 8. O-O O-O" },
+      "lado": "negras",
+      "plan": "Contra el Ae2 tranquilo: ...Ae6, ...Cbd7 y ...Dc7. La ruptura ...d5 libera tu juego y ...b5 gana espacio en el flanco de dama.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "najdorf-ag5",
+      "familia": "Variante Najdorf",
+      "nombre": "Variante Najdorf: 6.Ag5 e6",
+      "fila": { "eco": "B95", "name": "Sicilian Defense: Najdorf Variation", "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6" },
+      "lado": "negras",
+      "plan": "Con ...e6 cubres d5 y preparas ...Ae7, ...Dc7, ...Cbd7 y ...b5. Cuidado con la clavada del Ag5 sobre tu Cf6 y con avances blancos como f4 y e5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "dragon-yugoslavo",
+      "familia": "Variante del Dragón",
+      "nombre": "Variante del Dragón: Ataque Yugoslavo",
+      "fila": { "eco": "B76", "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack", "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6" },
+      "lado": "negras",
+      "plan": "Blancas suele enrocar largo y atacar con h4-h5. Tú contraatacas por la columna c: ...Ad7, ...Tc8 y ...Ce5-c4. Es una carrera de ataques: gana el más rápido.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "dragon-clasico",
+      "familia": "Variante del Dragón",
+      "nombre": "Variante del Dragón: Variante Clásica",
+      "fila": { "eco": "B73", "name": "Sicilian Defense: Dragon Variation, Classical Variation", "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be2 Bg7 7. O-O Nc6 8. Be3" },
+      "lado": "negras",
+      "plan": "Enroca (...0-0) y sigue con ...Ae6 o ...Ad7 y ...Tc8; tu A de g7 presiona la gran diagonal. Si se presenta, la ruptura ...d5 libera tu juego.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "dragon-acelerado",
+      "familia": "Dragón Acelerado",
+      "nombre": "Dragón Acelerado: Variante Moderna con Ac4",
+      "fila": { "eco": "B35", "name": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation", "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nc3 Bg7 6. Be3 Nf6 7. Bc4" },
+      "lado": "negras",
+      "plan": "Enroca (...0-0) y elige entre ...d6 (estructura Dragón) o ...a5 si el A se va a b3. La ventaja de este orden es que, sin haber jugado ...d6, a veces llegas a ...d5 en un solo paso.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "clasica-anti-sozin",
+      "familia": "Variante Clásica",
+      "nombre": "Variante Clásica: Anti-Sozin",
+      "fila": { "eco": "B57", "name": "Sicilian Defense: Classical Variation, Anti-Sozin Variation", "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6 6. Bc4 Qb6" },
+      "lado": "negras",
+      "plan": "...Db6 ataca al Cd4 y de paso a b2, y saca a Blancas de su plan con Ac4. Sigue con ...e6, ...Ae7 y ...0-0.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "sveshnikov",
+      "familia": "Variante Lasker-Pelikan",
+      "nombre": "Variante Lasker-Pelikan: Variante Sveshnikov",
+      "fila": { "eco": "B33", "name": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation", "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5 6. Ndb5 d6 7. Bg5 a6 8. Na3 b5" },
+      "lado": "negras",
+      "plan": "...b5 le quita la casilla c4 al C de a3. La lucha es por d5: si Blancas cambia Axf6, recaptura ...gxf6 y busca ...f5 para pelear el centro, con la pareja de alfiles.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "taimanov-bastrikov",
+      "familia": "Variante Taimanov",
+      "nombre": "Variante Taimanov: Variante Bastrikov",
+      "fila": { "eco": "B47", "name": "Sicilian Defense: Taimanov Variation, Bastrikov Variation", "pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Qc7" },
+      "lado": "negras",
+      "plan": "Esquema flexible: ...a6, ...Cf6 y ...Ab4 o ...Ae7, con ...d6 cuando haga falta. La D en c7 controla e5 y la columna c. Si Blancas juega Cdb5, la D se va a b8.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "kan-moderna",
+      "familia": "Variante Kan",
+      "nombre": "Variante Kan: Variante Moderna",
+      "fila": { "eco": "B42", "name": "Sicilian Defense: Kan Variation, Modern Variation", "pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Bd3" },
+      "lado": "negras",
+      "plan": "Sigue con ...Cf6 y ...Dc7 (o ...Ac5 para echar al C de d4), luego ...d6, ...Ae7 y ...0-0. Con ...b5 y ...Ab7 tienes juego en el flanco de dama.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "rossolimo-fianchetto",
+      "familia": "Ataque Nyezhmetdinov-Rossolimo",
+      "nombre": "Ataque Nyezhmetdinov-Rossolimo: Variante del Fianchetto",
+      "fila": { "eco": "B31", "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation", "pgn": "1. e4 c5 2. Nf3 Nc6 3. Bb5 g6" },
+      "lado": "negras",
+      "plan": "Sigue con ...Ag7, ...Cf6 (o ...e5 y ...Cge7) y ...0-0. Si Blancas cambia Axc6, recaptura con ...dxc6: te quedas con la pareja de alfiles y líneas abiertas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "moscu",
+      "familia": "Variante de Moscú",
+      "nombre": "Variante de Moscú: Línea Principal",
+      "fila": { "eco": "B52", "name": "Sicilian Defense: Moscow Variation, Main Line", "pgn": "1. e4 c5 2. Nf3 d6 3. Bb5+ Bd7" },
+      "lado": "negras",
+      "plan": "Tapa el jaque con ...Ad7 y ofrece cambiar alfiles: tras Axd7+ recaptura ...Dxd7. Luego ...Cc6, ...Cf6 y ...g6 o ...e6, con una posición sólida.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cerrada",
+      "familia": "Variante Cerrada",
+      "nombre": "Variante Cerrada",
+      "fila": { "eco": "B25", "name": "Sicilian Defense: Closed", "pgn": "1. e4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. d3 d6" },
+      "lado": "negras",
+      "plan": "Esquema espejo: ...e6 y ...Cge7 (o ...e5) y ...0-0. Juega en el flanco de dama con ...Tb8 y ...b5, mientras Blancas suele atacar por el flanco de rey con f4-f5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "grand-prix",
+      "familia": "Ataque Grand Prix",
+      "nombre": "Ataque Grand Prix",
+      "fila": { "eco": "B23", "name": "Sicilian Defense: Grand Prix Attack", "pgn": "1. e4 c5 2. Nc3 Nc6 3. f4" },
+      "lado": "negras",
+      "plan": "Desarrolla con ...g6, ...Ag7, ...e6 y ...Cge7, y busca ...d5 para pelear el centro y cerrarle la diagonal a un Ac4. Si Blancas juega Ab5, ...Cd4 es buena respuesta.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "smith-morra-siberiana",
+      "familia": "Gambito Smith-Morra",
+      "nombre": "Gambito Smith-Morra Aceptado: Variante Siberiana",
+      "fila": { "eco": "B21", "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation", "pgn": "1. e4 c5 2. d4 cxd4 3. c3 dxc3 4. Nxc3 Nc6 5. Nf3 e6 6. Bc4 Qc7" },
+      "lado": "negras",
+      "plan": "Aceptas el peón y desarrollas con cuidado: ...Cf6, ...a6 y ...Ae7. Si Blancas pone la D en e2 y enroca corto, ojo a la trampa ...Cg4 y ...Cd4, con amenaza de ...Dh2 mate.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    }
+  ]
+}

@@ -13,7 +13,7 @@
      "italiana"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "gambito-dama-declinado"
     ]
    }
@@ -27,11 +27,11 @@
    "frase": "Saco la dama temprano. ¿Qué podría salir mal?",
    "estilo": {
     "blancas": [
-     "abierta:dama"
+     "italiana"
     ],
     "negras": [
-     "abierta",
-     "gambito-dama-aceptado"
+     "escandinava",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -47,7 +47,7 @@
      "italiana"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "gambito-dama-declinado"
     ]
    }
@@ -78,11 +78,13 @@
    "frase": "Si veo un jaque, lo doy.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa"
+     "italiana:dos-caballos",
+     "siciliana:smith-morra",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -95,10 +97,12 @@
    "frase": "Juego los domingos con mi abuelo, y a veces le gano.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "italiana",
+     "caro-kann:dos-caballos",
+     "francesa"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "gambito-dama-declinado"
     ]
    }
@@ -112,8 +116,8 @@
    "frase": "Las piezas no se regalan. Bueno, casi nunca.",
    "estilo": {
     "blancas": [
-     "caro-kann:avance",
-     "francesa"
+     "eslava",
+     "gambito-dama"
     ],
     "negras": [
      "francesa",
@@ -131,11 +135,12 @@
    "estilo": {
     "blancas": [
      "italiana",
-     "caro-kann:clasica"
+     "caro-kann:clasica",
+     "escandinava"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -148,7 +153,8 @@
    "frase": "Estudio una apertura por semana. Esta semana: la tuya.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava"
     ],
     "negras": [
      "escandinava",
@@ -165,8 +171,7 @@
    "frase": "Sin prisa: el que se apura, se equivoca.",
    "estilo": {
     "blancas": [
-     "londres",
-     "caro-kann:cambio"
+     "londres"
     ],
     "negras": [
      "caro-kann",
@@ -184,11 +189,13 @@
    "estilo": {
     "blancas": [
      "italiana",
+     "siciliana:alapin",
      "caro-kann:avance",
-     "francesa"
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "eslava"
     ]
    }
@@ -202,12 +209,12 @@
    "frase": "Ataco primero y pregunto después.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa",
-     "caro-kann:clasica"
+     "gambito-dama",
+     "eslava"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -237,12 +244,14 @@
    "frase": "Si me das un peón, me lo como.",
    "estilo": {
     "blancas": [
-     "italiana",
-     "caro-kann:dos-caballos"
+     "italiana:dos-caballos",
+     "caro-kann:cambio",
+     "caro-kann:panov",
+     "escandinava"
     ],
     "negras": [
      "escandinava",
-     "gambito-dama-aceptado"
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -255,8 +264,9 @@
    "frase": "Repaso mis partidas cada noche. Las tuyas también.",
    "estilo": {
     "blancas": [
-     "abierta:espanola",
-     "caro-kann:avance"
+     "italiana",
+     "caro-kann:avance",
+     "francesa"
     ],
     "negras": [
      "francesa",
@@ -290,12 +300,13 @@
    "frase": "Juego la Siciliana porque me gusta el caos.",
    "estilo": {
     "blancas": [
-     "abierta:vienesa",
-     "caro-kann:clasica"
+     "siciliana",
+     "caro-kann:clasica",
+     "italiana:dos-caballos"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -311,7 +322,7 @@
      "gambito-dama"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "eslava"
     ]
    }
@@ -342,12 +353,13 @@
    "frase": "Mil de ELO y cero miedo.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa",
-     "caro-kann:avance"
+     "italiana",
+     "caro-kann:panov",
+     "escandinava"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "escandinava",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -360,8 +372,9 @@
    "frase": "Conozco tu apertura mejor que tú. Por ahora.",
    "estilo": {
     "blancas": [
-     "abierta:espanola",
-     "caro-kann:cambio"
+     "italiana",
+     "caro-kann:cambio",
+     "francesa"
     ],
     "negras": [
      "caro-kann",
@@ -379,10 +392,10 @@
    "estilo": {
     "blancas": [
      "londres",
-     "caro-kann:dos-caballos"
+     "gambito-dama"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "gambito-dama-declinado"
     ]
    }
@@ -396,11 +409,13 @@
    "frase": "Cada partida es una final.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -413,11 +428,13 @@
    "frase": "Paciencia: el error lo vas a cometer tú.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava",
+     "londres"
     ],
     "negras": [
      "caro-kann",
-     "eslava"
+     "gambito-dama-declinado"
     ]
    }
   },
@@ -430,11 +447,14 @@
    "frase": "Entreno con cursos, como tú.",
    "estilo": {
     "blancas": [
-     "abierta:espanola"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
-     "gambito-dama-declinado"
+     "italiana",
+     "eslava"
     ]
    }
   },
@@ -447,11 +467,13 @@
    "frase": "Juego rápido y pienso más rápido.",
    "estilo": {
     "blancas": [
-     "abierta:vienesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "escandinava",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -464,10 +486,13 @@
    "frase": "Profe de matemáticas. Calculo todo.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "francesa",
+     "italiana",
      "eslava"
     ]
    }
@@ -481,11 +506,13 @@
    "frase": "Gambito aceptado, partida ganada.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -498,6 +525,8 @@
    "frase": "Me gustan los finales largos.",
    "estilo": {
     "blancas": [
+     "gambito-dama",
+     "eslava",
      "londres"
     ],
     "negras": [
@@ -515,10 +544,13 @@
    "frase": "Juego en línea desde la secundaria.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "eslava"
     ]
    }
@@ -532,11 +564,13 @@
    "frase": "El peón de rey avanza solo.",
    "estilo": {
     "blancas": [
-     "abierta:vienesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -549,11 +583,13 @@
    "frase": "La Eslava es mi casa.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava",
+     "londres"
     ],
     "negras": [
      "caro-kann",
-     "eslava"
+     "gambito-dama-declinado"
     ]
    }
   },
@@ -566,11 +602,14 @@
    "frase": "Campeón del club tres años seguidos.",
    "estilo": {
     "blancas": [
-     "abierta:espanola"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "francesa",
-     "gambito-dama-declinado"
+     "italiana",
+     "eslava"
     ]
    }
   },
@@ -583,11 +622,13 @@
    "frase": "Mi alfil de casillas blancas es mi favorito.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -600,11 +641,13 @@
    "frase": "Primero la estructura, luego todo lo demás.",
    "estilo": {
     "blancas": [
+     "gambito-dama",
+     "eslava",
      "londres"
     ],
     "negras": [
      "caro-kann",
-     "eslava"
+     "gambito-dama-declinado"
     ]
    }
   },
@@ -617,11 +660,14 @@
    "frase": "Árbitra de torneos y jugadora de fin de semana.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
-     "gambito-dama-declinado"
+     "italiana",
+     "eslava"
     ]
    }
   },
@@ -634,11 +680,13 @@
    "frase": "Dos mil. Ya no regalo nada.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -651,11 +699,14 @@
    "frase": "Preparo cada apertura como un examen.",
    "estilo": {
     "blancas": [
-     "abierta:espanola"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "caro-kann",
-     "gambito-dama-declinado"
+     "italiana",
+     "eslava"
     ]
    }
   },
@@ -668,11 +719,13 @@
    "frase": "Candidato a maestro. Paciente como una piedra.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava",
+     "londres"
     ],
     "negras": [
-     "francesa",
-     "eslava"
+     "caro-kann",
+     "gambito-dama-declinado"
     ]
    }
   },
@@ -685,11 +738,13 @@
    "frase": "Mis sacrificios casi siempre funcionan.",
    "estilo": {
     "blancas": [
-     "abierta:vienesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -702,10 +757,13 @@
    "frase": "Maestro FIDE de día, profe de noche.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "eslava"
     ]
    }
@@ -719,7 +777,9 @@
    "frase": "Nunca pierdo un final igualado.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava",
+     "londres"
     ],
     "negras": [
      "caro-kann",
@@ -736,11 +796,13 @@
    "frase": "Gran maestro y amante del ataque.",
    "estilo": {
     "blancas": [
-     "abierta:espanola"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -753,10 +815,13 @@
    "frase": "Juego como si el tablero fuera mío.",
    "estilo": {
     "blancas": [
-     "italiana"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "abierta",
+     "italiana",
      "eslava"
     ]
    }
@@ -770,7 +835,9 @@
    "frase": "Casi imposible de vencer.",
    "estilo": {
     "blancas": [
-     "gambito-dama"
+     "gambito-dama",
+     "eslava",
+     "londres"
     ],
     "negras": [
      "caro-kann",
@@ -787,11 +854,13 @@
    "frase": "Calculo veinte jugadas antes del desayuno.",
    "estilo": {
     "blancas": [
-     "abierta:escocesa"
+     "siciliana",
+     "italiana:dos-caballos",
+     "caro-kann:avance"
     ],
     "negras": [
-     "siciliana-alapin",
-     "gambito-dama-aceptado"
+     "siciliana",
+     "gambito-dama:aceptado"
     ]
    }
   },
@@ -804,10 +873,13 @@
    "frase": "Soy el motor a casi toda su fuerza. Suerte.",
    "estilo": {
     "blancas": [
-     "abierta:espanola"
+     "italiana",
+     "caro-kann:clasica",
+     "francesa",
+     "escandinava"
     ],
     "negras": [
-     "caro-kann",
+     "italiana",
      "eslava"
     ]
    }

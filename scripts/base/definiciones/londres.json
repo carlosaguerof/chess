@@ -1,0 +1,81 @@
+{
+  "id": "londres",
+  "nombre": "Sistema Londres",
+  "nombreIngles": "London System",
+  "eco": "A45–A48, D00–D02",
+  "lado": "blancas",
+  "raiz": "d4",
+  "idea": "Un sistema para blancas que se juega casi igual contra todo: d4, Af4, e3, Cf3, c3, Ad3, Cbd2 y 0-0. Es fácil de aprender porque los planes se repiten y evita mucha teoría. La idea es un centro sólido (la pirámide c3-d4-e3) y luego atacar con Ce5 o en el flanco de rey.",
+  "variantes": [
+    {
+      "id": "d5-c5-cc6",
+      "familia": "Londres contra ...d5",
+      "nombre": "Sistema Londres: línea principal contra ...d5 y ...c5",
+      "fila": { "eco": "D02", "name": "Queen's Pawn Game: London System", "pgn": "1. d4 d5 2. Nf3 Nf6 3. Bf4 c5 4. e3 Nc6 5. Nbd2 e6 6. c3" },
+      "lado": "blancas",
+      "plan": "La pirámide c3-d4-e3 sostiene el centro. Sigue con Ad3, 0-0 y Ce5 (a veces con f4 para atacar). Si Negras ofrece cambiar alfiles con ...Ad6, retira Ag3 para conservar el tuyo.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "d5-c5-db6",
+      "familia": "Londres contra ...d5",
+      "nombre": "Sistema Londres: Variante del Peón Envenenado",
+      "fila": { "eco": "D02", "name": "London System: Poisoned Pawn Variation", "pgn": "1. d4 Nf6 2. Nf3 d5 3. Bf4 c5 4. e3 Qb6 5. Nc3" },
+      "lado": "blancas",
+      "plan": "Cc3 deja el peón de b2: si ...Dxb2, Cb5 amenaza Cc7+ (horquilla al R y a la T) y Tb1 echa a la D. Si Negras no lo toma, sigue desarrollando con Ae2 o Ad3 y 0-0.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "d5-e6",
+      "familia": "Londres contra ...d5",
+      "nombre": "Sistema Londres con ...e6",
+      "fila": { "eco": "D02", "name": "Queen's Pawn Game: London System, with e6", "pgn": "1. d4 d5 2. Nf3 e6 3. Bf4 Nf6" },
+      "lado": "blancas",
+      "plan": "Mismo esquema: e3, Ad3, c3, Cbd2 y 0-0. Tu A de f4 salió antes de cerrar con e3; el A de c8 negro quedó encerrado detrás de ...e6.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "d5-acelerado-c5",
+      "familia": "Londres Acelerado",
+      "nombre": "Londres Acelerado: Contragambito Steinitz",
+      "fila": { "eco": "D00", "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit", "pgn": "1. d4 d5 2. Bf4 c5" },
+      "lado": "blancas",
+      "plan": "Es la respuesta más activa de Negras. Lo sencillo es e3 y luego c3, Cf3, Ad3 y Cbd2. Si ...Db6 ataca b2, Cc3 lo defiende de forma indirecta: si ...Dxb2, Cb5 amenaza Cc7+.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cf6-g6",
+      "familia": "Londres contra la India (...Cf6)",
+      "nombre": "Sistema Londres contra el fianchetto, con Ae2",
+      "fila": { "eco": "A48", "name": "London System, with Be2", "pgn": "1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 d6 5. h3 c5 6. Be2" },
+      "lado": "blancas",
+      "plan": "h3 le deja al A la casilla h2 por si Negras juega ...Ch5. Sigue con c3 para sostener d4 contra ...c5, 0-0 y Cbd2.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cf6-e6",
+      "familia": "Londres contra la India (...Cf6)",
+      "nombre": "Defensa India: Sistema Londres",
+      "fila": { "eco": "A46", "name": "Indian Defense: London System", "pgn": "1. d4 Nf6 2. Nf3 e6 3. Bf4" },
+      "lado": "blancas",
+      "plan": "Sigue con e3, Ad3, c3, Cbd2 y 0-0 (h3 si quieres guardarle h2 al A). Contra ...c5, c3 mantiene firme el centro.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "cf6-acelerado",
+      "familia": "Londres Acelerado",
+      "nombre": "Defensa India: Londres Acelerado",
+      "fila": { "eco": "A45", "name": "Indian Defense: Accelerated London System", "pgn": "1. d4 Nf6 2. Bf4" },
+      "lado": "blancas",
+      "plan": "El mismo esquema en otro orden: sacas el Af4 de inmediato y sigues con e3, Cf3, c3, Ad3, Cbd2 y 0-0.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    }
+  ]
+}

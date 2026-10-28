@@ -28,6 +28,8 @@ export interface OpcionesAnalisis {
   uciElo?: number | null
   /** borrar la memoria del motor (tabla hash) antes de buscar: cada jugada se piensa desde cero */
   limpiar?: boolean
+  /** buscar solo entre estas jugadas (UCI "searchmoves"): sirve para evaluar una jugada concreta */
+  soloJugadas?: string[]
 }
 
 export interface Analisis {
@@ -156,9 +158,10 @@ export class MotorUci {
         },
       )
       this.transporte.enviar(`position fen ${fen}`)
-      if (o.profundidad) this.transporte.enviar(`go depth ${o.profundidad}`)
-      else if (o.nodos) this.transporte.enviar(`go nodes ${o.nodos}`)
-      else this.transporte.enviar(`go movetime ${o.tiempoMs ?? 100}`)
+      const solo = o.soloJugadas?.length ? ` searchmoves ${o.soloJugadas.join(' ')}` : ''
+      if (o.profundidad) this.transporte.enviar(`go depth ${o.profundidad}${solo}`)
+      else if (o.nodos) this.transporte.enviar(`go nodes ${o.nodos}${solo}`)
+      else this.transporte.enviar(`go movetime ${o.tiempoMs ?? 100}${solo}`)
       const linea = await fin
       const mejor = linea.split(' ')[1]
       const candidatas = [...porLinea.entries()].sort((a, b) => a[0] - b[0]).map(([, c]) => c)
