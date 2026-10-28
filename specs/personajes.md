@@ -30,7 +30,7 @@ Una por personaje: original, en español, **de personalidad**, sin nombres de ap
 1. **De colecciones libres** cuya licencia permita una página pública. La licencia se **confirma en su fuente** antes de usarla y se anota en `LICENCIAS.md` con su enlace. Si pide atribución (CC BY), la atribución va en "Código fuente y licencias". Nada de imágenes sueltas de internet sin licencia clara; las imágenes con IA de pago, solo como plan B.
 2. **Originales:** ningún personaje se parece a uno de chess.com, ni en cara ni en nombre ni en frase.
 3. **Generadas en el código** a partir del `aspecto` de cada personaje (edad, piel 1–5, peinado, color de pelo, barba, lentes, gorro, ropa y gesto), siempre el mismo dibujo para el mismo personaje y sin internet al usar la app. Lo que el aspecto no fija lo decide el id, nunca el azar.
-4. **Los 47 distintos entre sí y variados** (4 edades, las 5 pieles, varios colores de pelo y peinados, lentes, barbas y gorros). Lo comprueba `tests/unit/avatares.test.ts` en cada estilo.
+4. **Los 47 distintos entre sí y variados** (4 edades, las 5 pieles, varios colores de pelo y peinados, lentes, barbas y gorros). Lo comprueba `tests/unit/avatares.test.ts` sobre lo que dibuja cada estilo (Ilustrado no trae lentes ni gorros: ahí los accesorios son solo las barbas).
 5. **Tres estilos a escoger** en Más → Ajustes, que se aplican al instante y se recuerdan:
 
 | Estilo | Colección | Licencia | Notas |

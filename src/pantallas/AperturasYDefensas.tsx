@@ -132,9 +132,9 @@ export function PaginaApertura({ id }: { id: string }) {
   if (!curso) return <NoEncontre />
   const a = aperturaPorId(curso.apertura)
   const siguiente = siguienteLeccion(curso, hechas)
-  // L5: la idea general de la apertura, en dos frases y solo de mi lado (la de la Caro-Kann es de negras: no va en "Contra la Caro-Kann")
+  // L5: la idea general de la apertura, en una frase y solo de mi lado (la de la Caro-Kann es de negras: no va en "Contra la Caro-Kann")
   const deMiLado = a && (a.lado === 'ambos' || (a.lado === 'blancas') === (curso.color === 'w'))
-  const idea = deMiLado ? planDeMiLado(a.idea, curso.color).split(/(?<=\.)\s+/).slice(0, 2).join(' ') : ''
+  const idea = deMiLado ? (planDeMiLado(a.idea, curso.color).split(/(?<=\.)\s+/)[0] ?? '') : ''
   const empezar = () => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente ?? curso.lecciones[0]!)}`)
   return (
     <div className="pagina-apertura">

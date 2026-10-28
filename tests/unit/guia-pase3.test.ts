@@ -43,12 +43,13 @@ describe('T11 pase 3', () => {
     expect(m.texto).not.toContain('Otras aperturas')
     expect(m.texto).not.toContain('Otras defensas')
   })
-  it('H4: el texto de mi guía sobre "otras" solo sale cuando el rival salió al inicio', () => {
+  it('H4 (cambió con la Nota 1 y el pase 2 de la L5): el texto de mi guía ya no se cita, ni dentro ni fuera de teoría', () => {
     const dentro = ayudaEnMiTurno(negras, ['e4', 'c6', 'd4', 'd5', 'exd5', 'cxd5', 'Nf3'])
     if (dentro.origen === 'fuera') expect(dentro.pista).not.toContain('Tu guía dice')
     const fuera = ayudaEnMiTurno(negras, ['a3'])
     expect(fuera.origen).toBe('fuera')
-    expect(fuera.pista).toContain('Tu guía dice')
+    expect(fuera.pista).not.toContain('Tu guía dice')
+    expect(fuera.pista).toContain('Fuera de teoría')
   })
   it('H5: el plan de la Londres con ...c5 y ...Cc6 ya no pide f4 con el alfil en f4', () => {
     const v = b.aperturas.find((a) => a.id === 'londres')!.variantes.find((x) => x.id === 'd5-c5-cc6')!

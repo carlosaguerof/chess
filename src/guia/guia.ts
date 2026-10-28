@@ -124,9 +124,16 @@ export function mensajeTrasMiJugada(ctx: Contexto, historia: string[]): Mensaje 
     return { tipo: 'en-linea', texto: n ? `Con ${num(mia, ply)} llegaste a la ${n} por otro orden de jugadas: ya estás en tu línea.` : `Con ${num(mia, ply)} llegaste a tu línea por otro orden de jugadas.`, ingles: nombreAhora?.ingles }
   }
   if (opciones.length === 0) {
-    // mi repertorio ya no tiene nada aquí
-    const fuera = ply === 0 ? `Iniciaste con ${num(mia, 0)}.` : `Jugaste ${num(mia, ply)}. Ya saliste de tu línea: sigue con los principios (desarrolla, controla el centro, enroca).`
-    return { tipo: 'fuera', texto: fuera }
+    // mi repertorio (mis favoritas) no tiene nada aquí. Si venía en una línea mía, me salí; si no (sin favoritas, o
+    // jugando otra apertura), la guía reconoce cualquier apertura de la base, como siempre (Nota 1)
+    if (ply > 0 && estaEnRepertorio(ctx.rep, ctx.color, antes))
+      return { tipo: 'fuera', texto: `Jugaste ${num(mia, ply)}. Ya saliste de tu línea: sigue con los principios (desarrolla, controla el centro, enroca).` }
+    const dichas: string[] = []
+    if (ply === 0) dichas.push(`Iniciaste con ${num(mia, 0)}.`)
+    if (nombreAhora && (nombreAhora.apertura !== nombreAntes?.apertura || nombreAhora.variante !== nombreAntes?.variante))
+      dichas.push(nombreAhora.variante && nombreAhora.variante !== nombreAhora.apertura ? `Estás en la ${nombreAhora.apertura}: ${nombreAhora.variante}.` : `Estás en la ${nombreAhora.apertura}.`)
+    if (dichas.length === 0) dichas.push(nombreAhora ? `Jugaste ${num(mia, ply)}.` : `Jugaste ${num(mia, ply)}. Sigue con los principios (desarrolla, controla el centro, enroca).`)
+    return { tipo: 'fuera', texto: dichas.join(' '), ingles: nombreAhora?.ingles }
   }
   const mio = opciones.find((o) => o.san === mia)
   if (!mio) {
@@ -199,8 +206,22 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     const deBase = siguientesEnBase(ctx.base, ctx.color, historia)
     if (deBase) {
       san = deBase.san
-      nombre = deBase.v.familia
-      plan = planDeMiLado(deBase.v.plan, ctx.color)
+      const despues = [...historia, deBase.san]
+      const apertura = ctx.base.aperturas.find((a) => a.variantes.includes(deBase.v))
+      const familias = new Set(
+        (apertura?.variantes ?? [])
+          .filter((v) => (v.lado === 'ambos' || (v.lado === 'blancas') === (ctx.color === 'w')) && despues.every((s, i) => v.jugadas[i] === s))
+          .map((v) => v.familia),
+      )
+      if (apertura && familias.size > 1) {
+        // la jugada todavía sirve a varias variantes: se nombra la apertura y su idea, si es de mi lado
+        nombre = apertura.nombre
+        const deMiLado = apertura.lado === 'ambos' || (apertura.lado === 'blancas') === (ctx.color === 'w')
+        plan = deMiLado ? planDeMiLado(apertura.idea, ctx.color) : undefined
+      } else {
+        nombre = deBase.v.familia
+        plan = planDeMiLado(deBase.v.plan, ctx.color)
+      }
       ingles = `${deBase.v.nombreIngles} · ${deBase.v.eco}`
       origen = 'base'
     }
@@ -215,14 +236,13 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
         .filter((f) => !/(\d+\.{1,3}\s?)?\b([RDTAC]?[a-h]?[1-8]?x?[a-h][1-8]|0-0(-0)?)\b/.test(f))
         .join(' ')
       const pista = `Tu línea (${termina.nombre}) termina aquí. ${sinJugadas || 'Pide la Respuesta para ver su plan.'}`
-      const respuesta = `Tu línea (${termina.nombre}) termina aquí: la fuente no trae más jugadas. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
+      const respuesta = `Tu línea (${termina.nombre}) termina aquí: ahí acaba la teoría. Su plan: ${planDeMiLado(termina.plan, ctx.color)}`
       return { origen: 'fin-de-linea', nombre: termina.nombre, ingles: inglesDeLinea(termina), plan: termina.plan, pista, respuesta }
     }
   }
   if (!san || !esMiPly(ctx.color, ply)) {
-    const otros = GUIA.find((g) => g.color === ctx.color && (g.apertura === 'otros-1e4' || g.apertura === 'otros-negras'))
-    const texto = otros && rivalSalioAlInicio(ctx, historia) ? `${PRINCIPIOS} Tu guía dice: “${otros.textoGuia}”` : PRINCIPIOS
-    return { origen: 'fuera', pista: texto, respuesta: texto }
+    // (antes citaba el texto de mi guía sobre "otras" aperturas; desde la Nota 1 la guía no se cita: L5, pase 2)
+    return { origen: 'fuera', pista: PRINCIPIOS, respuesta: PRINCIPIOS }
   }
   const c = new Chess()
   for (const s of historia) c.move(s)
@@ -241,22 +261,8 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
     ingles,
     plan,
     pista: `${idea} Mueve ${pieza}.`,
-    respuesta: `${num(san, ply)} — ${nombre ?? ''}${origen === 'base' ? ' (de la base)' : ''}. ${corto(plan ?? '')}`.trim(),
+    respuesta: `${num(san, ply)} — ${nombre ?? ''}. ${corto(plan ?? '')}`.trim(),
   }
-}
-
-/**
- * ¿El rival salió de mi árbol en su primera jugada, o entró a lo que mi guía llama "otras"?
- * Solo ahí aplica el texto de mi guía sobre las otras aperturas.
- */
-function rivalSalioAlInicio(ctx: Contexto, historia: string[]): boolean {
-  const primera = ctx.color === 'w' ? 1 : 0
-  if (historia.length <= primera) return false
-  const hasta = historia.slice(0, primera + 1)
-  const sigue = siguientesEnRepertorio(ctx.rep, ctx.color, hasta).flatMap((o) => o.lineas)
-  const termina = lineaQueTerminaEn(ctx.rep, ctx.color, hasta)
-  const lineas = termina ? [...sigue, termina] : sigue
-  return lineas.length === 0 || lineas.every((l) => l.apertura.startsWith('otros'))
 }
 
 function siguientesEnBase(base: Base, color: ColorCorto, historia: string[]): { san: string; v: Variante } | null {

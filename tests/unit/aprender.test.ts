@@ -83,4 +83,24 @@ describe('Nota 1 · las favoritas son el repertorio', () => {
     const segunda = jugadaDeMisLineas(ck, 'b', ['e4', 'c6'], () => 0.5)
     expect(ck.lineas.some((l) => l.jugadas[2] === segunda)).toBe(true)
   })
+
+  it('la guía reconoce cualquier apertura de la base aunque no esté en mis favoritas (L5, pase 2)', async () => {
+    const { repertorioDeFavoritas } = await import('../../src/aprender/favoritas.ts')
+    const { mensajeTrasMiJugada, ayudaEnMiTurno } = await import('../../src/guia/guia.ts')
+    // sin favoritas, con negras: 1.e4 c6 se nombra, y no dice que me salí de nada
+    const vacia = { base: BASE, rep: repertorioDeFavoritas([]), color: 'b' as const }
+    const m = mensajeTrasMiJugada(vacia, ['e4', 'c6'])
+    expect(m.texto).toContain('Estás en la Defensa Caro-Kann')
+    expect(m.texto).not.toMatch(/saliste|repertorio/)
+    // con la Caro-Kann en favoritas, jugando la Italiana con blancas: también la nombra
+    const blancas = { base: BASE, rep: repertorioDeFavoritas(['caro-kann:b']), color: 'w' as const }
+    expect(mensajeTrasMiJugada(blancas, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4']).texto).toContain('Italiana')
+    // y si venía en mi línea y me salgo, sí lo dice
+    const ck = { base: BASE, rep: repertorioDeFavoritas(['caro-kann:b']), color: 'b' as const }
+    expect(mensajeTrasMiJugada(ck, ['e4', 'c6', 'd4', 'a6']).tipo).toBe('desvio')
+    // la Respuesta, sin etiqueta de origen, y nombrando la apertura mientras la jugada sirve a varias variantes
+    const r = ayudaEnMiTurno(vacia, ['e4'])
+    expect(r.respuesta).not.toContain('(de la base)')
+    expect(r.respuesta).toContain('Defensa Caro-Kann')
+  })
 })

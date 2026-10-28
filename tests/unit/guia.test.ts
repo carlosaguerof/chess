@@ -59,11 +59,11 @@ describe('T9 · la guía en una partida real', () => {
     const b = ayudaEnMiTurno(negras, ['e4', 'c5', 'Nf3'])
     expect(b.origen).toBe('base')
     expect(['d6', 'Nc6', 'e6', 'g6']).toContain(b.san)
-    expect(b.respuesta).toContain('(de la base)')
+    expect(b.respuesta).not.toContain('(de la base)') // §3.3: sin etiquetas de origen (L5, pase 2)
     const f = ayudaEnMiTurno(negras, ['a3', 'h5', 'h3'])
     expect(f.origen).toBe('fuera')
     expect(f.pista).toContain('Fuera de teoría')
-    expect(f.pista).toContain('...c6 + ...d5')
+    expect(f.pista).not.toContain('Tu guía') // desde la Nota 1 la guía no se cita (L5, pase 2)
   })
 
   it('"Que juegue mis líneas": el bot escoge entre las jugadas del rival de mi árbol', () => {
