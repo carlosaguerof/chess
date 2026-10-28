@@ -6,6 +6,9 @@ import { resultadoPara, puedeDeshacer, ayudasUsadas } from '../partida/modelo.ts
 import { estrellas as calcularEstrellas } from '../estrellas/estrellas.ts'
 import { anotarEstrellas } from '../estrellas/almacen.ts'
 import { Estrellas } from '../componentes/Estrellas.tsx'
+import { MenuAyudas, BarraEvaluacion, leerAyudas, guardarAyudas } from '../componentes/Ayudas.tsx'
+import { amenazas, porcentajeBlancas } from '../ayudas/amenazas.ts'
+import { evaluar } from '../ayudas/analisis.ts'
 import { obtenerMotor } from '../motor/navegador.ts'
 import { largo, jugadasEnEspanol } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
@@ -13,7 +16,7 @@ import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
 import { BarraJugador } from '../componentes/BarraJugador.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
 import { Avatar } from '../componentes/Avatar.tsx'
-import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear } from '../componentes/Iconos.tsx'
+import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear, IconoFoco } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
 import { BASE } from '../base/base.ts'
 import { useRepertorio } from '../repertorio/estado.ts'
@@ -32,6 +35,27 @@ export function Partida() {
   const pb = usePartidaBot({ misLineas: (p) => (historia, azar) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
   const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)
+  // ---- ayudas de chess.com (T15): barra, amenazas y sugerencia, con un motor aparte a toda fuerza
+  const [ajustes, setAjustes] = useState(leerAyudas)
+  const [menuAyudas, setMenuAyudas] = useState(false)
+  const [evaluacion, setEvaluacion] = useState<{ fen: string; pct: number; mejor: string | null } | null>(null)
+  const fenActual = pb.chess?.fen()
+  useEffect(() => {
+    if (!fenActual || !(ajustes.barra || ajustes.sugerencia)) return
+    let vigente = true
+    evaluar(fenActual)
+      .then((e) => vigente && setEvaluacion({ fen: fenActual, pct: porcentajeBlancas(e.cpBlancas, e.mate), mejor: e.mejor }))
+      .catch(() => undefined)
+    return () => {
+      vigente = false
+    }
+  }, [fenActual, ajustes.barra, ajustes.sugerencia])
+  // prender barra o flechas en una partida en curso cuenta para las estrellas
+  useEffect(() => {
+    const p = pb.partida
+    if (p && !p.fin && (ajustes.barra || ajustes.amenazas || ajustes.sugerencia) && !p.usoBarraOFlechas) pb.reemplazar({ ...p, usoBarraOFlechas: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ajustes, pb.partida?.id, pb.partida?.fin])
   const [avisoCerrado, setAvisoCerrado] = useState<string | null>(null)
 
   // el motor empieza a cargar en cuanto se abre la partida
@@ -86,6 +110,10 @@ export function Partida() {
   const miTurno = !partida.fin && !pb.turnoBot && !partida.pausa && chess.turn() === partida.colorHumano
   const ayudaVigente = ayuda && ayuda.ply === historia.length ? ayuda : null
   const flechas: DrawShape[] = ayudaVigente?.tipo === 'respuesta' && ayudaVigente.datos.desde ? [{ orig: ayudaVigente.datos.desde as Key, dest: ayudaVigente.datos.hasta as Key, brush: 'blue' }] : []
+  if (ajustes.amenazas && !partida.fin) for (const a of amenazas(chess, partida.colorHumano)) flechas.push({ orig: a.desde as Key, dest: a.hasta as Key, brush: 'red' })
+  const sugerencia = ajustes.sugerencia && miTurno && evaluacion?.fen === chess.fen() ? evaluacion.mejor : null
+  if (sugerencia) flechas.push({ orig: sugerencia.slice(0, 2) as Key, dest: sugerencia.slice(2, 4) as Key, brush: 'green' })
+  const barra = ajustes.barra && evaluacion ? evaluacion.pct : null
   const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
 
   const alJugar = (uci: string) => {
@@ -140,8 +168,20 @@ export function Partida() {
             </button>
           </div>
         )}
-        <div className="partida-tablero">
-          <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={miTurno ? colorHumano : undefined} onJugada={alJugar} flechas={flechas} />
+        {barra !== null && (
+          <div className="solo-celular">
+            <BarraEvaluacion porcentajeBlancas={barra} deBlancas={partida.orientacion === 'white'} horizontal />
+          </div>
+        )}
+        <div className="tablero-con-barra">
+          {barra !== null && (
+            <div className="solo-escritorio barra-vertical">
+              <BarraEvaluacion porcentajeBlancas={barra} deBlancas={partida.orientacion === 'white'} />
+            </div>
+          )}
+          <div className="partida-tablero" data-testid="flechas" data-flechas={flechas.map((f) => `${f.brush}:${f.orig}${f.dest ?? ''}`).join(' ')}>
+            <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={miTurno ? colorHumano : undefined} onJugada={alJugar} flechas={flechas} />
+          </div>
         </div>
         {rivalArriba ? barraYo : barraRival}
       </div>
@@ -187,7 +227,7 @@ export function Partida() {
             </div>
           </div>
         ) : (
-          <div className="botones-partida">
+          <div className="botones-partida cuatro">
             <button type="button" className="boton-icono" onClick={() => pb.deshacer()} disabled={!puedeDeshacer(partida) || pb.turnoBot || pb.pensando} data-testid="deshacer">
               <IconoDeshacer />
               <span>Deshacer</span>
@@ -195,6 +235,10 @@ export function Partida() {
             <button type="button" className="boton-icono" onClick={() => pb.voltear()} data-testid="voltear">
               <IconoVoltear />
               <span>Voltear</span>
+            </button>
+            <button type="button" className="boton-icono" onClick={() => setMenuAyudas(true)} data-testid="ayudas" aria-label="Ayudas: barra y flechas">
+              <IconoFoco />
+              <span>Ayudas</span>
             </button>
             <button type="button" className="boton-icono" onClick={() => setConfirmarRendirse(true)} data-testid="rendirse">
               <IconoBandera />
@@ -204,6 +248,16 @@ export function Partida() {
         )}
       </aside>
 
+      {menuAyudas && (
+        <MenuAyudas
+          ajustes={ajustes}
+          onCambiar={(a) => {
+            setAjustes(a)
+            guardarAyudas(a)
+          }}
+          onCerrar={() => setMenuAyudas(false)}
+        />
+      )}
       {confirmarRendirse && (
         <Dialogo
           titulo="¿Rendirte?"
