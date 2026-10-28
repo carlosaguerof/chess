@@ -1,7 +1,7 @@
 {
  "version": "Stockfish 19 Lite WASM",
- "comando": "node scripts/calibrar.ts todo 100 3000 --juegos 48 --paralelo 6 --niveles <parámetros de src/motor/niveles.json>",
- "niveles": "src/motor/niveles.json",
+ "niveles": "src/motor/niveles.json (v3d)",
+ "regla": "100–1400: partidos de la v2; 1500–3000: de la v3; los del 2100: de la v3d",
  "partidos": [
   {
    "eloA": 200,
@@ -13,7 +13,7 @@
    "tablas": 3,
    "perdidas": 13,
    "porcentajeA": 0.6979166666666666,
-   "segundos": 51.638
+   "origen": "t13-v2"
   },
   {
    "eloA": 300,
@@ -25,7 +25,7 @@
    "tablas": 6,
    "perdidas": 10,
    "porcentajeA": 0.7291666666666666,
-   "segundos": 81.562
+   "origen": "t13-v2"
   },
   {
    "eloA": 300,
@@ -37,7 +37,7 @@
    "tablas": 9,
    "perdidas": 12,
    "porcentajeA": 0.65625,
-   "segundos": 97.652
+   "origen": "t13-v2"
   },
   {
    "eloA": 400,
@@ -49,7 +49,7 @@
    "tablas": 4,
    "perdidas": 6,
    "porcentajeA": 0.8333333333333334,
-   "segundos": 99.658
+   "origen": "t13-v2"
   },
   {
    "eloA": 400,
@@ -61,7 +61,7 @@
    "tablas": 6,
    "perdidas": 16,
    "porcentajeA": 0.6041666666666666,
-   "segundos": 64.125
+   "origen": "t13-v2"
   },
   {
    "eloA": 500,
@@ -73,7 +73,7 @@
    "tablas": 2,
    "perdidas": 8,
    "porcentajeA": 0.8125,
-   "segundos": 56.999
+   "origen": "t13-v2"
   },
   {
    "eloA": 500,
@@ -85,7 +85,7 @@
    "tablas": 9,
    "perdidas": 15,
    "porcentajeA": 0.59375,
-   "segundos": 89.378
+   "origen": "t13-v2"
   },
   {
    "eloA": 600,
@@ -97,7 +97,7 @@
    "tablas": 3,
    "perdidas": 7,
    "porcentajeA": 0.8229166666666666,
-   "segundos": 65.509
+   "origen": "t13-v2"
   },
   {
    "eloA": 600,
@@ -109,7 +109,7 @@
    "tablas": 4,
    "perdidas": 14,
    "porcentajeA": 0.6666666666666666,
-   "segundos": 101.285
+   "origen": "t13-v2"
   },
   {
    "eloA": 700,
@@ -121,7 +121,7 @@
    "tablas": 2,
    "perdidas": 3,
    "porcentajeA": 0.9166666666666666,
-   "segundos": 53.514
+   "origen": "t13-v2"
   },
   {
    "eloA": 700,
@@ -133,7 +133,7 @@
    "tablas": 4,
    "perdidas": 17,
    "porcentajeA": 0.6041666666666666,
-   "segundos": 73.384
+   "origen": "t13-v2"
   },
   {
    "eloA": 800,
@@ -145,7 +145,7 @@
    "tablas": 3,
    "perdidas": 5,
    "porcentajeA": 0.8645833333333334,
-   "segundos": 61.135
+   "origen": "t13-v2"
   },
   {
    "eloA": 800,
@@ -157,7 +157,7 @@
    "tablas": 3,
    "perdidas": 9,
    "porcentajeA": 0.78125,
-   "segundos": 76.197
+   "origen": "t13-v2"
   },
   {
    "eloA": 900,
@@ -169,7 +169,7 @@
    "tablas": 2,
    "perdidas": 9,
    "porcentajeA": 0.7916666666666666,
-   "segundos": 90.908
+   "origen": "t13-v2"
   },
   {
    "eloA": 900,
@@ -181,7 +181,7 @@
    "tablas": 1,
    "perdidas": 18,
    "porcentajeA": 0.6145833333333334,
-   "segundos": 71.572
+   "origen": "t13-v2"
   },
   {
    "eloA": 1000,
@@ -193,7 +193,7 @@
    "tablas": 0,
    "perdidas": 13,
    "porcentajeA": 0.7291666666666666,
-   "segundos": 87.904
+   "origen": "t13-v2"
   },
   {
    "eloA": 1000,
@@ -205,7 +205,7 @@
    "tablas": 3,
    "perdidas": 14,
    "porcentajeA": 0.6770833333333334,
-   "segundos": 97.325
+   "origen": "t13-v2"
   },
   {
    "eloA": 1100,
@@ -217,7 +217,7 @@
    "tablas": 0,
    "perdidas": 9,
    "porcentajeA": 0.8125,
-   "segundos": 81.478
+   "origen": "t13-v2"
   },
   {
    "eloA": 1100,
@@ -229,7 +229,7 @@
    "tablas": 3,
    "perdidas": 13,
    "porcentajeA": 0.6979166666666666,
-   "segundos": 98.763
+   "origen": "t13-v2"
   },
   {
    "eloA": 1200,
@@ -241,7 +241,7 @@
    "tablas": 2,
    "perdidas": 9,
    "porcentajeA": 0.7916666666666666,
-   "segundos": 91.246
+   "origen": "t13-v2"
   },
   {
    "eloA": 1200,
@@ -253,7 +253,7 @@
    "tablas": 1,
    "perdidas": 18,
    "porcentajeA": 0.6145833333333334,
-   "segundos": 84.773
+   "origen": "t13-v2"
   },
   {
    "eloA": 1300,
@@ -265,7 +265,7 @@
    "tablas": 3,
    "perdidas": 14,
    "porcentajeA": 0.6770833333333334,
-   "segundos": 126.126
+   "origen": "t13-v2"
   },
   {
    "eloA": 1300,
@@ -277,7 +277,7 @@
    "tablas": 4,
    "perdidas": 9,
    "porcentajeA": 0.7708333333333334,
-   "segundos": 106.629
+   "origen": "t13-v2"
   },
   {
    "eloA": 1400,
@@ -289,7 +289,7 @@
    "tablas": 1,
    "perdidas": 7,
    "porcentajeA": 0.84375,
-   "segundos": 126.562
+   "origen": "t13-v2"
   },
   {
    "eloA": 1400,
@@ -301,391 +301,391 @@
    "tablas": 3,
    "perdidas": 15,
    "porcentajeA": 0.65625,
-   "segundos": 150.599
+   "origen": "t13-v2"
   },
   {
    "eloA": 1500,
    "eloB": 1300,
    "juegos": 48,
-   "semilla": 1041,
-   "puntosA": 42,
-   "ganadas": 41,
-   "tablas": 2,
-   "perdidas": 5,
-   "porcentajeA": 0.875,
-   "segundos": 138.699
+   "semilla": 1017,
+   "puntosA": 38.5,
+   "ganadas": 36,
+   "tablas": 5,
+   "perdidas": 7,
+   "porcentajeA": 0.8020833333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1500,
    "eloB": 1400,
    "juegos": 48,
-   "semilla": 1013,
-   "puntosA": 30.5,
-   "ganadas": 30,
-   "tablas": 1,
-   "perdidas": 17,
-   "porcentajeA": 0.6354166666666666,
-   "segundos": 149.226
+   "semilla": 1001,
+   "puntosA": 27.5,
+   "ganadas": 25,
+   "tablas": 5,
+   "perdidas": 18,
+   "porcentajeA": 0.5729166666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1600,
    "eloB": 1400,
    "juegos": 48,
-   "semilla": 1042,
-   "puntosA": 38,
-   "ganadas": 38,
-   "tablas": 0,
+   "semilla": 1018,
+   "puntosA": 36,
+   "ganadas": 34,
+   "tablas": 4,
    "perdidas": 10,
-   "porcentajeA": 0.7916666666666666,
-   "segundos": 203.616
+   "porcentajeA": 0.75,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1600,
    "eloB": 1500,
    "juegos": 48,
-   "semilla": 1014,
-   "puntosA": 32.5,
-   "ganadas": 30,
-   "tablas": 5,
-   "perdidas": 13,
-   "porcentajeA": 0.6770833333333334,
-   "segundos": 208.873
+   "semilla": 1002,
+   "puntosA": 27,
+   "ganadas": 25,
+   "tablas": 4,
+   "perdidas": 19,
+   "porcentajeA": 0.5625,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1700,
    "eloB": 1500,
    "juegos": 48,
-   "semilla": 1043,
-   "puntosA": 37,
-   "ganadas": 36,
-   "tablas": 2,
-   "perdidas": 10,
-   "porcentajeA": 0.7708333333333334,
-   "segundos": 277.065
+   "semilla": 1019,
+   "puntosA": 34,
+   "ganadas": 31,
+   "tablas": 6,
+   "perdidas": 11,
+   "porcentajeA": 0.7083333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1700,
    "eloB": 1600,
    "juegos": 48,
-   "semilla": 1015,
-   "puntosA": 30.5,
-   "ganadas": 30,
-   "tablas": 1,
-   "perdidas": 17,
-   "porcentajeA": 0.6354166666666666,
-   "segundos": 258.375
+   "semilla": 1003,
+   "puntosA": 37,
+   "ganadas": 35,
+   "tablas": 4,
+   "perdidas": 9,
+   "porcentajeA": 0.7708333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1800,
    "eloB": 1600,
    "juegos": 48,
-   "semilla": 1044,
-   "puntosA": 38.5,
-   "ganadas": 38,
-   "tablas": 1,
-   "perdidas": 9,
-   "porcentajeA": 0.8020833333333334,
-   "segundos": 315.952
+   "semilla": 1020,
+   "puntosA": 41,
+   "ganadas": 40,
+   "tablas": 2,
+   "perdidas": 6,
+   "porcentajeA": 0.8541666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1800,
    "eloB": 1700,
    "juegos": 48,
-   "semilla": 1016,
+   "semilla": 1004,
    "puntosA": 27,
-   "ganadas": 22,
-   "tablas": 10,
-   "perdidas": 16,
+   "ganadas": 24,
+   "tablas": 6,
+   "perdidas": 18,
    "porcentajeA": 0.5625,
-   "segundos": 270.456
+   "origen": "t13-v3"
   },
   {
    "eloA": 1900,
    "eloB": 1700,
    "juegos": 48,
-   "semilla": 1045,
-   "puntosA": 37,
-   "ganadas": 36,
-   "tablas": 2,
-   "perdidas": 10,
-   "porcentajeA": 0.7708333333333334,
-   "segundos": 420.191
+   "semilla": 1021,
+   "puntosA": 35.5,
+   "ganadas": 34,
+   "tablas": 3,
+   "perdidas": 11,
+   "porcentajeA": 0.7395833333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 1900,
    "eloB": 1800,
    "juegos": 48,
-   "semilla": 1017,
-   "puntosA": 35.5,
-   "ganadas": 31,
-   "tablas": 9,
-   "perdidas": 8,
-   "porcentajeA": 0.7395833333333334,
-   "segundos": 424.909
+   "semilla": 1005,
+   "puntosA": 32,
+   "ganadas": 29,
+   "tablas": 6,
+   "perdidas": 13,
+   "porcentajeA": 0.6666666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2000,
    "eloB": 1800,
    "juegos": 48,
-   "semilla": 1046,
-   "puntosA": 44,
-   "ganadas": 43,
-   "tablas": 2,
-   "perdidas": 3,
-   "porcentajeA": 0.9166666666666666,
-   "segundos": 573.79
+   "semilla": 1022,
+   "puntosA": 37,
+   "ganadas": 35,
+   "tablas": 4,
+   "perdidas": 9,
+   "porcentajeA": 0.7708333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2000,
    "eloB": 1900,
    "juegos": 48,
-   "semilla": 1018,
-   "puntosA": 37,
-   "ganadas": 32,
-   "tablas": 10,
-   "perdidas": 6,
-   "porcentajeA": 0.7708333333333334,
-   "segundos": 596.147
+   "semilla": 1006,
+   "puntosA": 26,
+   "ganadas": 24,
+   "tablas": 4,
+   "perdidas": 20,
+   "porcentajeA": 0.5416666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2100,
    "eloB": 1900,
    "juegos": 48,
-   "semilla": 1047,
-   "puntosA": 33.5,
-   "ganadas": 31,
-   "tablas": 5,
+   "semilla": 9103,
+   "puntosA": 32,
+   "ganadas": 28,
+   "tablas": 8,
    "perdidas": 12,
-   "porcentajeA": 0.6979166666666666,
-   "segundos": 794.036
+   "porcentajeA": 0.6666666666666666,
+   "origen": "t13-v3d"
   },
   {
    "eloA": 2100,
    "eloB": 2000,
    "juegos": 48,
-   "semilla": 1019,
-   "puntosA": 27.5,
-   "ganadas": 22,
-   "tablas": 11,
-   "perdidas": 15,
-   "porcentajeA": 0.5729166666666666,
-   "segundos": 759.57
+   "semilla": 9101,
+   "puntosA": 28.5,
+   "ganadas": 26,
+   "tablas": 5,
+   "perdidas": 17,
+   "porcentajeA": 0.59375,
+   "origen": "t13-v3d"
   },
   {
    "eloA": 2200,
    "eloB": 2000,
    "juegos": 48,
-   "semilla": 1048,
-   "puntosA": 35.5,
+   "semilla": 1024,
+   "puntosA": 34.5,
    "ganadas": 31,
-   "tablas": 9,
-   "perdidas": 8,
-   "porcentajeA": 0.7395833333333334,
-   "segundos": 1038.942
+   "tablas": 7,
+   "perdidas": 10,
+   "porcentajeA": 0.71875,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2200,
    "eloB": 2100,
    "juegos": 48,
-   "semilla": 1020,
-   "puntosA": 31,
-   "ganadas": 21,
-   "tablas": 20,
-   "perdidas": 7,
-   "porcentajeA": 0.6458333333333334,
-   "segundos": 945.784
+   "semilla": 9102,
+   "puntosA": 36,
+   "ganadas": 35,
+   "tablas": 2,
+   "perdidas": 11,
+   "porcentajeA": 0.75,
+   "origen": "t13-v3d"
   },
   {
    "eloA": 2300,
    "eloB": 2100,
    "juegos": 48,
-   "semilla": 1049,
-   "puntosA": 35,
-   "ganadas": 28,
-   "tablas": 14,
-   "perdidas": 6,
-   "porcentajeA": 0.7291666666666666,
-   "segundos": 1309.639
+   "semilla": 9104,
+   "puntosA": 40,
+   "ganadas": 37,
+   "tablas": 6,
+   "perdidas": 5,
+   "porcentajeA": 0.8333333333333334,
+   "origen": "t13-v3d"
   },
   {
    "eloA": 2300,
    "eloB": 2200,
    "juegos": 48,
-   "semilla": 1021,
-   "puntosA": 26.5,
-   "ganadas": 16,
-   "tablas": 21,
-   "perdidas": 11,
-   "porcentajeA": 0.5520833333333334,
-   "segundos": 1345.51
+   "semilla": 1009,
+   "puntosA": 29.5,
+   "ganadas": 24,
+   "tablas": 11,
+   "perdidas": 13,
+   "porcentajeA": 0.6145833333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2400,
    "eloB": 2200,
    "juegos": 48,
-   "semilla": 1050,
+   "semilla": 1026,
    "puntosA": 35.5,
-   "ganadas": 26,
-   "tablas": 19,
-   "perdidas": 3,
+   "ganadas": 29,
+   "tablas": 13,
+   "perdidas": 6,
    "porcentajeA": 0.7395833333333334,
-   "segundos": 1603.468
+   "origen": "t13-v3"
   },
   {
    "eloA": 2400,
    "eloB": 2300,
    "juegos": 48,
-   "semilla": 1022,
-   "puntosA": 29.5,
-   "ganadas": 18,
-   "tablas": 23,
-   "perdidas": 7,
-   "porcentajeA": 0.6145833333333334,
-   "segundos": 1710.976
+   "semilla": 1010,
+   "puntosA": 32,
+   "ganadas": 27,
+   "tablas": 10,
+   "perdidas": 11,
+   "porcentajeA": 0.6666666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2500,
    "eloB": 2300,
    "juegos": 48,
-   "semilla": 1051,
-   "puntosA": 34,
-   "ganadas": 22,
-   "tablas": 24,
-   "perdidas": 2,
-   "porcentajeA": 0.7083333333333334,
-   "segundos": 2129.306
+   "semilla": 1027,
+   "puntosA": 31.5,
+   "ganadas": 24,
+   "tablas": 15,
+   "perdidas": 9,
+   "porcentajeA": 0.65625,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2500,
    "eloB": 2400,
    "juegos": 48,
-   "semilla": 1023,
-   "puntosA": 26.5,
-   "ganadas": 12,
-   "tablas": 29,
-   "perdidas": 7,
-   "porcentajeA": 0.5520833333333334,
-   "segundos": 2119.729
+   "semilla": 1011,
+   "puntosA": 28,
+   "ganadas": 18,
+   "tablas": 20,
+   "perdidas": 10,
+   "porcentajeA": 0.5833333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2600,
    "eloB": 2400,
    "juegos": 48,
-   "semilla": 1052,
-   "puntosA": 29,
-   "ganadas": 13,
-   "tablas": 32,
-   "perdidas": 3,
-   "porcentajeA": 0.6041666666666666,
-   "segundos": 2528.357
+   "semilla": 1028,
+   "puntosA": 35,
+   "ganadas": 28,
+   "tablas": 14,
+   "perdidas": 6,
+   "porcentajeA": 0.7291666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2600,
    "eloB": 2500,
    "juegos": 48,
-   "semilla": 1024,
-   "puntosA": 30.5,
-   "ganadas": 15,
-   "tablas": 31,
-   "perdidas": 2,
-   "porcentajeA": 0.6354166666666666,
-   "segundos": 2693.363
+   "semilla": 1012,
+   "puntosA": 26.5,
+   "ganadas": 17,
+   "tablas": 19,
+   "perdidas": 12,
+   "porcentajeA": 0.5520833333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2700,
    "eloB": 2500,
    "juegos": 48,
-   "semilla": 1053,
-   "puntosA": 29.5,
-   "ganadas": 14,
-   "tablas": 31,
-   "perdidas": 3,
-   "porcentajeA": 0.6145833333333334,
-   "segundos": 2929.315
+   "semilla": 1029,
+   "puntosA": 34,
+   "ganadas": 22,
+   "tablas": 24,
+   "perdidas": 2,
+   "porcentajeA": 0.7083333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2700,
    "eloB": 2600,
    "juegos": 48,
-   "semilla": 1025,
-   "puntosA": 24,
-   "ganadas": 3,
-   "tablas": 42,
-   "perdidas": 3,
-   "porcentajeA": 0.5,
-   "segundos": 3590.664
+   "semilla": 1013,
+   "puntosA": 37,
+   "ganadas": 30,
+   "tablas": 14,
+   "perdidas": 4,
+   "porcentajeA": 0.7708333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2800,
    "eloB": 2600,
    "juegos": 48,
-   "semilla": 1054,
-   "puntosA": 28,
-   "ganadas": 12,
-   "tablas": 32,
-   "perdidas": 4,
-   "porcentajeA": 0.5833333333333334,
-   "segundos": 3472.441
+   "semilla": 1030,
+   "puntosA": 37.5,
+   "ganadas": 27,
+   "tablas": 21,
+   "perdidas": 0,
+   "porcentajeA": 0.78125,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2800,
    "eloB": 2700,
    "juegos": 48,
-   "semilla": 1026,
-   "puntosA": 26,
-   "ganadas": 5,
-   "tablas": 42,
-   "perdidas": 1,
-   "porcentajeA": 0.5416666666666666,
-   "segundos": 4407.383
+   "semilla": 1014,
+   "puntosA": 28,
+   "ganadas": 14,
+   "tablas": 28,
+   "perdidas": 6,
+   "porcentajeA": 0.5833333333333334,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2900,
    "eloB": 2700,
    "juegos": 48,
-   "semilla": 1055,
-   "puntosA": 28,
-   "ganadas": 10,
-   "tablas": 36,
-   "perdidas": 2,
-   "porcentajeA": 0.5833333333333334,
-   "segundos": 3746.943
+   "semilla": 1031,
+   "puntosA": 35,
+   "ganadas": 22,
+   "tablas": 26,
+   "perdidas": 0,
+   "porcentajeA": 0.7291666666666666,
+   "origen": "t13-v3"
   },
   {
    "eloA": 2900,
    "eloB": 2800,
    "juegos": 48,
-   "semilla": 1027,
-   "puntosA": 25.5,
-   "ganadas": 3,
-   "tablas": 45,
-   "perdidas": 0,
-   "porcentajeA": 0.53125,
-   "segundos": 5732.377
+   "semilla": 1015,
+   "puntosA": 27,
+   "ganadas": 9,
+   "tablas": 36,
+   "perdidas": 3,
+   "porcentajeA": 0.5625,
+   "origen": "t13-v3"
   },
   {
    "eloA": 3000,
    "eloB": 2800,
    "juegos": 48,
-   "semilla": 1056,
-   "puntosA": 27.5,
-   "ganadas": 7,
-   "tablas": 41,
-   "perdidas": 0,
-   "porcentajeA": 0.5729166666666666,
-   "segundos": 5157.631
+   "semilla": 1032,
+   "puntosA": 36,
+   "ganadas": 25,
+   "tablas": 22,
+   "perdidas": 1,
+   "porcentajeA": 0.75,
+   "origen": "t13-v3"
   },
   {
    "eloA": 3000,
    "eloB": 2900,
    "juegos": 48,
-   "semilla": 1028,
-   "puntosA": 23.5,
-   "ganadas": 2,
-   "tablas": 43,
-   "perdidas": 3,
-   "porcentajeA": 0.4895833333333333,
-   "segundos": 6738.776
+   "semilla": 1016,
+   "puntosA": 28,
+   "ganadas": 10,
+   "tablas": 36,
+   "perdidas": 2,
+   "porcentajeA": 0.5833333333333334,
+   "origen": "t13-v3"
   }
  ]
 }

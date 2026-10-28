@@ -32,7 +32,7 @@ Claves de la lista: **N1a** se ve el estado al entrar · **N1b** cada clic se no
 | Punto | ¿Cumple? | Evidencia |
 |---|---|---|
 | N1: casilla marcada en menos de 0.1 s | ✓ | T2: 2.0 ms (iPhone), 13.6 ms (escritorio) |
-| N1: "<Nombre> está pensando…" con una señal que se mueve; 0.4–1.2 s; Web Worker | ✓, salvo en los niveles más altos | `t5-bot-pensando`; `esperaDelBot` en `src/motor/bot.ts`; prueba T5. Excepción: en el 3000 (y a veces el 2900) el motor mismo tarda más de 1.2 s (WebKit: 1.2 s de promedio y 1.4 s de máximo; `iterations/v1/mediciones/motor-iphone.json`); se sigue viendo "está pensando" (pase 3 de la T22) |
+| N1: "<Nombre> está pensando…" con una señal que se mueve; 0.4–1.2 s; Web Worker | ✓ | `t5-bot-pensando`; `esperaDelBot` en `src/motor/bot.ts`; prueba T5. Con los niveles finales de la T13, el motor tarda menos de 1.2 s en todos los niveles (3000: 0.57 s de promedio, 0.68 s de máximo en WebKit; `iterations/v1/mediciones/motor-iphone.json`). Con la v2, el 3000 llegaba a 1.4 s (pase 3 de la T22) |
 | N1: se ve que el motor está cargando | ✓ | `t20-motor-cargando` ("Preparando a Brisa" con los puntos, con el motor demorado 4 s en la prueba) |
 | N2: español, R D T A C, `0-0`, inglés y ECO en chico | ✓ | todas las capturas; pases 1 a 3 |
 | N3: deshacer contra el bot; salir sin perder la partida | ✓ | prueba T5; `t5-inicio-partida-en-curso` |
