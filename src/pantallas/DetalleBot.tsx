@@ -3,7 +3,7 @@ import { personajePorId, NOMBRE_TEMPERAMENTO } from '../bots/personajes.ts'
 import { nombreApertura } from '../bots/nombres-aperturas.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
-import { empezarPartida, partidaEnCurso } from '../partida/usePartidaBot.ts'
+import { empezarPartida, partidaEnCurso, opcionesRecordadas } from '../partida/usePartidaBot.ts'
 import { navegar } from '../ruta.ts'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 
@@ -13,10 +13,11 @@ export function DetalleBot({ id }: { id: string }) {
   const bot = personajePorId(id)
   const [color, setColor] = useState<Color>('w')
   const [confirmar, setConfirmar] = useState(false)
+  const [opciones, setOpciones] = useState(opcionesRecordadas)
   if (!bot) return <p>No encontré a ese bot. <a href="#/bots">Ver todos</a></p>
   const enCurso = partidaEnCurso()
   const jugar = () => {
-    empezarPartida(bot.id, color)
+    empezarPartida(bot.id, color, undefined, opciones)
     navegar('/partida')
   }
   return (
@@ -32,7 +33,7 @@ export function DetalleBot({ id }: { id: string }) {
         <p className="frase">“{bot.frase}”</p>
         <p className="estilo">
           <span className="chip">{NOMBRE_TEMPERAMENTO[bot.temperamento]}</span>
-          Con blancas: {bot.estilo.blancas.map(nombreApertura).join(', ')} · Con negras: {bot.estilo.negras.map(nombreApertura).join(', ')}
+          Con blancas: {bot.estilo.blancas.map((k) => nombreApertura(k, 'blancas')).join(', ')} · Con negras: {bot.estilo.negras.map((k) => nombreApertura(k, 'negras')).join(', ')}
         </p>
       </div>
       <div className="selector-color" role="radiogroup" aria-label="Tu color">
@@ -49,6 +50,22 @@ export function DetalleBot({ id }: { id: string }) {
           </button>
         ))}
       </div>
+      <div className="interruptores">
+        <Interruptor
+          etiqueta="Guía de aperturas"
+          detalle="Te dice qué jugaste y si te saliste de tu línea"
+          activo={opciones.guia}
+          onCambiar={(v) => setOpciones({ ...opciones, guia: v })}
+          testid="interruptor-guia"
+        />
+        <Interruptor
+          etiqueta="Que juegue mis líneas"
+          detalle="El bot entra a las líneas de tu repertorio"
+          activo={opciones.misLineas}
+          onCambiar={(v) => setOpciones({ ...opciones, misLineas: v })}
+          testid="interruptor-mis-lineas"
+        />
+      </div>
       <button type="button" className="boton primario grande" data-testid="jugar" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
         Jugar
       </button>
@@ -58,5 +75,18 @@ export function DetalleBot({ id }: { id: string }) {
         </Dialogo>
       )}
     </div>
+  )
+}
+
+function Interruptor(props: { etiqueta: string; detalle: string; activo: boolean; onCambiar: (v: boolean) => void; testid: string }) {
+  return (
+    <label className="interruptor">
+      <span>
+        <strong>{props.etiqueta}</strong>
+        <small className="apagado">{props.detalle}</small>
+      </span>
+      <input type="checkbox" role="switch" checked={props.activo} onChange={(e) => props.onCambiar(e.target.checked)} data-testid={props.testid} />
+      <i aria-hidden="true" />
+    </label>
   )
 }

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import type { DrawShape } from 'chessground/draw'
+import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
 import { resultadoPara, puedeDeshacer } from '../partida/modelo.ts'
 import { obtenerMotor } from '../motor/navegador.ts'
@@ -10,12 +12,22 @@ import { Dialogo } from '../componentes/Dialogo.tsx'
 import { Avatar } from '../componentes/Avatar.tsx'
 import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
+import { BASE } from '../base/base.ts'
+import { useRepertorio } from '../repertorio/estado.ts'
+import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
+import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
+import { registrar } from '../registro/registro.ts'
+import { PanelGuia } from '../componentes/PanelGuia.tsx'
+import { uciAObjeto } from '../ajedrez/reglas.ts'
+import { Chess } from 'chess.js'
 
 const TITULO = { gane: '¡Ganaste!', perdi: 'Perdiste', tablas: 'Tablas' } as const
 
 export function Partida() {
-  const pb = usePartidaBot()
+  const [rep] = useRepertorio()
+  const pb = usePartidaBot({ misLineas: (p) => (historia, azar) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
+  const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)
   const [avisoCerrado, setAvisoCerrado] = useState<string | null>(null)
 
   // el motor empieza a cargar en cuanto se abre la partida
@@ -24,6 +36,7 @@ export function Partida() {
   }, [])
 
   const { partida, bot, chess } = pb
+  const historia = useMemo(() => chess?.history() ?? [], [chess])
   if (!partida || !bot || !chess) {
     return (
       <div className="vacio">
@@ -48,6 +61,42 @@ export function Partida() {
           : `${bot.nombre} está pensando`
         : undefined
   const rivalArriba = partida.orientacion === colorHumano
+  // ---- la guía de aperturas (T9): todo sale de mi repertorio y de la base, nunca del motor
+  const ctx: Contexto = { base: BASE, rep, color: partida.colorHumano }
+  const guia = partida.opciones.guia
+  const inicio: 'w' | 'b' = partida.fenInicial.split(' ')[1] === 'b' ? 'b' : 'w'
+  const quienMovio = (i: number) => (i % 2 === 0 ? inicio : inicio === 'w' ? 'b' : 'w')
+  const ultimaFueMia = historia.length > 0 && quienMovio(historia.length - 1) === partida.colorHumano
+  const mensaje = guia && ultimaFueMia ? mensajeTrasMiJugada(ctx, historia) : null
+  const miTurno = !partida.fin && !pb.turnoBot && !partida.pausa && chess.turn() === partida.colorHumano
+  const ayudaVigente = ayuda && ayuda.ply === historia.length ? ayuda : null
+  const flechas: DrawShape[] = ayudaVigente?.tipo === 'respuesta' && ayudaVigente.datos.desde ? [{ orig: ayudaVigente.datos.desde as Key, dest: ayudaVigente.datos.hasta as Key, brush: 'blue' }] : []
+  const resumen = partida.fin && guia ? resumenDePartida(rep, partida.colorHumano, historia) : null
+
+  const alJugar = (uci: string) => {
+    if (!guia) return pb.jugar(uci)
+    // antes de mover: qué esperaba mi repertorio aquí (para el desvío y para el registro por jugada)
+    const antes = historia
+    const ops = siguientesEnRepertorio(rep, partida.colorHumano, antes)
+    let san: string
+    try {
+      san = new Chess(chess.fen()).move(uciAObjeto(uci)).san
+    } catch {
+      return
+    }
+    const despues = [...antes, san]
+    const m = mensajeTrasMiJugada(ctx, despues)
+    if (ops.length > 0) {
+      const resultado = m.tipo === 'desvio' ? 'fallo' : ayudaVigente?.tipo === 'respuesta' ? 'respuesta' : ayudaVigente?.tipo === 'pista' ? 'pista' : 'acierto'
+      registrar({ fen: chess.fen(), esperada: ops[0]!.san, resultado, lugar: 'partida', linea: ops[0]!.lineas[0]!.nombre, camino: antes })
+    }
+    setAyuda(null)
+    pb.jugar(uci, () => (m.tipo === 'desvio' ? { pausa: 'desvio' } : {}))
+  }
+  const pedirAyuda = (tipo: 'pista' | 'respuesta') => {
+    setAyuda({ tipo, datos: ayudaEnMiTurno(ctx, historia), ply: historia.length })
+    pb.contarAyuda(tipo)
+  }
   const barraRival = <BarraJugador personaje={bot} estado={estadoBot} pensando={!!estadoBot} testid="barra-rival" />
   const barraYo = <BarraJugador yo testid="barra-yo" />
   const verAviso = !!partida.fin && avisoCerrado !== partida.id
@@ -75,7 +124,7 @@ export function Partida() {
           </div>
         )}
         <div className="partida-tablero">
-          <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={!partida.fin && !pb.turnoBot ? colorHumano : undefined} onJugada={pb.jugar} />
+          <TableroJugable chess={chess} orientacion={partida.orientacion} puedeMover={miTurno ? colorHumano : undefined} onJugada={alJugar} flechas={flechas} />
         </div>
         {rivalArriba ? barraYo : barraRival}
       </div>
@@ -87,6 +136,24 @@ export function Partida() {
           </span>
         </div>
         <ListaJugadas sanes={jugadasEnEspanol(chess)} primeraEsNegras={partida.fenInicial.split(' ')[1] === 'b'} />
+        {guia && !partida.fin && (
+          <PanelGuia
+            mensaje={mensaje}
+            ayuda={ayudaVigente}
+            miTurno={miTurno}
+            desvioPendiente={partida.pausa === 'desvio'}
+            onPista={() => pedirAyuda('pista')}
+            onRespuesta={() => pedirAyuda('respuesta')}
+            onSeguir={() => pb.seguir()}
+            onDeshacer={() => pb.deshacer()}
+          />
+        )}
+        {resumen && (
+          <div className="resumen-guia" data-testid="resumen" data-caso={resumen.caso}>
+            <p className="panel-guia-titulo">Resumen de tu apertura</p>
+            <p>{resumen.texto}</p>
+          </div>
+        )}
         {partida.fin ? (
           <div className="panel-final">
             <p className="resultado" data-testid="resultado">
@@ -103,7 +170,7 @@ export function Partida() {
           </div>
         ) : (
           <div className="botones-partida">
-            <button type="button" className="boton-icono" onClick={() => pb.deshacer()} disabled={!puedeDeshacer(partida) || pb.turnoBot} data-testid="deshacer">
+            <button type="button" className="boton-icono" onClick={() => pb.deshacer()} disabled={!puedeDeshacer(partida) || pb.turnoBot || pb.pensando} data-testid="deshacer">
               <IconoDeshacer />
               <span>Deshacer</span>
             </button>
@@ -143,6 +210,11 @@ export function Partida() {
             </button>
             <h2>{TITULO[resultado]}</h2>
             <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.nombre}</p>
+            {resumen && (
+              <p className="resumen-aviso" data-testid="resumen-aviso">
+                {resumen.texto}
+              </p>
+            )}
             <div className="aviso-jugadores">
               <Avatar yo tam={56} />
               <span>vs</span>

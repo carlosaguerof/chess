@@ -20,7 +20,7 @@ export function ListaBots() {
                     <span className="nombre">
                       {p.nombre} <span className="nivel">{p.elo}</span>
                     </span>
-                    <span className="aperturas">{[...p.estilo.blancas.slice(0, 1), ...p.estilo.negras.slice(0, 1)].map(nombreApertura).join(' · ')}</span>
+                    <span className="aperturas">{[nombreApertura(p.estilo.blancas[0]!, 'blancas'), nombreApertura(p.estilo.negras[0]!, 'negras')].join(' · ')}</span>
                   </div>
                 </a>
               </li>

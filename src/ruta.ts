@@ -27,6 +27,8 @@ export function useRuta(): Ruta {
     const cambio = () => setRuta(leerRuta())
     window.addEventListener('hashchange', cambio)
     window.addEventListener('popstate', cambio)
+    // por si la ruta cambió antes de empezar a escuchar (un efecto de un hijo corre antes que este)
+    cambio()
     return () => {
       window.removeEventListener('hashchange', cambio)
       window.removeEventListener('popstate', cambio)
