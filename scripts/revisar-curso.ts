@@ -48,7 +48,8 @@ for (const l of lineasDe(c))
     const es = sanAEspanol(j.san).replace(/[+#]/g, '')
     // lo que se ve en Practicar antes de jugar: la frase de la jugada del rival, la pregunta y la Pista
     const antes = ply > l.desde ? textoRival(c, l.jugadas, ply - 1)?.texto ?? '' : ''
-    for (const t of [antes, m.pregunta, m.pista ?? '']) {
+    // y el porqué de una jugada equivocada (sale en rojo también en Practicar)
+    for (const t of [antes, m.pregunta, m.pista ?? '', ...Object.values(m.errores ?? {})]) {
       if (t.includes(es)) aviso('DELATA', l.id, j.san, '|', t)
       // en una captura, la casilla es donde ya está la pieza rival: nombrarla es contexto, no la respuesta
       else if (!j.captured && !j.flags.includes('k') && !j.flags.includes('q') && new RegExp(`\\b${j.to}\\b`).test(t)) aviso('CASILLA', l.id, j.san, j.to, '|', t)
