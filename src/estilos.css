@@ -462,7 +462,8 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .mensaje-curso.buena { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.pista, .mensaje-curso.respuesta { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.explica { color: var(--texto); }
-.narracion-pie { display: flex; }
+.narracion-pie { display: flex; gap: 8px; }
+.narracion-pie.dos-botones .boton { flex: 1 1 0; min-width: 0; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
 .narracion .boton { min-width: 140px; }
 /* en el iPhone, la narración tiene una altura fija y se desplaza: Pista, Respuesta y Atrás no salen de la pantalla.
    El botón va en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su lado (C9) */
@@ -477,6 +478,12 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .lista-curso .titulo-grupo h2 { font-size: 16px; margin: 0; color: var(--texto-suave); }
 .numero-variante { color: var(--texto-apagado); font-weight: 600; }
 .pieza-leer .subtitulo-pieza { font-size: 17px; margin: 0; color: var(--texto-suave); }
+/* correcciones, C3: "Ver paso a paso" bajo el tablero de leer, y su ventana */
+.ver-paso-a-paso { width: 100%; max-width: 420px; align-self: center; }
+.paso-a-paso { gap: 10px; }
+.paso-a-paso h2 { font-size: 19px; }
+.paso-a-paso-nota { margin: -4px 0 0; font-size: 13px; color: var(--texto-apagado); }
+.paso-a-paso-frase { margin: 0; min-height: 5.9em; font-size: 17px; line-height: 1.45; color: var(--texto-suave); }
 .texto-pieza { display: flex; flex-direction: column; gap: 10px; }
 .texto-pieza p { margin: 0; line-height: 1.55; font-size: 16px; }
 .pasos-pieza { display: flex; align-items: center; justify-content: space-between; gap: 10px; }

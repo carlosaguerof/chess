@@ -3,12 +3,14 @@ import { Texto } from '../componentes/Notacion.tsx'
 import { Chess } from 'chess.js'
 import type { Key } from 'chessground/types'
 import { TableroMini } from '../componentes/TableroMini.tsx'
+import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
 import { cursoNuevo, lineasDe } from '../curso/datos.ts'
 import type { DatosCurso, PaginaLeer, TableroLeer } from '../curso/tipos.ts'
 import { marcarPieza, useAvance, type AvanceCurso, type PiezaLeerId } from '../curso/avance.ts'
 import { formas, lineaHasta } from '../curso/textos.ts'
+import { soloPeones } from '../curso/pasos.ts'
 
 /**
  * C6 (diseño §7): la página de un curso nuevo. Las piezas en orden (La idea, La estructura, las variantes, Errores y
@@ -124,11 +126,7 @@ export function CursoPagina({ id }: { id: string }) {
 
 /** Un tablero de las piezas de leer: la posición clave, o solo los peones, con sus marcas y sus coordenadas (C1). */
 function TableroDeLeer({ t, orientacion }: { t: TableroLeer; orientacion: 'white' | 'black' }) {
-  let fen = t.fen ?? fenDe(t.jugadas)
-  if (t.soloPeones) {
-    const [tab, ...resto] = fen.split(' ')
-    fen = [tab!.replace(/[kqrbnKQRBN]/g, '1').replace(/\d+/g, (x) => String([...x].reduce((s, d) => s + Number(d), 0))), ...resto].join(' ')
-  }
+  const fen = t.soloPeones ? soloPeones(t.fen ?? fenDe(t.jugadas)) : (t.fen ?? fenDe(t.jugadas))
   const sh = formas(t.marcas).map((f) => ({ orig: f.orig as Key, dest: f.dest as Key | undefined, brush: f.brush }))
   return <TableroMini fen={fen} orientacion={orientacion} flechas={sh} testid="tablero-leer" coordenadas />
 }
@@ -163,6 +161,8 @@ export function PiezaDeLeer({ id, pieza }: { id: string; pieza: PiezaLeerId }) {
           <Texto t={lineaHasta(pag.linea, pag.linea.length)} />
         </p>
       )}
+      {/* correcciones, C3: el texto se queda, y además se puede ver paso a paso en el tablero */}
+      {pag.pasoAPaso && <BotonPasoAPaso key={i} titulo={pag.subtitulo ?? p.titulo} pa={pag.pasoAPaso} orientacion={c.color === 'w' ? 'white' : 'black'} clase="ver-paso-a-paso" />}
       <div className="texto-pieza" data-testid="texto-pieza">
         {pag.texto.map((t, k) => (
           <p key={k}><Texto t={t} /></p>

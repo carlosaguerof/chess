@@ -21,12 +21,45 @@ export interface TableroLeer {
   marcas?: Marca[]
 }
 
+/**
+ * Un paso del "Ver paso a paso" (correcciones, C3; puntos 2 y 3 del feedback de Carlos): una frase, y lo que el
+ * tablero hace en ese momento. Lo que dice la frase sale del texto de su página (o de su plan), ya con su fuente.
+ */
+export interface PasoLeer {
+  /** una frase, en la notación de las guías */
+  frase: string
+  /** antes de jugar, el tablero vuelve a esta posición: las jugadas desde la salida del paso a paso */
+  reinicio?: string[]
+  /**
+   * las jugadas que el tablero hace en este paso (SAN inglés), desde la posición del paso anterior. En un paso a paso
+   * ilustrativo, las de negras van con "..." ("...Bd6") y las de blancas sin nada: así se sabe de qué color es cada una
+   */
+  jugadas?: string[]
+  /** las marcas de esta frase (correcciones, C5) */
+  marcas?: Marca[]
+}
+
+export interface PasoAPaso {
+  /** la posición de salida (FEN); si no, la inicial, o el final de la variante en un plan */
+  fen?: string
+  /** solo los peones (la estructura) */
+  soloPeones?: boolean
+  /**
+   * Un plan o una estructura: se mueven solo las piezas de las que habla la frase, aunque el mismo color juegue dos
+   * veces seguidas. La ventana lo dice en su nota.
+   */
+  ilustrativo?: boolean
+  pasos: PasoLeer[]
+}
+
 export interface PaginaLeer {
   subtitulo?: string
   texto: string[]
   tablero?: TableroLeer
   /** una línea para mostrar en un renglón (el repaso) */
   linea?: string[]
+  /** "Ver paso a paso" (correcciones, C3) */
+  pasoAPaso?: PasoAPaso
   fuente: string[]
 }
 
@@ -67,6 +100,8 @@ export interface PlanVariante {
   tuyo: string
   rival: string
   marcas: Marca[]
+  /** "Ver paso a paso" (correcciones, C3): sale del final de la variante */
+  pasoAPaso?: PasoAPaso
   fuente: string[]
 }
 
