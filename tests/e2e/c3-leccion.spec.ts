@@ -9,8 +9,9 @@ const TAL = '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal')
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const narracion = (page: Page) => page.getByTestId('narracion')
-const flechas = (page: Page) => page.locator('[data-testid="tablero"] svg.cg-shapes line')
-const circulos = (page: Page) => page.locator('[data-testid="tablero"] svg.cg-shapes circle')
+// las marcas (correcciones, C5 y C7): la capa propia encima del tablero
+const flechas = (page: Page) => page.locator('[data-testid="tablero"] [data-marca="flecha"]')
+const circulos = (page: Page) => page.locator('[data-testid="tablero"] [data-marca="casilla"]')
 
 /** Una jugada equivocada: no cambia el tablero (se queda a la vista con su flecha). */
 async function jugarMal(page: Page, info: TestInfo, uci: string) {
@@ -48,8 +49,10 @@ test.describe('C3 · la lección nueva', () => {
     await expect(narracion(page)).toContainText('Te toca: 3...♗f5')
     // la línea en un renglón, sin lo que sigue
     await expect(page.getByTestId('linea')).toHaveText('1.e4 c6 2.d4 d5 3.e5')
-    // tablero limpio en mi turno: sin flechas (están apagadas de entrada)
-    await expect(flechas(page)).toHaveCount(0)
+    // en mi turno, solo las marcas de las frases (el dibujo de Carlos y el ejemplo 2 de las reglas de las marcas):
+    // f6 y la L de g8 a f6 en rojo, y la flecha verde de 3...Af5; ninguna de la siguiente jugada que no sea clave
+    await expect(flechas(page)).toHaveCount(2)
+    await expect(circulos(page)).toHaveCount(1)
 
     // mi jugada: correcta, y como hay algo que leer, la máquina espera a "Siguiente"
     await jugar(page, info, 'c8f5')
@@ -72,7 +75,9 @@ test.describe('C3 · la lección nueva', () => {
     await expect(narracion(page).locator('[data-tipo="incorrecta"]').first()).toBeVisible()
     await page.getByTestId('reintentar').click()
     await momento(page, 'tuTurno')
-    await expect(flechas(page)).toHaveCount(0)
+    // vuelve "Te toca: 4...h5", jugada clave: solo su flecha
+    await expect(flechas(page)).toHaveCount(1)
+    await expect(page.locator('[data-marca="flecha"][data-de="h7"][data-a="h5"]')).toHaveCount(1)
 
     // "Atrás" regresa una jugada mía (a 3...Af5)
     await page.getByTestId('atras').click()
@@ -214,13 +219,23 @@ test.describe('C3 · la lección nueva', () => {
   })
 
   test('las flechas de la siguiente jugada se prenden en Ajustes (solo en Aprender)', async ({ page }) => {
+    // en 6...e6 de la Tal (no es jugada clave y la frase del rival no lleva marcas), el tablero está limpio
+    const en6e6 = async () => {
+      await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'aprender', ply: 11, fecha: Date.now() } })))
+      await page.goto(TAL)
+      await page.reload()
+      await momento(page, 'tuTurno')
+      await expect(leccion(page)).toHaveAttribute('data-ply', '11')
+    }
+    await page.goto('/#/ajustes')
+    await en6e6()
+    await expect(flechas(page)).toHaveCount(0)
     await page.goto('/#/ajustes')
     await expect(page.getByTestId('ajuste-flechas')).not.toBeChecked()
     await page.getByTestId('ajuste-flechas').check({ force: true })
-    await page.goto(TAL)
-    await page.getByTestId('empezar-vuelta').click()
-    await momento(page, 'tuTurno')
+    await en6e6()
     await expect(flechas(page)).toHaveCount(1)
+    await expect(page.locator('[data-marca="flecha"][data-de="e7"][data-a="e6"]')).toHaveCount(1)
   })
 
   test('Errores y trampas: castigo el error yo, con la pieza que castiga', async ({ page }, info) => {

@@ -56,8 +56,8 @@ function porMomento(): Map<string, { marcas: Marca[]; fen: string }> {
 }
 
 describe('Correcciones · C5 · las marcas (reglas v1.1)', () => {
-  it('el interruptor interno sale apagado: las marcas no se publican sin el "publica" de la torre', () => {
-    expect(MARCAS_NUEVAS_DE_ENTRADA).toBe(false)
+  it('el interruptor interno sale prendido: la torre dijo "publica" (C7)', () => {
+    expect(MARCAS_NUEVAS_DE_ENTRADA).toBe(true)
   })
 
   it('hay marcas, y cada una está ligada a una frase que existe', () => {

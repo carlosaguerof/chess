@@ -36,8 +36,12 @@ const uci = (jugadas: string[], ply: number) => {
 }
 
 test.describe('Correcciones · C5 · las marcas (interruptor prendido)', () => {
-  test('apagado de entrada: sin el interruptor, la lección se ve como antes (sin la capa nueva)', async ({ page }) => {
+  test('prendido de entrada (C7); con el interruptor en "0", la lección se ve como antes (sin la capa nueva)', async ({ page }) => {
     await abrirEn(page, 'v:avance-short', 'aprender', 5)
+    await momento(page, 'tuTurno')
+    await expect(page.getByTestId('capa-marcas')).toHaveCount(1)
+    await page.evaluate(() => localStorage.setItem('chess.interno.marcas', '0'))
+    await page.reload()
     await momento(page, 'tuTurno')
     await expect(page.getByTestId('capa-marcas')).toHaveCount(0)
   })
