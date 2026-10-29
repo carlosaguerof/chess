@@ -51,7 +51,7 @@ export function Info({ explicacion }: { explicacion: Explicacion }) {
   const [globo, setGlobo] = useState<DOMRect | null>(null)
   const [ventana, setVentana] = useState(false)
   return (
-    <span className="info">
+    <span className="info-como">
       <button
         type="button"
         className="info-boton"
@@ -69,7 +69,7 @@ export function Info({ explicacion }: { explicacion: Explicacion }) {
       </button>
       {globo &&
         createPortal(
-          <div className="globo-fondo" onClick={() => setGlobo(null)} data-testid="globo-fondo">
+          <div className="globo-info-fondo" onClick={() => setGlobo(null)} data-testid="globo-fondo">
             <Globo
               explicacion={explicacion}
               junto={globo}
@@ -96,7 +96,7 @@ function Globo({ explicacion, junto, onVer }: { explicacion: Explicacion; junto:
     setPos({ top: junto.bottom + 8, left })
   }, [junto])
   return (
-    <div ref={ref} className="globo" role="dialog" aria-label={explicacion.titulo} style={pos ? { top: pos.top, left: pos.left } : { visibility: 'hidden' }} onClick={(e) => e.stopPropagation()} data-testid="globo">
+    <div ref={ref} className="globo-info" role="dialog" aria-label={explicacion.titulo} style={pos ? { top: pos.top, left: pos.left } : { visibility: 'hidden' }} onClick={(e) => e.stopPropagation()} data-testid="globo">
       <button type="button" className="enlace-chico" onClick={onVer} data-testid={`ver-como-funciona-${explicacion.id}`}>
         {explicacion.enlace}
       </button>

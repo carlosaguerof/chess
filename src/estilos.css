@@ -326,13 +326,13 @@ h1, h2, h3 { margin: 0; }
 
 /* ---------- "cómo funciona" (ⓘ, globito y ventana de pasos) ---------- */
 .titulo-info { display: inline-flex; align-items: center; gap: 2px; }
-.info { position: relative; z-index: 1; display: inline-flex; }
+.info-como { position: relative; z-index: 1; display: inline-flex; }
 .info-boton { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: -6px 0; padding: 0; background: none; border: 0; border-radius: 50%; color: var(--texto-apagado); cursor: pointer; }
 .info-boton svg { width: 18px; height: 18px; }
 .info-boton:hover, .info-boton[aria-expanded='true'] { color: #fff; background: var(--fondo-panel-2); }
-.globo-fondo { position: fixed; inset: 0; z-index: 45; }
-.globo { position: fixed; max-width: min(300px, calc(100vw - 32px)); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 8px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
-.globo .enlace-chico { font-size: 15px; text-align: left; }
+.globo-info-fondo { position: fixed; inset: 0; z-index: 45; }
+.globo-info { position: fixed; max-width: min(300px, calc(100vw - 32px)); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 8px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.globo-info .enlace-chico { font-size: 15px; text-align: left; }
 .como-funciona { min-height: 240px; }
 .como-funciona-paso { margin: 0; flex: 1; font-size: 19px; line-height: 1.45; color: var(--texto-suave); }
 .como-funciona-botones { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }

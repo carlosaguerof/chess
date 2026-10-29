@@ -54,7 +54,7 @@ test('capturas de los ajustes de la app @capturas @ajustes', async ({ page }, in
     ['05-ajustes', '/ajustes'],
   ]
   if (ETAPA === 'antes') pantallas.push(['07-tus-datos', '/datos'])
-  else pantallas.push(['08-instalar', '/instalar'])
+  else pantallas.push(['08-instalar', '/instalar'], ['14-jugar-sin-cambios', '/bots'])
   for (const [nombre, ruta] of pantallas) {
     await page.goto('/#' + ruta)
     await page.reload()

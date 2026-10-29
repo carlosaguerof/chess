@@ -207,6 +207,15 @@ test.describe('ajustes de la app', () => {
   })
 })
 
+test('los estilos nuevos no pisan los de antes: el globo con la frase del bot en Jugar sigue en su lugar', async ({ page }) => {
+  // el globito del ⓘ se llamó primero "globo", como el del bot, y lo volvía flotante (encontrado en las capturas)
+  await page.goto('/#/bots')
+  const globo = page.locator('.globo').first()
+  await expect(globo).toBeVisible()
+  expect(await globo.evaluate((g) => getComputedStyle(g).position)).toBe('relative')
+  expect(await globo.evaluate((g) => getComputedStyle(g).backgroundColor)).toBe('rgb(255, 255, 255)')
+})
+
 test.describe('Nota 1 · "cómo funciona" con ⓘ en Repaso de hoy y en Refuerza', () => {
   /** ⓘ → globito → ventana; Siguiente y Atrás; Salir en el último; tocar fuera cierra el globito y la ventana. */
   async function recorrer(page: Page, id: 'repaso' | 'refuerza', enlace: string, pasos: number) {
