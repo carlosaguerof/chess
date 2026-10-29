@@ -15,9 +15,9 @@ const PUNTA_PLAN = 0.34
  * Una flecha. La punteada (un plan) es de puntos, sale un poco afuera de su pieza y lleva la punta abierta: en una
  * flecha de una sola casilla, los guiones quedaban debajo de la pieza y parecía sólida, o un puntero (pases visuales 1 y 2).
  */
-function Flecha({ m, orientacion, ocupada }: { m: Marca; orientacion: 'white' | 'black'; ocupada: (casilla: string) => boolean }) {
+function Flecha({ m, orientacion, ocupada, escala }: { m: Marca; orientacion: 'white' | 'black'; ocupada: (casilla: string) => boolean; escala: number }) {
   const puntos = puntosDeFlecha(m.de!, m.a!, orientacion, ocupada)
-  const punta = m.punteada ? PUNTA_PLAN : PUNTA
+  const punta = (m.punteada ? PUNTA_PLAN : PUNTA) * escala
   const color = colorDe(m)
   if (m.punteada) {
     const [sx, sy] = puntos[0]!
@@ -37,11 +37,20 @@ function Flecha({ m, orientacion, ocupada }: { m: Marca; orientacion: 'white' | 
   const linea = [...puntos.slice(0, -1), m.punteada ? [fin[0] - ux * 0.14, fin[1] - uy * 0.14] : base]
   const ancho = m.punteada ? punta * 0.65 : punta / 2
   const triangulo = [fin, [base[0] - uy * ancho, base[1] + ux * ancho], [base[0] + uy * ancho, base[1] - ux * ancho]]
+  const trazo = linea.map((p) => p.join(',')).join(' ')
+  const abierta = [triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')
   return (
-    <g data-marca="flecha" data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-puntos={puntos.length} opacity={0.82}>
-      <polyline points={linea.map((p) => p.join(',')).join(' ')} fill="none" stroke={color} strokeWidth={m.punteada ? 0.12 : GRUESO} strokeLinecap={m.punteada ? 'butt' : 'round'} strokeLinejoin="round" strokeDasharray={m.punteada ? '0.11 0.08' : undefined} />
+    <g data-marca="flecha" data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-puntos={puntos.length} opacity={escala > 1 ? 0.9 : 0.82}>
+      {/* en un tablero chico, un borde claro debajo: la flecha se distingue también sobre el amarillo de la última jugada */}
+      {escala > 1 && (
+        <g stroke="#f4f4e6" strokeOpacity={0.75} fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points={trazo} strokeWidth={(m.punteada ? 0.12 : GRUESO) * escala + 0.07} />
+          {m.punteada ? <polyline points={abierta} strokeWidth={0.075 * escala + 0.07} /> : <polygon points={triangulo.map((p) => p.join(',')).join(' ')} strokeWidth={0.07} />}
+        </g>
+      )}
+      <polyline points={trazo} fill="none" stroke={color} strokeWidth={(m.punteada ? 0.12 : GRUESO) * escala} strokeLinecap={m.punteada ? 'butt' : 'round'} strokeLinejoin="round" strokeDasharray={m.punteada ? `${0.11 * escala} ${0.08 * escala}` : undefined} />
       {m.punteada ? (
-        <polyline points={[triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')} fill="none" stroke={color} strokeWidth={0.075} strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points={[triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')} fill="none" stroke={color} strokeWidth={0.075 * escala} strokeLinecap="round" strokeLinejoin="round" />
       ) : (
         <polygon points={triangulo.map((p) => p.join(',')).join(' ')} fill={color} />
       )}
@@ -75,13 +84,17 @@ function ocupadas(fen: string): Set<string> {
   return r
 }
 
-export function CapaMarcas({ marcas, orientacion, fen }: { marcas: Marca[]; orientacion: 'white' | 'black'; fen: string }) {
+/**
+ * `escala`: en un tablero chico (el del paso a paso mide unos 350 px, 44 px por casilla) las flechas de una casilla casi
+ * no se veían (revisión de la torre, C5): ahí el trazo y la punta van más gruesos. El tablero de la lección no cambia.
+ */
+export function CapaMarcas({ marcas, orientacion, fen, escala = 1 }: { marcas: Marca[]; orientacion: 'white' | 'black'; fen: string; escala?: number }) {
   if (!marcas.length) return null
   const llenas = ocupadas(fen)
   return (
     <svg className="capa-marcas" viewBox="0 0 8 8" aria-hidden="true" data-testid="capa-marcas">
       {marcas.filter((m) => m.en).map((m) => <Casilla key={`c-${m.en}`} m={m} orientacion={orientacion} />)}
-      {marcas.filter((m) => m.de && m.a).map((m) => <Flecha key={`f-${m.de}-${m.a}`} m={m} orientacion={orientacion} ocupada={(c) => llenas.has(c)} />)}
+      {marcas.filter((m) => m.de && m.a).map((m) => <Flecha key={`f-${m.de}-${m.a}`} m={m} orientacion={orientacion} ocupada={(c) => llenas.has(c)} escala={escala} />)}
     </svg>
   )
 }
