@@ -65,10 +65,16 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     return () => clearTimeout(t)
   }, [e.momento, e.ply, l])
 
-  // en el iPhone la narración tiene altura fija y se desplaza: cada momento nuevo se lee desde arriba
+  // en el iPhone la narración tiene altura fija y se desplaza: cada momento nuevo se lee desde arriba,
+  // y la ayuda que pides (Pista, Otra pista, Respuesta) se lleva a la vista
   useEffect(() => {
     narracion.current?.scrollTo?.({ top: 0 })
-  }, [e.momento, e.ply, e.ayuda])
+  }, [e.momento, e.ply])
+  useEffect(() => {
+    if (e.ayuda === 0) return
+    const ayudas = narracion.current?.querySelectorAll('[data-tipo="pista"], [data-tipo="respuesta"]')
+    ayudas?.[ayudas.length - 1]?.scrollIntoView?.({ block: 'nearest' })
+  }, [e.ayuda])
 
   // el avance se guarda en el teléfono: se retoma donde me quedé
   useEffect(() => {
@@ -121,8 +127,9 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
         if (turno !== turnoError.current) return
         const valor = (x: { cpBlancas: number; mate: number | null }) => (x.mate !== null ? Math.sign(x.mate) * 10000 : x.cpBlancas) * lado
         const pierde = valor(bien) - valor(mal)
-        if (pierde >= 150) setNotaMotor('El motor ve que esa jugada pierde material.')
-        else if (pierde >= 60) setNotaMotor('El motor ve que esa jugada te deja peor.')
+        // en un «¿Y si…?» se compara con la jugada que castiga: la tuya puede no perder nada, solo no castigar
+        if (pierde >= 150) setNotaMotor(esVariante ? 'El motor ve que esa jugada pierde material.' : 'El motor ve otra jugada que gana material: esta no castiga el error.')
+        else if (pierde >= 60) setNotaMotor(esVariante ? 'El motor ve que esa jugada te deja peor.' : 'El motor ve otra jugada que castiga mejor.')
       })
       .catch(() => {})
   }
@@ -155,7 +162,8 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     mensajes.push({ tipo: 'info', texto: e.vuelta === 'aprender' ? l.intro : 'Ahora, Practicar: te pregunto por la meta de cada jugada y tú la encuentras. Si te atoras, pide una Pista.' })
     boton = { texto: 'Empezar', testid: 'empezar-vuelta', accion: () => setE(continuar(l, e)) }
   } else if (e.momento === 'rival') {
-    if (e.ultima !== null) mensajes.push({ tipo: 'correcta', jugada: jugadaEs(l.jugadas[e.ultima]!, e.ultima), texto: e.vuelta === 'practicar' || !esVariante ? `Correcto. ${textoMio(c, l.jugadas, e.ultima)?.hace ?? ''}` : 'Correcto.' })
+    // solo "Correcto": la jugada del rival llega en 0.9 s y un texto más largo se borraría antes de leerlo (diseño §4)
+    if (e.ultima !== null) mensajes.push({ tipo: 'correcta', jugada: jugadaEs(l.jugadas[e.ultima]!, e.ultima), texto: 'Correcto.' })
     else mensajes.push({ tipo: 'info', texto: 'Juega el rival…' })
   } else if (e.momento === 'tuTurno' && esperada && mia) {
     anotarRival()

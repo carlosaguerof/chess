@@ -113,7 +113,8 @@ describe('C4 · el curso de la Caro-Kann', () => {
         l.jugadas.slice(0, ply).forEach((s) => pos.move(s))
         for (const b of m.buenas) {
           expect(b, l.id).not.toBe(l.jugadas[ply])
-          expect(() => new Chess(pos.fen()).move(b), `${l.id}: ${b}`).not.toThrow()
+          // escrita como la escribe chess.js (con su + y su letra de desempate): así la reconoce la lección
+          expect(new Chess(pos.fen()).move(b).san, `${l.id}: ${b}`).toBe(b)
         }
       }
   })

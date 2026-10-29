@@ -149,20 +149,52 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
       expect(m.desplazada, `${cuando}: la página no se desplaza`).toBe(0)
       expect(m.abajo, `${cuando}: los botones caben`).toBeLessThanOrEqual(m.alto)
     }
+    // la ayuda que acabo de pedir se ve dentro de la narración (pase adversarial 2: "Otra pista" quedaba fuera)
+    const ayudaALaVista = async (cuando: string) => {
+      const m = await page.evaluate(() => {
+        const caja = document.querySelector('[data-testid="narracion"]')!.getBoundingClientRect()
+        const ayudas = document.querySelectorAll('[data-testid="narracion"] [data-tipo="pista"], [data-testid="narracion"] [data-tipo="respuesta"]')
+        const r = ayudas[ayudas.length - 1]!.getBoundingClientRect()
+        return { arriba: r.top, abajo: r.bottom, cajaArriba: caja.top, cajaAbajo: caja.bottom }
+      })
+      expect(m.arriba, `${cuando}: empieza dentro de la narración`).toBeGreaterThanOrEqual(m.cajaArriba - 1)
+      // se ve completa, o al menos sus dos primeros renglones
+      expect(Math.min(m.abajo, m.cajaAbajo) - m.arriba, `${cuando}: se ve`).toBeGreaterThanOrEqual(Math.min(m.abajo - m.arriba, 40) - 1)
+    }
     await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
     await toca('empezar-vuelta')
     await momento('tuTurno')
     await toca('pista')
     await toca('pista')
+    await expect(page.getByTestId('narracion').locator('[data-tipo="pista"]')).toHaveCount(2)
     await aLaVista('dos pistas')
+    await ayudaALaVista('Otra pista')
     await toca('respuesta')
     await expect(page.getByTestId('narracion').locator('[data-tipo="respuesta"]')).toBeVisible()
     await aLaVista('la Respuesta')
+    await ayudaALaVista('la Respuesta')
     const uci = enUci(l.jugadas)
     await jugar(page, info, uci[misJugadas(l)[0]!]!)
     await momento('leer')
     await aLaVista('la explicación')
     await expect(page.getByTestId('siguiente')).toBeInViewport()
+
+    // en Practicar, donde la frase del rival y la pregunta ya llenan la narración (las posiciones que midió el pase 2)
+    for (const [linea, ply] of [['v:panov', 7], ['v:avance-short', 11]] as const) {
+      await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'practicar', ply, fecha: Date.now() } })), [linea, ply] as const)
+      await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
+      await momento('tuTurno')
+      await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-ply', String(ply))
+      await toca('pista')
+      await toca('pista')
+      await expect(page.getByTestId('narracion').locator('[data-tipo="pista"]')).toHaveCount(2)
+      await aLaVista(`${linea}: dos pistas`)
+      await ayudaALaVista(`${linea}: Otra pista`)
+      await toca('respuesta')
+      await expect(page.getByTestId('narracion').locator('[data-tipo="respuesta"]')).toBeVisible()
+      await aLaVista(`${linea}: la Respuesta`)
+      await ayudaALaVista(`${linea}: la Respuesta`)
+    }
   })
 
   test('la lección nueva (C3): la Clásica, la variante más larga, en sus dos vueltas, y la página del curso', async ({ page }, info) => {

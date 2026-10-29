@@ -260,13 +260,14 @@
           "desde": 8,
           "lado": "b",
           "intro": "En la Bayoneta, tu alfil llegó a e4. ¿Y si blancas lo ataca con 5.Ag2 en lugar de 5.f3? Juegas tú: castígalo.",
-          "final": "Tu alfil se come el de g2 y después la torre de h1, que no tiene a dónde ir: ganas una torre.",
+          "final": "Tu alfil se come el de g2, que nadie defendía, y después la torre de h1, que no tiene a dónde ir: ganas un alfil y una torre.",
           "fuente": [
             "MOTOR"
           ],
           "motor": [
             "E-ag2",
-            "E-ag2-b"
+            "E-ag2-b",
+            "P2-ag2"
           ]
         }
       ]
@@ -569,7 +570,7 @@
       "intro": "Después de 3.exd5 cxd5, blancas juega 4.c4 y ataca d5 otra vez. Es el Ataque Panov.",
       "idea": "Defiendes d5 con ...Cf6 y ...e6, y clavas al caballo de c3 con ...Ab4.",
       "plan": {
-        "tuyo": "Enroca y presiona el peón aislado de d4. Si retomas en d5 con una pieza, bloquéalo ahí; y cambia piezas, porque con pocas piezas el aislado se vuelve débil.",
+        "tuyo": "Cuando blancas cambie en d5, su peón de d4 queda aislado: enroca y presiónalo. Si retomas en d5 con una pieza, bloquéalo ahí; y cambia piezas, porque con pocas piezas el aislado se vuelve débil.",
         "rival": "Blancas busca ataque con sus piezas activas y la ruptura d4-d5.",
         "marcas": [
           {
@@ -735,7 +736,7 @@
       "base": "breyer",
       "nombre": "2.d3",
       "desde": 2,
-      "intro": "Blancas juega 2.d3: no pelea por el centro y arma un esquema con g3 y Ag2. Es la Variante Breyer.",
+      "intro": "Blancas juega 2.d3: sostiene e4 con un peón, deja d4 para después y arma un esquema con g3 y Ag2. Es la Variante Breyer.",
       "idea": "Contra 2.d3 ocupas el centro con ...d5 y ...e5 y sacas tu alfil por g7.",
       "plan": {
         "tuyo": "Tienes el centro con d5 y e5 y tu rey a salvo: termina el desarrollo con el caballo de b8 y el alfil de c8.",
@@ -751,7 +752,7 @@
           "BASE"
         ]
       },
-      "regla": "Si blancas no ocupa el centro, ocúpalo tú.",
+      "regla": "Si blancas no pone un peón en d4, ocupa tú el centro.",
       "frecuencia": 1,
       "fuenteFrecuencia": "sin dato a tu nivel: va entre las raras"
     },
@@ -1444,7 +1445,11 @@
       "motor": [
         "M-c3-cc6"
       ],
-      "pista": "Desarrolla una pieza que también mire a d4."
+      "pista": "Desarrolla una pieza que también mire a d4.",
+      "buenas": [
+        "cxd4",
+        "a6"
+      ]
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6": {
       "pregunta": "Tu alfil ya salió. ¿Cómo abres tu otro alfil y sostienes d5?",
@@ -1543,7 +1548,7 @@
       "motor": [
         "M-vdw-ah7"
       ],
-      "pista": "Tu peón de h ya movió y dejó libre una casilla de la misma diagonal."
+      "pista": "Retírate por la misma diagonal, a una casilla donde ni el caballo ni los peones blancos lo alcancen."
     },
     "e4 c6 d4 d5 e5 Bf5 h4 h5": {
       "clave": true,
@@ -1562,10 +1567,12 @@
       ],
       "motor": [
         "M-tal-h5",
-        "M-tal-e6"
+        "M-tal-e6",
+        "P2-tal-h6"
       ],
       "errores": {
-        "e6": "Con ...e6 siguen g4, f3 y h5, y tu alfil se queda sin casillas: lo pierdes."
+        "e6": "Con ...e6 siguen g4, f3 y h5, y tu alfil se queda sin casillas: lo pierdes.",
+        "h6": "Con ...h6 tu alfil tendría h7, pero el motor prefiere ...h5: tras ...h6, blancas sigue con g4 contra tu alfil."
       }
     },
     "e4 c6 d4 d5 e5 Bf5 h4 h5 Bd3 Bxd3": {
@@ -1603,7 +1610,10 @@
       "motor": [
         "M-tal-e6b"
       ],
-      "pista": "Ya no hay alfil que encerrar: el peón que lo abre también sostiene d5."
+      "pista": "Ya no hay alfil que encerrar: el peón que lo abre también sostiene d5.",
+      "buenas": [
+        "Qa5+"
+      ]
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4": {
       "pregunta": "El peón de g4 ataca a tu alfil. ¿A dónde lo llevas, sin salir de su diagonal, para que además ataque algo?",
@@ -1665,10 +1675,12 @@
         "WB-3Af5"
       ],
       "motor": [
-        "M-bay-dd6"
+        "M-bay-dd6",
+        "P2-bay-qc8"
       ],
       "buenas": [
-        "fxe6"
+        "fxe6",
+        "Qc8"
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4 f3 Bg6 e6 Qd6 exf7+ Bxf7": {
@@ -1688,7 +1700,7 @@
       "motor": [
         "M-bay-axf7"
       ],
-      "pista": "Tomar con el rey lo deja expuesto."
+      "pista": "Piensa dónde queda tu rey después de retomar."
     },
     "e4 c6 d4 d5 e5 Bf5 Ne2 e6": {
       "pregunta": "Tu alfil ya salió. ¿Cómo abres tu otro alfil y sostienes d5?",
@@ -1746,7 +1758,7 @@
       "motor": [
         "M-cl-dxe4"
       ],
-      "pista": "Hay un peón que puedes tomar."
+      "pista": "Si el peón de e4 desaparece, blancas ya no tiene dos peones en el centro."
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5": {
       "clave": true,
@@ -1770,6 +1782,9 @@
       "motor": [
         "M-cl-af5",
         "M-cl-amenaza-af5"
+      ],
+      "buenas": [
+        "Nf6"
       ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6": {
@@ -1855,7 +1870,7 @@
       "errores": {
         "Bf5": "En f5, el caballo de g3 lo cambia y blancas queda mucho mejor."
       },
-      "pista": "Usa la casilla que te preparaste con tu peón de h."
+      "pista": "Retírate por la misma diagonal, a una casilla donde el caballo de g3 no pueda cambiarlo."
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3": {
       "pregunta": "El alfil de d3 ataca a tu alfil de h7. ¿Qué haces?",
@@ -1872,9 +1887,13 @@
         "WP-CK"
       ],
       "motor": [
-        "M-cl-axd3"
+        "M-cl-axd3",
+        "P2-cl-ngf6"
       ],
-      "pista": "Dos alfiles se miran en la misma diagonal."
+      "pista": "Dos alfiles se miran en la misma diagonal.",
+      "buenas": [
+        "Ngf6"
+      ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 e6": {
       "pregunta": "Tu alfil de c8 ya se cambió. ¿Cómo abres tu alfil de f8?",
@@ -1895,7 +1914,11 @@
       "motor": [
         "M-cl-e6"
       ],
-      "pista": "Ya no hay alfil que encerrar: el peón que lo abre también cuida d5."
+      "pista": "Ya no hay alfil que encerrar: el peón que lo abre también cuida d5.",
+      "buenas": [
+        "Qc7",
+        "Ngf6"
+      ]
     },
     "e4 c6 d4 d5 exd5 cxd5": {
       "pregunta": "Blancas cambió en d5. ¿Con qué retomas para seguir con un peón en el centro?",
@@ -1952,7 +1975,10 @@
       "motor": [
         "M-ca-cf6"
       ],
-      "pista": "Saca el otro caballo a su mejor casilla."
+      "pista": "Saca el otro caballo a su mejor casilla.",
+      "buenas": [
+        "Qc7"
+      ]
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4": {
       "clave": true,
@@ -1993,14 +2019,16 @@
       "motor": [
         "M-ca-dd7",
         "E-dc7",
-        "M-ca-e6"
+        "M-ca-e6",
+        "P2-ca-na5"
       ],
       "errores": {
         "Qc7": "El alfil de f4 se come tu dama.",
         "e6": "Dejas caer el peón de b7."
       },
       "buenas": [
-        "Qc8"
+        "Qc8",
+        "Na5"
       ],
       "pista": "Defiéndelo con tu dama, en una casilla donde el alfil de f4 no la toque."
     },
@@ -2065,7 +2093,10 @@
       "motor": [
         "M-pa-ab4"
       ],
-      "pista": "Ese caballo tiene detrás a su rey."
+      "pista": "Ese caballo tiene detrás a su rey.",
+      "buenas": [
+        "Be7"
+      ]
     },
     "e4 c6 Nc3 d5": {
       "pregunta": "Blancas desarrolló en vez de ocupar el centro. ¿Cómo atacas e4 con un peón apoyado?",
@@ -2104,6 +2135,9 @@
       ],
       "motor": [
         "M-dc-ag4"
+      ],
+      "buenas": [
+        "dxe4"
       ]
     },
     "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3": {
@@ -2126,7 +2160,7 @@
       "errores": {
         "Bh5": "Retirarte a h5 es peor para el motor y pide saber mucho más."
       },
-      "pista": "Cambiar es lo sencillo; retirarte pide saber más."
+      "pista": "Si te retiras, blancas puede seguir persiguiendo a tu alfil con sus peones."
     },
     "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 Qxf3 e6": {
       "pregunta": "Tus peones de c6 y d5 están en casillas blancas. ¿Qué peón completa esa cadena y abre tu alfil de f8?",
@@ -2166,8 +2200,8 @@
       "pista": "Tu peón de c6 ya está listo para apoyarlo."
     },
     "e4 c6 Nf3 d5 d3 dxe4": {
-      "pregunta": "Blancas defendió e4 con un peón. ¿Qué cambio abre la columna d entre las dos damas?",
-      "hace": "Cambias en e4 y abres la columna d entre las damas.",
+      "pregunta": "Blancas defendió e4 con un peón. ¿Cómo preparas un cambio de damas, para que el rey blanco tenga que retomar?",
+      "hace": "Cambias en e4. Si blancas retoma con el peón de d, la columna d queda abierta entre las damas.",
       "prepara": "Después de 4.dxe4 puedes cambiar las damas.",
       "marcas": [
         {
@@ -2201,7 +2235,7 @@
       "motor": [
         "M-of-dxd1"
       ],
-      "pista": "Un cambio con jaque obliga al rey a retomar."
+      "pista": "Piensa qué pieza blanca tendría que retomar en d1."
     },
     "e4 c6 Nf3 d5 exd5 cxd5": {
       "pregunta": "¿Con qué retomas para seguir con un peón en el centro?",
@@ -2274,7 +2308,10 @@
       "motor": [
         "M-pac-cxd5"
       ],
-      "pista": "Para esto jugaste 1...c6."
+      "pista": "Para esto jugaste 1...c6.",
+      "buenas": [
+        "Nf6"
+      ]
     },
     "e4 c6 c4 d5 exd5 cxd5 cxd5 Nf6": {
       "pregunta": "Blancas tiene un peón de más en d5. ¿Cómo lo atacas sin sacar la dama?",
@@ -2334,7 +2371,10 @@
       "motor": [
         "M-fa-e6"
       ],
-      "pista": "El peón que abre tu alfil también sostiene d5."
+      "pista": "El peón que abre tu alfil también sostiene d5.",
+      "buenas": [
+        "Qb6"
+      ]
     },
     "e4 c6 d4 d5 f3 e6 Nc3 Bb4": {
       "pregunta": "El caballo de c3 defiende e4. ¿Cómo lo inmovilizas?",
@@ -2356,7 +2396,7 @@
       "pista": "Ese caballo tiene detrás a su rey."
     },
     "e4 c6 d3 d5": {
-      "pregunta": "Blancas no ocupó el centro. ¿Cómo lo ocupas tú?",
+      "pregunta": "Blancas sostiene e4 con un peón y deja d4 para después. ¿Cómo atacas e4 con un peón apoyado?",
       "hace": "Ocupas el centro con un peón apoyado por c6.",
       "marcas": [
         {
@@ -2368,9 +2408,14 @@
         "WP-CK"
       ],
       "motor": [
-        "M-br-d5"
+        "M-br-d5",
+        "P2-br-e5"
       ],
-      "pista": "Tu peón de c6 ya está listo para apoyarlo."
+      "pista": "Tu peón de c6 ya está listo para apoyarlo.",
+      "buenas": [
+        "e5",
+        "e6"
+      ]
     },
     "e4 c6 d3 d5 Nd2 g6": {
       "pregunta": "Blancas arma un esquema tranquilo. ¿Cómo preparas la salida de tu alfil de f8 hacia la diagonal larga?",
@@ -2388,7 +2433,10 @@
       "motor": [
         "M-br-g6"
       ],
-      "pista": "Un peón del lado de rey abre una diagonal para tu alfil."
+      "pista": "Un peón del lado de rey abre una diagonal para tu alfil.",
+      "buenas": [
+        "e5"
+      ]
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7": {
       "pregunta": "¿Qué pieza llevas a la diagonal larga?",
@@ -2405,7 +2453,7 @@
       "motor": [
         "M-br-ag7"
       ],
-      "pista": "Ya le abriste la diagonal: sácalo."
+      "pista": "La diagonal larga va de h8 a a1."
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5": {
       "pregunta": "¿Qué otro peón llevas al centro, junto a d5?",
@@ -2479,7 +2527,7 @@
       "pista": "Un peón central puede atacar al alfil, apoyado por c6."
     },
     "e4 c6 Bc4 d5 Bb3 dxe4": {
-      "pregunta": "Blancas dejó su peón de e4 sin defensa. ¿Qué haces?",
+      "pregunta": "El alfil blanco se retiró a b3. ¿Qué ganas ahora?",
       "hace": "Tomas el peón de e4: tienes un peón de más.",
       "marcas": [
         {
@@ -2493,7 +2541,7 @@
       "motor": [
         "M-hb-dxe4"
       ],
-      "pista": "Hay un peón que puedes tomar."
+      "pista": "Cuenta quién defiende el peón de e4."
     },
     "e4 c6 Bc4 d5 Bb3 dxe4 Qh5 g6": {
       "pregunta": "La dama y el alfil atacan f7. ¿Cómo tapas ese ataque y atacas a la dama a la vez?",
@@ -2516,7 +2564,7 @@
       "pista": "Un peón puede tapar la diagonal de la dama y atacarla."
     },
     "e4 c6 d4 d5 e5 Bf5 h4 e6 g4": {
-      "pregunta": "El alfil negro tiene pocas casillas. ¿Con qué peón lo atacas?",
+      "pregunta": "El alfil negro tiene pocas casillas. ¿Cómo empiezas a quitárselas?",
       "hace": "Atacas al alfil con el peón de g.",
       "marcas": [
         {
@@ -2534,7 +2582,7 @@
       "pista": "Quítale casillas al alfil con un peón."
     },
     "e4 c6 d4 d5 e5 Bf5 h4 e6 g4 Be4 f3": {
-      "pregunta": "El alfil está en e4. ¿Con qué peón lo atacas otra vez?",
+      "pregunta": "El alfil se fue a e4. ¿Cómo lo atacas y a la vez le tapas la diagonal hacia h1?",
       "hace": "Atacas otra vez al alfil con un peón.",
       "marcas": [
         {
@@ -2552,7 +2600,7 @@
       "pista": "Vuelve a atacar al alfil."
     },
     "e4 c6 d4 d5 e5 Bf5 h4 e6 g4 Be4 f3 Bg6 h5": {
-      "pregunta": "El alfil volvió a g6. ¿Cómo lo dejas sin casillas?",
+      "pregunta": "Al alfil ya no le quedan casillas seguras. ¿Cómo lo atacas para ganarlo?",
       "hace": "El alfil ya no tiene a dónde ir: blancas gana una pieza.",
       "marcas": [
         {
@@ -2566,10 +2614,10 @@
       "motor": [
         "E-tal"
       ],
-      "pista": "Ataca al alfil ahora que no tiene a dónde ir."
+      "pista": "Busca cuál de tus peones puede atacarlo."
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qc7 Bxc7": {
-      "pregunta": "La dama negra se puso en c7. ¿Qué pieza blanca la ataca?",
+      "pregunta": "Negras defendió b7 con su dama. ¿Qué ganas?",
       "hace": "El alfil de f4 se come la dama.",
       "marcas": [
         {
@@ -2584,11 +2632,11 @@
       "motor": [
         "E-dc7"
       ],
-      "pista": "Mira qué pieza blanca ya apunta a c7."
+      "pista": "Mira las diagonales de tus alfiles."
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4 f3 Bg6 h4 h6 h5": {
-      "pregunta": "El peón de h4 puede dar un paso más contra el alfil de g6. ¿Qué haces?",
-      "pista": "Echa al alfil: ya no tiene un peón que frene al tuyo.",
+      "pregunta": "Negras jugó ...h6 en lugar de frenar tu peón de h. ¿Cómo lo aprovechas?",
+      "pista": "El alfil de g6 tiene una sola casilla para escapar: échalo y gana espacio.",
       "hace": "Echas al alfil de g6 a h7 y ganas espacio en el lado de rey.",
       "marcas": [
         {
@@ -2608,7 +2656,7 @@
     "e4 c6 d4 d5 e5 Bf5 g4 Be4 Bg2 Bxg2": {
       "pregunta": "El alfil de g2 ataca al tuyo. ¿Qué haces?",
       "pista": "Mira qué pieza blanca queda detrás del alfil de g2.",
-      "hace": "Cambias los alfiles, y el tuyo queda atacando la torre de h1, que no se puede escapar.",
+      "hace": "Te comes el alfil de g2: ninguna pieza blanca puede retomar. Y desde g2 tu alfil ataca la torre de h1, que no se puede mover.",
       "marcas": [
         {
           "de": "g2",
@@ -2621,7 +2669,8 @@
       ],
       "motor": [
         "E-ag2",
-        "E-ag2-b"
+        "E-ag2-b",
+        "P2-ag2"
       ]
     }
   },
