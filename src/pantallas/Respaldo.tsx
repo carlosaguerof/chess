@@ -1,32 +1,22 @@
 import { useRef, useState } from 'react'
-import { exportar, importar, ErrorImportar } from '../repertorio/edicion.ts'
-import { leerProgreso, guardarProgreso } from '../repertorio/estado.ts'
-import { leerRegistro, guardarRegistro } from '../registro/almacen-registro.ts'
-import { leerRepaso, guardarRepaso } from '../repaso/repaso.ts'
-import { leerFavoritas, guardarFavoritas } from '../aprender/favoritas.ts'
-import type { EntradaRegistro } from '../registro/registro.ts'
+import { importar, ErrorImportar } from '../repertorio/edicion.ts'
+import { cargarRespaldo, exportarMisDatos } from '../estado/respaldo.ts'
 
-/** "Tus datos" (menú Más, Nota 1): exportar e importar las favoritas, el avance, el registro y el repaso. */
+/**
+ * "Tus datos" (menú Más, Nota 1): exportar e importar las favoritas, el avance, el registro y el repaso.
+ * Apagada desde los ajustes de la app (`TUS_DATOS_PRENDIDA` en aprender/interruptores.ts): exportar e importar viven
+ * en Ajustes → Respaldo.
+ */
 export function Respaldo() {
   const [aviso, setAviso] = useState<{ ok: boolean; texto: string } | null>(null)
   const archivo = useRef<HTMLInputElement>(null)
-  const descargar = () => {
-    const texto = exportar({ favoritas: leerFavoritas(), progreso: leerProgreso(), registro: leerRegistro(), repaso: leerRepaso() })
-    const url = URL.createObjectURL(new Blob([texto], { type: 'application/json' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `mis-aperturas-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
-    setAviso({ ok: true, texto: 'Listo: se descargó el archivo.' })
+  const descargar = async () => {
+    if ((await exportarMisDatos()) !== 'cancelado') setAviso({ ok: true, texto: 'Listo: se descargó el archivo.' })
   }
   const subir = async (f: File) => {
     try {
       const r = importar(await f.text())
-      guardarFavoritas(r.favoritas)
-      guardarProgreso(r.progreso)
-      guardarRegistro(r.registro as EntradaRegistro[])
-      guardarRepaso(r.repaso ?? {})
+      cargarRespaldo(r)
       setAviso({ ok: true, texto: `Listo: se cargaron tus datos (${r.favoritas.length} ${r.favoritas.length === 1 ? 'favorita' : 'favoritas'}, ${Object.keys(r.progreso).length} lecciones aprendidas).` })
     } catch (e) {
       setAviso({ ok: false, texto: e instanceof ErrorImportar ? e.message : 'No se pudo leer el archivo.' })

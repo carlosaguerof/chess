@@ -158,7 +158,7 @@ function HojaOpciones({ onCerrar }: { onCerrar: () => void }) {
             />
             <Interruptor
               etiqueta="Que juegue mis líneas"
-              detalle="El bot entra a tus favoritas"
+              detalle="El bot entra a tus aperturas"
               activo={opciones.misLineas}
               onCambiar={(v) => cambiarOpciones({ ...opciones, misLineas: v })}
               testid="interruptor-mis-lineas"

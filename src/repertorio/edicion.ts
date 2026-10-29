@@ -71,7 +71,10 @@ export function repertorioOriginal(base: Base): Repertorio {
 
 // ----------------------------------------------------------- exportar e importar (todo en un archivo)
 
-/** El archivo de respaldo (versión 2, Nota 1): mis favoritas, el avance, el registro y el repaso. */
+/**
+ * El archivo de respaldo (versión 2, Nota 1): mis favoritas, el avance, el registro y el repaso; desde los ajustes de
+ * la app (2026-10-28), también Mis partidas y los ajustes. Un archivo sin esas dos partes se sigue leyendo.
+ */
 export interface Respaldo {
   app: 'chess-mis-aperturas'
   version: 2
@@ -83,11 +86,15 @@ export interface Respaldo {
   registro: unknown[]
   /** R7: los escalones y fechas del repaso */
   repaso?: Record<string, { escalon: number; proxima: string }>
+  /** R2: Mis partidas */
+  historial?: unknown[]
+  /** lo demás que la app guarda, por clave: sonido, estilo, repaso prendido, estrellas, último bot, opciones… */
+  ajustes?: Record<string, unknown>
 }
 
 /** El archivo que se descarga: JSON con formato fijo (exportar → importar → exportar da los mismos bytes). */
 export function exportar(r: Omit<Respaldo, 'app' | 'version'>): string {
-  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 2, favoritas: r.favoritas, progreso: r.progreso, registro: r.registro, repaso: r.repaso ?? {} }
+  const respaldo: Respaldo = { app: 'chess-mis-aperturas', version: 2, favoritas: r.favoritas, progreso: r.progreso, registro: r.registro, repaso: r.repaso ?? {}, historial: r.historial ?? [], ajustes: r.ajustes ?? {} }
   return JSON.stringify(respaldo, null, 1) + '\n'
 }
 
@@ -119,6 +126,8 @@ export function importar(texto: string): Respaldo {
     progreso: v1 ? migrarIds(progreso) : progreso,
     registro: r.registro ?? [],
     repaso: v1 ? migrarIds(repaso) : repaso,
+    historial: Array.isArray(r.historial) ? r.historial : undefined,
+    ajustes: r.ajustes && typeof r.ajustes === 'object' && !Array.isArray(r.ajustes) ? r.ajustes : undefined,
   }
 }
 

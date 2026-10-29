@@ -5,6 +5,7 @@ import { sonidoPrendido, prenderSonido } from '../sonido/sonido.ts'
 import { repasoActivo, activarRepaso } from '../repaso/repaso.ts'
 import { ESTILOS, cambiarEstiloRetratos, useEstiloRetratos } from '../bots/retratos.ts'
 import { personajePorId } from '../bots/personajes.ts'
+import { SeccionRespaldo } from '../componentes/SeccionRespaldo.tsx'
 
 const MUESTRA = ['brisa', 'octavio', 'citlali'].map((id) => personajePorId(id)!)
 
@@ -53,6 +54,13 @@ export function Ajustes() {
           testid="ajuste-repaso"
         />
       </div>
+      <SeccionRespaldo
+        onCargado={() => {
+          // lo importado puede traer otros ajustes: se vuelven a leer
+          setSonido(sonidoPrendido())
+          setRepaso(repasoActivo())
+        }}
+      />
     </div>
   )
 }

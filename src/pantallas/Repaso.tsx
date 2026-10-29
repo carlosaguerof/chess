@@ -3,6 +3,7 @@ import { leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { Practica } from './Leccion.tsx'
+import { COMO_FUNCIONA_REPASO, Info } from '../componentes/ComoFunciona.tsx'
 import { alRepasar, dia, ESCALONES, guardarRepaso, leerRepaso, paraHoy, sumarDias } from '../repaso/repaso.ts'
 
 /** R7: el "Repaso de hoy": las líneas que tocan hoy, una tras otra, solo con preguntas. */
@@ -16,7 +17,10 @@ export function Repaso() {
     const manana = paraHoy(leerRepaso(), leerProgreso(), lecciones, sumarDias(dia(), 1), leerRegistro()).length
     return (
       <div className="listo-por-hoy" data-testid="listo-por-hoy">
-        <h1>Listo por hoy</h1>
+        <div className="titulo-info">
+          <h1>Listo por hoy</h1>
+          <Info explicacion={COMO_FUNCIONA_REPASO} />
+        </div>
         <p>{hoy.length > 0 ? `Repasaste ${hoy.length} ${hoy.length === 1 ? 'línea' : 'líneas'}.` : 'Hoy no te toca repasar ninguna línea.'}</p>
         <p className="apagado" data-testid="manana">
           Mañana {manana === 1 ? 'toca 1 línea' : `tocan ${manana} líneas`}.
