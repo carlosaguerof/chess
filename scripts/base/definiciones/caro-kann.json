@@ -303,6 +303,296 @@
       "plan": "2.Ac4 apunta a f7, pero 2...d5 ataca al alfil y gana tiempo. Tras 3.Ab3 dxe4 4.Dh5 blancas apunta a f7: tápalo con ...e6 o echa a la dama con ...g6, y te quedas con el peón de más.",
       "frecuencia": null,
       "fuenteFrecuencia": null
+    },
+    {
+      "id": "curso-avance-short",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Short (4.Cf3 e6 5.Ae2 c5 6.Ae3 Db6)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Short Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3"
+      },
+      "continuacion": {
+        "jugadas": "e6 Be2 c5 Be3 Qb6",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...e6 5.Ae2)",
+          "Wikibooks, 5.Ae2 (5...c5)",
+          "Wikipedia, Caro–Kann Defence (6.Ae3, la línea de Short)",
+          "motor: 6...Db6 es la mejor (+0.30)"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Tu alfil ya salió a f5 antes de ...e6. Sigue la presión sobre d4, la base de la cadena blanca: ...Cc6, ...cxd4 y el caballo de g8 por e7 hacia f5. Blancas sostiene d4 con piezas.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-avance-c3",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Short con 4.c3 (5...c5 6.Cf3 Cc6)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance, Short Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. c3 e6 5. Be2"
+      },
+      "continuacion": {
+        "jugadas": "c5 Nf3 Nc6",
+        "fuente": [
+          "motor: 5...c5 es la mejor (+0.19) y 6...Cc6 de las mejores (+0.34)",
+          "Wikibooks, 5.Ae2 (el plan de ...c5)"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Igual que contra 4.Cf3: ...c5, ...Cc6 y presión sobre d4. Con c3, la dama blanca puede ir a b3 contra b7: respóndele con la dama (...Db6 o ...Dc7).",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-avance-van-der-wiel",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Ataque Van der Wiel (7...h5 8.Cf4 Ah7)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nc3 e6 5. g4 Bg6 6. Nge2 c5 7. h4"
+      },
+      "continuacion": {
+        "jugadas": "h5 Nf4 Bh7",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (7...h5 8.Cf4 Ah7)",
+          "motor: 7...h5 (+0.15) y 8...Ah7 (+0.11) son las mejores"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Contra g4 y h4, tu alfil se salva con ...h5 y se esconde en h7. Después golpea el centro con ...cxd4 y ...Cc6. Si blancas toma 9.Cxh5, gana un peón, pero tus piezas quedan activas a cambio.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-avance-tal",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Variante Tal (4...h5 5.Ad3 Axd3 6.Dxd3 e6)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Tal Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. h4"
+      },
+      "continuacion": {
+        "jugadas": "h5 Bd3 Bxd3 Qxd3 e6",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...h5 5.Ad3 Axd3 6.Dxd3 e6)",
+          "motor: 4...h5 (+0.36), 5...Axd3 (+0.36) y 6...e6 (+0.30) son las mejores o casi"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Frenaste el peón de h con ...h5 y cambiaste tu alfil. Ahora sí ...e6, ...c5 y ...Cc6 contra d4, como en todo el Avance.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-avance-bayoneta",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Ataque Bayoneta (4...Ae4 5.f3 Ag6 6.e6)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Bayonet Attack",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. g4"
+      },
+      "continuacion": {
+        "jugadas": "Be4 f3 Bg6 e6 Qd6 exf7+ Bxf7",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...Ae4 5.f3 Ag6 6.e6 Dd6 7.exf7+ Axf7)",
+          "motor: 4...Ae4, 5...Ag6, 6...Dd6 y 7...Axf7 son las mejores"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Recuperaste el peón y tu alfil quedó en f7, defendiendo. Desarrolla con ...Cd7 y ...Cgf6 y busca ...e5 o ...c5: el lado de rey de blancas quedó débil.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-avance-bronstein",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Variante Bronstein (4...e6 5.Cg3 Ag6)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Ne2"
+      },
+      "continuacion": {
+        "jugadas": "e6 Ng3 Bg6",
+        "fuente": [
+          "motor: 4...e6 (+0.06) y 5...Ag6 (+0.08) son las mejores",
+          "el plan de la base (caro-kann/avance-bronstein)"
+        ]
+      },
+      "lado": "negras",
+      "plan": "El caballo blanco persigue a tu alfil; el alfil se queda en la diagonal desde g6. Sigue ...c5 y ...Cc6 contra d4, y ...h5 si blancas empuja h4.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "guía de Carlos (Avance: 5 de 5)"
+    },
+    {
+      "id": "curso-clasica",
+      "familia": "Variante Clásica",
+      "nombre": "Variante Clásica: línea principal (hasta 10...e6)",
+      "fila": {
+        "eco": "B15",
+        "name": "Caro-Kann Defense",
+        "pgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4"
+      },
+      "continuacion": {
+        "jugadas": "Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3 e6",
+        "fuente": [
+          "Wikipedia, Caro–Kann Defence (5.Cg3 Ag6 6.h4 h6 7.Cf3 Cd7 8.h5 Ah7 9.Ad3 Axd3 10.Dxd3)",
+          "lichess-org/chess-openings, B19 Classical Variation, Lobron System (las mismas jugadas con 3.Cd2, hasta 10...e6)",
+          "motor: cada jugada negra es la mejor o casi"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Tu alfil ya se cambió y ...e6 no encierra nada. Termina el desarrollo con ...Cgf6, ...Dc7 o ...Ae7, y busca ...c5 contra d4. Blancas suele enrocar largo y usar la casilla e5.",
+      "frecuencia": 4,
+      "fuenteFrecuencia": "guía de Carlos (Clásica: 4 de 5)"
+    },
+    {
+      "id": "curso-cambio",
+      "familia": "Variante del Cambio",
+      "nombre": "Variante del Cambio: Rubinstein (6...Ag4 7.Db3 Dd7)",
+      "fila": {
+        "eco": "B13",
+        "name": "Caro-Kann Defense: Exchange Variation, Rubinstein Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nc6 5. c3 Nf6 6. Bf4"
+      },
+      "continuacion": {
+        "jugadas": "Bg4 Qb3 Qd7",
+        "fuente": [
+          "Wikipedia, Caro–Kann Defence (4...Cc6 5.c3 Cf6 6.Af4 Ag4 7.Db3)",
+          "motor: 6...Ag4 (+0.10) y 7...Dd7 (+0.09) son las mejores"
+        ]
+      },
+      "lado": "negras",
+      "plan": "b7 está defendido y tu alfil salió antes de ...e6. Sigue ...e6, ...Ad6 y 0-0; tu plan de fondo es avanzar ...b5 y ...b4 en el lado de dama.",
+      "frecuencia": 3,
+      "fuenteFrecuencia": "guía de Carlos (Cambio: 3 de 5)"
+    },
+    {
+      "id": "curso-dos-caballos",
+      "familia": "Ataque de los Dos Caballos",
+      "nombre": "Ataque de los Dos Caballos: 3...Ag4 4.h3 Axf3 5.Dxf3 e6",
+      "fila": {
+        "eco": "B11",
+        "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line",
+        "pgn": "1. e4 c6 2. Nc3 d5 3. Nf3 Bg4 4. h3 Bxf3"
+      },
+      "continuacion": {
+        "jugadas": "Qxf3 e6",
+        "fuente": [
+          "Wikipedia, Caro–Kann Defence (5.Dxf3: 5...Cf6 o 5...e6)",
+          "motor: 5...e6 (+0.27) igual que 5...Cf6"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Tus peones c6, d5 y e6 están en casillas blancas: juega en las negras. Sigue ...Cf6, ...Cbd7, el alfil a e7 o d6 y 0-0.",
+      "frecuencia": 2,
+      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2 de 5)"
+    },
+    {
+      "id": "curso-oferta-final",
+      "familia": "Ataque de los Dos Caballos",
+      "nombre": "2.Cf3 d5 3.d3: Variante del Final (3...dxe4 4.dxe4 Dxd1+)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Endgame Variation",
+        "pgn": "1. e4 c6 2. Nf3 d5 3. d3 dxe4 4. dxe4 Qxd1+ 5. Kxd1"
+      },
+      "lado": "negras",
+      "plan": "Sin damas, el rey blanco quedó en d1 y ya no enroca. Desarrolla con ...Cf6, ...Cbd7 y ...e5 o ...g6, y lleva tus piezas al centro.",
+      "frecuencia": 2,
+      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2 de 5)"
+    },
+    {
+      "id": "curso-apocalipsis",
+      "familia": "Ataque de los Dos Caballos",
+      "nombre": "2.Cf3 d5 3.exd5 cxd5 4.Ce5: Ataque Apocalipsis (4...e6)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Apocalypse Attack",
+        "pgn": "1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. Ne5"
+      },
+      "continuacion": {
+        "jugadas": "e6",
+        "fuente": [
+          "motor: 4...e6 es la mejor (+0.10); 4...Af5 pierde 195 por 5.Ab5+"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Con ...e6 sostienes d5 y abres a tu alfil de f8. Sigue ...Ad6, ...Cf6 o ...Cc6 y 0-0; el alfil de c8 sale después.",
+      "frecuencia": 2,
+      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2 de 5)"
+    },
+    {
+      "id": "curso-panov-acelerado",
+      "familia": "Ataque Panov Acelerado",
+      "nombre": "2.c4: Ataque Panov Acelerado (4...Cf6 5.Cc3 Cxd5)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Accelerated Panov Attack, Modern Variation",
+        "pgn": "1. e4 c6 2. c4 d5 3. exd5 cxd5 4. cxd5 Nf6"
+      },
+      "continuacion": {
+        "jugadas": "Nc3 Nxd5",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.c4 (5.Cc3 Cxd5)",
+          "motor: 5...Cxd5 es la mejor (+0.05)"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Recuperaste el peón con el caballo, no con la dama. Desarrolla con ...Cc6, ...e6 o ...g6, y enroca: tienes un juego cómodo.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "curso-fantasia",
+      "familia": "Variante Fantasía",
+      "nombre": "3.f3: Variante Fantasía (3...e6 4.Cc3 Ab4)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Maróczy Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. f3"
+      },
+      "continuacion": {
+        "jugadas": "e6 Nc3 Bb4",
+        "fuente": [
+          "Wikibooks, 3.f3 (tabla: 3...e6 4.Cc3 Ab4)",
+          "Wikipedia, Caro–Kann Defence (3...e6, probablemente la más sólida)",
+          "motor: 3...e6 (+0.26) y 4...Ab4 (+0.19) son las mejores"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Tu alfil de b4 clava al caballo que defiende e4. Sigue ...Ce7, ...c5 o ...dxe4 según la posición, y 0-0.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "curso-hillbilly",
+      "familia": "Ataque Hillbilly",
+      "nombre": "2.Ac4: Ataque Hillbilly (3.Ab3 dxe4 4.Dh5 g6)",
+      "fila": {
+        "eco": "B10",
+        "name": "Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit",
+        "pgn": "1. e4 c6 2. Bc4 d5 3. Bb3 dxe4 4. Qh5"
+      },
+      "continuacion": {
+        "jugadas": "g6",
+        "fuente": [
+          "Wikipedia, Caro–Kann Defence (Hillbilly: 4.Dh5)",
+          "motor: 4...g6 es la mejor (−0.68)"
+        ]
+      },
+      "lado": "negras",
+      "plan": "Tienes un peón de más y la dama blanca tiene que moverse otra vez. Desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
     }
   ]
 }

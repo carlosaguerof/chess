@@ -15,7 +15,8 @@ test('del resumen con una salida de línea a "Practicar esta línea", y la prác
   await expect(page.getByTestId('resumen-aviso')).toContainText('te saliste tú')
   await captura(page, info, 't18-resumen')
   await page.getByTestId('practicar-linea').click()
-  await expect(page.getByTestId('leccion-pantalla')).toBeVisible()
-  await expect(page.getByTestId('nombre-linea')).toContainText('Variante del Avance')
-  await expect(page.getByTestId('instruccion')).toContainText('Juega 1...c6')
+  // la Caro-Kann practica con su lección nueva (C3): la variante del Avance que empieza con mi línea
+  await expect(page.getByTestId('leccion-curso')).toBeVisible()
+  await expect(page.getByTestId('nombre-linea')).toContainText('Avance:')
+  await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'intro')
 })

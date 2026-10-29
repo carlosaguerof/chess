@@ -77,7 +77,9 @@ describe('Nota 1 · las favoritas son el repertorio', () => {
     expect(repertorioDeFavoritas([]).lineas).toHaveLength(0)
     expect(jugadaDeMisLineas(repertorioDeFavoritas([]), 'b', [], () => 0.5)).toBeNull()
     const ck = repertorioDeFavoritas(['caro-kann:b'])
-    expect(ck.lineas).toHaveLength(22)
+    // las variantes de la Caro-Kann que se juegan con negras (con las 14 líneas del curso piloto, C4)
+    expect(ck.lineas).toHaveLength(BASE.aperturas.find((a) => a.id === 'caro-kann')!.variantes.filter((v) => v.lado !== 'blancas').length)
+    expect(ck.lineas.length).toBeGreaterThanOrEqual(36)
     expect(jugadaDeMisLineas(ck, 'b', [], () => 0.5)).toBe('e4')
     // tras 1.e4 c6, el bot sigue en alguna línea de la Caro-Kann
     const segunda = jugadaDeMisLineas(ck, 'b', ['e4', 'c6'], () => 0.5)
@@ -122,7 +124,7 @@ describe('Nota 1 · las favoritas son el repertorio', () => {
     const { ayudaEnMiTurno } = await import('../../src/guia/guia.ts')
     const rep = repertorioDeFavoritas(['caro-kann:b'])
     // una línea de negras que termina con la jugada de blancas: ahí "mi línea termina"
-    const l = rep.lineas.find((x) => x.jugadas.length % 2 === 1)!
+    const l = rep.lineas.find((x) => x.jugadas.length % 2 === 1 && !rep.lineas.some((y) => y.jugadas.length > x.jugadas.length && x.jugadas.every((s, i) => y.jugadas[i] === s)))!
     const a = ayudaEnMiTurno({ base: BASE, rep, color: 'b' }, l.jugadas)
     expect(a.origen).toBe('fin-de-linea')
     expect(a.respuesta).not.toMatch(/la fuente|de la base|Tu guía/)

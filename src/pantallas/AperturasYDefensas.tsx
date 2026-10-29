@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js'
-import { mostrarTexto } from '../ajedrez/mostrar.ts'
+import { Texto } from '../componentes/Notacion.tsx'
 import { cursos, cursoPorId } from '../cursos/datos.ts'
 import type { Curso } from '../cursos/modelo.ts'
 import { planDeMiLado, siguienteLeccion } from '../cursos/modelo.ts'
@@ -13,6 +13,8 @@ import { IconoAdelante, IconoAtras, IconoCorazon, IconoFinal, IconoInicio } from
 import { guardar, leer } from '../estado/almacen.ts'
 import { navegar } from '../ruta.ts'
 import { useEffect, useState } from 'react'
+import { cursoNuevo } from '../curso/datos.ts'
+import { leerAvance } from '../curso/avance.ts'
 
 /**
  * Nota 1 (L3): "Aperturas y defensas", la sección Aprender. Arriba, "Con blancas" y "Con negras"; cada apertura mía en
@@ -42,7 +44,12 @@ const ultimaDe = (jugadas: string[]): [string, string] | undefined => {
 }
 const orientacion = (c: Curso) => (c.color === 'w' ? 'white' : 'black')
 const aprendidas = (c: Curso, hechas: Record<string, unknown>) => c.lecciones.filter((l) => hechas[l.id]).length
-const avance = (c: Curso, hechas: Record<string, unknown>) => `${aprendidas(c, hechas)} de ${c.lecciones.length} ${c.lecciones.length === 1 ? 'variante aprendida' : 'variantes aprendidas'}`
+const avance = (c: Curso, hechas: Record<string, unknown>) => {
+  // C6: el curso piloto lleva su propio avance (variantes terminadas en sus dos vueltas)
+  const n = cursoNuevo(c.id)
+  if (n) return `${n.variantes.filter((v) => leerAvance(n.id).variantes[v.id]?.terminada).length} de ${n.variantes.length} variantes`
+  return `${aprendidas(c, hechas)} de ${c.lecciones.length} ${c.lecciones.length === 1 ? 'variante aprendida' : 'variantes aprendidas'}`
+}
 const enlaceCurso = (id: string) => `#/curso/${encodeURIComponent(id)}`
 
 function Corazon({ id, favorita }: { id: string; favorita: boolean }) {
@@ -198,20 +205,20 @@ export function PaginaApertura({ id }: { id: string }) {
       </div>
       {idea && (
         <p className="plan-corto" data-testid="idea">
-          {mostrarTexto(idea)}
+          <Texto t={idea} />
         </p>
       )}
       <div className="empezar">
         <button type="button" className="boton primario grande" onClick={empezar} data-testid="empezar-leccion">
           {aprendidas(curso, hechas) > 0 ? 'Seguir aprendiendo' : 'Empezar a aprender'}
         </button>
-        {siguiente && aprendidas(curso, hechas) > 0 && <p className="apagado">Sigue: {mostrarTexto(siguiente.nombre)}</p>}
+        {siguiente && aprendidas(curso, hechas) > 0 && <p className="apagado">Sigue: <Texto t={siguiente.nombre} /></p>}
       </div>
       <ol className="lista-variantes">
         {curso.lecciones.map((l, i) => (
           <li key={l.id}>
             <a href={`${enlaceCurso(curso.id)}/${i}`} className="fila-variante" data-testid="variante" data-frecuencia={l.frecuencia}>
-              <span className="nombre">{mostrarTexto(l.nombre)}</span>
+              <span className="nombre"><Texto t={l.nombre} /></span>
               <span className={hechas[l.id] ? 'aprendida' : 'apagado'}>{hechas[l.id] ? 'Aprendida' : 'Por aprender'}</span>
             </a>
           </li>
@@ -251,7 +258,7 @@ export function PaginaVariante({ id, indice }: { id: string; indice: number }) {
       <a className="volver" href={enlaceCurso(curso.id)}>
         <IconoAtras /> {curso.nombre}
       </a>
-      <h1>{mostrarTexto(l.nombre)}</h1>
+      <h1><Texto t={l.nombre} /></h1>
       <div className="pagina-apertura-tablero">
         <TableroMini testid="tablero" fen={fenDe(jugadas)} orientacion={orientacion(curso)} ultima={ultimaDe(jugadas)} etiqueta={l.nombre} />
       </div>
@@ -277,12 +284,12 @@ export function PaginaVariante({ id, indice }: { id: string; indice: number }) {
             const actual = i + 1 === ply
             return (
               <span key={i}>
-                <span className={actual ? 'actual' : undefined}>{mostrarTexto(t)}</span>{' '}
+                <span className={actual ? 'actual' : undefined}><Texto t={t} /></span>{' '}
               </span>
             )
           })}
       </p>
-      {plan && <p className="plan-corto">{mostrarTexto(plan)}</p>}
+      {plan && <p className="plan-corto"><Texto t={plan} /></p>}
       <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${indice}`)} data-testid="practicar">
         Practicar
       </button>

@@ -203,3 +203,142 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: 2.Ac4 apunta a f7, pero 2...d5 ataca al alfil y gana tiempo. Tras 3.Ab3 dxe4 4.Dh5 blancas apunta a f7: tápalo con ...e6 o echa a la dama con ...g6, y te quedas con el peón de más.
 - Fuente: B10 · Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit
+
+## Variante del Avance
+
+### Variante del Avance: Short (4.Cf3 e6 5.Ae2 c5 6.Ae3 Db6)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.Cf3 e6 5.Ae2 c5 6.Ae3 Db6**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: Tu alfil ya salió a f5 antes de ...e6. Sigue la presión sobre d4, la base de la cadena blanca: ...Cc6, ...cxd4 y el caballo de g8 por e7 hacia f5. Blancas sostiene d4 con piezas.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Short Variation
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...e6 5.Ae2); Wikibooks, 5.Ae2 (5...c5); Wikipedia, Caro–Kann Defence (6.Ae3, la línea de Short); motor: 6...Db6 es la mejor (+0.30).
+
+### Variante del Avance: Short con 4.c3 (5...c5 6.Cf3 Cc6)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.c3 e6 5.Ae2 c5 6.Cf3 Cc6**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: Igual que contra 4.Cf3: ...c5, ...Cc6 y presión sobre d4. Con c3, la dama blanca puede ir a b3 contra b7: respóndele con la dama (...Db6 o ...Dc7).
+- Fuente: B12 · Caro-Kann Defense: Advance, Short Variation
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: motor: 5...c5 es la mejor (+0.19) y 6...Cc6 de las mejores (+0.34); Wikibooks, 5.Ae2 (el plan de ...c5).
+
+### Variante del Avance: Ataque Van der Wiel (7...h5 8.Cf4 Ah7)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.Cc3 e6 5.g4 Ag6 6.Cge2 c5 7.h4 h5 8.Cf4 Ah7**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: Contra g4 y h4, tu alfil se salva con ...h5 y se esconde en h7. Después golpea el centro con ...cxd4 y ...Cc6. Si blancas toma 9.Cxh5, gana un peón, pero tus piezas quedan activas a cambio.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Van der Wiel Attack
+- Sigue la fila de la fuente desde la media jugada 14 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (7...h5 8.Cf4 Ah7); motor: 7...h5 (+0.15) y 8...Ah7 (+0.11) son las mejores.
+
+### Variante del Avance: Variante Tal (4...h5 5.Ad3 Axd3 6.Dxd3 e6)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.h4 h5 5.Ad3 Axd3 6.Dxd3 e6**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: Frenaste el peón de h con ...h5 y cambiaste tu alfil. Ahora sí ...e6, ...c5 y ...Cc6 contra d4, como en todo el Avance.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Tal Variation
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...h5 5.Ad3 Axd3 6.Dxd3 e6); motor: 4...h5 (+0.36), 5...Axd3 (+0.36) y 6...e6 (+0.30) son las mejores o casi.
+
+### Variante del Avance: Ataque Bayoneta (4...Ae4 5.f3 Ag6 6.e6)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.g4 Ae4 5.f3 Ag6 6.e6 Dd6 7.exf7+ Axf7**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: Recuperaste el peón y tu alfil quedó en f7, defendiendo. Desarrolla con ...Cd7 y ...Cgf6 y busca ...e5 o ...c5: el lado de rey de blancas quedó débil.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Bayonet Attack
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...Ae4 5.f3 Ag6 6.e6 Dd6 7.exf7+ Axf7); motor: 4...Ae4, 5...Ag6, 6...Dd6 y 7...Axf7 son las mejores.
+
+### Variante del Avance: Variante Bronstein (4...e6 5.Cg3 Ag6)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.Ce2 e6 5.Cg3 Ag6**
+
+- Frecuencia: ●●●●● (5 de 5; guía de Carlos (Avance: 5 de 5))
+- Plan *(redactado por la IA)*: El caballo blanco persigue a tu alfil; el alfil se queda en la diagonal desde g6. Sigue ...c5 y ...Cc6 contra d4, y ...h5 si blancas empuja h4.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Bronstein Variation
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: motor: 4...e6 (+0.06) y 5...Ag6 (+0.08) son las mejores; el plan de la base (caro-kann/avance-bronstein).
+
+## Variante Clásica
+
+### Variante Clásica: línea principal (hasta 10...e6)
+
+**1.e4 c6 2.d4 d5 3.Cc3 dxe4 4.Cxe4 Af5 5.Cg3 Ag6 6.h4 h6 7.Cf3 Cd7 8.h5 Ah7 9.Ad3 Axd3 10.Dxd3 e6**
+
+- Frecuencia: ●●●●○ (4 de 5; guía de Carlos (Clásica: 4 de 5))
+- Plan *(redactado por la IA)*: Tu alfil ya se cambió y ...e6 no encierra nada. Termina el desarrollo con ...Cgf6, ...Dc7 o ...Ae7, y busca ...c5 contra d4. Blancas suele enrocar largo y usar la casilla e5.
+- Fuente: B15 · Caro-Kann Defense
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikipedia, Caro–Kann Defence (5.Cg3 Ag6 6.h4 h6 7.Cf3 Cd7 8.h5 Ah7 9.Ad3 Axd3 10.Dxd3); lichess-org/chess-openings, B19 Classical Variation, Lobron System (las mismas jugadas con 3.Cd2, hasta 10...e6); motor: cada jugada negra es la mejor o casi.
+
+## Variante del Cambio
+
+### Variante del Cambio: Rubinstein (6...Ag4 7.Db3 Dd7)
+
+**1.e4 c6 2.d4 d5 3.exd5 cxd5 4.Ad3 Cc6 5.c3 Cf6 6.Af4 Ag4 7.Db3 Dd7**
+
+- Frecuencia: ●●●○○ (3 de 5; guía de Carlos (Cambio: 3 de 5))
+- Plan *(redactado por la IA)*: b7 está defendido y tu alfil salió antes de ...e6. Sigue ...e6, ...Ad6 y 0-0; tu plan de fondo es avanzar ...b5 y ...b4 en el lado de dama.
+- Fuente: B13 · Caro-Kann Defense: Exchange Variation, Rubinstein Variation
+- Sigue la fila de la fuente desde la media jugada 12 con teoría de: Wikipedia, Caro–Kann Defence (4...Cc6 5.c3 Cf6 6.Af4 Ag4 7.Db3); motor: 6...Ag4 (+0.10) y 7...Dd7 (+0.09) son las mejores.
+
+## Ataque de los Dos Caballos
+
+### Ataque de los Dos Caballos: 3...Ag4 4.h3 Axf3 5.Dxf3 e6
+
+**1.e4 c6 2.Cc3 d5 3.Cf3 Ag4 4.h3 Axf3 5.Dxf3 e6**
+
+- Frecuencia: ●●○○○ (2 de 5; guía de Carlos (Dos Caballos: 2 de 5))
+- Plan *(redactado por la IA)*: Tus peones c6, d5 y e6 están en casillas blancas: juega en las negras. Sigue ...Cf6, ...Cbd7, el alfil a e7 o d6 y 0-0.
+- Fuente: B11 · Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikipedia, Caro–Kann Defence (5.Dxf3: 5...Cf6 o 5...e6); motor: 5...e6 (+0.27) igual que 5...Cf6.
+
+### 2.Cf3 d5 3.d3: Variante del Final (3...dxe4 4.dxe4 Dxd1+)
+
+**1.e4 c6 2.Cf3 d5 3.d3 dxe4 4.dxe4 Dxd1+ 5.Rxd1**
+
+- Frecuencia: ●●○○○ (2 de 5; guía de Carlos (Dos Caballos: 2 de 5))
+- Plan *(redactado por la IA)*: Sin damas, el rey blanco quedó en d1 y ya no enroca. Desarrolla con ...Cf6, ...Cbd7 y ...e5 o ...g6, y lleva tus piezas al centro.
+- Fuente: B10 · Caro-Kann Defense: Endgame Variation
+
+### 2.Cf3 d5 3.exd5 cxd5 4.Ce5: Ataque Apocalipsis (4...e6)
+
+**1.e4 c6 2.Cf3 d5 3.exd5 cxd5 4.Ce5 e6**
+
+- Frecuencia: ●●○○○ (2 de 5; guía de Carlos (Dos Caballos: 2 de 5))
+- Plan *(redactado por la IA)*: Con ...e6 sostienes d5 y abres a tu alfil de f8. Sigue ...Ad6, ...Cf6 o ...Cc6 y 0-0; el alfil de c8 sale después.
+- Fuente: B10 · Caro-Kann Defense: Apocalypse Attack
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: motor: 4...e6 es la mejor (+0.10); 4...Af5 pierde 195 por 5.Ab5+.
+
+## Ataque Panov Acelerado
+
+### 2.c4: Ataque Panov Acelerado (4...Cf6 5.Cc3 Cxd5)
+
+**1.e4 c6 2.c4 d5 3.exd5 cxd5 4.cxd5 Cf6 5.Cc3 Cxd5**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Recuperaste el peón con el caballo, no con la dama. Desarrolla con ...Cc6, ...e6 o ...g6, y enroca: tienes un juego cómodo.
+- Fuente: B10 · Caro-Kann Defense: Accelerated Panov Attack, Modern Variation
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, 1.e4 c6 2.c4 (5.Cc3 Cxd5); motor: 5...Cxd5 es la mejor (+0.05).
+
+## Variante Fantasía
+
+### 3.f3: Variante Fantasía (3...e6 4.Cc3 Ab4)
+
+**1.e4 c6 2.d4 d5 3.f3 e6 4.Cc3 Ab4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tu alfil de b4 clava al caballo que defiende e4. Sigue ...Ce7, ...c5 o ...dxe4 según la posición, y 0-0.
+- Fuente: B12 · Caro-Kann Defense: Maróczy Variation
+- Sigue la fila de la fuente desde la media jugada 6 con teoría de: Wikibooks, 3.f3 (tabla: 3...e6 4.Cc3 Ab4); Wikipedia, Caro–Kann Defence (3...e6, probablemente la más sólida); motor: 3...e6 (+0.26) y 4...Ab4 (+0.19) son las mejores.
+
+## Ataque Hillbilly
+
+### 2.Ac4: Ataque Hillbilly (3.Ab3 dxe4 4.Dh5 g6)
+
+**1.e4 c6 2.Ac4 d5 3.Ab3 dxe4 4.Dh5 g6**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tienes un peón de más y la dama blanca tiene que moverse otra vez. Desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.
+- Fuente: B10 · Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit
+- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikipedia, Caro–Kann Defence (Hillbilly: 4.Dh5); motor: 4...g6 es la mejor (−0.68).

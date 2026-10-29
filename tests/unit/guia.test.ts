@@ -139,7 +139,8 @@ describe('T9 · la guía en una partida real', () => {
       expect(r.texto).toContain('En 3.Ad3 se salió el rival')
     })
     it('seguí mi línea completa', () => {
-      const r = resumenDePartida(rep, 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4', 'h5', 'Bd3'])
+      // la Tal completa, como la trae la base desde el curso piloto (C4): 4...h5 5.Ad3 Axd3 6.Dxd3 e6, y la partida sigue
+      const r = resumenDePartida(rep, 'b', ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4', 'h5', 'Bd3', 'Bxd3', 'Qxd3', 'e6', 'Nf3'])
       expect(r.caso).toBe('completa')
       expect(r.texto).toContain('Seguiste tu línea completa')
     })

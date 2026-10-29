@@ -448,3 +448,39 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .numero-paso { font-weight: 700; color: #fff; }
 .ya-instalada { margin: 0; font-weight: 700; font-size: 18px; }
 .nota-instalar { font-size: 14px; line-height: 1.4; }
+
+/* ---------------------------------------------------------------- C3 y C6: el curso nuevo (piloto de la Caro-Kann) */
+/* el espacio fijo de los mensajes: narra lo que va pasando y no se quita solo (diseño §4) */
+.narracion { display: flex; flex-direction: column; gap: 8px; min-height: 168px; background: var(--fondo-panel); border-radius: var(--radio); padding: 10px; }
+.mensaje-curso { margin: 0; line-height: 1.45; font-size: 15px; }
+.mensaje-curso strong { font-weight: 700; }
+.mensaje-curso.rival { color: var(--texto-suave); }
+.mensaje-curso.pregunta { font-size: 17px; }
+.mensaje-curso.correcta { color: var(--acento-claro); }
+.mensaje-curso.incorrecta { background: #4a2522; color: #ffb4ab; border-radius: 8px; padding: 8px 10px; }
+/* la jugada buena de otra línea: en otro color, no en rojo */
+.mensaje-curso.buena { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
+.mensaje-curso.pista, .mensaje-curso.respuesta { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
+.mensaje-curso.explica { color: var(--texto); }
+.narracion .boton { align-self: flex-start; min-width: 140px; }
+/* en el iPhone, la narración tiene una altura fija y se desplaza: Pista, Respuesta y Atrás no salen de la pantalla */
+@media (max-width: 899px) {
+  .leccion-curso .narracion { height: 200px; min-height: 0; overflow-y: auto; }
+  .leccion-curso .narracion .boton { position: sticky; bottom: 0; flex-shrink: 0; box-shadow: 0 -8px 10px var(--fondo-panel); }
+}
+.botones-curso { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.empezar-de-nuevo { align-self: center; font-size: 14px; }
+.linea-leccion { min-height: 1.7em; font-size: 15px; }
+.lista-curso .titulo-grupo { list-style: none; padding: 8px 2px 0; }
+.lista-curso .titulo-grupo h2 { font-size: 16px; margin: 0; color: var(--texto-suave); }
+.numero-variante { color: var(--texto-apagado); font-weight: 600; }
+.pieza-leer .subtitulo-pieza { font-size: 17px; margin: 0; color: var(--texto-suave); }
+.texto-pieza { display: flex; flex-direction: column; gap: 10px; }
+.texto-pieza p { margin: 0; line-height: 1.55; font-size: 16px; }
+.pasos-pieza { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.botones-pieza { display: flex; gap: 8px; margin-left: auto; }
+.resumen-curso .linea-jugadas { font-size: 15px; }
+.lista-tropiezos { margin: 6px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.pagina-curso .detalles dl div { margin-bottom: 8px; }
+/* C6: las figuras (♘f3) un poco más grandes: con Inter salen chicas junto a las letras */
+.figura { font-size: 1.22em; line-height: 0; vertical-align: -0.04em; }

@@ -2,18 +2,20 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { Chessground } from 'chessground'
 import type { Api } from 'chessground/api'
 import type { Key } from 'chessground/types'
+import type { DrawShape } from 'chessground/draw'
 import type { ColorLargo } from '../ajedrez/reglas.ts'
 import './tablero.css'
 
 /** Un tablero solo para ver (la tarjeta de una apertura, la línea de una variante): no se mueve nada en él. */
-export function TableroMini({ fen, orientacion, ultima, testid = 'tablero-mini', etiqueta }: { fen: string; orientacion: ColorLargo; ultima?: [string, string]; testid?: string; etiqueta?: string }) {
+export function TableroMini({ fen, orientacion, ultima, testid = 'tablero-mini', etiqueta, flechas }: { fen: string; orientacion: ColorLargo; ultima?: [string, string]; testid?: string; etiqueta?: string; flechas?: DrawShape[] }) {
   const el = useRef<HTMLDivElement>(null)
   const api = useRef<Api | null>(null)
-  const config = () => ({ fen, orientation: orientacion, lastMove: ultima as Key[] | undefined })
+  // C3: las marcas de las piezas de leer del curso (flechas y casillas), solo para ver
+  const config = () => ({ fen, orientation: orientacion, lastMove: ultima as Key[] | undefined, drawable: { enabled: false, visible: true, autoShapes: flechas ?? [] } })
 
   useEffect(() => {
     if (!el.current) return
-    api.current = Chessground(el.current, { ...config(), viewOnly: true, coordinates: false, animation: { enabled: true, duration: 150 }, drawable: { enabled: false, visible: false } })
+    api.current = Chessground(el.current, { ...config(), viewOnly: true, coordinates: false, animation: { enabled: true, duration: 150 }, drawable: { enabled: false, visible: true, autoShapes: flechas ?? [] } })
     // al cambiar de tamaño se vuelve a dibujar, en el siguiente cuadro (como el tablero de la partida)
     let ancho = el.current.clientWidth
     let cuadro = 0

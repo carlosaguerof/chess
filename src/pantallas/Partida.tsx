@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { mostrarTexto } from '../ajedrez/mostrar.ts'
+import { Texto } from '../componentes/Notacion.tsx'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
@@ -139,7 +139,8 @@ export function Partida() {
     const l = resumen?.linea
     if (!l) return null
     const curso = listaCursos().find((c) => c.id === `${l.apertura}:${l.color}`)
-    const i = curso ? curso.lecciones.findIndex((x) => x.id.endsWith('/' + l.id)) : -1
+    // la lección de esa línea; si el curso la trae más larga (el curso piloto), la que empieza con ella
+    const i = curso ? [curso.lecciones.findIndex((x) => x.id.endsWith('/' + l.id)), curso.lecciones.findIndex((x) => l.jugadas.every((s, k) => x.jugadas[k] === s))].find((k) => k >= 0) ?? -1 : -1
     return curso && i >= 0 ? `/leccion/${encodeURIComponent(curso.id)}/${i}` : null
   })()
 
@@ -235,7 +236,7 @@ export function Partida() {
         {resumen && (
           <div className="resumen-guia" data-testid="resumen" data-caso={resumen.caso}>
             <p className="panel-guia-titulo">Resumen de tu apertura</p>
-            <p>{mostrarTexto(resumen.texto)}</p>
+            <p><Texto t={resumen.texto} /></p>
             {practicar && (
               <button type="button" className="enlace-chico" onClick={() => navegar(practicar)}>
                 Practicar esta línea
@@ -316,7 +317,7 @@ export function Partida() {
             <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin!.nombre}</p>
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
-                {mostrarTexto(resumen.texto)}
+                <Texto t={resumen.texto} />
               </p>
             )}
             {practicar && (

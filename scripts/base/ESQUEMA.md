@@ -38,3 +38,20 @@ Reglas:
 - `frecuencia` (1 a 5) solo si viene de una fuente citada en `fuenteFrecuencia` (por ejemplo la guía de Carlos); si no, `null` (el script pone 3).
 - El orden de `variantes` importa: primero las más comunes y principales.
 - Entre 6 y 16 variantes por apertura, salvo que se pida otra cosa.
+
+## La continuación (cursos del escalón 1, desde 2026-10-29)
+
+Una lección de curso puede necesitar más jugadas de las que trae la fila de la fuente (el curso pide de 6 a 8 jugadas mías por variante). Entonces la variante lleva una `continuacion`: las jugadas que siguen a la fila (SAN inglés, separadas por espacios) y de dónde salen.
+
+```json
+"continuacion": {
+  "jugadas": "h5 Bd3 Bxd3 Qxd3 e6",
+  "fuente": ["Wikibooks, 1.e4 c6 2.d4 d5 3.e5 Af5 (4...h5 5.Ad3 Axd3 6.Dxd3 e6)", "motor: 4...h5 (+0.36) es la mejor"]
+}
+```
+
+Reglas:
+- Cada jugada de la continuación sale de una fuente seria (Wikibooks, Wikipedia) o es la mejor del motor (o a menos de 0.2): lo dice `fuente`. Nada se inventa.
+- Se valida como lo demás: `npm run validar-base` (ninguna jugada de mi lado pierde más de 1 peón) y, como entra a los libros de los bots, `node scripts/validar-libros.ts`. Las dos aceptan `DIR_VALIDACION=<carpeta de trabajo>` para escribir sus archivos de paso fuera del repo.
+- `construir-base` la pega a la fila (la base guarda `continuacion: { desde, fuente }`) y la prueba de la base revisa que la fila siga exacta.
+- Una variante con continuación es una variante nueva (id `curso-…`, lado de quien aprende): las de antes no cambian, así los otros cursos no se mueven.

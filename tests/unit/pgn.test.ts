@@ -34,7 +34,8 @@ describe('R3 · el PGN entra a mi repertorio', () => {
     const tras = (h: string[]) => siguientesEnRepertorio(repertorio, 'b', h).map((o) => o.san)
     expect(tras(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5'])).toContain('h4')
     expect(tras(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'])).toEqual(['h5'])
-    expect(tras(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4', 'h5'])).toEqual(['c4'])
+    // 5.c4 (la del PGN) y 5.Ad3 (la de la base desde el curso piloto, C4)
+    expect(tras(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4', 'h5']).sort()).toEqual(['Bd3', 'c4'])
     const nueva = repertorio.lineas.find((l) => l.jugadas.join(' ') === 'e4 c6 d4 d5 e5 Bf5 h4 h5 c4')!
     expect(nueva.apertura).toBe('caro-kann')
     expect(nueva.origen).toBe('propia')
