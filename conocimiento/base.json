@@ -44,7 +44,7 @@
       "h3"
      ],
      "lado": "blancas",
-     "plan": "El esquema lento y sólido: c3 y d3, 0-0 y Te1. Cuando negras juega ...a6 (amenaza ...b5), retiras el alfil a b3; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.",
+     "plan": "El esquema lento y sólido: c3 y d3, 0-0 y Te1. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -171,7 +171,7 @@
       "d3"
      ],
      "lado": "blancas",
-     "plan": "La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.",
+     "plan": "La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -203,7 +203,7 @@
       "d4"
      ],
      "lado": "blancas",
-     "plan": "4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Se considera más fuerte que el famoso Hígado Frito (6.Cxf7).",
+     "plan": "4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Fischer lo prefería al famoso Hígado Frito (6.Cxf7); para el motor, los dos dan ventaja parecida.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -239,7 +239,7 @@
       "Be2"
      ],
      "lado": "blancas",
-     "plan": "La respuesta buena de negras: 5...Ca5 ataca tu alfil y entrega un peón a cambio de tiempo. Con 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2 conservas el peón de más, pero negras gana actividad (...h6 echa a tu caballo). Termina tu desarrollo y enroca antes de buscar más.",
+     "plan": "La respuesta buena de negras: 5...Ca5 ataca tu alfil y entrega un peón a cambio de tiempo. Con 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2 conservas el peón de más, pero negras gana actividad (...h6 echa a tu caballo). Cuidado: no retires el alfil a a4 (8.Aa4 le da la ventaja a negras); va a e2 o d3. Termina tu desarrollo y enroca antes de buscar más.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -269,7 +269,7 @@
       "Bxf7+"
      ],
      "lado": "blancas",
-     "plan": "4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (Ad5 o Ab3). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.",
+     "plan": "4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -323,7 +323,7 @@
       "h6"
      ],
      "lado": "blancas",
-     "plan": "...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo: c3 y d4 (o d3 y Cc3), desarrolla y enroca; tendrás ventaja de desarrollo.",
+     "plan": "...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo con 4.d4 directo, sin preparar con c3; desarrolla y enroca: tendrás ventaja de desarrollo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -410,7 +410,7 @@
       "f5"
      ],
      "lado": "blancas",
-     "plan": "Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Responde con calma: d3, Cc3 y 0-0. Si negras cambia ...fxe4, retoma con el peón (dxe4).",
+     "plan": "Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Lo mejor es 4.d4 (o 4.d3 y después Cc3 y 0-0). El orden importa: 4.Cc3 es un error, porque 4...fxe4 ataca tu caballo de f3 y pierdes material. Si negras cambia ...fxe4 después de d3, retoma con el peón (dxe4).",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -433,7 +433,7 @@
     "e4",
     "c5"
    ],
-   "idea": "Negras responde a 1.e4 con ...c5: pelea por la casilla d4 desde un lado y busca posiciones desequilibradas donde se juega para ganar. Con negras es de las defensas más recomendadas. Con blancas, la Alapin (2.c3) prepara d4 para tener dos peones en el centro y evita la teoría larga de la Siciliana abierta.",
+   "idea": "Negras responde a 1.e4 con ...c5: pelea por la casilla d4 desde un lado y busca posiciones desequilibradas donde se juega para ganar. Con negras es de las defensas más recomendadas. Con blancas, la Alapin (2.c3) prepara d4 para retomar con un peón si negras cambia. Contra 2...d5 y 2...Cf6 el centro de dos peones casi nunca llega: juegas con un peón aislado en d4 o con la cadena e5-d4. Evitas la Siciliana abierta, aunque la Alapin tiene su propia teoría.",
    "variantes": [
     {
      "id": "alapin-d5-moderna",
@@ -546,7 +546,7 @@
       "Bb3"
      ],
      "lado": "blancas",
-     "plan": "Sigue con d4 para un centro grande, 0-0 y De2, sosteniendo el peón de e5. Si Negras juega ...c4, el A va a c2 y apunta al enroque negro.",
+     "plan": "Sigue con d4 para un centro grande, 0-0 y De2, sosteniendo el peón de e5. Si negras juega ...c4, tu alfil se retira a c2: es su única casilla buena.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -579,7 +579,7 @@
       "Bg4"
      ],
      "lado": "blancas",
-     "plan": "Lo sólido es Ae2 para romper la clavada, enrocar y luego Cc3, que gana tiempo contra la D. Juegas con un peón aislado en d4: a cambio tienes piezas activas.",
+     "plan": "Lo mejor es 7.Cc3 de inmediato, que gana tiempo contra la dama; 7.Ae2 también sirve. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -609,7 +609,7 @@
       "Nf3"
      ],
      "lado": "blancas",
-     "plan": "Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la dama de d5 con c4, o con Cc3 después de recapturar en d4 con el peón de c3.",
+     "plan": "Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Si negras cambia en d4 y recapturas con el peón de c3, Cc3 gana tiempo atacando la dama de d5.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -666,7 +666,7 @@
       "Nf6"
      ],
      "lado": "blancas",
-     "plan": "Negras da un peón a cambio de desarrollo rápido. Lo práctico es Ab5+ y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.",
+     "plan": "Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+ (4.Ab5+ vale casi lo mismo) y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -1189,7 +1189,7 @@
     "e4",
     "c6"
    ],
-   "idea": "Contra 1.e4, negras juega 1...c6 para preparar ...d5 con el peón apoyado: pelea por el centro sin crear debilidades. La clave es sacar el alfil de casillas blancas (a f5 o g4) antes de cerrar con ...e6. Es sólida, con poca teoría y planes claros.",
+   "idea": "Contra 1.e4, negras juega 1...c6 para preparar ...d5 con el peón apoyado: pelea por el centro sin crear debilidades. La clave es sacar el alfil de casillas blancas (a f5 o g4) antes de cerrar con ...e6. Es sólida y de planes claros; la teoría que vale la pena estudiar en serio está en el Avance, el Panov y la Clásica.",
    "variantes": [
     {
      "id": "avance-short",
@@ -1210,7 +1210,7 @@
       "Be2"
      ],
      "lado": "ambos",
-     "plan": "Con blancas es el esquema de tu guía: c3, Cf3, Ae2 y 0-0, que sostiene la cadena d4-e5 y te da espacio en el flanco de rey. Con negras: el alfil ya salió a f5 antes de ...e6; sigue ...c5 contra d4, con ...Cc6, ...Db6 y ...Cd7 o ...Ce7.",
+     "plan": "Con blancas: c3, Cf3, Ae2 y 0-0 sostienen la cadena d4-e5 y te desarrollan; no es un ataque al rey. Además, c3 le abre a tu dama el camino a b3, contra el peón de b7 que quedó sin defensa. Con negras: el alfil ya salió a f5 antes de ...e6; sigue ...c5 contra d4, con ...Cc6, ...Db6 y ...Cd7 o ...Ce7.",
      "autorPlan": "ia",
      "frecuencia": 5,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1238,7 +1238,7 @@
       "Nf3"
      ],
      "lado": "ambos",
-     "plan": "Blancas desarrolla sin prisa con Cf3, Ae2 y 0-0, y después c3 o Ae3 para sostener d4. Negras sigue con 4...e6 y prepara ...c5 contra d4, con ...Cc6 y ...Cd7 o ...Ce7 según la posición.",
+     "plan": "Blancas desarrolla sin prisa con Cf3, Ae2 y 0-0, y después c3 o Ae3 para sostener d4. Si negras cambia ...cxd4, retomas con el caballo; más adelante, la ruptura c4. Negras sigue con 4...e6 y prepara ...c5 contra d4, con ...Cc6 y ...Cd7 o ...Ce7 según la posición.",
      "autorPlan": "ia",
      "frecuencia": 5,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1300,7 +1300,7 @@
       "h4"
      ],
      "lado": "ambos",
-     "plan": "Blancas amenaza h5 para echar al alfil de f5 y ganar espacio. Lo más sencillo es 4...h5, que frena ese avance, y luego ...e6, ...c5 y ...Cc6 como en todo el Avance. La casilla g5 queda débil y blancas puede aprovecharla con Ag5.",
+     "plan": "Blancas amenaza h5 para echar al alfil de f5 y ganar espacio. Lo más sencillo es 4...h5, que frena ese avance, y luego ...e6, ...c5 y ...Cc6 como en todo el Avance. Nunca 4...e6: tras 5.g4, 6.f3 y 7.h5 el alfil se queda sin casillas. La casilla g5 queda débil y blancas puede aprovecharla con Ag5.",
      "autorPlan": "ia",
      "frecuencia": 5,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1328,7 +1328,7 @@
       "g4"
      ],
      "lado": "ambos",
-     "plan": "Blancas empuja g4 para echar al alfil y ganar espacio, a costa de debilitar su flanco de rey. Negras retira el alfil (a d7, o a e4 y luego a g6 si f3) y sigue con ...e6 y ...c5 contra d4.",
+     "plan": "Blancas empuja g4 para echar al alfil y ganar espacio, a costa de debilitar su flanco de rey. Negras retira el alfil a e4 (la mejor del motor) y, si 5.f3, a g6; también sirve ...Ad7. Si después blancas empuja 6.h4, la respuesta es 6...h5, no 6...h6. Sigue ...e6 y ...c5 contra d4.",
      "autorPlan": "ia",
      "frecuencia": 5,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1383,7 +1383,7 @@
       "c5"
      ],
      "lado": "ambos",
-     "plan": "Negras ataca d4 de inmediato con 3...c5, aunque gasta un tiempo (el peón ya había jugado a c6). Si 4.dxc5, recupera el peón con ...e6 y ...Axc5, con ...Cc6 para presionar e5. Con blancas: desarrolla rápido y sostén el peón de e5.",
+     "plan": "Negras ataca d4 de inmediato con 3...c5. Su peón de c se mueve dos veces, pero el de e de blancas también, así que no se atrasa; para el motor vale lo mismo que 3...Af5. Si 4.dxc5, recupera el peón con ...e6 y ...Axc5, con ...Cc6 para presionar e5. Con blancas: desarrolla rápido y sostén el peón de e5.",
      "autorPlan": "ia",
      "frecuencia": 5,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1578,7 +1578,7 @@
       "Bf4"
      ],
      "lado": "negras",
-     "plan": "Estructura simétrica y tranquila. Saca el alfil a g4 (atacando la dama) antes de ...e6; si Db3 ataca b7, defiéndelo con ...Dd7 o ...Dc8. Después ...e6, ...Ad6 y 0-0, con el plan típico de avanzar ...b5-b4 (ataque de minorías).",
+     "plan": "Estructura casi simétrica: blancas tiene la columna e y tú la c. Saca el alfil a g4 (atacando la dama) antes de ...e6; si Db3 ataca b7, defiéndelo con ...Dd7 o ...Dc8, nunca con ...Dc7, porque el alfil de f4 la captura. Después ...e6, ...Ad6 y 0-0, con el plan típico de avanzar ...b5-b4 (ataque de minorías).",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1644,7 +1644,7 @@
       "Bb4"
      ],
      "lado": "negras",
-     "plan": "Negras juega ...e6 y ...Ab4, clavando el caballo de c3, que vigila d5. Tras cxd5 lo usual es recapturar ...Cxd5 y blancas queda con el peón aislado de d4: enroca, bloquéalo, cambia piezas y atácalo.",
+     "plan": "Negras juega ...e6 y ...Ab4, clavando el caballo de c3, que vigila d5. Tras cxd5 se recaptura en d5 (con el caballo o con el peón: para el motor valen lo mismo) y blancas queda con el peón aislado de d4: enroca, bloquéalo, cambia piezas y atácalo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "guía de Carlos",
@@ -1699,7 +1699,7 @@
       "d3"
      ],
      "lado": "negras",
-     "plan": "Contra 2.Cf3 juega 2...d5 como siempre; si blancas sigue con Cc3, llegas a los Dos Caballos. Contra 3.d3, desarrolla con ...Cf6, saca el alfil de c8 (a g4 o f5), juega ...e6 y enroca.",
+     "plan": "Contra 2.Cf3 juega 2...d5 como siempre; si blancas sigue con Cc3, llegas a los Dos Caballos. Contra 3.d3, lo más directo es 3...dxe4 4.dxe4 Dxd1+: se cambian las damas y queda un final tranquilo (de ahí el nombre). También sirve desarrollar con ...Cf6, el alfil a g4 o f5, ...e6 y enroque.",
      "autorPlan": "ia",
      "frecuencia": 2,
      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)",
@@ -1727,7 +1727,7 @@
       "Ne5"
      ],
      "lado": "negras",
-     "plan": "Tras el cambio en d5 tienes un buen centro. Contra el caballo en e5, desarrolla con ...Cf6 y ...e6 y no te apures a sacar la dama.",
+     "plan": "Tras el cambio en d5 tienes un buen centro. Contra el caballo en e5, juega ...e6 y ...Cf6 y no te apures a sacar la dama. Todavía no saques el alfil a f5: 4...Af5 permite 5.Ab5+ y negras queda mal.",
      "autorPlan": "ia",
      "frecuencia": 2,
      "fuenteFrecuencia": "guía de Carlos (Dos Caballos: 2.Cf3)",
@@ -1788,7 +1788,7 @@
       "Bc4"
      ],
      "lado": "negras",
-     "plan": "Blancas sostiene e4 con f3, pero debilita su flanco de rey. Con 3...dxe4 4.fxe4 e5 golpeas el centro de inmediato; si blancas da un peón con 6.Ac4, desarrolla rápido y enroca antes de que te ataque en f7.",
+     "plan": "Blancas sostiene e4 con f3, pero debilita su flanco de rey. Lo más sencillo es 3...e6 (o 3...Db6); la línea de esta lección, 3...dxe4 4.fxe4 e5, es la más aguda. Si llegas a ella y blancas da un peón con 6.Ac4, desarrolla rápido y enroca antes de que te ataque en f7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -1878,7 +1878,7 @@
     "d5",
     "e5"
    ],
-   "idea": "Con 3.e5 (Variante del Avance) cierras el centro y ganas espacio: tu peón de e5 le quita f6 al caballo negro y el alfil de c8 de negras queda encerrado detrás de e6. Negras atacará tu cadena de peones en d4 con ...c5, ...Cc6 y ...Db6; tú la sostienes con c3 y Cf3, desarrollas con Ae2 y enrocas. Es el mismo esquema que usas contra la Caro-Kann.",
+   "idea": "Con 3.e5 (Variante del Avance) cierras el centro y ganas espacio: tu peón de e5 le quita f6 al caballo negro y el alfil de c8 de negras queda encerrado detrás de e6. Negras atacará tu cadena de peones en d4 con ...c5, ...Cc6 y ...Db6; tú la sostienes con c3 y Cf3, desarrollas con Ae2 y enrocas. El esqueleto (c3, Cf3, Ae2 y 0-0) es el mismo que contra la Caro-Kann, pero aquí el orden es casi forzado: d4 se defiende desde la jugada 4.",
    "variantes": [
     {
      "id": "avance-c3",
@@ -1897,7 +1897,7 @@
       "c3"
      ],
      "lado": "blancas",
-     "plan": "La jugada clave: c3 sostiene d4 con un peón. Si negras cambia ...cxd4, retoma cxd4 y conservas los peones de d4 y e5. Sigue con Cf3, Ae2 y 0-0.",
+     "plan": "La jugada clave: c3 sostiene d4 con un peón. Si negras cambia ...cxd4, retoma cxd4 y conservas d4 y e5, aunque ya ningún peón defiende d4 y el caballo negro buscará f5 para atacarlo. Sigue con Cf3 (no 5.Ad3, que tapa a tu dama y pierde un peón), Ae2 y 0-0.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -1959,7 +1959,7 @@
       "a3"
      ],
      "lado": "blancas",
-     "plan": "...Db6 suma otro atacante sobre d4 (y mira b2). 6.a3 prepara b4 para ganar espacio en el flanco de dama. Si negras cierra con ...c4, juega Cbd2, Ae2 y 0-0. Evita 6.Ad3: entrega el peón de d4 (Gambito Milner-Barry).",
+     "plan": "...Db6 suma otro atacante sobre d4 (y mira b2). 6.a3 prepara b4 para ganar espacio en el flanco de dama. Si negras cierra con ...c4, juega Cbd2, Ae2 y 0-0. 6.Ad3 es el Gambito Milner-Barry: entregas d4 a cambio de desarrollo y ataque. Es legítimo (el motor lo ve igual que 6.a3), pero pide saber atacar; para empezar, 6.a3 o 6.Ae2.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -1992,7 +1992,7 @@
       "Nh6"
      ],
      "lado": "blancas",
-     "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca.",
+     "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2023,7 +2023,7 @@
       "Bd7"
      ],
      "lado": "blancas",
-     "plan": "Negras desarrolla el alfil a d7 antes de decidir dónde va la dama. Sigue con tu esquema: Ae2 y 0-0, cuidando d4. Tu peón de e5 te sigue dando espacio en el flanco de rey.",
+     "plan": "Negras desarrolla el alfil a d7 antes de decidir dónde va la dama. Sigue con tu esquema: Ae2 y 0-0, cuidando d4. Cuidado con 6.Ab5: pierde el peón de e5 (6...Cxe5). Tu peón de e5 te sigue dando espacio en el flanco de rey.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2104,7 +2104,7 @@
     "e4",
     "d5"
    ],
-   "idea": "Negras ataca el peón de e4 desde la primera jugada con 1...d5. Tras 2.exd5 recupera el peón con la dama (2...Dxd5) o con el caballo (2...Cf6); blancas gana tiempo atacando a la dama con Cc3, y la dama se retira a a5, d6 o d8. Con blancas el plan es sencillo: desarrollar con tiempo, d4 en el centro y enroque.",
+   "idea": "Negras ataca el peón de e4 desde la primera jugada con 1...d5. Tras 2.exd5 recupera el peón con la dama (2...Dxd5) o con el caballo (2...Cf6); blancas gana tiempo atacando a la dama con Cc3, y la dama se retira a a5, d6 o d8. Con blancas: desarrollar con tiempo, d4 en el centro, Ad2 para quitar la clavada de tu caballo cuando la dama está en a5, y enroque, que puede ser a cualquier lado.",
    "variantes": [
     {
      "id": "da5-clasica",
@@ -2126,7 +2126,7 @@
       "Bf5"
      ],
      "lado": "ambos",
-     "plan": "Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4, Ad2 para quitar la clavada y 0-0, aprovechando el tiempo ganado contra la dama.",
+     "plan": "Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4, Ad2 y 0-0; también 6.Ce5 contra el alfil. Ad2 quita la clavada y además amenaza Cd5: el caballo se mueve y tu alfil ataca a la dama de a5.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2160,7 +2160,7 @@
       "g4"
      ],
      "lado": "ambos",
-     "plan": "Línea agresiva de blancas: Ce5 y g4 persiguen al alfil de f5 para ganar espacio y tiempo. Negras retira el alfil a una casilla segura, completa con ...e6 y busca cambiar el caballo de e5 con ...Cbd7. Con blancas, h4 y el desarrollo rápido mantienen la presión.",
+     "plan": "Línea agresiva de blancas: Ce5 y g4 persiguen al alfil de f5 para ganar espacio y tiempo. Negras tiene una sola casilla buena para el alfil: 7...Ae6, y sigue 8.Ag2 Cbd7 para cambiar el caballo de e5. Si 7...Ag6, 8.h4 amenaza h5 y el alfil se queda sin casillas. Con blancas, h4 y el desarrollo rápido mantienen la presión.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2192,7 +2192,7 @@
       "h3"
      ],
      "lado": "ambos",
-     "plan": "Aquí el alfil sale a g4 en vez de f5. Contra 6.h3, negras decide entre cambiar ...Axf3 (lo sencillo) o retirar ...Ah5, que permite g4 y Ce5. Con blancas, h3 le pregunta al alfil, y quedarte con la pareja de alfiles es una ventaja duradera.",
+     "plan": "Aquí el alfil sale a g4 en vez de f5. Contra 6.h3, negras decide entre cambiar ...Axf3 (lo sencillo) o retirar ...Ah5, que permite g4 y Ce5. Con blancas, h3 le pregunta al alfil, y quedarte con la pareja de alfiles es una ventaja duradera. Si negras contesta 6...Dh5, 7.hxg4 Dxh1 8.Ce2 y la dama negra queda atrapada.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2223,7 +2223,7 @@
       "a6"
      ],
      "lado": "ambos",
-     "plan": "La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola con Cb5, Af4 o Ce4. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas: desarrollo rápido, 0-0 y golpear a la dama cuando se pueda.",
+     "plan": "La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola con Cb5, Af4 o Ce4. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas, el esquema que mejor funciona es g3, Ag2, 0-0 y Ce5.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2252,7 +2252,7 @@
       "c6"
      ],
      "lado": "ambos",
-     "plan": "Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: desarrollo rápido y Ce4 o Af4 para ganar tiempo atacando a la dama.",
+     "plan": "Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas, lo principal es g3 con Ag2 y desarrollo rápido: la dama negra ya tiene c7 para retirarse, así que no ganas mucho persiguiéndola.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2283,7 +2283,7 @@
       "Bg4"
      ],
      "lado": "ambos",
-     "plan": "La dama vuelve a d8: es la retirada más segura, aunque cede más tiempo. Negras desarrolla ...Cf6, ...Ag4, ...e6, ...c6 y ...Ae7, con una posición pasiva pero sólida. Con blancas: más espacio en el centro, h3 para preguntarle al alfil y desarrollo rápido.",
+     "plan": "La dama vuelve a d8: es la retirada más segura, aunque cede más tiempo. Negras desarrolla ...Cf6, ...Ag4, ...e6, ...c6 y ...Ae7, con una posición pasiva pero sólida. Con blancas: más espacio en el centro, h3 para preguntarle al alfil y desarrollo rápido. Si negras cambia 6...Axf3 7.Dxf3 y toma 7...Dxd4, 8.Dxb7 gana la torre de a8.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2648,7 +2648,7 @@
     "c4",
     "c6"
    ],
-   "idea": "Con 2...c6 defiendes el peón de d5 con otro peón, sin encerrar tu alfil de casillas blancas como pasa con ...e6. La idea es sacar ese alfil a f5 (o g4) y después jugar ...e6, desarrollar y enrocar. Es la misma estructura de la Caro-Kann: posiciones sólidas en las que rara vez te sorprenden.",
+   "idea": "Con 2...c6 defiendes el peón de d5 con otro peón, sin encerrar tu alfil de casillas blancas como pasa con ...e6. La idea es sacar ese alfil a f5 (o g4) y después jugar ...e6, desarrollar y enrocar, pero el alfil sale cuando b7 no queda colgando: si sale demasiado pronto, Db3 ataca b7 y d5 (en la línea principal sale después de ...dxc4 y a4). Tus peones quedan como en la Caro-Kann (c6 y e6); los de blancas, no.",
    "variantes": [
     {
      "id": "checa",
@@ -2701,7 +2701,7 @@
       "e6"
      ],
      "lado": "negras",
-     "plan": "Contra 4.e3 el alfil sale a f5 ANTES de ...e6; si no, se queda encerrado. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.",
+     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2734,7 +2734,7 @@
       "Bf5"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila. Desarrolla igual que blancas: ...Cf6, ...Cc6 y ...Af5; luego ...e6, ...Ae7 o ...Ad6 y 0-0. Vigila la jugada Db3 contra tu peón de b7.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2761,7 +2761,7 @@
       "dxc4"
      ],
      "lado": "negras",
-     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
+     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4, porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3073,7 +3073,7 @@
    "eco": "A00–A14, D02",
    "lado": "negras",
    "raiz": [],
-   "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Casi siempre llegas a estructuras que ya conoces de la Eslava y la Caro-Kann.",
+   "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios.",
    "variantes": [
     {
      "id": "inglesa-caro-kann",
@@ -3087,7 +3087,7 @@
       "c6"
      ],
      "lado": "negras",
-     "plan": "1...c6 prepara ...d5 con apoyo. Si 2.d4 d5, estás en la Eslava; si 2.e4 d5, la estructura es la de la Caro-Kann; si 2.Cf3 d5, sigue con ...Cf6 y el alfil a f5 o g4.",
+     "plan": "1...c6 prepara ...d5 con apoyo. Si 2.d4 d5, estás en la Eslava; si 2.e4 d5, es la Caro-Kann con 2.c4 (el Panov acelerado, que está en tu curso de la Caro-Kann); si 2.Cf3 d5, sigue con ...Cf6 y el alfil a f5 o g4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3119,7 +3119,7 @@
       "d3"
      ],
      "lado": "negras",
-     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7.",
+     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, ...Cc6 o ...Db6, no ...e6, que deja caer b7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3280,7 +3280,7 @@
       "d5"
      ],
      "lado": "negras",
-     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0.",
+     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

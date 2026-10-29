@@ -5,15 +5,19 @@
   "eco": "C02",
   "lado": "blancas",
   "raiz": "e4 e6 d4 d5 e5",
-  "idea": "Con 3.e5 (Variante del Avance) cierras el centro y ganas espacio: tu peón de e5 le quita f6 al caballo negro y el alfil de c8 de negras queda encerrado detrás de e6. Negras atacará tu cadena de peones en d4 con ...c5, ...Cc6 y ...Db6; tú la sostienes con c3 y Cf3, desarrollas con Ae2 y enrocas. Es el mismo esquema que usas contra la Caro-Kann.",
+  "idea": "Con 3.e5 (Variante del Avance) cierras el centro y ganas espacio: tu peón de e5 le quita f6 al caballo negro y el alfil de c8 de negras queda encerrado detrás de e6. Negras atacará tu cadena de peones en d4 con ...c5, ...Cc6 y ...Db6; tú la sostienes con c3 y Cf3, desarrollas con Ae2 y enrocas. El esqueleto (c3, Cf3, Ae2 y 0-0) es el mismo que contra la Caro-Kann, pero aquí el orden es casi forzado: d4 se defiende desde la jugada 4.",
   "variantes": [
     {
       "id": "avance-c3",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: 3...c5 4.c3",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3"
+      },
       "lado": "blancas",
-      "plan": "La jugada clave: c3 sostiene d4 con un peón. Si negras cambia ...cxd4, retoma cxd4 y conservas los peones de d4 y e5. Sigue con Cf3, Ae2 y 0-0.",
+      "plan": "La jugada clave: c3 sostiene d4 con un peón. Si negras cambia ...cxd4, retoma cxd4 y conservas d4 y e5, aunque ya ningún peón defiende d4 y el caballo negro buscará f5 para atacarlo. Sigue con Cf3 (no 5.Ad3, que tapa a tu dama y pierde un peón), Ae2 y 0-0.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -21,7 +25,11 @@
       "id": "paulsen",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: Ataque Paulsen",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Paulsen Attack", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Paulsen Attack",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3"
+      },
       "lado": "blancas",
       "plan": "La posición base del Avance: negras presiona d4 con ...c5 y ...Cc6, y tú lo defiendes con c3 y Cf3. Sigue con Ae2 y 0-0; si negras suma ...Db6, a3 y b4 te dan espacio en el flanco de dama.",
       "frecuencia": null,
@@ -31,9 +39,13 @@
       "id": "principal-a3",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: línea principal",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Main Line", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Main Line",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3"
+      },
       "lado": "blancas",
-      "plan": "...Db6 suma otro atacante sobre d4 (y mira b2). 6.a3 prepara b4 para ganar espacio en el flanco de dama. Si negras cierra con ...c4, juega Cbd2, Ae2 y 0-0. Evita 6.Ad3: entrega el peón de d4 (Gambito Milner-Barry).",
+      "plan": "...Db6 suma otro atacante sobre d4 (y mira b2). 6.a3 prepara b4 para ganar espacio en el flanco de dama. Si negras cierra con ...c4, juega Cbd2, Ae2 y 0-0. 6.Ad3 es el Gambito Milner-Barry: entregas d4 a cambio de desarrollo y ataque. Es legítimo (el motor lo ve igual que 6.a3), pero pide saber atacar; para empezar, 6.a3 o 6.Ae2.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -41,9 +53,13 @@
       "id": "lputian",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: Variante Lputian",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Lputian Variation", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3 Nh6" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Lputian Variation",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3 Nh6"
+      },
       "lado": "blancas",
-      "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca.",
+      "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -51,9 +67,13 @@
       "id": "euwe",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: Variante Euwe",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Euwe Variation", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Bd7" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Euwe Variation",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Bd7"
+      },
       "lado": "blancas",
-      "plan": "Negras desarrolla el alfil a d7 antes de decidir dónde va la dama. Sigue con tu esquema: Ae2 y 0-0, cuidando d4. Tu peón de e5 te sigue dando espacio en el flanco de rey.",
+      "plan": "Negras desarrolla el alfil a d7 antes de decidir dónde va la dama. Sigue con tu esquema: Ae2 y 0-0, cuidando d4. Cuidado con 6.Ab5: pierde el peón de e5 (6...Cxe5). Tu peón de e5 te sigue dando espacio en el flanco de rey.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -61,7 +81,11 @@
       "id": "wade",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: Variante Wade",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Wade Variation", "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Qb6 5. Nf3 Bd7" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Wade Variation",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Qb6 5. Nf3 Bd7"
+      },
       "lado": "blancas",
       "plan": "Negras saca la dama antes que el caballo y busca ...Ab5 para cambiar su alfil 'malo' (el que queda encerrado detrás de e6). Sigue con Ae2 y 0-0 sosteniendo d4; aunque se cambien los alfiles, tú conservas más espacio.",
       "frecuencia": null,
@@ -71,7 +95,11 @@
       "id": "cambio-de-alfil",
       "familia": "Variante del Avance",
       "nombre": "Variante del Avance: Cambio de Alfil Extendido",
-      "fila": { "eco": "C02", "name": "French Defense: Advance Variation, Extended Bishop Swap", "pgn": "1. e4 e6 2. d4 d5 3. e5 Bd7" },
+      "fila": {
+        "eco": "C02",
+        "name": "French Defense: Advance Variation, Extended Bishop Swap",
+        "pgn": "1. e4 e6 2. d4 d5 3. e5 Bd7"
+      },
       "lado": "blancas",
       "plan": "Negras quiere cambiar su alfil 'malo' (por ejemplo con ...Ab5) antes de jugar ...c5. No cambies tu plan: c3, Cf3, Ae2 y 0-0, con el peón de e5 bien sostenido.",
       "frecuencia": null,
