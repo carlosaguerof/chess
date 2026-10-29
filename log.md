@@ -400,3 +400,17 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
   - Lo aprendido: `iterations/v3/learning.md` (10 a 20).
   - Las pruebas: `tests/unit/curso-{contenido,ciclo}.test.ts` y `tests/e2e/zoom-iphone.spec.ts`.
   - Los informes de los pases, fuera del repo: `00_corridas/_local/chess/2026-10-29_caro-kann/c7/`.
+
+## [2026-10-29] decisión | C8: el formato de los cursos queda escrito para los otros siete
+- **Qué:** `specs/cursos.md` (nuevo) dice cómo se hace un curso del escalón 1, para que la segunda corrida haga los otros siete igual:
+  - §1: las seis piezas y el glosario.
+  - §2: la lección, con sus dos vueltas, la ayuda en escalones, el error que se queda, las jugadas buenas, el avance guardado y la narración.
+  - §3: los textos (los campos de cada jugada, el orden y el largo, sin símbolos, nada se inventa, la fuente de cada idea).
+  - §4: dónde vive cada cosa.
+  - §5: cómo se comprueba (`revisar-curso`, Vitest, Playwright, el motor y hasta tres pases adversariales).
+  
+  Lo aprendido en la vuelta (20 puntos, cada uno con su porqué y dónde quedó la regla) está en `iterations/v3/learning.md`.
+- **Por qué:** una vuelta se cierra cuando su aprendizaje quedó en las reglas (AGENTS.md). Lo que encontraron los pases (pistas que describen la jugada, `buenas` medidas en cada posición, errores del rival que el motor confirme) es justo lo que la próxima corrida no debe repetir.
+- **Quién:** Carlos (instructivo Caro-Kann, C8); la redacción, la corrida.
+- **Dónde:** `specs/cursos.md`, `iterations/v3/learning.md`.
+- **Una propuesta para Carlos, sin cambiar ninguna regla:** reiniciar la Air antes de una corrida larga con capturas. Esta noche, tras 29 horas encendida, se cayó la pantalla con una captura de WebKit y el perfil iPhone no se pudo correr.
