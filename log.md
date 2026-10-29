@@ -378,3 +378,25 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** la vara de todas las pantallas es la Pantalla limpia (`specs/ux.md`), revisada con las capturas en el tamaño del iPhone, no solo con las pruebas en verde.
 - **Quién:** Carlos (diseño §7); la revisión, la corrida con la skill `revisar-ux`.
 - **Dónde:** `src/pantallas/CursoPagina.tsx`, `src/componentes/Notacion.tsx`; `iterations/v3/revision-ux-curso.md`; pruebas: `tests/e2e/c6-pantallas.spec.ts` y la lección nueva en `tests/e2e/zoom-iphone.spec.ts`.
+
+## [2026-10-29] cambio | C7: tres pases adversariales sobre el curso de la Caro-Kann
+- **Qué:** tres revisiones, cada una con un subagente nuevo y solo las seis categorías del instructivo (errores de ajedrez, afirmaciones que el motor no sostiene, textos que delatan la jugada, puntos del diseño §4 que no se cumplen, algo que ya existía y se rompió, texto copiado). Pase 1: 25 hallazgos (8 graves); pase 2: 15 (3 graves); pase 3: 9 (1 grave). Todos se arreglaron. Lo más importante:
+  - **El ajedrez:** un caballo de f3 que "cuidaba e4"; un d5 "atacado dos veces" con un solo atacante; un alfil que "se comía" una casilla defendida; una regla del Repaso que regalaba el alfil contra g4; un plan que mandaba el caballo a la casilla de su propio alfil.
+  - **Los «¿Y si…?»:** el error "del rival" (6.h4 en la Bayoneta) era su segunda mejor jugada. Pasó a ser un error tuyo (6...h6), y el del rival es ahora 5.Ag2, que pierde un alfil y una torre. **Esto corrige la entrada de C4**, que habla de tres «¿Y si…?» con 6.h4 como error del rival: ahora son cuatro.
+  - **Las pistas que delataban:** la de respaldo, armada por el tipo de jugada, daba ideas falsas; ahora cada jugada trae la suya.
+  - **Las jugadas buenas:** salían en rojo las que no traía la base. Ahora `buenas` tiene, medida con el motor, toda jugada a 0.2 o menos de la de la lección (91 en 37 posiciones).
+  - **La lección:**
+    - La Respuesta está a la mano también con un error a la vista.
+    - En un «¿Y si…?», el error no dice "esta lección juega…" y el tablero se ve desde tu lado.
+    - En el iPhone, la narración tiene altura fija y la ayuda que pides se lleva a la vista.
+    - En Practicar, solo "Correcto" (el texto largo se borraba a los 0.9 s).
+  - **El Repaso:** las lecciones viejas de la Karpov y la Botvinnik-Carls pasan a la lección de la misma respuesta.
+- **Por qué:** nada se inventa en el ajedrez, y las pruebas de forma no ven un texto falso ni una pista que describe la jugada. Cada pase encontró errores en los arreglos del anterior.
+- **Quién:** la corrida (instructivo Caro-Kann, C7). Las decisiones que puede cambiar Carlos:
+  - Practicar solo dice "Correcto" en lugar de esperar a "Siguiente".
+  - La Karpov y la Botvinnik-Carls van a la Clásica y al Avance.
+- **Dónde:** `conocimiento/cursos/caro-kann.json`, `src/pantallas/LeccionCurso.tsx`, `src/curso/{ciclo,textos,tipos}.ts`, `src/aprender/migracion.ts`, `src/estilos.css`.
+  - Las medidas: `iterations/v3/comprobaciones-del-curso.md` (E-*, P2-*, P3-*).
+  - Lo aprendido: `iterations/v3/learning.md` (10 a 20).
+  - Las pruebas: `tests/unit/curso-{contenido,ciclo}.test.ts` y `tests/e2e/zoom-iphone.spec.ts`.
+  - Los informes de los pases, fuera del repo: `00_corridas/_local/chess/2026-10-29_caro-kann/c7/`.
