@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ac5 4.c3 Cf6 5.d3 d6 6.0-0 0-0 7.Te1 a6 8.Ab3 Aa7 9.h3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El esquema lento y sólido: c3 y d3, 0-0 y Te1. Cuando negras juega ...a6 (amenaza ...b5), retiras el alfil a b3; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.
+- Plan *(redactado por la IA)*: El esquema lento y sólido: c3 y d3, 0-0 y Te1. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.
 - Fuente: C54 · Italian Game: Classical Variation, Giuoco Pianissimo, Main Line
 
 ### Variante Clásica, Giuoco Pianissimo: con 6.Cbd2
@@ -47,7 +47,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.d3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.
+- Plan *(redactado por la IA)*: La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.
 - Fuente: C55 · Italian Game: Two Knights Defense, Modern Bishop's Opening
 
 ### Defensa de los Dos Caballos: Ataque Lolli
@@ -55,7 +55,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 d5 5.exd5 Cxd5 6.d4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Se considera más fuerte que el famoso Hígado Frito (6.Cxf7).
+- Plan *(redactado por la IA)*: 4.Cg5 ataca f7 con caballo y alfil; tras 4...d5 5.exd5, retomar con ...Cxd5 es impreciso. 6.d4 abre el centro mientras el rey negro sigue en e8: sigue con 0-0 y Te1, presionando f7 y el caballo de d5. Fischer lo prefería al famoso Hígado Frito (6.Cxf7); para el motor, los dos dan ventaja parecida.
 - Fuente: C57 · Italian Game: Two Knights Defense, Lolli Attack
 
 ### Defensa de los Dos Caballos (4.Cg5 d5 5.exd5 Ca5)
@@ -63,7 +63,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 d5 5.exd5 Ca5 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La respuesta buena de negras: 5...Ca5 ataca tu alfil y entrega un peón a cambio de tiempo. Con 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2 conservas el peón de más, pero negras gana actividad (...h6 echa a tu caballo). Termina tu desarrollo y enroca antes de buscar más.
+- Plan *(redactado por la IA)*: La respuesta buena de negras: 5...Ca5 ataca tu alfil y entrega un peón a cambio de tiempo. Con 6.Ab5+ c6 7.dxc6 bxc6 8.Ae2 conservas el peón de más, pero negras gana actividad (...h6 echa a tu caballo). Cuidado: no retires el alfil a a4 (8.Aa4 le da la ventaja a negras); va a e2 o d3. Termina tu desarrollo y enroca antes de buscar más.
 - Fuente: C58 · Italian Game: Two Knights Defense
 
 ### Defensa de los Dos Caballos: Contraataque Traxler, sacrificio de alfil
@@ -71,7 +71,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 Ac5 5.Axf7+**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (Ad5 o Ab3). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.
+- Plan *(redactado por la IA)*: 4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.
 - Fuente: C57 · Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line
 
 ## Defensa París
@@ -91,7 +91,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 h6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: ...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo: c3 y d4 (o d3 y Cc3), desarrolla y enroca; tendrás ventaja de desarrollo.
+- Plan *(redactado por la IA)*: ...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo con 4.d4 directo, sin preparar con c3; desarrolla y enroca: tendrás ventaja de desarrollo.
 - Fuente: C50 · Italian Game: Anti-Fried Liver Defense
 
 ## Defensa Húngara
@@ -121,5 +121,5 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 f5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Responde con calma: d3, Cc3 y 0-0. Si negras cambia ...fxe4, retoma con el peón (dxe4).
+- Plan *(redactado por la IA)*: Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Lo mejor es 4.d4 (o 4.d3 y después Cc3 y 0-0). El orden importa: 4.Cc3 es un error, porque 4...fxe4 ataca tu caballo de f3 y pierdes material. Si negras cambia ...fxe4 después de d3, retoma con el peón (dxe4).
 - Fuente: C50 · Italian Game: Rousseau Gambit

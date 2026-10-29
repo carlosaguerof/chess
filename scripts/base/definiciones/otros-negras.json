@@ -5,15 +5,19 @@
   "eco": "A00–A14, D02",
   "lado": "negras",
   "raiz": "",
-  "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Casi siempre llegas a estructuras que ya conoces de la Eslava y la Caro-Kann.",
+  "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios.",
   "variantes": [
     {
       "id": "inglesa-caro-kann",
       "familia": "Apertura Inglesa (1.c4)",
       "nombre": "Apertura Inglesa: Sistema defensivo Caro-Kann",
-      "fila": { "eco": "A11", "name": "English Opening: Caro-Kann Defensive System", "pgn": "1. c4 c6" },
+      "fila": {
+        "eco": "A11",
+        "name": "English Opening: Caro-Kann Defensive System",
+        "pgn": "1. c4 c6"
+      },
       "lado": "negras",
-      "plan": "1...c6 prepara ...d5 con apoyo. Si 2.d4 d5, estás en la Eslava; si 2.e4 d5, la estructura es la de la Caro-Kann; si 2.Cf3 d5, sigue con ...Cf6 y el alfil a f5 o g4.",
+      "plan": "1...c6 prepara ...d5 con apoyo. Si 2.d4 d5, estás en la Eslava; si 2.e4 d5, es la Caro-Kann con 2.c4 (el Panov acelerado, que está en tu curso de la Caro-Kann); si 2.Cf3 d5, sigue con ...Cf6 y el alfil a f5 o g4.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -21,9 +25,13 @@
       "id": "inglesa-anglo-eslava-g3",
       "familia": "Apertura Inglesa (1.c4)",
       "nombre": "Apertura Réti: Variante Anglo-Eslava, con g3",
-      "fila": { "eco": "A11", "name": "Réti Opening: Anglo-Slav Variation, with g3", "pgn": "1. c4 c6 2. Nf3 d5 3. g3 Nf6 4. Bg2 Bf5 5. O-O e6 6. d3" },
+      "fila": {
+        "eco": "A11",
+        "name": "Réti Opening: Anglo-Slav Variation, with g3",
+        "pgn": "1. c4 c6 2. Nf3 d5 3. g3 Nf6 4. Bg2 Bf5 5. O-O e6 6. d3"
+      },
       "lado": "negras",
-      "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7.",
+      "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, ...Cc6 o ...Db6, no ...e6, que deja caer b7.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -31,7 +39,11 @@
       "id": "inglesa-gurevich",
       "familia": "Apertura Inglesa (1.c4)",
       "nombre": "Apertura Réti: Variante Anglo-Eslava, Sistema Gurevich",
-      "fila": { "eco": "A11", "name": "Réti Opening: Anglo-Slav Variation, Gurevich System", "pgn": "1. c4 c6 2. Nf3 d5 3. e3 Nf6 4. Nc3 e6 5. b3 Bd6" },
+      "fila": {
+        "eco": "A11",
+        "name": "Réti Opening: Anglo-Slav Variation, Gurevich System",
+        "pgn": "1. c4 c6 2. Nf3 d5 3. e3 Nf6 4. Nc3 e6 5. b3 Bd6"
+      },
       "lado": "negras",
       "plan": "Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Después busca la ruptura ...e5.",
       "frecuencia": null,
@@ -41,7 +53,11 @@
       "id": "reti-bogoljubow",
       "familia": "Apertura Réti (1.Cf3)",
       "nombre": "Apertura Réti: Variante Anglo-Eslava, Variante Bogoljubow",
-      "fila": { "eco": "A12", "name": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation", "pgn": "1. Nf3 d5 2. c4 c6 3. b3 Bf5 4. Bb2" },
+      "fila": {
+        "eco": "A12",
+        "name": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation",
+        "pgn": "1. Nf3 d5 2. c4 c6 3. b3 Bf5 4. Bb2"
+      },
       "lado": "negras",
       "plan": "El mismo esquema: ...c6 sostiene d5 y el alfil sale a f5 antes de cerrar con ...e6. Sigue ...e6, ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
       "frecuencia": null,
@@ -51,7 +67,11 @@
       "id": "reti-fianchetto",
       "familia": "Apertura Réti (1.Cf3)",
       "nombre": "Juego de Peón de Dama: Variante Simétrica, Pseudo-Catalana",
-      "fila": { "eco": "D02", "name": "Queen's Pawn Game: Symmetrical Variation, Pseudo-Catalan", "pgn": "1. Nf3 d5 2. g3 c6 3. Bg2 Nf6 4. O-O Bg4 5. d4 e6" },
+      "fila": {
+        "eco": "D02",
+        "name": "Queen's Pawn Game: Symmetrical Variation, Pseudo-Catalan",
+        "pgn": "1. Nf3 d5 2. g3 c6 3. Bg2 Nf6 4. O-O Bg4 5. d4 e6"
+      },
       "lado": "negras",
       "plan": "Contra g3 y Ag2, ...c6 con ...Ag4 es un esquema muy sólido: el alfil sale antes de ...e6. Sigue ...Cbd7, ...Ae7 o ...Ad6 y 0-0.",
       "frecuencia": null,
@@ -61,7 +81,11 @@
       "id": "larsen-clasica",
       "familia": "Ataque Nimzo-Larsen (1.b3)",
       "nombre": "Ataque Nimzo-Larsen: Variante Clásica",
-      "fila": { "eco": "A01", "name": "Nimzo-Larsen Attack: Classical Variation", "pgn": "1. b3 d5" },
+      "fila": {
+        "eco": "A01",
+        "name": "Nimzo-Larsen Attack: Classical Variation",
+        "pgn": "1. b3 d5"
+      },
       "lado": "negras",
       "plan": "Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 o g4; luego ...e6, ...c6 y enroca. Con un centro de peones firme y tus piezas fuera, no necesitas más teoría.",
       "frecuencia": null,
@@ -71,7 +95,11 @@
       "id": "otras-hungara",
       "familia": "Apertura Húngara (1.g3)",
       "nombre": "Apertura Húngara: Formación Eslava",
-      "fila": { "eco": "A00", "name": "Hungarian Opening: Slav Formation", "pgn": "1. g3 d5 2. Bg2 c6" },
+      "fila": {
+        "eco": "A00",
+        "name": "Hungarian Opening: Slav Formation",
+        "pgn": "1. g3 d5 2. Bg2 c6"
+      },
       "lado": "negras",
       "plan": "El peón de d5, apoyado por ...c6, tapa la diagonal larga del alfil de g2. Sigue ...Cf6, el alfil a f5 o g4, luego ...e6 y 0-0.",
       "frecuencia": null,
@@ -81,9 +109,13 @@
       "id": "otras-bird",
       "familia": "Apertura Bird (1.f4)",
       "nombre": "Apertura Bird: Variante Holandesa",
-      "fila": { "eco": "A03", "name": "Bird Opening: Dutch Variation", "pgn": "1. f4 d5" },
+      "fila": {
+        "eco": "A03",
+        "name": "Bird Opening: Dutch Variation",
+        "pgn": "1. f4 d5"
+      },
       "lado": "negras",
-      "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0.",
+      "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     }

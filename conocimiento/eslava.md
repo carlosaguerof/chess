@@ -2,7 +2,7 @@
 
 *Slav Defense* · ECO D10–D19, D43 · se juega con negras · empieza con 1.d4 d5 2.c4 c6
 
-> Con 2...c6 defiendes el peón de d5 con otro peón, sin encerrar tu alfil de casillas blancas como pasa con ...e6. La idea es sacar ese alfil a f5 (o g4) y después jugar ...e6, desarrollar y enrocar. Es la misma estructura de la Caro-Kann: posiciones sólidas en las que rara vez te sorprenden. *(redactado por la IA)*
+> Con 2...c6 defiendes el peón de d5 con otro peón, sin encerrar tu alfil de casillas blancas como pasa con ...e6. La idea es sacar ese alfil a f5 (o g4) y después jugar ...e6, desarrollar y enrocar, pero el alfil sale cuando b7 no queda colgando: si sale demasiado pronto, Db3 ataca b7 y d5 (en la línea principal sale después de ...dxc4 y a4). Tus peones quedan como en la Caro-Kann (c6 y e6); los de blancas, no. *(redactado por la IA)*
 
 Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/chess-openings`, CC0) y están validadas con el motor: ninguna jugada del lado que aprendes pierde más de 1 peón contra la mejor (Stockfish 19 lite, profundidad 18). Los planes los redactó la IA.
 
@@ -23,7 +23,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.e3 Af5 5.Cc3 e6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 ANTES de ...e6; si no, se queda encerrado. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.
+- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.
 - Fuente: D12 · Slav Defense: Quiet Variation, Schallopp Defense
 
 ## Variante del Cambio
@@ -33,7 +33,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.cxd5 cxd5 4.Cc3 Cf6 5.Cf3 Cc6 6.Af4 Af5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila. Desarrolla igual que blancas: ...Cf6, ...Cc6 y ...Af5; luego ...e6, ...Ae7 o ...Ad6 y 0-0. Vigila la jugada Db3 contra tu peón de b7.
+- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.
 - Fuente: D14 · Slav Defense: Exchange Variation, Symmetrical Line
 
 ## Variante 3.Cc3
@@ -43,7 +43,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cc3 dxc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: blancas tiene que gastar tiempo para recuperar el peón. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.
+- Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4, porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.
 - Fuente: D10 · Slav Defense
 
 ## Variante Checa

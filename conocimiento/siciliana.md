@@ -2,7 +2,7 @@
 
 *Sicilian Defense* · ECO B20–B99 · se juega con los dos lados · empieza con 1.e4 c5
 
-> Negras responde a 1.e4 con ...c5: pelea por la casilla d4 desde un lado y busca posiciones desequilibradas donde se juega para ganar. Con negras es de las defensas más recomendadas. Con blancas, la Alapin (2.c3) prepara d4 para tener dos peones en el centro y evita la teoría larga de la Siciliana abierta. *(redactado por la IA)*
+> Negras responde a 1.e4 con ...c5: pelea por la casilla d4 desde un lado y busca posiciones desequilibradas donde se juega para ganar. Con negras es de las defensas más recomendadas. Con blancas, la Alapin (2.c3) prepara d4 para retomar con un peón si negras cambia. Contra 2...d5 y 2...Cf6 el centro de dos peones casi nunca llega: juegas con un peón aislado en d4 o con la cadena e5-d4. Evitas la Siciliana abierta, aunque la Alapin tiene su propia teoría. *(redactado por la IA)*
 
 Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/chess-openings`, CC0) y están validadas con el motor: ninguna jugada del lado que aprendes pierde más de 1 peón contra la mejor (Stockfish 19 lite, profundidad 18). Los planes los redactó la IA.
 
@@ -37,7 +37,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 Cf6 3.e5 Cd5 4.Cf3 Cc6 5.Ac4 Cb6 6.Ab3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sigue con d4 para un centro grande, 0-0 y De2, sosteniendo el peón de e5. Si Negras juega ...c4, el A va a c2 y apunta al enroque negro.
+- Plan *(redactado por la IA)*: Sigue con d4 para un centro grande, 0-0 y De2, sosteniendo el peón de e5. Si negras juega ...c4, tu alfil se retira a c2: es su única casilla buena.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Stoltz Attack
 
 ### Variante Alapin: Defensa Barmen, Cambio Central
@@ -45,7 +45,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Lo sólido es Ae2 para romper la clavada, enrocar y luego Cc3, que gana tiempo contra la D. Juegas con un peón aislado en d4: a cambio tienes piezas activas.
+- Plan *(redactado por la IA)*: Lo mejor es 7.Cc3 de inmediato, que gana tiempo contra la dama; 7.Ae2 también sirve. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
 
 ### Variante Alapin: Defensa Barmen con 4...g6
@@ -53,7 +53,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 g6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Gana tiempos atacando la dama de d5 con c4, o con Cc3 después de recapturar en d4 con el peón de c3.
+- Plan *(redactado por la IA)*: Desarrolla con Ae2, 0-0 y Ae3. Contra ...Ag7 cuida el peón de d4 (o cámbialo con dxc5). Si negras cambia en d4 y recapturas con el peón de c3, Cc3 gana tiempo atacando la dama de d5.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
 
 ### Variante Heidenfeld
@@ -69,7 +69,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Cf6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo práctico es Ab5+ y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+ (4.Ab5+ vale casi lo mismo) y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
 
 ## Variante Najdorf
