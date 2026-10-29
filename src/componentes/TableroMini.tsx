@@ -49,7 +49,7 @@ export function TableroMini({ fen, orientacion, ultima, testid = 'tablero-mini',
   return (
     <div className={`tablero tablero-mini ${orientacion === 'black' ? 'negras' : 'blancas'}`} data-testid={testid} data-fen={fen} data-orientacion={orientacion} role="img" aria-label={etiqueta ?? 'Tablero'}>
       <div ref={el} />
-      {marcas && <CapaMarcas marcas={marcas} orientacion={orientacion} fen={fen} />}
+      {marcas && <CapaMarcas marcas={marcas} orientacion={orientacion} fen={fen} escala={1.4} />}
     </div>
   )
 }
