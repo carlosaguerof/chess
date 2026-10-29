@@ -78,7 +78,68 @@
             "WP-CK",
             "WP-es",
             "HOU"
-          ]
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "Blancas abre con 1.e4: ocupa el centro.",
+                "jugadas": [
+                  "e4"
+                ]
+              },
+              {
+                "frase": "Contestas 1...c6: preparas ...d5 con un peón detrás que lo apoya.",
+                "jugadas": [
+                  "c6"
+                ]
+              },
+              {
+                "frase": "Blancas pone otro peón en el centro: 2.d4.",
+                "jugadas": [
+                  "d4"
+                ]
+              },
+              {
+                "frase": "Juegas 2...d5 y atacas el peón de e4.",
+                "jugadas": [
+                  "d5"
+                ]
+              },
+              {
+                "frase": "El peón de c6 apoya a tu peón de d5."
+              },
+              {
+                "frase": "Si blancas cambia, 3.exd5, retomas con el peón de c6, 3...cxd5, y sigues con un peón en el centro.",
+                "jugadas": [
+                  "exd5",
+                  "cxd5"
+                ]
+              },
+              {
+                "frase": "Si blancas avanza, 3.e5, tu alfil de casillas blancas sale antes de que cierres con ...e6: 3...Af5.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5"
+                ],
+                "jugadas": [
+                  "e5",
+                  "Bf5"
+                ]
+              },
+              {
+                "frase": "Después de 4.Cf3, cierras con 4...e6: tu alfil ya está afuera, no encerrado como en la Francesa.",
+                "jugadas": [
+                  "Nf3",
+                  "e6"
+                ]
+              },
+              {
+                "frase": "El precio: tienes un poco menos de espacio."
+              }
+            ]
+          }
         }
       ]
     },
@@ -113,7 +174,41 @@
             "WB-3e5",
             "WP-PS",
             "WP-CK"
-          ]
+          ],
+          "pasoAPaso": {
+            "fen": "4k3/pp3ppp/2p1p3/3pP3/3P4/8/PPP2PPP/4K3 b - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "Tus peones: c6, d5 y e6."
+              },
+              {
+                "frase": "Los de blancas, d4 y e5, forman una cadena: peones en diagonal que se protegen."
+              },
+              {
+                "frase": "La base de la cadena es d4, el peón de atrás: es la casilla clave."
+              },
+              {
+                "frase": "Tu ruptura: ...c5, contra d4.",
+                "jugadas": [
+                  "...c5"
+                ]
+              },
+              {
+                "frase": "También puedes romper con ...f6, contra e5.",
+                "jugadas": [
+                  "...f6"
+                ]
+              },
+              {
+                "frase": "La ruptura de blancas: c4, contra tu peón de d5.",
+                "jugadas": [
+                  "c4"
+                ]
+              }
+            ]
+          }
         },
         {
           "subtitulo": "Contra la Clásica (3.Cc3)",
@@ -138,7 +233,29 @@
             "WP-PS",
             "WP-CK",
             "CB"
-          ]
+          ],
+          "pasoAPaso": {
+            "fen": "4k3/pp3pp1/2p1p2p/7P/3P4/8/PPP2PP1/4K3 b - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "Tus peones: c6 y e6, sin debilidades."
+              },
+              {
+                "frase": "Los de blancas: un peón en d4, y ya no tienen peón de e."
+              },
+              {
+                "frase": "Tu ruptura: ...c5, contra d4.",
+                "jugadas": [
+                  "...c5"
+                ]
+              },
+              {
+                "frase": "Blancas tiene más espacio y la casilla e5 para un caballo."
+              }
+            ]
+          }
         }
       ]
     },
@@ -298,7 +415,114 @@
             "WB-3Af5",
             "WB-6h4",
             "INV"
-          ]
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "La línea principal: 1.e4 c6 2.d4 d5.",
+                "jugadas": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5"
+                ]
+              },
+              {
+                "frase": "3.e5 Af5: tu alfil sale antes de ...e6.",
+                "jugadas": [
+                  "e5",
+                  "Bf5"
+                ]
+              },
+              {
+                "frase": "4.Cf3 e6 5.Ae2: ahora sí cierras con ...e6.",
+                "jugadas": [
+                  "Nf3",
+                  "e6",
+                  "Be2"
+                ]
+              },
+              {
+                "frase": "5...c5: golpeas el centro de blancas, en d4.",
+                "jugadas": [
+                  "c5"
+                ]
+              },
+              {
+                "frase": "Si blancas empuja 4.h4 contra tu alfil, primero 4...h5.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "e5",
+                  "Bf5"
+                ],
+                "jugadas": [
+                  "h4",
+                  "h5"
+                ]
+              },
+              {
+                "frase": "En la Clásica, contra 6.h4, juegas 6...h6: así tu alfil tiene h7.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "Nc3",
+                  "dxe4",
+                  "Nxe4",
+                  "Bf5",
+                  "Ng3",
+                  "Bg6"
+                ],
+                "jugadas": [
+                  "h4",
+                  "h6"
+                ]
+              },
+              {
+                "frase": "Si blancas empuja 4.g4, retiras tu alfil sin salir de su diagonal: 4...Ae4.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "e5",
+                  "Bf5"
+                ],
+                "jugadas": [
+                  "g4",
+                  "Be4"
+                ]
+              },
+              {
+                "frase": "Si la dama blanca va a b3, 7.Db3, defiendes b7 con tu dama: 7...Dd7.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "exd5",
+                  "cxd5",
+                  "Bd3",
+                  "Nc6",
+                  "c3",
+                  "Nf6",
+                  "Bf4",
+                  "Bg4"
+                ],
+                "jugadas": [
+                  "Qb3",
+                  "Qd7"
+                ]
+              },
+              {
+                "frase": "Nunca la pongas en c7: ahí la atacaría el alfil de f4."
+              }
+            ]
+          }
         },
         {
           "subtitulo": "Lo que tu guía decía distinto",
@@ -313,7 +537,96 @@
             "WB-3Cc3",
             "WB-3exd5",
             "WP-CK"
-          ]
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "«Sacas tu alfil malo»: tu alfil sale antes de ...e6, 3...Af5, así que no llega a ser malo.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "e5"
+                ],
+                "jugadas": [
+                  "Bf5"
+                ]
+              },
+              {
+                "frase": "En la línea tranquila, blancas sostiene d4 y se desarrolla: 4.Cf3 e6 5.Ae2.",
+                "jugadas": [
+                  "Nf3",
+                  "e6",
+                  "Be2"
+                ]
+              },
+              {
+                "frase": "Y 4.h4 va contra tu alfil, no contra tu rey.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5",
+                  "e5",
+                  "Bf5"
+                ],
+                "jugadas": [
+                  "h4"
+                ]
+              },
+              {
+                "frase": "«En la Clásica, el caballo ataca d5»: 3.Cc3 sobre todo defiende e4.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5"
+                ],
+                "jugadas": [
+                  "Nc3"
+                ]
+              },
+              {
+                "frase": "«El Cambio es simétrico»: casi. Tras 3.exd5 cxd5, blancas tiene la columna e y tú la c.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "d4",
+                  "d5"
+                ],
+                "jugadas": [
+                  "exd5",
+                  "cxd5"
+                ]
+              },
+              {
+                "frase": "«Dos Caballos transpone a la Clásica»: solo si blancas juega 3.d4.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "Nc3",
+                  "d5"
+                ],
+                "jugadas": [
+                  "d4"
+                ]
+              },
+              {
+                "frase": "Contra 3.Cf3, la clave es 3...Ag4.",
+                "reinicio": [
+                  "e4",
+                  "c6",
+                  "Nc3",
+                  "d5"
+                ],
+                "jugadas": [
+                  "Nf3",
+                  "Bg4"
+                ]
+              }
+            ]
+          }
         }
       ]
     }
@@ -347,7 +660,36 @@
         ],
         "motor": [
           "E-short-ce7"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: presionar d4, la base de la cadena de blancas."
+            },
+            {
+              "frase": "...Cc6: tu caballo también ataca d4.",
+              "jugadas": [
+                "...Nc6"
+              ]
+            },
+            {
+              "frase": "Tu peón de c5 ya ataca d4: cuando convenga, lo cambias."
+            },
+            {
+              "frase": "El caballo de g8 sale por e7: ...Cge7.",
+              "jugadas": [
+                "...Nge7"
+              ]
+            },
+            {
+              "frase": "Blancas sostiene d4 con piezas y, cuando puede, abre el juego con c4.",
+              "jugadas": [
+                "c4"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Primero el alfil a f5; después ...e6 y ...c5.",
       "frecuencia": 5,
@@ -377,7 +719,39 @@
           "INV",
           "MOTOR",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan, como en todo el Avance: presionar d4."
+            },
+            {
+              "frase": "...Db6: tu dama va contra d4, junto con ...cxd4.",
+              "jugadas": [
+                "...Qb6"
+              ]
+            },
+            {
+              "frase": "El caballo de g8 va a e7: ...Cge7.",
+              "jugadas": [
+                "...Nge7"
+              ]
+            },
+            {
+              "frase": "Blancas enroca, 0-0, y sostiene d4 con c3, el caballo de f3 y su dama.",
+              "jugadas": [
+                "O-O"
+              ]
+            },
+            {
+              "frase": "Si blancas juega Db3, tu dama defiende b7.",
+              "jugadas": [
+                "Qb3"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Si la dama blanca va a b3, defiende b7 con tu dama.",
       "frecuencia": 5,
@@ -407,7 +781,30 @@
         "fuente": [
           "WB-3Af5",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: golpear el centro de blancas."
+            },
+            {
+              "frase": "...Cc6: tu caballo se suma contra d4.",
+              "jugadas": [
+                "...Nc6"
+              ]
+            },
+            {
+              "frase": "Tu peón de c5 también ataca d4: ...cxd4 cuando convenga."
+            },
+            {
+              "frase": "Tu alfil de h7 sigue mirando la diagonal hacia b1."
+            },
+            {
+              "frase": "Blancas quiere atacar en el lado de rey; si toma tu peón de h5, tus piezas quedan activas."
+            }
+          ]
+        }
       },
       "regla": "Contra h4, primero ...h5.",
       "frecuencia": 5,
@@ -437,7 +834,36 @@
           "WB-3Af5",
           "WB-3e5",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Ya cambiaste tu alfil: ahora vas contra d4, como en todo el Avance."
+            },
+            {
+              "frase": "...c5: tu peón ataca d4.",
+              "jugadas": [
+                "...c5"
+              ]
+            },
+            {
+              "frase": "...Cc6: el caballo se suma.",
+              "jugadas": [
+                "...Nc6"
+              ]
+            },
+            {
+              "frase": "El caballo de g8 sale por e7: ...Cge7.",
+              "jugadas": [
+                "...Nge7"
+              ]
+            },
+            {
+              "frase": "Blancas tiene espacio, pero ya no tiene un alfil que perseguir."
+            }
+          ]
+        }
       },
       "regla": "Contra 4.h4: 4...h5 antes que nada.",
       "frecuencia": 5,
@@ -466,7 +892,32 @@
         "fuente": [
           "WB-3Af5",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Desarrollas tus caballos: ...Cd7 y ...Cgf6.",
+              "jugadas": [
+                "...Nd7",
+                "...Ngf6"
+              ]
+            },
+            {
+              "frase": "Luego buscas ...c5 o ...e5, contra el centro de blancas."
+            },
+            {
+              "frase": "El lado de rey blanco quedó débil tras g4 y f3."
+            },
+            {
+              "frase": "Blancas tiene más espacio y busca empujar f4 y g5.",
+              "jugadas": [
+                "f4",
+                "g5"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Contra g4, el alfil a e4; contra f3, a g6.",
       "frecuencia": 5,
@@ -495,7 +946,32 @@
         "fuente": [
           "BASE",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...c5 y ...Cc6: vas contra d4.",
+              "jugadas": [
+                "...c5",
+                "...Nc6"
+              ]
+            },
+            {
+              "frase": "Si blancas empuja h4 contra tu alfil de g6, primero ...h5.",
+              "jugadas": [
+                "h4",
+                "...h5"
+              ]
+            },
+            {
+              "frase": "La otra idea de blancas: c4, contra tu peón de d5.",
+              "jugadas": [
+                "c4"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Si un caballo persigue a tu alfil, se queda en su diagonal; contra h4, ...h5.",
       "frecuencia": 5,
@@ -525,7 +1001,37 @@
           "WP-CK",
           "CB",
           "WP-PS"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Terminas el desarrollo: ...Cgf6.",
+              "jugadas": [
+                "...Ngf6"
+              ]
+            },
+            {
+              "frase": "...Ae7 y enroque corto: 0-0.",
+              "jugadas": [
+                "...Be7",
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "Después, ...c5 contra d4.",
+              "jugadas": [
+                "...c5"
+              ]
+            },
+            {
+              "frase": "Blancas suele poner un caballo en e5, Ce5, y enrocar largo.",
+              "jugadas": [
+                "Ne5"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Contra 6.h4: 6...h6, y el alfil tendrá h7.",
       "frecuencia": 4,
@@ -556,7 +1062,31 @@
           "WP-MA",
           "WP-CK",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...e6 y ...Ad6: sacas tu otro alfil.",
+              "jugadas": [
+                "...e6",
+                "...Bd6"
+              ]
+            },
+            {
+              "frase": "Enrocas: 0-0.",
+              "jugadas": [
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "Después adelantas ...b5 y ...b4: es el ataque de minorías."
+            },
+            {
+              "frase": "Blancas busca la casilla e5 para un caballo y atacar en el lado de rey."
+            }
+          ]
+        }
       },
       "regla": "Contra Db3 con el alfil blanco en f4: ...Dd7, nunca ...Dc7.",
       "frecuencia": 3,
@@ -585,7 +1115,34 @@
           "WP-IQP",
           "WP-CK",
           "INV"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Enrocas: 0-0.",
+              "jugadas": [
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "Blancas busca ataque con sus piezas activas y la ruptura d4-d5."
+            },
+            {
+              "frase": "Si blancas cambia, cxd5, y retomas con el caballo, Cxd5, su peón de d4 queda aislado.",
+              "jugadas": [
+                "cxd5",
+                "...Nxd5"
+              ]
+            },
+            {
+              "frase": "Tu caballo en d5 lo bloquea: el peón de d4 ya no puede avanzar."
+            },
+            {
+              "frase": "Y cambias piezas: con pocas piezas, el aislado se vuelve débil."
+            }
+          ]
+        }
       },
       "regla": "Contra el peón aislado: bloquéalo y cambia piezas.",
       "frecuencia": 3,
@@ -615,7 +1172,32 @@
           "WP-CK",
           "HOU",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...Cf6 y ...Cbd7: desarrollas los caballos.",
+              "jugadas": [
+                "...Nf6",
+                "...Nbd7"
+              ]
+            },
+            {
+              "frase": "...Ae7 y enroque corto: 0-0.",
+              "jugadas": [
+                "...Be7",
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "Tus peones están en casillas blancas: juega en las negras."
+            },
+            {
+              "frase": "Blancas tiene la pareja de alfiles: es fuerte cuando la posición se abre."
+            }
+          ]
+        }
       },
       "regla": "Contra los dos caballos: 3...Ag4.",
       "frecuencia": 2,
@@ -645,7 +1227,25 @@
           "WP-CK",
           "BASE",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Sin damas, desarrollas: ...Cf6 y ...Cbd7.",
+              "jugadas": [
+                "...Nf6",
+                "...Nbd7"
+              ]
+            },
+            {
+              "frase": "Luego ...e5 o ...g6, y llevas tus piezas al centro."
+            },
+            {
+              "frase": "El rey blanco se quedó en d1: blancas tiene que desarrollarse con cuidado."
+            }
+          ]
+        }
       },
       "regla": "Contra 2.Cf3 y 3.d3: ...dxe4 y cambio de damas.",
       "frecuencia": 2,
@@ -674,7 +1274,28 @@
         "fuente": [
           "MOTOR",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...Ad6 y ...Cf6: desarrollas.",
+              "jugadas": [
+                "...Bd6",
+                "...Nf6"
+              ]
+            },
+            {
+              "frase": "Enrocas, 0-0; el alfil de c8 sale después.",
+              "jugadas": [
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "Blancas usa su caballo de e5 y busca jaques con su alfil en b5."
+            }
+          ]
+        }
       },
       "regla": "Contra 4.Ce5: 4...e6, no 4...Af5.",
       "frecuencia": 2,
@@ -699,7 +1320,28 @@
         "fuente": [
           "WB-2c4",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...Cc6: desarrollas.",
+              "jugadas": [
+                "...Nc6"
+              ]
+            },
+            {
+              "frase": "Luego ...e6 o ...g6, y enrocas: tu juego es cómodo."
+            },
+            {
+              "frase": "Blancas desarrolla con d4 y Cf3, y puede quedarse con un peón aislado en d4.",
+              "jugadas": [
+                "d4",
+                "Nf3"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Contra 2.c4: recupera d5 con el caballo.",
       "frecuencia": 1,
@@ -725,7 +1367,25 @@
           "WB-3f3",
           "WP-CK",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "...Ce7 y enroque corto: 0-0.",
+              "jugadas": [
+                "...Ne7",
+                "...O-O"
+              ]
+            },
+            {
+              "frase": "El peón de f3 debilitó el lado de rey blanco."
+            },
+            {
+              "frase": "Blancas quiere quedarse con el centro de dos peones."
+            }
+          ]
+        }
       },
       "regla": "Contra 3.f3: 3...e6.",
       "frecuencia": 1,
@@ -750,7 +1410,30 @@
         "fuente": [
           "LICHESS-CC0",
           "BASE"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tienes el centro con d5 y e5, y tu rey a salvo."
+            },
+            {
+              "frase": "Terminas el desarrollo con el caballo de b8: ...Cd7.",
+              "jugadas": [
+                "...Nd7"
+              ]
+            },
+            {
+              "frase": "Y después, el alfil de c8."
+            },
+            {
+              "frase": "Blancas gana espacio en el lado de dama con b4 y, después, b5.",
+              "jugadas": [
+                "b5"
+              ]
+            }
+          ]
+        }
       },
       "regla": "Si blancas no pone un peón en d4, ocupa tú el centro.",
       "frecuencia": 1,
@@ -780,7 +1463,21 @@
           "WP-CK",
           "BASE",
           "MOTOR"
-        ]
+        ],
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tienes un peón de más: el de e4."
+            },
+            {
+              "frase": "Desarrollas con ...Cf6, ...Ag7 y ...Af5, y enrocas."
+            },
+            {
+              "frase": "Blancas buscará recuperar el peón de e4 con sus piezas."
+            }
+          ]
+        }
       },
       "regla": "Contra 2.Ac4: 2...d5.",
       "frecuencia": 1,

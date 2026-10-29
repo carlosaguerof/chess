@@ -17,6 +17,7 @@ import { borrarEnCurso, guardarEnCurso, leerAvance, marcarError, marcarPieza, ma
 import { formas, jugadaEs, lineaHasta, porQueNo, posicion } from '../curso/textos.ts'
 import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turno.ts'
 import { flechasPrendidas } from '../curso/flechas.ts'
+import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
@@ -260,7 +261,9 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
               ))}
               {/* en el iPhone, una franja a todo lo ancho: el texto que pasa debajo del botón no se asoma a su lado */}
               {boton && (
-                <div className="narracion-pie">
+                <div className={`narracion-pie ${e.momento === 'plan' && l.variante?.plan.pasoAPaso ? 'dos-botones' : ''}`}>
+                  {/* correcciones, C3: el plan también se ve paso a paso, desde el final de la variante */}
+                  {e.momento === 'plan' && l.variante?.plan.pasoAPaso && <BotonPasoAPaso titulo="Tu plan" pa={l.variante.plan.pasoAPaso} inicio={l.jugadas} orientacion={l.lado === 'w' ? 'white' : 'black'} />}
                   <button type="button" className="boton primario" onClick={boton.accion} data-testid={boton.testid}>
                     {boton.texto}
                   </button>
