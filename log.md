@@ -331,3 +331,9 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** solo se publica con todo en verde, y lo publicado se comprueba en la página de verdad (`specs/publicacion.md`).
 - **Quién:** autorizado por Carlos en el prompt de la corrida ("Publicar está autorizado con todo en verde").
 - **Dónde:** <https://carlosaguerof.github.io/chess/>; el reporte, en `00_corridas/chess/2026-10-28_REPORTE_ajustes-de-la-app.md`.
+
+## [2026-10-29] corrida | Curso piloto de la Caro-Kann (escalón 1), desde las 00:44
+- **Qué:** la corrida que hace el escalón 1 con un solo curso completo, la Caro-Kann: corrige la base, cambia la notación a figuras, construye la lección nueva, escribe el curso con el porqué de cada jugada, comprueba los textos con el motor, hace las pantallas, corre los pases adversariales y publica. La vuelta es la v3 (`iterations/v3/manifest.md`); la corrida del perfil que había abierto esa carpeta se detuvo el 2026-10-28 y su manifiesto queda en git.
+- **Por qué:** la necesidad de Carlos es aprender sus aperturas comprendiéndolas, no de memoria. Primero un curso completo que él prueba en el iPhone; con lo que diga se ajusta el formato antes de hacer los otros siete (regla del MVP: empezar chico, probar y crecer).
+- **Quién:** Carlos aprobó el diseño (A, con el piloto de la Caro-Kann) el 2026-10-29.
+- **Dónde:** instructivo **Caro-Kann** = `2026-10-29_INSTRUCTIVO_curso-caro-kann.md`, con el diseño `2026-10-28_DISENO_escalon-1.md` (en el repo de las corridas, fuera de este).
