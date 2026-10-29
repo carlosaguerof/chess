@@ -9,6 +9,9 @@ test('el sitio publicado trae Jugar con los 47 retratos y la sección "Aperturas
   await expect(page.locator('img[data-retrato]').first()).toHaveAttribute('data-estilo', 'toon')
   await page.goto('./#/cursos')
   await expect(page.getByRole('heading', { name: 'Aperturas y defensas' })).toBeVisible()
-  await expect(page.getByTestId('favoritas-vacia')).toBeVisible()
+  // ajustes de la app: "Con blancas" y "Con negras", sin ♡
+  await expect(page.getByTestId('pestana-blancas')).toHaveAttribute('aria-selected', 'true')
+  await expect(page.getByTestId('pestana-negras')).toBeVisible()
+  await expect(page.locator('.corazon')).toHaveCount(0)
   await expect(page.getByRole('navigation', { name: 'Secciones' })).not.toContainText('Repertorio')
 })

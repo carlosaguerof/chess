@@ -1,9 +1,10 @@
 import { expect, test } from '@playwright/test'
 import { captura, jugar, tocar } from './_util.ts'
+import { FAVORITAS_PRENDIDAS } from '../../src/aprender/interruptores.ts'
 
 test.describe('T8 · practicar con cursos', () => {
   test('Caro-Kann, lección del Avance: enseña 1...c6, pregunta tras 1.e4 y 2.d4, marca lo incorrecto, Pista, Respuesta y al final la siguiente', async ({ page }, info) => {
-    await page.goto('/#/cursos/todas')
+    await page.goto(FAVORITAS_PRENDIDAS ? '/#/cursos/todas' : '/#/cursos/negras')
     await expect(page.getByRole('heading', { name: 'Aperturas y defensas' })).toBeVisible()
     await captura(page, info, 't8-cursos')
     await page.getByTestId('tarjeta-caro-kann:b').locator('a').click()

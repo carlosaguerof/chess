@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { Chess } from 'chess.js'
-import { repertorioDeFavoritas, lineasDe } from '../../src/aprender/favoritas.ts'
+import { misAperturas, repertorioDeFavoritas } from '../../src/aprender/favoritas.ts'
+import { FAVORITAS_PRENDIDAS, TUS_DATOS_PRENDIDA } from '../../src/aprender/interruptores.ts'
 import { siguientesEnRepertorio } from '../../src/repertorio/modelo.ts'
 import { captura, jugar } from './_util.ts'
 
@@ -8,6 +9,7 @@ const ck = 'caro-kann:b'
 
 test.describe('Nota 1 · "Aperturas y defensas"', () => {
   test('Mis favoritas vacía la primera vez; el ♡ de la Caro-Kann la guarda al instante, se conserva al recargar y se quita', async ({ page }, info) => {
+    test.skip(!FAVORITAS_PRENDIDAS, 'las favoritas están apagadas (aprender/interruptores.ts): para cuando haya varios usuarios')
     await page.goto('/#/cursos')
     await expect(page.getByRole('heading', { name: 'Aperturas y defensas' })).toBeVisible()
     await expect(page.getByTestId('pestana-favoritas')).toHaveAttribute('aria-selected', 'true')
@@ -39,13 +41,13 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
   })
 
   test('Con negras → Caro-Kann → Variante del Avance: avanzar y regresar en el tablero, y Practicar abre la lección', async ({ page }, info) => {
-    await page.goto('/#/cursos/todas')
-    await page.getByRole('region', { name: 'Para jugar con negras' }).getByTestId(`tarjeta-${ck}`).locator('a').click()
-    // la página de la apertura: tablero arriba, avance, variantes de la más común a la más rara, y el corazón
+    await page.goto(FAVORITAS_PRENDIDAS ? '/#/cursos/todas' : '/#/cursos/negras')
+    await page.getByTestId(`tarjeta-${ck}`).locator('a').click()
+    // la página de la apertura: tablero arriba, avance, variantes de la más común a la más rara (el corazón, solo con favoritas)
     await expect(page.getByRole('heading', { name: 'Defensa Caro-Kann' })).toBeVisible()
     await expect(page.getByTestId('avance')).toContainText('0 de 22 variantes aprendidas')
     await expect(page.getByTestId('tablero-mini')).toHaveAttribute('data-orientacion', 'black')
-    await expect(page.getByTestId(`corazon-${ck}`)).toBeVisible()
+    await expect(page.getByTestId(`corazon-${ck}`)).toHaveCount(FAVORITAS_PRENDIDAS ? 1 : 0)
     // L5: la idea general de la apertura, de mi lado y corta
     await expect(page.getByTestId('idea')).toContainText('1...c6')
     const filas = page.getByTestId('variante')
@@ -81,12 +83,13 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
     await expect(page.getByTestId('instruccion')).toBeVisible()
   })
 
-  test('una partida con "Que juegue mis líneas" y la Caro-Kann en favoritas llega a una variante de la Caro-Kann', async ({ page }, info) => {
+  test('una partida con "Que juegue mis líneas" llega a una variante de mis aperturas', async ({ page }, info) => {
+    // con las favoritas apagadas, mis líneas son todas mis aperturas (la favorita guardada no cuenta)
     await page.addInitScript((f) => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(f)), [ck])
     await page.goto('/#/prueba-partida?bot=brisa&color=b&guia=1&mislineas=1&jugadas=')
-    const rep = repertorioDeFavoritas([ck])
+    const rep = repertorioDeFavoritas(misAperturas([ck]))
     const historia = () => page.getByTestId('lista-jugadas').getByTestId('jugada').count()
-    // tres jugadas mías: cada vez, la que dice mi favorita después de la del bot
+    // tres jugadas mías: cada vez, la que dice mi línea después de la del bot
     for (let n = 1; n <= 3; n++) {
       await expect.poll(historia, { timeout: 15_000 }).toBe(2 * n - 1)
       const jugadas = (await page.getByTestId('partida').getAttribute('data-jugadas'))!.split(' ').filter(Boolean)
@@ -98,12 +101,13 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
     }
     await expect.poll(historia, { timeout: 15_000 }).toBe(7)
     const jugadas = (await page.getByTestId('partida').getAttribute('data-jugadas'))!.split(' ').filter(Boolean)
-    // el bot nunca se salió de mis líneas: lo jugado es el principio de una variante de la Caro-Kann
-    expect(lineasDe(ck).some((l) => jugadas.every((s, i) => l.jugadas[i] === s))).toBe(true)
+    // el bot nunca se salió de mis líneas: lo jugado es el principio de una variante de mis aperturas
+    expect(rep.lineas.some((l) => jugadas.every((s, i) => l.jugadas[i] === s))).toBe(true)
     await captura(page, info, 'l3-partida-mis-lineas')
   })
 
   test('Tus datos (menú Más): exportar e importar devuelve las favoritas', async ({ page }, info) => {
+    test.skip(!TUS_DATOS_PRENDIDA || !FAVORITAS_PRENDIDAS, '"Tus datos" y las favoritas están apagadas (aprender/interruptores.ts); exportar vive en Ajustes')
     await page.addInitScript((f) => localStorage.getItem('ajedrez.v1.favoritas') ?? localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(f)), [ck, 'italiana:w'])
     await page.goto('/')
     await page.getByRole('button', { name: 'Más' }).click()

@@ -15,12 +15,12 @@ test('T20 · recorrido de pantallas que faltaban en las capturas', async ({ page
   await page.goto('/#/historial')
   await expect(page.getByText('Todavía no terminas ninguna partida')).toBeVisible()
   await captura(page, info, 't20-historial-vacio')
-  // Aprender (Nota 1): "Aperturas y defensas", vacía la primera vez, con su botón a Todas
+  // Aprender: "Aperturas y defensas", con mis aperturas con blancas
   await page.goto('/#/cursos')
-  await expect(page.getByTestId('ir-a-todas')).toBeVisible()
+  await expect(page.getByTestId('pestana-blancas')).toHaveAttribute('aria-selected', 'true')
   await captura(page, info, 't20-aprender')
-  // Tus datos (exportar e importar, en el menú Más)
-  await page.goto('/#/datos')
+  // exportar, en Ajustes (ajustes de la app: "Tus datos" se quitó)
+  await page.goto('/#/ajustes')
   await expect(page.getByTestId('exportar')).toBeVisible()
   await captura(page, info, 't20-repertorio-menu')
   // el motor tarda en cargar: se ve que está cargando (N1)

@@ -4,6 +4,7 @@ import { BASE } from '../../src/base/base.ts'
 import { repertorioInicial } from '../../src/repertorio/modelo.ts'
 import { cursosDe } from '../../src/cursos/modelo.ts'
 import { jugar } from './_util.ts'
+import { FAVORITAS_PRENDIDAS, TUS_DATOS_PRENDIDA } from '../../src/aprender/interruptores.ts'
 
 /**
  * Corrida de limpieza visual (iterations/v2): una captura de cada pantalla, en los dos perfiles.
@@ -84,7 +85,7 @@ test('capturas de todas las pantallas @capturas', async ({ page }, info) => {
           ['11-repaso', '/repaso'],
           ['12-aperturas', '/cursos/todas'],
           ['13-apertura', '/curso/' + encodeURIComponent('caro-kann:b') + '/0'],
-          ['15-tus-datos', '/datos'],
+          ...(TUS_DATOS_PRENDIDA ? [['15-tus-datos', '/datos'] as [string, string]] : []),
           ['16-historial', '/historial'],
           ['18-ajustes', '/ajustes'],
           ['19-licencias', '/licencias'],
@@ -97,7 +98,7 @@ test('capturas de todas las pantallas @capturas', async ({ page }, info) => {
   }
 
   // Mis favoritas vacía (después)
-  if (ETAPA !== 'antes') {
+  if (ETAPA !== 'antes' && FAVORITAS_PRENDIDAS) {
     await page.evaluate(() => localStorage.setItem('ajedrez.v1.favoritas', '[]'))
     await page.goto('/#/cursos')
     await page.reload()
