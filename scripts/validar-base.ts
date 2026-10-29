@@ -33,7 +33,8 @@ async function principal() {
     for (const v of d.variantes) {
       const fila = fuente.find((f) => f.eco === v.fila.eco && f.name === v.fila.name && f.pgn === v.fila.pgn)
       if (!fila) continue
-      for (const j of jugadasMias(fila.sanes, v.lado ?? d.lado)) {
+      const todas = [...fila.sanes, ...(v.continuacion ? v.continuacion.jugadas.split(' ').filter(Boolean) : [])]
+      for (const j of jugadasMias(todas, v.lado ?? d.lado)) {
         const k = claveValidacion(j.fen, j.uci)
         const c = cache[k]
         if (!c || c.profundidad < profundidad || process.argv.includes('--todo')) pend.set(k, { fen: j.fen, uci: j.uci })
@@ -42,7 +43,8 @@ async function principal() {
   const lista = [...pend.values()]
   console.log(`por validar: ${lista.length} jugadas (ya en caché: ${Object.keys(cache).length})`)
   if (lista.length === 0) return
-  const dir = '/Users/carlosaguerof/01_repos/00_corridas/_local/chess/2026-10-28_mvp/validacion'
+  // la carpeta de trabajo (fuera del repo): la de la corrida que valida, o la del MVP
+  const dir = process.env.DIR_VALIDACION ?? '/Users/carlosaguerof/01_repos/00_corridas/_local/chess/2026-10-28_mvp/validacion'
   mkdirSync(dir, { recursive: true })
   const lotes: { fen: string; uci: string }[][] = Array.from({ length: paralelo }, () => [])
   lista.forEach((p, i) => lotes[i % paralelo]!.push(p))

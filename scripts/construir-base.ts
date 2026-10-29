@@ -70,6 +70,8 @@ interface Definicion {
     familia: string
     nombre: string
     fila: { eco: string; name: string; pgn: string }
+    /** C4: jugadas después de la fila (SAN inglés), con su fuente; las de mi lado se validan con el motor como las demás */
+    continuacion?: { jugadas: string; fuente: string[] }
     lado?: Lado
     plan: string
     frecuencia: number | null
@@ -105,7 +107,7 @@ export function construir(): { base: Base; errores: string[]; recortes: string[]
         errores.push(`${etiqueta}: la fila no existe tal cual en la fuente (${v.fila.eco} · ${v.fila.name} · ${v.fila.pgn})`)
         continue
       }
-      const jugadas = fila.sanes
+      const jugadas = [...fila.sanes, ...(v.continuacion ? v.continuacion.jugadas.split(' ').filter(Boolean) : [])]
       if (raiz.some((m, i) => jugadas[i] !== m)) errores.push(`${etiqueta}: no empieza con la raíz ${d.raiz}`)
       const c = new Chess()
       try {
@@ -153,6 +155,7 @@ export function construir(): { base: Base; errores: string[]; recortes: string[]
         fuenteFrecuencia: v.frecuencia ? (v.fuenteFrecuencia ?? '') : 'sin dato (regla: 3)',
         fuente: { repo: 'lichess-org/chess-openings', eco: fila.eco, name: fila.name, pgn: fila.pgn },
         ...(corte < jugadas.length ? { recorte: { jugadasOriginales: jugadas.length, motivo } } : {}),
+        ...(v.continuacion ? { continuacion: { desde: fila.sanes.length, fuente: v.continuacion.fuente } } : {}),
       })
     }
     aperturas.push({ id: d.id, nombre: d.nombre, nombreIngles: d.nombreIngles, eco: d.eco, lado: d.lado, raiz, idea: d.idea, variantes })
@@ -179,6 +182,7 @@ export function paginaMarkdown(a: Apertura): string {
     l.push(`- Frecuencia: ${PUNTOS(v.frecuencia)} (${v.frecuencia} de 5; ${v.fuenteFrecuencia})`)
     l.push(`- Plan *(redactado por la IA)*: ${v.plan}`)
     l.push(`- Fuente: ${v.fuente.eco} · ${v.fuente.name}`)
+    if (v.continuacion) l.push(`- Sigue la fila de la fuente desde la media jugada ${v.continuacion.desde + 1} con teoría de: ${v.continuacion.fuente.join('; ')}.`)
     if (v.recorte) l.push(`- Recortada: la fuente sigue hasta ${v.recorte.jugadasOriginales} medias jugadas; se corta porque ${v.recorte.motivo}.`)
     l.push('')
   }

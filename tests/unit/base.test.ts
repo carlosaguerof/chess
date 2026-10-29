@@ -35,6 +35,12 @@ describe('T6 · la base de conocimiento de aperturas', () => {
         // recortada antes de una jugada mía que el motor no aprueba: lo que queda es un prefijo exacto de la fuente
         expect(v.jugadas).toEqual(fila!.sanes.slice(0, v.jugadas.length))
         expect(v.recorte.jugadasOriginales).toBe(fila!.sanes.length)
+      } else if (v.continuacion) {
+        // C4: la fila de la fuente, exacta, y después la teoría de la continuación, con su fuente
+        expect(v.jugadas.slice(0, v.continuacion.desde)).toEqual(fila!.sanes)
+        expect(v.continuacion.desde).toBe(fila!.sanes.length)
+        expect(v.jugadas.length).toBeGreaterThan(fila!.sanes.length)
+        expect(v.continuacion.fuente.length).toBeGreaterThan(0)
       } else expect(v.jugadas).toEqual(fila!.sanes)
     }
   })

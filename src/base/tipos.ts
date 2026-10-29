@@ -23,6 +23,8 @@ export interface Variante {
   fuente: { repo: string; eco: string; name: string; pgn: string }
   /** si la línea se cortó antes de una jugada de mi lado que el motor no aprueba */
   recorte?: { jugadasOriginales: number; motivo: string }
+  /** C4: la línea sigue la fila de la fuente desde esta media jugada con teoría de otras fuentes (Wikibooks, Wikipedia o la mejor del motor) */
+  continuacion?: { desde: number; fuente: string[] }
 }
 
 export interface Apertura {

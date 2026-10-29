@@ -61,7 +61,8 @@ async function principal() {
   const todas = jugadasDeLibro()
   const pend = todas.filter((j) => !cache[claveValidacion(j.fen, j.uci)])
   console.log(`jugadas de libro: ${todas.length}; por validar: ${pend.length}`)
-  const dir = '/Users/carlosaguerof/01_repos/00_corridas/_local/chess/2026-10-28_mvp/validacion-libros'
+  // la carpeta de trabajo (fuera del repo): la de la corrida que valida, o la del MVP
+  const dir = process.env.DIR_VALIDACION ?? '/Users/carlosaguerof/01_repos/00_corridas/_local/chess/2026-10-28_mvp/validacion-libros'
   mkdirSync(dir, { recursive: true })
   const lotes: (typeof pend)[] = Array.from({ length: paralelo }, () => [])
   pend.forEach((p, i) => lotes[i % paralelo]!.push(p))
