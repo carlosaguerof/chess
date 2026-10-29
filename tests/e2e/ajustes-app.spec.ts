@@ -88,7 +88,7 @@ test.describe('ajustes de la app', () => {
   test('"Tus datos" ya no existe; Respaldo en Ajustes exporta todo e importa con confirmación', async ({ page }, info) => {
     await page.addInitScript(() => {
       if (localStorage.getItem('ajedrez.v1.progreso')) return
-      localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1 } }))
+      localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'eslava:b/b:eslava/checa': { fecha: 1 } }))
       localStorage.setItem('ajedrez.v1.historial', JSON.stringify([{ id: 'p1', botId: 'brisa', colorHumano: 'w', resultado: 'gane', fin: 'jaque mate', jugadas: 20, fecha: 3 }]))
       localStorage.setItem('ajedrez.v1.sonido', 'true')
     })
@@ -108,7 +108,7 @@ test.describe('ajustes de la app', () => {
     expect(d.suggestedFilename()).toMatch(/^mis-aperturas-\d{4}-\d{2}-\d{2}\.json$/)
     const ruta = await d.path()
     const r = JSON.parse(readFileSync(ruta, 'utf8'))
-    expect(Object.keys(r.progreso)).toEqual(['caro-kann:b/b:caro-kann/avance-short'])
+    expect(Object.keys(r.progreso)).toEqual(['eslava:b/b:eslava/checa'])
     expect(r.historial).toHaveLength(1)
     expect(r.ajustes.sonido).toBe(true)
     await expect(page.getByTestId('aviso-respaldo')).toContainText('se descargó')

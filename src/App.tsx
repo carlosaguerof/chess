@@ -10,6 +10,9 @@ import { Jugar } from './pantallas/Jugar.tsx'
 import { Partida } from './pantallas/Partida.tsx'
 import { Licencias } from './pantallas/Licencias.tsx'
 import { Leccion } from './pantallas/Leccion.tsx'
+import { LeccionCurso } from './pantallas/LeccionCurso.tsx'
+import { CursoPagina, ErroresDelCurso, PiezaDeLeer } from './pantallas/CursoPagina.tsx'
+import { cursoNuevo } from './curso/datos.ts'
 import { Refuerza } from './pantallas/Refuerza.tsx'
 import { AperturasYDefensas, PaginaApertura, PaginaVariante, pestanaDe } from './pantallas/AperturasYDefensas.tsx'
 import { Respaldo } from './pantallas/Respaldo.tsx'
@@ -50,6 +53,10 @@ export function App() {
   if (import.meta.env.DEV && primera === 'prueba-partida') return <PruebaPartida consulta={ruta.consulta} />
   // la partida ocupa toda la pantalla (N8: solo lo que importa)
   if (primera === 'partida') return <Partida />
+  // C3: el curso piloto (la Caro-Kann) usa la lección nueva; los demás, la de antes
+  const nuevo = segunda ? cursoNuevo(decodeURIComponent(segunda)) : undefined
+  if (primera === 'curso' && nuevo && ruta.partes[2] === 'linea' && ruta.partes[3]) return <LeccionCurso key={ruta.camino} cursoId={nuevo.id} lineaId={decodeURIComponent(ruta.partes[3])} />
+  if (primera === 'leccion' && nuevo) return <LeccionCurso key={ruta.camino} cursoId={nuevo.id} lineaId={`v:${nuevo.variantes[Number(ruta.partes[2] ?? 0)]?.id ?? ''}`} />
   if (primera === 'leccion' && segunda) return <Leccion key={ruta.consulta.get('otra') ?? ''} cursoId={decodeURIComponent(segunda)} indice={Number(ruta.partes[2] ?? 0)} />
   let pantalla
   if (primera === 'bots') pantalla = <Jugar />
@@ -57,6 +64,9 @@ export function App() {
   else if (primera === 'licencias') pantalla = <Licencias />
   // Nota 1: Aprender es "Aperturas y defensas" (Con blancas / Con negras); Repertorio y Aperturas ya no son pantallas aparte
   else if (primera === 'cursos') pantalla = <AperturasYDefensas key={segunda ?? ''} pestana={pestanaDe(segunda)} />
+  else if (primera === 'curso' && nuevo && ruta.partes[2] === 'leer' && ['idea', 'estructura', 'repaso'].includes(ruta.partes[3] ?? '')) pantalla = <PiezaDeLeer key={ruta.camino} id={nuevo.id} pieza={(ruta.partes[3] ?? 'idea') as 'idea' | 'estructura' | 'repaso'} />
+  else if (primera === 'curso' && nuevo && ruta.partes[2] === 'errores') pantalla = <ErroresDelCurso id={nuevo.id} />
+  else if (primera === 'curso' && nuevo && ruta.partes[2] === undefined) pantalla = <CursoPagina id={nuevo.id} />
   else if (primera === 'curso' && segunda && ruta.partes[2] !== undefined) pantalla = <PaginaVariante key={ruta.camino} id={decodeURIComponent(segunda)} indice={Number(ruta.partes[2])} />
   else if (primera === 'curso' && segunda) pantalla = <PaginaApertura id={decodeURIComponent(segunda)} />
   else if (primera === 'repertorio') pantalla = <AperturasYDefensas pestana={pestanaDe(undefined)} />

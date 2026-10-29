@@ -5,10 +5,11 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import './estilos.css'
 import { App } from './App.tsx'
-import { migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
+import { migrarAlCursoCaroKann, migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
 
 // Nota 1: lo guardado pasa al modelo de favoritas (una sola vez)
 migrarAlModeloDeFavoritas()
+migrarAlCursoCaroKann()
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>

@@ -6,6 +6,7 @@ import { siguientesEnRepertorio } from '../../src/repertorio/modelo.ts'
 import { captura, jugar } from './_util.ts'
 
 const ck = 'caro-kann:b'
+const sl = 'eslava:b'
 
 test.describe('Nota 1 · "Aperturas y defensas"', () => {
   test('Mis favoritas vacía la primera vez; el ♡ de la Caro-Kann la guarda al instante, se conserva al recargar y se quita', async ({ page }, info) => {
@@ -40,46 +41,47 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
     await expect(page.getByTestId('favoritas-vacia')).toBeVisible()
   })
 
-  test('Con negras → Caro-Kann → Variante del Avance: avanzar y regresar en el tablero, y Practicar abre la lección', async ({ page }, info) => {
+  // la Caro-Kann tiene su página nueva (C6); la página de antes sigue en los demás cursos: aquí, la Eslava
+  test('Con negras → Eslava → Variante Checa: avanzar y regresar en el tablero, y Practicar abre la lección', async ({ page }, info) => {
     await page.goto(FAVORITAS_PRENDIDAS ? '/#/cursos/todas' : '/#/cursos/negras')
-    await page.getByTestId(`tarjeta-${ck}`).locator('a').click()
+    await page.getByTestId(`tarjeta-${sl}`).locator('a').click()
     // la página de la apertura: tablero arriba, avance, variantes de la más común a la más rara (el corazón, solo con favoritas)
-    await expect(page.getByRole('heading', { name: 'Defensa Caro-Kann' })).toBeVisible()
-    await expect(page.getByTestId('avance')).toContainText('0 de 22 variantes aprendidas')
+    await expect(page.getByRole('heading', { name: 'Defensa Eslava' })).toBeVisible()
+    await expect(page.getByTestId('avance')).toContainText('0 de 13 variantes aprendidas')
     await expect(page.getByTestId('tablero-mini')).toHaveAttribute('data-orientacion', 'black')
-    await expect(page.getByTestId(`corazon-${ck}`)).toHaveCount(FAVORITAS_PRENDIDAS ? 1 : 0)
+    await expect(page.getByTestId(`corazon-${sl}`)).toHaveCount(FAVORITAS_PRENDIDAS ? 1 : 0)
     // L5: la idea general de la apertura, de mi lado y corta
-    await expect(page.getByTestId('idea')).toContainText('1...c6')
+    await expect(page.getByTestId('idea')).toContainText('2...c6')
     const filas = page.getByTestId('variante')
-    await expect(filas).toHaveCount(22)
-    await expect(filas.first()).toContainText('Variante del Avance')
+    await expect(filas).toHaveCount(13)
+    await expect(filas.first()).toContainText('Variante Checa')
     // el inglés y el ECO, solo en "Detalles"
     const texto = await page.locator('main').innerText()
     expect(texto.replace(/Detalles[\s\S]*$/, '')).not.toMatch(/Defense|Variation|\bB1\d\b/)
     await captura(page, info, 'l3-apertura')
     // la variante: su línea en el tablero, en un renglón
     await filas.first().click()
-    await expect(page.getByRole('heading', { name: /Variante del Avance/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Variante Checa/ })).toBeVisible()
     const tablero = page.getByTestId('tablero')
     const linea = page.getByTestId('linea')
-    await expect(linea).toContainText('1.e4 c6 2.d4 d5 3.e5 ♗f5')
+    await expect(linea).toContainText('1.d4 d5 2.c4 c6 3.♘f3')
     const final = await tablero.getAttribute('data-fen')
     await page.getByTestId('regresar').click()
     await expect(tablero).not.toHaveAttribute('data-fen', final!)
     await page.getByTestId('al-inicio').click()
     await expect(tablero).toHaveAttribute('data-fen', /^rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w/)
     await page.getByTestId('avanzar').click()
-    await expect(tablero).toHaveAttribute('data-fen', /^rnbqkbnr\/pppppppp\/8\/8\/4P3\//)
-    await expect(linea.locator('.actual')).toHaveText('1.e4')
+    await expect(tablero).toHaveAttribute('data-fen', /^rnbqkbnr\/pppppppp\/8\/8\/3P4\//)
+    await expect(linea.locator('.actual')).toHaveText('1.d4')
     await page.getByTestId('al-final').click()
     await expect(tablero).toHaveAttribute('data-fen', final!)
-    // el dibujo también está al final: el peón de c6 ya no está en c7 (lo dibuja chessground, no React)
+    // el dibujo también está al final: los 8 peones negros (el de d5 tomó en c4; lo dibuja chessground, no React)
     await expect(tablero.locator('piece.black.pawn')).toHaveCount(8)
     await page.waitForTimeout(400)
     await captura(page, info, 'l3-variante')
     // Practicar abre la lección
     await page.getByTestId('practicar').click()
-    await expect(page).toHaveURL(/#\/leccion\/caro-kann%3Ab\/0/)
+    await expect(page).toHaveURL(/#\/leccion\/eslava%3Ab\/0/)
     await expect(page.getByTestId('instruccion')).toBeVisible()
   })
 

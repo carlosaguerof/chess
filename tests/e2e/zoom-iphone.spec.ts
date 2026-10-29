@@ -1,6 +1,7 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { Chess } from 'chess.js'
 import { cursos } from '../../src/cursos/datos.ts'
+import { cursoNuevo, lineaPorId, misJugadas } from '../../src/curso/datos.ts'
 import { centroCasilla, jugar } from './_util.ts'
 
 // El bug del 2026-10-28: jugando contra Brisa en el iPhone, la página se ensanchaba y Safari cambiaba el zoom solo.
@@ -105,7 +106,10 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
 
   test('las demás pantallas con tablero: la lección más larga (las dos fases), su variante y su apertura', async ({ page }, info) => {
     test.setTimeout(120_000)
-    const todas = cursos().flatMap((c) => c.lecciones.map((l, i) => ({ curso: c, l, i })))
+    // los cursos con la lección de antes (el de la Caro-Kann tiene la nueva: la prueba de abajo)
+    const todas = cursos()
+      .filter((c) => !cursoNuevo(c.id))
+      .flatMap((c) => c.lecciones.map((l, i) => ({ curso: c, l, i })))
     const { curso, l, i } = todas.reduce((x, y) => (y.l.jugadas.length > x.l.jugadas.length ? y : x))
     const uci = enUci(l.jugadas)
     const esMia = (ply: number) => (ply % 2 === 0 ? 'w' : 'b') === l.color
@@ -128,5 +132,65 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     await page.goto(`/#/curso/${encodeURIComponent(curso.id)}`)
     await expect(page.getByTestId('variante').first()).toBeVisible()
     await cabe(page, 'página de la apertura')
+  })
+
+  test('la lección nueva (C7): con las dos pistas, la Respuesta o un error, Pista, Respuesta y Atrás siguen a la vista sin desplazar', async ({ page }, info) => {
+    const c = cursoNuevo('caro-kann:b')!
+    const l = lineaPorId(c, 'v:clasica')!
+    const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
+    // se toca con el dedo sin que Playwright desplace la página: si un botón no se ve, la prueba lo dice
+    const toca = (id: string) => page.getByTestId(id).dispatchEvent('click')
+    const aLaVista = async (cuando: string) => {
+      const m = await page.evaluate(() => ({
+        alto: innerHeight,
+        desplazada: scrollY,
+        abajo: Math.max(...['pista', 'respuesta', 'atras'].map((id) => document.querySelector(`[data-testid="${id}"]`)!.getBoundingClientRect().bottom)),
+      }))
+      expect(m.desplazada, `${cuando}: la página no se desplaza`).toBe(0)
+      expect(m.abajo, `${cuando}: los botones caben`).toBeLessThanOrEqual(m.alto)
+    }
+    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    await toca('empezar-vuelta')
+    await momento('tuTurno')
+    await toca('pista')
+    await toca('pista')
+    await aLaVista('dos pistas')
+    await toca('respuesta')
+    await expect(page.getByTestId('narracion').locator('[data-tipo="respuesta"]')).toBeVisible()
+    await aLaVista('la Respuesta')
+    const uci = enUci(l.jugadas)
+    await jugar(page, info, uci[misJugadas(l)[0]!]!)
+    await momento('leer')
+    await aLaVista('la explicación')
+    await expect(page.getByTestId('siguiente')).toBeInViewport()
+  })
+
+  test('la lección nueva (C3): la Clásica, la variante más larga, en sus dos vueltas, y la página del curso', async ({ page }, info) => {
+    test.setTimeout(150_000)
+    const c = cursoNuevo('caro-kann:b')!
+    const l = lineaPorId(c, 'v:clasica')!
+    const uci = enUci(l.jugadas)
+    const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
+    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    for (const vuelta of ['aprender', 'practicar']) {
+      await page.getByTestId('empezar-vuelta').click()
+      for (let ply = l.desde; ply < uci.length; ply++) {
+        if ((ply % 2 === 0 ? 'w' : 'b') !== l.lado) continue
+        await momento('tuTurno')
+        await jugar(page, info, uci[ply]!)
+        await cabe(page, `lección nueva, ${vuelta}, media jugada ${ply + 1}`)
+        if (vuelta === 'aprender') await page.getByTestId('siguiente').click()
+      }
+      if (vuelta === 'aprender') {
+        await momento('plan')
+        await cabe(page, 'el plan')
+        await page.getByTestId('a-practicar').click()
+      }
+    }
+    await momento('fin')
+    await cabe(page, 'el resumen')
+    await page.goto('/#/curso/caro-kann%3Ab')
+    await expect(page.getByTestId('pagina-curso')).toBeVisible()
+    await cabe(page, 'la página del curso')
   })
 })

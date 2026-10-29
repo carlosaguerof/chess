@@ -6,6 +6,7 @@ import { repasoActivo, activarRepaso } from '../repaso/repaso.ts'
 import { ESTILOS, cambiarEstiloRetratos, useEstiloRetratos } from '../bots/retratos.ts'
 import { personajePorId } from '../bots/personajes.ts'
 import { SeccionRespaldo } from '../componentes/SeccionRespaldo.tsx'
+import { flechasPrendidas, prenderFlechas } from '../curso/flechas.ts'
 import { cambiarNotacion, mostrarSan, notacion, releerNotacion, type Notacion } from '../ajedrez/mostrar.ts'
 
 /** C2: las dos formas de ver las jugadas, con su ejemplo en la misma jugada. */
@@ -21,6 +22,7 @@ export function Ajustes() {
   const [sonido, setSonido] = useState(sonidoPrendido)
   const [repaso, setRepaso] = useState(repasoActivo)
   const [nota, setNota] = useState(notacion)
+  const [flechas, setFlechas] = useState(flechasPrendidas)
   const estilo = useEstiloRetratos()
   return (
     <div className="ajustes">
@@ -83,12 +85,23 @@ export function Ajustes() {
           }}
           testid="ajuste-repaso"
         />
+        <Interruptor
+          etiqueta="Flechas de la siguiente jugada"
+          detalle="En las lecciones, al aprender"
+          activo={flechas}
+          onCambiar={(v) => {
+            prenderFlechas(v)
+            setFlechas(v)
+          }}
+          testid="ajuste-flechas"
+        />
       </div>
       <SeccionRespaldo
         onCargado={() => {
           // lo importado puede traer otros ajustes: se vuelven a leer
           setSonido(sonidoPrendido())
           setRepaso(repasoActivo())
+          setFlechas(flechasPrendidas())
           releerNotacion()
           setNota(notacion())
         }}

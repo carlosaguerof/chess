@@ -1,6 +1,7 @@
 import { BASE } from '../base/base.ts'
 import { cursoActivo } from '../aprender/interruptores.ts'
 import { cursosDeLaBase, type Curso } from './modelo.ts'
+import { cursoNuevo, leccionesDe } from '../curso/datos.ts'
 
 let todos: Curso[] | null = null
 
@@ -9,7 +10,13 @@ let todos: Curso[] | null = null
  * apagadas: `aprender/interruptores.ts`). No dependen de mis favoritas.
  */
 export function cursos(): Curso[] {
-  todos ??= cursosDeLaBase(BASE).filter((c) => cursoActivo(c.id))
+  // C3: el curso piloto de la Caro-Kann trae sus propias lecciones (una por variante); el Repaso y el inicio las usan igual
+  todos ??= cursosDeLaBase(BASE)
+    .filter((c) => cursoActivo(c.id))
+    .map((c) => {
+      const n = cursoNuevo(c.id)
+      return n ? { ...c, lecciones: leccionesDe(n) } : c
+    })
   return todos
 }
 

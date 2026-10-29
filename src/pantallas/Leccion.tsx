@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { mostrarTexto } from '../ajedrez/mostrar.ts'
+import { Texto } from '../componentes/Notacion.tsx'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
@@ -132,7 +132,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
     estado.fase === 'ensenar' ? (
       listo && esperada ? (
         <>
-          Juega <strong>{mostrarTexto(jugadaNumerada(sanAEspanol(esperada), estado.ply))}</strong>
+          Juega <strong><Texto t={jugadaNumerada(sanAEspanol(esperada), estado.ply)} /></strong>
         </>
       ) : (
         'Mira la jugada del rival…'
@@ -154,7 +154,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
           </a>
           <div className="leccion-titulo">
             <span className="apagado">{repaso ? `Repaso de hoy · ${repaso.indice + 1} de ${repaso.total} · ${curso.nombre}` : curso.nombre}</span>
-            <strong data-testid="nombre-linea">{mostrarTexto(leccion.nombre)}</strong>
+            <strong data-testid="nombre-linea"><Texto t={leccion.nombre} /></strong>
           </div>
           {repaso && (
             <span className="info-arriba">
@@ -185,11 +185,11 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
               {instruccion}
             </p>
             {estado.fase === 'ensenar' && estado.ply === leccion.jugadas.findIndex((_, i) => (i % 2 === 0 ? 'w' : 'b') === color) && leccion.plan && (
-              <p className="plan-leccion">{mostrarTexto(planDeMiLado(leccion.plan, color))}</p>
+              <p className="plan-leccion"><Texto t={planDeMiLado(leccion.plan, color)} /></p>
             )}
             {aviso && (
               <p className={`aviso-leccion ${aviso.tipo}`} role="status" data-testid="aviso-leccion" data-resultado={aviso.tipo}>
-                {mostrarTexto(aviso.texto)}
+                <Texto t={aviso.texto} />
               </p>
             )}
             <div className="botones-ayuda">
@@ -206,7 +206,7 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
         ) : repaso ? (
           <div className="fin-leccion" data-testid="fin-repaso">
             <p className="etiqueta">Línea repasada</p>
-            <h2>{mostrarTexto(leccion.nombre)}</h2>
+            <h2><Texto t={leccion.nombre} /></h2>
             {vuelve && <p data-testid="cuando-vuelve">{vuelve}</p>}
             <button type="button" className="boton primario grande" onClick={repaso.onSiguiente} data-testid="siguiente-repaso">
               {repaso.indice + 1 < repaso.total ? `Siguiente (quedan ${repaso.total - repaso.indice - 1})` : 'Terminar'}
@@ -215,11 +215,11 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
         ) : (
           <div className="fin-leccion" data-testid="fin-leccion">
             <p className="etiqueta">Lección terminada</p>
-            <h2>{mostrarTexto(leccion.nombre)}</h2>
-            {leccion.plan && <p className="plan">{mostrarTexto(planDeMiLado(leccion.plan, color))}</p>}
+            <h2><Texto t={leccion.nombre} /></h2>
+            {leccion.plan && <p className="plan"><Texto t={planDeMiLado(leccion.plan, color)} /></p>}
             {siguiente && siguiente.id !== leccion.id ? (
               <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente)}`)} data-testid="siguiente-leccion">
-                Siguiente: {mostrarTexto(siguiente.nombre)}
+                Siguiente: <Texto t={siguiente.nombre} />
               </button>
             ) : (
               <a className="boton primario grande" href={`#/curso/${encodeURIComponent(curso.id)}`}>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { mostrarTexto } from '../ajedrez/mostrar.ts'
+import { Texto } from './Notacion.tsx'
 
 /** La lista de jugadas, siempre a la vista, en la notación que escogí en Ajustes (figuras o letras). */
 export function ListaJugadas(props: { sanes: string[]; primeraEsNegras?: boolean; numeroInicial?: number; marcar?: Record<number, string> }) {
@@ -28,7 +28,7 @@ export function ListaJugadas(props: { sanes: string[]; primeraEsNegras?: boolean
   const celda = (j?: { san: string; i: number }) =>
     j ? (
       <span className={`jugada ${props.marcar?.[j.i] ?? ''} ${j.i === props.sanes.length - 1 ? 'actual' : ''}`} data-testid="jugada">
-        {mostrarTexto(j.san)}
+        <Texto t={j.san} />
       </span>
     ) : (
       <span className="jugada vacia">{props.primeraEsNegras ? '…' : ''}</span>

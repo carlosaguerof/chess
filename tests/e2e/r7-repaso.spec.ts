@@ -4,9 +4,11 @@ import { BASE } from '../../src/base/base.ts'
 import { repertorioInicial } from '../../src/repertorio/modelo.ts'
 import { cursosDe, type Leccion } from '../../src/cursos/modelo.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
+import { cursos } from '../../src/cursos/datos.ts'
 import { captura, jugar, tocar } from './_util.ts'
 
-const curso = cursosDe(BASE, repertorioInicial(BASE)).find((c) => c.id === 'caro-kann:b')!
+// dos líneas de la Eslava (la Caro-Kann tiene su curso nuevo; su Repaso se prueba abajo, con una variante nueva)
+const curso = cursosDe(BASE, repertorioInicial(BASE)).find((c) => c.id === 'eslava:b')!
 const [A, B] = [curso.lecciones[0]!, curso.lecciones[1]!]
 const HOY = new Date('2026-11-02T10:00:00')
 const MANANA = new Date('2026-11-03T10:00:00')
@@ -39,7 +41,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   test.setTimeout(120_000)
   await page.clock.setFixedTime(HOY)
   await page.goto('/')
-  // dos líneas de la Caro-Kann que aprendí ayer
+  // dos líneas de la Eslava que aprendí ayer
   const ayer = HOY.getTime() - 86_400_000
   await page.evaluate(([a, b, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f }, [b]: { fecha: f } })), [A.id, B.id, ayer] as const)
   await page.reload()
@@ -57,7 +59,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   // el reloj avanza dos minutos entre una línea y otra (como de verdad)
   await page.clock.setFixedTime(new Date(HOY.getTime() + 2 * 60_000))
   await page.getByTestId('siguiente-repaso').click()
-  // B: con un error → vuelve mañana (fallar 1...c6 repasando B no regresa a A)
+  // B: con un error → vuelve mañana (fallar 1...d5 repasando B no regresa a A)
   await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(B.nombre, 'figuras'))
   await contestar(page, info, B, true)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve mañana')
@@ -114,4 +116,18 @@ test('R7 · pedir Pista o Respuesta en el repaso también la regresa a mañana',
     await page.getByTestId('siguiente-repaso').click()
   }
   await expect(page.getByTestId('manana')).toContainText('Mañana tocan 2 líneas')
+})
+
+test('R7 · una variante del curso nuevo de la Caro-Kann también entra al Repaso de hoy', async ({ page }, info) => {
+  test.setTimeout(120_000)
+  const tal = cursos().find((c) => c.id === 'caro-kann:b')!.lecciones.find((l) => l.id.endsWith('/curso-avance-tal'))!
+  await page.clock.setFixedTime(HOY)
+  await page.goto('/')
+  await page.evaluate(([a, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f } })), [tal.id, HOY.getTime() - 86_400_000] as const)
+  await page.reload()
+  await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
+  await page.goto('/#/repaso')
+  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(tal.nombre, 'figuras'))
+  await contestar(page, info, tal)
+  await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve en 3 días')
 })
