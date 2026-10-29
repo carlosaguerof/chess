@@ -31,7 +31,7 @@ async function aprenderTal(page: Page, info: TestInfo) {
 }
 
 test.describe('C3 · la lección nueva', () => {
-  test('el ciclo: intro, rival solo, espera de "Siguiente" cuando hay que leer, el error que se queda, Atrás, el plan, Practicar rápido y el resumen', async ({ page }, info) => {
+  test('el ciclo: intro, rival solo, espera de "Siguiente" cuando hay que leer, el error que se queda, Atrás, el plan, Practicar con su explicación y el resumen', async ({ page }, info) => {
     await page.goto(TAL)
     // "Variante N de M" y la introducción, en el espacio fijo de los mensajes
     await expect(page.getByTestId('cual-variante')).toHaveText('Variante 4 de 16')
@@ -93,21 +93,23 @@ test.describe('C3 · la lección nueva', () => {
     await expect(narracion(page)).toContainText('Tu plan:')
     await expect(flechas(page)).not.toHaveCount(0)
 
-    // Practicar: pregunta por la meta, sin decir la jugada
+    // Practicar: sin decir la jugada; después de jugarla, su explicación y "Siguiente" (correcciones, C2)
     await page.getByTestId('a-practicar').click()
     await expect(leccion(page)).toHaveAttribute('data-vuelta', 'practicar')
     await page.getByTestId('empezar-vuelta').click()
     await momento(page, 'tuTurno')
     await expect(narracion(page)).not.toContainText('Te toca')
     await expect(narracion(page)).not.toContainText('♗f5')
-    // el ciclo rápido: la máquina contesta sola, sin "Siguiente"
     await jugar(page, info, 'c8f5')
-    await expect(page.getByTestId('siguiente')).toHaveCount(0)
+    await momento(page, 'leer')
+    await page.getByTestId('siguiente').click()
     await momento(page, 'tuTurno')
     await expect(leccion(page)).toHaveAttribute('data-ply', '7')
     for (const j of ['h7h5', 'f5d3', 'e7e6']) {
       await momento(page, 'tuTurno')
       await jugar(page, info, j)
+      await momento(page, 'leer')
+      await page.getByTestId('siguiente').click()
     }
 
     // el resumen: la línea, la idea clave, en qué me equivoqué, y tres salidas
@@ -133,7 +135,7 @@ test.describe('C3 · la lección nueva', () => {
     await momento(page, 'tuTurno')
     await expect(flechas(page)).toHaveCount(0)
     await expect(circulos(page)).toHaveCount(0)
-    // 1) Pista: la idea en palabras
+    // 1) Pista: la idea en palabras (en Practicar, la meta: correcciones, C2)
     await page.getByTestId('pista').click()
     await expect(narracion(page).locator('[data-tipo="pista"]')).toHaveCount(1)
     await expect(narracion(page)).not.toContainText('♗f5')
@@ -141,18 +143,19 @@ test.describe('C3 · la lección nueva', () => {
     // 2) Otra pista: se marca la pieza que se mueve
     await expect(page.getByTestId('pista')).toContainText('Otra pista')
     await page.getByTestId('pista').click()
-    await expect(narracion(page).locator('[data-tipo="pista"]')).toHaveCount(2)
-    await expect(narracion(page)).toContainText('el alfil de c8')
     await expect(circulos(page)).toHaveCount(1)
     await expect(page.getByTestId('pista')).toBeDisabled()
-    // 3) Respuesta: la flecha de la jugada, con su porqué
+    // 3) Respuesta: la flecha de la jugada (en Practicar, sin texto)
     await page.getByTestId('respuesta').click()
-    await expect(narracion(page).locator('[data-tipo="respuesta"]')).toContainText('Respuesta: 3...♗f5')
     await expect(flechas(page)).toHaveCount(1)
     await jugar(page, info, 'c8f5')
+    await momento(page, 'leer')
+    await page.getByTestId('siguiente').click()
     for (const j of ['h7h5', 'f5d3', 'e7e6']) {
       await momento(page, 'tuTurno')
       await jugar(page, info, j)
+      await momento(page, 'leer')
+      await page.getByTestId('siguiente').click()
     }
     await momento(page, 'fin')
     await expect(page.getByTestId('resumen-tropiezos')).toContainText('3...♗f5')

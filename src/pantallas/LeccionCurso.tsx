@@ -14,7 +14,8 @@ import { cursoNuevo, jugadasDeLaBaseEn, lineaPorId, lineasDe, textoMio, textoRiv
 import type { DatosCurso, LineaCurso } from '../curso/tipos.ts'
 import { atras, continuar, empezar, empezarDeNuevo, intentar, jugarRival, pedirPista, pedirRespuesta, plyDeAtras, progreso, reintentar, retomar, tropiezos, type EstadoCiclo } from '../curso/ciclo.ts'
 import { borrarEnCurso, guardarEnCurso, leerAvance, marcarError, marcarPieza, marcarVariante } from '../curso/avance.ts'
-import { despues, formas, jugadaEs, lineaHasta, piezaQueSeMueve, pistaDe, porQueNo, posicion } from '../curso/textos.ts'
+import { formas, jugadaEs, lineaHasta, porQueNo, posicion } from '../curso/textos.ts'
+import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turno.ts'
 import { flechasPrendidas } from '../curso/flechas.ts'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
@@ -103,7 +104,8 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     }
     const ply = e.ply
     const buenas = new Set([...jugadasDeLaBaseEn(tablero.fen()), ...(textoMio(c, l.jugadas, ply)?.buenas ?? [])].filter((s) => s !== l.jugadas[ply]))
-    const r = intentar(l, e, { san: j.san, desde: j.from, hasta: j.to }, { buenas, esperar: e.vuelta === 'aprender' && despues(textoMio(c, l.jugadas, ply)).length > 0 })
+    // con algo que leer después de la jugada (en Aprender y, desde las correcciones, también en Practicar), espera a "Siguiente"
+    const r = intentar(l, e, { san: j.san, desde: j.from, hasta: j.to }, { buenas, esperar: explicacionDespues(c, l, e.vuelta, ply).length > 0 })
     setNotaMotor(null)
     if (r.resultado === 'correcta' && esVariante && e.vuelta === 'practicar')
       registrarPasoCurso({ fen: tablero.fen(), esperada: l.jugadas[ply]!, paso: r.estado.pasos[ply]!, linea: l.nombre, camino: l.jugadas.slice(0, ply) })
@@ -135,11 +137,12 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   // ---------------------------------------------------------------- el tablero
   const flechas: DrawShape[] = []
   const flecha = (orig: string, dest: string | undefined, brush: string) => flechas.push({ orig: orig as Key, dest: dest as Key | undefined, brush })
-  if (e.momento === 'tuTurno' && esperada) {
+  const turno = e.momento === 'tuTurno' && esperada ? vistaTuTurno(c, l, e.vuelta, e.ply, e.ayuda) : null
+  if (turno && esperada) {
     const m = posicion(l.jugadas, e.ply).move(esperada)
     if (e.vuelta === 'aprender' && flechasPrendidas()) flecha(m.from, m.to, 'green')
-    if (e.ayuda === 2) flecha(m.from, undefined, 'yellow')
-    if (e.ayuda === 3) flecha(m.from, m.to, 'blue')
+    if (turno.pieza) flecha(turno.pieza, undefined, 'yellow')
+    if (turno.flecha) flecha(turno.flecha.de, turno.flecha.a, 'blue')
   }
   if (e.intento) flecha(e.intento.desde, e.intento.hasta, e.momento === 'error' ? 'red' : 'blue')
   if (e.momento === 'leer' && e.ultima !== null) for (const f of formas(textoMio(c, l.jugadas, e.ultima)?.marcas)) flecha(f.orig, f.dest, f.brush)
@@ -157,24 +160,19 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   }
   let boton: { texto: string; testid: string; accion: () => void } | null = null
   if (e.momento === 'intro') {
-    mensajes.push({ tipo: 'info', texto: e.vuelta === 'aprender' ? l.intro : 'Ahora, Practicar: te pregunto por la meta de cada jugada y tú la encuentras. Si te atoras, pide una Pista.' })
+    mensajes.push({ tipo: 'info', texto: e.vuelta === 'aprender' ? l.intro : INTRO_PRACTICAR })
     boton = { texto: 'Empezar', testid: 'empezar-vuelta', accion: () => setE(continuar(l, e)) }
   } else if (e.momento === 'rival') {
-    // solo "Correcto": la jugada del rival llega en 0.9 s y un texto más largo se borraría antes de leerlo (diseño §4)
+    // solo "Correcto": la explicación ya se leyó con "Siguiente"; la jugada del rival llega en 0.9 s
     if (e.ultima !== null) mensajes.push({ tipo: 'correcta', jugada: jugadaEs(l.jugadas[e.ultima]!, e.ultima), texto: 'Correcto.' })
     else mensajes.push({ tipo: 'info', texto: 'Juega el rival…' })
-  } else if (e.momento === 'tuTurno' && esperada && mia) {
+  } else if (e.momento === 'tuTurno' && turno && mia) {
     anotarRival()
-    // en Aprender la lección dice la jugada; en Practicar y en los «¿Y si…?», pregunta por la meta
-    if (e.vuelta === 'aprender' && esVariante) mensajes.push({ tipo: 'pregunta', jugada: `Te toca: ${jugadaEs(esperada, e.ply)}`, texto: mia.hace })
-    else mensajes.push({ tipo: 'pregunta', texto: mia.pregunta })
-    // con la Respuesta a la vista, las pistas ya no hacen falta (y en el iPhone empujarían el texto fuera de la pantalla)
-    if (e.ayuda === 1 || e.ayuda === 2) mensajes.push({ tipo: 'pista', texto: `Pista: ${pistaDe(c, l, e.ply)}` })
-    if (e.ayuda === 2) mensajes.push({ tipo: 'pista', texto: `Otra pista: ${piezaQueSeMueve(l, e.ply).texto}` })
-    if (e.ayuda === 3) mensajes.push({ tipo: 'respuesta', jugada: `Respuesta: ${jugadaEs(esperada, e.ply)}`, texto: [mia.hace, mia.porque].filter(Boolean).join(' ') })
+    // Aprender dice la jugada; Practicar no dice nada de ella, salvo la ayuda que pido (src/curso/turno.ts)
+    mensajes.push(...turno.textos)
   } else if (e.momento === 'leer' && e.ultima !== null) {
     mensajes.push({ tipo: 'correcta', jugada: jugadaEs(l.jugadas[e.ultima]!, e.ultima), texto: 'Correcto.' })
-    for (const t of despues(textoMio(c, l.jugadas, e.ultima))) mensajes.push({ tipo: 'explica', texto: t })
+    for (const t of explicacionDespues(c, l, e.vuelta, e.ultima)) mensajes.push({ tipo: 'explica', texto: t })
     boton = { texto: 'Siguiente', testid: 'siguiente', accion: () => setE(continuar(l, e)) }
   } else if (e.momento === 'error' && e.intento && esperada) {
     mensajes.push({ tipo: 'incorrecta', jugada: `Esa no es: ${jugadaEs(e.intento.san, e.ply)}`, texto: porQueNo(c, l, e.ply, e.intento.san, e.vuelta) })
