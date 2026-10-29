@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess } from 'chess.js'
 import type { Base } from '../../src/base/tipos.ts'
-import { repertorioInicial } from '../../src/repertorio/modelo.ts'
+import { lineaDeVariante, repertorioInicial } from '../../src/repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, nombreDeApertura, resumenDePartida, type Contexto } from '../../src/guia/guia.ts'
 import { claveValidacion } from '../../scripts/construir-base.ts'
 import { azarConSemilla } from '../../src/motor/elegir.ts'
@@ -55,11 +55,17 @@ describe('T9 · la guía en una partida real', () => {
     expect(validacion[claveValidacion(fen.fen(), 'c7c6')]!.mejor).toBe('e7e5')
   })
 
-  it('si mi repertorio no tiene nada, salen de la base; si la base tampoco, el aviso de fuera de teoría', () => {
-    const b = ayudaEnMiTurno(negras, ['e4', 'c5', 'Nf3'])
+  it('si mi repertorio no tiene nada, salen de la base (solo de mis cursos); si la base tampoco, el aviso de fuera de teoría', () => {
+    // sin la Caro-Kann en el repertorio, la base da la jugada de mi curso de la Caro-Kann
+    const sinCaroKann = { base, rep: { version: 1 as const, lineas: rep.lineas.filter((l) => l.apertura !== 'caro-kann') }, color: 'b' as const }
+    const b = ayudaEnMiTurno(sinCaroKann, ['e4', 'c6', 'd4'])
     expect(b.origen).toBe('base')
-    expect(['d6', 'Nc6', 'e6', 'g6']).toContain(b.san)
+    expect(b.san).toBe('d5')
     expect(b.respuesta).not.toContain('(de la base)') // §3.3: sin etiquetas de origen (L5, pase 2)
+    // la Siciliana con negras está apagada (populares de la base): ya no da jugadas, aunque la nombra
+    const s = ayudaEnMiTurno(negras, ['e4', 'c5', 'Nf3'])
+    expect(s.origen).toBe('fuera')
+    expect(nombreDeApertura(base, ['e4', 'c5', 'Nf3'])?.apertura).toBe('Defensa Siciliana')
     const f = ayudaEnMiTurno(negras, ['a3', 'h5', 'h3'])
     expect(f.origen).toBe('fuera')
     expect(f.pista).toContain('Fuera de teoría')
@@ -89,9 +95,13 @@ describe('T9 · la guía en una partida real', () => {
   })
 
   it('pase 1: la Pista no dice la jugada aunque el nombre de la variante la traiga entre paréntesis', () => {
-    const a = ayudaEnMiTurno(negras, ['e4', 'd5', 'exd5', 'Qxd5', 'Nc3'])
-    expect(a.origen).toBe('base')
+    // la Escandinava con negras está apagada: el caso se prueba con la base completa como repertorio de negras
+    const escandinava = { base, rep: { version: 1 as const, lineas: base.aperturas.find((x) => x.id === 'escandinava')!.variantes.map((v) => lineaDeVariante(v, 'b', 'escandinava', 'ambos')) }, color: 'b' as const }
+    const a = ayudaEnMiTurno(escandinava, ['e4', 'd5', 'exd5', 'Qxd5', 'Nc3'])
+    expect(a.origen).toBe('repertorio')
     expect(a.pista).not.toMatch(/a5|d6|d8/)
+    // y ya no la sugiere la base con mi repertorio de siempre
+    expect(ayudaEnMiTurno(negras, ['e4', 'd5', 'exd5', 'Qxd5', 'Nc3']).origen).toBe('fuera')
   })
 
   it('pase 2: reconoce la misma posición por otro orden de jugadas (transposición)', () => {

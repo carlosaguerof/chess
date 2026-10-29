@@ -4,12 +4,15 @@ import { BASE } from '../base/base.ts'
 import type { Base } from '../base/tipos.ts'
 import { lineaDeVariante, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
+import { cursoActivo, FAVORITAS_PRENDIDAS, MIS_APERTURAS } from './interruptores.ts'
 
 /**
  * Nota 1 (L3): "Aperturas y defensas". Mis favoritas son aperturas de la base con el color con que las juego
  * ("caro-kann:b" = la Caro-Kann con negras; "caro-kann:w" = contra la Caro-Kann, con blancas). Empiezan vacías
- * (mi guía ya no siembra nada) y son mi repertorio para todo lo demás: "Que juegue mis líneas", la guía en partida
- * y lo que Refuerza propone sin haberlo practicado.
+ * (mi guía ya no siembra nada).
+ *
+ * Desde los ajustes de la app (2026-10-28) están apagadas (`FAVORITAS_PRENDIDAS`, para cuando haya varios usuarios):
+ * mi repertorio son todas mis aperturas. Prendidas, vuelven a ser mi repertorio para "Que juegue mis líneas" y la guía.
  */
 const CLAVE = 'favoritas'
 const EVENTO = 'favoritas'
@@ -65,13 +68,23 @@ export function repertorioDeFavoritas(favoritas: string[] = leerFavoritas(), bas
   return rep
 }
 
-/** Todas las aperturas de la base con los dos colores, como si todas fueran favoritas (para lo ya practicado). */
+/** Todos mis cursos de la base con los dos colores, como si todos fueran favoritos (para lo ya practicado). */
 export function repertorioCompleto(base: Base = BASE): Repertorio {
-  const ids = base.aperturas.flatMap((a) => (['w', 'b'] as ColorCorto[]).map((c) => `${a.id}:${c}`))
+  const ids = base.aperturas.flatMap((a) => (['w', 'b'] as ColorCorto[]).map((c) => `${a.id}:${c}`)).filter(cursoActivo)
   return repertorioDeFavoritas(ids, base)
 }
 
 /** Mi repertorio al día (cambia cuando pongo o quito una favorita). */
 export function useRepertorioFavoritas(): Repertorio {
   return repertorioDeFavoritas(useFavoritas())
+}
+
+/** Las aperturas que son mi repertorio: todas mis aperturas; con las favoritas prendidas, mis favoritas. */
+export function misAperturas(favoritas: string[] = leerFavoritas()): string[] {
+  return FAVORITAS_PRENDIDAS ? favoritas.filter(cursoActivo) : MIS_APERTURAS
+}
+
+/** Mi repertorio para la guía y "Que juegue mis líneas": las variantes de mis aperturas. */
+export function useMiRepertorio(): Repertorio {
+  return repertorioDeFavoritas(misAperturas(useFavoritas()))
 }

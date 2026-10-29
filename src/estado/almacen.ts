@@ -30,3 +30,17 @@ export const CLAVES = {
   partida: 'partida',
   ajustes: 'ajustes',
 } as const
+
+/** Las claves que la app tiene guardadas en este navegador (sin el prefijo). */
+export function clavesGuardadas(): string[] {
+  try {
+    const r: string[] = []
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i)
+      if (k?.startsWith(PREFIJO)) r.push(k.slice(PREFIJO.length))
+    }
+    return r.sort()
+  } catch {
+    return []
+  }
+}

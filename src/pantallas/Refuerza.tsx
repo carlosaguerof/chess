@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
-import { repertorioCompleto, useRepertorioFavoritas } from '../aprender/favoritas.ts'
+import { repertorioCompleto } from '../aprender/favoritas.ts'
 import type { Repertorio } from '../repertorio/modelo.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
-import { jugadasParaRefuerza, ordenRefuerza, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
+import { jugadasFalladas, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
 import { aperturaPorId } from '../base/base.ts'
 
 const nombreAp = (id: string) => aperturaPorId(id)?.nombre ?? id
@@ -17,45 +17,41 @@ import { TableroJugable } from '../componentes/TableroJugable.tsx'
 import { ListaJugadas } from '../componentes/ListaJugadas.tsx'
 import { jugadasEnEspanol } from '../ajedrez/reglas.ts'
 import { IconoAtras, IconoFoco, IconoOjo } from '../componentes/Iconos.tsx'
+import { COMO_FUNCIONA_REFUERZA, Info } from '../componentes/ComoFunciona.tsx'
 import { Chess } from 'chess.js'
 
 const POR_RONDA = 10
 
-/** "Refuerza lo que fallas" (nota 1): primero lo que más fallo, después lo que llevo más tiempo sin practicar. */
+/** "Refuerza lo que fallas" (nota 1): solo las jugadas que he fallado, de la que más fallo a la que menos. */
 export function Refuerza() {
-  const rep = useRepertorioFavoritas()
+  const rep = useMemo(() => repertorioCompleto(), [])
   const [ronda, setRonda] = useState<JugadaARepasar[] | null>(null)
   const [vuelta, setVuelta] = useState(0)
-  const orden = useMemo(() => ordenRefuerza(jugadasParaRefuerza(rep, repertorioCompleto(), leerRegistro())), [rep, vuelta, ronda]) // eslint-disable-line react-hooks/exhaustive-deps
-  if (ronda) return <Ronda jugadas={ronda} rep={repertorioCompleto()} onTerminar={() => (setRonda(null), setVuelta(vuelta + 1))} />
-  const falladas = orden.filter((j) => j.fallos > 0).length
-  const nunca = orden.filter((j) => j.intentos === 0).length
-  // sin nada practicado ni favoritas, no hay qué reforzar: se dice y se lleva a Aprender
+  const orden = useMemo(() => jugadasFalladas(rep, leerRegistro()), [rep, vuelta, ronda]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (ronda) return <Ronda jugadas={ronda} rep={rep} onTerminar={() => (setRonda(null), setVuelta(vuelta + 1))} />
+  // sin jugadas falladas no hay qué reforzar: se dice en una línea
   if (orden.length === 0)
     return (
-      <div className="refuerza vacio" data-testid="refuerza-vacia">
-        <h1>Refuerza lo que fallas</h1>
-        <p className="apagado">Todavía no hay jugadas para reforzar.</p>
-        <a className="boton primario" href="#/cursos">
-          Ir a Aprender
-        </a>
+      <div className="refuerza" data-testid="refuerza-vacia">
+        <Titulo />
+        <p className="apagado">Aún no hay jugadas falladas.</p>
       </div>
     )
   return (
     <div className="refuerza">
-      <h1>Refuerza lo que fallas</h1>
-      <p className="apagado">
-        {falladas > 0 ? `${falladas} ${falladas === 1 ? 'jugada que has fallado' : 'jugadas que has fallado'}` : 'Aún no has fallado jugadas'} · {nunca} sin practicar todavía
+      <Titulo />
+      <p className="apagado" data-testid="conteo-refuerza">
+        {orden.length} {orden.length === 1 ? 'jugada que has fallado' : 'jugadas que has fallado'}
       </p>
       <button type="button" className="boton primario grande" onClick={() => setRonda(orden.slice(0, POR_RONDA))} data-testid="empezar-refuerza">
-        Empezar ({Math.min(POR_RONDA, orden.length)} jugadas)
+        Empezar ({Math.min(POR_RONDA, orden.length)} {Math.min(POR_RONDA, orden.length) === 1 ? 'jugada' : 'jugadas'})
       </button>
       <ol className="lista-refuerza" data-testid="lista-refuerza">
         {orden.slice(0, POR_RONDA).map((j) => (
-          <li key={j.fen + j.esperada} data-testid="jugada-refuerza">
+          <li key={j.fen + j.esperada} data-testid="jugada-refuerza" data-fallos={j.fallos}>
             <span className="nombre">{nombreDeJugada(j, nombreAp)}</span>
             <span className="apagado">
-              {posicionCorta(j)} · <span className={j.fallos > 0 ? 'conteo-fallo' : ''}>{textoConteo(j)}</span>
+              {posicionCorta(j)} · <span className="conteo-fallo">{textoConteo(j)}</span>
             </span>
           </li>
         ))}
@@ -63,6 +59,14 @@ export function Refuerza() {
     </div>
   )
 }
+
+/** El título con su ⓘ (Nota 1 de los ajustes de la app). */
+const Titulo = () => (
+  <div className="titulo-info">
+    <h1>Refuerza lo que fallas</h1>
+    <Info explicacion={COMO_FUNCIONA_REFUERZA} />
+  </div>
+)
 
 function posicionCorta(j: JugadaARepasar): string {
   const ultima = j.camino.length > 0 ? jugadaNumerada(sanAEspanol(j.camino[j.camino.length - 1]!), j.camino.length - 1) : 'inicio'
@@ -82,7 +86,9 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
     return (
       <div className="refuerza">
         <h1>Listo por ahora</h1>
-        <p className="apagado">Repasaste {jugadas.length} jugadas. Lo que fallaste vuelve primero la próxima vez.</p>
+        <p className="apagado">
+          Repasaste {jugadas.length} {jugadas.length === 1 ? 'jugada' : 'jugadas'}. Lo que fallaste vuelve primero la próxima vez.
+        </p>
         <button type="button" className="boton primario grande" onClick={onTerminar} data-testid="otra-ronda">
           Volver a Refuerza
         </button>

@@ -45,30 +45,19 @@ export function jugadasDeMiRepertorio(rep: Repertorio, registro: EntradaRegistro
 }
 
 /**
- * Nota 1: lo que Refuerza propone son las jugadas de mis favoritas (aunque no las haya practicado) y todas las que ya
- * practiqué en cualquier apertura de la base (en un curso, un repaso o una partida con la guía).
- */
-export function jugadasParaRefuerza(favoritas: Repertorio, todas: Repertorio, registro: EntradaRegistro[]): JugadaARepasar[] {
-  const deFavoritas = jugadasDeMiRepertorio(favoritas, registro)
-  const ya = new Set(deFavoritas.map((j) => clave(j.fen, j.esperada)))
-  const practicadas = jugadasDeMiRepertorio(todas, registro).filter((j) => j.intentos > 0 && !ya.has(clave(j.fen, j.esperada)))
-  return [...deFavoritas, ...practicadas]
-}
-
-/**
- * "Refuerza lo que fallas": primero las jugadas que más fallo; después las que llevo más tiempo sin practicar
- * (las que nunca he practicado, antes que todas).
+ * "Refuerza lo que fallas" (ajustes de la app, 2026-10-28): solo las jugadas que he fallado, de la que más fallo a la
+ * que menos; entre iguales, la que fallo más seguido y después la que llevo más tiempo sin practicar. Las que nunca he
+ * practicado y las que nunca he fallado ya no salen.
  */
 export function ordenRefuerza(js: JugadaARepasar[]): JugadaARepasar[] {
-  const falladas = js.filter((j) => j.fallos > 0).sort((a, b) => b.fallos - a.fallos || b.fallos / b.intentos - a.fallos / a.intentos || (a.ultima ?? 0) - (b.ultima ?? 0))
-  // las nunca practicadas se alternan entre líneas, para que una ronda toque varias
-  const nunca = js.filter((j) => j.intentos === 0)
-  const porLinea = new Map<string, JugadaARepasar[]>()
-  for (const j of nunca) porLinea.set(j.linea.id, [...(porLinea.get(j.linea.id) ?? []), j])
-  const alternadas: JugadaARepasar[] = []
-  for (let i = 0; alternadas.length < nunca.length; i++) for (const grupo of porLinea.values()) if (grupo[i]) alternadas.push(grupo[i]!)
-  const practicadas = js.filter((j) => j.fallos === 0 && j.intentos > 0).sort((a, b) => (a.ultima ?? 0) - (b.ultima ?? 0))
-  return [...falladas, ...alternadas, ...practicadas]
+  return js.filter((j) => j.fallos > 0).sort((a, b) => b.fallos - a.fallos || b.fallos / b.intentos - a.fallos / a.intentos || (a.ultima ?? 0) - (b.ultima ?? 0))
+}
+
+/** Las jugadas falladas de mis cursos, en el orden de Refuerza. */
+export function jugadasFalladas(rep: Repertorio, registro: EntradaRegistro[]): JugadaARepasar[] {
+  // sin un solo fallo en el registro no hace falta recorrer las líneas
+  if (!registro.some((e) => e.resultado !== 'acierto')) return []
+  return ordenRefuerza(jugadasDeMiRepertorio(rep, registro))
 }
 
 /** Cómo se nombra una jugada: si la comparten varias aperturas, por el color; si varias variantes, por la apertura. */

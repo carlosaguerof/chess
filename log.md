@@ -255,3 +255,73 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Prueba:** `tests/e2e/zoom-iphone.spec.ts` (perfil iPhone): la partida del reporte y una de 40 jugadas, jugadas por toques, y la lección más larga en sus dos fases, con su variante y su apertura; tras cada jugada, el ancho de la página ≤ el de la pantalla y la escala en 1. Sin el arreglo falla en 6.Ae2 (473 > 390). Y `tests/publicado/zoom.spec.ts` lo comprueba en la página publicada. La regla quedó en `specs/ux.md` ("En el iPhone").
 - **Quién:** Carlos reportó el bug con su captura; arreglado por la corrida "arreglar zoom".
 - **Dónde:** rama `fix/zoom-iphone`, merge a `main`; publicado con `npm run publicar`. La salida de las pruebas y la comprobación de lo publicado, en `00_corridas/chess/2026-10-28_REPORTE_arreglar-zoom.md`.
+
+## [2026-10-28] cambio | El arreglo del zoom, verificado por Carlos en su iPhone
+- **Qué:** Carlos jugó en su iPhone real, en la página publicada con el arreglo, y ya no hace zoom ni se corre de lado.
+- **Por qué importa:** las pruebas lo comprobaban en WebKit a 390×844; el gesto del doble toque solo se ve en un iPhone de verdad. Con esto, el arreglo queda cerrado.
+- **Quién:** Carlos, al día siguiente del arreglo.
+- **Dónde:** la entrada anterior; `00_corridas/chess/2026-10-28_REPORTE_arreglar-zoom.md`.
+
+## [2026-10-28] cambio | 1. Aprender ya no tiene "Mis favoritas": "Con blancas" y "Con negras"
+- **Qué:** las dos pestañas de Aprender son "Con blancas" y "Con negras", con mis aperturas de ese color. Las favoritas y el ♡ se apagan sin borrarse: quedan detrás de `FAVORITAS_PRENDIDAS` (`src/aprender/interruptores.ts`), para cuando haya varios usuarios. "Que juegue mis líneas", la guía en la partida y el texto de Opciones ("El bot entra a tus aperturas") usan todas mis aperturas. Lo guardado en el navegador (favoritas, avance, repaso) no se toca ni rompe nada al abrir.
+- **Por qué:** la app es de un solo usuario y ya sabe cuáles son mis aperturas; escogerlas con un ♡ era un paso de más. Las favoritas sirven cuando cada usuario escoja las suyas.
+- **Quién:** Carlos, después de usar la app en su iPhone.
+- **Dónde:** rama `feat/ajustes-app`; `src/pantallas/AperturasYDefensas.tsx`, `src/aprender/favoritas.ts` (`misAperturas`, `useMiRepertorio`); `specs/aprender.md`. Pruebas: `tests/e2e/ajustes-app.spec.ts`, `tests/unit/ajustes-app.test.ts`; las de favoritas se saltan con su interruptor apagado y vuelven si se prende.
+
+## [2026-10-28] cambio | 2. Solo mis cursos: las populares de la base se apagan
+- **Qué:** Aprender trae los 9 cursos de mi árbol: con blancas, la Italiana, la Alapin, el Avance contra la Caro-Kann y contra la Francesa, la captura contra la Escandinava y "Otras defensas contra 1.e4"; con negras, la Caro-Kann, la Eslava y "...c6 + ...d5 contra lo demás" (sí es un curso: "Otras aperturas de blancas"). Se apagan, sin borrarse, las 5 que agregó la base como populares (decisión 9): Sistema Londres, Gambito de Dama, Siciliana con negras, Escandinava con negras y Gambito de Dama Declinado (`POPULARES_PRENDIDAS`). Qué tocaba cada una:
+  - **Aprender:** sus 5 cursos ya no salen ni se abren por su dirección; el avance que tuvieran se queda guardado.
+  - **La guía:** ya no sugiere jugadas de ellas (Pista y Respuesta) ni ofrece "Practicar esta línea" de ellas; sí nombra la apertura si la partida entra ahí (p. ej. si el bot abre con el Londres).
+  - **"Que juegue mis líneas" y Refuerza:** solo mis cursos.
+  - **El Repaso de hoy:** sin cambios en su lógica; como lee mis cursos, una lección aprendida de una popular ya no vuelve (su ficha sigue guardada).
+  - **Los libros de los bots:** sin cambios. Ningún bot las usaba "para mí": son el estilo de cada bot (lo que él abre o cómo se defiende) desde la T5, antes de que existieran las populares. Además, que el bot juegue la Siciliana o la Escandinava con negras es justo lo que practico con la Alapin y la captura.
+  - **"Otras defensas contra 1.e4"** se queda: es el "otros → Principios" con blancas de mi árbol, no una popular.
+- **Por qué:** "solo mis cursos". Las populares estaban para conocer otras opciones; hoy meten ruido en lo que estoy aprendiendo.
+- **Quién:** Carlos.
+- **Dónde:** `src/aprender/interruptores.ts` (`MIS_APERTURAS` sale de `GUIA`; `POPULARES`), `src/cursos/datos.ts`, `src/guia/guia.ts`; la base (`conocimiento/`) no cambia.
+
+## [2026-10-28] cambio | 3. "Refuerza lo que fallas" muestra solo lo que he fallado
+- **Qué:** Refuerza muestra solo las jugadas falladas, de la que más fallo a la que menos (entre iguales, la que fallo más seguido y luego la que llevo más tiempo sin practicar). Ya no salen las que nunca practiqué ni las que nunca fallé. Sin fallos, dice "Aún no hay jugadas falladas." en una línea, y la tarjeta del inicio lo dice también, sin el botón Reforzar.
+- **Por qué:** el nombre dice "lo que fallas"; mezclar lo nunca practicado lo volvía otra cosa. Sin botón, la tarjeta del inicio no invita a una pantalla vacía y sigue diciendo qué es (como la del Repaso).
+- **Quién:** Carlos pidió; "sin botón" en vez de "botón inactivo", la corrida (se ve más limpio).
+- **De paso:** al terminar una ronda de una sola jugada decía "Repasaste 1 jugadas"; ahora, "1 jugada" (con solo lo fallado, las rondas cortas son comunes).
+- **Dónde:** `src/registro/refuerza.ts` (`ordenRefuerza`, `jugadasFalladas`), `src/pantallas/Refuerza.tsx`, `src/pantallas/Inicio.tsx`; `tests/unit/refuerza.test.ts`.
+
+## [2026-10-28] cambio | 4. Sin la pantalla "Tus datos": Exportar pasa a Ajustes
+- **Qué:** la pantalla "Tus datos" y su entrada en Más se apagan sin borrarse (`TUS_DATOS_PRENDIDA`); la ruta vieja abre el inicio. Exportar pasa a Ajustes con una línea que dice qué trae (la sección final, con Importar, es la entrada de la opción A, abajo).
+- **Por qué en Ajustes y no en Mis partidas:** comprobado en el código (`src/repertorio/edicion.ts`, `exportar`): el archivo traía las favoritas, el avance, el registro de jugadas y el repaso, y **no** traía Mis partidas ni los ajustes. No era "solo el historial", así que no iba en Mis partidas.
+- **Quién:** Carlos.
+- **Dónde:** `src/App.tsx`, `src/pantallas/Ajustes.tsx`; `src/pantallas/Respaldo.tsx` se queda en el repo.
+
+## [2026-10-28] cambio | 5. En Más, "Instalar en el iPhone"
+- **Qué:** una guía para dejar la app en la pantalla de inicio con Safari, en los pasos que Carlos hizo: ⋯ junto a la dirección → Share → View More → Add to Home Screen → Open as Web App prendido → Add; el ícono "Aperturas" aparece en la pantalla de inicio. Los botones van en inglés, como los muestra su iPhone, con su explicación en español. Cada paso lleva un dibujo propio hecho en el código (nunca sus capturas: traen sus contactos y el repo es público). Dice que es para iPhone con Safari y que para Android o computadora aún no hay guía. Si la página ya corre como app, en lugar de los pasos dice "Ya la tienes como app". Al final: funciona sin internet después de abrirla una vez, lo que guardas vive en esa app y, para pasar el avance de Safari, Respaldo en Ajustes.
+- **El nombre:** "Instalar en el iPhone": dice qué hace y dónde, así que alguien con Android sabe desde el menú que no es para él; en el iPhone, "instalar" ya quiere decir "como app".
+- **Chrome en el iPhone:** no llegaron capturas, así que solo va Safari.
+- **Por qué:** instalada se abre como una app, sin la barra de Safari, y funciona sin internet.
+- **Quién:** Carlos (los pasos y las capturas); el nombre y los dibujos, la corrida.
+- **Dónde:** `src/pantallas/Instalar.tsx`, `src/estado/instalada.ts`; `specs/ux.md`.
+
+## [2026-10-29] cambio | Nota 1: "cómo funciona" con un ⓘ en Repaso de hoy y en Refuerza
+- **Qué:** un ⓘ junto al título del Repaso de hoy y de Refuerza, en el inicio y en sus pantallas (en el repaso, arriba de la lección). Al tocarlo, un globito con "Ver cómo funciona el Repaso de hoy" o "Ver cómo funciona Refuerza"; al tocar el enlace, una ventana con la explicación en pasos cortos, uno por vista, con Atrás a la izquierda (no en el primero) y Siguiente a la derecha, que en el último dice "Salir". Un toque fuera cierra el globito y la ventana. El último paso de las dos dice que es opcional.
+- **Lo que explica sale del código:** el repaso, de `src/repaso/repaso.ts` (por lección, entra al terminarla, 1-3-7-14-30 días sin ayuda, mañana si fallas o pides ayuda, te espera si te atrasas, se apaga en Ajustes); Refuerza, de `src/registro/` (qué se guarda, Pista y Respuesta cuentan como fallo, el orden y desde dónde se practica). Una prueba compara los plazos del texto con `ESCALONES`.
+- **Por qué:** ayuda breve y a la mano (N10) sin párrafos en la pantalla (Pantalla limpia).
+- **Quién:** Carlos (Nota 1); "Salir" a la derecha en el último paso, interpretado así porque es lo usual.
+- **Dónde:** `src/componentes/ComoFunciona.tsx`; `tests/e2e/ajustes-app.spec.ts` (ⓘ → globito → ventana, Siguiente, Atrás, Salir, tocar fuera, en los dos perfiles).
+
+## [2026-10-29] decisión | 4 (opción A): Exportar e Importar juntos en Ajustes, en "Respaldo"
+- **Qué:** Importar se queda, junto a Exportar, en una sección "Respaldo" de Ajustes, con tres frases en palabras de usuario: tu avance vive solo en esta app, en este teléfono, sin nube; Exportar guarda todo en un archivo (a iCloud Drive o a Archivos); Importar lo carga de vuelta (después de borrar la app, en un teléfono nuevo o para pasar el avance de Safari a la app instalada). Importar pregunta antes de reemplazar (N5) y dice qué trae el archivo. El archivo ahora sí trae **todo**: avance, registro, repaso, Mis partidas y los ajustes (las estrellas, el estilo, el sonido, el último bot…); un archivo de antes, sin partidas, se sigue leyendo y no borra las que hay. Abierta como app, Exportar ofrece compartir el archivo si el teléfono puede; si no, lo descarga. "Tus datos" sigue fuera.
+- **Por qué:** sin importar no había forma de recuperar un respaldo ni de pasar el avance de la pestaña de Safari a la app instalada: en el iPhone son copias separadas. Y "Exportar guarda todo" tenía que ser cierto. Compartir en modo app, porque ahí una descarga puede no dejar el archivo a la mano (no comprobado en un iPhone real).
+- **Quién:** Carlos (opción A, por la dirección).
+- **Dónde:** `src/componentes/SeccionRespaldo.tsx`, `src/estado/respaldo.ts`, `src/repertorio/edicion.ts`; `tests/e2e/ajustes-app.spec.ts` (exportar baja todo, importar pregunta, modo app descarga o comparte).
+
+## [2026-10-29] aprendizaje | Un nombre de estilo nuevo puede pisar uno viejo sin que ninguna prueba falle
+- **Qué:** el globito del ⓘ se llamó `.globo`, igual que el globo con la frase del bot en Jugar, y `.info`, igual que el aviso azul de la lección. Las pruebas pasaban (buscan textos y botones, no cómo se ven); lo vio la revisión de las capturas de después: un triángulo blanco que no era del globito, y el globo del bot habría quedado flotando.
+- **Por qué importa:** los estilos de esta app viven en un solo archivo y cualquier nombre se comparte. Regla: antes de crear una clase, buscarla en `src/estilos.css`; y revisar las capturas de después, no solo correr las pruebas.
+- **Quién:** la corrida, en la revisión de UX.
+- **Dónde:** `.globo-info` e `.info-como` en `src/estilos.css`; la prueba "los estilos nuevos no pisan los de antes" en `tests/e2e/ajustes-app.spec.ts`; `iterations/v2/revision-ux-ajustes.md`.
+
+## [2026-10-29] decisión | Lo que queda para cuando haya más usuarios
+- **Qué:** una sección "Cuando haya más usuarios" en `context/despues.md`: lo que se apagó en estos ajustes y cómo se prende (favoritas, cursos populares, "Tus datos"), más lo que Carlos dejó para entonces: el perfil con guardado en la nube (la corrida que se detuvo el 2026-10-28), "Enviar feedback" en Más, la analítica con PostHog, un aviso de cookies y privacidad, y "Escoger tu ruta de aperturas". Nada se construye: solo queda anotado, con su porqué.
+- **Por qué:** que no se pierda, y que nada de eso entre al escalón en curso (regla del MVP).
+- **Quién:** Carlos, por la dirección.
+- **Dónde:** `context/despues.md`.

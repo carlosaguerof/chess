@@ -3,6 +3,7 @@ import { cursos, cursoPorId } from '../cursos/datos.ts'
 import type { Curso } from '../cursos/modelo.ts'
 import { planDeMiLado, siguienteLeccion } from '../cursos/modelo.ts'
 import { alternarFavorita, useFavoritas } from '../aprender/favoritas.ts'
+import { FAVORITAS_PRENDIDAS } from '../aprender/interruptores.ts'
 import { leerProgreso } from '../repertorio/estado.ts'
 import { aperturaPorId, variantePorClave } from '../base/base.ts'
 import { lineaEnEspanol } from '../ajedrez/notacion.ts'
@@ -13,10 +14,18 @@ import { navegar } from '../ruta.ts'
 import { useEffect, useState } from 'react'
 
 /**
- * Nota 1 (L3): "Aperturas y defensas", la sección Aprender. Arriba, "Mis favoritas" y "Todas"; cada apertura en una
- * tarjeta con su tablero, su nombre, mi avance y un corazón. Al tocarla, su página; al tocar una variante, su línea.
+ * Nota 1 (L3): "Aperturas y defensas", la sección Aprender. Arriba, "Con blancas" y "Con negras"; cada apertura mía en
+ * una tarjeta con su tablero, su nombre y mi avance. Al tocarla, su página; al tocar una variante, su línea.
+ * Con las favoritas prendidas (`aprender/interruptores.ts`), arriba van "Mis favoritas" y "Todas", y cada tarjeta
+ * lleva su corazón.
  */
-type Pestana = 'favoritas' | 'todas'
+export type Pestana = 'blancas' | 'negras' | 'favoritas' | 'todas'
+
+/** La pestaña de una ruta de Aprender ("/cursos", "/cursos/negras", "/cursos/todas"). */
+export function pestanaDe(segunda: string | undefined): Pestana {
+  if (FAVORITAS_PRENDIDAS) return segunda === 'todas' ? 'todas' : 'favoritas'
+  return segunda === 'negras' ? 'negras' : 'blancas'
+}
 
 const fenDe = (jugadas: string[] = []) => {
   const c = new Chess()
@@ -52,13 +61,13 @@ function Corazon({ id, favorita }: { id: string; favorita: boolean }) {
 
 function Tarjeta({ curso, favorita, hechas }: { curso: Curso; favorita: boolean; hechas: Record<string, unknown> }) {
   return (
-    <li className="tarjeta-apertura" data-testid={`tarjeta-${curso.id}`}>
+    <li className={`tarjeta-apertura ${FAVORITAS_PRENDIDAS ? 'con-corazon' : ''}`} data-testid={`tarjeta-${curso.id}`}>
       <a href={enlaceCurso(curso.id)} className="tarjeta-apertura-enlace">
         <strong>{curso.nombre}</strong>
         <TableroMini fen={fenDe(curso.raiz)} orientacion={orientacion(curso)} etiqueta={curso.nombre} />
         <span className="apagado">{avance(curso, hechas)}</span>
       </a>
-      <Corazon id={curso.id} favorita={favorita} />
+      {FAVORITAS_PRENDIDAS && <Corazon id={curso.id} favorita={favorita} />}
     </li>
   )
 }
@@ -90,11 +99,41 @@ function Grupos({ lista, favoritas, hechas }: { lista: Curso[]; favoritas: strin
 }
 
 export function AperturasYDefensas({ pestana }: { pestana: Pestana }) {
-  const favoritas = useFavoritas()
-  const hechas = leerProgreso()
   useEffect(() => {
     guardar('pestana-aprender', pestana)
   }, [pestana])
+  return pestana === 'blancas' || pestana === 'negras' ? <PorColor color={pestana === 'blancas' ? 'w' : 'b'} /> : <ConFavoritas pestana={pestana} />
+}
+
+/** Mis aperturas de un color: "Con blancas" o "Con negras". */
+function PorColor({ color }: { color: 'w' | 'b' }) {
+  const hechas = leerProgreso()
+  return (
+    <div className="aprender">
+      <h1>Aperturas y defensas</h1>
+      <div className="pestanas" role="tablist" aria-label="Aperturas y defensas">
+        <a role="tab" aria-selected={color === 'w'} className={color === 'w' ? 'activo' : ''} href="#/cursos" data-testid="pestana-blancas">
+          Con blancas
+        </a>
+        <a role="tab" aria-selected={color === 'b'} className={color === 'b' ? 'activo' : ''} href="#/cursos/negras" data-testid="pestana-negras">
+          Con negras
+        </a>
+      </div>
+      <ul className="cuadricula-aperturas" data-testid="lista-aperturas">
+        {cursos()
+          .filter((c) => c.color === color)
+          .map((c) => (
+            <Tarjeta key={c.id} curso={c} favorita={false} hechas={hechas} />
+          ))}
+      </ul>
+    </div>
+  )
+}
+
+/** Con las favoritas prendidas: "Mis favoritas" y "Todas", agrupadas por color. */
+function ConFavoritas({ pestana }: { pestana: 'favoritas' | 'todas' }) {
+  const favoritas = useFavoritas()
+  const hechas = leerProgreso()
   const mias = cursos().filter((c) => favoritas.includes(c.id))
   return (
     <div className="aprender">
@@ -121,8 +160,11 @@ export function AperturasYDefensas({ pestana }: { pestana: Pestana }) {
   )
 }
 
-/** A dónde regresa "Volver": a la pestaña de donde vine. */
-const volverASeccion = () => (leer<string>('pestana-aprender', 'favoritas') === 'todas' ? '#/cursos/todas' : '#/cursos')
+/** A dónde regresa "Volver": a la pestaña de donde vine (sin favoritas, a la del color de la apertura). */
+const volverASeccion = (c: Curso) => {
+  if (!FAVORITAS_PRENDIDAS) return c.color === 'b' ? '#/cursos/negras' : '#/cursos'
+  return leer<string>('pestana-aprender', 'favoritas') === 'todas' ? '#/cursos/todas' : '#/cursos'
+}
 
 /** La página de una apertura: el tablero, sus variantes de la más común a la más rara, y empezar a aprenderla. */
 export function PaginaApertura({ id }: { id: string }) {
@@ -138,7 +180,7 @@ export function PaginaApertura({ id }: { id: string }) {
   const empezar = () => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente ?? curso.lecciones[0]!)}`)
   return (
     <div className="pagina-apertura">
-      <a className="volver" href={volverASeccion()}>
+      <a className="volver" href={volverASeccion(curso)}>
         <IconoAtras /> Aperturas y defensas
       </a>
       <div className="pagina-apertura-tablero">
@@ -151,7 +193,7 @@ export function PaginaApertura({ id }: { id: string }) {
             {avance(curso, hechas)}
           </p>
         </div>
-        <Corazon id={curso.id} favorita={favoritas.includes(curso.id)} />
+        {FAVORITAS_PRENDIDAS && <Corazon id={curso.id} favorita={favoritas.includes(curso.id)} />}
       </div>
       {idea && (
         <p className="plan-corto" data-testid="idea">
@@ -265,7 +307,7 @@ export function PaginaVariante({ id, indice }: { id: string; indice: number }) {
 function NoEncontre() {
   return (
     <p className="vacio">
-      No encontré esa apertura. <a href="#/cursos/todas">Ver todas</a>
+      No encontré esa apertura. <a href={FAVORITAS_PRENDIDAS ? '#/cursos/todas' : '#/cursos'}>Ver mis aperturas</a>
     </p>
   )
 }

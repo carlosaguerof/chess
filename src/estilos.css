@@ -230,7 +230,8 @@ h1, h2, h3 { margin: 0; }
 .tarjeta-apertura { position: relative; background: var(--fondo-panel); border-radius: 10px; }
 .tarjeta-apertura:hover { background: #2e2c29; }
 .tarjeta-apertura-enlace { display: flex; flex-direction: column; gap: 8px; padding: 10px; text-decoration: none; height: 100%; }
-.tarjeta-apertura-enlace strong { font-size: 15px; line-height: 1.25; min-height: 2.5em; padding-right: 34px; }
+.tarjeta-apertura-enlace strong { font-size: 15px; line-height: 1.25; min-height: 2.5em; }
+.tarjeta-apertura.con-corazon .tarjeta-apertura-enlace strong { padding-right: 34px; }
 .tarjeta-apertura-enlace .apagado { font-size: 12px; }
 .tablero-mini { pointer-events: none; touch-action: auto; }
 .corazon { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--texto-suave); cursor: pointer; }
@@ -318,8 +319,27 @@ h1, h2, h3 { margin: 0; }
 .lista-refuerza .nombre { font-weight: 700; }
 .lista-refuerza .apagado { font-size: 13px; }
 .conteo-fallo { color: #ffb4ab; font-weight: 700; }
-.tarjeta-enlace { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.tarjeta-enlace div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.tarjeta-enlace { position: relative; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.tarjeta-enlace > div { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+/* el botón de la tarjeta la cubre toda (se toca en cualquier parte); el ⓘ queda encima */
+.abre-tarjeta::after { content: ''; position: absolute; inset: 0; border-radius: 10px; }
+
+/* ---------- "cómo funciona" (ⓘ, globito y ventana de pasos) ---------- */
+.titulo-info { display: inline-flex; align-items: center; gap: 2px; }
+.info-como { position: relative; z-index: 1; display: inline-flex; }
+.info-boton { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: -6px 0; padding: 0; background: none; border: 0; border-radius: 50%; color: var(--texto-apagado); cursor: pointer; }
+.info-boton svg { width: 18px; height: 18px; }
+.info-boton:hover, .info-boton[aria-expanded='true'] { color: #fff; background: var(--fondo-panel-2); }
+.globo-info-fondo { position: fixed; inset: 0; z-index: 45; }
+.globo-info { position: fixed; max-width: min(300px, calc(100vw - 32px)); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 8px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.globo-info .enlace-chico { font-size: 15px; text-align: left; }
+.como-funciona { min-height: 240px; }
+.como-funciona-paso { margin: 0; flex: 1; font-size: 19px; line-height: 1.45; color: var(--texto-suave); }
+.como-funciona-botones { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.como-funciona-botones > :first-child { justify-self: start; }
+.como-funciona-botones > :last-child { justify-self: end; }
+.como-funciona-cuenta { font-size: 13px; }
+.info-arriba { margin-left: auto; padding-right: 4px; }
 
 /* en el celular, los tres botones de la partida siempre a la vista */
 @media (max-width: 899px) {
@@ -376,8 +396,14 @@ h1, h2, h3 { margin: 0; }
 .ajustes { display: flex; flex-direction: column; gap: 12px; }
 .ajustes h1 { font-size: 24px; }
 .ajustes .tarjeta { background: var(--fondo-panel); border-radius: var(--radio); padding: 4px 14px; display: flex; flex-direction: column; }
+.seccion-respaldo { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.seccion-respaldo h2 { font-size: 16px; }
+.seccion-respaldo > p { margin: 0; font-size: 14px; line-height: 1.4; }
+.ajustes .opciones-respaldo { padding: 14px; gap: 16px; }
+.opciones-respaldo > div { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.opciones-respaldo p { margin: 0; font-size: 14px; line-height: 1.4; }
 .repaso-hoy { display: flex; flex-direction: column; gap: 2px; }
-a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+div.repaso-hoy.tarjeta-enlace { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
 .listo-por-hoy { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 .listo-por-hoy h1 { font-size: 26px; }
 
@@ -403,3 +429,15 @@ a.repaso-hoy { flex-direction: row; align-items: center; justify-content: space-
 .empezar p { margin: 0; font-size: 13px; text-align: center; }
 /* L5, pase 3: un botón con aspecto de enlace (p. ej. "Repetir esta lección") no lleva fondo */
 button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
+
+/* ---------- instalar en el iPhone (ajustes de la app) ---------- */
+.instalar { display: flex; flex-direction: column; gap: 14px; }
+.instalar h1 { font-size: 24px; }
+.instalar > p { margin: 0; }
+.pasos-instalar { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pasos-instalar li { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 14px; align-items: center; background: var(--fondo-panel); border-radius: 10px; padding: 10px; }
+.pasos-instalar p { margin: 0; line-height: 1.4; color: var(--texto-suave); }
+.dibujo-paso { display: block; width: 128px; height: auto; }
+.numero-paso { font-weight: 700; color: #fff; }
+.ya-instalada { margin: 0; font-weight: 700; font-size: 18px; }
+.nota-instalar { font-size: 14px; line-height: 1.4; }

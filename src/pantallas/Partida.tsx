@@ -21,7 +21,7 @@ import { IconoAtras, IconoBandera, IconoCerrar, IconoDeshacer, IconoVoltear, Ico
 import { navegar } from '../ruta.ts'
 import { cursos as listaCursos } from '../cursos/datos.ts'
 import { BASE } from '../base/base.ts'
-import { useRepertorioFavoritas } from '../aprender/favoritas.ts'
+import { useMiRepertorio } from '../aprender/favoritas.ts'
 import { siguientesEnRepertorio } from '../repertorio/modelo.ts'
 import { ayudaEnMiTurno, jugadaDeMisLineas, mensajeTrasMiJugada, resumenDePartida, type Ayuda, type Contexto } from '../guia/guia.ts'
 import { registrarJugadaPartida } from '../registro/eventos.ts'
@@ -33,8 +33,8 @@ import { Chess } from 'chess.js'
 const TITULO = { gane: '¡Ganaste!', perdi: 'Perdiste', tablas: 'Tablas' } as const
 
 export function Partida() {
-  // Nota 1: mi repertorio son las variantes de mis favoritas (sin favoritas, el bot juega su libro)
-  const rep = useRepertorioFavoritas()
+  // mi repertorio son las variantes de mis aperturas (con las favoritas prendidas, las de mis favoritas)
+  const rep = useMiRepertorio()
   const pb = usePartidaBot({ misLineas: (p) => (historia, azar, preferidas) => jugadaDeMisLineas(rep, p.colorHumano, historia, azar, preferidas) })
   const [confirmarRendirse, setConfirmarRendirse] = useState(false)
   const [ayuda, setAyuda] = useState<{ tipo: 'pista' | 'respuesta'; datos: Ayuda; ply: number } | null>(null)

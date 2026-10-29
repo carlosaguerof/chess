@@ -6,7 +6,7 @@ import { repertorioInicial } from '../../src/repertorio/modelo.ts'
 import { instalarLocalStorage } from './memoria-navegador.ts'
 import { registrarJugadaPartida, registrarPasoCurso, registrarPasoRefuerza, resultadoEnPartida } from '../../src/registro/eventos.ts'
 import { leerRegistro } from '../../src/registro/almacen-registro.ts'
-import { jugadasDeMiRepertorio, ordenRefuerza, textoConteo } from '../../src/registro/refuerza.ts'
+import { jugadasDeMiRepertorio, jugadasFalladas, ordenRefuerza, textoConteo } from '../../src/registro/refuerza.ts'
 import type { EntradaRegistro } from '../../src/registro/registro.ts'
 
 const base = JSON.parse(readFileSync('conocimiento/base.json', 'utf8')) as Base
@@ -48,7 +48,7 @@ describe('T12 (nota 1) · registro por jugada y "Refuerza lo que fallas"', () =>
     expect(resultadoEnPartida(true, 'respuesta')).toBe('fallo')
   })
 
-  it('el orden de Refuerza: primero lo que más fallo; después lo nunca practicado; al final lo practicado hace más tiempo', () => {
+  it('el orden de Refuerza: solo las falladas, de la que más fallo a la que menos (ajustes de la app)', () => {
     const corto = (fen: string) => fen.split(' ').slice(0, 4).join(' ')
     const e = (fen: string, esperada: string, resultado: EntradaRegistro['resultado'], fecha: number): EntradaRegistro => ({ fen: corto(fen), esperada, resultado, lugar: 'curso', fecha })
     const registro: EntradaRegistro[] = [
@@ -58,20 +58,20 @@ describe('T12 (nota 1) · registro por jugada y "Refuerza lo que fallas"', () =>
       // 3...Af5 en el Avance: fallada 2 de 2 (con Pista)
       e(tras('e4', 'c6', 'd4', 'd5', 'e5'), 'Bf5', 'fallo', 20),
       e(tras('e4', 'c6', 'd4', 'd5', 'e5'), 'Bf5', 'pista', 21),
-      // 1.e4 (blancas): bien, hace tiempo
+      // 2.c3 (Alapin): fallada 1 de 1, hace más tiempo que 1...c6
+      e(tras('e4', 'c5'), 'c3', 'respuesta', 3),
+      // 1.e4 (blancas): siempre bien
       e(tras(), 'e4', 'acierto', 5),
     ]
     const orden = ordenRefuerza(jugadasDeMiRepertorio(rep, registro))
-    expect(orden[0]!.esperada).toBe('Bf5')
-    expect(textoConteo(orden[0]!)).toBe('fallada 2 de 2 veces')
-    expect(orden[1]!.esperada).toBe('c6')
-    expect(textoConteo(orden[1]!)).toBe('fallada 1 de 2 veces')
-    // luego, todas las nunca practicadas antes que 1.e4 (practicada, sin fallos)
-    const resto = orden.slice(2)
-    const iE4 = resto.findIndex((j) => j.esperada === 'e4' && j.camino.length === 0)
-    expect(resto.slice(0, iE4).every((j) => j.intentos === 0)).toBe(true)
-    expect(iE4).toBe(resto.length - 1)
-    expect(textoConteo(resto[0]!)).toBe('nunca practicada')
+    expect(orden.map((j) => j.esperada)).toEqual(['Bf5', 'c3', 'c6'])
+    expect(orden.map(textoConteo)).toEqual(['fallada 2 de 2 veces', 'fallada 1 de 1 vez', 'fallada 1 de 2 veces'])
+    // ya no salen las nunca practicadas ni las que nunca he fallado
+    expect(orden.every((j) => j.fallos > 0)).toBe(true)
+    // la función de las pantallas: lo mismo, y vacía sin fallos
+    expect(jugadasFalladas(rep, registro).map((j) => j.esperada)).toEqual(['Bf5', 'c3', 'c6'])
+    expect(jugadasFalladas(rep, [e(tras(), 'e4', 'acierto', 5)])).toEqual([])
+    expect(jugadasFalladas(rep, [])).toEqual([])
   })
 })
 

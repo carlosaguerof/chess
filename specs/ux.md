@@ -9,7 +9,7 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 1. **Una pantalla, un propósito,** con una acción principal clara.
 2. **Sin párrafos que expliquen la app.** Como mucho, un subtítulo corto.
 3. **Sin etiquetas sobre de dónde sale cada cosa** ("de tu guía", "en tu repertorio", "redactado por la IA", la fuente) en las vistas principales. Si hace falta, van en un "Detalles" que no estorbe.
-4. **Sin nombres en inglés ni códigos ECO,** salvo en ese "Detalles" de Aperturas y defensas.
+4. **Sin nombres en inglés ni códigos ECO,** salvo en ese "Detalles" de Aperturas y defensas, y en la guía "Instalar en el iPhone", donde los botones van como los muestra el iPhone de Carlos (en inglés), con su explicación en español.
 5. **Las jugadas en un renglón normal** ("1.e4 c6 2.d4 d5 3.e5 Af5"), no una píldora por media jugada. La excepción es la lista de jugadas de una partida, como en chess.com.
 6. **Un solo tipo de letra** en la interfaz (Inter). Nada de letra de código; los relojes usan cifras de ancho fijo de la misma Inter.
 7. **Se abre paso a paso:** primero una lista corta; el detalle, al tocar.
@@ -17,6 +17,8 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 9. **Se compara contra la referencia:** cada pantalla, junto a su captura de chess.com (si hay) o contra cómo resuelve chess.com algo parecido. Si al lado se ve más cargada, no está lista. Las capturas de chess.com **no entran a este repo** (es público): se quedan en el repo privado de la dirección.
 
 **Al reescribir una pantalla:** antes de tirar la vieja, se listan sus arreglos de UX (avisos, confirmaciones, salidas, datos) y se confirma que la nueva los trae, o se anota por qué se quitó.
+
+**Los estilos viven en un solo archivo** (`src/estilos.css`): antes de crear una clase, se busca ahí, porque un nombre repetido pisa al viejo sin que falle ninguna prueba (pasó con `.globo` e `.info`, 2026-10-29). La revisión mira las capturas de después, no solo el verde de las pruebas.
 
 **Lo que a Carlos le gusta y se protege:** lo ordenado y sencillo de chess.com; la ventana de tiempo (tres grupos de tres y "Sin tiempo"); la lista limpia de todas las aperturas.
 
@@ -46,3 +48,27 @@ Toques del inicio a mi primera jugada (C4): **Jugar** (1), tocar la pieza (2), t
 ## Aprender
 
 La sección "Aperturas y defensas": `specs/aprender.md`.
+
+## "Cómo funciona": el ⓘ (ayuda breve, N10)
+
+Decidido por Carlos el 2026-10-29 (Nota 1 de los ajustes de la app). Así se explica una función sin poner párrafos en la pantalla.
+
+1. **Un ⓘ junto al título,** donde aparece la función (en el inicio y en su pantalla). Hoy: Repaso de hoy y Refuerza lo que fallas.
+2. **Al tocarlo, un globito chico** junto al ícono, con un solo enlace: "Ver cómo funciona …". Un toque fuera lo cierra. El ⓘ dentro de una tarjeta que se toca no abre la tarjeta.
+3. **Al tocar el enlace, una ventana encima** con la explicación **en pasos cortos, uno por vista**, en palabras de usuario. Abajo, en las esquinas: **Atrás** a la izquierda (no en el primer paso) y **Siguiente** a la derecha, que en el último dice **"Salir"** y cierra. En medio, "2 de 5". Un toque fuera (o Esc) la cierra.
+4. **Lo que dice sale del código** y una prueba lo compara (los plazos del repaso contra `ESCALONES`). Si la función es opcional, un paso lo dice: "úsalo si te sirve, como gustes".
+5. Código: `src/componentes/ComoFunciona.tsx`. Prueba: `tests/e2e/ajustes-app.spec.ts`.
+
+## Instalar en el iPhone
+
+Decidido por Carlos el 2026-10-28 (punto 5 de los ajustes de la app). En Más → "Instalar en el iPhone".
+
+1. **Dice para qué es:** iPhone con Safari; para Android o computadora aún no hay guía.
+2. **Los pasos de Safari,** tal como los hizo Carlos: ⋯ junto a la dirección → Share → View More → Add to Home Screen → Open as Web App prendido → Add; el ícono aparece en la pantalla de inicio. Cada paso, con un **dibujo propio, simple, hecho en el código**: nunca capturas de su teléfono (traen sus contactos y el repo es público).
+3. **Si ya corre como app** (`display-mode: standalone` o `navigator.standalone`), en lugar de los pasos: "Ya la tienes como app".
+4. **Una línea al final:** funciona sin internet después de abrirla una vez; lo que guardas vive en esa app (Safari y la app instalada son copias separadas) y el avance se pasa con Respaldo en Ajustes.
+5. Chrome en el iPhone: solo si llegan capturas de Carlos. Código: `src/pantallas/Instalar.tsx`.
+
+## Respaldo (Ajustes)
+
+Decidido por Carlos el 2026-10-29 (opción A del punto 4). Exportar e Importar juntos, en Ajustes → "Respaldo", con tres frases: el avance vive solo en esta app, en este teléfono, sin nube; Exportar guarda todo en un archivo (a iCloud Drive o a Archivos); Importar lo carga de vuelta (después de borrar la app, en un teléfono nuevo o para pasar el avance de Safari a la app instalada). **Importar reemplaza:** antes pregunta y dice qué trae el archivo (N5); un archivo ajeno dice qué pasó, sin preguntar (N9). Abierta como app, Exportar ofrece compartir el archivo si el teléfono puede; si no, lo descarga. Código: `src/componentes/SeccionRespaldo.tsx`, `src/estado/respaldo.ts`.

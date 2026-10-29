@@ -8,6 +8,9 @@ import { leerProgreso } from '../repertorio/estado.ts'
 import { cursos } from '../cursos/datos.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
+import { repertorioCompleto } from '../aprender/favoritas.ts'
+import { jugadasFalladas } from '../registro/refuerza.ts'
+import { COMO_FUNCIONA_REFUERZA, COMO_FUNCIONA_REPASO, Info } from '../componentes/ComoFunciona.tsx'
 
 export function Inicio() {
   // L4: el último bot con el que jugué (Brisa, 700, la primera vez), igual que en Jugar
@@ -25,6 +28,8 @@ export function Inicio() {
     const manana = paraHoy(leerRepaso(), hechas, lecciones, sumarDias(dia(), 1), registro).length
     return { n: hoy.length, min: minutos(hoy), manana, aprendidas: lecciones.some((l) => hechas[l.id]) }
   })()
+  // Refuerza: sin jugadas falladas, la tarjeta lo dice y no lleva botón
+  const falladas = jugadasFalladas(repertorioCompleto(), leerRegistro()).length
   const jugar = () => {
     empezarPartida(bot.id, 'w')
     navegar('/partida')
@@ -60,25 +65,52 @@ export function Inicio() {
       </section>
       {repaso &&
         (repaso.n > 0 ? (
-          <a className="tarjeta tarjeta-enlace repaso-hoy" href="#/repaso" data-testid="repaso-hoy" data-n={repaso.n}>
-            <strong>
-              Repaso de hoy: {repaso.n} {repaso.n === 1 ? 'línea' : 'líneas'}, unos {repaso.min} {repaso.min === 1 ? 'minuto' : 'minutos'}
-            </strong>
-            <span className="boton primario chico">Repasar</span>
-          </a>
+          <div className="tarjeta tarjeta-enlace repaso-hoy" data-testid="repaso-hoy" data-n={repaso.n}>
+            <div>
+              <span className="titulo-info">
+                <strong>
+                  Repaso de hoy: {repaso.n} {repaso.n === 1 ? 'línea' : 'líneas'}, unos {repaso.min} {repaso.min === 1 ? 'minuto' : 'minutos'}
+                </strong>
+                <Info explicacion={COMO_FUNCIONA_REPASO} />
+              </span>
+            </div>
+            <a className="boton primario chico abre-tarjeta" href="#/repaso">
+              Repasar
+            </a>
+          </div>
         ) : (
           <div className="tarjeta repaso-hoy" data-testid="repaso-hoy" data-n={0}>
-            <strong>{repaso.aprendidas ? 'Repaso de hoy: listo' : 'Repaso de hoy'}</strong>
+            <span className="titulo-info">
+              <strong>{repaso.aprendidas ? 'Repaso de hoy: listo' : 'Repaso de hoy'}</strong>
+              <Info explicacion={COMO_FUNCIONA_REPASO} />
+            </span>
             <span className="apagado">{repaso.aprendidas ? `Mañana ${repaso.manana === 1 ? 'toca 1 línea' : `tocan ${repaso.manana} líneas`}.` : 'Aquí vuelven las lecciones que termines.'}</span>
           </div>
         ))}
-      <a className="tarjeta tarjeta-enlace" href="#/refuerza" data-testid="ir-refuerza">
-        <div>
-          <strong>Refuerza lo que fallas</strong>
-          <span className="apagado">Las jugadas que más fallas</span>
+      {falladas > 0 ? (
+        <div className="tarjeta tarjeta-enlace" data-testid="ir-refuerza" data-n={falladas}>
+          <div>
+            <span className="titulo-info">
+              <strong>Refuerza lo que fallas</strong>
+              <Info explicacion={COMO_FUNCIONA_REFUERZA} />
+            </span>
+            <span className="apagado">Las jugadas que más fallas</span>
+          </div>
+          <a className="boton secundario chico abre-tarjeta" href="#/refuerza">
+            Reforzar
+          </a>
         </div>
-        <span className="boton secundario chico">Reforzar</span>
-      </a>
+      ) : (
+        <div className="tarjeta tarjeta-enlace" data-testid="ir-refuerza" data-n={0}>
+          <div>
+            <span className="titulo-info">
+              <strong>Refuerza lo que fallas</strong>
+              <Info explicacion={COMO_FUNCIONA_REFUERZA} />
+            </span>
+            <span className="apagado">Aún no hay jugadas falladas.</span>
+          </div>
+        </div>
+      )}
       {confirmar && (
         <Dialogo
           titulo="¿Empezar otra partida?"

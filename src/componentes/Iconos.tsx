@@ -18,6 +18,8 @@ export const IconoAbajo = (p: P) => (<svg {...base} {...p}><path d="m6 9 6 6 6-6
 export const IconoAdelante = (p: P) => (<svg {...base} {...p}><path d="m9 18 6-6-6-6" /></svg>)
 export const IconoInicio = (p: P) => (<svg {...base} {...p}><path d="M6 6v12" /><path d="m17 18-6-6 6-6" /></svg>)
 export const IconoFinal = (p: P) => (<svg {...base} {...p}><path d="M18 6v12" /><path d="m7 18 6-6-6-6" /></svg>)
+/** ⓘ: "cómo funciona" (Nota 1 de los ajustes de la app). */
+export const IconoInfo = (p: P) => (<svg {...base} {...p}><circle cx="12" cy="12" r="9" /><path d="M12 11v5" /><path d="M12 7.5h.01" /></svg>)
 /** El corazón de las favoritas: sin rellenar, o relleno al guardarla (Nota 1). */
 export const IconoCorazon = ({ lleno, className }: { lleno: boolean; className?: string }) => (<svg {...base} className={className} fill={lleno ? 'currentColor' : 'none'}><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.7 7.8 3.9 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.4 0 5.6 3.3 4.5 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" /></svg>)
 

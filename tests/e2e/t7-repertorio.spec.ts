@@ -1,10 +1,11 @@
 import { expect, test } from '@playwright/test'
 import { captura } from './_util.ts'
+import { FAVORITAS_PRENDIDAS } from '../../src/aprender/interruptores.ts'
 
-test.describe('T7 · mi repertorio (mis favoritas), visible', () => {
-  test('con la Caro-Kann en favoritas: sus variantes de la más común a la más rara, sin etiquetas de dónde sale cada cosa', async ({ page }, info) => {
+test.describe('T7 · mi repertorio, visible', () => {
+  test('la Caro-Kann (en Con negras; con favoritas, en Mis favoritas): sus variantes de la más común a la más rara, sin etiquetas de dónde sale cada cosa', async ({ page }, info) => {
     await page.addInitScript(() => localStorage.setItem('ajedrez.v1.favoritas', JSON.stringify(['caro-kann:b'])))
-    await page.goto('/#/cursos')
+    await page.goto(FAVORITAS_PRENDIDAS ? '/#/cursos' : '/#/cursos/negras')
     await captura(page, info, 't7-repertorio-blancas')
     await page.getByTestId('tarjeta-caro-kann:b').locator('a').click()
     const filas = page.getByTestId('variante')

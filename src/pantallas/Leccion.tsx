@@ -4,6 +4,7 @@ import type { Key } from 'chessground/types'
 import { leerProgreso, marcarLeccion } from '../repertorio/estado.ts'
 import { cursoPorId } from '../cursos/datos.ts'
 import { alternativasEn, intentar, marcarPista, marcarRespuesta, nuevoEstado, estadoDeRepaso, planDeMiLado, pista, posicion, respuesta, siguienteLeccion, type Curso, type Leccion as TLeccion, type EstadoLeccion } from '../cursos/modelo.ts'
+import { COMO_FUNCIONA_REPASO, Info } from '../componentes/ComoFunciona.tsx'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { jugadaNumerada, sanAEspanol } from '../ajedrez/notacion.ts'
 import { jugadasEnEspanol, uciAObjeto } from '../ajedrez/reglas.ts'
@@ -154,6 +155,11 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
             <span className="apagado">{repaso ? `Repaso de hoy · ${repaso.indice + 1} de ${repaso.total} · ${curso.nombre}` : curso.nombre}</span>
             <strong data-testid="nombre-linea">{leccion.nombre}</strong>
           </div>
+          {repaso && (
+            <span className="info-arriba">
+              <Info explicacion={COMO_FUNCIONA_REPASO} />
+            </span>
+          )}
         </div>
         <div className="partida-tablero">
           <TableroJugable
