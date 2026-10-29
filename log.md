@@ -488,3 +488,15 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Quién:** Carlos (la A1); la torre (el "publica" y el arreglo del tablero chico); la corrida. Lo que sigue es de Carlos: entrar a la Air con su contraseña.
 - **Dónde:** `feat/c7-marcas` en `origin`; los pasos para cerrar C7, en `00_corridas/chess/2026-10-29_BLOQUEADO_correcciones-caro-kann.md`.
 - **Lo aprendido (propuesta, no se cambió ninguna regla):** la corrida de las capturas del iPhone de C5 (14:41) y la suite completa de C7 (14:43) quedaron a dos minutos una de otra; el swap venía de 1.5 a 1.9 GB. Una corrida completa de WebKit justo después de otra con capturas tumbó la pantalla, igual que en la noche. Antes de la suite completa conviene dejar pasar un rato, o reiniciar la Air si el swap pasa de 1.5 GB.
+
+## [2026-10-29] corrida | C7: publicadas las marcas de la Caro-Kann, con el "publica" de la torre
+- **Qué:** Carlos entró a la Air (a las 17:43 `/dev/console` volvió a ser suyo) y se retomó C7 desde las pruebas, con los pasos del BLOQUEADO y uno más que pidió la torre: esperar a que la carga bajara de 8 (`uptime`, de 75 a 7.46 a las 17:46). Antes de la corrida: 70 % de memoria libre, sin navegadores sobrantes, swap 127 MB.
+  - `npm test`: 222 de 222.
+  - `npm run e2e`, una sola vez, los dos perfiles (17:46–17:55): **166 pasan, 12 se saltan, ninguna falla** (iPhone en WebKit 86, escritorio 80).
+  - Sin `IOSurface` en el registro y sin reportes de fallo nuevos.
+  - Integrado: `eef6ead` (merge de `feat/c7-marcas`, con `MARCAS_NUEVAS_DE_ENTRADA = true`).
+  - `npm run publicar` → `gh-pages` `2703309`; a las 17:56:23 la página servía `index-CYetwzx9.js`, el del build.
+  - Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`: 17 pasan y 1 se salta (la del zoom en escritorio). Incluye la prueba nueva del ejemplo de Carlos con las marcas prendidas (f6 roja, la L roja g8→g6→f6, sin d6, y la verde c8→f5), que pasa en los dos perfiles.
+- **Por qué:** el instructivo pide publicar las marcas solo con el "publica" de la torre (14:42) y con todo en verde; la caída de las 14:45 lo había dejado bloqueado.
+- **Quién:** la torre ("retoma C7", 17:43); la corrida.
+- **Dónde:** `eef6ead` en `main`, `gh-pages` `2703309`. Cierra la entrada anterior de C7 (bloqueada) y el BLOQUEADO de la corrida.
