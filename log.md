@@ -325,3 +325,9 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** que no se pierda, y que nada de eso entre al escalón en curso (regla del MVP).
 - **Quién:** Carlos, por la dirección.
 - **Dónde:** `context/despues.md`.
+
+## [2026-10-29] corrida | Ajustes de la app: pruebas en verde, merge, publicación y comprobación
+- **Qué:** `npm test` → 156 de 156; `npm run e2e` → 103 pasaron y 9 se saltaron a propósito (en cada perfil, las 3 de favoritas y "Tus datos", apagadas; y las 3 del zoom en escritorio); `npm run e2e:pages` contra el sitio construido → 9 de 9. Merge `--no-ff` a `main` (`33b9f4e`) y `git push origin main`. `npm run publicar` subió el sitio (`gh-pages` `697c975`); GitHub Pages: `built`. Comprobación: la página da 200, sirve el código nuevo (`assets/index-DYIgBwXH.js`) y `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages` pasa 9 de 9 (con `tests/publicado/ajustes-app.spec.ts`: Aprender por color, el ⓘ, la guía para instalar y Respaldo).
+- **Por qué:** solo se publica con todo en verde, y lo publicado se comprueba en la página de verdad (`specs/publicacion.md`).
+- **Quién:** autorizado por Carlos en el prompt de la corrida ("Publicar está autorizado con todo en verde").
+- **Dónde:** <https://carlosaguerof.github.io/chess/>; el reporte, en `00_corridas/chess/2026-10-28_REPORTE_ajustes-de-la-app.md`.
