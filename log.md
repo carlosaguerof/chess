@@ -284,6 +284,7 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Qué:** Refuerza muestra solo las jugadas falladas, de la que más fallo a la que menos (entre iguales, la que fallo más seguido y luego la que llevo más tiempo sin practicar). Ya no salen las que nunca practiqué ni las que nunca fallé. Sin fallos, dice "Aún no hay jugadas falladas." en una línea, y la tarjeta del inicio lo dice también, sin el botón Reforzar.
 - **Por qué:** el nombre dice "lo que fallas"; mezclar lo nunca practicado lo volvía otra cosa. Sin botón, la tarjeta del inicio no invita a una pantalla vacía y sigue diciendo qué es (como la del Repaso).
 - **Quién:** Carlos pidió; "sin botón" en vez de "botón inactivo", la corrida (se ve más limpio).
+- **De paso:** al terminar una ronda de una sola jugada decía "Repasaste 1 jugadas"; ahora, "1 jugada" (con solo lo fallado, las rondas cortas son comunes).
 - **Dónde:** `src/registro/refuerza.ts` (`ordenRefuerza`, `jugadasFalladas`), `src/pantallas/Refuerza.tsx`, `src/pantallas/Inicio.tsx`; `tests/unit/refuerza.test.ts`.
 
 ## [2026-10-28] cambio | 4. Sin la pantalla "Tus datos": Exportar pasa a Ajustes
@@ -312,6 +313,12 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** sin importar no había forma de recuperar un respaldo ni de pasar el avance de la pestaña de Safari a la app instalada: en el iPhone son copias separadas. Y "Exportar guarda todo" tenía que ser cierto. Compartir en modo app, porque ahí una descarga puede no dejar el archivo a la mano (no comprobado en un iPhone real).
 - **Quién:** Carlos (opción A, por la dirección).
 - **Dónde:** `src/componentes/SeccionRespaldo.tsx`, `src/estado/respaldo.ts`, `src/repertorio/edicion.ts`; `tests/e2e/ajustes-app.spec.ts` (exportar baja todo, importar pregunta, modo app descarga o comparte).
+
+## [2026-10-29] aprendizaje | Un nombre de estilo nuevo puede pisar uno viejo sin que ninguna prueba falle
+- **Qué:** el globito del ⓘ se llamó `.globo`, igual que el globo con la frase del bot en Jugar, y `.info`, igual que el aviso azul de la lección. Las pruebas pasaban (buscan textos y botones, no cómo se ven); lo vio la revisión de las capturas de después: un triángulo blanco que no era del globito, y el globo del bot habría quedado flotando.
+- **Por qué importa:** los estilos de esta app viven en un solo archivo y cualquier nombre se comparte. Regla: antes de crear una clase, buscarla en `src/estilos.css`; y revisar las capturas de después, no solo correr las pruebas.
+- **Quién:** la corrida, en la revisión de UX.
+- **Dónde:** `.globo-info` e `.info-como` en `src/estilos.css`; la prueba "los estilos nuevos no pisan los de antes" en `tests/e2e/ajustes-app.spec.ts`; `iterations/v2/revision-ux-ajustes.md`.
 
 ## [2026-10-29] decisión | Lo que queda para cuando haya más usuarios
 - **Qué:** una sección "Cuando haya más usuarios" en `context/despues.md`: lo que se apagó en estos ajustes y cómo se prende (favoritas, cursos populares, "Tus datos"), más lo que Carlos dejó para entonces: el perfil con guardado en la nube (la corrida que se detuvo el 2026-10-28), "Enviar feedback" en Más, la analítica con PostHog, un aviso de cookies y privacidad, y "Escoger tu ruta de aperturas". Nada se construye: solo queda anotado, con su porqué.

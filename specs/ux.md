@@ -18,6 +18,8 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 
 **Al reescribir una pantalla:** antes de tirar la vieja, se listan sus arreglos de UX (avisos, confirmaciones, salidas, datos) y se confirma que la nueva los trae, o se anota por qué se quitó.
 
+**Los estilos viven en un solo archivo** (`src/estilos.css`): antes de crear una clase, se busca ahí, porque un nombre repetido pisa al viejo sin que falle ninguna prueba (pasó con `.globo` e `.info`, 2026-10-29). La revisión mira las capturas de después, no solo el verde de las pruebas.
+
 **Lo que a Carlos le gusta y se protege:** lo ordenado y sencillo de chess.com; la ventana de tiempo (tres grupos de tres y "Sin tiempo"); la lista limpia de todas las aperturas.
 
 ## En el iPhone: nunca zoom ni la página corrida de lado

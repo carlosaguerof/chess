@@ -27,3 +27,6 @@ La vuelta 2 se cierra cuando Carlos la revise (su `feedback.md` llega después).
 
 8. **La ayuda dice lo que hace el código, y una prueba lo cuida.**
    *Lógica:* el "cómo funciona" del repaso nombra sus plazos (1, 3, 7, 14 y 30 días); si alguien cambia `ESCALONES`, la prueba avisa antes de que la ayuda mienta. → `specs/ux.md` ("Cómo funciona"); `tests/unit/ajustes-app.test.ts`.
+
+9. **Un nombre de estilo nuevo puede pisar uno viejo, y las pruebas no lo ven.**
+   *Lógica:* `.globo` e `.info` ya existían (el globo del bot en Jugar y el aviso de la lección). Las pruebas buscan textos y botones, no cómo se ven; lo encontró la revisión de las capturas de después. Antes de crear una clase, se busca en `src/estilos.css`; y la revisión de UX mira las capturas, no solo el verde de las pruebas. → `log.md`; `iterations/v2/revision-ux-ajustes.md`; `tests/e2e/ajustes-app.spec.ts`.
