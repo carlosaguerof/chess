@@ -19,3 +19,9 @@
 ## Antes: la corrida del perfil y el guardado en la nube (detenida el 2026-10-28)
 
 Esta carpeta se abrió el 2026-10-28 para el perfil opcional con guardado en la nube (instructivo `2026-10-28_INSTRUCTIVO_perfil-y-guardado.md`). Carlos la detuvo después de la etapa 0 y la pasó al estacionamiento (`context/despues.md`, "Cuando haya más usuarios"). Su manifiesto completo sigue en la historia de git (`git show dd43c9f:iterations/v3/manifest.md`). El proyecto `chess` de Supabase y su tabla `progreso` vacía siguen ahí.
+
+---
+
+## Después: las correcciones del piloto (2026-10-29, tarde)
+
+Carlos recorrió el curso publicado en su iPhone y dejó 7 comentarios (`feedback.md`). Una corrida los arregló: coordenadas en los tableros de leer (C1), Practicar sin ayudas que no pediste (C2), "Ver paso a paso" (C3), publicar (C4), las marcas en el tablero con las reglas v1.1 (C5, publicadas solo con el "publica" de la torre: C7) y las reglas en `specs/cursos.md` (C6). Qué cambió, en `changes.md`; lo aprendido, en `learning.md` (23 a 35). La fuente: `00_corridas/chess/2026-10-29_INSTRUCTIVO_correcciones-caro-kann.md`. Capturas de las correcciones: `capturas/correcciones/` y `capturas/marcas/`.

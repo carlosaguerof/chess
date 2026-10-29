@@ -437,3 +437,46 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** el instructivo pide `npm test` y `npm run e2e` en verde antes de publicar, con el iPhone en WebKit. La pantalla con el renglón cortado es la que Carlos recorre en la prueba de MAÑANA (variante 4).
 - **Quién:** Carlos pidió cerrar C9 (`00_corridas/chess/2026-10-29_PROMPT_publicar-curso-caro-kann.md`); la sesión lo hizo.
 - **Dónde:** `0e86eb9` (merge de `ee65b8e`, el arreglo, y `198f2e1`, las capturas); lo aprendido, en `iterations/v3/learning.md` (21 y 22), `specs/ux.md` (En el iPhone, regla 5) y `specs/cursos.md` §2; el cierre, en el REPORTE de la corrida, sección "C9, cerrada".
+
+## [2026-10-29] decisión | Correcciones de la Caro-Kann: los 7 comentarios de Carlos en el iPhone, en una corrida
+- **Qué:** Carlos recorrió el curso publicado en su iPhone y dejó 7 comentarios (`iterations/v3/feedback.md`). Una corrida los arregla en este orden: C1 coordenadas en los tableros de leer (puntos 1 y 4), C2 Practicar sin ayudas que no pediste (5), C3 "Ver paso a paso" (2 y 3), C4 publicar, C5 las marcas en el tablero (6 y 7, al final y con revisión de la torre), C6 bitácora y reglas, C7 publicar las marcas con el "publica". La vuelta sigue siendo la v3.
+- **Por qué:** Aprender le gustó mucho y se protege; Practicar daba pistas que no pidió; el principiante no se imagina las jugadas solo con el texto; y las marcas, "si se hace bien, quedaría increíble; pero si no, lo puede arruinar visualmente".
+- **Quién:** Carlos (instructivo `00_corridas/chess/2026-10-29_INSTRUCTIVO_correcciones-caro-kann.md`, con sus Notas 1 a 3: solo la Caro-Kann por ahora; las reglas de las marcas v1.1; la torre es "Air - chess - torre").
+- **Dónde:** `iterations/v3/feedback.md`, `iterations/v3/changes.md`; el estado de la corrida, en `00_corridas/chess/2026-10-29_ESTADO_correcciones-caro-kann.md`.
+
+## [2026-10-29] cambio | C1: coordenadas en los tableros de leer de la Caro-Kann
+- **Qué:** los tableros de La idea y de La estructura llevan las mismas coordenadas que la lección (a–h y 1–8 dentro de las casillas), volteadas porque el curso es con negras. También el tablero de la ventana del paso a paso (C3).
+- **Por qué:** "Los necesito para ubicar mejor lo que dice abajo." (punto 1). El tablero de la lección ya las tenía (punto 4).
+- **Quién:** Carlos (feedback); la corrida.
+- **Dónde:** `65d8cb4`. `src/componentes/TableroMini.tsx` (`coordenadas`), `src/pantallas/CursoPagina.tsx`; prueba `tests/e2e/correcciones-coordenadas.spec.ts` (falla sin el arreglo). Los tableros de las tarjetas y de los otros cursos no cambian (Nota 1).
+
+## [2026-10-29] cambio | C2: Practicar sin ayudas que no pediste
+- **Qué:** en Practicar, en tu turno solo se lee la frase del rival; nada de tu jugada ni la pregunta por la meta. La Pista, si la pides, da la meta en palabras (lo que antes era la pregunta); la segunda marca la pieza, sin más texto. La Respuesta es solo la flecha. Después de tu jugada (correcta o tras la Respuesta) llega la explicación (qué hace, por qué ahora, qué prepara y el cuidado) y la máquina espera a "Siguiente". Aprender y los «¿Y si…?» no cambian.
+- **Por qué:** "se supone que es práctica, sin pistas, pero sí te da pistas"; "la explicación de tu jugada, que te la dé hasta que la hagas, para seguir reforzando el entendimiento" (punto 5). Reemplaza la decisión del piloto de "solo Correcto" en Practicar: Carlos escogió la otra opción.
+- **Quién:** Carlos (feedback); la corrida. Decisión de la corrida que Carlos puede cambiar: la explicación de Practicar suma el "cuidado", como Aprender.
+- **Dónde:** `e166127`. `src/curso/turno.ts` (nuevo), `src/pantallas/LeccionCurso.tsx`; pruebas `tests/unit/correcciones-practicar.test.ts` (los escalones) y `tests/e2e/correcciones-practicar.spec.ts`; se ajustaron `c3-leccion`, `c6-pantallas` y `zoom-iphone`.
+
+## [2026-10-29] cambio | C3: "Ver paso a paso" en La idea, La estructura, el plan y el repaso
+- **Qué:** las páginas de leer guardan su texto y suman "Ver paso a paso": una ventana con un paso por vista, Atrás y Siguiente abajo en las esquinas ("Salir" en el último), que se cierra al tocar fuera. Cada paso es una frase y el tablero hace o muestra lo que dice. 21 paso a paso: La idea, las dos estructuras, las dos páginas del Repaso y los 16 planes (en la lección, junto a "Ahora, Practicar").
+- **Por qué:** "para alguien principiante… no sé bien seguir la anotación e imaginármelo" (puntos 2 y 3): las dos maneras, el texto y el tablero.
+- **Quién:** Carlos (feedback); la corrida escribió las frases a partir del texto de cada página y de cada plan (sin ajedrez nuevo).
+- **Dónde:** `a1bd11d`. Datos `pasoAPaso` en `conocimiento/cursos/caro-kann.json`; `src/curso/pasos.ts`, `src/componentes/PasoAPaso.tsx`; pruebas `tests/unit/correcciones-paso-a-paso.test.ts` (cada paso que habla de una jugada la trae, y al revés) y `tests/e2e/correcciones-paso-a-paso.spec.ts`. Lo aprendido: en un plan, "Ad6" lo jugaba el alfil blanco de f4; las jugadas de negras van con "..." en los datos.
+
+## [2026-10-29] corrida | C4: publicadas las correcciones C1 a C3
+- **Qué:** una sola corrida completa y publicar. `npm test`: 210 de 210. `npm run e2e` (13:21–13:30): 158 pasan, 12 se saltan, ninguna falla (iPhone en WebKit 82, escritorio 76). `npm run publicar` desde `main` `501d2dd` → `gh-pages` `8343fd9`. Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`; `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`: 15 pasan, 1 se salta (la del zoom en escritorio). Ningún `IOSurface`.
+- **Por qué:** el instructivo autoriza publicar C1 a C3 con todo en verde; las marcas esperan el "publica" de la torre.
+- **Quién:** la corrida.
+- **Dónde:** `501d2dd`; prueba nueva en la página publicada: `tests/publicado/correcciones-caro-kann.spec.ts` (coordenadas, paso a paso y Practicar).
+
+## [2026-10-29] cambio | C5: las marcas en el tablero, integradas con un interruptor apagado
+- **Qué:** marcas que ilustran lo que dice cada frase, con las reglas v1.1 que aprobó Carlos (tabla A1–A6 y reglas R1–R8). Van pegadas a su frase en los datos (`rival[k].marcas`, `mias[k].marcasDe`, `plan.marcasDe`, `pasoAPaso.pasos[i].marcas`) y se ven junto con ella: en Aprender (la frase del rival y "Te toca"), después de tu jugada en las dos vueltas, en el plan y en el paso a paso. En Practicar y en los «¿Y si…?», nada antes de tu jugada; la segunda Pista ilumina la pieza y la Respuesta es la flecha. El dibujo es propio: flecha sólida (ahora) o de guiones con punta abierta (plan), la del caballo en L sin doblar encima de una pieza, y casilla iluminada; solo verde y rojo. El ejemplo de Carlos queda tal cual: en "3.e5 le quita la casilla f6 a tu caballo", f6 en rojo y la L roja g8→g6→f6, sin d6; en "Te toca: 3...♗f5", una flecha verde. 42 de 140 jugadas llevan marcas (la lista, en `iterations/v3/marcas-por-jugada.md`), más 46 frases del plan y del paso a paso.
+- **Por qué:** "si se hace bien, quedaría increíble; pero si no, lo puede arruinar visualmente" (puntos 6 y 7). Las reglas v1.1 hacen que cada marca salga de su frase y se pueda comprobar con un programa.
+- **Cómo se comprobó:** `tests/unit/correcciones-marcas.test.ts`, una prueba por regla (R1 a R8) más dos que salieron de los pases (ninguna L dobla encima de una pieza; ninguna casilla encierra una pieza tuya): 12 de 12, y atrapa a propósito una casilla que la frase no dice (d6), una flecha falsa y un color cambiado. `tests/e2e/correcciones-marcas.spec.ts`: apagado de entrada, el dibujo de Carlos, R7 y el tablero de leer limpio. Capturas de cada frase con marcas en los dos perfiles (86 por perfil, `iterations/v3/capturas/marcas/`, con su índice). Tres pases visuales con subagentes nuevos (11, 9 y 4 hallazgos, ninguno de R1 a R5; todos arreglados).
+- **Quién:** Carlos (feedback y reglas v1.1, Nota 2); la torre de chess autorizó una segunda corrida de capturas del iPhone, la última de C5. Decisiones de la corrida que puede cambiar la torre: la A1 de "Te toca" solo en las jugadas clave; sin marca cuando ninguna ruta de la L es limpia o la frase queda escondida en el iPhone.
+- **Dónde:** `7ffe98d` (merge de `240665a`), con `MARCAS_NUEVAS_DE_ENTRADA = false` en `src/curso/marcas.ts`. `src/componentes/CapaMarcas.tsx`, `scripts/marcas-por-jugada.ts`. Los pases: `00_corridas/_local/chess/2026-10-29_correcciones/c5-pases-visuales.md`. No se publica sin el "publica" de la torre (C7).
+
+## [2026-10-29] decisión | C6: las reglas de Practicar, del paso a paso y de las marcas, en specs/cursos.md
+- **Qué:** `specs/cursos.md` trae ahora las coordenadas en todo tablero del curso (§1), Practicar sin ayudas que no pediste (§2), "Ver paso a paso" (§2.1) y las marcas completas (§2.2: la tabla A1–A6, R1–R8, los tres ejemplos, lo que enseñaron los pases, dónde se ven y cómo se escriben). Lo aprendido, en `iterations/v3/learning.md` (23 a 35) y `iterations/v3/changes.md`.
+- **Por qué:** para que los otros siete cursos ya salgan así (Nota 1: por ahora, solo la Caro-Kann), y porque una vuelta se cierra cuando su aprendizaje quedó en las reglas.
+- **Quién:** Carlos (instructivo, C6); la redacción, la corrida.
+- **Dónde:** `specs/cursos.md`, `iterations/v3/{changes,learning}.md`.
