@@ -10,7 +10,7 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 2. **Sin párrafos que expliquen la app.** Como mucho, un subtítulo corto.
 3. **Sin etiquetas sobre de dónde sale cada cosa** ("de tu guía", "en tu repertorio", "redactado por la IA", la fuente) en las vistas principales. Si hace falta, van en un "Detalles" que no estorbe.
 4. **Sin nombres en inglés ni códigos ECO,** salvo en ese "Detalles" de Aperturas y defensas, y en la guía "Instalar en el iPhone", donde los botones van como los muestra el iPhone de Carlos (en inglés), con su explicación en español.
-5. **Las jugadas en un renglón normal** ("1.e4 c6 2.d4 d5 3.e5 Af5"), no una píldora por media jugada. La excepción es la lista de jugadas de una partida, como en chess.com.
+5. **Las jugadas en un renglón normal** ("1.e4 c6 2.d4 d5 3.e5 ♗f5", en la notación que escogí en Ajustes), no una píldora por media jugada. La excepción es la lista de jugadas de una partida, como en chess.com.
 6. **Un solo tipo de letra** en la interfaz (Inter). Nada de letra de código; los relojes usan cifras de ancho fijo de la misma Inter.
 7. **Se abre paso a paso:** primero una lista corta; el detalle, al tocar.
 8. **Sin puntitos, flechitas ni triangulitos de adorno.** Cada elemento a la vista se tiene que ganar su lugar. (Se quedan los que dicen algo: los puntos que se mueven mientras el bot piensa, que son la señal de N1, y los botones de avanzar y regresar.)

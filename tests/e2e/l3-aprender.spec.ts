@@ -62,7 +62,7 @@ test.describe('Nota 1 · "Aperturas y defensas"', () => {
     await expect(page.getByRole('heading', { name: /Variante del Avance/ })).toBeVisible()
     const tablero = page.getByTestId('tablero')
     const linea = page.getByTestId('linea')
-    await expect(linea).toContainText('1.e4 c6 2.d4 d5 3.e5 Af5')
+    await expect(linea).toContainText('1.e4 c6 2.d4 d5 3.e5 ♗f5')
     const final = await tablero.getAttribute('data-fen')
     await page.getByTestId('regresar').click()
     await expect(tablero).not.toHaveAttribute('data-fen', final!)

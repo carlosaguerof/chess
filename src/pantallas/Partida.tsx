@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { mostrarTexto } from '../ajedrez/mostrar.ts'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { usePartidaBot, empezarPartida } from '../partida/usePartidaBot.ts'
@@ -234,7 +235,7 @@ export function Partida() {
         {resumen && (
           <div className="resumen-guia" data-testid="resumen" data-caso={resumen.caso}>
             <p className="panel-guia-titulo">Resumen de tu apertura</p>
-            <p>{resumen.texto}</p>
+            <p>{mostrarTexto(resumen.texto)}</p>
             {practicar && (
               <button type="button" className="enlace-chico" onClick={() => navegar(practicar)}>
                 Practicar esta línea
@@ -315,7 +316,7 @@ export function Partida() {
             <p className="apagado">{partida.fin!.tipo === 'rendicion' && resultado === 'perdi' ? 'Te rendiste' : partida.fin!.tipo === 'tiempo' && resultado === 'perdi' ? 'Se te acabó el tiempo' : partida.fin!.nombre}</p>
             {resumen && (
               <p className="resumen-aviso" data-testid="resumen-aviso">
-                {resumen.texto}
+                {mostrarTexto(resumen.texto)}
               </p>
             )}
             {practicar && (

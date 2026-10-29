@@ -6,8 +6,8 @@ test.describe('T2 · tablero y reglas', () => {
     await page.goto('/#/libre')
     for (const j of ['e2e4', 'e7e5', 'd1h5', 'b8c6', 'f1c4', 'g8f6', 'h5f7']) await jugar(page, info, j)
     await expect(page.getByTestId('fin')).toContainText('Jaque mate')
-    await expect(page.getByTestId('lista-jugadas')).toContainText('Dxf7#')
-    await expect(page.getByTestId('lista-jugadas')).toContainText('Ac4')
+    await expect(page.getByTestId('lista-jugadas')).toContainText('♕xf7#')
+    await expect(page.getByTestId('lista-jugadas')).toContainText('♗c4')
     await expect(page.locator('cg-board square.check')).toHaveCount(1)
     await captura(page, info, 't2-mate-del-pastor')
   })
@@ -22,7 +22,7 @@ test.describe('T2 · tablero y reglas', () => {
     await captura(page, info, 't2-coronacion')
     await selector.getByRole('button', { name: 'Caballo' }).click()
     await expect(selector).toBeHidden()
-    await expect(page.getByTestId('lista-jugadas')).toContainText('e8=C+')
+    await expect(page.getByTestId('lista-jugadas')).toContainText('e8=♘+')
   })
 
   test('una jugada ilegal no se acepta, y la casilla se marca en menos de 0.1 s', async ({ page }, info) => {

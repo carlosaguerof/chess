@@ -1,4 +1,5 @@
 import { leerHistorial, dondeMeSalgo, totales } from '../historial/historial.ts'
+import { mostrarTexto } from '../ajedrez/mostrar.ts'
 import { personajePorId } from '../bots/personajes.ts'
 import { Avatar } from '../componentes/Avatar.tsx'
 
@@ -33,7 +34,7 @@ export function Historial() {
           <ol className="lista-salidas" data-testid="donde-me-salgo">
             {salidas.map((s) => (
               <li key={s.linea}>
-                <span>{s.linea}</span>
+                <span>{mostrarTexto(s.linea)}</span>
                 <span className="conteo-fallo">
                   {s.veces} {s.veces === 1 ? 'vez' : 'veces'}
                 </span>
@@ -55,7 +56,7 @@ export function Historial() {
                 <small className="apagado">
                   {p.colorHumano === 'w' ? 'con blancas' : 'con negras'} · {p.fin} · {Math.ceil(p.jugadas / 2)} jugadas · {new Date(p.fecha).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}
                 </small>
-                {p.resumen?.caso === 'me-sali' && p.resumen.linea && <small className="conteo-fallo">Te saliste de: {p.resumen.linea}</small>}
+                {p.resumen?.caso === 'me-sali' && p.resumen.linea && <small className="conteo-fallo">Te saliste de: {mostrarTexto(p.resumen.linea)}</small>}
               </span>
               <span className={`resultado-chico ${p.resultado}`}>{RESULTADO[p.resultado]}</span>
             </li>

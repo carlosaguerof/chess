@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { mostrarTexto } from '../ajedrez/mostrar.ts'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { repertorioCompleto } from '../aprender/favoritas.ts'
@@ -49,9 +50,9 @@ export function Refuerza() {
       <ol className="lista-refuerza" data-testid="lista-refuerza">
         {orden.slice(0, POR_RONDA).map((j) => (
           <li key={j.fen + j.esperada} data-testid="jugada-refuerza" data-fallos={j.fallos}>
-            <span className="nombre">{nombreDeJugada(j, nombreAp)}</span>
+            <span className="nombre">{mostrarTexto(nombreDeJugada(j, nombreAp))}</span>
             <span className="apagado">
-              {posicionCorta(j)} · <span className="conteo-fallo">{textoConteo(j)}</span>
+              {mostrarTexto(posicionCorta(j))} · <span className="conteo-fallo">{textoConteo(j)}</span>
             </span>
           </li>
         ))}
@@ -129,7 +130,7 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
             <span className="apagado">
               Refuerza · {i + 1} de {jugadas.length}
             </span>
-            <strong data-testid="nombre-linea">{nombreDeJugada(actual, nombreAp)}</strong>
+            <strong data-testid="nombre-linea">{mostrarTexto(nombreDeJugada(actual, nombreAp))}</strong>
           </div>
         </div>
         <div className="partida-tablero">
@@ -141,12 +142,12 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
           <strong>¿Qué harías?</strong>
         </p>
         <p className="apagado">
-          {textoConteo(actual)} · {actual.familias.size > 1 ? `está en ${actual.familias.size} variantes, como ${actual.linea.nombre}` : actual.linea.nombre}
+          {textoConteo(actual)} · {mostrarTexto(actual.familias.size > 1 ? `está en ${actual.familias.size} variantes, como ${actual.linea.nombre}` : actual.linea.nombre)}
         </p>
         <ListaJugadas sanes={jugadasEnEspanol(chess)} />
         {aviso && (
           <p className={`aviso-leccion ${aviso.tipo}`} role="status" data-testid="aviso-leccion" data-resultado={aviso.tipo}>
-            {aviso.texto}
+            {mostrarTexto(aviso.texto)}
           </p>
         )}
         <div className="botones-ayuda">

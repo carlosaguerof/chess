@@ -39,16 +39,16 @@ test.describe('T9 · la guía de aperturas en una partida real', () => {
     const m = page.getByTestId('mensaje-guia')
     await expect(m).toHaveAttribute('data-tipo', 'desvio')
     await expect(m).toContainText('Te desviaste')
-    await expect(m).toContainText('tu línea dice 3...Af5')
+    await expect(m).toContainText('tu línea dice 3...♗f5')
     await captura(page, info, 't9-desvio')
     // el bot espera mi decisión; deshacer regresa a la posición anterior
     await page.waitForTimeout(1500)
     await expect(page.getByTestId('lista-jugadas').getByTestId('jugada')).toHaveCount(6)
     await page.getByTestId('deshacer-desvio').click()
     await expect(page.getByTestId('tablero')).toHaveAttribute('data-fen', fenAntes!)
-    // ahora sí mi línea: el mensaje en notación R D T A C
+    // ahora sí mi línea: el mensaje en la notación de entrada (figuras, C2)
     await jugar(page, info, 'c8f5')
-    await expect(page.getByTestId('mensaje-guia')).toContainText('3...Af5')
+    await expect(page.getByTestId('mensaje-guia')).toContainText('3...♗f5')
     // al final, el resumen
     await page.getByTestId('rendirse').click()
     await page.getByRole('dialog', { name: '¿Rendirte?' }).getByRole('button', { name: 'Rendirme' }).click()
