@@ -179,21 +179,26 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     await aLaVista('la explicación')
     await expect(page.getByTestId('siguiente')).toBeInViewport()
 
-    // en Practicar, donde la frase del rival y la pregunta ya llenan la narración (las posiciones que midió el pase 2)
+    // en Practicar, donde la frase del rival y la Pista llenan la narración (las posiciones que midió el pase 2).
+    // Desde las correcciones (C2), la Respuesta de Practicar es solo la flecha, y después de jugar llega la explicación
     for (const [linea, ply] of [['v:panov', 7], ['v:avance-short', 11]] as const) {
+      const lp = lineaPorId(c, linea)!
       await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'practicar', ply, fecha: Date.now() } })), [linea, ply] as const)
       await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
       await momento('tuTurno')
       await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-ply', String(ply))
       await toca('pista')
       await toca('pista')
-      await expect(page.getByTestId('narracion').locator('[data-tipo="pista"]')).toHaveCount(2)
+      await expect(page.getByTestId('narracion').locator('[data-tipo="pista"]')).toHaveCount(1)
       await aLaVista(`${linea}: dos pistas`)
-      await ayudaALaVista(`${linea}: Otra pista`)
+      await ayudaALaVista(`${linea}: la Pista`)
       await toca('respuesta')
-      await expect(page.getByTestId('narracion').locator('[data-tipo="respuesta"]')).toBeVisible()
+      await expect(page.getByTestId('narracion').locator('[data-tipo="pista"], [data-tipo="respuesta"]')).toHaveCount(0)
       await aLaVista(`${linea}: la Respuesta`)
-      await ayudaALaVista(`${linea}: la Respuesta`)
+      await jugar(page, info, enUci(lp.jugadas)[ply]!)
+      await momento('leer')
+      await aLaVista(`${linea}: la explicación`)
+      await expect(page.getByTestId('siguiente')).toBeInViewport()
     }
   })
 
@@ -249,7 +254,8 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
         await momento('tuTurno')
         await jugar(page, info, uci[ply]!)
         await cabe(page, `lección nueva, ${vuelta}, media jugada ${ply + 1}`)
-        if (vuelta === 'aprender') await page.getByTestId('siguiente').click()
+        // en las dos vueltas, la explicación espera a "Siguiente" (Practicar, desde las correcciones, C2)
+        await page.getByTestId('siguiente').click()
       }
       if (vuelta === 'aprender') {
         await momento('plan')

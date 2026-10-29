@@ -125,9 +125,12 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
     await tocar(page, info, 'e6')
     await momento(page, 'error')
     await page.getByTestId('reintentar').click()
+    // en Practicar, después de cada jugada, su explicación y "Siguiente" (correcciones, C2)
     for (const j of ['c8f5', 'h7h5', 'f5d3', 'e7e6']) {
       await momento(page, 'tuTurno')
       await jugar(page, info, j)
+      await momento(page, 'leer')
+      await page.getByTestId('siguiente').click()
     }
     await momento(page, 'fin')
     await expect(page.getByTestId('resumen-tropiezos')).toContainText('1 error')
