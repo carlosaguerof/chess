@@ -35,3 +35,16 @@ test('Practicar: en tu turno solo la jugada del rival; la explicación, después
   await expect(narracion.locator('[data-tipo="explica"]').first()).toContainText('Sacas tu alfil')
   await expect(page.getByTestId('siguiente')).toBeVisible()
 })
+
+test('Las marcas (C7): en "3.e5 le quita la casilla f6 a tu caballo", f6 en rojo y la L roja de g8 a f6; y la flecha verde de 3...♗f5', async ({ page }) => {
+  await page.goto('./#/')
+  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-short', vuelta: 'aprender', ply: 5, fecha: Date.now() } })))
+  await page.goto('./#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-short'))
+  await page.reload()
+  await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'tuTurno')
+  await expect(page.locator('[data-marca]')).toHaveCount(3)
+  await expect(page.locator('[data-marca="casilla"][data-en="f6"][data-color="rojo"]')).toHaveCount(1)
+  await expect(page.locator('[data-marca="flecha"][data-de="g8"][data-a="f6"][data-color="rojo"][data-puntos="3"]')).toHaveCount(1)
+  await expect(page.locator('[data-marca="flecha"][data-de="c8"][data-a="f5"][data-color="verde"]')).toHaveCount(1)
+  await expect(page.locator('[data-marca][data-en="d6"]')).toHaveCount(0)
+})
