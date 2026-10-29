@@ -40,7 +40,8 @@ export function migrarAlModeloDeFavoritas(): void {
 /**
  * C3 (curso piloto de la Caro-Kann): la Caro-Kann con negras cambió a una lección por respuesta de blancas. Lo que ya
  * llevaba en el Repaso de hoy pasa a la lección nueva de la misma respuesta (se muda de nombre: no se pierde y no se cuenta
- * dos veces). Si la nueva ya tenía algo, la vieja se queda como estaba.
+ * dos veces). Si la nueva ya tenía algo (dos viejas van a la misma), la primera de la lista gana y la otra se queda como estaba,
+ * guardada en el teléfono aunque el Repaso ya no la saque.
  * El avance del curso nuevo (variantes terminadas en sus dos vueltas) empieza en cero.
  */
 export const LECCIONES_CARO_KANN: Record<string, string> = {
@@ -52,6 +53,11 @@ export const LECCIONES_CARO_KANN: Record<string, string> = {
   'avance-bronstein': 'curso-avance-bronstein',
   clasica: 'curso-clasica',
   'clasica-cc3': 'curso-clasica',
+  // las de una jugada mía distinta (3...c5, 4...Cd7) van a la lección de la misma respuesta de blancas (pase adversarial 1)
+  'avance-botvinnik-carls': 'curso-avance-short',
+  karpov: 'curso-clasica',
+  'karpov-moderna': 'curso-clasica',
+  'karpov-kasparov': 'curso-clasica',
   'cambio-rubinstein': 'curso-cambio',
   'panov-mieses': 'panov-principal',
   'dos-caballos': 'curso-dos-caballos',

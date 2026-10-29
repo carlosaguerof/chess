@@ -7,7 +7,7 @@ import { jugadasFalladas } from '../../src/registro/refuerza.ts'
 import { repertorioDeFavoritas } from '../../src/aprender/favoritas.ts'
 import { paraHoy, dia, sumarDias } from '../../src/repaso/repaso.ts'
 import { cursos } from '../../src/cursos/datos.ts'
-import { pasarCaroKann } from '../../src/aprender/migracion.ts'
+import { LECCIONES_CARO_KANN, pasarCaroKann } from '../../src/aprender/migracion.ts'
 import type { EntradaRegistro } from '../../src/registro/registro.ts'
 
 /** C3: el ciclo de la lección nueva, sin pantalla; y el registro sigue alimentando Refuerza y el Repaso de hoy. */
@@ -172,5 +172,14 @@ describe('C3 · el registro sigue alimentando Refuerza y el Repaso de hoy', () =
     expect(nuevo['caro-kann:b/b:caro-kann/curso-avance-tal']).toEqual({ escalon: 2 })
     expect(nuevo['caro-kann:b/b:caro-kann/avance-tal']).toBeUndefined() // se mudó: no cuenta dos veces
     expect(nuevo['italiana:w/w:italiana/paris']).toEqual({ escalon: 1 })
+  })
+
+  it('ninguna lección vieja de la Caro-Kann se queda sin lección nueva (pase adversarial 1: la Karpov y la Botvinnik-Carls)', () => {
+    // las 22 lecciones de antes (la base de main antes del curso), con negras
+    const viejas = ['avance-short', 'avance-short-cf3', 'avance-van-der-wiel', 'avance-tal', 'avance-bayoneta', 'avance-bronstein', 'avance-botvinnik-carls', 'clasica', 'karpov', 'karpov-moderna', 'clasica-cc3', 'karpov-kasparov', 'cambio-rubinstein', 'panov-mieses', 'panov-principal', 'dos-caballos', 'dos-caballos-cf3', 'dos-caballos-cf3-apocalipsis', 'panov-acelerado', 'maroczy', 'breyer', 'hillbilly']
+    const nuevas = new Set(leccionesDe(c).map((x) => x.id.split('/').pop()))
+    for (const v of viejas) expect(nuevas.has(LECCIONES_CARO_KANN[v] ?? v), v).toBe(true)
+    const r = pasarCaroKann({ 'caro-kann:b/b:caro-kann/karpov': { escalon: 3 } })
+    expect(r['caro-kann:b/b:caro-kann/curso-clasica']).toEqual({ escalon: 3 })
   })
 })

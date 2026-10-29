@@ -100,6 +100,24 @@ describe('C4 · el curso de la Caro-Kann', () => {
     for (const f of usadas) expect(c.fuentes[f], f).toBeDefined()
   })
 
+  it('cada jugada mía trae su propia Pista (la de respaldo, por tipo de jugada, daba ideas falsas: C7)', () => {
+    expect(Object.entries(c.mias).filter(([, m]) => !m.pista?.trim()).map(([k]) => k)).toEqual([])
+  })
+
+  it('las jugadas buenas que la base no trae son legales y no son la de la lección', () => {
+    for (const l of lineas)
+      for (const ply of misJugadas(l)) {
+        const m = textoMio(c, l.jugadas, ply)
+        if (!m?.buenas) continue
+        const pos = new Chess()
+        l.jugadas.slice(0, ply).forEach((s) => pos.move(s))
+        for (const b of m.buenas) {
+          expect(b, l.id).not.toBe(l.jugadas[ply])
+          expect(() => new Chess(pos.fen()).move(b), `${l.id}: ${b}`).not.toThrow()
+        }
+      }
+  })
+
   it('ningún texto pasa de 40 palabras, salvo las jugadas clave (hasta 100)', () => {
     for (const t of todosLosTextos()) expect(palabras(t.texto), `${t.donde}: ${t.texto}`).toBeLessThanOrEqual(t.clave ? 100 : 40)
   })
