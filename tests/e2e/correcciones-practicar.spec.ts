@@ -13,8 +13,9 @@ const TAL = '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal')
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const narracion = (page: Page) => page.getByTestId('narracion')
-const flechas = (page: Page) => page.locator('[data-testid="tablero"] svg.cg-shapes line')
-const circulos = (page: Page) => page.locator('[data-testid="tablero"] svg.cg-shapes circle')
+// las marcas (correcciones, C5 y C7): la capa propia encima del tablero
+const flechas = (page: Page) => page.locator('[data-testid="tablero"] [data-marca="flecha"]')
+const circulos = (page: Page) => page.locator('[data-testid="tablero"] [data-marca="casilla"]')
 const ver = (t: string) => mostrarTexto(t, 'figuras')
 
 async function practicarTal(page: Page) {

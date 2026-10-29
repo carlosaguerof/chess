@@ -10,8 +10,8 @@ import { posicion } from './textos.ts'
  */
 
 // ---------------------------------------------------------------- el interruptor interno
-/** Apagado hasta que la torre diga "publica" (C5 → C7). Para las pruebas y las capturas: `chess.interno.marcas` = "1". */
-export const MARCAS_NUEVAS_DE_ENTRADA = false
+/** Prendido con el "publica" de la torre (C7). `chess.interno.marcas` = "0" las apaga, "1" las prende (pruebas y capturas). */
+export const MARCAS_NUEVAS_DE_ENTRADA = true
 const CLAVE_INTERRUPTOR = 'chess.interno.marcas'
 
 export function marcasNuevas(): boolean {
