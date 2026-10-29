@@ -129,7 +129,7 @@ describe('C4 · el curso de la Caro-Kann', () => {
     for (const t of todosLosTextos()) expect(t.texto.replace(/¿[^?]*\?/g, ''), t.donde).not.toMatch(simbolo)
   })
 
-  it('la pregunta de Practicar y la Pista no delatan la jugada (ni su casilla de destino)', () => {
+  it('la pregunta de Practicar, la Pista y el porqué de un error no delatan la jugada (ni su casilla de destino)', () => {
     for (const l of lineas)
       for (let ply = l.desde; ply < l.jugadas.length; ply++) {
         if ((ply % 2 === 0 ? 'w' : 'b') !== l.lado) continue
@@ -138,9 +138,10 @@ describe('C4 · el curso de la Caro-Kann', () => {
         l.jugadas.slice(0, ply).forEach((s) => ch.move(s))
         const j = ch.move(l.jugadas[ply]!)
         const es = sanAEspanol(j.san).replace(/[+#]/g, '')
-        // lo que se ve en Practicar antes de jugar: la frase de la jugada del rival, la pregunta y la Pista
+        // lo que se ve en Practicar antes de jugar: la frase de la jugada del rival, la pregunta y la Pista; y el porqué de
+        // una jugada equivocada, que sale en rojo también en Practicar (pase adversarial 3)
         const antes = ply > l.desde ? (textoRival(c, l.jugadas, ply - 1)?.texto ?? '') : ''
-        for (const t of [antes, m.pregunta, m.pista ?? '']) {
+        for (const t of [antes, m.pregunta, m.pista ?? '', ...Object.values(m.errores ?? {})]) {
           expect(t, `${l.id} ${j.san}: el texto dice la jugada`).not.toContain(es)
           // la casilla de destino no se nombra; en una captura es donde ya está la pieza rival (contexto), y el enroque no tiene casilla
           if (!j.captured && !j.flags.includes('k') && !j.flags.includes('q')) expect(t, `${l.id} ${j.san}: el texto dice ${j.to}`).not.toMatch(new RegExp(`\\b${j.to}\\b`))

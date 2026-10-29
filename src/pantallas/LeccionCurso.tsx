@@ -69,12 +69,10 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   // y la ayuda que pides (Pista, Otra pista, Respuesta) se lleva a la vista
   useEffect(() => {
     narracion.current?.scrollTo?.({ top: 0 })
-  }, [e.momento, e.ply])
-  useEffect(() => {
-    if (e.ayuda === 0) return
+    if (e.momento !== 'tuTurno' || e.ayuda === 0) return
     const ayudas = narracion.current?.querySelectorAll('[data-tipo="pista"], [data-tipo="respuesta"]')
     ayudas?.[ayudas.length - 1]?.scrollIntoView?.({ block: 'nearest' })
-  }, [e.ayuda])
+  }, [e.momento, e.ply, e.ayuda])
 
   // el avance se guarda en el teléfono: se retoma donde me quedé
   useEffect(() => {
