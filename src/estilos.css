@@ -20,6 +20,11 @@
 }
 
 * { box-sizing: border-box; }
+/* iPhone: el doble toque nunca hace zoom (tocar dos casillas rápido cuenta como doble toque); el zoom con dos dedos sí queda.
+   Va en todo porque cada zona que se desliza (la lista de jugadas, las hojas) decide por su cuenta. El tablero lleva `none` (tablero.css). */
+* { touch-action: manipulation; }
+/* Safari hace zoom al tocar un campo con letra de menos de 16 px */
+input, select, textarea { font-size: 16px; }
 html, body { margin: 0; padding: 0; background: var(--fondo); color: var(--texto); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100%; }
 body { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; }
@@ -135,7 +140,9 @@ h1, h2, h3 { margin: 0; }
 }
 
 /* ---------- partida ---------- */
-.partida { min-height: 100vh; display: grid; grid-template-columns: 1fr; align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
+/* minmax(0, 1fr) y no 1fr: con 1fr la columna crecía con la lista de jugadas en un renglón y arrastraba al tablero y a la página
+   a lo ancho (en el iPhone, Safari se alejaba solo). Así la columna mide la pantalla y la lista se desliza dentro de su espacio. */
+.partida { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
 .partida-columna { display: flex; flex-direction: column; gap: 6px; }
 .partida-arriba { display: flex; align-items: center; gap: 4px; padding-left: 4px; }
 .partida-arriba .barra-jugador { flex: 1; }
@@ -262,7 +269,7 @@ h1, h2, h3 { margin: 0; }
 .enlace-chico.peligro { color: #ff8a80; }
 
 /* ---------- lecciones ---------- */
-.leccion { min-height: 100vh; display: grid; grid-template-columns: 1fr; align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
+.leccion { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
 .leccion-columna { display: flex; flex-direction: column; gap: 6px; }
 .leccion-titulo { display: flex; flex-direction: column; font-size: 13px; line-height: 1.3; }
 .leccion-titulo strong { font-size: 16px; }

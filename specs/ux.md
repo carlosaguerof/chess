@@ -20,6 +20,15 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 
 **Lo que a Carlos le gusta y se protege:** lo ordenado y sencillo de chess.com; la ventana de tiempo (tres grupos de tres y "Sin tiempo"); la lista limpia de todas las aperturas.
 
+## En el iPhone: nunca zoom ni la página corrida de lado
+
+Desde el bug del 2026-10-28 (`log.md`): jugando, la lista de jugadas en un renglón ensanchaba la página y Safari se alejaba solo.
+
+1. **Todo cabe en el ancho de la pantalla, siempre.** Lo que crece a lo ancho (la lista de jugadas) se desliza dentro de su propio espacio. Las columnas de las rejillas van con `minmax(0, 1fr)`, no con `1fr`: con `1fr` la columna crece con su contenido más largo y arrastra al tablero y a la página.
+2. **El doble toque no hace zoom** (`touch-action: manipulation` en toda la app; el tablero, `none`). El zoom con dos dedos se queda: sirve para ver de cerca.
+3. **Los campos de texto, con letra de 16 px o más:** con menos, Safari hace zoom al tocarlos.
+4. **La prueba:** `tests/e2e/zoom-iphone.spec.ts`, en el perfil del iPhone: tras cada jugada, el ancho de la página no pasa del de la pantalla y la escala sigue en 1. Una pantalla nueva con tablero entra a esa prueba.
+
 ## Jugar contra un bot
 
 | Paso | Qué veo | Qué pasa al tocar | Elevador (N1) |
