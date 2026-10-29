@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Chess } from 'chess.js'
 import type { DrawShape } from 'chessground/draw'
+import type { Marca } from '../curso/tipos.ts'
 import { destinos, esCoronacion, largo, type ColorLargo } from '../ajedrez/reglas.ts'
 import { Tablero } from './Tablero.tsx'
 import { SelectorCoronacion } from './SelectorCoronacion.tsx'
@@ -17,6 +18,7 @@ export function TableroJugable(props: {
   puedeMover?: ColorLargo | 'both'
   onJugada: (uci: string) => void
   flechas?: DrawShape[]
+  marcas?: Marca[]
 }) {
   const { chess } = props
   const [pendiente, setPendiente] = useState<{ desde: string; hasta: string } | null>(null)
@@ -55,6 +57,7 @@ export function TableroJugable(props: {
         jaque={chess.inCheck()}
         onJugada={alJugar}
         flechas={props.flechas}
+        marcas={props.marcas}
       />
       {pendiente && (
         <SelectorCoronacion

@@ -4,13 +4,26 @@
  * pantalla los convierte (`ajedrez/mostrar.ts`). `fuente` y `motor` son de la base interna: en la app no se cita nada.
  */
 
-/** Una marca en el tablero: una flecha (de → a) o una casilla encerrada (en). */
+/**
+ * Una marca en el tablero: una flecha (de → a) o una casilla (en).
+ *
+ * Las de las correcciones (C5, reglas de las marcas v1.1) traen `tipo`, lo que afirma su frase: A1 tu jugada, A2 tu
+ * pieza ataca o apoya una casilla, A3 tu plan o una ruta (punteada), A4 una pieza del rival controla, ataca o amenaza,
+ * A5 el rival te quita una casilla (la casilla y la flecha de tu pieza a ella), A6 la casilla clave. Solo verde (lo
+ * tuyo) y rojo (lo del rival contra ti). Las de antes, sin `tipo`, se ven mientras el interruptor siga apagado.
+ */
 export interface Marca {
   de?: string
   a?: string
   en?: string
   color?: 'verde' | 'rojo' | 'azul' | 'amarillo'
+  tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6'
+  /** "después": un plan o una ruta (solo A3) */
+  punteada?: boolean
 }
+
+/** Las marcas de un texto, frase por frase (la frase 0 primero). */
+export type MarcasPorFrase = Marca[][]
 
 export interface TableroLeer {
   /** las jugadas desde el inicio (SAN inglés) o una posición */
@@ -46,7 +59,8 @@ export interface PasoAPaso {
   soloPeones?: boolean
   /**
    * Un plan o una estructura: se mueven solo las piezas de las que habla la frase, aunque el mismo color juegue dos
-   * veces seguidas. La ventana lo dice en su nota.
+   * veces seguidas, y no todas (no se juega lo que dejaría una pieza colgada). La ventana lo dice en su nota: "Es una
+   * ilustración: el rival no contesta cada jugada."
    */
   ilustrativo?: boolean
   pasos: PasoLeer[]
@@ -85,13 +99,21 @@ export interface JugadaMia {
   cuidado?: string
   /** por qué no, para jugadas equivocadas conocidas (SAN inglés → texto) */
   errores?: Record<string, string>
+  /** las de antes (sin frase): se ven después de jugar mientras el interruptor de las marcas siga apagado */
   marcas?: Marca[]
+  /**
+   * las marcas de cada frase (correcciones, C5). En `hace`, la frase 0 va con "Te toca: <jugada>" y ahí va la A1; lo
+   * demás de `hace` se mide en la posición después de la jugada
+   */
+  marcasDe?: Partial<Record<'hace' | 'porque' | 'prepara' | 'cuidado', MarcasPorFrase>>
   fuente: string[]
   motor?: string[]
 }
 
 export interface JugadaRival {
   texto: string
+  /** las marcas de cada frase de `texto`, con su jugada en negritas (correcciones, C5) */
+  marcas?: MarcasPorFrase
   fuente: string[]
   motor?: string[]
 }
@@ -99,7 +121,10 @@ export interface JugadaRival {
 export interface PlanVariante {
   tuyo: string
   rival: string
+  /** las de antes (sin frase) */
   marcas: Marca[]
+  /** las marcas de cada frase de `tuyo` y de `rival` (correcciones, C5) */
+  marcasDe?: Partial<Record<'tuyo' | 'rival', MarcasPorFrase>>
   /** "Ver paso a paso" (correcciones, C3): sale del final de la variante */
   pasoAPaso?: PasoAPaso
   fuente: string[]
