@@ -3,6 +3,7 @@ import { Chess } from 'chess.js'
 import { BASE } from '../../src/base/base.ts'
 import { repertorioInicial } from '../../src/repertorio/modelo.ts'
 import { cursosDe, type Leccion } from '../../src/cursos/modelo.ts'
+import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { captura, jugar, tocar } from './_util.ts'
 
 const curso = cursosDe(BASE, repertorioInicial(BASE)).find((c) => c.id === 'caro-kann:b')!
@@ -49,7 +50,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   // el botón de la tarjeta (en el centro del iPhone puede quedar el ⓘ de "cómo funciona")
   await tarjeta.getByRole('link', { name: 'Repasar' }).click()
   // A: completa y sin ayuda → vuelve en 3 días
-  await expect(page.getByTestId('nombre-linea')).toHaveText(A.nombre)
+  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(A.nombre, 'figuras'))
   await expect(page.getByTestId('fase')).toContainText('Ahora tú') // sin la parte de enseñar
   await contestar(page, info, A)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve en 3 días')
@@ -57,7 +58,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   await page.clock.setFixedTime(new Date(HOY.getTime() + 2 * 60_000))
   await page.getByTestId('siguiente-repaso').click()
   // B: con un error → vuelve mañana (fallar 1...c6 repasando B no regresa a A)
-  await expect(page.getByTestId('nombre-linea')).toHaveText(B.nombre)
+  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(B.nombre, 'figuras'))
   await contestar(page, info, B, true)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve mañana')
   await captura(page, info, 'r7-fin-linea')
@@ -73,7 +74,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   await page.reload()
   await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
   await page.getByTestId('repaso-hoy').getByRole('link', { name: 'Repasar' }).click()
-  await expect(page.getByTestId('nombre-linea')).toHaveText(B.nombre)
+  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(B.nombre, 'figuras'))
 })
 
 test('R7 · el interruptor quita el repaso del inicio y se recuerda al recargar; Refuerza sigue igual', async ({ page }) => {
@@ -104,7 +105,7 @@ test('R7 · pedir Pista o Respuesta en el repaso también la regresa a mañana',
   await page.evaluate(([a, b, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f }, [b]: { fecha: f } })), [A.id, B.id, ayer] as const)
   await page.goto('/#/repaso')
   for (const [l, boton] of [[A, 'pista'], [B, 'respuesta']] as const) {
-    await expect(page.getByTestId('nombre-linea')).toHaveText(l.nombre)
+    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(l.nombre, 'figuras'))
     await expect(page.getByTestId('instruccion')).toContainText('¿Qué harías?')
     await page.getByTestId(boton).click()
     await expect(page.getByTestId('aviso-leccion')).toHaveAttribute('data-resultado', boton)

@@ -414,6 +414,13 @@ div.repaso-hoy.tarjeta-enlace { flex-direction: row; align-items: center; justif
 .opciones-estilo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .opciones-estilo button { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--fondo-panel); border: 2px solid transparent; border-radius: var(--radio); padding: 10px 4px; font-weight: 700; font-size: 14px; cursor: pointer; }
 .opciones-estilo button.activo { border-color: var(--acento); }
+/* C2: Ajustes → Notación (Figuras o Letras), con su ejemplo */
+.ajuste-notacion { display: flex; flex-direction: column; gap: 10px; }
+.ajuste-notacion h2 { font-size: 16px; }
+.opciones-notacion { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.opciones-notacion button { display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--fondo-panel); border: 2px solid transparent; border-radius: var(--radio); padding: 12px 4px; font-weight: 700; font-size: 14px; cursor: pointer; color: inherit; }
+.opciones-notacion button.activo { border-color: var(--acento); }
+.muestra-notacion { font-size: 18px; font-weight: 400; }
 .muestra-estilo { display: flex; gap: 2px; }
 .muestra-estilo .retrato { width: 30px; height: 30px; }
 @media (min-width: 900px) { .muestra-estilo .retrato { width: 44px; height: 44px; } }

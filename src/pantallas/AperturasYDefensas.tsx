@@ -1,4 +1,5 @@
 import { Chess } from 'chess.js'
+import { mostrarTexto } from '../ajedrez/mostrar.ts'
 import { cursos, cursoPorId } from '../cursos/datos.ts'
 import type { Curso } from '../cursos/modelo.ts'
 import { planDeMiLado, siguienteLeccion } from '../cursos/modelo.ts'
@@ -197,20 +198,20 @@ export function PaginaApertura({ id }: { id: string }) {
       </div>
       {idea && (
         <p className="plan-corto" data-testid="idea">
-          {idea}
+          {mostrarTexto(idea)}
         </p>
       )}
       <div className="empezar">
         <button type="button" className="boton primario grande" onClick={empezar} data-testid="empezar-leccion">
           {aprendidas(curso, hechas) > 0 ? 'Seguir aprendiendo' : 'Empezar a aprender'}
         </button>
-        {siguiente && aprendidas(curso, hechas) > 0 && <p className="apagado">Sigue: {siguiente.nombre}</p>}
+        {siguiente && aprendidas(curso, hechas) > 0 && <p className="apagado">Sigue: {mostrarTexto(siguiente.nombre)}</p>}
       </div>
       <ol className="lista-variantes">
         {curso.lecciones.map((l, i) => (
           <li key={l.id}>
             <a href={`${enlaceCurso(curso.id)}/${i}`} className="fila-variante" data-testid="variante" data-frecuencia={l.frecuencia}>
-              <span className="nombre">{l.nombre}</span>
+              <span className="nombre">{mostrarTexto(l.nombre)}</span>
               <span className={hechas[l.id] ? 'aprendida' : 'apagado'}>{hechas[l.id] ? 'Aprendida' : 'Por aprender'}</span>
             </a>
           </li>
@@ -250,7 +251,7 @@ export function PaginaVariante({ id, indice }: { id: string; indice: number }) {
       <a className="volver" href={enlaceCurso(curso.id)}>
         <IconoAtras /> {curso.nombre}
       </a>
-      <h1>{l.nombre}</h1>
+      <h1>{mostrarTexto(l.nombre)}</h1>
       <div className="pagina-apertura-tablero">
         <TableroMini testid="tablero" fen={fenDe(jugadas)} orientacion={orientacion(curso)} ultima={ultimaDe(jugadas)} etiqueta={l.nombre} />
       </div>
@@ -276,12 +277,12 @@ export function PaginaVariante({ id, indice }: { id: string; indice: number }) {
             const actual = i + 1 === ply
             return (
               <span key={i}>
-                <span className={actual ? 'actual' : undefined}>{t}</span>{' '}
+                <span className={actual ? 'actual' : undefined}>{mostrarTexto(t)}</span>{' '}
               </span>
             )
           })}
       </p>
-      {plan && <p className="plan-corto">{plan}</p>}
+      {plan && <p className="plan-corto">{mostrarTexto(plan)}</p>}
       <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${indice}`)} data-testid="practicar">
         Practicar
       </button>

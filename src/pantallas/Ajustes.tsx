@@ -6,6 +6,13 @@ import { repasoActivo, activarRepaso } from '../repaso/repaso.ts'
 import { ESTILOS, cambiarEstiloRetratos, useEstiloRetratos } from '../bots/retratos.ts'
 import { personajePorId } from '../bots/personajes.ts'
 import { SeccionRespaldo } from '../componentes/SeccionRespaldo.tsx'
+import { cambiarNotacion, mostrarSan, notacion, releerNotacion, type Notacion } from '../ajedrez/mostrar.ts'
+
+/** C2: las dos formas de ver las jugadas, con su ejemplo en la misma jugada. */
+const NOTACIONES: { id: Notacion; nombre: string }[] = [
+  { id: 'figuras', nombre: 'Figuras' },
+  { id: 'letras', nombre: 'Letras' },
+]
 
 const MUESTRA = ['brisa', 'octavio', 'citlali'].map((id) => personajePorId(id)!)
 
@@ -13,6 +20,7 @@ const MUESTRA = ['brisa', 'octavio', 'citlali'].map((id) => personajePorId(id)!)
 export function Ajustes() {
   const [sonido, setSonido] = useState(sonidoPrendido)
   const [repaso, setRepaso] = useState(repasoActivo)
+  const [nota, setNota] = useState(notacion)
   const estilo = useEstiloRetratos()
   return (
     <div className="ajustes">
@@ -28,6 +36,28 @@ export function Ajustes() {
                 ))}
               </span>
               <span>{e.nombre}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="ajuste-notacion" aria-labelledby="titulo-notacion">
+        <h2 id="titulo-notacion">Notación</h2>
+        <div className="opciones-notacion" role="radiogroup" aria-labelledby="titulo-notacion">
+          {NOTACIONES.map((n) => (
+            <button
+              key={n.id}
+              type="button"
+              role="radio"
+              aria-checked={nota === n.id}
+              className={nota === n.id ? 'activo' : ''}
+              onClick={() => {
+                cambiarNotacion(n.id)
+                setNota(n.id)
+              }}
+              data-testid={`notacion-${n.id}`}
+            >
+              <span>{n.nombre}</span>
+              <span className="muestra-notacion">{mostrarSan('Nf3', n.id)}</span>
             </button>
           ))}
         </div>
@@ -59,6 +89,8 @@ export function Ajustes() {
           // lo importado puede traer otros ajustes: se vuelven a leer
           setSonido(sonidoPrendido())
           setRepaso(repasoActivo())
+          releerNotacion()
+          setNota(notacion())
         }}
       />
     </div>

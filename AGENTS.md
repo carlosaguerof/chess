@@ -26,7 +26,7 @@ Las capturas de Playwright van a `iterations/v2/capturas/pruebas/<perfil>/` (las
 
 ## Principios
 - Producto y UX: `/Users/carlosaguerof/01_repos/00_direccion/principios/producto.md` (Nielsen + Maister + lo de Carlos). Su aterrizaje en esta app: `context/producto.md` §2.
-- Todo en español. Notación de piezas **R D T A C**, `0-0` y `0-0-0`.
+- Todo en español. **Las jugadas se ven en figuras** (♘f3, ♗xc4, `0-0`) de entrada; en Ajustes, "Notación": Figuras o Letras (la notación formal en inglés: Nf3, Bxc4, O-O). Nunca las dos juntas. Por dentro, los textos (planes, guía, cursos) se escriben en la notación de las guías de Carlos (R D T A C, `0-0`) y la pantalla los convierte con `mostrarTexto` (`src/ajedrez/mostrar.ts`). Decisión de Carlos, diseño del escalón 1 §6 (2026-10-29).
 - **Nada se inventa en las aperturas.** La teoría estándar de la base (`conocimiento/`, con su fuente y validada con el motor) es la fuente de verdad. Mi guía (`input/`) solo dice qué aperturas quiero aprender; si no coincide con la teoría, gana la teoría.
 - Pantallas y flujo como chess.com; **nunca sus archivos ni su marca** (ni piezas, ni sonidos, ni avatares, ni nombres de bots). Todo propio o abierto, con la licencia en `LICENCIAS.md`.
 - Sin secretos en el repo ni en el chat. No hay llaves: todo corre en el navegador.
