@@ -197,6 +197,44 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     }
   })
 
+  test('la lección nueva (C9): el texto que pasa debajo del botón no se asoma a su lado, y al deslizar se lee completo', async ({ page }, info) => {
+    // las capturas de C9: en el plan de la Tal, el renglón de "El de blancas" se veía cortado a la derecha de "Ahora, Practicar"
+    const c = cursoNuevo('caro-kann:b')!
+    const l = lineaPorId(c, 'v:avance-tal')!
+    const uci = enUci(l.jugadas)
+    const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
+    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    await page.getByTestId('empezar-vuelta').click()
+    for (const ply of misJugadas(l)) {
+      await momento('tuTurno')
+      await jugar(page, info, uci[ply]!)
+      await momento('leer')
+      await page.getByTestId('siguiente').click()
+    }
+    await momento('plan')
+    const m = await page.evaluate(() => {
+      const caja = document.querySelector<HTMLElement>('[data-testid="narracion"]')!
+      const r = caja.getBoundingClientRect()
+      const s = getComputedStyle(caja)
+      const izquierda = r.left + parseFloat(s.paddingLeft)
+      const derecha = r.right - parseFloat(s.paddingRight)
+      const boton = document.querySelector('[data-testid="a-practicar"]')!.getBoundingClientRect()
+      // a la altura del botón (arriba, en medio y abajo), de un lado al otro de la narración, no se ve ningún mensaje
+      const xs = [izquierda + 2, boton.right + 4, (boton.right + derecha) / 2, derecha - 2]
+      const ys = [boton.top + 2, boton.top + boton.height / 2, boton.bottom - 2]
+      const asomados = ys.flatMap((y) => xs.filter((x) => document.elementFromPoint(x, y)?.closest('.mensaje-curso'))).length
+      // deslizado hasta abajo, el último renglón queda arriba del botón
+      caja.scrollTop = caja.scrollHeight
+      const ultimo = Array.from(caja.querySelectorAll('.mensaje-curso')).at(-1)!.getBoundingClientRect()
+      const botonAbajo = document.querySelector('[data-testid="a-practicar"]')!.getBoundingClientRect()
+      return { desborda: caja.scrollHeight > caja.clientHeight, asomados, ultimoArriba: ultimo.bottom <= botonAbajo.top + 1 }
+    })
+    // si el plan ya cupiera, la prueba no probaría nada
+    expect(m.desborda, 'el plan de la Tal desborda la narración').toBe(true)
+    expect(m.asomados, 'renglones que se asoman junto al botón').toBe(0)
+    expect(m.ultimoArriba, 'el último renglón se lee completo').toBe(true)
+  })
+
   test('la lección nueva (C3): la Clásica, la variante más larga, en sus dos vueltas, y la página del curso', async ({ page }, info) => {
     test.setTimeout(150_000)
     const c = cursoNuevo('caro-kann:b')!
