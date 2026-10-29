@@ -1,0 +1,150 @@
+import { expect, test, type Page, type TestInfo } from '@playwright/test'
+import { esCelular, jugar, tocar } from './_util.ts'
+
+/**
+ * C6 (curso de la Caro-Kann): las pantallas del curso, en los dos perfiles, con sus capturas en
+ * iterations/v3/capturas/<perfil>/. Cada pantalla: una acción principal clara, la página nunca más ancha que la
+ * pantalla (en el iPhone, sin zoom) y nada en inglés ni códigos ECO a la vista.
+ */
+const cap = (page: Page, info: TestInfo, nombre: string, completa = false) => page.screenshot({ path: `iterations/v3/capturas/${info.project.name}/${nombre}.png`, fullPage: completa })
+const momento = (page: Page, m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
+
+async function sinDesborde(page: Page) {
+  const r = await page.evaluate(() => ({ ancho: document.documentElement.scrollWidth, vista: window.innerWidth, escala: window.visualViewport?.scale ?? 1 }))
+  expect(r.ancho).toBeLessThanOrEqual(r.vista)
+  expect(r.escala).toBe(1)
+}
+
+test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
+  test('Aprender → la tarjeta con su avance → la página del curso con las piezas en orden y "Empezar"', async ({ page }, info) => {
+    await page.goto('/#/cursos/negras')
+    const tarjeta = page.getByTestId('tarjeta-caro-kann:b')
+    await expect(tarjeta).toContainText('Defensa Caro-Kann')
+    await expect(tarjeta).toContainText('0 de 16 variantes')
+    await cap(page, info, '01-aprender-con-negras')
+    await tarjeta.click()
+    await expect(page.getByTestId('pagina-curso')).toBeVisible()
+    await expect(page.getByTestId('empezar-curso')).toHaveText('Empezar')
+    const piezas = page.getByTestId('piezas-curso')
+    await expect(piezas.locator('[data-testid^="paso-"]')).toHaveCount(2 + 16 + 2)
+    await expect(piezas.locator('[data-testid^="paso-"]').first()).toContainText('La idea')
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(1)).toContainText('La estructura')
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(2)).toContainText('1. Avance: 4.♘f3')
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(18)).toContainText('Errores y trampas')
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(19)).toContainText('Repaso del curso')
+    await expect(page.getByTestId('pagina-curso')).not.toContainText(/Caro-Kann Defense|B1\d/)
+    await sinDesborde(page)
+    await cap(page, info, '02-pagina-del-curso', true)
+  })
+
+  test('las piezas de leer: La idea, La estructura y el Repaso; "Listo" marca la pieza y lleva a lo que sigue', async ({ page }, info) => {
+    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.getByTestId('empezar-curso').click()
+    await expect(page.getByTestId('pieza-idea')).toBeVisible()
+    await expect(page.getByTestId('texto-pieza')).toContainText('1...c6')
+    await expect(page.getByTestId('tablero-leer')).toBeVisible()
+    await sinDesborde(page)
+    await cap(page, info, '03-la-idea', true)
+    await page.getByTestId('pieza-listo').click()
+    await expect(page.getByTestId('pieza-estructura')).toBeVisible()
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('1 de 2')
+    await cap(page, info, '04-la-estructura-avance', true)
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('2 de 2')
+    await cap(page, info, '05-la-estructura-clasica', true)
+    await page.getByTestId('pieza-listo').click()
+    // lo que sigue después de las dos piezas de leer: la primera variante
+    await expect(page.getByTestId('leccion-curso')).toBeVisible()
+    await page.goto('/#/curso/caro-kann%3Ab')
+    await expect(page.getByTestId('paso-idea')).toHaveAttribute('data-estado', 'hecha')
+    await expect(page.getByTestId('paso-estructura')).toHaveAttribute('data-estado', 'hecha')
+    await expect(page.getByTestId('empezar-curso')).toContainText('Seguir: Avance: 4.♘f3')
+    await page.goto('/#/curso/caro-kann%3Ab/leer/repaso')
+    await expect(page.getByTestId('linea-repaso')).toContainText('1.e4 c6 2.d4 d5 3.e5 ♗f5 4.♘f3 e6 5.♗e2 c5')
+    await cap(page, info, '06-repaso-del-curso', true)
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('texto-pieza')).toContainText('alfil malo')
+    await cap(page, info, '07-repaso-lo-que-tu-guia-decia', true)
+  })
+
+  test('la lección: cada momento, con su captura', async ({ page }, info) => {
+    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-short'))
+    await momento(page, 'intro')
+    await sinDesborde(page)
+    await cap(page, info, '08-leccion-intro')
+    await page.getByTestId('empezar-vuelta').click()
+    await momento(page, 'tuTurno')
+    await cap(page, info, '09-leccion-aprender-tu-turno')
+    await jugar(page, info, 'c7c6')
+    await momento(page, 'leer')
+    await cap(page, info, '10-leccion-aprender-correcto-y-siguiente')
+    await page.getByTestId('siguiente').click()
+    await momento(page, 'tuTurno')
+    await tocar(page, info, 'e7')
+    await tocar(page, info, 'e5')
+    await momento(page, 'error')
+    await page.waitForTimeout(1500)
+    await cap(page, info, '11-leccion-error-hasta-reintentar')
+    await page.getByTestId('reintentar').click()
+    await jugar(page, info, 'd7d5')
+    await page.getByTestId('siguiente').click()
+    await momento(page, 'tuTurno')
+    await tocar(page, info, 'c6')
+    await tocar(page, info, 'c5')
+    await momento(page, 'buena')
+    await cap(page, info, '12-leccion-buena-de-otra-linea')
+    await page.getByTestId('reintentar').click()
+    await page.getByTestId('pista').click()
+    await page.getByTestId('pista').click()
+    await cap(page, info, '13-leccion-pista-y-otra-pista')
+    await page.getByTestId('respuesta').click()
+    await cap(page, info, '14-leccion-respuesta')
+    await sinDesborde(page)
+  })
+
+  test('el plan, Practicar y el resumen con sus tres salidas (en la Tal)', async ({ page }, info) => {
+    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
+    await page.getByTestId('empezar-vuelta').click()
+    for (const j of ['c8f5', 'h7h5', 'f5d3', 'e7e6']) {
+      await momento(page, 'tuTurno')
+      await jugar(page, info, j)
+      await momento(page, 'leer')
+      await page.getByTestId('siguiente').click()
+    }
+    await momento(page, 'plan')
+    await cap(page, info, '15-leccion-el-plan')
+    await page.getByTestId('a-practicar').click()
+    await page.getByTestId('empezar-vuelta').click()
+    await momento(page, 'tuTurno')
+    await cap(page, info, '16-leccion-practicar-pregunta')
+    await tocar(page, info, 'e7')
+    await tocar(page, info, 'e6')
+    await momento(page, 'error')
+    await page.getByTestId('reintentar').click()
+    for (const j of ['c8f5', 'h7h5', 'f5d3', 'e7e6']) {
+      await momento(page, 'tuTurno')
+      await jugar(page, info, j)
+    }
+    await momento(page, 'fin')
+    await expect(page.getByTestId('resumen-tropiezos')).toContainText('1 error')
+    await sinDesborde(page)
+    await cap(page, info, '17-leccion-resumen', esCelular(info))
+  })
+
+  test('Errores y trampas: la lista y un "¿Y si…?"', async ({ page }, info) => {
+    await page.goto('/#/curso/caro-kann%3Ab/errores')
+    await expect(page.getByTestId('pieza-errores')).toBeVisible()
+    await cap(page, info, '18-errores-y-trampas')
+    await page.getByTestId('error-cambio-dc7').click()
+    await page.getByTestId('empezar-vuelta').click()
+    await momento(page, 'tuTurno')
+    await cap(page, info, '19-y-si-castiga-tu')
+  })
+
+  test('Ajustes: Notación y Flechas de la siguiente jugada', async ({ page }, info) => {
+    await page.goto('/#/ajustes')
+    await expect(page.getByTestId('notacion-figuras')).toBeVisible()
+    await expect(page.getByTestId('ajuste-flechas')).toBeAttached()
+    await cap(page, info, '20-ajustes', true)
+  })
+})
