@@ -414,3 +414,14 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Quién:** Carlos (instructivo Caro-Kann, C8); la redacción, la corrida.
 - **Dónde:** `specs/cursos.md`, `iterations/v3/learning.md`.
 - **Una propuesta para Carlos, sin cambiar ninguna regla:** reiniciar la Air antes de una corrida larga con capturas. Esta noche, tras 29 horas encendida, se cayó la pantalla con una captura de WebKit y el perfil iPhone no se pudo correr.
+
+## [2026-10-29] corrida | C9: publicar queda bloqueado (WebKit no arranca en la Air)
+- **Qué:** la corrida del curso de la Caro-Kann cierra C0 a C8, integradas a `main`. **No se publicó.** El instructivo pide `npm test` y `npm run e2e` en verde, y el perfil iPhone de `npm run e2e` corre en WebKit, que no arranca desde las 01:54.
+- **Las pruebas al cierre** (03:39–03:49, sobre `1fe00b6`):
+  - `npm test`: 195 de 195.
+  - `npm run e2e -- --project=escritorio`: 66 pasan y 8 se saltan (son del iPhone).
+  - El perfil iPhone emulado en Chromium (390×844): 71 pasan y 3 se saltan.
+  - `npm run e2e -- --project=iphone`: `browserType.launch: Timeout 180000ms exceeded`.
+- **Por qué no arranca:** a las 01:54 se cayó WindowServer (`IOSurface … limit reached`, con una captura de 390×844) y la sesión de Carlos quedó en la pantalla de inicio. Sin sesión gráfica, WebKit no arranca; Chromium sí. Hace falta que Carlos entre con su contraseña.
+- **Quién:** la corrida; lo que sigue, Carlos (un paso).
+- **Dónde:** `00_corridas/chess/2026-10-29_BLOQUEADO_curso-caro-kann.md`, que trae los pasos para cerrar C9: las pruebas de WebKit, las capturas del iPhone 13 a 16, `npm run publicar` y la comprobación contra la página publicada.
