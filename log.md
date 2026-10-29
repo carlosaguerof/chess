@@ -425,3 +425,15 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué no arranca:** a las 01:54 se cayó WindowServer (`IOSurface … limit reached`, con una captura de 390×844) y la sesión de Carlos quedó en la pantalla de inicio. Sin sesión gráfica, WebKit no arranca; Chromium sí. Hace falta que Carlos entre con su contraseña.
 - **Quién:** la corrida; lo que sigue, Carlos (un paso).
 - **Dónde:** `00_corridas/chess/2026-10-29_BLOQUEADO_curso-caro-kann.md`, que trae los pasos para cerrar C9: las pruebas de WebKit, las capturas del iPhone 13 a 16, `npm run publicar` y la comprobación contra la página publicada.
+
+## [2026-10-29] corrida | C9: publicado el curso de la Caro-Kann, con las pruebas del iPhone en WebKit
+- **Qué:** Carlos entró a la Air a las 10:57 y WebKit volvió a arrancar. Se cerró C9:
+  - `npm test`: 195 de 195 (26 archivos).
+  - `npm run e2e`, los dos perfiles, una sola corrida (11:05–11:13): **138 pasan, 12 se saltan, ninguna falla**. iPhone (WebKit): 72 pasan y 3 se saltan; escritorio: 66 pasan y 9 se saltan (las del iPhone y las de favoritas, que se saltan en los dos).
+  - Las capturas del iPhone del curso (`iterations/v3/capturas/iphone`, de la 02 a la 19) se rehicieron en WebKit: eran de antes de los arreglos de los pases.
+  - Publicado: `npm run publicar` → `gh-pages` `ad36251`, desde `main` `0e86eb9`. Comprobación: `curl -sI` da 200 y el `.wasm` del motor sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`: 11 pasan y 1 se salta (la del zoom, solo del iPhone). Trae una prueba nueva, `tests/publicado/curso-caro-kann.spec.ts`: el curso abre y la lección de la Tal se juega hasta el plan.
+  - Ningún mensaje de `IOSurface` en el registro del sistema durante las pruebas.
+- **Lo que encontró la revisión de las capturas:** en el plan de la Tal, en el iPhone, el renglón de "El de blancas" se asomaba cortado a la derecha de "Ahora, Practicar". Ya pasaba en las capturas de Chromium del pase 2 y nadie lo vio. Arreglo: el botón va en una franja del color del panel, a todo lo ancho (`ee65b8e`), con su prueba en `tests/e2e/zoom-iphone.spec.ts`, que falla sin el arreglo. Además, las capturas del curso esperan 250 ms, porque la pieza salía a medio camino de su animación.
+- **Por qué:** el instructivo pide `npm test` y `npm run e2e` en verde antes de publicar, con el iPhone en WebKit. La pantalla con el renglón cortado es la que Carlos recorre en la prueba de MAÑANA (variante 4).
+- **Quién:** Carlos pidió cerrar C9 (`00_corridas/chess/2026-10-29_PROMPT_publicar-curso-caro-kann.md`); la sesión lo hizo.
+- **Dónde:** `0e86eb9` (merge de `ee65b8e`, el arreglo, y `198f2e1`, las capturas); lo aprendido, en `iterations/v3/learning.md` (21 y 22), `specs/ux.md` (En el iPhone, regla 5) y `specs/cursos.md` §2; el cierre, en el REPORTE de la corrida, sección "C9, cerrada".
