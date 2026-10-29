@@ -462,11 +462,13 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .mensaje-curso.buena { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.pista, .mensaje-curso.respuesta { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.explica { color: var(--texto); }
-.narracion .boton { align-self: flex-start; min-width: 140px; }
-/* en el iPhone, la narración tiene una altura fija y se desplaza: Pista, Respuesta y Atrás no salen de la pantalla */
+.narracion-pie { display: flex; }
+.narracion .boton { min-width: 140px; }
+/* en el iPhone, la narración tiene una altura fija y se desplaza: Pista, Respuesta y Atrás no salen de la pantalla.
+   El botón va en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su lado (C9) */
 @media (max-width: 899px) {
   .leccion-curso .narracion { height: 200px; min-height: 0; overflow-y: auto; }
-  .leccion-curso .narracion .boton { position: sticky; bottom: 0; flex-shrink: 0; box-shadow: 0 -8px 10px var(--fondo-panel); }
+  .leccion-curso .narracion-pie { position: sticky; bottom: 0; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
 }
 .botones-curso { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .empezar-de-nuevo { align-self: center; font-size: 14px; }

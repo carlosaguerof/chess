@@ -6,7 +6,11 @@ import { esCelular, jugar, tocar } from './_util.ts'
  * iterations/v3/capturas/<perfil>/. Cada pantalla: una acción principal clara, la página nunca más ancha que la
  * pantalla (en el iPhone, sin zoom) y nada en inglés ni códigos ECO a la vista.
  */
-const cap = (page: Page, info: TestInfo, nombre: string, completa = false) => page.screenshot({ path: `iterations/v3/capturas/${info.project.name}/${nombre}.png`, fullPage: completa })
+// antes de la foto, la animación de la jugada (180 ms) termina: si no, la pieza sale a medio camino (capturas de C9)
+const cap = async (page: Page, info: TestInfo, nombre: string, completa = false) => {
+  await page.waitForTimeout(250)
+  await page.screenshot({ path: `iterations/v3/capturas/${info.project.name}/${nombre}.png`, fullPage: completa })
+}
 const momento = (page: Page, m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 
 async function sinDesborde(page: Page) {

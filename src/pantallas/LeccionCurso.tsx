@@ -260,10 +260,13 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
                   <Texto t={x.texto} />
                 </p>
               ))}
+              {/* en el iPhone, una franja a todo lo ancho: el texto que pasa debajo del botón no se asoma a su lado */}
               {boton && (
-                <button type="button" className="boton primario" onClick={boton.accion} data-testid={boton.testid}>
-                  {boton.texto}
-                </button>
+                <div className="narracion-pie">
+                  <button type="button" className="boton primario" onClick={boton.accion} data-testid={boton.testid}>
+                    {boton.texto}
+                  </button>
+                </div>
               )}
             </div>
             <div className="botones-ayuda botones-curso">

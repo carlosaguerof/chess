@@ -39,7 +39,7 @@ Código: `src/curso/ciclo.ts` (el ciclo, sin pantalla), `src/pantallas/LeccionCu
 - **Atrás** regresa una jugada tuya; **Empezar de nuevo** reinicia la vuelta y pregunta antes.
 - **El avance se guarda** en el teléfono (`ajedrez.v1.curso:<curso>`): piezas leídas, variantes aprendidas y terminadas, "¿Y si…?" hechos, y dónde me quedé (al volver, retomo ahí). Viaja en el Respaldo.
 - **Al terminar Practicar, el resumen:** la línea en un renglón, la idea clave, en qué me equivoqué (fallos, Pista, Respuesta) y tres salidas: siguiente variante, repetir, volver al curso.
-- **El espacio fijo de los mensajes** junto al tablero narra (la jugada del rival y su porqué, la pregunta, Correcto, el error) y no se quita solo. En el celular tiene una altura fija y se desplaza por dentro: Pista, Respuesta y Atrás nunca salen de la pantalla; cada momento nuevo se lee desde arriba y la ayuda que pides se lleva a la vista.
+- **El espacio fijo de los mensajes** junto al tablero narra (la jugada del rival y su porqué, la pregunta, Correcto, el error) y no se quita solo. En el celular tiene una altura fija y se desplaza por dentro: Pista, Respuesta y Atrás nunca salen de la pantalla; cada momento nuevo se lee desde arriba y la ayuda que pides se lleva a la vista. Su botón (Siguiente, Reintentar, Ahora, Practicar) se queda abajo en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su lado (C9).
 - **El registro:** cada jugada de Practicar se registra como antes (`registrarPasoCurso`) y alimenta Refuerza; al terminar una variante entra al Repaso de hoy (`marcarLeccion`). Las variantes son las lecciones del curso para el Repaso (`leccionesDe`).
 
 ## 3. Los textos

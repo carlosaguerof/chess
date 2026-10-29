@@ -30,6 +30,7 @@ Desde el bug del 2026-10-28 (`log.md`): jugando, la lista de jugadas en un rengl
 2. **El doble toque no hace zoom** (`touch-action: manipulation` en toda la app; el tablero, `none`). El zoom con dos dedos se queda: sirve para ver de cerca.
 3. **Los campos de texto, con letra de 16 px o más:** con menos, Safari hace zoom al tocarlos.
 4. **La prueba:** `tests/e2e/zoom-iphone.spec.ts`, en el perfil del iPhone: tras cada jugada, el ancho de la página no pasa del de la pantalla y la escala sigue en 1. Una pantalla nueva con tablero entra a esa prueba.
+5. **Un botón fijo sobre un texto que se desliza va en una franja a todo lo ancho,** del color del panel. Si solo el botón tapa el texto, el renglón de abajo se asoma cortado a su lado (el plan de la Tal, C9, 2026-10-29). La prueba, en el mismo archivo.
 
 ## Jugar contra un bot
 
