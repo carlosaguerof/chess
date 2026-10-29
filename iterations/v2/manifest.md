@@ -24,3 +24,12 @@ CAPTURAS=despues npx playwright test --grep @capturas
 Desde la Nota 1, Repertorio y Aperturas son "Aperturas y defensas", así que en `despues/` cambian algunas: 03 = Jugar con otro bot escogido, 07 = Mis favoritas, 08 = la página de una apertura, 12 = Todas, 13 = una variante, 14 = Mis favoritas vacía y 15 = Tus datos (exportar e importar, en Más).
 
 Además: `capturas/l1/` (los 47 personajes en cada estilo y el ajuste del estilo) y `capturas/pruebas/` (las que toma cada prueba de `npm run e2e`; las de la v1 se quedan como estaban en `iterations/v1/capturas/`).
+
+**Ajustes de la app (2026-10-28 y 29):** las capturas de antes y después de Aprender, Refuerza, Ajustes (con Respaldo), el menú Más, la guía "Instalar en el iPhone" y el ⓘ de "cómo funciona" están en `capturas/ajustes/{antes,despues}/{iphone,escritorio}/`. Se generan con `tests/e2e/capturas-ajustes.spec.ts`:
+
+```
+CAPTURAS=antes   npx playwright test --grep @ajustes
+CAPTURAS=despues npx playwright test --grep @ajustes
+```
+
+La fuente: `00_corridas/chess/2026-10-28_PROMPT_ajustes-de-la-app.md` (fuera de este repo); el reporte, junto a él.
