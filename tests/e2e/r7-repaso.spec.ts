@@ -46,7 +46,8 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   await expect(tarjeta).toHaveAttribute('data-n', '2')
   await expect(tarjeta).toContainText(/Repaso de hoy: 2 líneas, unos \d+ minutos?/)
   await captura(page, info, 'r7-inicio')
-  await tarjeta.click()
+  // el botón de la tarjeta (en el centro del iPhone puede quedar el ⓘ de "cómo funciona")
+  await tarjeta.getByRole('link', { name: 'Repasar' }).click()
   // A: completa y sin ayuda → vuelve en 3 días
   await expect(page.getByTestId('nombre-linea')).toHaveText(A.nombre)
   await expect(page.getByTestId('fase')).toContainText('Ahora tú') // sin la parte de enseñar
@@ -71,7 +72,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   await page.clock.setFixedTime(MANANA)
   await page.reload()
   await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
-  await page.getByTestId('repaso-hoy').click()
+  await page.getByTestId('repaso-hoy').getByRole('link', { name: 'Repasar' }).click()
   await expect(page.getByTestId('nombre-linea')).toHaveText(B.nombre)
 })
 

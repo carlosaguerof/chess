@@ -86,7 +86,9 @@ function Ronda({ jugadas, rep, onTerminar }: { jugadas: JugadaARepasar[]; rep: R
     return (
       <div className="refuerza">
         <h1>Listo por ahora</h1>
-        <p className="apagado">Repasaste {jugadas.length} jugadas. Lo que fallaste vuelve primero la próxima vez.</p>
+        <p className="apagado">
+          Repasaste {jugadas.length} {jugadas.length === 1 ? 'jugada' : 'jugadas'}. Lo que fallaste vuelve primero la próxima vez.
+        </p>
         <button type="button" className="boton primario grande" onClick={onTerminar} data-testid="otra-ronda">
           Volver a Refuerza
         </button>

@@ -77,6 +77,27 @@ test('capturas de los ajustes de la app @capturas @ajustes', async ({ page }, in
   await page.reload()
   await foto(page, info, '00-inicio-sin-falladas')
 
+  if (ETAPA !== 'antes') {
+    // Nota 1: el ⓘ de Refuerza en el inicio, su globito y la ventana de pasos
+    await page.getByTestId('info-refuerza').click()
+    await expect(page.getByTestId('globo')).toBeVisible()
+    await foto(page, info, '10-como-funciona-globito')
+    await page.getByTestId('ver-como-funciona-refuerza').click()
+    await page.getByTestId('paso-siguiente').click()
+    await foto(page, info, '11-como-funciona-ventana')
+    for (let i = 0; i < 3; i++) await page.getByTestId('paso-siguiente').click()
+    await foto(page, info, '12-como-funciona-ultimo')
+    await page.getByTestId('paso-siguiente').click()
+    // Respaldo: la sección completa, e Importar pregunta antes de reemplazar
+    await page.goto('/#/ajustes')
+    await page.getByTestId('respaldo').scrollIntoViewIfNeeded()
+    await foto(page, info, '05b-ajustes-respaldo')
+    await page.getByTestId('importar').setInputFiles({ name: 'respaldo.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ app: 'chess-mis-aperturas', version: 2, favoritas: [], progreso: { a: { fecha: 1 } }, registro: [], repaso: {}, historial: [{ id: 'p1' }], ajustes: {} })) })
+    await expect(page.getByRole('dialog')).toBeVisible()
+    await foto(page, info, '13-importar-confirmar')
+    await page.getByRole('dialog').getByRole('button', { name: 'Cancelar' }).click()
+  }
+
   // la guía para instalar, con la página abierta como app
   if (ETAPA !== 'antes') {
     await page.addInitScript(() => {
