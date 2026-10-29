@@ -122,7 +122,7 @@ export function CursoPagina({ id }: { id: string }) {
   )
 }
 
-/** Un tablero de las piezas de leer: la posición clave, o solo los peones, con sus marcas. */
+/** Un tablero de las piezas de leer: la posición clave, o solo los peones, con sus marcas y sus coordenadas (C1). */
 function TableroDeLeer({ t, orientacion }: { t: TableroLeer; orientacion: 'white' | 'black' }) {
   let fen = t.fen ?? fenDe(t.jugadas)
   if (t.soloPeones) {
@@ -130,7 +130,7 @@ function TableroDeLeer({ t, orientacion }: { t: TableroLeer; orientacion: 'white
     fen = [tab!.replace(/[kqrbnKQRBN]/g, '1').replace(/\d+/g, (x) => String([...x].reduce((s, d) => s + Number(d), 0))), ...resto].join(' ')
   }
   const sh = formas(t.marcas).map((f) => ({ orig: f.orig as Key, dest: f.dest as Key | undefined, brush: f.brush }))
-  return <TableroMini fen={fen} orientacion={orientacion} flechas={sh} testid="tablero-leer" />
+  return <TableroMini fen={fen} orientacion={orientacion} flechas={sh} testid="tablero-leer" coordenadas />
 }
 
 /** Una pieza de leer (La idea, La estructura, Repaso): sus páginas, una por vista, con Atrás y Siguiente. */
