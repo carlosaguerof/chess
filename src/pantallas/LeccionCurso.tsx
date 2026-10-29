@@ -18,6 +18,7 @@ import { formas, jugadaEs, lineaHasta, porQueNo, posicion } from '../curso/texto
 import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turno.ts'
 import { flechasPrendidas } from '../curso/flechas.ts'
 import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
+import { marcasDelMomento, marcasNuevas } from '../curso/marcas.ts'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
@@ -136,18 +137,21 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   }
 
   // ---------------------------------------------------------------- el tablero
+  // C5: con el interruptor prendido, las marcas nuevas (pegadas a su frase) reemplazan a las flechas de antes
+  const nuevas = marcasNuevas()
+  const marcas = nuevas ? marcasDelMomento(c, l, e, { flechasSiguiente: flechasPrendidas() }) : undefined
   const flechas: DrawShape[] = []
   const flecha = (orig: string, dest: string | undefined, brush: string) => flechas.push({ orig: orig as Key, dest: dest as Key | undefined, brush })
   const turno = e.momento === 'tuTurno' && esperada ? vistaTuTurno(c, l, e.vuelta, e.ply, e.ayuda) : null
-  if (turno && esperada) {
+  if (!nuevas && turno && esperada) {
     const m = posicion(l.jugadas, e.ply).move(esperada)
     if (e.vuelta === 'aprender' && flechasPrendidas()) flecha(m.from, m.to, 'green')
     if (turno.pieza) flecha(turno.pieza, undefined, 'yellow')
     if (turno.flecha) flecha(turno.flecha.de, turno.flecha.a, 'blue')
   }
-  if (e.intento) flecha(e.intento.desde, e.intento.hasta, e.momento === 'error' ? 'red' : 'blue')
-  if (e.momento === 'leer' && e.ultima !== null) for (const f of formas(textoMio(c, l.jugadas, e.ultima)?.marcas)) flecha(f.orig, f.dest, f.brush)
-  if (e.momento === 'plan' && l.variante) for (const f of formas(l.variante.plan.marcas)) flecha(f.orig, f.dest, f.brush)
+  if (!nuevas && e.intento) flecha(e.intento.desde, e.intento.hasta, e.momento === 'error' ? 'red' : 'blue')
+  if (!nuevas && e.momento === 'leer' && e.ultima !== null) for (const f of formas(textoMio(c, l.jugadas, e.ultima)?.marcas)) flecha(f.orig, f.dest, f.brush)
+  if (!nuevas && e.momento === 'plan' && l.variante) for (const f of formas(l.variante.plan.marcas)) flecha(f.orig, f.dest, f.brush)
 
   // ---------------------------------------------------------------- el espacio de mensajes (narra; no se quita solo)
   const mensajes: Mensaje[] = []
@@ -209,7 +213,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
           </div>
         </div>
         <div className="partida-tablero">
-          <TableroJugable chess={tablero} orientacion={l.lado === 'w' ? 'white' : 'black'} puedeMover={e.momento === 'tuTurno' ? (l.lado === 'w' ? 'white' : 'black') : undefined} onJugada={alJugar} flechas={flechas} />
+          <TableroJugable chess={tablero} orientacion={l.lado === 'w' ? 'white' : 'black'} puedeMover={e.momento === 'tuTurno' ? (l.lado === 'w' ? 'white' : 'black') : undefined} onJugada={alJugar} flechas={flechas} marcas={marcas} />
         </div>
       </div>
       <aside className="partida-panel leccion-panel">

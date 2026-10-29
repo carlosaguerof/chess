@@ -11,6 +11,7 @@ import type { DatosCurso, PaginaLeer, TableroLeer } from '../curso/tipos.ts'
 import { marcarPieza, useAvance, type AvanceCurso, type PiezaLeerId } from '../curso/avance.ts'
 import { formas, lineaHasta } from '../curso/textos.ts'
 import { soloPeones } from '../curso/pasos.ts'
+import { marcasNuevas } from '../curso/marcas.ts'
 
 /**
  * C6 (diseño §7): la página de un curso nuevo. Las piezas en orden (La idea, La estructura, las variantes, Errores y
@@ -127,7 +128,8 @@ export function CursoPagina({ id }: { id: string }) {
 /** Un tablero de las piezas de leer: la posición clave, o solo los peones, con sus marcas y sus coordenadas (C1). */
 function TableroDeLeer({ t, orientacion }: { t: TableroLeer; orientacion: 'white' | 'black' }) {
   const fen = t.soloPeones ? soloPeones(t.fen ?? fenDe(t.jugadas)) : (t.fen ?? fenDe(t.jugadas))
-  const sh = formas(t.marcas).map((f) => ({ orig: f.orig as Key, dest: f.dest as Key | undefined, brush: f.brush }))
+  // C5: con las marcas nuevas, el tablero de la página queda limpio; las marcas van con su frase, en el paso a paso
+  const sh = marcasNuevas() ? [] : formas(t.marcas).map((f) => ({ orig: f.orig as Key, dest: f.dest as Key | undefined, brush: f.brush }))
   return <TableroMini fen={fen} orientacion={orientacion} flechas={sh} testid="tablero-leer" coordenadas />
 }
 

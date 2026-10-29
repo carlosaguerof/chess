@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { Texto } from './Notacion.tsx'
 import { TableroMini } from './TableroMini.tsx'
 import { fotosDePasos, soloPeones } from '../curso/pasos.ts'
+import { marcasDelPaso, marcasNuevas } from '../curso/marcas.ts'
 import type { PasoAPaso } from '../curso/tipos.ts'
 
 /**
@@ -53,8 +54,9 @@ function VentanaPasoAPaso({ titulo, pa, inicio, orientacion, onCerrar }: { titul
         <h2>
           <Texto t={titulo} />
         </h2>
-        {pa.ilustrativo && <p className="paso-a-paso-nota">Solo se mueven las piezas de las que habla cada frase.</p>}
-        <TableroMini fen={fen} orientacion={orientacion} ultima={ultimaJugada(i)} testid="tablero-paso-a-paso" coordenadas />
+        {pa.ilustrativo && <p className="paso-a-paso-nota">Es una ilustración: el rival no contesta cada jugada.</p>}
+        {/* C5: las marcas de la frase, que se acumulan hasta que el tablero vuelve a mover (detrás del interruptor) */}
+        <TableroMini fen={fen} orientacion={orientacion} ultima={ultimaJugada(i)} testid="tablero-paso-a-paso" coordenadas marcas={marcasNuevas() ? marcasDelPaso(pa, i) : undefined} />
         <p className="paso-a-paso-frase" data-testid="paso-a-paso-frase" aria-live="polite">
           <Texto t={pa.pasos[i]!.frase} />
         </p>

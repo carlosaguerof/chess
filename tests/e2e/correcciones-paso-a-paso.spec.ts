@@ -120,7 +120,7 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
     await expect(page.getByTestId('narracion')).toContainText('Tu plan:')
     await page.getByTestId('ver-paso-a-paso').click()
     await expect(page.getByTestId('paso-a-paso').getByRole('heading')).toHaveText('Tu plan')
-    await expect(page.getByTestId('paso-a-paso')).toContainText('Solo se mueven las piezas de las que habla cada frase.')
+    await expect(page.getByTestId('paso-a-paso')).toContainText('Es una ilustración: el rival no contesta cada jugada.')
     await page.getByTestId('pap-siguiente').click()
     await cap(page, info, 'c3-el-plan-de-la-tal-paso-2')
     await page.getByTestId('pap-atras').click()

@@ -5,6 +5,8 @@ import type { Config } from 'chessground/config'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import type { ColorLargo } from '../ajedrez/reglas.ts'
+import type { Marca } from '../curso/tipos.ts'
+import { CapaMarcas } from './CapaMarcas.tsx'
 import './tablero.css'
 
 export interface PropsTablero {
@@ -19,6 +21,8 @@ export interface PropsTablero {
   jaque: boolean
   onJugada: (desde: string, hasta: string) => void
   flechas?: DrawShape[]
+  /** las marcas de las correcciones (C5), con su dibujo propio encima del tablero */
+  marcas?: Marca[]
   etiqueta?: string
 }
 
@@ -88,6 +92,7 @@ export function Tablero(props: PropsTablero) {
       aria-label={props.etiqueta ?? 'Tablero'}
     >
       <div ref={el} />
+      {props.marcas && <CapaMarcas marcas={props.marcas} orientacion={props.orientacion} fen={props.fen} />}
     </div>
   )
 }
