@@ -1,5 +1,5 @@
 import type { Marca } from '../curso/tipos.ts'
-import { centro, colorDe, puntosDeFlecha } from '../curso/marcas.ts'
+import { centro, colorDe, puntosDeFlechas } from '../curso/marcas.ts'
 
 /**
  * Las marcas encima del tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3): un dibujo propio, porque
@@ -16,8 +16,7 @@ const PUNTA_PLAN = 0.34
  * Una flecha. La punteada (un plan) es de puntos, sale un poco afuera de su pieza y lleva la punta abierta: en una
  * flecha de una sola casilla, los guiones quedaban debajo de la pieza y parecía sólida, o un puntero (pases visuales 1 y 2).
  */
-function Flecha({ m, orientacion, ocupada, escala }: { m: Marca; orientacion: 'white' | 'black'; ocupada: (casilla: string) => boolean; escala: number }) {
-  const puntos = puntosDeFlecha(m.de!, m.a!, orientacion, ocupada)
+function Flecha({ m, puntos, escala }: { m: Marca; puntos: [number, number][]; escala: number }) {
   const punta = (m.punteada ? PUNTA_PLAN : PUNTA) * escala
   const color = colorDe(m)
   if (m.punteada) {
@@ -92,10 +91,13 @@ function ocupadas(fen: string): Set<string> {
 export function CapaMarcas({ marcas, orientacion, fen, escala = 1 }: { marcas: Marca[]; orientacion: 'white' | 'black'; fen: string; escala?: number }) {
   if (!marcas.length) return null
   const llenas = ocupadas(fen)
+  // las flechas en su orden: cada L evita las piezas y el camino de las de antes (puntosDeFlechas)
+  const flechas = marcas.filter((m) => m.de && m.a)
+  const rutas = puntosDeFlechas(flechas as { de: string; a: string }[], orientacion, (c) => llenas.has(c))
   return (
     <svg className="capa-marcas" viewBox="0 0 8 8" aria-hidden="true" data-testid="capa-marcas">
       {marcas.filter((m) => m.en).map((m) => <Casilla key={`c-${m.en}`} m={m} orientacion={orientacion} />)}
-      {marcas.filter((m) => m.de && m.a).map((m) => <Flecha key={`f-${m.de}-${m.a}`} m={m} orientacion={orientacion} ocupada={(c) => llenas.has(c)} escala={escala} />)}
+      {flechas.map((m, i) => <Flecha key={`f-${m.de}-${m.a}`} m={m} puntos={rutas[i]!} escala={escala} />)}
     </svg>
   )
 }

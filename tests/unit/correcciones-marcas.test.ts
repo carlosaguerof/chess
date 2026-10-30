@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { Chess, type Color, type Square } from 'chess.js'
 import { CURSOS_NUEVOS, lineaPorId, lineasDe, misJugadas, textoRival } from '../../src/curso/datos.ts'
 import { empezar, pedirPista, pedirRespuesta, type EstadoCiclo, type Vuelta } from '../../src/curso/ciclo.ts'
-import { caminosDeCaballo, centro, COLORES, colorDe, marcasDelMomento, marcasDelPaso, puntosDeFlecha, frasesDe, MARCAS_NUEVAS_DE_ENTRADA } from '../../src/curso/marcas.ts'
+import { caminosDeCaballo, centro, COLORES, colorDe, marcasDelMomento, marcasDelPaso, puntosDeFlecha, puntosDeFlechas, frasesDe, MARCAS_NUEVAS_DE_ENTRADA } from '../../src/curso/marcas.ts'
 import { explicacionDespues } from '../../src/curso/turno.ts'
 import { posicion } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
@@ -321,8 +321,10 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     for (const [g, v] of porMomento()) {
       const tablero = new Chess(v.fen)
       const ocupada = (c: string) => !!tablero.get(c as Square)
-      for (const m of flechas(v.marcas)) {
-        const p = puntosDeFlecha(m.de!, m.a!, 'black', ocupada)
+      // como se dibujan: todas juntas, en su orden (puntosDeFlechas)
+      const rutas = puntosDeFlechas(flechas(v.marcas) as { de: string; a: string }[], 'black', ocupada)
+      for (const [k, m] of flechas(v.marcas).entries()) {
+        const p = rutas[k]!
         if (p.length < 3) continue
         const esquina = caminosDeCaballo(m.de!, m.a!).find((cm) => centro(cm.esquina, 'black').join() === p[1]!.join())!.esquina
         expect(ocupada(esquina), `${g}: la L ${m.de}→${m.a} dobla en ${esquina}, que tiene una pieza`).toBe(false)
@@ -331,6 +333,46 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     // si la esquina del tramo largo tiene una pieza y la otra no, va por la otra (b8→c6 con la dama en b6: por c8)
     expect(puntosDeFlecha('b8', 'c6', 'black', (c) => c === 'b6')[1]).toEqual(centro('c8', 'black'))
     expect(puntosDeFlecha('b8', 'c6', 'black')[1]).toEqual(centro('b6', 'black'))
+  })
+
+  it('R6 · y dos flechas que se ven juntas no comparten tramo (pase visual de la v1.3: la ruta f3→e5→g6 se leía como una "T"; la L f3→d4 doblaba sobre la flecha de la dama)', () => {
+    /** Los tramos de una flecha, de centro a centro de casilla vecina. */
+    const tramos = (puntos: [number, number][]) =>
+      puntos.slice(1).flatMap(([x1, y1], k) => {
+        const [x0, y0] = puntos[k]!
+        const n = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0))
+        return Array.from({ length: n }, (_, s) => {
+          const a = [x0 + ((x1 - x0) * s) / n, y0 + ((y1 - y0) * s) / n].join()
+          const b = [x0 + ((x1 - x0) * (s + 1)) / n, y0 + ((y1 - y0) * (s + 1)) / n].join()
+          return [a, b].sort().join('|')
+        })
+      })
+    let revisados = 0
+    for (const [g, v] of porMomento()) {
+      const tablero = new Chess(v.fen)
+      const fs = flechas(v.marcas) as { de: string; a: string }[]
+      const rutas = puntosDeFlechas(fs, 'black', (c) => !!tablero.get(c as Square))
+      // dos flechas de la misma pieza sí pueden salir juntas (8.♘f4 ataca g6 y h5: se lee como una horquilla)
+      const vistos = new Map<string, { de: string; a: string }>()
+      rutas.forEach((r, i) => {
+        for (const t of tramos(r)) {
+          const otra = vistos.get(t)
+          if (otra && otra.de !== fs[i]!.de) expect.fail(`${g}: ${fs[i]!.de}→${fs[i]!.a} comparte un tramo con ${otra.de}→${otra.a}`)
+          vistos.set(t, fs[i]!)
+        }
+      })
+      revisados++
+    }
+    expect(revisados).toBeGreaterThan(40)
+    // los dos casos del pase: la ruta del caballo de la Clásica (7.♘f3) y el plan de 4.c3
+    const clasica = porMomento().get('tuTurno:e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7')!
+    const [ida, vuelta] = puntosDeFlechas(flechas(clasica.marcas) as { de: string; a: string }[], 'black', (c) => !!new Chess(clasica.fen).get(c as Square))
+    expect(ida![1]).toEqual(centro('f5', 'black'))
+    expect(vuelta![1]).toEqual(centro('e6', 'black'))
+    const c3 = porMomento().get('plan:avance-c3')!
+    const rutasC3 = puntosDeFlechas(flechas(c3.marcas) as { de: string; a: string }[], 'black', (c) => !!new Chess(c3.fen).get(c as Square))
+    const caballo = flechas(c3.marcas).findIndex((m) => m.de === 'f3')
+    expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
   })
 
   it('R7 · nada tuyo antes de tu jugada: en los datos, la frase del rival solo trae lo del rival y no hay ninguna A1', () => {
@@ -423,12 +465,25 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(readFileSync('iterations/v3/marcas-por-jugada.md', 'utf8')).toBe(listaDeMarcas(c))
   })
 
-  it('el paso a paso acumula las marcas hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
+  it('el paso a paso acumula las marcas mientras la frase sigue con lo mismo, hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
     const idea = c.piezas.idea.paginas[0]!.pasoAPaso!
     expect(marcasDelPaso(idea, 1)).toEqual([{ tipo: 'A3', de: 'd7', a: 'd5', color: 'verde', punteada: true }])
     expect(marcasDelPaso(idea, 2)).toEqual([])
-    const hillbilly = c.variantes.find((v) => v.id === 'hillbilly')!.plan.pasoAPaso!
-    expect(marcasDelPaso(hillbilly, 2).map((m) => `${m.de}→${m.a}`)).toEqual(['f8→g7', 'c8→f5'])
+    // "Desarrollas tu alfil por g7" y "Y el otro por f5": sigue con lo mismo, se acumulan
+    const plan = (id: string) => c.variantes.find((v) => v.id === id)!.plan.pasoAPaso!
+    expect(marcasDelPaso(plan('hillbilly'), 2).map((m) => `${m.de}→${m.a}`)).toEqual(['f8→g7', 'c8→f5'])
+    // un paso sin marcas habla de otra cosa: no arrastra las de antes (pase visual de la v1.3: la flecha de ...cxd4 se
+    // quedaba en "Tu alfil de h7 sigue mirando la diagonal hacia b1", sin su frase)
+    expect(marcasDelPaso(plan('avance-van-der-wiel'), 3)).toEqual([])
+    expect(marcasDelPaso(plan('hillbilly'), 3)).toEqual([])
+    // ni las del otro lado: en el plan del Cambio, la casilla e5 del rival no lleva la verde de ...b5
+    expect(marcasDelPaso(plan('cambio'), 3)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
+    // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
+    for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
+      pa.pasos.forEach((p, i) => {
+        const lados = new Set((p.marcas ?? []).map((m) => m.color))
+        for (const m of marcasDelPaso(pa, i)) expect(lados.has(m.color), `«${p.frase}»: ${JSON.stringify(m)}`).toBe(true)
+      })
   })
 
   it('las reglas atrapan errores metidos a propósito: una A1 en "Te toca", una A4 pegada y una A7 ilegal', () => {

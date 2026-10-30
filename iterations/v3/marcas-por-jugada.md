@@ -154,7 +154,7 @@
 | plan avance-short tuyo frase 1 | Presiona d4, la base de la cadena: ...Cc6, ...cxd4 y el caballo de g8 por e7. | flecha b8→c6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | plan avance-short rival frase 1 | Blancas sostiene d4 con piezas y, cuando pueda, abre el juego con c4. | flecha c2→c4 (A7, roja, punteada) |
 | plan avance-c3 tuyo frase 1 | Como contra 4.Cf3: ...Db6 y ...cxd4 contra d4, y el caballo de g8 a e7. | flecha d8→b6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
-| plan avance-c3 rival frase 1 | Blancas enroca y sostiene d4 con c3, Cf3 y su dama. | flecha f3→d4 (A4, roja); flecha d1→d4 (A4, roja) |
+| plan avance-c3 rival frase 1 | Blancas enroca y sostiene d4 con c3, Cf3 y su dama. | flecha d1→d4 (A4, roja); flecha f3→d4 (A4, roja) |
 | plan avance-van-der-wiel tuyo frase 1 | Golpea el centro con ...cxd4 y ...Cc6. | flecha c5→d4 (A3, verde, punteada); flecha b8→c6 (A3, verde, punteada) |
 | plan avance-tal tuyo frase 2 | Ahora ...c5 y ...Cc6 contra d4, como en todo el Avance, y el caballo de g8 por e7. | flecha c6→c5 (A3, verde, punteada) |
 | plan avance-bayoneta tuyo frase 1 | Desarrolla con ...Cd7 y ...Cgf6 y busca ...c5 o ...e5: el lado de rey blanco quedó débil tras g4 y f3. | flecha b8→d7 (A3, verde, punteada); flecha g8→f6 (A3, verde, punteada) |

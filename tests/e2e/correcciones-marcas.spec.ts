@@ -5,6 +5,7 @@ import { cursoNuevo, jugadasDeVariante, lineaPorId } from '../../src/curso/datos
 import { marcasDelPaso } from '../../src/curso/marcas.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { jugadaEs } from '../../src/curso/textos.ts'
+import { explicacionDespues } from '../../src/curso/turno.ts'
 import type { Cambio } from '../../scripts/marcas-cambios.ts'
 import { jugar } from './_util.ts'
 
@@ -43,7 +44,8 @@ async function abrirJugada(page: Page, info: Parameters<typeof jugar>[1], linea:
   await momento(page, 'tuTurno')
   if (!despues) return
   await jugar(page, info, uci(lineaPorId(c, linea)!.jugadas, ply))
-  await momento(page, 'leer')
+  // si en Practicar todas las frases adelantan una jugada, no hay nada que leer: "Correcto" y sigue el rival
+  await momento(page, explicacionDespues(c, lineaPorId(c, linea)!, vuelta, ply).length ? 'leer' : 'rival')
 }
 
 test.describe('Correcciones · las marcas (reglas v1.3)', () => {
@@ -201,6 +203,19 @@ test.describe('Correcciones · las marcas (reglas v1.3)', () => {
         const donde = x.pieza ? `${{ idea: 'La idea', estructura: 'La estructura', repaso: 'El repaso' }[x.pieza]} ${x.pagina! + 1}` : `el plan de ${fig(lineaPorId(c, x.linea!)!.nombre)}`
         await foto(`paso-${x.pieza ? `${x.pieza}-${x.pagina! + 1}` : `plan-${x.linea!.slice(2)}`}-${x.paso! + 1}`, { ...fila, momento: `Paso a paso, ${donde}, paso ${x.paso! + 1}` }, page.getByTestId('paso-a-paso'))
       }
+    }
+    // S1 (la torre, 2026-10-30): la fila del interruptor, con cada vuelta escogida, siempre en verde la de ahora
+    for (const vuelta of ['practicar', 'aprender'] as const) {
+      await abrirEn(page, 'v:avance-tal', vuelta, 9)
+      await momento(page, 'tuTurno')
+      const fila = (await page.getByTestId('fase').boundingBox())!
+      const y = Math.max(0, fila.y - 16)
+      const archivo = `${String(n++).padStart(2, '0')}-s1-interruptor-${vuelta}.png`
+      await page.waitForTimeout(250)
+      await page.screenshot({ path: `${dir}/${archivo}`, scale: 'css', clip: { x: 0, y, width: page.viewportSize()!.width, height: fila.y + fila.height + 40 - y } })
+      const escogida = vuelta === 'aprender' ? 'Aprender' : 'Practicar'
+      const antes = vuelta === 'practicar' ? 'Practicar escogida, en gris (`chip-base`) y en negritas' : 'Aprender escogida, en verde (`chip-rep`): no cambia'
+      indice.push(`| ${archivo} | S1: la fila del interruptor, con ${escogida} escogida (Avance: 4.h4 (Tal), jugada 3) | — | ${antes} | ${escogida} en verde (\`chip-rep\`) y en negritas; la otra, sin fondo y gris |`)
     }
     if (info.project.name === 'escritorio' || !existsSync(`${CARPETA}/indice.md`))
       writeFileSync(

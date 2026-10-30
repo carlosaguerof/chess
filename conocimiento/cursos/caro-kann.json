@@ -882,13 +882,13 @@
             [
               {
                 "tipo": "A4",
-                "de": "f3",
+                "de": "d1",
                 "a": "d4",
                 "color": "rojo"
               },
               {
                 "tipo": "A4",
-                "de": "d1",
+                "de": "f3",
                 "a": "d4",
                 "color": "rojo"
               }

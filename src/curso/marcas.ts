@@ -87,13 +87,24 @@ export function marcasDelMomento(c: DatosCurso, l: LineaCurso, e: EstadoCiclo, o
   return sinRepetir(r)
 }
 
-/** Las marcas que se ven en el paso `i` del paso a paso: las suyas y las de los pasos de antes desde la última jugada. */
+/**
+ * Las marcas que se ven en el paso `i` del paso a paso: las suyas y las de los pasos de antes desde la última jugada,
+ * pero solo si la frase de ahora sigue con lo mismo: trae marcas, y las de antes son de su mismo lado (verde o rojo).
+ * En el paso a paso se ve una frase a la vez: una marca de antes en un paso que habla de otra cosa se quedaba sin su
+ * frase ("Tu alfil de h7 sigue mirando la diagonal hacia b1" con la flecha de ...cxd4; pase visual de la v1.3).
+ */
 export function marcasDelPaso(pa: PasoAPaso, i: number): Marca[] {
-  const r: Marca[] = []
-  for (let j = i; j >= 0; j--) {
+  const propias = pa.pasos[i]!.marcas ?? []
+  if (!propias.length) return []
+  const lados = new Set(propias.map((m) => m.color))
+  const r: Marca[] = [...propias]
+  for (let j = i; j > 0; j--) {
     const p = pa.pasos[j]!
-    r.unshift(...(p.marcas ?? []))
     if (p.jugadas?.length || p.reinicio) break
+    // un paso de antes sin marcas de este lado ya limpió el tablero: lo de más atrás no regresa
+    const antes = (pa.pasos[j - 1]!.marcas ?? []).filter((m) => lados.has(m.color))
+    if (!antes.length) break
+    r.unshift(...antes)
   }
   return sinRepetir(r)
 }
@@ -142,15 +153,44 @@ export function caminosDeCaballo(de: string, a: string): { esquina: string; pasa
 /**
  * Los puntos de una flecha: recta, o en L si es un salto de caballo (R6). La L va primero por el tramo largo, como el
  * dibujo de Carlos (g8→g6→f6), salvo que el otro camino estorbe menos (pase visual 1): que no doble encima de una pieza
- * (parece que esa pieza es la que se mueve) y que pase por menos piezas. Depende solo del tablero, no de las otras
- * flechas: una marca que se queda de un paso a otro no cambia de forma (pase visual 2).
+ * (parece que esa pieza es la que se mueve) y que pase por menos piezas. `usada`: las casillas por donde ya pasan las
+ * flechas de antes (`puntosDeFlechas`), que estorban igual que una pieza.
  */
-export function puntosDeFlecha(de: string, a: string, orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false): [number, number][] {
+export function puntosDeFlecha(de: string, a: string, orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false, usada: (casilla: string) => boolean = () => false): [number, number][] {
   const p0 = centro(de, orientacion)
   const p1 = centro(a, orientacion)
   if (!esSaltoDeCaballo(de, a)) return [p0, p1]
-  const costo = (c: { esquina: string; pasa: string[] }) => (ocupada(c.esquina) ? 2 : 0) + c.pasa.filter(ocupada).length
+  return [p0, centro(caminoDeCaballo(de, a, ocupada, usada).esquina, orientacion), p1]
+}
+
+/** El camino que toma la L de un caballo (el de `puntosDeFlecha`). */
+function caminoDeCaballo(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean) {
+  const estorba = (c: string) => ocupada(c) || usada(c)
+  const costo = (c: { esquina: string; pasa: string[] }) => (estorba(c.esquina) ? 2 : 0) + c.pasa.filter(estorba).length
   const [larga, corta] = caminosDeCaballo(de, a)
-  const camino = costo(corta!) < costo(larga!) ? corta! : larga!
-  return [p0, centro(camino.esquina, orientacion), p1]
+  return costo(corta!) < costo(larga!) ? corta! : larga!
+}
+
+/** Las casillas por donde pasa una flecha, sin la de salida: las de en medio y la de llegada. */
+function casillasDeFlecha(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean): string[] {
+  if (esSaltoDeCaballo(de, a)) return [...caminoDeCaballo(de, a, ocupada, usada).pasa, a]
+  const [c0, f0, c1, f1] = [de.charCodeAt(0) - 97, Number(de[1]), a.charCodeAt(0) - 97, Number(a[1])]
+  const pasos = Math.max(Math.abs(c1 - c0), Math.abs(f1 - f0))
+  return Array.from({ length: pasos }, (_, i) => casilla(c0 + (Math.sign(c1 - c0) * (i + 1) * Math.abs(c1 - c0)) / pasos, f0 + (Math.sign(f1 - f0) * (i + 1) * Math.abs(f1 - f0)) / pasos))
+}
+
+/**
+ * Los puntos de varias flechas que se ven juntas, en su orden. Cada L de caballo evita, además de las piezas, el camino
+ * de las flechas de antes (pase visual de la v1.3: la ruta f3→e5→g6 se encimaba en e5–f5 y se leía como una "T"; la L
+ * f3→d4 doblaba sobre la flecha de la dama d1→d4). Las de antes no ven a las de después: una marca que se queda de un
+ * paso al siguiente no cambia de forma (pase visual 2).
+ */
+export function puntosDeFlechas(flechas: { de: string; a: string }[], orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false): [number, number][][] {
+  const usadas = new Set<string>()
+  return flechas.map(({ de, a }) => {
+    const usada = (c: string) => usadas.has(c)
+    const puntos = puntosDeFlecha(de, a, orientacion, ocupada, usada)
+    for (const c of casillasDeFlecha(de, a, ocupada, usada)) usadas.add(c)
+    return puntos
+  })
 }
