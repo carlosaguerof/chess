@@ -11,7 +11,8 @@ import type { DatosCurso, LineaCurso, PasoAPaso, PasoLeer, VerQuePasa } from './
  * - **Sale con las frases que se muestran:** las que Practicar oculta por adelantar una jugada no traen botón.
  * - **En Practicar** tampoco va si la línea del "Ver" (sus jugadas, sus flechas verdes o su texto) contiene una jugada
  *   mía que la línea todavía me va a pedir, con la misma pieza y a la misma casilla: sería darme la respuesta. Con un
- *   error a la vista, cuenta también la jugada que falta. En Aprender sí va: ahí ya se me dice la jugada.
+ *   error a la vista, cuenta también la jugada que falta, y una jugada del rival a su casilla. En Aprender sí va: ahí ya
+ *   se me dice la jugada.
  * - **Dos frases con "Ver" en un momento** van una tras otra en la misma ventana, y el título cambia con la frase. La
  *   segunda vuelve a su posición (`reinicio`), salvo que siga la línea de la primera: entonces continúa desde ahí.
  */
@@ -45,9 +46,11 @@ export function todosLosVer(c: DatosCurso): FraseConVer[] {
 
 /**
  * Lo que la línea del "Ver" adelanta de mis jugadas de `l` desde la `desde`: las que hace, las que señala con una flecha
- * verde y las que su texto escribe (misma pieza, misma casilla). Vacío si no adelanta nada.
+ * verde y las que su texto escribe (misma pieza, misma casilla). Vacío si no adelanta nada. `conError`: `desde` es la
+ * jugada que falta, y una jugada del rival a esa casilla también la delata (la Van der Wiel: si juegas 7...Cc6, 8.h5
+ * enseña h5, y la frase del error evita decir esa casilla).
  */
-export function verAdelanta(l: LineaCurso, desde: number, inicio: string[], ver: VerQuePasa): string[] {
+export function verAdelanta(l: LineaCurso, desde: number, inicio: string[], ver: VerQuePasa, conError = false): string[] {
   const pedidas = misJugadas(l)
     .filter((p) => p >= desde)
     .map((p) => {
@@ -58,7 +61,10 @@ export function verAdelanta(l: LineaCurso, desde: number, inicio: string[], ver:
   const contra = (pieza: string, a: string) => pedidas.filter((x) => x.pieza === pieza && x.a === a).forEach((x) => r.add(x.san))
   const fotos = fotosDePasos({ pasos: ver.pasos }, inicio)
   ver.pasos.forEach((p, i) => {
-    for (const m of fotos[i]!.hechas) if (m.color === l.lado) contra(m.piece, m.to)
+    for (const m of fotos[i]!.hechas) {
+      if (m.color === l.lado) contra(m.piece, m.to)
+      else if (conError && m.to === pedidas[0]?.a) r.add(pedidas[0].san)
+    }
     const tablero = new Chess(fotos[i]!.fen)
     for (const f of p.marcas ?? []) {
       const pieza = f.color === 'verde' && f.de && f.a ? tablero.get(f.de as Square) : undefined
@@ -135,6 +141,6 @@ export function verDelError(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: n
   const ver = m?.verErrores?.[san]
   const frase = m?.errores?.[san]
   if (!ver || !frase) return null
-  if (enPracticar(l, vuelta) && verAdelanta(l, ply, l.jugadas.slice(0, ply), ver).length) return null
+  if (enPracticar(l, vuelta) && verAdelanta(l, ply, l.jugadas.slice(0, ply), ver, true).length) return null
   return juntar(l, ply, [{ frase, ver }])
 }

@@ -1,5 +1,4 @@
 {
-  "e4 c6 | prepara | 0": "explica",
   "e4 c6 d4 d5 | porque | 0": "sin-consecuencia",
   "e4 c6 d4 d5 | prepara | 0": "plan",
   "e4 c6 d4 d5 e5 Bf5 | prepara | 0": "plan",
@@ -42,7 +41,7 @@
   "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6 Nf3 Bb4 | porque | 0": "explica",
   "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6 Nf3 Bb4 | prepara | 0": "plan",
   "e4 c6 Nc3 d5 Nf3 Bg4 | porque | 0": "explica",
-  "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 | porque | 0": "explica",
+  "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 | porque | 0": "sin-consecuencia",
   "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 | cuidado | 0": "sin-consecuencia",
   "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 | errores | Bh5": "sin-consecuencia",
   "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3 Qxf3 e6 | porque | 0": "explica",

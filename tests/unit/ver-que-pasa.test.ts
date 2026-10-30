@@ -39,7 +39,7 @@ function jugadasHechas(fen: string, jugadas: string[]) {
 
 describe('"Ver qué pasa" · los datos', () => {
   it('cada línea es legal (chess.js): se juegan las jugadas de los dos lados, sin saltarse el turno', () => {
-    expect(TODOS).toHaveLength(42)
+    expect(TODOS).toHaveLength(43)
     for (const v of TODOS) {
       expect(() => fotos(v), donde(v)).not.toThrow()
       expect(v.ver.pasos.length, donde(v)).toBeGreaterThanOrEqual(2)
@@ -121,6 +121,8 @@ describe('"Ver qué pasa" · los datos', () => {
     expect(JSON.stringify(Object.values(c.mias).map((m) => Object.keys(m.ver ?? {})))).not.toContain('hace')
     // ninguna consecuencia se cayó con el motor
     expect(Object.values(razones)).not.toContain('no-se-sostiene')
+    // la Francesa sí es una alternativa, con su consecuencia: va con "Ver", solo en Aprender
+    expect(TODOS.some((v) => v.frase.startsWith('A diferencia de la Francesa'))).toBe(true)
     // y la lista está al día
     expect(readFileSync('iterations/v3/ver-que-pasa-inventario.md', 'utf8')).toBe(listaDelInventario(c))
   })
@@ -142,7 +144,7 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
   }
 
   it('"encerrado": al alfil de c8 solo le queda d7', () => {
-    for (const f of ['Si jugaras ...e6 primero, tu alfil quedaría encerrado detrás de tus peones.', 'Si jugaras ...e6 primero, tu alfil quedaría encerrado.', 'Así tu alfil de c8 se queda encerrado detrás de tus peones.']) expect(salidas(final(f), 'c8'), f).toEqual(['d7'])
+    for (const f of ['Si jugaras ...e6 primero, tu alfil quedaría encerrado detrás de tus peones.', 'Si jugaras ...e6 primero, tu alfil quedaría encerrado.', 'Así tu alfil de c8 se queda encerrado detrás de tus peones.', 'A diferencia de la Francesa (1...e6), tu alfil de c8 queda libre para salir.']) expect(salidas(final(f), 'c8'), f).toEqual(['d7'])
     // y desde d7 no sale a ningún lado (solo regresa)
     const ch = final('Así tu alfil de c8 se queda encerrado detrás de tus peones.')
     ch.remove('c8')
@@ -151,14 +153,16 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
   })
 
   it('"sin casillas": todas las casillas del alfil de g6 están atacadas', () => {
-    for (const f of ['Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas.', 'Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.']) {
+    for (const [f, e4] of [
+      ['Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas.', 'c3'],
+      ['Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.', 'f3'],
+    ] as const) {
       const ch = final(f)
       expect(ch.get('g6'), f).toEqual({ type: 'b', color: 'b' })
-      const s = salidas(ch, 'g6')
-      expect(s.length, f).toBeGreaterThan(0)
-      for (const x of s) expect(ch.isAttacked(x as Square, 'w'), `${f}: ${x}`).toBe(true)
+      expect(salidas(ch, 'g6').sort(), f).toEqual(['c2', 'd3', 'e4', 'f5', 'h5'])
+      // lo que dice el último paso: quién cubre cada casilla
+      for (const [casilla, quien] of [['f5', 'g4'], ['h5', 'g4'], ['e4', e4], ['d3', 'd1'], ['c2', 'd1']] as const) expect(ch.attackers(casilla, 'w'), `${f}: ${casilla}`).toContain(quien)
     }
-    expect(salidas(final('Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas.'), 'g6')).toHaveLength(5)
   })
 
   it('"sin apoyo": ninguna pieza blanca defiende e5, y ya no hay peón en d4', () => {
@@ -243,8 +247,11 @@ describe('"Ver qué pasa" · en la lección', () => {
     // una misma frase se decide línea por línea: 3...e6 no se pide en la Bayoneta, y en la de 4.Cf3 sí
     expect(verDelError(c, linea('v:avance-bayoneta'), 'practicar', 5, 'e6')).not.toBeNull()
     expect(verDelError(c, linea('v:avance-short'), 'practicar', 5, 'e6')).toBeNull()
-    // las jugadas del rival no cuentan: 7.h5 no es mi ...h5
-    expect(verDelError(c, linea('v:avance-van-der-wiel'), 'practicar', 13, 'Nc6')).not.toBeNull()
+    // una jugada del rival no adelanta nada, salvo con un error a la vista, si cae en la casilla que falta: 7...Cc6 8.h5 enseña h5
+    const vdw = linea('v:avance-van-der-wiel')
+    expect(verDelError(c, vdw, 'aprender', 13, 'Nc6')).not.toBeNull()
+    expect(verDelError(c, vdw, 'practicar', 13, 'Nc6')).toBeNull()
+    expect(verDespues(c, vdw, 'practicar', 13)?.titulo).toContain('Si lo dejaras avanzar')
     // los errores metidos a propósito: una flecha verde o un texto que adelantan
     const v = TODOS.find((x) => x.clave === 'e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5' && x.campo === 'porque')!
     const short = linea('v:avance-short')
@@ -270,7 +277,7 @@ describe('"Ver qué pasa" · en la lección', () => {
     // la segunda sigue la línea de la primera: continúa desde ahí, sin repetir 7...Cc6 y 8.h5
     const vdw = verDespues(c, linea('v:avance-van-der-wiel'), 'aprender', 13)!
     expect(titulos(vdw)).toHaveLength(2)
-    expect(vdw.pa.pasos.flatMap((p) => p.jugadas ?? [])).toEqual(['Nc6', 'h5', 'Be4', 'Nxe4', 'dxe4'])
+    expect(vdw.pa.pasos.flatMap((p) => p.jugadas ?? [])).toEqual(['Nc6', 'h5', 'Be4', 'Rh3', 'Nh6', 'Nxe4', 'dxe4'])
     expect(vdw.pa.pasos.filter((p) => p.reinicio)).toEqual([])
     // cada ventana se puede recorrer completa, en cada momento de cada variante
     for (const l of VARIANTES)

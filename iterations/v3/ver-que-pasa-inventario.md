@@ -2,13 +2,14 @@
 
 > Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**97 frases: 42 con "Ver"; 55 sin él** (29 porque explica la jugada que ya está en la línea, sin una alternativa; 18 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 4 porque lo que dice se juega en las jugadas que siguen de la línea; 4 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 10 de las 42 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**97 frases: 43 con "Ver"; 54 sin él** (27 porque explica la jugada que ya está en la línea, sin una alternativa; 18 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 4 porque lo que dice se juega en las jugadas que siguen de la línea; 5 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 11 de las 43 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
 | 1...c6 | porque | Si blancas cambia en d5, retomas con el peón de c y sigues con un peón en el centro. | 2.d4 2...d5 3.exd5 3...cxd5 | solo Aprender |
+| 1...c6 | prepara | A diferencia de la Francesa (1...e6), tu alfil de c8 queda libre para salir. | 1...e6 2.d4 2...d5 | solo Aprender |
 | 3...♗f5 | porque | Después vas a jugar ...e6 para abrir tu otro alfil; si ...e6 fuera primero, este alfil quedaría encerrado detrás de tus peones, como en la Francesa. | 3...e6 | Aprender; en Practicar, solo en Avance: 4.g4 (Bayoneta) |
 | 3...♗f5 (si juegas 3...e6) | errores | Así tu alfil de c8 se queda encerrado detrás de tus peones. | 3...e6 | Aprender; en Practicar, solo en Avance: 4.g4 (Bayoneta) |
 | 5...c5 | porque | Si d4 cae, el peón de e5 se queda sin apoyo. | 6.♗e3 6...cxd4 7.♘xd4 | Aprender y Practicar |
@@ -17,8 +18,8 @@
 | 5...c5 | porque | Si blancas cambia en c5, tu alfil de f8 retoma y se desarrolla. | 6.dxc5 6...♗xc5 | Aprender y Practicar |
 | 5...♗g6 | porque | En e4 lo tomaría el caballo de c3. | 5...♗e4 6.♘xe4 6...dxe4 | Aprender y Practicar |
 | 7...h5 | porque | Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas. | 7...♘c6 8.h5 | Aprender y Practicar |
-| 7...h5 | cuidado | Si juegas ...♘c6 como si nada, 8.h5 echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♘xe4 9...dxe4 | Aprender y Practicar |
-| 7...h5 (si juegas 7...♘c6) | errores | Si no frenas el peón de h, da un paso más, echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♘xe4 9...dxe4 | Aprender y Practicar |
+| 7...h5 | cuidado | Si juegas ...♘c6 como si nada, 8.h5 echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | Aprender y Practicar |
+| 7...h5 (si juegas 7...♘c6) | errores | Si no frenas el peón de h, da un paso más, echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | solo Aprender |
 | 8...♗h7 | prepara | Si blancas toma tu peón de h5, tus piezas quedan activas a cambio. | 9.♘xh5 9...♘c6 10.dxc5 10...♗xc5 | Aprender y Practicar |
 | 4...h5 | porque | Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 | solo Aprender |
 | 4...h5 (si juegas 4...e6) | errores | Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 | solo Aprender |
@@ -55,7 +56,6 @@
 
 | Jugada | Campo | Frase | Por qué no |
 |---|---|---|---|
-| 1...c6 | prepara | A diferencia de la Francesa (1...e6), tu alfil de c8 queda libre para salir. | explica la jugada que ya está en la línea, sin una alternativa |
 | 2...d5 | porque | Ahora blancas tiene que decidir: cerrar con e5, cambiar en d5 o defender e4. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 2...d5 | prepara | Cada decisión de blancas es una variante de este curso. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 3...♗f5 | prepara | Con el alfil afuera, ...e6 y ...c5 ya no encierran nada. | dice qué sigue (un plan), no qué pasaría con otra cosa |
@@ -98,7 +98,7 @@
 | 6...♗b4 | porque | Ese caballo es el que vigila d5. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♗b4 | prepara | Siguen el enroque y la presión sobre d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 3...♗g4 | porque | Es la respuesta lógica: el alfil sale antes de ...e6. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4...♗xf3 | porque | Blancas se queda con los dos alfiles, pero tú evitas líneas con mucha teoría. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4...♗xf3 | porque | Blancas se queda con los dos alfiles, pero tú evitas líneas con mucha teoría. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 4...♗xf3 | cuidado | Retirarte a h5 es peor para el motor y pide saber mucho más. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 4...♗xf3 (si juegas 4...♗h5) | errores | Retirarte a h5 es peor para el motor y pide saber mucho más. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 5...e6 | porque | Sin tu alfil de casillas blancas, tus peones van en casillas blancas y tus piezas juegan en las negras. | explica la jugada que ya está en la línea, sin una alternativa |

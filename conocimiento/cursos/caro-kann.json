@@ -2988,6 +2988,87 @@
               }
             ]
           }
+        ],
+        "prepara": [
+          {
+            "antes": true,
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 1.e4.",
+                "fuente": [
+                  "WB-1c6",
+                  "WP-CK",
+                  "WP-es",
+                  "LICHESS-CC0",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "V-fr"
+                ]
+              },
+              {
+                "frase": "1...e6: la Francesa: el peón le cierra el paso a tu alfil de c8.",
+                "jugadas": [
+                  "e6"
+                ],
+                "fuente": [
+                  "WB-1c6",
+                  "WP-CK",
+                  "WP-es",
+                  "LICHESS-CC0",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "V-fr"
+                ]
+              },
+              {
+                "frase": "2.d4: blancas ocupa el centro.",
+                "jugadas": [
+                  "d4"
+                ],
+                "fuente": [
+                  "WB-1c6",
+                  "WP-CK",
+                  "WP-es",
+                  "LICHESS-CC0",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "V-fr"
+                ]
+              },
+              {
+                "frase": "2...d5: tu peón llega al centro, con el de e6 detrás.",
+                "jugadas": [
+                  "d5"
+                ],
+                "fuente": [
+                  "WB-1c6",
+                  "WP-CK",
+                  "WP-es",
+                  "LICHESS-CC0",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "V-fr"
+                ]
+              },
+              {
+                "frase": "Tu alfil de c8 se queda encerrado detrás de tus peones: solo le queda d7. Con ...c6 queda libre para salir.",
+                "fuente": [
+                  "WB-1c6",
+                  "WP-CK",
+                  "WP-es",
+                  "LICHESS-CC0",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "V-fr"
+                ]
+              }
+            ]
+          }
         ]
       },
       "fuente": [
@@ -3751,7 +3832,7 @@
                 ]
               },
               {
-                "frase": "6...dxe4: retomas con el peón, pero te quedaste sin tu alfil y el motor te ve peor.",
+                "frase": "6...dxe4: retomas con el peón: tu alfil se cambió por el caballo y el motor te ve peor.",
                 "jugadas": [
                   "dxe4"
                 ],
@@ -3879,7 +3960,7 @@
                 ]
               },
               {
-                "frase": "Las cinco casillas a las que puede ir tu alfil de g6 están atacadas: se queda sin casillas.",
+                "frase": "Tu alfil de g6 se queda sin casillas: g4 cubre f5 y h5, el caballo de c3 cubre e4, y la dama, d3 y c2.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -3907,7 +3988,10 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               },
               {
@@ -3923,7 +4007,10 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               },
               {
@@ -3939,7 +4026,10 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               },
               {
@@ -3963,11 +4053,52 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               },
               {
-                "frase": "9.Cxe4: el caballo de c3 toma tu alfil.",
+                "frase": "9.Th3: la torre se aparta de tu alfil.",
+                "jugadas": [
+                  "Rh3"
+                ],
+                "fuente": [
+                  "WB-3Af5",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "M-vdw-cc6",
+                  "V-vdw-cc6",
+                  "V-vdw-cc6-c",
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
+                ]
+              },
+              {
+                "frase": "9...Ch6: sacas el caballo y atacas g4.",
+                "jugadas": [
+                  "Nh6"
+                ],
+                "fuente": [
+                  "WB-3Af5",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "M-vdw-cc6",
+                  "V-vdw-cc6",
+                  "V-vdw-cc6-c",
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
+                ]
+              },
+              {
+                "frase": "10.Cxe4: el caballo de c3 toma tu alfil.",
                 "jugadas": [
                   "Nxe4"
                 ],
@@ -3979,11 +4110,14 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               },
               {
-                "frase": "9...dxe4: retomas con el peón. El motor ve que pierdes casi un peón de ventaja.",
+                "frase": "10...dxe4: retomas con el peón. El material queda igual, pero el motor ve a blancas casi un peón mejor.",
                 "jugadas": [
                   "dxe4"
                 ],
@@ -3995,7 +4129,10 @@
                   "M-vdw-cc6",
                   "V-vdw-cc6",
                   "V-vdw-cc6-c",
-                  "V-vdw-cc6-d"
+                  "V-vdw-cc6-d",
+                  "V-vdw-cc6-f",
+                  "V-vdw-cc6-g",
+                  "V-vdw-cc6-h"
                 ]
               }
             ]
@@ -4016,7 +4153,10 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             },
             {
@@ -4032,7 +4172,10 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             },
             {
@@ -4048,7 +4191,10 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             },
             {
@@ -4072,11 +4218,52 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             },
             {
-              "frase": "9.Cxe4: el caballo de c3 toma tu alfil.",
+              "frase": "9.Th3: la torre se aparta de tu alfil.",
+              "jugadas": [
+                "Rh3"
+              ],
+              "fuente": [
+                "WB-3Af5",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-vdw-cc6",
+                "V-vdw-cc6",
+                "V-vdw-cc6-c",
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
+              ]
+            },
+            {
+              "frase": "9...Ch6: sacas el caballo y atacas g4.",
+              "jugadas": [
+                "Nh6"
+              ],
+              "fuente": [
+                "WB-3Af5",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-vdw-cc6",
+                "V-vdw-cc6",
+                "V-vdw-cc6-c",
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
+              ]
+            },
+            {
+              "frase": "10.Cxe4: el caballo de c3 toma tu alfil.",
               "jugadas": [
                 "Nxe4"
               ],
@@ -4088,11 +4275,14 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             },
             {
-              "frase": "9...dxe4: retomas con el peón. El motor ve que pierdes casi un peón de ventaja.",
+              "frase": "10...dxe4: retomas con el peón. El material queda igual, pero el motor ve a blancas casi un peón mejor.",
               "jugadas": [
                 "dxe4"
               ],
@@ -4104,7 +4294,10 @@
                 "M-vdw-cc6",
                 "V-vdw-cc6",
                 "V-vdw-cc6-c",
-                "V-vdw-cc6-d"
+                "V-vdw-cc6-d",
+                "V-vdw-cc6-f",
+                "V-vdw-cc6-g",
+                "V-vdw-cc6-h"
               ]
             }
           ]
@@ -4366,7 +4559,7 @@
                 ]
               },
               {
-                "frase": "7.h5: el peón de h lo ataca otra vez.",
+                "frase": "7.h5: ahora lo ataca el peón de h.",
                 "jugadas": [
                   "h5"
                 ],
@@ -4384,7 +4577,7 @@
                 ]
               },
               {
-                "frase": "Tu alfil se queda sin casillas: lo pierdes. El motor ve que blancas gana una pieza.",
+                "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. Por eso lo pierdes: blancas gana una pieza.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -4512,7 +4705,7 @@
               ]
             },
             {
-              "frase": "7.h5: el peón de h lo ataca otra vez.",
+              "frase": "7.h5: ahora lo ataca el peón de h.",
               "jugadas": [
                 "h5"
               ],
@@ -4530,7 +4723,7 @@
               ]
             },
             {
-              "frase": "Tu alfil se queda sin casillas: lo pierdes. El motor ve que blancas gana una pieza.",
+              "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. Por eso lo pierdes: blancas gana una pieza.",
               "fuente": [
                 "WB-3Af5",
                 "MOTOR"
@@ -4971,7 +5164,8 @@
                 "motor": [
                   "M-bay-axf7",
                   "V-bay-rxf7",
-                  "V-bay-rxf7-b"
+                  "V-bay-rxf7-b",
+                  "V-bay-f5"
                 ]
               },
               {
@@ -4986,13 +5180,23 @@
                 "motor": [
                   "M-bay-axf7",
                   "V-bay-rxf7",
-                  "V-bay-rxf7-b"
+                  "V-bay-rxf7-b",
+                  "V-bay-f5"
                 ]
               },
               {
-                "frase": "8.f4: blancas sigue adelantando peones.",
+                "frase": "8.f4: blancas adelanta otro peón: con f5 atacaría a tu alfil de g6.",
                 "jugadas": [
                   "f4"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A7",
+                    "de": "f4",
+                    "a": "f5",
+                    "color": "rojo",
+                    "punteada": true
+                  }
                 ],
                 "fuente": [
                   "WB-3Af5",
@@ -5001,7 +5205,8 @@
                 "motor": [
                   "M-bay-axf7",
                   "V-bay-rxf7",
-                  "V-bay-rxf7-b"
+                  "V-bay-rxf7-b",
+                  "V-bay-f5"
                 ]
               },
               {
@@ -5013,7 +5218,8 @@
                 "motor": [
                   "M-bay-axf7",
                   "V-bay-rxf7",
-                  "V-bay-rxf7-b"
+                  "V-bay-rxf7-b",
+                  "V-bay-f5"
                 ]
               }
             ]
@@ -5477,9 +5683,17 @@
                 ]
               },
               {
-                "frase": "8...Da5+: tu dama da jaque para recuperar la pieza.",
+                "frase": "8...Da5+: tu dama da jaque y ataca al caballo de f5.",
                 "jugadas": [
                   "Qa5+"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "a5",
+                    "a": "f5",
+                    "color": "verde"
+                  }
                 ],
                 "fuente": [
                   "WB-6h4",
@@ -5626,9 +5840,17 @@
               ]
             },
             {
-              "frase": "8...Da5+: tu dama da jaque para recuperar la pieza.",
+              "frase": "8...Da5+: tu dama da jaque y ataca al caballo de f5.",
               "jugadas": [
                 "Qa5+"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "a5",
+                  "a": "f5",
+                  "color": "verde"
+                }
               ],
               "fuente": [
                 "WB-6h4",
@@ -5823,7 +6045,7 @@
               ]
             },
             {
-              "frase": "7.h5: el peón echa a tu alfil de g6, y h7 está ocupada por tu propio peón.",
+              "frase": "7.h5: el peón echa a tu alfil de g6.",
               "jugadas": [
                 "h5"
               ],
@@ -5879,9 +6101,17 @@
               ]
             },
             {
-              "frase": "8...Da5+: tu dama da jaque para recuperar la pieza.",
+              "frase": "8...Da5+: tu dama da jaque y ataca al caballo de f5.",
               "jugadas": [
                 "Qa5+"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "a5",
+                  "a": "f5",
+                  "color": "verde"
+                }
               ],
               "fuente": [
                 "WB-6h4",
@@ -6055,9 +6285,17 @@
                 ]
               },
               {
-                "frase": "9...Da5+: tu dama da jaque para recuperar la pieza.",
+                "frase": "9...Da5+: tu dama da jaque y ataca al caballo de f5.",
                 "jugadas": [
                   "Qa5+"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "a5",
+                    "a": "f5",
+                    "color": "verde"
+                  }
                 ],
                 "fuente": [
                   "CB",
@@ -6164,9 +6402,17 @@
               ]
             },
             {
-              "frase": "9...Da5+: tu dama da jaque para recuperar la pieza.",
+              "frase": "9...Da5+: tu dama da jaque y ataca al caballo de f5.",
               "jugadas": [
                 "Qa5+"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "a5",
+                  "a": "f5",
+                  "color": "verde"
+                }
               ],
               "fuente": [
                 "CB",
@@ -6299,7 +6545,7 @@
                 ]
               },
               {
-                "frase": "10...Cxh7: retomas con el caballo: los alfiles se cambian igual, pero tu caballo queda en h7.",
+                "frase": "10...Cxh7: retomas con el caballo: los alfiles se cambian igual, pero tu caballo queda en h7, en la orilla del tablero.",
                 "jugadas": [
                   "Nxh7"
                 ],
@@ -6716,7 +6962,7 @@
                 ]
               },
               {
-                "frase": "7...Dc7: defiendes b7, pero tu dama queda en la diagonal del alfil de f4.",
+                "frase": "7...Dc7: tu dama queda en la diagonal del alfil de f4.",
                 "jugadas": [
                   "Qc7"
                 ],
@@ -6845,7 +7091,7 @@
               ]
             },
             {
-              "frase": "7...Dc7: defiendes b7, pero tu dama queda en la diagonal del alfil de f4.",
+              "frase": "7...Dc7: tu dama queda en la diagonal del alfil de f4.",
               "jugadas": [
                 "Qc7"
               ],
@@ -7478,6 +7724,14 @@
                 "jugadas": [
                   "Nh6"
                 ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "h6",
+                    "a": "f7",
+                    "color": "verde"
+                  }
+                ],
                 "fuente": [
                   "MOTOR",
                   "WP-CK"
@@ -7489,7 +7743,7 @@
                 ]
               },
               {
-                "frase": "7.Cxd7: blancas cambia su caballo y le abre la fila a la dama.",
+                "frase": "7.Cxd7: el caballo toma tu alfil y le deja libre la fila a la dama.",
                 "jugadas": [
                   "Nxd7"
                 ],
@@ -7519,7 +7773,7 @@
                 ]
               },
               {
-                "frase": "8.Dxd5: la dama gana tu peón de d5: negras queda claramente peor.",
+                "frase": "8.Dxd5: la dama gana tu peón de d5: quedas claramente peor.",
                 "jugadas": [
                   "Qxd5"
                 ],
@@ -7632,6 +7886,14 @@
               "jugadas": [
                 "Nh6"
               ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "h6",
+                  "a": "f7",
+                  "color": "verde"
+                }
+              ],
               "fuente": [
                 "MOTOR",
                 "WP-CK"
@@ -7643,7 +7905,7 @@
               ]
             },
             {
-              "frase": "7.Cxd7: blancas cambia su caballo y le abre la fila a la dama.",
+              "frase": "7.Cxd7: el caballo toma tu alfil y le deja libre la fila a la dama.",
               "jugadas": [
                 "Nxd7"
               ],
@@ -7673,7 +7935,7 @@
               ]
             },
             {
-              "frase": "8.Dxd5: la dama gana tu peón de d5: negras queda claramente peor.",
+              "frase": "8.Dxd5: la dama gana tu peón de d5: quedas claramente peor.",
               "jugadas": [
                 "Qxd5"
               ],
