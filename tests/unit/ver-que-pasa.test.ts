@@ -4,9 +4,11 @@ import { Chess, type Square } from 'chess.js'
 import { CURSOS_NUEVOS, lineaPorId, lineasDe, misJugadas } from '../../src/curso/datos.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
 import { frasesDespues } from '../../src/curso/adelantar.ts'
-import { palabras, posicion } from '../../src/curso/textos.ts'
-import { todosLosVer, verAdelanta, verDelError, verDespues, type VerDelMomento } from '../../src/curso/ver.ts'
+import { explicacionDespues } from '../../src/curso/turno.ts'
+import { frasesDe, palabras, porQueNo, posicion } from '../../src/curso/textos.ts'
+import { todosLosVer, tramosDe, verAdelanta, verDelError, verDespues, type VerDelMomento } from '../../src/curso/ver.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
+import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { frasesDelCurso, listaDelInventario, llaveDe, RAZONES, sinVer } from '../../scripts/ver-inventario.ts'
 import type { LineaCurso } from '../../src/curso/tipos.ts'
 
@@ -235,8 +237,7 @@ describe('"Ver qué pasaría" · en la lección', () => {
     let ocultas = 0
     for (const l of VARIANTES)
       for (const ply of misJugadas(l)) {
-        const despues = verDespues(c, l, 'practicar', ply)
-        if (despues) {
+        for (const despues of verDespues(c, l, 'practicar', ply)) {
           revisadas++
           for (const j of hechasMias(l, despues)) expect(pedidas(l, ply + 1), `${l.id} ${ply}: ${j}`).not.toContain(j)
         }
@@ -257,14 +258,13 @@ describe('"Ver qué pasaría" · en la lección', () => {
   it('sale solo con las frases que se muestran: lo que Practicar oculta no trae "Ver"', () => {
     for (const l of VARIANTES)
       for (const ply of misJugadas(l)) {
-        const v = verDespues(c, l, 'practicar', ply)
         const visibles = frasesDespues(c, l, 'practicar', ply).map((f) => f.texto)
-        for (const p of v?.pa.pasos ?? []) if (p.titulo) expect(visibles, `${l.id} ${ply}`).toContain(p.titulo)
+        for (const v of verDespues(c, l, 'practicar', ply)) expect(visibles, `${l.id} ${ply}`).toContain(v.titulo)
       }
     // el caso de Carlos, en la Tal: la frase de ...e6 no se muestra en Practicar, y por eso no hay botón
     const tal = linea('v:avance-tal')
-    expect(verDespues(c, tal, 'aprender', 7)?.titulo).toContain('Con ...e6 en vez de ...h5')
-    expect(verDespues(c, tal, 'practicar', 7)).toBeNull()
+    expect(verDespues(c, tal, 'aprender', 7)[0]?.titulo).toContain('Con ...e6 en vez de ...h5')
+    expect(verDespues(c, tal, 'practicar', 7)).toEqual([])
   })
 
   it('en Practicar no va si la línea contiene una jugada que la línea me va a pedir, aunque la frase se muestre; en Aprender sí va', () => {
@@ -280,7 +280,7 @@ describe('"Ver qué pasaría" · en la lección', () => {
     const vdw = linea('v:avance-van-der-wiel')
     expect(verDelError(c, vdw, 'aprender', 13, 'Nc6')).not.toBeNull()
     expect(verDelError(c, vdw, 'practicar', 13, 'Nc6')).toBeNull()
-    expect(verDespues(c, vdw, 'practicar', 13)?.titulo).toContain('Si lo dejaras avanzar')
+    expect(verDespues(c, vdw, 'practicar', 13)[0]?.titulo).toContain('Si lo dejaras avanzar')
     // los errores metidos a propósito: una flecha verde o un texto que adelantan
     const v = TODOS.find((x) => x.clave === 'e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5' && x.campo === 'porque')!
     const short = linea('v:avance-short')
@@ -289,42 +289,110 @@ describe('"Ver qué pasaría" · en la lección', () => {
     expect(verAdelanta(short, 10, v.inicio, { pasos: [...v.ver.pasos, { frase: 'Y luego ...Db6.' }] })).toEqual(['Qb6'])
   })
 
-  it('un momento con dos frases: la ventana las cubre una tras otra, y el título cambia con la frase', () => {
-    const titulos = (v: VerDelMomento) => v.pa.pasos.flatMap((p) => (p.titulo ? [p.titulo] : []))
-    // dos líneas distintas: la segunda vuelve a la posición de salida
-    const cambio = verDespues(c, linea('v:cambio'), 'aprender', 13)!
-    expect(titulos(cambio)).toEqual(['Nunca con ...Dc7: el alfil de f4 se come tu dama.', 'Y si juegas ...e6, pierdes b7.'])
-    const f = fotosDePasos(cambio.pa, cambio.inicio)
-    const segunda = cambio.pa.pasos.findIndex((p, i) => i > 0 && p.titulo)
-    expect(cambio.pa.pasos[segunda]!.reinicio).toEqual([])
-    // cuando la segunda frase regresa el tablero, lo dice, también si sola diría "Esta es la posición"
-    const short = verDespues(c, linea('v:avance-short'), 'aprender', 9)!
-    expect(short.pa.pasos.find((p, i) => i > 0 && p.titulo)!.frase).toBe('Regresamos a la posición después de 5...c5.')
-    expect(short.pa.pasos[0]!.frase).toBe('Esta es la posición después de 5...c5.')
-    expect(f[segunda]!.fen).toBe(f[0]!.fen)
-    // una habla de después y otra de antes: la ventana sale de antes, y la de después lleva mi jugada
-    const clasica = verDespues(c, linea('v:clasica'), 'aprender', 11)!
-    expect(clasica.inicio).toHaveLength(11)
-    expect(clasica.pa.pasos[0]!.reinicio).toEqual(['h6'])
-    expect(() => fotosDePasos(clasica.pa, clasica.inicio)).not.toThrow()
-    // la segunda sigue la línea de la primera: continúa desde ahí, sin repetir 7...Cc6 y 8.h5
-    const vdw = verDespues(c, linea('v:avance-van-der-wiel'), 'aprender', 13)!
-    expect(titulos(vdw)).toHaveLength(2)
-    expect(vdw.pa.pasos.flatMap((p) => p.jugadas ?? [])).toEqual(['Nc6', 'h5', 'Be4', 'Rh3', 'Nh6', 'Nxe4', 'dxe4'])
-    expect(vdw.pa.pasos.filter((p) => p.reinicio)).toEqual([])
+  it('un momento con dos frases: dos botones, y cada uno abre su ventana, con su frase de título y desde su propia posición', () => {
+    const conDos = new Set(VARIANTES.flatMap((l) => misJugadas(l).filter((ply) => verDespues(c, l, 'aprender', ply).length >= 2).map((ply) => l.jugadas.slice(0, ply + 1).join(' '))))
+    expect(conDos.size).toBe(5)
+    // dos líneas distintas, cada una en su ventana
+    const [dama, b7] = verDespues(c, linea('v:cambio'), 'aprender', 13)
+    expect(dama!.titulo).toBe('Nunca con ...Dc7: el alfil de f4 se come tu dama.')
+    expect(b7!.titulo).toBe('Y si juegas ...e6, pierdes b7.')
+    // la que antes "regresaba" el tablero ya no regresa: es la primera de su ventana
+    const [, c5] = verDespues(c, linea('v:avance-short'), 'aprender', 9)
+    expect(c5!.pa.pasos[0]!.frase).toBe('Esta es la posición después de 5...c5.')
+    // una habla de después y otra de antes: cada una sale de la suya
+    const [h7, sinAtender] = verDespues(c, linea('v:clasica'), 'aprender', 11)
+    expect(h7!.inicio).toHaveLength(12)
+    expect(sinAtender!.inicio).toHaveLength(11)
+    expect(h7!.pa.pasos[0]!.reinicio).toBeUndefined()
+    // la que antes seguía la línea de la primera ahora empieza desde su propia posición, con todas sus jugadas
+    const [dejar, cc6] = verDespues(c, linea('v:avance-van-der-wiel'), 'aprender', 13)
+    expect(dejar!.titulo).toContain('Si lo dejaras avanzar')
+    expect(cc6!.pa.pasos[0]!.jugadas).toBeUndefined()
+    expect(cc6!.pa.pasos.flatMap((p) => p.jugadas ?? [])).toEqual(['Nc6', 'h5', 'Be4', 'Rh3', 'Nh6', 'Nxe4', 'dxe4'])
+    expect(fotosDePasos(cc6!.pa, cc6!.inicio)[0]!.fen).toBe(posicion(cc6!.inicio, cc6!.inicio.length).fen())
     // cada ventana se puede recorrer completa, en cada momento de cada variante
     for (const l of VARIANTES)
       for (const ply of misJugadas(l))
-        for (const vuelta of ['aprender', 'practicar'] as const) {
-          const v = verDespues(c, l, vuelta, ply)
-          if (v) expect(() => fotosDePasos(v.pa, v.inicio), `${l.id} ${ply} ${vuelta}`).not.toThrow()
-        }
+        for (const vuelta of ['aprender', 'practicar'] as const) for (const v of verDespues(c, l, vuelta, ply)) expect(() => fotosDePasos(v.pa, v.inicio), `${l.id} ${ply} ${vuelta}`).not.toThrow()
   })
 
   it('una equivocada sin explicación del curso, o sin "Ver", no trae botón', () => {
     const tal = linea('v:avance-tal')
     expect(verDelError(c, tal, 'aprender', 7, 'a6')).toBeNull()
     expect(verDelError(c, tal, 'aprender', 7, 'h6')!.titulo).toContain('Con ...h6 tu alfil tendría h7')
-    expect(verDespues(c, tal, 'aprender', 9)).toBeNull()
+    expect(verDespues(c, tal, 'aprender', 9)).toEqual([])
+  })
+})
+
+describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-30)', () => {
+  const VUELTAS = ['aprender', 'practicar'] as const
+  /** Todas las líneas, las dos vueltas y todas mis jugadas. */
+  const MOMENTOS = lineasDe(c).flatMap((l) => misJugadas(l).flatMap((ply) => VUELTAS.map((vuelta) => ({ l, ply, vuelta, donde: `${l.id} ${ply} ${vuelta}` }))))
+  const sinCuidado = (t: string) => t.replace(/^Cuidado: /, '')
+  /** La frase del inventario que abre esa ventana, en esa jugada. */
+  const delInventario = (l: LineaCurso, ply: number, frase: string) => TODOS.find((v) => v.clave === l.jugadas.slice(0, ply + 1).join(' ') && v.frase === frase)
+
+  it('el texto de la explicación es el de antes, sin frases perdidas ni repetidas, también como se ve en pantalla', () => {
+    for (const { l, ply, vuelta, donde } of MOMENTOS) {
+      const vers = verDespues(c, l, vuelta, ply)
+      const textos = explicacionDespues(c, l, vuelta, ply)
+      const tramos = textos.map((t) => tramosDe(t, vers))
+      expect(tramos.map((t) => t.map((x) => x.texto).join(' ')), donde).toEqual(textos)
+      expect(tramos.flat().flatMap((x) => frasesDe(x.texto)).map(sinCuidado), donde).toEqual(frasesDespues(c, l, vuelta, ply).map((f) => f.texto))
+      // partir el texto no cambia cómo se ve ninguna jugada
+      for (const n of ['figuras', 'letras'] as const) expect(tramos.map((t) => t.map((x) => mostrarTexto(x.texto, n)).join(' ')), donde).toEqual(textos.map((t) => mostrarTexto(t, n)))
+    }
+  })
+
+  it('cada "Ver" queda en su frase, justo después de su punto final, y su ventana es solo de esa frase', () => {
+    let aMedias = 0
+    for (const { l, ply, vuelta, donde } of MOMENTOS) {
+      const vers = verDespues(c, l, vuelta, ply)
+      const textos = explicacionDespues(c, l, vuelta, ply)
+      const tramos = textos.flatMap((t) => tramosDe(t, vers).map((x, i, todos) => ({ ...x, ultimo: i === todos.length - 1 })))
+      // ni perdidos ni repetidos, y en el orden de la lectura
+      expect(tramos.flatMap((x) => (x.ver ? [x.ver] : [])), donde).toEqual(vers)
+      for (const x of tramos) {
+        if (!x.ver) continue
+        expect(x.texto.endsWith(x.ver.titulo), `${donde}: «${x.ver.titulo}»`).toBe(true)
+        expect(sinCuidado(frasesDe(x.texto).at(-1)!), donde).toBe(x.ver.titulo)
+        const f = delInventario(l, ply, x.ver.titulo)!
+        expect(f, `${donde}: «${x.ver.titulo}»`).toBeTruthy()
+        expect(x.ver.pa.pasos, donde).toEqual(f.ver.pasos)
+        expect(x.ver.inicio, donde).toEqual(f.inicio)
+        if (!x.ultimo) aMedias++
+      }
+    }
+    // con un error a la vista, igual: el botón va al final de su frase
+    for (const { l, ply, vuelta, donde } of MOMENTOS)
+      for (const san of Object.keys(c.mias[l.jugadas.slice(0, ply + 1).join(' ')]?.errores ?? {})) {
+        const ver = verDelError(c, l, vuelta, ply, san)
+        const texto = porQueNo(c, l, ply, san, vuelta)
+        expect(tramosDe(texto, ver ? [ver] : []), `${donde} ${san}`).toEqual([{ texto, ver }])
+      }
+    // la frase de la Dc7 del Cambio, la única a media explicación (una vez por vuelta)
+    expect(aMedias).toBe(2)
+    const [dama, b7] = verDespues(c, linea('v:cambio'), 'aprender', 13)
+    expect(tramosDe('Cuidado: Nunca con ...Dc7: el alfil de f4 se come tu dama. Y si juegas ...e6, pierdes b7.', [dama!, b7!])).toEqual([
+      { texto: 'Cuidado: Nunca con ...Dc7: el alfil de f4 se come tu dama.', ver: dama },
+      { texto: 'Y si juegas ...e6, pierdes b7.', ver: b7 },
+    ])
+  })
+
+  it('en Practicar sale exactamente en las mismas frases que antes: las que se muestran y no adelantan nada', () => {
+    let despues = 0
+    let errores = 0
+    for (const l of VARIANTES)
+      for (const ply of misJugadas(l)) {
+        const inventario = frasesDespues(c, l, 'practicar', ply).flatMap((f) => {
+          const v = delInventario(l, ply, f.texto)
+          return v && !verAdelanta(l, ply + 1, v.inicio, v.ver).length ? [f.texto] : []
+        })
+        expect(verDespues(c, l, 'practicar', ply).map((v) => v.titulo), `${l.id} ${ply}`).toEqual(inventario)
+        despues += inventario.length
+        for (const san of Object.keys(c.mias[l.jugadas.slice(0, ply + 1).join(' ')]?.verErrores ?? {})) if (verDelError(c, l, 'practicar', ply, san)) errores++
+      }
+    // la cuenta de cuando el botón iba en el pie (`b2c1a9f`, 2026-10-30)
+    expect({ despues, errores }).toEqual({ despues: 23, errores: 12 })
   })
 })

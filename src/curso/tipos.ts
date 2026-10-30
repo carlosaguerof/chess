@@ -57,8 +57,6 @@ export interface PasoLeer {
   jugadas?: string[]
   /** las marcas de esta frase (correcciones, C5) */
   marcas?: Marca[]
-  /** en una ventana que cubre dos frases ("Ver qué pasaría"), la frase de la que hablan los pasos desde aquí: es el título */
-  titulo?: string
   /** de dónde sale esta frase y qué comprobó el motor ("Ver qué pasaría"; en los demás pasos, los trae su página o su plan) */
   fuente?: string[]
   motor?: string[]

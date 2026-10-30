@@ -65,8 +65,7 @@ function dondeSale(c: DatosCurso, v: ReturnType<typeof todosLosVer>[number]): st
   const conLineas = lineasDe(c).filter((l) => l.tipo === 'variante' && misJugadas(l).some((p) => l.jugadas.slice(0, p + 1).join(' ') === v.clave))
   for (const l of conLineas) {
     const ply = v.clave.split(' ').length - 1
-    const en = v.campo === 'errores' ? verDelError(c, l, 'practicar', ply, v.i as string) : verDespues(c, l, 'practicar', ply)
-    const ventana = en?.pa.pasos.some((p) => p.titulo === v.frase) ?? false
+    const ventana = v.campo === 'errores' ? !!verDelError(c, l, 'practicar', ply, v.i as string) : verDespues(c, l, 'practicar', ply).some((x) => x.titulo === v.frase)
     ;(ventana ? practicar : ocultos).push(l.nombre)
   }
   const nombres = (x: string[]) => mostrarTexto(x.join(', '), 'figuras')

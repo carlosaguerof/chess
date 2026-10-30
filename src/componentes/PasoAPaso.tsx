@@ -21,16 +21,17 @@ function ultimaDe(jugadas: string[]): [string, string] | undefined {
  * que dice. Abajo, en las esquinas, Atrás (no en el primero) y Siguiente, que en el último dice "Salir". Un toque fuera
  * (o Esc) la cierra. Como la ventana de "Cómo funciona" (`ComoFunciona.tsx`).
  */
-export function BotonPasoAPaso(props: { titulo: string; pa: PasoAPaso; inicio?: string[]; orientacion: 'white' | 'black'; clase?: string }) {
-  return <BotonVentana {...props} texto="Ver paso a paso" testid="ver-paso-a-paso" />
+export function BotonPasoAPaso({ clase, ...props }: { titulo: string; pa: PasoAPaso; inicio?: string[]; orientacion: 'white' | 'black'; clase?: string }) {
+  return <BotonVentana {...props} clase={`boton secundario ${clase ?? ''}`} texto="Ver paso a paso" testid="ver-paso-a-paso" />
 }
 
 /**
  * "Ver qué pasaría" (2026-10-30): la misma ventana, para una frase que dice qué pasaría si se jugara otra cosa. El título es
- * la frase y el tablero empieza en la posición de la que habla, con su última jugada en amarillo.
+ * la frase y el tablero empieza en la posición de la que habla, con su última jugada en amarillo. El botón es un enlace
+ * chico, en el renglón, justo después de su frase: el pie es para seguir (`specs/ux.md`).
  */
 export function BotonVerQuePasa({ ver, orientacion }: { ver: VerDelMomento; orientacion: 'white' | 'black' }) {
-  return <BotonVentana titulo={ver.titulo} pa={ver.pa} inicio={ver.inicio} orientacion={orientacion} texto="Ver qué pasaría" testid="ver-que-pasa" verQuePasa />
+  return <BotonVentana titulo={ver.titulo} pa={ver.pa} inicio={ver.inicio} orientacion={orientacion} clase="enlace-chico enlace-ver" texto="Ver qué pasaría" testid="ver-que-pasa" verQuePasa />
 }
 
 interface PropsVentana {
@@ -41,12 +42,12 @@ interface PropsVentana {
   verQuePasa?: boolean
 }
 
-function BotonVentana({ texto, testid, clase, ...props }: PropsVentana & { texto: string; testid: string; clase?: string }) {
+function BotonVentana({ texto, testid, clase, ...props }: PropsVentana & { texto: string; testid: string; clase: string }) {
   const [abierta, setAbierta] = useState(false)
   return (
     <>
-      <button type="button" className={`boton secundario ${clase ?? ''}`} onClick={() => setAbierta(true)} data-testid={testid}>
-        {texto}
+      <button type="button" className={clase} onClick={() => setAbierta(true)} data-testid={testid}>
+        <span>{texto}</span>
       </button>
       {abierta && <VentanaPasoAPaso {...props} onCerrar={() => setAbierta(false)} />}
     </>
@@ -75,34 +76,15 @@ function VentanaPasoAPaso({ titulo, pa, inicio, orientacion, verQuePasa, onCerra
     }
     return verQuePasa ? ultimaDe(inicio ?? []) : undefined
   }
-  // en una ventana con dos frases, el título sigue a la frase de la que hablan los pasos
-  const tituloDe = (k: number) => pa.pasos.slice(0, k + 1).findLast((p) => p.titulo)?.titulo ?? titulo
-  const titulos = pa.pasos.flatMap((p) => (p.titulo ? [p.titulo] : []))
   const foto = fotos[i]!
   const fen = pa.soloPeones ? soloPeones(foto.fen) : foto.fen
 
   return createPortal(
     <div className="dialogo-fondo" onClick={onCerrar} data-testid="paso-a-paso-fondo">
       <div className={`dialogo paso-a-paso ${verQuePasa ? 'ver-que-pasa' : ''}`} role="dialog" aria-modal="true" aria-label={`${titulo}, paso a paso`} onClick={(e) => e.stopPropagation()} data-testid="paso-a-paso" data-paso={i + 1}>
-        {titulos.length > 1 ? (
-          <>
-            <p className="paso-a-paso-nota" data-testid="paso-a-paso-cual">
-              Frase {titulos.indexOf(tituloDe(i)) + 1} de {titulos.length}
-            </p>
-            {/* las frases en la misma celda: la ventana mide la más larga, y los botones no se mueven bajo el dedo al cambiar */}
-            <h2 className="titulos-paso">
-              {titulos.map((t) => (
-                <span key={t} className={t === tituloDe(i) ? undefined : 'titulo-oculto'} data-testid={t === tituloDe(i) ? 'paso-a-paso-titulo' : undefined}>
-                  <Texto t={t} />
-                </span>
-              ))}
-            </h2>
-          </>
-        ) : (
-          <h2 data-testid="paso-a-paso-titulo">
-            <Texto t={tituloDe(i)} />
-          </h2>
-        )}
+        <h2 data-testid="paso-a-paso-titulo">
+          <Texto t={titulo} />
+        </h2>
         {pa.ilustrativo && <p className="paso-a-paso-nota">Es una ilustración: el rival no contesta cada jugada.</p>}
         {/* C5: las marcas de la frase, que se acumulan hasta que el tablero vuelve a mover (detrás del interruptor) */}
         <TableroMini fen={fen} orientacion={orientacion} ultima={ultimaJugada(i)} testid="tablero-paso-a-paso" coordenadas marcas={marcasNuevas() ? marcasDelPaso(pa, i) : undefined} />

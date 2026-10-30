@@ -4,17 +4,16 @@ import { adelanta, frasesDespues } from './adelantar.ts'
 import { misJugadas, textoMio } from './datos.ts'
 import { fotosDePasos } from './pasos.ts'
 import { frasesDe, posicion } from './textos.ts'
-import type { DatosCurso, LineaCurso, PasoAPaso, PasoLeer, VerQuePasa } from './tipos.ts'
+import type { DatosCurso, LineaCurso, PasoAPaso, VerQuePasa } from './tipos.ts'
 
 /**
- * "Ver qué pasaría" (Carlos, 2026-10-30), sin pantalla: qué ventana abre el botón en cada momento de la lección.
+ * "Ver qué pasaría" (Carlos, 2026-10-30), sin pantalla: qué ventana abre cada botón de la lección.
  * - **Sale con las frases que se muestran:** las que Practicar oculta por adelantar una jugada no traen botón.
  * - **En Practicar** tampoco va si la línea del "Ver" (sus jugadas, sus flechas verdes o su texto) contiene una jugada
  *   mía que la línea todavía me va a pedir, con la misma pieza y a la misma casilla: sería darme la respuesta. Con un
  *   error a la vista, cuenta también la jugada que falta, y una jugada del rival a su casilla. En Aprender sí va: ahí ya
  *   se me dice la jugada.
- * - **Dos frases con "Ver" en un momento** van una tras otra en la misma ventana, y el título cambia con la frase. La
- *   segunda vuelve a su posición (`reinicio`), salvo que siga la línea de la primera: entonces continúa desde ahí.
+ * - **Cada frase con "Ver" lleva su botón,** pegado a ella (`tramosDe`), y abre su propia ventana, desde su propia posición.
  */
 
 /** Una frase con su "Ver qué pasaría", y la posición de la que habla. */
@@ -75,66 +74,31 @@ export function verAdelanta(l: LineaCurso, desde: number, inicio: string[], ver:
   return [...r]
 }
 
-/** Lo que abre el botón: el título (la primera frase), los pasos y la salida (las jugadas desde el inicio). */
+/** Lo que abre el botón de una frase: el título (la frase), sus pasos y la salida (las jugadas desde el inicio). */
 export interface VerDelMomento {
   titulo: string
   pa: PasoAPaso
   inicio: string[]
 }
 
-const jugadasDe = (v: VerQuePasa) => v.pasos.flatMap((p) => p.jugadas ?? [])
-
-/** Si `b` sigue la línea de `a`, cuántos pasos de `b` ya se vieron (los de esas jugadas); si no, 0. */
-function pasosYaVistos(a: VerQuePasa, b: VerQuePasa): number {
-  const [ja, jb] = [jugadasDe(a), jugadasDe(b)]
-  if (!!a.antes !== !!b.antes || !ja.length || ja.length >= jb.length || !ja.every((s, i) => s === jb[i])) return 0
-  let hechas = 0
-  for (const [i, p] of b.pasos.entries()) {
-    hechas += p.jugadas?.length ?? 0
-    if (hechas >= ja.length) return i + 1
-  }
-  return 0
-}
-
-/**
- * Las frases de un momento, una tras otra, en una sola ventana. Si alguna habla de antes de mi jugada, la ventana sale de
- * ahí, y las que hablan de después llevan mi jugada en su `reinicio`.
- */
-function juntar(l: LineaCurso, ply: number, frases: Pick<FraseConVer, 'frase' | 'ver'>[]): VerDelMomento | null {
-  if (!frases.length) return null
-  const antes = frases.some((f) => f.ver.antes)
-  const pasos: PasoLeer[] = []
-  frases.forEach((f, k) => {
-    const base = antes && !f.ver.antes ? [l.jugadas[ply]!] : []
-    const vistos = k > 0 ? pasosYaVistos(frases[k - 1]!.ver, f.ver) : 0
-    f.ver.pasos.slice(vistos).forEach((p, i) => {
-      const q: PasoLeer = { ...p }
-      if (i === 0) q.titulo = f.frase
-      // la segunda frase siempre regresa el tablero, y lo dice
-      if (i === 0 && k > 0 && !vistos) q.frase = p.frase.replace('Esta es la posición', 'Regresamos a la posición')
-      if (p.reinicio) q.reinicio = [...base, ...p.reinicio]
-      else if (i === 0 && !vistos && (k > 0 || base.length)) q.reinicio = base
-      pasos.push(q)
-    })
-  })
-  return { titulo: frases[0]!.frase, pa: { pasos }, inicio: l.jugadas.slice(0, antes ? ply : ply + 1) }
-}
+/** La ventana de una frase: sale de antes de mi jugada `ply` si la frase habla de ahí (`antes`); si no, de después. */
+const verDeFrase = (l: LineaCurso, ply: number, frase: string, ver: VerQuePasa): VerDelMomento => ({ titulo: frase, pa: { pasos: ver.pasos }, inicio: l.jugadas.slice(0, ver.antes ? ply : ply + 1) })
 
 const enPracticar = (l: LineaCurso, vuelta: Vuelta) => vuelta === 'practicar' && l.tipo === 'variante'
 
-/** El "Ver qué pasaría" de la explicación de después de mi jugada `ply`, si la frases que se muestran lo traen. */
-export function verDespues(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: number): VerDelMomento | null {
+/** Los "Ver qué pasaría" de la explicación de después de mi jugada `ply`, en orden: uno por cada frase que se muestra y lo trae. */
+export function verDespues(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: number): VerDelMomento[] {
   const m = textoMio(c, l.jugadas, ply)
-  if (!m?.ver) return null
-  const frases: Pick<FraseConVer, 'frase' | 'ver'>[] = []
+  if (!m?.ver) return []
+  const r: VerDelMomento[] = []
   for (const f of frasesDespues(c, l, vuelta, ply)) {
     const ver = f.campo === 'hace' ? null : m.ver[f.campo]?.[f.i]
     if (!ver) continue
-    const inicio = l.jugadas.slice(0, ver.antes ? ply : ply + 1)
-    if (enPracticar(l, vuelta) && verAdelanta(l, ply + 1, inicio, ver).length) continue
-    frases.push({ frase: f.texto, ver })
+    const v = verDeFrase(l, ply, f.texto, ver)
+    if (enPracticar(l, vuelta) && verAdelanta(l, ply + 1, v.inicio, ver).length) continue
+    r.push(v)
   }
-  return juntar(l, ply, frases)
+  return r
 }
 
 /** El "Ver qué pasaría" de una equivocada conocida (`errores`). Mi jugada sigue pendiente, así que también cuenta esa. */
@@ -144,5 +108,25 @@ export function verDelError(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: n
   const frase = m?.errores?.[san]
   if (!ver || !frase) return null
   if (enPracticar(l, vuelta) && verAdelanta(l, ply, l.jugadas.slice(0, ply), ver, true).length) return null
-  return juntar(l, ply, [{ frase, ver }])
+  return verDeFrase(l, ply, frase, ver)
+}
+
+/** Un trozo de un mensaje de la lección y, justo después de su punto final, su "Ver qué pasaría" si lo lleva. */
+export interface Tramo {
+  texto: string
+  ver: VerDelMomento | null
+}
+
+/** Parte un mensaje después de cada frase que lleva "Ver": cada botón queda pegado a su frase, y el texto no cambia. */
+export function tramosDe(texto: string, vers: VerDelMomento[]): Tramo[] {
+  const r: Tramo[] = []
+  let resto = texto
+  for (const ver of vers) {
+    const i = resto.indexOf(ver.titulo)
+    if (i < 0) continue
+    const fin = i + ver.titulo.length
+    r.push({ texto: resto.slice(0, fin), ver })
+    resto = resto.slice(fin).trimStart()
+  }
+  return resto ? [...r, { texto: resto, ver: null }] : r
 }
