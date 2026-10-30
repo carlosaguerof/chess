@@ -1,0 +1,50 @@
+# La comprobación después de publicar (npm run e2e:pages, los dos perfiles), en una máquina de GitHub, nueva en cada corrida:
+# prueba la página publicada con las pruebas de main. Aquí sí corre el perfil del iPhone en WebKit, que en la Air no se corre.
+# Se lanza a mano: gh workflow run pagina-publicada.yml
+# No hace commits ni publica nada. Los registros y el artefacto son públicos: nada privado aquí.
+name: Página publicada
+run-name: La página publicada, con las pruebas de main
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pagina-publicada:
+    runs-on: macos-latest
+    # 14 pruebas por 2 perfiles, a 90 s cada una si todas se atoran, más la instalación: el corte nunca le gana a las pruebas
+    timeout-minutes: 50
+    steps:
+      - name: Baja las pruebas de main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Instala Node, el mismo de la Air
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.12.1'
+
+      - name: Instala las dependencias
+        run: npm ci
+
+      - name: Instala los navegadores
+        run: npx playwright install webkit chromium
+
+      # pw:browser deja en el registro con qué navegador arranca cada perfil
+      - name: npm run e2e:pages
+        run: npm run e2e:pages
+        env:
+          SITIO: https://carlosaguerof.github.io/chess/
+          DEBUG: pw:browser
+
+      - name: Sube lo que sirve para revisar
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pagina-publicada-${{ github.run_id }}
+          path: test-results-publicado/
+          retention-days: 14
