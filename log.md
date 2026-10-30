@@ -621,3 +621,17 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué la comprobación fue en Chromium:** la §5 del prompt pide WebKit una sola vez, y esa vez fue la suite completa, como en las corridas anteriores (`iterations/v3/learning.md` n.º 41).
 - **Quién:** la torre ("publica", 02:52); la corrida de la Air.
 - **Dónde:** `main` `ec90fac`, `gh-pages` `08028e5`. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_marcas-v1.3.md`.
+
+## [2026-10-30] cambio | Las pruebas completas en GitHub, no en la Air
+- **Qué:**
+  - `.github/workflows/pruebas.yml`: `npm test` y `npm run e2e`, los dos perfiles, en una máquina de GitHub nueva en cada corrida, sobre la rama que se diga (`gh workflow run pruebas.yml -f rama=<rama>`). Se lanza a mano, no corre en cada push, no usa secretos, no hace commits y no publica. Al final, aunque falle, sube `test-results/` y solo las capturas que esa corrida rehízo.
+  - Máquina: `macos-latest` (macOS 26 arm64, M1 de 3 núcleos, 7 GB), con Node 26.12.1, el de la Air. Gratis: la documentación de GitHub dice que los ejecutores estándar son gratis e ilimitados en repos públicos, y la API da `billable` 0 ms en las tres corridas.
+  - Corridas (todas: 226 pasan, 34 se saltan, 0 fallan; iPhone en WebKit 127 y 3, escritorio 99 y 31; `npm test` 235 de 235):
+    - [`41042070927`](https://github.com/carlosaguerof/chess/actions/runs/41042070927), `main` `7995874`: 13 min 4 s (`e2e` 12.0 min).
+    - [`41042074419`](https://github.com/carlosaguerof/chess/actions/runs/41042074419), `main` `7995874`: 17 min 42 s (`e2e` 16.2 min).
+    - [`41044447367`](https://github.com/carlosaguerof/chess/actions/runs/41044447367), `feat/marcas-v1.3` `28de5f9`: 13 min 10 s (`e2e` 12.2 min). Es para comprobar que sirve para otra rama; el registro muestra que bajó ese commit.
+  - El mismo resultado de la Air en la publicación de las marcas v1.3 (226, 34, 0 y 235 de 235): `main` no cambió de pruebas desde entonces.
+  - El artefacto se bajó con `gh run download` en las dos de `main`: 243 capturas, 122 del iPhone, 38 MB.
+- **Por qué:** las pruebas del perfil del iPhone en WebKit sacan muchas capturas y van llenando el WindowServer de la Air. Ya tiró la pantalla dos veces (n.º 15 y 36). Reiniciar lo vacía, pero cierra las sesiones y el Remote Control, y la Air se queda en la contraseña de FileVault. Una máquina de GitHub se tira al acabar: si algo se llena, no le pasa nada a la Air.
+- **Quién:** Carlos (el prompt `00_corridas/chess/2026-10-30_PROMPT_pruebas-en-github.md`); la corrida "pruebas en GitHub" en la Air. Lo que decidió la corrida: Node exacto (26.12.1), `timeout-minutes: 60`, 14 días de artefacto, subir solo lo rehecho, `DEBUG=pw:browser` para que el registro muestre el navegador, y la tercera corrida sobre otra rama.
+- **Dónde:** `.github/workflows/pruebas.yml`, en `main` desde `7995874`. Cómo se usa: `AGENTS.md`. La regla de publicar: `specs/publicacion.md`. Lo aprendido y la respuesta al n.º 41: `iterations/v3/learning.md` n.º 57 a 61. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_pruebas-en-github.md`.

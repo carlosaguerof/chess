@@ -11,6 +11,7 @@
 ## Cuándo
 
 - Solo con **`npm test` y `npm run e2e` en verde**, y solo si `gh repo view carlosaguerof/chess --json visibility` dice `PUBLIC` (el script lo revisa).
+- **La corrida final antes de publicar va en GitHub** (`.github/workflows/pruebas.yml`, cómo se lanza: `AGENTS.md`), sobre la rama que se va a publicar. **En la Air, mientras se trabaja, Chromium**: el perfil del iPhone en WebKit llena el WindowServer y tira la pantalla (`iterations/v3/learning.md` n.º 15 y 36).
 - Publicar está autorizado al cerrar una corrida que lo diga en su instructivo; fuera de eso, solo cuando Carlos lo pida.
 
 ## Comprobación después de publicar

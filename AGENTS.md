@@ -24,6 +24,15 @@ npm run casa                    # construye y sirve en la red de la casa, puerto
 ```
 Las capturas de Playwright van a `iterations/v2/capturas/pruebas/<perfil>/` (las de la v1 se quedan en `iterations/v1/capturas/`). Las de antes y después de cada pantalla: `CAPTURAS=despues npx playwright test --grep @capturas`.
 
+**Las pruebas completas, en GitHub; en la Air, solo Chromium.** `npm test` y `npm run e2e`, los dos perfiles, corren en una máquina de GitHub nueva en cada corrida (`.github/workflows/pruebas.yml`), sobre cualquier rama ya subida a `origin`. En la Air, mientras se trabaja: `npx playwright test --project=escritorio`. El perfil `iphone` en WebKit no se corre ahí porque llena el WindowServer y tira la pantalla (`iterations/v3/learning.md` n.º 15 y 36).
+```
+gh workflow run pruebas.yml -f rama=<rama>   # la lanza
+gh run list --workflow=pruebas.yml -L 3      # da el número de la corrida
+gh run watch <número> --exit-status          # espera; sale con error si algo falló
+gh run download <número> --dir <carpeta>     # baja el artefacto; la carpeta, fuera del repo
+```
+El artefacto vive 14 días y es público, como el registro. Queda en `<carpeta>/pruebas-<número>/`: en `iterations/`, solo las capturas que esa corrida rehízo; en `test-results/`, los `trace` de lo que haya fallado. No entra solo al repo: si unas capturas se van a guardar, se copian a mano y van en un commit. Las de GitHub se ven como las de la Air, pero no son idénticas byte a byte: si se comparan dos capturas, las dos salen del mismo lado (`iterations/v3/learning.md` n.º 59).
+
 ## Principios
 - Producto y UX: `/Users/carlosaguerof/01_repos/00_direccion/principios/producto.md` (Nielsen + Maister + lo de Carlos). Su aterrizaje en esta app: `context/producto.md` §2.
 - Todo en español. **Las jugadas se ven en figuras** (♘f3, ♗xc4, `0-0`) de entrada; en Ajustes, "Notación": Figuras o Letras (la notación formal en inglés: Nf3, Bxc4, O-O). Nunca las dos juntas. Por dentro, los textos (planes, guía, cursos) se escriben en la notación de las guías de Carlos (R D T A C, `0-0`) y la pantalla los convierte con `mostrarTexto` (`src/ajedrez/mostrar.ts`). Decisión de Carlos, diseño del escalón 1 §6 (2026-10-29).
