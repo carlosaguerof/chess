@@ -30,6 +30,7 @@ gh workflow run pruebas.yml -f rama=<rama>   # la lanza
 gh run list --workflow=pruebas.yml -L 3      # da el número de la corrida
 gh run watch <número> --exit-status          # espera; sale con error si algo falló
 gh run download <número> --dir <carpeta>     # baja el artefacto; la carpeta, fuera del repo
+gh workflow run pagina-publicada.yml         # después de publicar: la página publicada, los dos perfiles (specs/publicacion.md)
 ```
 El artefacto vive 14 días y es público, como el registro. Queda en `<carpeta>/pruebas-<número>/`: en `iterations/`, solo las capturas que esa corrida rehízo; en `test-results/`, los `trace` de lo que haya fallado. No entra solo al repo: si unas capturas se van a guardar, se copian a mano y van en un commit. Las de GitHub se ven como las de la Air, pero no son idénticas byte a byte: si se comparan dos capturas, las dos salen del mismo lado (`iterations/v3/learning.md` n.º 59).
 

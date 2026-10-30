@@ -13,7 +13,7 @@ export default defineConfig({
   expect: { timeout: 20_000 },
   reporter: [['list']],
   outputDir: './test-results-publicado',
-  use: { baseURL: sitio ?? 'http://localhost:4174/chess/' },
+  use: { baseURL: sitio ?? 'http://localhost:4174/chess/', trace: 'retain-on-failure' },
   webServer: sitio
     ? undefined
     : { command: 'npm run build:pages && npx vite preview --base=/chess/ --outDir dist-pages --port 4174 --strictPort', url: 'http://localhost:4174/chess/', reuseExistingServer: false, timeout: 120_000 },
