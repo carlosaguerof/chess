@@ -480,7 +480,7 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .mensaje-curso.buena { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.pista, .mensaje-curso.respuesta { background: #2b3440; color: #cfe0f5; border-radius: 8px; padding: 8px 10px; }
 .mensaje-curso.explica { color: var(--texto); }
-.narracion-pie { display: flex; gap: 8px; }
+.narracion-pie { display: flex; justify-content: flex-end; gap: 8px; }
 .narracion-pie.dos-botones .boton { flex: 1 1 0; min-width: 0; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
 .narracion .boton { min-width: 140px; }
 /* En el celular, la lección mide lo que se ve de la pantalla, sin el scroll de la página (2026-10-29): el alto visible de
