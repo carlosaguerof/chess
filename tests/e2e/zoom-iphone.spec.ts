@@ -2,6 +2,7 @@ import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { Chess } from 'chess.js'
 import { cursos } from '../../src/cursos/datos.ts'
 import { cursoNuevo, lineaPorId, misJugadas } from '../../src/curso/datos.ts'
+import { explicacionDespues } from '../../src/curso/turno.ts'
 import { centroCasilla, jugar } from './_util.ts'
 
 // El bug del 2026-10-28: jugando contra Brisa en el iPhone, la página se ensanchaba y Safari cambiaba el zoom solo.
@@ -240,6 +241,55 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     expect(m.ultimoArriba, 'el último renglón se lee completo').toBe(true)
   })
 
+  // 2026-10-30, en el iPhone de Carlos: entre el botón y el borde de abajo de la narración se asomaba cortado un renglón
+  // ("…detrás de tus peones, como en la Francesa"). La franja se pegaba arriba del relleno de abajo del cuadro que se desliza.
+  // En las cinco pantallas de leccion-cabe, en el momento de su captura: la Van der Wiel, después de 3...Af5 (en Aprender,
+  // que trae el mismo texto). Para que el texto pase debajo del botón en todas, también en la más alta, se repiten los
+  // mensajes: lo que se prueba es la franja, no el largo del texto.
+  for (const p of [
+    { nombre: 'iPhone SE', ancho: 375, alto: 667 },
+    { nombre: 'Android chico', ancho: 360, alto: 740 },
+    { nombre: 'iPhone 13/14', ancho: 390, alto: 844 },
+    { nombre: 'iPhone 16 Pro', ancho: 402, alto: 874 },
+    { nombre: 'iPhone Pro Max', ancho: 430, alto: 932 },
+  ])
+    test(`la lección nueva (C9): debajo del botón tampoco se asoma nada, en ${p.nombre} (${p.ancho}×${p.alto})`, async ({ page }, info) => {
+      await page.setViewportSize({ width: p.ancho, height: p.alto })
+      const l = lineaPorId(cursoNuevo('caro-kann:b')!, 'v:avance-van-der-wiel')!
+      const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
+      await page.goto('/')
+      await page.evaluate((linea) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply: 5, fecha: Date.now() } })), l.id)
+      await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+      await momento('tuTurno')
+      await jugar(page, info, enUci(l.jugadas)[5]!)
+      await momento('leer')
+      await expect(page.getByTestId('narracion')).toContainText('como en la Francesa')
+      const m = await page.evaluate(() => {
+        const caja = document.querySelector<HTMLElement>('[data-testid="narracion"]')!
+        const pie = caja.querySelector('.narracion-pie')!
+        const mensajes = Array.from(caja.querySelectorAll('.mensaje-curso'))
+        for (let i = 0; i < 3; i++) for (const x of mensajes) caja.insertBefore(x.cloneNode(true), pie)
+        caja.scrollTop = 0
+        const r = caja.getBoundingClientRect()
+        const s = getComputedStyle(caja)
+        const izquierda = r.left + parseFloat(s.paddingLeft)
+        const derecha = r.right - parseFloat(s.paddingRight)
+        const boton = document.querySelector('[data-testid="siguiente"]')!.getBoundingClientRect()
+        // de un lado al otro, renglón por renglón, entre el botón y el borde de abajo de la narración: no se ve ningún mensaje
+        const asomados: string[] = []
+        for (let y = boton.bottom + 1; y < r.bottom - 0.5; y += 2)
+          for (const x of [izquierda + 2, (izquierda + derecha) / 2, derecha - 2]) {
+            const el = document.elementFromPoint(x, y)?.closest('.mensaje-curso')
+            if (el) asomados.push(`${Math.round(x)},${Math.round(y)}: «${el.textContent!.slice(0, 30)}»`)
+          }
+        // el texto pasa de verdad por debajo del botón (si no, la prueba no probaría nada)
+        const ultimo = mensajes.length ? Array.from(caja.querySelectorAll('.mensaje-curso')).at(-1)!.getBoundingClientRect().bottom : 0
+        return { pasaDebajo: ultimo > r.bottom, asomados, abajo: Math.round(r.bottom - boton.bottom) }
+      })
+      expect(m.pasaDebajo, 'el texto pasa por debajo del botón').toBe(true)
+      expect(m.asomados, `debajo del botón (${m.abajo} px hasta el borde)`).toEqual([])
+    })
+
   test('la lección nueva (C3): la Clásica, la variante más larga, en sus dos vueltas, y la página del curso', async ({ page }, info) => {
     test.setTimeout(150_000)
     const c = cursoNuevo('caro-kann:b')!
@@ -254,8 +304,10 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
         await momento('tuTurno')
         await jugar(page, info, uci[ply]!)
         await cabe(page, `lección nueva, ${vuelta}, media jugada ${ply + 1}`)
-        // en las dos vueltas, la explicación espera a "Siguiente" (Practicar, desde las correcciones, C2)
-        await page.getByTestId('siguiente').click()
+        // en las dos vueltas, la explicación espera a "Siguiente" (Practicar, desde las correcciones, C2), salvo en
+        // Practicar cuando todas sus frases adelantan una jugada que viene (2026-10-30): ahí sigue el rival
+        const explicacion = explicacionDespues(c, l, vuelta as 'aprender' | 'practicar', ply)
+        if (explicacion.length) await page.getByTestId('siguiente').click()
       }
       if (vuelta === 'aprender') {
         await momento('plan')

@@ -64,6 +64,18 @@ test.describe('Correcciones · C1 · coordenadas en los tableros de leer', () =>
     await cap('c1-la-estructura-clasica')
   })
 
+  test('el tablero de arriba de la página del curso también (2026-10-30); los de las tarjetas de Aprender, no', async ({ page }) => {
+    // "todo tablero lleva las letras y los números, volteados con negras" (punto 1 del feedback del piloto)
+    await page.goto('/#/curso/caro-kann%3Ab')
+    await revisarTablero(page.getByTestId('pagina-curso').getByTestId('tablero-mini'))
+    // las miniaturas de las tarjetas se quedan sin coordenadas: ahí no se leerían
+    await page.goto('/#/cursos/negras')
+    const tarjetas = page.getByTestId('tablero-mini')
+    await expect(tarjetas.first()).toBeVisible()
+    expect(await tarjetas.count()).toBeGreaterThan(0)
+    expect(await tarjetas.locator('coords').count()).toBe(0)
+  })
+
   test('el tablero de la lección no cambia: sigue con sus coordenadas', async ({ page }) => {
     await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-short'))
     await revisarTablero(page.getByTestId('tablero').first())
