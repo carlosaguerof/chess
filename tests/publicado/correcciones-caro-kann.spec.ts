@@ -72,11 +72,14 @@ test('Practicar no adelanta tu siguiente jugada (el caso de Carlos): después de
   await expect(page.locator('[data-marca]')).toHaveCount(0)
 })
 
-test('"Ver qué pasa" (2026-10-30): en la Tal, después de 4...h5, a la izquierda de "Siguiente"; recorre 4...e6 a 7.h5 y la lección sigue igual; en Practicar no sale', async ({ page }, info) => {
+test('"Ver qué pasaría" (2026-10-30): en la Tal, después de 4...h5, a la izquierda de "Siguiente"; recorre 4...e6 a 7.h5 y la lección sigue igual; en Practicar no sale', async ({ page }, info) => {
   await abrir(page, 'v:avance-tal', 'aprender', 7)
   await jugar(page, info, 'h7h5')
   const leccion = page.getByTestId('leccion-curso')
   await expect(leccion).toHaveAttribute('data-momento', 'leer')
+  await expect(page.getByTestId('ver-que-pasa')).toHaveText('Ver qué pasaría')
+  // la captura del pie: en la corrida de `pagina-publicada.yml` queda en el artefacto, y es la de WebKit en el perfil iphone
+  await page.locator('.narracion-pie').screenshot({ path: test.info().outputPath('pie-ver-que-pasaria.png') })
   const [ver, siguiente] = await Promise.all([page.getByTestId('ver-que-pasa').boundingBox(), page.getByTestId('siguiente').boundingBox()])
   expect(ver!.x + ver!.width).toBeLessThanOrEqual(siguiente!.x)
   await page.getByTestId('ver-que-pasa').click()

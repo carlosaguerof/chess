@@ -518,7 +518,7 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .ver-paso-a-paso { width: 100%; max-width: 420px; align-self: center; }
 .paso-a-paso { gap: 10px; }
 .paso-a-paso h2 { font-size: 19px; }
-/* "Ver qué pasa": el título es la frase entera, y una frase larga no empuja los botones fuera de la pantalla */
+/* "Ver qué pasaría": el título es la frase entera, y una frase larga no empuja los botones fuera de la pantalla */
 .paso-a-paso.ver-que-pasa { max-height: calc(100dvh - 32px - var(--seguro-arriba) - var(--seguro-abajo)); overflow-y: auto; }
 .paso-a-paso.ver-que-pasa h2 { font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--texto-suave); }
 .titulos-paso { display: grid; }

@@ -26,11 +26,11 @@ export function BotonPasoAPaso(props: { titulo: string; pa: PasoAPaso; inicio?: 
 }
 
 /**
- * "Ver qué pasa" (2026-10-30): la misma ventana, para una frase que dice qué pasaría si se jugara otra cosa. El título es
+ * "Ver qué pasaría" (2026-10-30): la misma ventana, para una frase que dice qué pasaría si se jugara otra cosa. El título es
  * la frase y el tablero empieza en la posición de la que habla, con su última jugada en amarillo.
  */
 export function BotonVerQuePasa({ ver, orientacion }: { ver: VerDelMomento; orientacion: 'white' | 'black' }) {
-  return <BotonVentana titulo={ver.titulo} pa={ver.pa} inicio={ver.inicio} orientacion={orientacion} texto="Ver qué pasa" testid="ver-que-pasa" verQuePasa />
+  return <BotonVentana titulo={ver.titulo} pa={ver.pa} inicio={ver.inicio} orientacion={orientacion} texto="Ver qué pasaría" testid="ver-que-pasa" verQuePasa />
 }
 
 interface PropsVentana {

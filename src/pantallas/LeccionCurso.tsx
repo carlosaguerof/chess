@@ -214,7 +214,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     boton = { texto: 'Ahora, Practicar', testid: 'a-practicar', accion: () => setE(empezar(l, 'practicar')) }
   }
 
-  // el botón secundario del pie, a la izquierda del principal: "Ver paso a paso" en el plan; "Ver qué pasa" cuando la explicación del momento lo trae
+  // el botón secundario del pie, a la izquierda del principal: "Ver paso a paso" en el plan; "Ver qué pasaría" cuando la explicación del momento lo trae
   const orientacion = l.lado === 'w' ? 'white' : 'black'
   const pasosDelPlan = e.momento === 'plan' ? l.variante?.plan.pasoAPaso : undefined
   const ver = e.momento === 'leer' && e.ultima !== null ? verDespues(c, l, e.vuelta, e.ultima) : e.momento === 'error' && e.intento ? verDelError(c, l, e.vuelta, e.ply, e.intento.san) : null
