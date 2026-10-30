@@ -1,6 +1,7 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { Chess } from 'chess.js'
 import { cursoNuevo, leccionIdDe, lineaPorId, misJugadas } from '../../src/curso/datos.ts'
+import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { jugar } from './_util.ts'
 
 /**
@@ -90,6 +91,13 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
       expect(m.int.bottom, 'en el mismo renglón').toBeGreaterThan(m.jugada.top)
       expect(m.int.top, 'en el mismo renglón').toBeLessThan(m.jugada.bottom)
       expect(m.fila, 'la fila no crece: mide lo que "Jugada N de M"').toBeLessThanOrEqual(m.jugada.alto + 0.5)
+      // lo que se toca es más alto que el chip, sin agregar altura: 8 arriba y 8 abajo de la otra opción, todavía es ella
+      const alrededor = await page.evaluate((id) => {
+        const r = document.querySelector(`[data-testid="${id}"]`)!.getBoundingClientRect()
+        const en = (y: number) => document.elementFromPoint(r.left + r.width / 2, y)?.closest('[data-testid]')?.getAttribute('data-testid')
+        return [en(r.top - 8), en(r.bottom + 8)]
+      }, `vuelta-${otra}`)
+      expect(alrededor, 'lo que se toca, más alto que el chip').toEqual([`vuelta-${otra}`, `vuelta-${otra}`])
     }
   })
 
@@ -159,7 +167,7 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
     await momento(page, 'intro')
     await expect(leccion(page)).toHaveAttribute('data-ply', String(TAL.desde))
     await expect(page.getByTestId('jugada-n-de-m')).toHaveText('Jugada 1 de 4')
-    await expect(page.getByTestId('narracion')).toContainText(TAL.intro.slice(0, 20))
+    await expect(page.getByTestId('narracion')).toContainText(mostrarTexto(TAL.intro, 'figuras'))
     expect(await enCurso(page)).toMatchObject({ linea: TAL.id, vuelta: 'aprender', ply: TAL.desde })
     await page.getByTestId('empezar-vuelta').click()
     await momento(page, 'tuTurno')

@@ -276,6 +276,12 @@ h1, h2, h3 { margin: 0; }
 .leccion-titulo strong { font-size: 16px; }
 .leccion-panel { gap: 12px; }
 .leccion-fase { display: flex; align-items: center; justify-content: space-between; }
+/* el interruptor Aprender | Practicar (2026-10-30): dos chips en un contorno, la vuelta en curso con su color de antes.
+   No agrega altura a la fila; lo que se toca crece 10 arriba y 10 abajo, dentro del margen del panel */
+.vueltas { display: inline-flex; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--borde); }
+.vueltas .chip { position: relative; margin: 0; border: 0; cursor: pointer; font-weight: 700; }
+.vueltas .chip[aria-checked="false"] { background: none; color: var(--texto-apagado); font-weight: 500; }
+.vueltas .chip::after { content: ''; position: absolute; inset: -10px 0; }
 .leccion-instruccion { margin: 0; font-size: 20px; }
 .aviso-leccion { margin: 0; padding: 10px 12px; border-radius: 8px; font-weight: 600; line-height: 1.4; }
 .aviso-leccion.correcta { background: #2e3a24; color: var(--acento-claro); }

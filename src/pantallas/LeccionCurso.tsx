@@ -12,7 +12,7 @@ import { registrarPasoCurso } from '../registro/eventos.ts'
 import { evaluar } from '../ayudas/analisis.ts'
 import { cursoNuevo, jugadasDeLaBaseEn, lineaPorId, lineasDe, textoMio, textoRival } from '../curso/datos.ts'
 import type { DatosCurso, LineaCurso } from '../curso/tipos.ts'
-import { atras, continuar, empezar, empezarDeNuevo, intentar, jugarRival, pedirPista, pedirRespuesta, plyDeAtras, progreso, reintentar, retomar, tropiezos, type EstadoCiclo } from '../curso/ciclo.ts'
+import { atras, continuar, empezar, empezarDeNuevo, intentar, jugarRival, pedirPista, pedirRespuesta, plyDeAtras, progreso, reintentar, retomar, tropiezos, type EstadoCiclo, type Vuelta } from '../curso/ciclo.ts'
 import { borrarEnCurso, guardarEnCurso, leerAvance, marcarError, marcarPieza, marcarVariante } from '../curso/avance.ts'
 import { formas, jugadaEs, lineaHasta, porQueNo, posicion } from '../curso/textos.ts'
 import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turno.ts'
@@ -22,6 +22,12 @@ import { marcasDelMomento, marcasNuevas } from '../curso/marcas.ts'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
+
+/** Las dos opciones del interruptor de la vuelta, con los colores de los chips de antes. */
+const VUELTAS: { id: Vuelta; nombre: string; chip: string }[] = [
+  { id: 'aprender', nombre: 'Aprender', chip: 'chip-rep' },
+  { id: 'practicar', nombre: 'Practicar', chip: 'chip-base' },
+]
 
 /** La lección nueva (C3, diseño §4): una variante del curso o un "¿Y si…?" de Errores y trampas. */
 export function LeccionCurso({ cursoId, lineaId }: { cursoId: string; lineaId: string }) {
@@ -101,6 +107,13 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
       if (c.piezas.errores.lista.every((x) => a.errores[x.id])) marcarPieza(c.id, 'errores')
     }
   }, [e.momento, c, l])
+
+  // saltar a la otra vuelta (2026-10-30): empieza desde su primera jugada, sin preguntar; al volver, retomo en ella
+  const cambiarVuelta = (v: Vuelta) => {
+    if (v === e.vuelta) return
+    guardarEnCurso(c.id, l.id, v, l.desde)
+    setE(empezar(l, v))
+  }
 
   const alJugar = (uci: string) => {
     if (e.momento !== 'tuTurno') return
@@ -236,7 +249,18 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
         ) : (
           <>
             <div className="leccion-fase" data-testid="fase">
-              <span className={`chip ${e.vuelta === 'aprender' ? 'chip-rep' : 'chip-base'}`}>{!esVariante ? 'Castígalo' : e.vuelta === 'aprender' ? 'Aprender' : 'Practicar'}</span>
+              {/* en una variante, la etiqueta de la vuelta es un interruptor (2026-10-30); un «¿Y si…?» se queda con su chip */}
+              {esVariante ? (
+                <div className="vueltas" role="radiogroup" aria-label="Vuelta" data-testid="interruptor-vuelta">
+                  {VUELTAS.map((v) => (
+                    <button key={v.id} type="button" role="radio" aria-checked={e.vuelta === v.id} className={`chip ${e.vuelta === v.id ? v.chip : ''}`} onClick={() => cambiarVuelta(v.id)} data-testid={`vuelta-${v.id}`}>
+                      {v.nombre}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <span className={`chip ${e.vuelta === 'aprender' ? 'chip-rep' : 'chip-base'}`}>Castígalo</span>
+              )}
               <span className="apagado" data-testid="jugada-n-de-m">
                 Jugada {n} de {m}
               </span>
