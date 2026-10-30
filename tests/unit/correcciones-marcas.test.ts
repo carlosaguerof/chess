@@ -145,6 +145,26 @@ function revisarR4(x: Ligada): string[] {
   return r
 }
 
+/**
+ * R4 de un plan de dos jugadas ("...c5 y ...Cc6"): `llega` da por bueno b8→c6 con el peón todavía en c6 (la pieza "apoya"
+ * esa casilla). Aquí cada A3 se juega en su orden, con la de antes hecha, y tiene que ser una jugada legal.
+ */
+function revisarOrdenA3(x: Ligada): string[] {
+  const ch = conTurno(x.fen, x.mio)
+  const r: string[] = []
+  for (const m of x.marcas.filter((n) => n.tipo === 'A3')) {
+    const j = conTurno(ch.fen(), x.mio).moves({ square: m.de as Square, verbose: true }).find((v) => v.to === m.a)
+    if (!j) {
+      r.push(`${x.donde}: ${m.de}→${m.a} no se puede jugar en ese orden`)
+      continue
+    }
+    const pieza = ch.get(m.de as Square)!
+    ch.remove(m.de as Square)
+    ch.put(pieza, m.a as Square)
+  }
+  return r
+}
+
 /** R7, en los datos: nada tuyo antes de tu jugada (la frase del rival solo trae lo del rival) y ninguna A1. */
 function revisarR7Datos(todas: Ligada[]): string[] {
   const r: string[] = []
@@ -267,6 +287,15 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     const a7 = TODAS.filter((x) => x.marcas.some((m) => m.tipo === 'A7'))
     expect(a7.length).toBeGreaterThanOrEqual(10)
     expect(a7.some((x) => x.marcas.some((m) => pasoAnterior(x, m)))).toBe(true)
+  })
+
+  it('R4 · las A3 de "Siguen…" se juegan en su orden, la segunda con la primera hecha (...c5 y ...Cc6, con el peón todavía en c6)', () => {
+    const siguen = TODAS.filter((x) => x.donde.startsWith('mía') && /\b[Ss]iguen\b/.test(x.frase) && x.marcas.some((m) => m.tipo === 'A3'))
+    expect(siguen.length).toBeGreaterThanOrEqual(5)
+    expect(siguen.flatMap(revisarOrdenA3)).toEqual([])
+    // y lo atrapa: al revés, ...Cc6 no se puede con el peón en c6
+    const tal = siguen.find((x) => x.frase === 'Siguen ...c5 y ...Cc6 contra d4.')!
+    expect(revisarOrdenA3({ ...tal, marcas: [...tal.marcas].reverse() })).toEqual([expect.stringContaining('b8→c6 no se puede jugar en ese orden')])
   })
 
   it('R5 · colores y trazos solo de esta lista, y cada tipo con el suyo: punteada verde la A3, punteada roja la A7', () => {
@@ -407,6 +436,24 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     const rutasC3 = puntosDeFlechas(flechas(c3.marcas) as { de: string; a: string }[], 'black', (c) => !!new Chess(c3.fen).get(c as Square))
     const caballo = flechas(c3.marcas).findIndex((m) => m.de === 'f3')
     expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
+  })
+
+  it('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasa"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
+    const tablero = (l: LineaCurso, ply: number) => posicion(l.jugadas, ply + 1)
+    const rutasDe = (id: string, ply: number) => {
+      const l = lineaPorId(c, id)!
+      const fs = flechas(marcasDelMomento(c, l, despuesDe(l, 'aprender', ply))) as { de: string; a: string }[]
+      const t = tablero(l, ply)
+      const rutas = puntosDeFlechas(fs, 'black', (x) => !!t.get(x as Square))
+      return new Map(fs.map((f, i) => [`${f.de}-${f.a}`, rutas[i]!]))
+    }
+    // ...c5 y ...Cc6 en la Tal: la L llega a c6 de lado, por b6, no por c7 en la línea de c6→c5
+    expect(rutasDe('v:avance-tal', 11).get('b8-c6')![1]).toEqual(centro('b6', 'black'))
+    // 6...Cc6 en el 4.c3: la L a d4 no pasa por c5, de donde sale ...cxd4
+    expect(rutasDe('v:avance-c3', 11).get('c6-d4')![1]).toEqual(centro('d6', 'black'))
+    // las rutas de siempre no cambian si nada estorba
+    expect(puntosDeFlechas([{ de: 'b8', a: 'c6' }], 'black')[0]![1]).toEqual(centro('b6', 'black'))
+    expect(puntosDeFlechas([{ de: 'g8', a: 'f6' }, { de: 'd8', a: 'c7' }], 'black')[0]![1]).toEqual(centro('g6', 'black'))
   })
 
   it('R7 · nada tuyo antes de tu jugada: en los datos, la frase del rival solo trae lo del rival y no hay ninguna A1', () => {
@@ -572,6 +619,20 @@ describe('Las marcas · los ejemplos de referencia (§4 de las reglas v1.3)', ()
     const salidas = ch.moves({ square: 'g6', verbose: true }).map((m) => m.to)
     expect(salidas).toHaveLength(5)
     for (const s of salidas) expect(ch.isAttacked(s, 'w'), s).toBe(true)
+  })
+
+  it('los "Siguen…" de la última jugada de una línea llevan sus A3 (V2, 2026-10-30): la Tal, el 4.c3, la Clásica y la Bayoneta, en las dos vueltas', () => {
+    const verdes = (a: string, b: string) => [`${a} A3 verde punteada`, `${b} A3 verde punteada`]
+    for (const [id, ply, de, a] of [
+      ['v:avance-tal', 11, 'c6→c5', 'b8→c6'],
+      ['v:avance-c3', 11, 'd8→b6', 'c5→d4'],
+      ['v:clasica', 19, 'g8→f6', 'd8→c7'],
+      ['v:avance-bayoneta', 13, 'b8→d7', 'g8→f6'],
+    ] as const) {
+      const l = linea(id)
+      expect(misJugadas(l).at(-1), id).toBe(ply)
+      for (const vuelta of ['aprender', 'practicar'] as const) expect(sinTipo(marcasDelMomento(c, l, despuesDe(l, vuelta, ply))).filter((m) => m.includes('A3')), `${id} ${vuelta}`).toEqual(verdes(de, a))
+    }
   })
 
   it('6 · 6...♗g4 en el Cambio (A2): la verde g4→d1 solo en Practicar, después de jugar; en Aprender es "Te toca" y no lleva marcas tuyas', () => {

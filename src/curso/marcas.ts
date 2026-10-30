@@ -154,26 +154,27 @@ export function caminosDeCaballo(de: string, a: string): { esquina: string; pasa
  * Los puntos de una flecha: recta, o en L si es un salto de caballo (R6). La L va primero por el tramo largo, como el
  * dibujo de Carlos (g8→g6→f6), salvo que el otro camino estorbe menos (pase visual 1): que no doble encima de una pieza
  * (parece que esa pieza es la que se mueve) y que pase por menos piezas. `usada`: las casillas por donde ya pasan las
- * flechas de antes (`puntosDeFlechas`), que estorban igual que una pieza.
+ * flechas de antes (`puntosDeFlechas`), que estorban igual que una pieza. `por`: la esquina, si la marca la fija.
  */
-export function puntosDeFlecha(de: string, a: string, orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false, usada: (casilla: string) => boolean = () => false): [number, number][] {
+export function puntosDeFlecha(de: string, a: string, orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false, usada: (casilla: string) => boolean = () => false, por?: string): [number, number][] {
   const p0 = centro(de, orientacion)
   const p1 = centro(a, orientacion)
   if (!esSaltoDeCaballo(de, a)) return [p0, p1]
-  return [p0, centro(caminoDeCaballo(de, a, ocupada, usada).esquina, orientacion), p1]
+  return [p0, centro(caminoDeCaballo(de, a, ocupada, usada, por).esquina, orientacion), p1]
 }
 
 /** El camino que toma la L de un caballo (el de `puntosDeFlecha`). */
-function caminoDeCaballo(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean) {
+function caminoDeCaballo(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean, por?: string) {
   const estorba = (c: string) => ocupada(c) || usada(c)
   const costo = (c: { esquina: string; pasa: string[] }) => (estorba(c.esquina) ? 2 : 0) + c.pasa.filter(estorba).length
   const [larga, corta] = caminosDeCaballo(de, a)
+  if (por) return corta!.esquina === por ? corta! : larga!
   return costo(corta!) < costo(larga!) ? corta! : larga!
 }
 
 /** Las casillas por donde pasa una flecha, sin la de salida: las de en medio y la de llegada. */
-function casillasDeFlecha(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean): string[] {
-  if (esSaltoDeCaballo(de, a)) return [...caminoDeCaballo(de, a, ocupada, usada).pasa, a]
+function casillasDeFlecha(de: string, a: string, ocupada: (casilla: string) => boolean, usada: (casilla: string) => boolean, por?: string): string[] {
+  if (esSaltoDeCaballo(de, a)) return [...caminoDeCaballo(de, a, ocupada, usada, por).pasa, a]
   const [c0, f0, c1, f1] = [de.charCodeAt(0) - 97, Number(de[1]), a.charCodeAt(0) - 97, Number(a[1])]
   const pasos = Math.max(Math.abs(c1 - c0), Math.abs(f1 - f0))
   return Array.from({ length: pasos }, (_, i) => casilla(c0 + (Math.sign(c1 - c0) * (i + 1) * Math.abs(c1 - c0)) / pasos, f0 + (Math.sign(f1 - f0) * (i + 1) * Math.abs(f1 - f0)) / pasos))
@@ -183,14 +184,18 @@ function casillasDeFlecha(de: string, a: string, ocupada: (casilla: string) => b
  * Los puntos de varias flechas que se ven juntas, en su orden. Cada L de caballo evita, además de las piezas, el camino
  * de las flechas de antes (pase visual de la v1.3: la ruta f3→e5→g6 se encimaba en e5–f5 y se leía como una "T"; la L
  * f3→d4 doblaba sobre la flecha de la dama d1→d4). Las de antes no ven a las de después: una marca que se queda de un
- * paso al siguiente no cambia de forma (pase visual 2).
+ * paso al siguiente no cambia de forma (pase visual 2). La excepción: una L no llega por detrás de la flecha recta que
+ * sale de su casilla (...c5 y ...♘c6: por c7, las dos se leían como una sola línea de c8 a c5). `por`: la esquina que
+ * fija una marca, cuando su camino de siempre pasa sobre la pieza de la que sale otra flecha (6...♘c6 del 4.c3).
  */
-export function puntosDeFlechas(flechas: { de: string; a: string }[], orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false): [number, number][][] {
+export function puntosDeFlechas(flechas: { de: string; a: string; por?: string }[], orientacion: 'white' | 'black', ocupada: (casilla: string) => boolean = () => false): [number, number][][] {
   const usadas = new Set<string>()
-  return flechas.map(({ de, a }) => {
-    const usada = (c: string) => usadas.has(c)
-    const puntos = puntosDeFlecha(de, a, orientacion, ocupada, usada)
-    for (const c of casillasDeFlecha(de, a, ocupada, usada)) usadas.add(c)
+  const atras = (f: { de: string; a: string }) => casilla(f.de.charCodeAt(0) - 97 - Math.sign(f.a.charCodeAt(0) - f.de.charCodeAt(0)), Number(f.de[1]) - Math.sign(Number(f.a[1]) - Number(f.de[1])))
+  return flechas.map(({ de, a, por }) => {
+    const siguen = new Set(flechas.filter((f) => f.de === a && !esSaltoDeCaballo(f.de, f.a)).map(atras))
+    const usada = (c: string) => usadas.has(c) || siguen.has(c)
+    const puntos = puntosDeFlecha(de, a, orientacion, ocupada, usada, por)
+    for (const c of casillasDeFlecha(de, a, ocupada, usada, por)) usadas.add(c)
     return puntos
   })
 }

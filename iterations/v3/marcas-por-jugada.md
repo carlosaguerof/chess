@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 46 de 140.** Más 47 frases del plan y del paso a paso.
+**Jugadas con marcas: 49 de 140.** Más 82 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -23,7 +23,7 @@
 | 5.Ae2 | Avance: 4.c3 | del rival | no |  |
 | 5...c5 | Avance: 4.c3 | tuya | no |  |
 | 6.Cf3 | Avance: 4.c3 | del rival | sí | rival frase 1: flecha f3→d4 (A4, roja) |
-| 6...Cc6 | Avance: 4.c3 | tuya | sí | mía porque frase 1: flecha c6→d4 (A2, verde) |
+| 6...Cc6 | Avance: 4.c3 | tuya | sí | mía porque frase 1: flecha c6→d4 (A2, verde)<br>mía prepara frase 1: flecha d8→b6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | 4.Cc3 | Avance: 4.Cc3 (Van der Wiel) | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
 | 4...e6 | Avance: 4.Cc3 (Van der Wiel) | tuya | no |  |
 | 5.g4 | Avance: 4.Cc3 (Van der Wiel) | del rival | no |  |
@@ -39,7 +39,7 @@
 | 5.Ad3 | Avance: 4.h4 (Tal) | del rival | sí | rival frase 1: flecha d3→f5 (A4, roja) |
 | 5...Axd3 | Avance: 4.h4 (Tal) | tuya | no |  |
 | 6.Dxd3 | Avance: 4.h4 (Tal) | del rival | no |  |
-| 6...e6 | Avance: 4.h4 (Tal) | tuya | no |  |
+| 6...e6 | Avance: 4.h4 (Tal) | tuya | sí | mía prepara frase 1: flecha c6→c5 (A3, verde, punteada); flecha b8→c6 (A3, verde, punteada) |
 | 4.g4 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
 | 4...Ae4 | Avance: 4.g4 (Bayoneta) | tuya | sí | mía porque frase 1: flecha e4→h1 (A2, verde) |
 | 5.f3 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
@@ -47,7 +47,7 @@
 | 6.e6 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
 | 6...Dd6 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
 | 7.exf7+ | Avance: 4.g4 (Bayoneta) | del rival | no |  |
-| 7...Axf7 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
+| 7...Axf7 | Avance: 4.g4 (Bayoneta) | tuya | sí | mía prepara frase 1: flecha b8→d7 (A3, verde, punteada); flecha g8→f6 (A3, verde, punteada) |
 | 4.Ce2 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha e2→g3 (A7, roja, punteada); flecha g3→f5 (A7, roja, punteada) |
 | 4...e6 | Avance: 4.Ce2 (Bronstein) | tuya | no |  |
 | 5.Cg3 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
@@ -67,7 +67,7 @@
 | 9.Ad3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha d3→h7 (A4, roja) |
 | 9...Axd3 | Clásica: 3.Cc3 | tuya | no |  |
 | 10.Dxd3 | Clásica: 3.Cc3 | del rival | no |  |
-| 10...e6 | Clásica: 3.Cc3 | tuya | no |  |
+| 10...e6 | Clásica: 3.Cc3 | tuya | sí | mía prepara frase 1: flecha g8→f6 (A3, verde, punteada); flecha d8→c7 (A3, verde, punteada) |
 | 3.exd5 | Cambio: 3.exd5 | del rival | no |  |
 | 3...cxd5 | Cambio: 3.exd5 | tuya | no |  |
 | 4.Ad3 | Cambio: 3.exd5 | del rival | sí | rival frase 1: casilla f5 (A5, roja); flecha c8→f5 (A5, roja) |
@@ -198,3 +198,38 @@
 | plan panov-acelerado paso a paso, paso 2 | Luego ...e6 o ...g6, y enrocas: tu juego es cómodo. | flecha e7→e6 (A3, verde, punteada); flecha g7→g6 (A3, verde, punteada) |
 | plan hillbilly paso a paso, paso 2 | Desarrollas tu alfil por g7: ...Ag7. | flecha f8→g7 (A3, verde, punteada) |
 | plan hillbilly paso a paso, paso 3 | Y el otro por f5: ...Af5. | flecha c8→f5 (A3, verde, punteada) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5, prepara 0, paso 2 | 6.dxc5: blancas toma tu peón, pero tu alfil de f8 ataca c5. | flecha f8→c5 (A2, verde) |
+| ver de e4 c6 d4 d5 e5 Bf5 c3 e6, cuidado 0, paso 2 | 5.Db3: la dama blanca ataca tu peón de b7. | flecha b3→b7 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5, porque 0, paso 2 | 6.dxc5: blancas cambia en c5, y tu alfil de f8 ataca esa casilla. | flecha f8→c5 (A2, verde) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6, porque 0, paso 2 | 5...Ae4: llevas el alfil a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, porque 0, paso 4 | Tu alfil de g6 se queda sin casillas seguras: g4 cubre f5 y h5, el caballo de c3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja); flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, cuidado 0, paso 4 | 8...Ae4: tu alfil se va a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, cuidado 0, paso 6 | 9...Ch6: sacas el caballo y atacas g4. | flecha h6→g4 (A2, verde) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, errores Nc6, paso 4 | 8...Ae4: tu alfil se va a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, errores Nc6, paso 6 | 9...Ch6: sacas el caballo y atacas g4. | flecha h6→g4 (A2, verde) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5 Nf4 Bh7, prepara 0, paso 3 | 9...Cc6: tu caballo sale y ataca d4. | flecha c6→d4 (A2, verde) |
+| ver de e4 c6 d4 d5 e5 Bf5 h4 h5, porque 0, paso 8 | Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 h4 h5, errores e6, paso 8 | Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 g4 Be4 f3 Bg6 e6 Qd6 exf7+ Bxf7, porque 0, paso 3 | 8.f4: blancas adelanta otro peón: con f5 atacaría a tu alfil de g6. | flecha f4→f5 (A7, roja, punteada) |
+| ver de e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6, cuidado 0, paso 2 | 6.h4: blancas empuja el peón de h: si llega a h5, echa a tu alfil de g6. | flecha h4→h5 (A7, roja, punteada) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, cuidado 0, paso 4 | 7...Af5: tu alfil va a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, cuidado 0, paso 6 | 8...Da5+: tu dama da jaque y ataca al caballo de f5. | flecha a5→f5 (A2, verde) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, errores Nd7, paso 4 | 7...Af5: tu alfil va a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, errores Nd7, paso 6 | 8...Da5+: tu dama da jaque y ataca al caballo de f5. | flecha a5→f5 (A2, verde) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, errores e6, paso 4 | 7...Af5: tu alfil va a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, errores Nf6, paso 4 | 7...Af5: tu alfil va a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6, errores Nf6, paso 6 | 8...Da5+: tu dama da jaque y ataca al caballo de f5. | flecha a5→f5 (A2, verde) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7, cuidado 0, paso 2 | 8...Af5: llevas el alfil a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7, cuidado 0, paso 4 | 9...Da5+: tu dama da jaque y ataca al caballo de f5. | flecha a5→f5 (A2, verde) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7, errores Bf5, paso 2 | 8...Af5: llevas el alfil a f5, donde lo ataca el caballo de g3. | flecha g3→f5 (A4, roja) |
+| ver de e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7, errores Bf5, paso 4 | 9...Da5+: tu dama da jaque y ataca al caballo de f5. | flecha a5→f5 (A2, verde) |
+| ver de e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qd7, cuidado 0, paso 2 | 7...Dc7: tu dama queda en la diagonal del alfil de f4. | flecha f4→c7 (A4, roja) |
+| ver de e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qd7, cuidado 1, paso 2 | 7...e6: no defiendes b7, y la dama de b3 lo ataca. | flecha b3→b7 (A4, roja) |
+| ver de e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qd7, errores Qc7, paso 2 | 7...Dc7: tu dama queda en la diagonal del alfil de f4. | flecha f4→c7 (A4, roja) |
+| ver de e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4 Qb3 Qd7, errores e6, paso 2 | 7...e6: no defiendes b7, y la dama de b3 lo ataca. | flecha b3→b7 (A4, roja) |
+| ver de e4 c6 Nf3 d5 exd5 cxd5 Ne5 e6, cuidado 0, paso 5 | 6.Dh5: la dama y el caballo de e5 atacan f7. | flecha h5→f7 (A4, roja); flecha e5→f7 (A4, roja) |
+| ver de e4 c6 Nf3 d5 exd5 cxd5 Ne5 e6, cuidado 0, paso 6 | 6...Ch6: tu caballo defiende f7. | flecha h6→f7 (A2, verde) |
+| ver de e4 c6 Nf3 d5 exd5 cxd5 Ne5 e6, errores Bf5, paso 5 | 6.Dh5: la dama y el caballo de e5 atacan f7. | flecha h5→f7 (A4, roja); flecha e5→f7 (A4, roja) |
+| ver de e4 c6 Nf3 d5 exd5 cxd5 Ne5 e6, errores Bf5, paso 6 | 6...Ch6: tu caballo defiende f7. | flecha h6→f7 (A2, verde) |
+| ver de e4 c6 c4 d5 exd5 cxd5 cxd5 Nf6, cuidado 0, paso 3 | 5.Cc3: el caballo ataca a tu dama en d5 y blancas gana tiempo. | flecha c3→d5 (A4, roja) |
+| ver de e4 c6 c4 d5 exd5 cxd5 cxd5 Nf6, errores Qxd5, paso 3 | 5.Cc3: el caballo ataca a tu dama en d5 y blancas gana tiempo. | flecha c3→d5 (A4, roja) |
