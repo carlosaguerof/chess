@@ -605,3 +605,19 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** la torre revisó las capturas de la primera vuelta y los dos pases visuales; el ejemplo 5 es el que dibujó Carlos, "así que no es menor". Lo demás de la revisión quedó como estaba (el índice, los ejemplos, S1, las quitadas, las A7 y los tres arreglos de pantalla), incluidas las 4 jugadas de Practicar sin explicación, que la torre le dirá a Carlos.
 - **Quién:** la torre ("Air - chess - torre"), con las reglas v1.3 de Carlos; la corrida de la Air.
 - **Dónde:** `b400573` (las A2, el dibujo y sus pruebas) y `c0af644` (las capturas de la segunda vuelta, desde la 83, en `iterations/v3/capturas/marcas-v1.3/`, con su sección en `indice.md` y `cambios-2.json`). Las reglas: `specs/cursos.md` §2.2. Lo aprendido: `iterations/v3/learning.md` n.º 55 y 56.
+
+## [2026-10-30] corrida | Publicadas las marcas v1.3, Practicar sin pistas, los tres errores de pantalla y S1
+- **Qué:**
+  - La torre revisó dos vueltas de capturas (Chromium) y dijo **"publica"**. En la primera tomó dos decisiones: (1) A, las tres puntas en d4 se quedan; (2) B, lo tuyo desde lejos o saltando entra en esta corrida. También pidió arreglar la punteada de una casilla. La segunda vuelta le pareció bien.
+  - Antes de WebKit (02:53): `/dev/console` de `carlosaguerof`, 50 % de memoria libre, carga 1.63, sin WebKit ni Chromium sobrantes, sin WindowServer nuevo desde el reinicio de las 23:04.
+  - `npm run e2e`, una sola vez, los dos perfiles (02:53:16–03:03:48): **226 pasan, 34 se saltan, ninguna falla** (iPhone en WebKit: 127 pasan y 3 se saltan; escritorio: 99 y 31). Después: 0 renglones de `IOSurface` en `log show --last 30m` y ningún `WindowServer-*.ips` nuevo; 39 % libre.
+  - `npm test`: 235 de 235. Integrado a `main` en `ec90fac` (merge `--no-ff` de `feat/marcas-v1.3` encima de `origin/main` `ad72f10`).
+  - `npm run publicar` → `gh-pages` `08028e5` (03:04:54–03:05:01). A las 03:05:36 la página servía `index-CeANqJK6.js`, el del build.
+  - Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`, en Chromium (escritorio y el iPhone emulado, 390×844, táctil): **25 pasan, 1 se salta** (la del zoom en escritorio). Incluye las pruebas nuevas de la página publicada:
+    - el ejemplo de Carlos, sin la verde de 3...♗f5;
+    - la A7 de 7.h4;
+    - Practicar sin ...e6 después de 3...♗f5;
+    - las coordenadas de la página del curso.
+- **Por qué la comprobación fue en Chromium:** la §5 del prompt pide WebKit una sola vez, y esa vez fue la suite completa, como en las corridas anteriores (`iterations/v3/learning.md` n.º 41).
+- **Quién:** la torre ("publica", 02:52); la corrida de la Air.
+- **Dónde:** `main` `ec90fac`, `gh-pages` `08028e5`. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_marcas-v1.3.md`.
