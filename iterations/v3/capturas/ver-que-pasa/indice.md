@@ -4,7 +4,7 @@
 
 | Captura | Momento | Frase | Marcas |
 |---|---|---|---|
-| 001-pie-ver-y-siguiente-tal.png | La Tal, Aprender, después de 4...h5: el pie | Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes. | — |
+| 001-pie-ver-y-siguiente-tal.png | La Tal, Aprender, después de 4...h5: el pie | Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes. | — |
 | 002-tal-paso-1.png | La Tal, paso 1 de 10 | Regresamos a la posición después de 4.h4. | — |
 | 003-tal-paso-2.png | La Tal, paso 2 de 10 | 4...e6: abres tu alfil de f8, pero dejas avanzar los peones blancos. | — |
 | 004-tal-paso-3.png | La Tal, paso 3 de 10 | 5.g4: un peón ataca a tu alfil. | — |
@@ -49,9 +49,9 @@
 | 043-avance-van-der-wiel-16-prepara-0-primero.png | Avance: 4.♘c3 (Van der Wiel), 8...♗h7, prepara: paso 1 de 5 | Título: Si blancas toma tu peón de h5, tus piezas quedan activas a cambio.<br>Paso: Esta es la posición después de 8...♗h7. | — |
 | 044-avance-van-der-wiel-16-prepara-0-paso-3.png | Avance: 4.♘c3 (Van der Wiel), 8...♗h7, prepara: paso 3 de 5 | Título: Si blancas toma tu peón de h5, tus piezas quedan activas a cambio.<br>Paso: 9...♘c6: tu caballo sale y ataca d4. | c6→d4 (A2) |
 | 045-avance-van-der-wiel-16-prepara-0-ultimo.png | Avance: 4.♘c3 (Van der Wiel), 8...♗h7, prepara: paso 5 de 5 | Título: Si blancas toma tu peón de h5, tus piezas quedan activas a cambio.<br>Paso: 10...♗xc5: tu alfil de f8 retoma y sale. Blancas ganó un peón, pero tus piezas quedan activas y la partida sigue pareja. | — |
-| 046-avance-tal-8-porque-0-primero.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 1 de 10 | Título: Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Regresamos a la posición después de 4.h4. | — |
-| 047-avance-tal-8-porque-0-paso-8.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 8 de 10 | Título: Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | d1→d3 (A4) |
-| 048-avance-tal-8-porque-0-ultimo.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 10 de 10 | Título: Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: 8.♖xh5: la torre lo toma: lo pierdes, y blancas gana una pieza por un peón. | — |
+| 046-avance-tal-8-porque-0-primero.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 1 de 10 | Título: Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Regresamos a la posición después de 4.h4. | — |
+| 047-avance-tal-8-porque-0-paso-8.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 8 de 10 | Título: Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | d1→d3 (A4) |
+| 048-avance-tal-8-porque-0-ultimo.png | Avance: 4.h4 (Tal), 4...h5, porque: paso 10 de 10 | Título: Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: 8.♖xh5: la torre lo toma: lo pierdes, y blancas gana una pieza por un peón. | — |
 | 049-avance-tal-8-errores-e6-primero.png | Avance: 4.h4 (Tal), 4...h5, si juegas 4...e6: paso 1 de 10 | Título: Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Esta es la posición después de 4.h4. | — |
 | 050-avance-tal-8-errores-e6-paso-8.png | Avance: 4.h4 (Tal), 4...h5, si juegas 4...e6: paso 8 de 10 | Título: Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | d1→d3 (A4) |
 | 051-avance-tal-8-errores-e6-ultimo.png | Avance: 4.h4 (Tal), 4...h5, si juegas 4...e6: paso 10 de 10 | Título: Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes.<br>Paso: 8.♖xh5: la torre lo toma: lo pierdes, y blancas gana una pieza por un peón. | — |

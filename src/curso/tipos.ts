@@ -70,7 +70,7 @@ export interface PasoLeer {
  * el último paso dice la consecuencia. Va junto a su frase, en `ver` y `verErrores` de la jugada mía (`src/curso/ver.ts`).
  */
 export interface VerQuePasa {
-  /** la frase habla de la posición de antes de mi jugada ("Si juegas ...e6 ahora"); si no, de la de después */
+  /** la frase habla de la posición de antes de mi jugada ("Con ...e6 en vez de ...h5"); si no, de la de después */
   antes?: boolean
   pasos: PasoLeer[]
 }

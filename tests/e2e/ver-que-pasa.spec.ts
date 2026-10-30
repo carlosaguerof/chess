@@ -114,7 +114,7 @@ test.describe('V1 · "Ver qué pasa"', () => {
     const antes = await page.getByTestId('narracion').innerText()
 
     await page.getByTestId('ver-que-pasa').click()
-    await expect(tituloDe(page)).toHaveText(fig('Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.'))
+    await expect(tituloDe(page)).toHaveText(fig('Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.'))
     await expect(page.getByTestId('tablero-paso-a-paso')).toHaveAttribute('data-fen', posicion(tal.jugadas, 7).fen())
     await expect(fraseDe(page)).toHaveText(fig('Regresamos a la posición después de 4.h4.'))
     await expect(amarillas(page), 'la última jugada, en amarillo').toHaveCount(2)
@@ -148,7 +148,7 @@ test.describe('V1 · "Ver qué pasa"', () => {
 
   test('en Practicar, la frase oculta no trae "Ver": "Siguiente" va solo, a la derecha', async ({ page }, info) => {
     await despuesDe(page, info, TAL, 'practicar', 7)
-    await expect(page.getByTestId('narracion')).not.toContainText('Si juegas')
+    await expect(page.getByTestId('narracion')).not.toContainText('Con ...e6 en vez de')
     await expect(page.getByTestId('ver-que-pasa')).toHaveCount(0)
     expect((await orillas(page, 'siguiente')).derecha).toBe(0)
   })
@@ -295,7 +295,7 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
   // 1. el pie con "Ver qué pasa" y "Siguiente"
   const tal = lineaPorId(c, TAL)!
   await despuesDe(page, info, TAL, 'aprender', 7)
-  await foto('pie-ver-y-siguiente-tal', { momento: 'La Tal, Aprender, después de 4...h5: el pie', frase: fig('Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.') })
+  await foto('pie-ver-y-siguiente-tal', { momento: 'La Tal, Aprender, después de 4...h5: el pie', frase: fig('Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.') })
 
   // 2. cada paso del ejemplo de la Tal
   const vTal = verDespues(c, tal, 'aprender', 7)!

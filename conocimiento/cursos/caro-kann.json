@@ -4476,7 +4476,7 @@
       "pregunta": "Blancas empujó h4 contra tu alfil. ¿Qué haces antes que nada?",
       "pista": "Frena ese peón antes de que siga avanzando.",
       "hace": "Frenas el peón de h: ya no puede llegar a h5.",
-      "porque": "Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.",
+      "porque": "Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.",
       "prepara": "Ahora sí puedes seguir con ...e6.",
       "marcas": [
         {

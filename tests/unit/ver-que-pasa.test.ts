@@ -59,7 +59,7 @@ describe('"Ver qué pasa" · los datos', () => {
       // si habla de antes de mi jugada, el tablero regresa, y lo dice (con un error a la vista no regresa: no se hizo)
       expect(p.frase, donde(v)).toBe(`${v.ver.antes && v.campo !== 'errores' ? 'Regresamos a' : 'Esta es'} la posición después de ${esperada}.`.replace('Esta es la', 'Esta es la'))
     }
-    // las de `errores` hablan de antes de mi jugada; "Si juegas ...e6 ahora", también
+    // las de `errores` hablan de antes de mi jugada; "Con ...e6 en vez de ...h5", también
     for (const v of TODOS.filter((x) => x.campo === 'errores')) expect(v.ver.antes, donde(v)).toBe(true)
   })
 
@@ -129,7 +129,7 @@ describe('"Ver qué pasa" · los datos', () => {
   })
 
   it('tiene la línea de la Tal que Carlos no veía: 4...e6 5.g4 ...Ae4 6.f3 ...Ag6 7.h5, igual que el «¿Y si…?», y juega la pérdida', () => {
-    const v = TODOS.find((x) => x.frase.startsWith('Si juegas ...e6 ahora'))!
+    const v = TODOS.find((x) => x.frase.startsWith('Con ...e6 en vez de ...h5'))!
     expect(v.ver.antes).toBe(true)
     expect(v.inicio).toEqual(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'])
     expect(v.ver.pasos.flatMap((p) => p.jugadas ?? [])).toEqual([...c.piezas.errores.lista.find((e) => e.id === 'tal-e6')!.jugadas.slice(7), 'Bxh5', 'Rxh5'])
@@ -161,7 +161,7 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
   it('"sin casillas": todas las casillas del alfil de g6 están atacadas', () => {
     for (const [f, e4] of [
       ['Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas.', 'c3'],
-      ['Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.', 'f3'],
+      ['Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.', 'f3'],
     ] as const) {
       const ch = enPaso(f, 'Tu alfil')
       expect(ch.get('g6'), f).toEqual({ type: 'b', color: 'b' })
@@ -172,7 +172,7 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
   })
 
   it('"lo pierdes": al final de la Tal ya no está tu alfil, y blancas tiene una pieza por un peón', () => {
-    const ch = final('Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.')
+    const ch = final('Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.')
     expect(ch.findPiece({ type: 'b', color: 'b' })).toEqual(['f8'])
     const valor = (color: 'w' | 'b') => ch.board().flat().filter((p) => p?.color === color).reduce((s, p) => s + { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 }[p!.type], 0)
     expect(valor('w') - valor('b')).toBe(2)
@@ -263,7 +263,7 @@ describe('"Ver qué pasa" · en la lección', () => {
       }
     // el caso de Carlos, en la Tal: la frase de ...e6 no se muestra en Practicar, y por eso no hay botón
     const tal = linea('v:avance-tal')
-    expect(verDespues(c, tal, 'aprender', 7)?.titulo).toContain('Si juegas ...e6 ahora')
+    expect(verDespues(c, tal, 'aprender', 7)?.titulo).toContain('Con ...e6 en vez de ...h5')
     expect(verDespues(c, tal, 'practicar', 7)).toBeNull()
   })
 

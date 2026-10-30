@@ -159,7 +159,7 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 
 ## 2.3 "Ver qué pasa" (Carlos, 2026-10-30)
 
-"Lo leo y no lo veo": "Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes." Para el principiante, una frase de "¿y si…?" no se imagina: **se ve en el tablero, con el botón "Ver qué pasa", en la misma ventana del "Ver paso a paso"** (§2.1). Por ahora solo en la Caro-Kann; los otros siete cursos salen así.
+"Lo leo y no lo veo": "Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes." (Hoy dice "Con ...e6 en vez de ...h5, siguen…": chocaba con "Ahora sí puedes seguir con ...e6", la frase de abajo.) Para el principiante, una frase de "¿y si…?" no se imagina: **se ve en el tablero, con el botón "Ver qué pasa", en la misma ventana del "Ver paso a paso"** (§2.1). Por ahora solo en la Caro-Kann; los otros siete cursos salen así.
 
 **Qué frases lo llevan.** Toda frase de la explicación de una jugada mía que describe **una alternativa con su consecuencia en el tablero**: qué pasa si juego otra cosa, si juego algo antes de tiempo, o si el rival hace algo distinto. Entran `porque`, `prepara`, `cuidado` y las explicaciones de `errores`. `hace` no: es "Te toca", antes de jugar. No lo llevan:
 - lo que explica la jugada que ya está en la línea, sin una alternativa ("Ese caballo es el que vigila d5");
@@ -172,7 +172,7 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 **El botón y la ventana.**
 1. **En el pie, "Ver qué pasa" (secundario) a la izquierda y el principal a la derecha** (`dos-botones`, como en el plan). Sale después de jugar, con "Siguiente", y con una equivocada conocida, con "Reintentar".
 2. **El título es la frase** (en letra de 15 px: es entera y la ventana tiene que caber a 375×667; si no cabe, se desliza por dentro).
-3. **El primer paso es la posición de la que habla la frase,** sin mover nada, con su última jugada en amarillo. Si la frase habla de otra jugada en mi lugar ("Si juegas ...e6 ahora"), es la de antes de la mía (`antes: true`), y como el tablero regresa, lo dice: "Regresamos a la posición después de 4.h4."; con un error a la vista no regresa ("Esta es la posición…"), porque la jugada no se hizo. Si habla de lo que sigue, es la de después ("Esta es la posición…").
+3. **El primer paso es la posición de la que habla la frase,** sin mover nada, con su última jugada en amarillo. Si la frase habla de otra jugada en mi lugar ("Con ...e6 en vez de ...h5"), es la de antes de la mía (`antes: true`), y como el tablero regresa, lo dice: "Regresamos a la posición después de 4.h4."; con un error a la vista no regresa ("Esta es la posición…"), porque la jugada no se hizo. Si habla de lo que sigue, es la de después ("Esta es la posición…").
 4. **Un paso por jugada,** con una frase corta que diga qué hace, y **el último dice la consecuencia** (en el mismo paso de la última jugada o en uno sin jugada). Atrás, Siguiente y "Salir", como en §2.1.
    - **La consecuencia se enseña, no se cuenta** (pase visual): si la frase dice "lo pierdes", la línea juega la pérdida (la Tal sigue con 7...♗xh5 8.♖xh5), y si dice "sin casillas", el paso dice quién cubre cada una, con las marcas que quepan (lo pegado no lleva marca: R8).
    - **Se cierra con lo que se ve:** "tu dama se mueve otra vez y tus demás piezas siguen en casa", no "el motor lo ve peor". "El motor" se queda donde la frase habla de una ventaja que no se ve en el tablero ("casi un peón").
