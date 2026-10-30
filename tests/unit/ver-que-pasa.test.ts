@@ -11,7 +11,7 @@ import { frasesDelCurso, listaDelInventario, llaveDe, RAZONES, sinVer } from '..
 import type { LineaCurso } from '../../src/curso/tipos.ts'
 
 /**
- * "Ver qué pasa" (Carlos, 2026-10-30): sobre los datos de todo el curso. Las marcas de los pasos entran a las reglas R1 a
+ * "Ver qué pasaría" (Carlos, 2026-10-30): sobre los datos de todo el curso. Las marcas de los pasos entran a las reglas R1 a
  * R8 por `ligadas` (`tests/unit/correcciones-marcas.test.ts`). Las consecuencias que dice el motor, con sus comandos, en
  * `iterations/v3/comprobaciones-del-curso.md`; aquí, las que se miden con chess.js.
  */
@@ -37,7 +37,7 @@ function jugadasHechas(fen: string, jugadas: string[]) {
   return r
 }
 
-describe('"Ver qué pasa" · los datos', () => {
+describe('"Ver qué pasaría" · los datos', () => {
   it('cada línea es legal (chess.js): se juegan las jugadas de los dos lados, sin saltarse el turno', () => {
     expect(TODOS).toHaveLength(43)
     for (const v of TODOS) {
@@ -137,7 +137,7 @@ describe('"Ver qué pasa" · los datos', () => {
   })
 })
 
-describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess.js)', () => {
+describe('"Ver qué pasaría" · las consecuencias que se miden en el tablero (chess.js)', () => {
   const final = (frase: string) => new Chess(fotos(TODOS.find((v) => v.frase === frase)!).at(-1)!.fen)
   /** La posición del paso cuya frase empieza con `inicio`. */
   const enPaso = (frase: string, inicio: string) => {
@@ -215,7 +215,7 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
   })
 })
 
-describe('"Ver qué pasa" · en la lección', () => {
+describe('"Ver qué pasaría" · en la lección', () => {
   /** Las jugadas mías que la línea me va a pedir desde `desde`, como pieza y casilla (otra cuenta que la del código). */
   function pedidas(l: LineaCurso, desde: number) {
     return misJugadas(l)

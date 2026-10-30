@@ -7,7 +7,7 @@ import { frasesDe, posicion } from './textos.ts'
 import type { DatosCurso, LineaCurso, PasoAPaso, PasoLeer, VerQuePasa } from './tipos.ts'
 
 /**
- * "Ver qué pasa" (Carlos, 2026-10-30), sin pantalla: qué ventana abre el botón en cada momento de la lección.
+ * "Ver qué pasaría" (Carlos, 2026-10-30), sin pantalla: qué ventana abre el botón en cada momento de la lección.
  * - **Sale con las frases que se muestran:** las que Practicar oculta por adelantar una jugada no traen botón.
  * - **En Practicar** tampoco va si la línea del "Ver" (sus jugadas, sus flechas verdes o su texto) contiene una jugada
  *   mía que la línea todavía me va a pedir, con la misma pieza y a la misma casilla: sería darme la respuesta. Con un
@@ -17,7 +17,7 @@ import type { DatosCurso, LineaCurso, PasoAPaso, PasoLeer, VerQuePasa } from './
  *   segunda vuelve a su posición (`reinicio`), salvo que siga la línea de la primera: entonces continúa desde ahí.
  */
 
-/** Una frase con su "Ver qué pasa", y la posición de la que habla. */
+/** Una frase con su "Ver qué pasaría", y la posición de la que habla. */
 export interface FraseConVer {
   clave: string
   /** el campo de la jugada, o `errores` */
@@ -29,7 +29,7 @@ export interface FraseConVer {
   inicio: string[]
 }
 
-/** Todos los "Ver qué pasa" de un curso, con su frase: para las pruebas, el inventario y la lista de marcas. */
+/** Todos los "Ver qué pasaría" de un curso, con su frase: para las pruebas, el inventario y la lista de marcas. */
 export function todosLosVer(c: DatosCurso): FraseConVer[] {
   const r: FraseConVer[] = []
   for (const [clave, m] of Object.entries(c.mias)) {
@@ -122,7 +122,7 @@ function juntar(l: LineaCurso, ply: number, frases: Pick<FraseConVer, 'frase' | 
 
 const enPracticar = (l: LineaCurso, vuelta: Vuelta) => vuelta === 'practicar' && l.tipo === 'variante'
 
-/** El "Ver qué pasa" de la explicación de después de mi jugada `ply`, si la frases que se muestran lo traen. */
+/** El "Ver qué pasaría" de la explicación de después de mi jugada `ply`, si la frases que se muestran lo traen. */
 export function verDespues(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: number): VerDelMomento | null {
   const m = textoMio(c, l.jugadas, ply)
   if (!m?.ver) return null
@@ -137,7 +137,7 @@ export function verDespues(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: nu
   return juntar(l, ply, frases)
 }
 
-/** El "Ver qué pasa" de una equivocada conocida (`errores`). Mi jugada sigue pendiente, así que también cuenta esa. */
+/** El "Ver qué pasaría" de una equivocada conocida (`errores`). Mi jugada sigue pendiente, así que también cuenta esa. */
 export function verDelError(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: number, san: string): VerDelMomento | null {
   const m = textoMio(c, l.jugadas, ply)
   const ver = m?.verErrores?.[san]

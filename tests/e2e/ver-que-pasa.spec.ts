@@ -11,7 +11,7 @@ import { jugar, tocar } from './_util.ts'
 
 /**
  * El pie de la narración (2026-10-30, Carlos en su iPhone: "Siguiente debería ir a la derecha, no a la izquierda"): la
- * acción principal va a la derecha, sola o con una secundaria a su izquierda. Y "Ver qué pasa" (Carlos: "lo leo y no lo
+ * acción principal va a la derecha, sola o con una secundaria a su izquierda. Y "Ver qué pasaría" (Carlos: "lo leo y no lo
  * veo"): la frase de una alternativa, en el tablero, con la ventana del paso a paso. Las capturas para la torre
  * (`--grep @capturas-ver`), en iterations/v3/capturas/ver-que-pasa/<perfil>/, con su índice.
  */
@@ -48,6 +48,27 @@ async function orillas(page: Page, id: string) {
     const r = b.getBoundingClientRect()
     const pie = b.closest('.narracion-pie')!.getBoundingClientRect()
     return { derecha: Math.round(pie.right - r.right), izquierda: Math.round(r.left - pie.left) }
+  })
+}
+
+/** Cuánto mide el nombre de "Ver qué pasaría" y cuánto le da su botón. `largoSeDesborda`: la misma medida, con un nombre que no cabe. */
+async function medirNombre(page: Page) {
+  return page.getByTestId('ver-que-pasa').evaluate((b) => {
+    const rango = document.createRange()
+    rango.selectNodeContents(b)
+    const estilo = getComputedStyle(b)
+    const medida = {
+      texto: rango.getBoundingClientRect().width,
+      adentro: b.clientWidth - parseFloat(estilo.paddingLeft) - parseFloat(estilo.paddingRight),
+      scrollWidth: b.scrollWidth,
+      clientWidth: b.clientWidth,
+    }
+    const nombre = b.firstChild!
+    const antes = nombre.nodeValue
+    nombre.nodeValue = 'Ver qué pasaría en esta posición si jugaras otra cosa'
+    const largoSeDesborda = b.scrollWidth > b.clientWidth
+    nombre.nodeValue = antes
+    return { ...medida, largoSeDesborda }
   })
 }
 
@@ -104,12 +125,13 @@ async function recorrer(page: Page, v: VerDelMomento) {
   }
 }
 
-test.describe('V1 · "Ver qué pasa"', () => {
+test.describe('V1 · "Ver qué pasaría"', () => {
   const tal = lineaPorId(c, TAL)!
 
   test('en la Tal, después de 4...h5: abre en la posición de después de 4.h4, recorre 4...e6 a 7.h5 y dice la consecuencia; al salir, la lección sigue igual', async ({ page }, info) => {
     await despuesDe(page, info, TAL, 'aprender', 7)
-    expect((await orillas(page, 'ver-que-pasa')).izquierda, '"Ver qué pasa", a la izquierda').toBe(0)
+    await expect(page.getByTestId('ver-que-pasa')).toHaveText('Ver qué pasaría')
+    expect((await orillas(page, 'ver-que-pasa')).izquierda, '"Ver qué pasaría", a la izquierda').toBe(0)
     expect((await orillas(page, 'siguiente')).derecha, '"Siguiente", a la derecha').toBe(0)
     const antes = await page.getByTestId('narracion').innerText()
 
@@ -165,7 +187,7 @@ test.describe('V1 · "Ver qué pasa"', () => {
     await expect(page.getByTestId('resumen-tropiezos')).toContainText('Sin errores ni ayuda en Practicar.')
   })
 
-  test('con una equivocada conocida: "Ver qué pasa" y "Reintentar"; al salir, el error sigue a la vista; en Practicar, solo si no adelanta', async ({ page }, info) => {
+  test('con una equivocada conocida: "Ver qué pasaría" y "Reintentar"; al salir, el error sigue a la vista; en Practicar, solo si no adelanta', async ({ page }, info) => {
     // 4...h6 en la Tal: el "Ver" no contiene ...h5
     await abrirEn(page, TAL, 'practicar', 7)
     await momento(page, 'tuTurno')
@@ -264,6 +286,38 @@ test.describe('V1 · "Ver qué pasa"', () => {
         expect(dos.boton, 'con dos frases, Siguiente a la vista').toBeLessThanOrEqual(dos.alto)
       })
     })
+
+  // el botón mide la mitad del pie y no parte el renglón (`nowrap`): un nombre largo se saldría sin que nada fallara
+  for (const p of [
+    { ancho: 390, alto: 844 },
+    { ancho: 375, alto: 667 },
+  ])
+    test.describe(`el nombre, a ${p.ancho}×${p.alto}`, () => {
+      test.use({ viewport: { width: p.ancho, height: p.alto } })
+
+      test('cabe entero en el botón, con "Siguiente" y con "Reintentar"', async ({ page }, info) => {
+        const medidas: Record<string, Awaited<ReturnType<typeof medirNombre>>> = {}
+        await despuesDe(page, info, TAL, 'aprender', 7)
+        await expect(page.getByTestId('siguiente')).toBeVisible()
+        medidas.siguiente = await medirNombre(page)
+
+        await abrirEn(page, TAL, 'practicar', 7)
+        await momento(page, 'tuTurno')
+        await tocar(page, info, 'h7')
+        await tocar(page, info, 'h6')
+        await momento(page, 'error')
+        await expect(page.getByTestId('reintentar')).toBeVisible()
+        medidas.reintentar = await medirNombre(page)
+
+        // en el artefacto de `pruebas.yml`: así se sabe qué tan bien cabe en WebKit, que en la Air no corre
+        writeFileSync(info.outputPath('medidas.json'), JSON.stringify({ perfil: info.project.name, ...p, ...medidas }, null, 2))
+        for (const [con, m] of Object.entries(medidas)) {
+          expect(m.scrollWidth, `con "${con}", el botón no se desborda`).toBeLessThanOrEqual(m.clientWidth)
+          expect(m.texto, `con "${con}", el texto no pisa el relleno`).toBeLessThanOrEqual(m.adentro)
+          expect(m.largoSeDesborda, 'la medida sí ve un nombre que no cabe').toBe(true)
+        }
+      })
+    })
 })
 
 // ---------------------------------------------------------------- las capturas para la torre
@@ -292,7 +346,7 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
     return r.join('; ')
   }
 
-  // 1. el pie con "Ver qué pasa" y "Siguiente"
+  // 1. el pie con "Ver qué pasaría" y "Siguiente"
   const tal = lineaPorId(c, TAL)!
   await despuesDe(page, info, TAL, 'aprender', 7)
   await foto('pie-ver-y-siguiente-tal', { momento: 'La Tal, Aprender, después de 4...h5: el pie', frase: fig('Con ...e6 en vez de ...h5, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.') })
@@ -358,7 +412,7 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
   await momento(page, 'intro')
   await foto('empezar-solo-clasica', { momento: 'La Clásica, la introducción', frase: lineaPorId(c, 'v:clasica')!.intro })
 
-  // 6. Practicar y el error: el pie con y sin "Ver", y "Ver qué pasa" con "Reintentar"
+  // 6. Practicar y el error: el pie con y sin "Ver", y "Ver qué pasaría" con "Reintentar"
   await despuesDe(page, info, TAL, 'practicar', 7)
   await foto('practicar-tal-sin-ver', { momento: 'La Tal, Practicar, después de 4...h5: la frase oculta no trae "Ver"', frase: explicacionDespues(c, tal, 'practicar', 7).map(fig).join('<br>') })
   await despuesDe(page, info, 'v:avance-bayoneta', 'practicar', 13)
@@ -368,7 +422,7 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
   await tocar(page, info, 'h7')
   await tocar(page, info, 'h6')
   await momento(page, 'error')
-  await foto('practicar-error-con-ver-y-reintentar', { momento: 'La Tal, Practicar, si juegas 4...h6: "Ver qué pasa" y "Reintentar"', frase: fig(c.mias['e4 c6 d4 d5 e5 Bf5 h4 h5']!.errores!.h6!) })
+  await foto('practicar-error-con-ver-y-reintentar', { momento: 'La Tal, Practicar, si juegas 4...h6: "Ver qué pasaría" y "Reintentar"', frase: fig(c.mias['e4 c6 d4 d5 e5 Bf5 h4 h5']!.errores!.h6!) })
 
   // 7. en la pantalla más chica, la ventana con la frase más larga
   if (isMobile) {
@@ -386,9 +440,9 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
     writeFileSync(
       `${CARPETA}/indice.md`,
       [
-        '# Las capturas de "Ver qué pasa" (2026-10-30)',
+        '# Las capturas de "Ver qué pasaría" (2026-10-30)',
         '',
-        '> Generado por `tests/e2e/ver-que-pasa.spec.ts` (`--grep @capturas-ver`). Las mismas en `iphone/` (Chromium emulando el iPhone 16 Pro, 402×874, táctil) y `escritorio/` (Chromium, 1440×900). Primero el pie y cada paso del ejemplo de la Tal; después, el primero y el último paso de cada "Ver qué pasa"; al final, las frases "Siguen…" con sus marcas, "Siguiente" y "Empezar" solos. Las líneas completas, en `iterations/v3/ver-que-pasa-inventario.md`.',
+        '> Generado por `tests/e2e/ver-que-pasa.spec.ts` (`--grep @capturas-ver`). Las mismas en `iphone/` (Chromium emulando el iPhone 16 Pro, 402×874, táctil) y `escritorio/` (Chromium, 1440×900). Primero el pie y cada paso del ejemplo de la Tal; después, el primero y el último paso de cada "Ver qué pasaría"; al final, las frases "Siguen…" con sus marcas, "Siguiente" y "Empezar" solos. Las líneas completas, en `iterations/v3/ver-que-pasa-inventario.md`.',
         '',
         '| Captura | Momento | Frase | Marcas |',
         '|---|---|---|---|',

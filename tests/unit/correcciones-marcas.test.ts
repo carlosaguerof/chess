@@ -438,7 +438,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
   })
 
-  it('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasa"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
+  it('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasaría"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
     const tablero = (l: LineaCurso, ply: number) => posicion(l.jugadas, ply + 1)
     const rutasDe = (id: string, ply: number) => {
       const l = lineaPorId(c, id)!
