@@ -196,7 +196,8 @@ test.describe('C3 · la lección nueva', () => {
     await expect(leccion(page)).toHaveAttribute('data-ply', '7')
     await expect(leccion(page)).toHaveAttribute('data-vuelta', 'aprender')
     await page.goto('/#/curso/caro-kann%3Ab')
-    await expect(page.getByTestId('empezar-curso')).toContainText('Seguir: Avance: 4.h4 (Tal)')
+    await expect(page.getByTestId('empezar-curso')).toContainText('Seguir')
+    await expect(page.getByTestId('seguir-nombre')).toHaveText('Avance: 4.h4 (Tal)')
     await expect(page.getByTestId('paso-v:avance-tal')).toHaveAttribute('data-estado', 'pendiente')
   })
 
