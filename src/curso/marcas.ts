@@ -1,12 +1,14 @@
 import type { DatosCurso, LineaCurso, Marca, MarcasPorFrase, PasoAPaso } from './tipos.ts'
 import type { EstadoCiclo } from './ciclo.ts'
-import { textoMio, textoRival } from './datos.ts'
-import { posicion } from './textos.ts'
+import { textoRival } from './datos.ts'
+import { frasesDe, posicion } from './textos.ts'
+import { frasesDespues, marcaAdelanta } from './adelantar.ts'
 
 /**
- * Las marcas en el tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.1, aprobadas por Carlos el
- * 2026-10-29), sin pantalla: qué se ve en cada momento y cómo se dibuja. Cada marca nace de su frase (`tipo` A1–A6) y
- * aparece junto con ella; las de una misma jugada se acumulan, hasta cuatro, y el tablero se limpia en la siguiente.
+ * Las marcas en el tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3, 2026-10-30), sin pantalla:
+ * qué se ve en cada momento y cómo se dibuja. Cada marca nace de su frase (`tipo` A1–A7) y aparece junto con ella; las
+ * de una misma jugada se acumulan, hasta cuatro, y el tablero se limpia en la siguiente. Antes de tu jugada, solo lo
+ * del rival; después, lo tuyo. Lo pegado no se marca, salvo la casilla vacía que te quitan (A5).
  */
 
 // ---------------------------------------------------------------- el interruptor interno
@@ -26,10 +28,8 @@ export function marcasNuevas(): boolean {
 }
 
 // ---------------------------------------------------------------- las frases de un texto
-/** Corta un texto en frases: donde un punto va seguido de espacio y mayúscula ("1...c6" y "3.Cd2" no cortan). */
-export function frasesDe(texto: string): string[] {
-  return texto.split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑ¿«])/).filter(Boolean)
-}
+/** Corta un texto en frases (vive en textos.ts: lo usa también la explicación de Practicar). */
+export { frasesDe }
 
 const todas = (m?: MarcasPorFrase): Marca[] => (m ?? []).flat()
 const igual = (x: Marca, y: Marca) => x.de === y.de && x.a === y.a && x.en === y.en
@@ -49,26 +49,27 @@ function rivalAntes(l: LineaCurso, ply: number): number | null {
 }
 
 /**
- * Lo que se ve en el tablero en un momento de la lección:
- * - **Aprender**, en mi turno: las marcas de la frase del rival y las de "Te toca" (la A1 de las jugadas clave, con lo
- *   que dice la frase). Pista: nada; Otra pista: se ilumina la pieza (salvo que su flecha ya se vea); Respuesta: la A1.
+ * Lo que se ve en el tablero en un momento de la lección (reglas v1.3: lo del rival antes de tu jugada, lo tuyo después):
+ * - **Aprender**, en mi turno: solo lo del rival, las marcas de su frase. "Te toca" no lleva marcas mías: la A1 sale solo
+ *   con la Respuesta (o con "Flechas de la siguiente jugada", si las prendí en Ajustes). Pista: nada; Otra pista: se
+ *   ilumina la pieza (salvo que su flecha ya se vea); Respuesta: la A1.
  * - **Practicar** y los «¿Y si…?», en mi turno: nada. Otra pista: la pieza; Respuesta: la A1 (R7).
- * - Después de mi jugada: las de su explicación (en Practicar también las de "qué hace", sin la A1: ya la enseña el
- *   amarillo de la última jugada).
- * - El plan: las de su frase y la del rival. El error, la flecha roja de lo que jugué; la buena de otra línea, la verde.
+ * - Después de mi jugada: las de su explicación, frase por frase (en Practicar también las de "qué hace", y sin las de
+ *   las frases que no se muestran porque adelantan una jugada; `frasesDespues`).
+ * - Mientras dura la línea, ninguna flecha apunta a una jugada mía que viene más adelante (R7, `marcaAdelanta`).
+ * - El plan: las de su frase y la del rival (la línea ya terminó). El error, la flecha roja de lo que jugué; la buena de
+ *   otra línea, la verde.
  */
 export function marcasDelMomento(c: DatosCurso, l: LineaCurso, e: EstadoCiclo, opciones: { flechasSiguiente?: boolean } = {}): Marca[] {
-  const practicar = e.vuelta === 'practicar' && l.tipo === 'variante'
   const aprender = e.vuelta === 'aprender' && l.tipo === 'variante'
   const r: Marca[] = []
   if (e.momento === 'tuTurno' && l.jugadas[e.ply]) {
-    const mia = textoMio(c, l.jugadas, e.ply)
     const a1 = flechaDe(l, e.ply)
     // en un «¿Y si…?» tampoco: se pregunta por la jugada que castiga, y una flecha la insinuaría (pase visual 1)
     if (aprender) {
       const p = rivalAntes(l, e.ply)
-      if (p !== null) r.push(...todas(textoRival(c, l.jugadas, p)?.marcas))
-      r.push(...todas(mia?.marcasDe?.hace))
+      // antes de tu jugada, solo lo del rival (v1.3, R7): rojo, y nada que adelante una jugada mía
+      if (p !== null) r.push(...todas(textoRival(c, l.jugadas, p)?.marcas).filter((m) => m.color === 'rojo' && !marcaAdelanta(l, e.ply, m)))
       if (opciones.flechasSiguiente) r.push(a1)
     }
     const flechaVisible = r.some((m) => m.de === a1.de && m.a === a1.a)
@@ -77,9 +78,9 @@ export function marcasDelMomento(c: DatosCurso, l: LineaCurso, e: EstadoCiclo, o
   } else if ((e.momento === 'error' || e.momento === 'buena') && e.intento) {
     r.push({ de: e.intento.desde, a: e.intento.hasta, color: e.momento === 'error' ? 'rojo' : 'verde' })
   } else if (e.momento === 'leer' && e.ultima !== null) {
-    const de = textoMio(c, l.jugadas, e.ultima)?.marcasDe
-    if (practicar) r.push(...todas(de?.hace).filter((m) => m.tipo !== 'A1'))
-    r.push(...todas(de?.porque), ...todas(de?.prepara), ...todas(de?.cuidado))
+    // la A1 no va: la jugada ya la enseña el amarillo de la última jugada
+    const ultima = e.ultima
+    r.push(...frasesDespues(c, l, e.vuelta, ultima).flatMap((f) => f.marcas).filter((m) => m.tipo !== 'A1' && !marcaAdelanta(l, ultima + 1, m)))
   } else if (e.momento === 'plan' && l.variante) {
     r.push(...todas(l.variante.plan.marcasDe?.tuyo), ...todas(l.variante.plan.marcasDe?.rival))
   }

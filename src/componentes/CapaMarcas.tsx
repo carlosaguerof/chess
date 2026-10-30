@@ -2,9 +2,10 @@ import type { Marca } from '../curso/tipos.ts'
 import { centro, colorDe, puntosDeFlecha } from '../curso/marcas.ts'
 
 /**
- * Las marcas encima del tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.1): un dibujo propio, porque
- * el de chessground no hace flechas punteadas ni en L. Flecha: de la pieza a la casilla, sólida (ahora) o punteada (un
- * plan); la del caballo, en L. Casilla: iluminada. Solo verde y rojo. No se puede tocar: las jugadas pasan por debajo.
+ * Las marcas encima del tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3): un dibujo propio, porque
+ * el de chessground no hace flechas punteadas ni en L. Flecha: de la pieza a la casilla, sólida (ahora) o punteada
+ * ("después": tu plan en verde, A3; el plan o la amenaza del rival en rojo, A7, una flecha por paso); la del caballo,
+ * en L. Casilla: iluminada. Solo verde y rojo. No se puede tocar: las jugadas pasan por debajo.
  */
 const GRUESO = 0.16
 const PUNTA = 0.42
@@ -40,7 +41,7 @@ function Flecha({ m, orientacion, ocupada, escala }: { m: Marca; orientacion: 'w
   const trazo = linea.map((p) => p.join(',')).join(' ')
   const abierta = [triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')
   return (
-    <g data-marca="flecha" data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-puntos={puntos.length} opacity={escala > 1 ? 0.9 : 0.82}>
+    <g data-marca="flecha" data-tipo={m.tipo} data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-puntos={puntos.length} opacity={escala > 1 ? 0.9 : 0.82}>
       {/* en un tablero chico, un borde claro debajo: la flecha se distingue también sobre el amarillo de la última jugada */}
       {escala > 1 && (
         <g stroke="#f4f4e6" strokeOpacity={0.75} fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -62,7 +63,7 @@ function Casilla({ m, orientacion }: { m: Marca; orientacion: 'white' | 'black' 
   const [x, y] = centro(m.en!, orientacion)
   const color = colorDe(m)
   return (
-    <g data-marca="casilla" data-en={m.en} data-color={m.color ?? 'verde'}>
+    <g data-marca="casilla" data-tipo={m.tipo} data-en={m.en} data-color={m.color ?? 'verde'}>
       <rect x={x - 0.44} y={y - 0.44} width={0.88} height={0.88} rx={0.06} fill={color} fillOpacity={0.32} stroke={color} strokeWidth={0.12} />
     </g>
   )

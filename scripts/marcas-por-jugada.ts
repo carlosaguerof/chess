@@ -1,9 +1,9 @@
-// Las marcas del curso, frase por frase (correcciones de la Caro-Kann, C5; reglas de las marcas v1.1).
+// Las marcas del curso, frase por frase (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3, 2026-10-30).
 //
 //   node scripts/marcas-por-jugada.ts > iterations/v3/marcas-por-jugada.md
 //
 // Junta cada frase que lleva marcas con la posición donde se miden, y lista qué jugadas llevan marcas y cuáles no,
-// para revisar que solo sean las clave (R8). La prueba `tests/unit/correcciones-marcas.test.ts` usa lo mismo.
+// para revisar que solo se marque lo que no se ve solo (R8). La prueba `tests/unit/correcciones-marcas.test.ts` usa lo mismo.
 import { CURSOS_NUEVOS, jugadasDeVariante, lineasDe } from '../src/curso/datos.ts'
 import { fotosDePasos } from '../src/curso/pasos.ts'
 import { frasesDe } from '../src/curso/marcas.ts'
@@ -56,7 +56,6 @@ export function ligadas(c: DatosCurso): Ligada[] {
         const jugada = posicion(l.jugadas, p).move(l.jugadas[p]!)
         const fenAntes = fenDe(l.jugadas.slice(0, p))
         const fenDespues = fenDe(antes)
-        const grupoTuTurno = `tuTurno:${k}`
         const enAprender = l.tipo === 'variante'
         for (const campo of ['hace', 'porque', 'prepara', 'cuidado'] as const) {
           const marcas = t.marcasDe[campo]
@@ -72,9 +71,10 @@ export function ligadas(c: DatosCurso): Ligada[] {
               jugada: { from: jugada.from, to: jugada.to },
               fenAntes,
               mio: color(p),
-              // "hace" se ve en "Te toca" (Aprender) y después de jugar (Practicar, sin la A1); lo demás, después de jugar
-              grupos: campo === 'hace' ? (enAprender ? [grupoTuTurno, `practicar:${k}`] : [grupoTuTurno]) : [`aprender:${k}`, `practicar:${k}`],
-              fenTablero: campo === 'hace' ? fenAntes : fenDespues,
+              // v1.3: "hace" es "Te toca" en Aprender, antes de jugar, y ahí no lleva marcas; se ve después de jugar en
+              // Practicar ("qué hace"). Lo demás, después de jugar en las dos vueltas
+              grupos: campo === 'hace' ? (enAprender ? [`practicar:${k}`] : []) : [`aprender:${k}`, `practicar:${k}`],
+              fenTablero: fenDespues,
             }),
           )
         }
@@ -128,7 +128,7 @@ export function listaDeMarcas(c: DatosCurso): string {
   return [
     '# Las marcas del curso de la Caro-Kann, jugada por jugada',
     '',
-    '> Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.1). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo lleven marcas las jugadas clave (R8).',
+    '> Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.',
     '',
     `**Jugadas con marcas: ${conMarcas} de ${total}.** Más ${otras.length} frases del plan y del paso a paso.`,
     '',

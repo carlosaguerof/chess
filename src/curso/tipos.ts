@@ -7,20 +7,25 @@
 /**
  * Una marca en el tablero: una flecha (de → a) o una casilla (en).
  *
- * Las de las correcciones (C5, reglas de las marcas v1.1) traen `tipo`, lo que afirma su frase: A1 tu jugada, A2 tu
- * pieza ataca o apoya una casilla, A3 tu plan o una ruta (punteada), A4 una pieza del rival controla, ataca o amenaza,
- * A5 el rival te quita una casilla (la casilla y la flecha de tu pieza a ella), A6 la casilla clave. Solo verde (lo
- * tuyo) y rojo (lo del rival contra ti). Las de antes, sin `tipo`, se ven mientras el interruptor siga apagado.
+ * Las de las correcciones (C5; reglas de las marcas v1.3, 2026-10-30) traen `tipo`, lo que afirma su frase: A1 tu
+ * jugada (solo como Respuesta), A2 tu pieza ataca o apoya una casilla desde lejos o saltando, A3 tu plan o una ruta
+ * (punteada verde), A4 una pieza del rival controla, ataca o defiende desde lejos o saltando, A5 el rival te quita una
+ * casilla vacía (la casilla y la flecha de tu pieza a ella), A6 la casilla clave, A7 el plan o la amenaza del rival
+ * (punteada roja, una flecha por paso, hasta dos). Solo verde (lo tuyo) y rojo (lo del rival). Las de antes, sin
+ * `tipo`, se ven mientras el interruptor siga apagado.
  */
 export interface Marca {
   de?: string
   a?: string
   en?: string
   color?: 'verde' | 'rojo' | 'azul' | 'amarillo'
-  tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6'
-  /** "después": un plan o una ruta (solo A3) */
+  tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7'
+  /** "después": un plan, una ruta o una amenaza (A3 verde, A7 roja) */
   punteada?: boolean
 }
+
+/** Los campos de la explicación de una jugada mía, en el orden en que se leen. */
+export type CampoMio = 'hace' | 'porque' | 'prepara' | 'cuidado'
 
 /** Las marcas de un texto, frase por frase (la frase 0 primero). */
 export type MarcasPorFrase = Marca[][]
@@ -102,10 +107,16 @@ export interface JugadaMia {
   /** las de antes (sin frase): se ven después de jugar mientras el interruptor de las marcas siga apagado */
   marcas?: Marca[]
   /**
-   * las marcas de cada frase (correcciones, C5). En `hace`, la frase 0 va con "Te toca: <jugada>" y ahí va la A1; lo
-   * demás de `hace` se mide en la posición después de la jugada
+   * las marcas de cada frase (correcciones, C5; reglas v1.3), medidas en la posición después de la jugada. `hace` es
+   * "Te toca" en Aprender, antes de jugar, y ahí no se ven: sus marcas salen en Practicar, después de jugar
    */
-  marcasDe?: Partial<Record<'hace' | 'porque' | 'prepara' | 'cuidado', MarcasPorFrase>>
+  marcasDe?: Partial<Record<CampoMio, MarcasPorFrase>>
+  /**
+   * las jugadas mías que cada frase describe sin escribirlas (SAN inglés), frase por frase: "Tu alfil podrá esconderse
+   * en h7" describe ...Bh7. En Practicar, una frase que escribe o describe una jugada que la línea todavía me va a pedir
+   * no se muestra (Carlos, 2026-10-30: "en Practicar no se dan pistas que no pedí"; `src/curso/adelantar.ts`)
+   */
+  describe?: Partial<Record<CampoMio, string[][]>>
   fuente: string[]
   motor?: string[]
 }

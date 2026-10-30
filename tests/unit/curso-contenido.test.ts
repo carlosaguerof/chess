@@ -140,7 +140,11 @@ describe('C4 · el curso de la Caro-Kann', () => {
         const es = sanAEspanol(j.san).replace(/[+#]/g, '')
         // lo que se ve en Practicar antes de jugar: la frase de la jugada del rival, la pregunta y la Pista; y el porqué de
         // una jugada equivocada, que sale en rojo también en Practicar (pase adversarial 3)
-        const antes = ply > l.desde ? (textoRival(c, l.jugadas, ply - 1)?.texto ?? '') : ''
+        const rival = ply > l.desde ? textoRival(c, l.jugadas, ply - 1) : undefined
+        // la frase del rival puede nombrar la casilla de su propia amenaza (A7, reglas de las marcas v1.3, ejemplo 5:
+        // "si su peón llega a h5, tu alfil de g6 se queda sin casillas", antes de 7...h5): es lo que hace el rival, no tu jugada
+        const amenaza = new Set((rival?.marcas ?? []).flat().filter((x) => x.tipo === 'A7').map((x) => x.a))
+        const antes = rival && !amenaza.has(j.to) ? rival.texto : ''
         for (const t of [antes, m.pregunta, m.pista ?? '', ...Object.values(m.errores ?? {})]) {
           expect(t, `${l.id} ${j.san}: el texto dice la jugada`).not.toContain(es)
           // la casilla de destino no se nombra; en una captura es donde ya está la pieza rival (contexto), y el enroque no tiene casilla

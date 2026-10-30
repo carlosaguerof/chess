@@ -112,26 +112,10 @@
                 "frase": "Juegas 2...d5 y atacas el peón de e4.",
                 "jugadas": [
                   "d5"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "d5",
-                    "a": "e4",
-                    "color": "verde"
-                  }
                 ]
               },
               {
-                "frase": "El peón de c6 apoya a tu peón de d5.",
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "c6",
-                    "a": "d5",
-                    "color": "verde"
-                  }
-                ]
+                "frase": "El peón de c6 apoya a tu peón de d5."
               },
               {
                 "frase": "Si blancas cambia, 3.exd5, retomas con el peón de c6, 3...cxd5, y sigues con un peón en el centro.",
@@ -218,15 +202,7 @@
                 "frase": "Tus peones: c6, d5 y e6."
               },
               {
-                "frase": "Los de blancas, d4 y e5, forman una cadena: peones en diagonal que se protegen.",
-                "marcas": [
-                  {
-                    "tipo": "A4",
-                    "de": "d4",
-                    "a": "e5",
-                    "color": "rojo"
-                  }
-                ]
+                "frase": "Los de blancas, d4 y e5, forman una cadena: peones en diagonal que se protegen."
               },
               {
                 "frase": "La base de la cadena es d4, el peón de atrás: es la casilla clave."
@@ -235,42 +211,18 @@
                 "frase": "Tu ruptura: ...c5, contra d4.",
                 "jugadas": [
                   "...c5"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "c5",
-                    "a": "d4",
-                    "color": "verde"
-                  }
                 ]
               },
               {
                 "frase": "También puedes romper con ...f6, contra e5.",
                 "jugadas": [
                   "...f6"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "f6",
-                    "a": "e5",
-                    "color": "verde"
-                  }
                 ]
               },
               {
                 "frase": "La ruptura de blancas: c4, contra tu peón de d5.",
                 "jugadas": [
                   "c4"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A4",
-                    "de": "c4",
-                    "a": "d5",
-                    "color": "rojo"
-                  }
                 ]
               }
             ]
@@ -315,14 +267,6 @@
                 "frase": "Tu ruptura: ...c5, contra d4.",
                 "jugadas": [
                   "...c5"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "c5",
-                    "a": "d4",
-                    "color": "verde"
-                  }
                 ]
               },
               {
@@ -536,14 +480,6 @@
                 "frase": "5...c5: golpeas el centro de blancas, en d4.",
                 "jugadas": [
                   "c5"
-                ],
-                "marcas": [
-                  {
-                    "tipo": "A2",
-                    "de": "c5",
-                    "a": "d4",
-                    "color": "verde"
-                  }
                 ]
               },
               {
@@ -800,10 +736,11 @@
               "frase": "Tu peón de c5 ya ataca d4: cuando convenga, lo cambias.",
               "marcas": [
                 {
-                  "tipo": "A2",
+                  "tipo": "A3",
                   "de": "c5",
                   "a": "d4",
-                  "color": "verde"
+                  "color": "verde",
+                  "punteada": true
                 }
               ]
             },
@@ -836,6 +773,17 @@
                 "de": "c5",
                 "a": "d4",
                 "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "c2",
+                "a": "c4",
+                "color": "rojo",
                 "punteada": true
               }
             ]
@@ -897,12 +845,6 @@
               "marcas": [
                 {
                   "tipo": "A4",
-                  "de": "c3",
-                  "a": "d4",
-                  "color": "rojo"
-                },
-                {
-                  "tipo": "A4",
                   "de": "f3",
                   "a": "d4",
                   "color": "rojo"
@@ -933,6 +875,22 @@
                 "a": "d4",
                 "color": "verde",
                 "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A4",
+                "de": "f3",
+                "a": "d4",
+                "color": "rojo"
+              },
+              {
+                "tipo": "A4",
+                "de": "d1",
+                "a": "d4",
+                "color": "rojo"
               }
             ]
           ]
@@ -983,10 +941,11 @@
               "frase": "Tu peón de c5 también ataca d4: ...cxd4 cuando convenga.",
               "marcas": [
                 {
-                  "tipo": "A2",
+                  "tipo": "A3",
                   "de": "c5",
                   "a": "d4",
-                  "color": "verde"
+                  "color": "verde",
+                  "punteada": true
                 }
               ]
             },
@@ -1058,14 +1017,6 @@
               "frase": "...c5: tu peón ataca d4.",
               "jugadas": [
                 "...c5"
-              ],
-              "marcas": [
-                {
-                  "tipo": "A2",
-                  "de": "c5",
-                  "a": "d4",
-                  "color": "verde"
-                }
               ]
             },
             {
@@ -1187,6 +1138,24 @@
                 "punteada": true
               }
             ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "f3",
+                "a": "f4",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A7",
+                "de": "g4",
+                "a": "g5",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
           ]
         }
       },
@@ -1226,14 +1195,6 @@
               "jugadas": [
                 "...c5",
                 "...Nc6"
-              ],
-              "marcas": [
-                {
-                  "tipo": "A2",
-                  "de": "c5",
-                  "a": "d4",
-                  "color": "verde"
-                }
               ]
             },
             {
@@ -1268,6 +1229,24 @@
                 "de": "h7",
                 "a": "h5",
                 "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "c2",
+                "a": "c4",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A7",
+                "de": "h2",
+                "a": "h4",
+                "color": "rojo",
                 "punteada": true
               }
             ]
@@ -1323,14 +1302,6 @@
               "frase": "Después, ...c5 contra d4.",
               "jugadas": [
                 "...c5"
-              ],
-              "marcas": [
-                {
-                  "tipo": "A2",
-                  "de": "c5",
-                  "a": "d4",
-                  "color": "verde"
-                }
               ]
             },
             {
@@ -1461,6 +1432,15 @@
                 "a": "b5",
                 "color": "verde",
                 "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A6",
+                "en": "e5",
+                "color": "rojo"
               }
             ]
           ]
@@ -1719,7 +1699,16 @@
               ]
             },
             {
-              "frase": "Blancas usa su caballo de e5 y busca jaques con su alfil en b5."
+              "frase": "Blancas usa su caballo de e5 y busca jaques con su alfil en b5.",
+              "marcas": [
+                {
+                  "tipo": "A7",
+                  "de": "f1",
+                  "a": "b5",
+                  "color": "rojo",
+                  "punteada": true
+                }
+              ]
             }
           ]
         },
@@ -1738,6 +1727,17 @@
                 "de": "g8",
                 "a": "f6",
                 "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "f1",
+                "a": "b5",
+                "color": "rojo",
                 "punteada": true
               }
             ]
@@ -1813,6 +1813,24 @@
                 "de": "b8",
                 "a": "c6",
                 "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "d2",
+                "a": "d4",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A7",
+                "de": "g1",
+                "a": "f3",
+                "color": "rojo",
                 "punteada": true
               }
             ]
@@ -1921,6 +1939,19 @@
                 "b5"
               ]
             }
+          ]
+        },
+        "marcasDe": {
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "b4",
+                "a": "b5",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
           ]
         }
       },
@@ -2072,16 +2103,6 @@
       ],
       "motor": [
         "M-av-be3"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "e3",
-            "a": "d4",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 c3": {
@@ -2094,12 +2115,21 @@
         "M-c3-db3"
       ],
       "marcas": [
+        [],
         [
           {
-            "tipo": "A4",
-            "de": "c3",
-            "a": "d4",
-            "color": "rojo"
+            "tipo": "A7",
+            "de": "d1",
+            "a": "b3",
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "b3",
+            "a": "b7",
+            "color": "rojo",
+            "punteada": true
           }
         ]
       ]
@@ -2150,30 +2180,93 @@
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2": {
-      "texto": "Blancas lleva el otro caballo hacia f4 para seguir persiguiendo a tu alfil.",
+      "texto": "Blancas lleva el otro caballo a f4 para seguir persiguiendo a tu alfil de g6.",
       "fuente": [
         "WB-3Af5"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "e2",
+            "a": "f4",
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "f4",
+            "a": "g6",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4": {
-      "texto": "Blancas empuja h4: con un paso más, su peón dejaría sin casillas a tu alfil de g6.",
+      "texto": "Blancas empuja h4: si su peón llega a h5, tu alfil de g6 se queda sin casillas.",
       "fuente": [
         "WB-3Af5"
       ],
       "motor": [
         "M-vdw-h4"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "h4",
+            "a": "h5",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5 Nf4": {
       "texto": "El caballo de f4 ataca a tu alfil de g6 y al peón de h5.",
       "fuente": [
         "WB-3Af5"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f4",
+            "a": "g6",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A4",
+            "de": "f4",
+            "a": "h5",
+            "color": "rojo"
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 h4": {
-      "texto": "Blancas empuja 4.h4: quiere seguir avanzando sus peones del lado de rey para dejar a tu alfil sin casillas.",
+      "texto": "Blancas empuja 4.h4: quiere seguir avanzando sus peones del lado de rey, g4 y h5, para dejar a tu alfil sin casillas.",
       "fuente": [
         "WB-3Af5"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "g2",
+            "a": "g4",
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "h4",
+            "a": "h5",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 h4 h5 Bd3": {
@@ -2224,9 +2317,27 @@
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 Ne2": {
-      "texto": "Blancas lleva el caballo hacia g3, desde donde atacará a tu alfil.",
+      "texto": "Blancas lleva el caballo hacia g3, desde donde atacará a tu alfil de f5.",
       "fuente": [
         "BASE"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "e2",
+            "a": "g3",
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "g3",
+            "a": "f5",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3": {
@@ -2269,13 +2380,23 @@
       ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3": {
-      "texto": "El caballo se aparta y ataca a tu alfil a la vez: blancas gana un tiempo, una jugada de ventaja.",
+      "texto": "El caballo se aparta y ataca a tu alfil de f5 a la vez: blancas gana un tiempo, una jugada de ventaja.",
       "fuente": [
         "CB",
         "WB-5Cg3"
       ],
       "motor": [
         "M-cl-cg3"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "g3",
+            "a": "f5",
+            "color": "rojo"
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4": {
@@ -2286,10 +2407,21 @@
       ],
       "motor": [
         "M-cl-h4"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "h4",
+            "a": "h5",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3": {
-      "texto": "Blancas desarrolla el caballo y apunta a e5: quiere saltar ahí contra tu alfil.",
+      "texto": "Blancas desarrolla el caballo y apunta a e5: quiere saltar ahí contra tu alfil de g6.",
       "fuente": [
         "MOTOR"
       ],
@@ -2299,10 +2431,18 @@
       "marcas": [
         [
           {
-            "tipo": "A4",
+            "tipo": "A7",
             "de": "f3",
             "a": "e5",
-            "color": "rojo"
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "e5",
+            "a": "g6",
+            "color": "rojo",
+            "punteada": true
           }
         ]
       ]
@@ -2312,23 +2452,23 @@
       "fuente": [
         "CB",
         "WP-CK"
+      ]
+    },
+    "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3": {
+      "texto": "Blancas ofrece cambiar alfiles: el suyo de d3 por el tuyo de h7, tu pieza más activa.",
+      "fuente": [
+        "CB",
+        "HOU"
       ],
       "marcas": [
         [
           {
             "tipo": "A4",
-            "de": "h5",
-            "a": "g6",
+            "de": "d3",
+            "a": "h7",
             "color": "rojo"
           }
         ]
-      ]
-    },
-    "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3": {
-      "texto": "Blancas ofrece cambiar alfiles: el suyo por el tuyo, tu pieza más activa.",
-      "fuente": [
-        "CB",
-        "HOU"
       ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7 Bd3 Bxd3 Qxd3": {
@@ -2368,16 +2508,6 @@
       "texto": "Blancas defiende d4 con un peón.",
       "fuente": [
         "WB-4Cc6"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "c3",
-            "a": "d4",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4": {
@@ -2422,22 +2552,22 @@
         "WB-3cxd5",
         "WP-CK",
         "WP-IQP"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "c4",
-            "a": "d5",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3": {
       "texto": "Blancas suma presión sobre d5.",
       "fuente": [
         "WB-5Cc3-panov"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "c3",
+            "a": "d5",
+            "color": "rojo"
+          }
+        ]
       ]
     },
     "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6 Nf3": {
@@ -2480,16 +2610,6 @@
       "texto": "Blancas defiende e4 con un peón.",
       "fuente": [
         "WP-CK"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "d3",
-            "a": "e4",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 Nf3 d5 d3 dxe4 dxe4": {
@@ -2556,16 +2676,6 @@
       "fuente": [
         "WB-3f3",
         "BASE"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "f3",
-            "a": "e4",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 d4 d5 f3 e6 Nc3": {
@@ -2589,16 +2699,6 @@
       "fuente": [
         "WP-CK",
         "BASE"
-      ],
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "d3",
-            "a": "e4",
-            "color": "rojo"
-          }
-        ]
       ]
     },
     "e4 c6 d3 d5 Nd2": {
@@ -2628,6 +2728,17 @@
       "fuente": [
         "LICHESS-CC0",
         "BASE"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "f1",
+            "a": "g2",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
       ]
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5 Bg2": {
@@ -2652,6 +2763,16 @@
       "texto": "Blancas saca el alfil a c4, apuntando a f7.",
       "fuente": [
         "WB-2Ac4"
+      ],
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "c4",
+            "a": "f7",
+            "color": "rojo"
+          }
+        ]
       ]
     },
     "e4 c6 Bc4 d5 Bb3": {
@@ -2737,29 +2858,7 @@
           "a": "d5"
         }
       ],
-      "fuente": [
-        "WB-1c6",
-        "WP-CK",
-        "WP-es"
-      ],
       "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "c7",
-              "a": "c6",
-              "color": "verde"
-            },
-            {
-              "tipo": "A3",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde",
-              "punteada": true
-            }
-          ]
-        ],
         "porque": [
           [
             {
@@ -2769,6 +2868,18 @@
               "color": "verde",
               "punteada": true
             }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-1c6",
+        "WP-CK",
+        "WP-es"
+      ],
+      "describe": {
+        "porque": [
+          [
+            "d5"
           ]
         ]
       }
@@ -2791,33 +2902,7 @@
       ],
       "motor": [
         "M-2d5"
-      ],
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "e4",
-              "color": "verde"
-            }
-          ],
-          [
-            {
-              "tipo": "A2",
-              "de": "c6",
-              "a": "d5",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      ]
     },
     "e4 c6 d4 d5 e5 Bf5": {
       "clave": true,
@@ -2844,16 +2929,6 @@
         "e6": "Así tu alfil de c8 se queda encerrado detrás de tus peones."
       },
       "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "c8",
-              "a": "f5",
-              "color": "verde"
-            }
-          ]
-        ],
         "porque": [
           [
             {
@@ -2916,16 +2991,6 @@
         "Bg6"
       ],
       "marcasDe": {
-        "porque": [
-          [
-            {
-              "tipo": "A4",
-              "de": "d4",
-              "a": "e5",
-              "color": "rojo"
-            }
-          ]
-        ],
         "prepara": [
           [
             {
@@ -3097,7 +3162,19 @@
       ],
       "motor": [
         "M-vdw-ag6"
-      ]
+      ],
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A4",
+              "de": "c3",
+              "a": "e4",
+              "color": "rojo"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5": {
       "pregunta": "Blancas gasta jugadas contra tu alfil. ¿Cómo atacas la base de su cadena?",
@@ -3144,26 +3221,10 @@
       "buenas": [
         "cxd4"
       ],
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "h7",
-              "a": "h5",
-              "color": "verde"
-            }
-          ]
-        ],
+      "describe": {
         "prepara": [
           [
-            {
-              "tipo": "A3",
-              "de": "g6",
-              "a": "h7",
-              "color": "verde",
-              "punteada": true
-            }
+            "Bh7"
           ]
         ]
       }
@@ -3210,29 +3271,6 @@
       "errores": {
         "e6": "Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes.",
         "h6": "Con ...h6 tu alfil tendría h7, pero blancas sigue con 5.g4 contra tu alfil."
-      },
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "h7",
-              "a": "h5",
-              "color": "verde"
-            }
-          ]
-        ],
-        "prepara": [
-          [
-            {
-              "tipo": "A3",
-              "de": "e7",
-              "a": "e6",
-              "color": "verde",
-              "punteada": true
-            }
-          ]
-        ]
       }
     },
     "e4 c6 d4 d5 e5 Bf5 h4 h5 Bd3 Bxd3": {
@@ -3297,7 +3335,14 @@
       ],
       "buenas": [
         "Bg6"
-      ]
+      ],
+      "describe": {
+        "prepara": [
+          [
+            "Bg6"
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4 f3 Bg6": {
       "pregunta": "El peón de f3 ataca a tu alfil. ¿A dónde lo retiras?",
@@ -3344,7 +3389,14 @@
       "buenas": [
         "fxe6",
         "Qc8"
-      ]
+      ],
+      "describe": {
+        "porque": [
+          [
+            "Bxf7"
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4 f3 Bg6 e6 Qd6 exf7+ Bxf7": {
       "pregunta": "El peón de f7 te da jaque. ¿Con qué pieza lo tomas?",
@@ -3385,7 +3437,14 @@
       "pista": "El peón que lo abre también sostiene d5.",
       "buenas": [
         "h5"
-      ]
+      ],
+      "describe": {
+        "prepara": [
+          [
+            "Bg6"
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6": {
       "pregunta": "El caballo de g3 ataca a tu alfil. ¿A dónde lo retiras sin salir de su diagonal?",
@@ -3437,7 +3496,14 @@
       "motor": [
         "M-cl-dxe4"
       ],
-      "pista": "Si el peón de e4 desaparece, blancas ya no tiene dos peones en el centro."
+      "pista": "Si el peón de e4 desaparece, blancas ya no tiene dos peones en el centro.",
+      "describe": {
+        "porque": [
+          [
+            "Bf5"
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5": {
       "clave": true,
@@ -3466,25 +3532,7 @@
         "Nf6",
         "Nd7",
         "a5"
-      ],
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "c8",
-              "a": "f5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "f5",
-              "a": "e4",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      ]
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6": {
       "pregunta": "El caballo de g3 ataca a tu alfil. ¿A dónde lo retiras?",
@@ -3516,6 +3564,11 @@
           "en": "h7"
         }
       ],
+      "errores": {
+        "Nd7": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor.",
+        "e6": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor.",
+        "Nf6": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor."
+      },
       "fuente": [
         "WB-6h4",
         "CB"
@@ -3524,20 +3577,15 @@
         "M-cl-h6",
         "M-cl-sin-h6"
       ],
-      "errores": {
-        "Nd7": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor.",
-        "e6": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor.",
-        "Nf6": "Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor."
-      },
-      "marcasDe": {
+      "describe": {
+        "porque": [
+          [
+            "Bh7"
+          ]
+        ],
         "hace": [
           [
-            {
-              "tipo": "A1",
-              "de": "h7",
-              "a": "h6",
-              "color": "verde"
-            }
+            "Bh7"
           ]
         ]
       }
@@ -3670,7 +3718,15 @@
       "errores": {
         "Qxd5": "Así sacas la dama demasiado pronto, y es peor."
       },
-      "pista": "Para esto jugaste 1...c6."
+      "pista": "Para esto jugaste 1...c6.",
+      "describe": {
+        "porque": [
+          [],
+          [
+            "Nc6"
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6": {
       "pregunta": "Tu caballo de b8 ya tiene libre una buena casilla. ¿A dónde lo desarrollas, atacando d4?",
@@ -3744,12 +3800,6 @@
       "marcasDe": {
         "hace": [
           [
-            {
-              "tipo": "A1",
-              "de": "c8",
-              "a": "g4",
-              "color": "verde"
-            },
             {
               "tipo": "A2",
               "de": "g4",
@@ -3880,7 +3930,19 @@
       "pista": "Ese caballo tiene detrás a su rey.",
       "buenas": [
         "Be7"
-      ]
+      ],
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A4",
+              "de": "c3",
+              "a": "d5",
+              "color": "rojo"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 Nc3 d5": {
       "pregunta": "Blancas desarrolló el caballo en vez de jugar 2.d4. ¿Cómo atacas e4 con un peón apoyado?",
@@ -3898,33 +3960,7 @@
       "motor": [
         "M-dc-d5"
       ],
-      "pista": "Tu peón de c6 ya está listo para apoyarlo.",
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "e4",
-              "color": "verde"
-            }
-          ],
-          [
-            {
-              "tipo": "A2",
-              "de": "c6",
-              "a": "d5",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      "pista": "Tu peón de c6 ya está listo para apoyarlo."
     },
     "e4 c6 Nc3 d5 Nf3 Bg4": {
       "clave": true,
@@ -3950,25 +3986,7 @@
         "dxe4",
         "g6",
         "a6"
-      ],
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "c8",
-              "a": "g4",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "g4",
-              "a": "f3",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      ]
     },
     "e4 c6 Nc3 d5 Nf3 Bg4 h3 Bxf3": {
       "pregunta": "El peón de h3 ataca a tu alfil. ¿Qué es lo más sencillo?",
@@ -4030,33 +4048,7 @@
       "motor": [
         "M-cf3-d5"
       ],
-      "pista": "Tu peón de c6 ya está listo para apoyarlo.",
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "e4",
-              "color": "verde"
-            }
-          ],
-          [
-            {
-              "tipo": "A2",
-              "de": "c6",
-              "a": "d5",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      "pista": "Tu peón de c6 ya está listo para apoyarlo."
     },
     "e4 c6 Nf3 d5 d3 dxe4": {
       "pregunta": "Blancas defendió e4 con un peón. ¿Cómo preparas un cambio de damas, para que el rey blanco tenga que retomar?",
@@ -4068,6 +4060,13 @@
           "a": "d1"
         }
       ],
+      "pista": "Para cambiar damas, primero tiene que abrirse la columna d entre ellas.",
+      "buenas": [
+        "Qc7",
+        "g6",
+        "e6",
+        "Bg4"
+      ],
       "fuente": [
         "WP-CK",
         "MOTOR"
@@ -4075,13 +4074,19 @@
       "motor": [
         "M-of-dxe4"
       ],
-      "pista": "Para cambiar damas, primero tiene que abrirse la columna d entre ellas.",
-      "buenas": [
-        "Qc7",
-        "g6",
-        "e6",
-        "Bg4"
-      ]
+      "describe": {
+        "prepara": [
+          [
+            "Qxd1+"
+          ]
+        ],
+        "hace": [
+          [],
+          [
+            "Qxd1+"
+          ]
+        ]
+      }
     },
     "e4 c6 Nf3 d5 d3 dxe4 dxe4 Qxd1+": {
       "pregunta": "Las damas están frente a frente en la columna d. ¿Qué haces?",
@@ -4164,21 +4169,10 @@
         "M-pac-d5"
       ],
       "pista": "Tu peón de c6 ya está listo para apoyarlo.",
-      "marcasDe": {
+      "describe": {
         "hace": [
           [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "e4",
-              "color": "verde"
-            }
+            "cxd5"
           ]
         ]
       }
@@ -4326,25 +4320,7 @@
         "e5",
         "Nf6",
         "d6"
-      ],
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "c6",
-              "a": "d5",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      ]
     },
     "e4 c6 d3 d5 Nd2 g6": {
       "pregunta": "Blancas arma un esquema tranquilo. ¿Cómo preparas la salida de tu alfil de f8 hacia la diagonal larga?",
@@ -4368,7 +4344,14 @@
         "e6",
         "c5",
         "Qc7"
-      ]
+      ],
+      "describe": {
+        "hace": [
+          [
+            "Bg7"
+          ]
+        ]
+      }
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7": {
       "pregunta": "¿Qué pieza llevas a la diagonal larga?",
@@ -4437,7 +4420,14 @@
         "a5",
         "Nh6",
         "Nd7"
-      ]
+      ],
+      "describe": {
+        "prepara": [
+          [
+            "O-O"
+          ]
+        ]
+      }
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5 Bg2 Ne7 O-O O-O": {
       "pregunta": "Tus piezas del lado de rey ya salieron. ¿Qué haces con tu rey?",
@@ -4476,33 +4466,7 @@
       "motor": [
         "M-hb-d5"
       ],
-      "pista": "Un peón central puede atacar al alfil, apoyado por c6.",
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A1",
-              "de": "d7",
-              "a": "d5",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "c4",
-              "color": "verde"
-            }
-          ],
-          [
-            {
-              "tipo": "A2",
-              "de": "d5",
-              "a": "e4",
-              "color": "verde"
-            }
-          ]
-        ]
-      }
+      "pista": "Un peón central puede atacar al alfil, apoyado por c6."
     },
     "e4 c6 Bc4 d5 Bb3 dxe4": {
       "pregunta": "El alfil blanco se retiró a b3. ¿Qué ganas ahora?",

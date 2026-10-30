@@ -63,14 +63,15 @@ test.describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () =>
     await expect(narracion(page)).not.toContainText('Respuesta')
     await expect(narracion(page)).not.toContainText('♗f5')
 
-    // después de mi jugada: "Correcto" y la explicación (qué hace, por qué ahora, qué prepara), y espera a "Siguiente"
+    // después de mi jugada: "Correcto" y la explicación, y espera a "Siguiente". En la Tal, ...e6 viene después (6...e6):
+    // el porqué y el qué prepara lo nombran, y en Practicar no se muestran (2026-10-30: "no se dan pistas que no pedí")
     await jugar(page, info, 'c8f5')
     await momento(page, 'leer')
     await expect(narracion(page).locator('[data-tipo="correcta"]')).toContainText('Correcto')
     const explica = narracion(page).locator('[data-tipo="explica"]')
+    await expect(explica).toHaveCount(1)
     await expect(explica.nth(0)).toHaveText(ver(mia.hace))
-    await expect(explica.nth(1)).toHaveText(ver(mia.porque!))
-    await expect(explica.nth(2)).toHaveText(ver(mia.prepara!))
+    await expect(narracion(page)).not.toContainText('e6')
     await page.waitForTimeout(1500)
     await momento(page, 'leer')
     await page.getByTestId('siguiente').click()
