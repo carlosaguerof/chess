@@ -662,3 +662,16 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Quién:** Carlos (el prompt); la corrida de la Air.
 - **Dónde:** `f38d14b` (la prueba, que falla sin el arreglo) y `c9c8a31` (`.narracion-pie`, `src/estilos.css`). La regla, en `specs/ux.md`. La prueba: `tests/e2e/ver-que-pasa.spec.ts`.
 
+## [2026-10-30] corrida | Publicados "Ver qué pasa", las marcas de "Siguen…" y el botón principal a la derecha
+- **Qué:**
+  - La torre revisó el índice, el inventario y cinco capturas, y dijo **"publica"**, con un cambio de texto (la frase de 4...h5 de la Tal: "Con ...e6 en vez de ...h5, siguen…") y la corrida final en GitHub. Sus otras decisiones: los puntos 1, 3, 4 y 5 del aviso de la corrida y la baja del pie se quedan como están.
+  - Con el cambio: `npm test` 256 de 256; Playwright en Chromium, los dos perfiles (el iPhone emulado): **249 pasan, 39 se saltan, ninguna falla**.
+  - `origin/main` (`ea5b8e3`) se mezcló en la rama (`4c521f4`). Sus únicos conflictos fueron `log.md` y `learning.md`, que crecieron de los dos lados: se quedaron ambos, y lo aprendido de esta corrida pasó a ser del n.º 62 al 71.
+  - **La corrida final, en GitHub:** [`41052532777`](https://github.com/carlosaguerof/chess/actions/runs/41052532777), sobre `feat/ver-que-pasa` `4c521f4`, 18 min (`e2e` 16.7 min): `npm test` 256 de 256; `npm run e2e`, los dos perfiles, con el iPhone en WebKit: **249 pasan, 39 se saltan, ninguna falla**.
+  - Integrado a `main` en `8334c8c` (merge `--no-ff` encima de `origin/main`). `npm run publicar` → `gh-pages` `dc1f9e1` (06:22:45). A las 06:23:16 la página servía `index-DaWgOspI.js`, el del build.
+  - Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`, en Chromium (escritorio y el iPhone emulado, 390×844, táctil): **27 pasan, 1 se salta** (la del zoom en escritorio). Incluye el caso nuevo de la Tal.
+- **Por qué en GitHub y no en la Air:** la regla nueva de `specs/publicacion.md`. WebKit no corrió en la Air, y la medición de `ioclasscount` que había pedido la torre ya no aplica.
+- **Las capturas del iPhone del artefacto no se subieron al repo,** por indicación de la torre. Las de `iterations/v3/capturas/ver-que-pasa/iphone/` son de Chromium.
+- **Quién:** la torre ("publica"); la corrida de la Air.
+- **Dónde:** `main` `8334c8c`, `gh-pages` `dc1f9e1`. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_ver-que-pasa.md`.
+
