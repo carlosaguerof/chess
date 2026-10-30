@@ -675,3 +675,26 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Quién:** la torre ("publica"); la corrida de la Air.
 - **Dónde:** `main` `8334c8c`, `gh-pages` `dc1f9e1`. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_ver-que-pasa.md`.
 
+## [2026-10-30] cambio | El botón se llama "Ver qué pasaría"
+- **Qué:**
+  - El texto visible del botón pasó de "Ver qué pasa" a **"Ver qué pasaría"**, con "Siguiente" y con "Reintentar" (`src/componentes/PasoAPaso.tsx`). También cambiaron los comentarios y títulos de prueba en `src/` y `tests/`, y `specs/cursos.md` y `specs/ux.md`; §2.3 deja la razón con las palabras de Carlos, para los otros siete cursos.
+  - Se quedan como estaban los identificadores internos (`ver-que-pasa`, `src/curso/ver.ts`, `BotonVerQuePasa`), `scripts/` y los nombres de archivo. No se reescribieron ni las entradas viejas de esta bitácora ni las capturas viejas.
+  - Pruebas nuevas: el texto exacto en `tests/e2e/ver-que-pasa.spec.ts` y `tests/publicado/correcciones-caro-kann.spec.ts`; y que el nombre cabe, con "Siguiente" y con "Reintentar", a 390×844 y a 375×667. La de la página publicada guarda la captura del pie.
+- **Por qué:** Carlos lo probó en su iPhone: "no se entiende a menos que leas el texto y luego te lo preguntes", y propuso "Ver qué pasaría" o "Qué pasaría". Lo que se ve no es lo que sigue en la partida, sino lo que pasaría con otra cosa: el presente suena a lo que sigue, y el condicional dice que es un supuesto. El botón mide la mitad del pie y no parte el renglón, así que un nombre más largo se podía salir sin que nada fallara: por eso la prueba.
+- **Cómo se comprobó:**
+  - Corrida final en GitHub, [`41100866910`](https://github.com/carlosaguerof/chess/actions/runs/41100866910), sobre `feat/ver-que-pasaria` `c6888f5`, 18 min de trabajo (26 con la espera de máquina): `npm test` 256 de 256; `npm run e2e`, con el iPhone en WebKit: **253 pasan, 39 se saltan, ninguna falla**.
+  - **Cuánto cabe, en WebKit:** el nombre mide 122.2 px. A 390×844 tiene 151 por dentro (sobran 28.8) y a 375×667, 144 (sobran 21.8). No hizo falta ajustar nada. Con "Siguiente" y con "Reintentar" mide lo mismo.
+  - A las 12:09:54 la página ya servía el build nuevo; `curl -sI` da 200, el `.wasm` sale como `application/wasm`, y el bundle publicado trae "Ver qué pasaría" y ya no el nombre viejo.
+- **Quién:** Carlos (la queja y las dos propuestas); la torre (escogió "Ver qué pasaría"); la corrida de la Air.
+- **Dónde:** `feat/ver-que-pasaria` `c6888f5`, merge a `main` `4eefe14`, `gh-pages` `576cf34`. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_ver-que-pasaria.md`.
+
+## [2026-10-30] cambio | La página publicada se comprueba en GitHub, con el iPhone en WebKit
+- **Qué:**
+  - Workflow nuevo, `.github/workflows/pagina-publicada.yml`: se lanza a mano y corre `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages`, los dos perfiles, con las pruebas de `main`, en `macos-latest`. Sin secretos, solo lectura y sin commits. Sube `test-results-publicado/` aunque falle, 14 días. Su `timeout-minutes` es 50: 14 pruebas por 2 perfiles a 90 s cada una, más la instalación, para que el corte nunca le gane a las pruebas.
+  - `playwright.publicado.config.ts` ahora guarda el `trace` de lo que falle: sin eso no había con qué diagnosticar.
+  - `specs/publicacion.md` y `AGENTS.md` dicen dónde corre y cómo se lanza.
+- **Por qué:** WebKit revisaba el código antes de publicar, pero no la página publicada: `npm run e2e:pages` corría en Chromium en la Air (`iterations/v3/learning.md` n.º 41 y 58). Ahora el perfil del iPhone corre en WebKit sin tocar la Air.
+- **Cómo se comprobó:** su primera corrida, [`41104631717`](https://github.com/carlosaguerof/chess/actions/runs/41104631717), probó la parte A ya publicada, con las pruebas de `main` `d42a733`, en 2 min: **27 pasan, 1 se salta** (la del zoom en escritorio), **ninguna falla**. El registro confirma que el perfil `iphone` arrancó `webkit-2370` y `escritorio`, Chromium. La captura del pie en WebKit se revisó a ojo: el nombre se lee entero y los dos botones se ven bien. El registro público no trae nada privado.
+- **No se republicó:** no cambia la app. No se lanzó `pruebas.yml` para esta rama: lo que cambia no lo toca esa suite, y lo prueba la primera corrida del workflow.
+- **Quién:** la torre (el prompt, que responde a los n.º 41 y 58); la corrida de la Air (el `trace` y el `timeout-minutes`).
+- **Dónde:** `chore/pagina-publicada` `338ed64`, merge a `main` `d42a733`. Lo aprendido, en `iterations/v3/learning.md` n.º 73 a 77.
