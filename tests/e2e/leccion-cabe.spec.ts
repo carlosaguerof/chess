@@ -153,12 +153,14 @@ for (const p of PANTALLAS) {
 test.describe('Nota 1: los botones con jugadas en su texto no se parten en columnas', () => {
   test.use({ viewport: { width: 402, height: 874 } })
 
-  test('"Seguir: Avance: 4.♘f3" en la página del curso es un solo renglón de texto, no un trozo por figura', async ({ page }) => {
+  test('"Seguir" y "Avance: 4.♘f3" en la página del curso van en un solo elemento, no un trozo por figura', async ({ page }) => {
     await page.goto('/#/')
     await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-short', vuelta: 'aprender', ply: 1, fecha: Date.now() } })))
     await page.goto('/#/curso/caro-kann%3Ab')
     const boton = page.getByTestId('empezar-curso')
-    await expect(boton).toHaveText('Seguir: Avance: 4.♘f3')
+    // dos renglones desde el 2026-10-29: "Seguir" y, abajo, el nombre (tests/e2e/boton-seguir.spec.ts)
+    await expect(boton).toContainText('Seguir')
+    await expect(page.getByTestId('seguir-nombre')).toHaveText('Avance: 4.♘f3')
     // .boton es inline-flex: si el texto no va en un solo elemento, cada trozo (las letras, la figura ♘, lo demás) es una columna aparte
     const m = await boton.evaluate((e) => ({ hijos: e.childNodes.length, figuras: e.querySelectorAll('.figura').length }))
     expect(m.figuras).toBe(1)

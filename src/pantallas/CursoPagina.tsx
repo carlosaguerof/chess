@@ -15,7 +15,8 @@ import { marcasNuevas } from '../curso/marcas.ts'
 
 /**
  * C6 (diseño §7): la página de un curso nuevo. Las piezas en orden (La idea, La estructura, las variantes, Errores y
- * trampas, Repaso), cada una con su estado, y un botón grande: "Empezar" o "Seguir: …".
+ * trampas, Repaso), cada una con su estado, y un botón grande: "Empezar", "Seguir" con el nombre de lo que sigue abajo, o
+ * "Repasar el curso".
  */
 type Paso = { id: string; nombre: string; url: string; hecho: boolean }
 
@@ -91,9 +92,13 @@ export function CursoPagina({ id }: { id: string }) {
           {!alguno ? (
             'Empezar'
           ) : sigue ? (
-            // en un solo elemento: .boton es inline-flex y cada trozo (las letras, la figura ♘) sería una columna aparte (Nota 1)
-            <span>
-              Seguir: <Texto t={sigue.nombre} />
+            // en un solo elemento: .boton es inline-flex y cada trozo (las letras, la figura ♘) sería una columna aparte (Nota 1).
+            // Dos renglones: "Seguir", grande, y abajo dónde retomo, chico y en uno solo (2026-10-29)
+            <span className="boton-seguir">
+              <span>Seguir</span>
+              <span className="boton-seguir-nombre" data-testid="seguir-nombre">
+                <Texto t={sigue.nombre} />
+              </span>
             </span>
           ) : (
             'Repasar el curso'
