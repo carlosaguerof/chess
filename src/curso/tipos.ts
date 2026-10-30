@@ -55,6 +55,22 @@ export interface PasoLeer {
   jugadas?: string[]
   /** las marcas de esta frase (correcciones, C5) */
   marcas?: Marca[]
+  /** en una ventana que cubre dos frases ("Ver qué pasa"), la frase de la que hablan los pasos desde aquí: es el título */
+  titulo?: string
+  /** de dónde sale esta frase y qué comprobó el motor ("Ver qué pasa"; en los demás pasos, los trae su página o su plan) */
+  fuente?: string[]
+  motor?: string[]
+}
+
+/**
+ * "Ver qué pasa" (Carlos, 2026-10-30, en el curso: "lo leo y no lo veo"): los pasos de una frase que dice qué pasaría si
+ * se jugara otra cosa, en la misma ventana del "Ver paso a paso". Las jugadas de los dos lados se juegan, una por paso, y
+ * el último paso dice la consecuencia. Va junto a su frase, en `ver` y `verErrores` de la jugada mía (`src/curso/ver.ts`).
+ */
+export interface VerQuePasa {
+  /** la frase habla de la posición de antes de mi jugada ("Si juegas ...e6 ahora"); si no, de la de después */
+  antes?: boolean
+  pasos: PasoLeer[]
 }
 
 export interface PasoAPaso {
@@ -117,6 +133,10 @@ export interface JugadaMia {
    * no se muestra (Carlos, 2026-10-30: "en Practicar no se dan pistas que no pedí"; `src/curso/adelantar.ts`)
    */
   describe?: Partial<Record<CampoMio, string[][]>>
+  /** "Ver qué pasa" de cada frase, en su orden (`null`: esa frase no lleva); `hace` no: es "Te toca", antes de jugar */
+  ver?: Partial<Record<Exclude<CampoMio, 'hace'>, (VerQuePasa | null)[]>>
+  /** "Ver qué pasa" de las explicaciones de `errores` (SAN inglés → sus pasos) */
+  verErrores?: Record<string, VerQuePasa>
   fuente: string[]
   motor?: string[]
 }

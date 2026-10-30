@@ -17,8 +17,9 @@ import { borrarEnCurso, guardarEnCurso, leerAvance, marcarError, marcarPieza, ma
 import { formas, jugadaEs, lineaHasta, porQueNo, posicion } from '../curso/textos.ts'
 import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turno.ts'
 import { flechasPrendidas } from '../curso/flechas.ts'
-import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
+import { BotonPasoAPaso, BotonVerQuePasa } from '../componentes/PasoAPaso.tsx'
 import { marcasDelMomento, marcasNuevas } from '../curso/marcas.ts'
+import { verDelError, verDespues } from '../curso/ver.ts'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
@@ -213,6 +214,11 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     boton = { texto: 'Ahora, Practicar', testid: 'a-practicar', accion: () => setE(empezar(l, 'practicar')) }
   }
 
+  // el botón secundario del pie, a la izquierda del principal: "Ver paso a paso" en el plan; "Ver qué pasa" cuando la explicación del momento lo trae
+  const orientacion = l.lado === 'w' ? 'white' : 'black'
+  const pasosDelPlan = e.momento === 'plan' ? l.variante?.plan.pasoAPaso : undefined
+  const ver = e.momento === 'leer' && e.ultima !== null ? verDespues(c, l, e.vuelta, e.ultima) : e.momento === 'error' && e.intento ? verDelError(c, l, e.vuelta, e.ply, e.intento.san) : null
+
   // Pista y Respuesta, a la mano también con un error a la vista (lo quitan y ayudan en un solo toque)
   const conAyuda = e.momento === 'tuTurno' || e.momento === 'error' || e.momento === 'buena'
   const { n, m } = progreso(l, e)
@@ -235,7 +241,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
           </div>
         </div>
         <div className="partida-tablero">
-          <TableroJugable chess={tablero} orientacion={l.lado === 'w' ? 'white' : 'black'} puedeMover={e.momento === 'tuTurno' ? (l.lado === 'w' ? 'white' : 'black') : undefined} onJugada={alJugar} flechas={flechas} marcas={marcas} />
+          <TableroJugable chess={tablero} orientacion={orientacion} puedeMover={e.momento === 'tuTurno' ? orientacion : undefined} onJugada={alJugar} flechas={flechas} marcas={marcas} />
         </div>
       </div>
       <aside className="partida-panel leccion-panel">
@@ -285,9 +291,10 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
               ))}
               {/* en el iPhone, una franja a todo lo ancho: el texto que pasa debajo del botón no se asoma a su lado */}
               {boton && (
-                <div className={`narracion-pie ${e.momento === 'plan' && l.variante?.plan.pasoAPaso ? 'dos-botones' : ''}`}>
+                <div className={`narracion-pie ${pasosDelPlan || ver ? 'dos-botones' : ''}`}>
                   {/* correcciones, C3: el plan también se ve paso a paso, desde el final de la variante */}
-                  {e.momento === 'plan' && l.variante?.plan.pasoAPaso && <BotonPasoAPaso titulo="Tu plan" pa={l.variante.plan.pasoAPaso} inicio={l.jugadas} orientacion={l.lado === 'w' ? 'white' : 'black'} />}
+                  {pasosDelPlan && <BotonPasoAPaso titulo="Tu plan" pa={pasosDelPlan} inicio={l.jugadas} orientacion={orientacion} />}
+                  {ver && <BotonVerQuePasa ver={ver} orientacion={orientacion} />}
                   <button type="button" className="boton primario" onClick={boton.accion} data-testid={boton.testid}>
                     {boton.texto}
                   </button>
