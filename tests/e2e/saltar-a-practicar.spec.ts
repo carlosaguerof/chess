@@ -78,9 +78,26 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
       const otra = vuelta === 'aprender' ? 'practicar' : 'aprender'
       await expect(page.getByTestId(`vuelta-${vuelta}`)).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByTestId(`vuelta-${otra}`)).toHaveAttribute('aria-checked', 'false')
-      // los mismos colores de los chips de hoy: Aprender con chip-rep, Practicar con chip-base
-      await expect(page.getByTestId(`vuelta-${vuelta}`)).toHaveClass(new RegExp(vuelta === 'aprender' ? 'chip-rep' : 'chip-base'))
+      // la vuelta en curso, siempre en verde (chip-rep) y en negritas; la otra, sin fondo y gris (Carlos, 2026-10-30:
+      // "que Practicar se ponga en verde cuando esté seleccionado y que Aprender se ponga un gris")
+      await expect(page.getByTestId(`vuelta-${vuelta}`)).toHaveClass(/chip-rep/)
       await expect(page.getByTestId(`vuelta-${otra}`)).not.toHaveClass(/chip-rep|chip-base/)
+      const estilo = (id: string) =>
+        page.getByTestId(id).evaluate((el) => {
+          const s = getComputedStyle(el)
+          return { fondo: s.backgroundColor, color: s.color, grosor: s.fontWeight }
+        })
+      const verde = await page.evaluate(() => {
+        const muestra = document.createElement('span')
+        muestra.className = 'chip chip-rep'
+        document.body.append(muestra)
+        const s = getComputedStyle(muestra)
+        const r = { fondo: s.backgroundColor, color: s.color }
+        muestra.remove()
+        return r
+      })
+      expect(await estilo(`vuelta-${vuelta}`), `${vuelta} escogida: el fondo y el color de chip-rep`).toEqual({ ...verde, grosor: '700' })
+      expect(await estilo(`vuelta-${otra}`), `${otra}: sin fondo y gris`).toEqual({ fondo: 'rgba(0, 0, 0, 0)', color: 'rgb(161, 159, 156)', grosor: '500' })
       // en la misma fila, con "Jugada N de M" a la derecha, y sin hacerla más alta que ese texto
       const m = await page.evaluate(() => {
         const caja = (s: string) => document.querySelector(`[data-testid="${s}"]`)!.getBoundingClientRect()
