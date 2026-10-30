@@ -297,6 +297,10 @@ describe('"Ver qué pasa" · en la lección', () => {
     const f = fotosDePasos(cambio.pa, cambio.inicio)
     const segunda = cambio.pa.pasos.findIndex((p, i) => i > 0 && p.titulo)
     expect(cambio.pa.pasos[segunda]!.reinicio).toEqual([])
+    // cuando la segunda frase regresa el tablero, lo dice, también si sola diría "Esta es la posición"
+    const short = verDespues(c, linea('v:avance-short'), 'aprender', 9)!
+    expect(short.pa.pasos.find((p, i) => i > 0 && p.titulo)!.frase).toBe('Regresamos a la posición después de 5...c5.')
+    expect(short.pa.pasos[0]!.frase).toBe('Esta es la posición después de 5...c5.')
     expect(f[segunda]!.fen).toBe(f[0]!.fen)
     // una habla de después y otra de antes: la ventana sale de antes, y la de después lleva mi jugada
     const clasica = verDespues(c, linea('v:clasica'), 'aprender', 11)!

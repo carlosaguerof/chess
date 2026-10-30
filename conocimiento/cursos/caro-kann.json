@@ -3973,7 +3973,8 @@
                     "tipo": "A4",
                     "de": "c3",
                     "a": "e4",
-                    "color": "rojo"
+                    "color": "rojo",
+                    "por": "c4"
                   }
                 ],
                 "fuente": [
@@ -4057,7 +4058,8 @@
                     "tipo": "A4",
                     "de": "c3",
                     "a": "e4",
-                    "color": "rojo"
+                    "color": "rojo",
+                    "por": "c4"
                   }
                 ],
                 "fuente": [
@@ -4097,6 +4099,14 @@
                 "frase": "9...Ch6: sacas el caballo y atacas g4.",
                 "jugadas": [
                   "Nh6"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "h6",
+                    "a": "g4",
+                    "color": "verde"
+                  }
                 ],
                 "fuente": [
                   "WB-3Af5",
@@ -4222,7 +4232,8 @@
                   "tipo": "A4",
                   "de": "c3",
                   "a": "e4",
-                  "color": "rojo"
+                  "color": "rojo",
+                  "por": "c4"
                 }
               ],
               "fuente": [
@@ -4262,6 +4273,14 @@
               "frase": "9...Ch6: sacas el caballo y atacas g4.",
               "jugadas": [
                 "Nh6"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "h6",
+                  "a": "g4",
+                  "color": "verde"
+                }
               ],
               "fuente": [
                 "WB-3Af5",
@@ -4393,7 +4412,8 @@
                     "tipo": "A2",
                     "de": "c6",
                     "a": "d4",
-                    "color": "verde"
+                    "color": "verde",
+                    "por": "d6"
                   }
                 ],
                 "fuente": [

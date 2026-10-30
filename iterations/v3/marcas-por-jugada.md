@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 49 de 140.** Más 80 frases del plan y del paso a paso.
+**Jugadas con marcas: 49 de 140.** Más 82 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -204,7 +204,9 @@
 | ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6, porque 0, paso 2 | 5...Ae4: llevas el alfil a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
 | ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, porque 0, paso 4 | Tu alfil de g6 se queda sin casillas seguras: g4 cubre f5 y h5, el caballo de c3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja); flecha c3→e4 (A4, roja) |
 | ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, cuidado 0, paso 4 | 8...Ae4: tu alfil se va a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, cuidado 0, paso 6 | 9...Ch6: sacas el caballo y atacas g4. | flecha h6→g4 (A2, verde) |
 | ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, errores Nc6, paso 4 | 8...Ae4: tu alfil se va a e4, donde lo ataca el caballo de c3. | flecha c3→e4 (A4, roja) |
+| ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5, errores Nc6, paso 6 | 9...Ch6: sacas el caballo y atacas g4. | flecha h6→g4 (A2, verde) |
 | ver de e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5 Nf4 Bh7, prepara 0, paso 3 | 9...Cc6: tu caballo sale y ataca d4. | flecha c6→d4 (A2, verde) |
 | ver de e4 c6 d4 d5 e5 Bf5 h4 h5, porque 0, paso 8 | Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja) |
 | ver de e4 c6 d4 d5 e5 Bf5 h4 h5, errores e6, paso 8 | Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. | flecha d1→d3 (A4, roja) |

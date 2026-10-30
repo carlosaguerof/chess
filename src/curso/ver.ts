@@ -110,6 +110,8 @@ function juntar(l: LineaCurso, ply: number, frases: Pick<FraseConVer, 'frase' | 
     f.ver.pasos.slice(vistos).forEach((p, i) => {
       const q: PasoLeer = { ...p }
       if (i === 0) q.titulo = f.frase
+      // la segunda frase siempre regresa el tablero, y lo dice
+      if (i === 0 && k > 0 && !vistos) q.frase = p.frase.replace('Esta es la posición', 'Regresamos a la posición')
       if (p.reinicio) q.reinicio = [...base, ...p.reinicio]
       else if (i === 0 && !vistos && (k > 0 || base.length)) q.reinicio = base
       pasos.push(q)

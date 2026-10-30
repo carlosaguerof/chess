@@ -249,6 +249,19 @@ test.describe('V1 · "Ver qué pasa"', () => {
         expect(medida.arriba, 'la ventana, dentro de la pantalla').toBeGreaterThanOrEqual(0)
         expect(medida.abajo).toBeLessThanOrEqual(medida.alto)
         expect(medida.boton, 'Siguiente, a la vista').toBeLessThanOrEqual(medida.alto)
+
+        // la ventana con dos frases y la línea de "Frase 1 de 2", la más alta: 6...h6 de la Clásica
+        await despuesDe(page, info, 'v:clasica', 'aprender', 11)
+        await page.getByTestId('ver-que-pasa').click()
+        await expect(page.getByTestId('paso-a-paso-cual')).toBeVisible()
+        const dos = await page.evaluate(() => {
+          const r = document.querySelector('[data-testid="paso-a-paso"]')!.getBoundingClientRect()
+          const b = document.querySelector('[data-testid="pap-siguiente"]')!.getBoundingClientRect()
+          return { arriba: r.top, abajo: r.bottom, boton: b.bottom, alto: innerHeight }
+        })
+        expect(dos.arriba, 'con dos frases, dentro de la pantalla').toBeGreaterThanOrEqual(0)
+        expect(dos.abajo).toBeLessThanOrEqual(dos.alto)
+        expect(dos.boton, 'con dos frases, Siguiente a la vista').toBeLessThanOrEqual(dos.alto)
       })
     })
 })
@@ -317,8 +330,8 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
     const nombre = `${l.id.slice(2)}-${ply + 1}-${v.campo}-${String(v.i).replace(/[^A-Za-z0-9]/g, '')}`
     for (let i = 0; i <= hasta; i++) {
       await expect(ventana(page)).toHaveAttribute('data-paso', String(i + 1))
-      // además del primero y el último, cada paso con marcas
-      if (i === desde || i === hasta || abierta.pa.pasos[i]!.marcas?.length) await foto(`${nombre}-${i === desde ? 'primero' : i === hasta ? 'ultimo' : `paso-${i + 1}`}`, { momento: `${lugar}: paso ${i + 1} de ${abierta.pa.pasos.length}`, frase: `Título: ${fig(v.frase)}<br>Paso: ${fig(abierta.pa.pasos[i]!.frase)}`, marcas: await marcasVistas('tablero-paso-a-paso') })
+      // además del primero y el último, cada paso con marcas (de esta frase: en una ventana con dos, se sale al pasar)
+      if (i === desde || i === hasta || (i > desde && abierta.pa.pasos[i]!.marcas?.length)) await foto(`${nombre}-${i === desde ? 'primero' : i === hasta ? 'ultimo' : `paso-${i + 1}`}`, { momento: `${lugar}: paso ${i + 1} de ${abierta.pa.pasos.length}`, frase: `Título: ${fig(v.frase)}<br>Paso: ${fig(abierta.pa.pasos[i]!.frase)}`, marcas: await marcasVistas('tablero-paso-a-paso') })
       if (i < hasta) await page.getByTestId('pap-siguiente').click()
     }
     await page.keyboard.press('Escape')
@@ -364,6 +377,9 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
     await foto('375x667-pie', { momento: 'A 375×667: el pie, después de 3...♗f5', frase: 'la explicación más larga con "Ver"' })
     await page.getByTestId('ver-que-pasa').click()
     await foto('375x667-ventana', { momento: 'A 375×667: la ventana con el título más largo', frase: 'el título más largo' })
+    await despuesDe(page, info, 'v:clasica', 'aprender', 11)
+    await page.getByTestId('ver-que-pasa').click()
+    await foto('375x667-dos-frases', { momento: 'A 375×667: una ventana con dos frases, después de 6...h6 de la Clásica', frase: 'Frase 1 de 2' })
   }
 
   if (info.project.name === 'escritorio')
