@@ -79,7 +79,8 @@ export function CursoPagina({ id }: { id: string }) {
         <IconoAtras /> Aperturas y defensas
       </a>
       <div className="pagina-apertura-tablero">
-        <TableroMini fen={fenDe(['e4', 'c6'])} orientacion={c.color === 'w' ? 'white' : 'black'} etiqueta={c.nombre} />
+        {/* con coordenadas, como los tableros de leer: todo tablero del curso las lleva (punto 1 del feedback; 2026-10-30) */}
+        <TableroMini fen={fenDe(['e4', 'c6'])} orientacion={c.color === 'w' ? 'white' : 'black'} etiqueta={c.nombre} coordenadas />
       </div>
       <div>
         <h1>{c.nombre}</h1>

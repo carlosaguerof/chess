@@ -29,6 +29,8 @@ export function Marco(props: { actual: string; secciones: EntradaMenu[]; mas: En
   const activo = (r: string) => (r === '/' ? props.actual === '/' : props.actual.startsWith(r) || (r === '/cursos' && props.actual.startsWith('/curso')))
   return (
     <div className="marco">
+      {/* arriba, del alto de la hora del iPhone: lo que se desliza no se ve detrás de ella (2026-10-30) */}
+      <div className="franja-arriba" aria-hidden="true" data-testid="franja-arriba" />
       <nav className="navegacion" aria-label="Secciones">
         <a className="marca" href="#/">
           <span className="marca-pieza">♞</span>

@@ -72,9 +72,13 @@ h1, h2, h3 { margin: 0; }
 }
 .nav-item svg { width: 24px; height: 24px; }
 .nav-item.activo, .nav-item:hover { color: #fff; }
-.contenido { padding: 16px 16px calc(var(--alto-nav) + 24px); max-width: 720px; margin: 0 auto; }
+/* 2026-10-30: el espacio de abajo cuenta la barra de inicio del iPhone, como la barra de navegación ("Palabras del curso"
+   quedaba tapado); arriba, lo de la hora: al cargar, nada empieza detrás de ella */
+.contenido { padding: calc(16px + var(--seguro-arriba)) 16px calc(var(--alto-nav) + var(--seguro-abajo) + 24px); max-width: 720px; margin: 0 auto; }
+/* arriba, una franja del color del fondo, del alto de la hora: lo que se desliza no se ve detrás de ella */
+.franja-arriba { position: fixed; top: 0; left: 0; right: 0; height: var(--seguro-arriba); background: var(--fondo); z-index: 35; }
 .menu-mas-fondo { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.4); }
-.menu-mas { position: fixed; right: 12px; bottom: calc(var(--alto-nav) + 12px); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 6px; min-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.menu-mas { position: fixed; right: 12px; bottom: calc(var(--alto-nav) + var(--seguro-abajo) + 12px); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 6px; min-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
 .menu-mas a { display: block; padding: 12px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; }
 .menu-mas a:hover { background: var(--fondo-hover); }
 
@@ -103,7 +107,7 @@ h1, h2, h3 { margin: 0; }
 .volver { display: inline-flex; align-items: center; gap: 4px; color: var(--texto-apagado); text-decoration: none; font-weight: 600; }
 .volver svg { width: 20px; height: 20px; }
 .jugar { display: flex; flex-direction: column; padding-bottom: 150px; }
-.jugar-escogido { position: sticky; top: 0; z-index: 10; background: var(--fondo); margin: -16px -16px 0; padding: 14px 16px 10px; }
+.jugar-escogido { position: sticky; top: var(--seguro-arriba); z-index: 10; background: var(--fondo); margin: -16px -16px 0; padding: 14px 16px 10px; }
 .jugar-globo-fila { display: flex; align-items: center; gap: 14px; }
 .globo { position: relative; flex: 1; margin: 0; background: #fff; color: #1d1c1a; border-radius: 14px; padding: 12px 14px; font-size: 15px; line-height: 1.35; font-weight: 500; }
 .globo::before { content: ''; position: absolute; left: -7px; top: 50%; margin-top: -8px; border-style: solid; border-width: 8px 8px 8px 0; border-color: transparent #fff transparent transparent; }
@@ -493,7 +497,9 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
   .leccion-curso .tablero-jugable { position: relative; width: min(100cqw, 100cqh); margin: 0 auto; }
   .leccion-curso .leccion-panel { flex: 1 0 auto; }
   .leccion-curso .narracion, .leccion-curso .resumen-texto { flex: 1 1 0; min-height: 140px; overflow-y: auto; }
-  .leccion-curso .narracion-pie { position: sticky; bottom: 0; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
+  /* la franja llega hasta el borde de abajo de la narración: pegada en bottom 0 quedaba arriba de su relleno de 10, y por
+     ahí se asomaba el texto que pasa debajo del botón (2026-10-30). Baja esos 10 (bottom y margin) y los cubre con el suyo */
+  .leccion-curso .narracion-pie { position: sticky; bottom: -10px; margin-bottom: -10px; padding-bottom: 10px; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
   .leccion-curso .linea-leccion { white-space: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
   /* el resumen, no más alto que la lección: así el tablero no cambia de tamaño al terminar */
   .leccion-curso .resumen-curso { flex: 1 1 auto; gap: 8px; }
