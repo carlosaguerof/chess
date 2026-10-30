@@ -20,6 +20,8 @@ Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Mand
 
 **Los estilos viven en un solo archivo** (`src/estilos.css`): antes de crear una clase, se busca ahí, porque un nombre repetido pisa al viejo sin que falle ninguna prueba (pasó con `.globo` e `.info`, 2026-10-29). La revisión mira las capturas de después, no solo el verde de las pruebas.
 
+**Un botón con jugadas en su texto lleva el texto en un solo elemento** (`<span>`). `.boton` es `inline-flex`: cada trozo del texto (las letras, la figura ♘ de `<Texto>`, lo demás) sería una columna aparte, separada por el `gap` ("Siguiente variante: Avance: 4." · "♘" · "c3 (Van der Wiel)", Nota 1 del 2026-10-29). Y un botón dice lo justo: el de la siguiente variante, "Siguiente variante"; su nombre se ve al abrirla.
+
 **Lo que a Carlos le gusta y se protege:** lo ordenado y sencillo de chess.com; la ventana de tiempo (tres grupos de tres y "Sin tiempo"); la lista limpia de todas las aperturas.
 
 ## En el iPhone: nunca zoom ni la página corrida de lado
@@ -31,6 +33,7 @@ Desde el bug del 2026-10-28 (`log.md`): jugando, la lista de jugadas en un rengl
 3. **Los campos de texto, con letra de 16 px o más:** con menos, Safari hace zoom al tocarlos.
 4. **La prueba:** `tests/e2e/zoom-iphone.spec.ts`, en el perfil del iPhone: tras cada jugada, el ancho de la página no pasa del de la pantalla y la escala sigue en 1. Una pantalla nueva con tablero entra a esa prueba.
 5. **Un botón fijo sobre un texto que se desliza va en una franja a todo lo ancho,** del color del panel. Si solo el botón tapa el texto, el renglón de abajo se asoma cortado a su lado (el plan de la Tal, C9, 2026-10-29). La prueba, en el mismo archivo.
+6. **La lección del curso mide lo que se ve de la pantalla, sin el scroll de la página** (2026-10-29; Carlos, en su iPhone 16 Pro: "dos barras de scroll", la de la narración se queda y la de la página sobra). Usa el alto visible de verdad (`100dvh`) menos las barras del sistema (`env(safe-area-inset-top)` y `env(safe-area-inset-bottom)`), igual en la app instalada y en Safari. **La narración toma el alto que sobra,** con un mínimo de 140 (unas tres líneas más su botón), y se desliza por dentro. **Solo si con 140 no cabe, el tablero se achica,** centrado, sin bajar de 280; si ni así cabe (Safari con sus barras en un iPhone SE, el celular de lado), la página se desliza. Lo que crecería a lo alto no le quita espacio: la línea de jugadas va en un renglón que se desliza, con la última jugada a la vista, y el resumen usa el espacio de la narración, con sus salidas abajo. La prueba: `tests/e2e/leccion-cabe.spec.ts`, en cinco pantallas (375×667, 360×740, 390×844, 402×874 y 430×932) y en los momentos más altos de la lección.
 
 ## Jugar contra un bot
 
