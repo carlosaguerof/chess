@@ -465,14 +465,30 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .narracion-pie { display: flex; gap: 8px; }
 .narracion-pie.dos-botones .boton { flex: 1 1 0; min-width: 0; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
 .narracion .boton { min-width: 140px; }
-/* en el iPhone, la narración tiene una altura fija y se desplaza: Pista, Respuesta y Atrás no salen de la pantalla.
-   El botón va en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su lado (C9) */
+/* En el celular, la lección mide lo que se ve de la pantalla, sin el scroll de la página (2026-10-29): el alto visible de
+   verdad (100dvh) menos las barras del sistema, en la app instalada y en Safari. La narración toma el alto que sobra (140 o
+   más) y se desliza por dentro, así Pista, Respuesta, Atrás y Reiniciar no salen de la pantalla. Solo si con 140 no cabe, el
+   tablero se achica, centrado, hasta 280; si ni así cabe, la página se desliza. El resumen, igual (Nota 1).
+   El botón de la narración va en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su
+   lado (C9). La línea, en un solo renglón que se desliza: si se partiera, quitaría alto a la narración y al tablero. */
 @media (max-width: 899px) {
-  .leccion-curso .narracion { height: 200px; min-height: 0; overflow-y: auto; }
+  .leccion-curso { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 0; padding: max(8px, env(safe-area-inset-top)) 0 max(12px, env(safe-area-inset-bottom)); }
+  .leccion-curso .leccion-columna { display: contents; }
+  .leccion-curso .partida-arriba { flex: none; }
+  /* el tablero toma lo ancho de la pantalla y cede alto solo si hace falta: mide el lado menor de su espacio (cqw, cqh) */
+  .leccion-curso .partida-tablero { flex: 0 1 100vw; min-height: 280px; container-type: size; }
+  .leccion-curso .tablero-jugable { position: relative; width: min(100cqw, 100cqh); margin: 0 auto; }
+  .leccion-curso .leccion-panel { flex: 1 0 auto; }
+  .leccion-curso .narracion, .leccion-curso .resumen-texto { flex: 1 1 0; min-height: 140px; overflow-y: auto; }
   .leccion-curso .narracion-pie { position: sticky; bottom: 0; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
+  .leccion-curso .linea-leccion { white-space: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+  /* el resumen, no más alto que la lección: así el tablero no cambia de tamaño al terminar */
+  .leccion-curso .resumen-curso { flex: 1 1 auto; gap: 8px; }
+  .leccion-curso .resumen-curso > .enlace { padding: 6px 10px; }
+  .leccion-curso .resumen-texto p { margin: 0; }
 }
-.botones-curso { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.empezar-de-nuevo { align-self: center; font-size: 14px; }
+.botones-curso { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.resumen-texto { display: flex; flex-direction: column; gap: 10px; }
 .linea-leccion { min-height: 1.7em; font-size: 15px; }
 .lista-curso .titulo-grupo { list-style: none; padding: 8px 2px 0; }
 .lista-curso .titulo-grupo h2 { font-size: 16px; margin: 0; color: var(--texto-suave); }

@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Texto } from '../componentes/Notacion.tsx'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { uciAObjeto } from '../ajedrez/reglas.ts'
 import { TableroJugable } from '../componentes/TableroJugable.tsx'
 import { Dialogo } from '../componentes/Dialogo.tsx'
-import { IconoAtras, IconoFoco, IconoOjo } from '../componentes/Iconos.tsx'
+import { IconoAtras, IconoFoco, IconoOjo, IconoReiniciar } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
 import { marcarLeccion } from '../repertorio/estado.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
@@ -53,6 +53,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   const [notaMotor, setNotaMotor] = useState<string | null>(null)
   const turnoError = useRef(0)
   const narracion = useRef<HTMLDivElement>(null)
+  const linea = useRef<HTMLParagraphElement>(null)
   const tablero = useMemo(() => posicion(l.jugadas, e.ply), [l, e.ply])
   const lineas = useMemo(() => lineasDe(c), [c])
   const esVariante = l.tipo === 'variante'
@@ -76,6 +77,11 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     const ayudas = narracion.current?.querySelectorAll('[data-tipo="pista"], [data-tipo="respuesta"]')
     ayudas?.[ayudas.length - 1]?.scrollIntoView?.({ block: 'nearest' })
   }, [e.momento, e.ply, e.ayuda])
+
+  // en el celular la línea va en un renglón que se desliza (para que la lección quepa en la pantalla): la última jugada, a la vista
+  useEffect(() => {
+    linea.current?.scrollTo?.({ left: linea.current.scrollWidth })
+  }, [e.ply])
 
   // el avance se guarda en el teléfono: se retoma donde me quedé
   useEffect(() => {
@@ -222,21 +228,8 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
             l={l}
             e={e}
             siguiente={siguienteLinea ? () => navegar(`/curso/${encodeURIComponent(c.id)}/linea/${encodeURIComponent(siguienteLinea.id)}`) : () => navegar(`/curso/${encodeURIComponent(c.id)}${esVariante ? '/errores' : ''}`)}
-            textoSiguiente={
-              siguienteLinea ? (
-                esVariante ? (
-                  <>
-                    Siguiente variante: <Texto t={siguienteLinea.nombre} />
-                  </>
-                ) : (
-                  'Siguiente «¿Y si…?»'
-                )
-              ) : esVariante ? (
-                'Errores y trampas'
-              ) : (
-                'Volver al curso'
-              )
-            }
+            // Nota 1 (2026-10-29): solo "Siguiente variante"; su nombre se ve al abrirla
+            textoSiguiente={siguienteLinea ? (esVariante ? 'Siguiente variante' : 'Siguiente «¿Y si…?»') : esVariante ? 'Errores y trampas' : 'Volver al curso'}
             repetir={() => setE(empezar(l, 'aprender'))}
             urlCurso={urlCurso}
           />
@@ -248,7 +241,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
                 Jugada {n} de {m}
               </span>
             </div>
-            <p className="linea-jugadas linea-leccion" data-testid="linea">
+            <p className="linea-jugadas linea-leccion" ref={linea} data-testid="linea">
               {e.ply > 0 ? <Texto t={lineaHasta(l.jugadas, e.ply)} /> : ' '}
             </p>
             <div className="narracion" ref={narracion} data-testid="narracion" role="status" aria-live="polite">
@@ -287,10 +280,12 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
                 <IconoAtras />
                 <span>Atrás</span>
               </button>
+              {/* antes era un enlace debajo de la fila y la página ya no cabía en el iPhone (2026-10-29); pregunta antes, igual */}
+              <button type="button" className="boton-icono" onClick={() => setConfirmar(true)} data-testid="reiniciar">
+                <IconoReiniciar />
+                <span>Reiniciar</span>
+              </button>
             </div>
-            <button type="button" className="enlace empezar-de-nuevo" onClick={() => setConfirmar(true)} data-testid="empezar-de-nuevo">
-              Empezar de nuevo
-            </button>
           </>
         )}
       </aside>
@@ -312,35 +307,38 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
 }
 
 /** Al terminar: la línea en un renglón, la idea clave y en qué me equivoqué, con tres salidas (diseño §4). */
-function Resumen(props: { l: LineaCurso; e: EstadoCiclo; siguiente: () => void; textoSiguiente: ReactNode; repetir: () => void; urlCurso: string }) {
+function Resumen(props: { l: LineaCurso; e: EstadoCiclo; siguiente: () => void; textoSiguiente: string; repetir: () => void; urlCurso: string }) {
   const { l, e } = props
   const t = tropiezos(e)
   return (
     <div className="fin-leccion resumen-curso" data-testid="resumen-variante">
-      <p className="etiqueta">{l.variante ? 'Variante terminada' : 'Bien castigado'}</p>
-      <h2><Texto t={l.nombre} /></h2>
-      <p className="linea-jugadas" data-testid="resumen-linea">
-        <Texto t={lineaHasta(l.jugadas, l.jugadas.length)} />
-      </p>
-      <p data-testid="resumen-idea">
-        <strong>La idea: </strong>
-        <Texto t={l.variante ? l.variante.idea : (l.error?.final ?? '')} />
-      </p>
-      {l.variante && (
-        <div data-testid="resumen-tropiezos">
-          <strong>{t.length === 0 ? 'Sin errores ni ayuda en Practicar.' : 'En qué te equivocaste:'}</strong>
-          {t.length > 0 && (
-            <ul className="lista-tropiezos">
-              {t.map((x) => (
-                <li key={x.ply}>
-                  <Texto t={jugadaEs(l.jugadas[x.ply]!, x.ply)} />: {[x.paso.fallos > 0 ? `${x.paso.fallos} ${x.paso.fallos === 1 ? 'error' : 'errores'}` : null, x.paso.pista ? 'pediste Pista' : null, x.paso.respuesta ? 'viste la Respuesta' : null].filter(Boolean).join(', ')}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-      <button type="button" className="boton primario grande" onClick={props.siguiente} data-testid="salida-siguiente">
+      {/* en el celular, el texto usa el espacio de la narración y se desliza por dentro; las salidas quedan abajo, a la vista (Nota 1) */}
+      <div className="resumen-texto" data-testid="resumen-texto">
+        <p className="etiqueta">{l.variante ? 'Variante terminada' : 'Bien castigado'}</p>
+        <h2><Texto t={l.nombre} /></h2>
+        <p className="linea-jugadas" data-testid="resumen-linea">
+          <Texto t={lineaHasta(l.jugadas, l.jugadas.length)} />
+        </p>
+        <p data-testid="resumen-idea">
+          <strong>La idea: </strong>
+          <Texto t={l.variante ? l.variante.idea : (l.error?.final ?? '')} />
+        </p>
+        {l.variante && (
+          <div data-testid="resumen-tropiezos">
+            <strong>{t.length === 0 ? 'Sin errores ni ayuda en Practicar.' : 'En qué te equivocaste:'}</strong>
+            {t.length > 0 && (
+              <ul className="lista-tropiezos">
+                {t.map((x) => (
+                  <li key={x.ply}>
+                    <Texto t={jugadaEs(l.jugadas[x.ply]!, x.ply)} />: {[x.paso.fallos > 0 ? `${x.paso.fallos} ${x.paso.fallos === 1 ? 'error' : 'errores'}` : null, x.paso.pista ? 'pediste Pista' : null, x.paso.respuesta ? 'viste la Respuesta' : null].filter(Boolean).join(', ')}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+      <button type="button" className="boton primario" onClick={props.siguiente} data-testid="salida-siguiente">
         {props.textoSiguiente}
       </button>
       <button type="button" className="boton secundario" onClick={props.repetir} data-testid="salida-repetir">
