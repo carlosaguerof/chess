@@ -49,9 +49,9 @@ test.describe('C3 · la lección nueva', () => {
     await expect(narracion(page)).toContainText('Te toca: 3...♗f5')
     // la línea en un renglón, sin lo que sigue
     await expect(page.getByTestId('linea')).toHaveText('1.e4 c6 2.d4 d5 3.e5')
-    // en mi turno, solo las marcas de las frases (el dibujo de Carlos y el ejemplo 2 de las reglas de las marcas):
-    // f6 y la L de g8 a f6 en rojo, y la flecha verde de 3...Af5; ninguna de la siguiente jugada que no sea clave
-    await expect(flechas(page)).toHaveCount(2)
+    // en mi turno, solo las marcas de la frase del rival (el dibujo de Carlos): f6 y la L de g8 a f6 en rojo. La flecha
+    // de 3...Af5 ya no va: antes de tu jugada, solo lo del rival (reglas de las marcas v1.3)
+    await expect(flechas(page)).toHaveCount(1)
     await expect(circulos(page)).toHaveCount(1)
 
     // mi jugada: correcta, y como hay algo que leer, la máquina espera a "Siguiente"
@@ -75,9 +75,10 @@ test.describe('C3 · la lección nueva', () => {
     await expect(narracion(page).locator('[data-tipo="incorrecta"]').first()).toBeVisible()
     await page.getByTestId('reintentar').click()
     await momento(page, 'tuTurno')
-    // vuelve "Te toca: 4...h5", jugada clave: solo su flecha
-    await expect(flechas(page)).toHaveCount(1)
-    await expect(page.locator('[data-marca="flecha"][data-de="h7"][data-a="h5"]')).toHaveCount(1)
+    // vuelve "Te toca: 4...h5": solo la amenaza del rival (A7: g4 y h5), sin la flecha de tu jugada (reglas v1.3)
+    await expect(flechas(page)).toHaveCount(2)
+    await expect(page.locator('[data-marca="flecha"][data-tipo="A7"][data-de="h4"][data-a="h5"]')).toHaveCount(1)
+    await expect(page.locator('[data-marca="flecha"][data-de="h7"][data-a="h5"]')).toHaveCount(0)
 
     // "Atrás" regresa una jugada mía (a 3...Af5)
     await page.getByTestId('atras').click()

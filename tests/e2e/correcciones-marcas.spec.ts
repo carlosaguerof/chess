@@ -1,25 +1,28 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { Chess } from 'chess.js'
-import { cursoNuevo, jugadasDeVariante, lineasDe } from '../../src/curso/datos.ts'
+import { cursoNuevo, jugadasDeVariante, lineaPorId } from '../../src/curso/datos.ts'
 import { marcasDelPaso } from '../../src/curso/marcas.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
-import { enPalabras, ligadas, type Ligada } from '../../scripts/marcas-por-jugada.ts'
-import type { Marca } from '../../src/curso/tipos.ts'
+import { jugadaEs } from '../../src/curso/textos.ts'
+import { explicacionDespues } from '../../src/curso/turno.ts'
+import type { Cambio } from '../../scripts/marcas-cambios.ts'
 import { jugar } from './_util.ts'
 
 /**
- * Correcciones de la Caro-Kann, C5: las marcas, con el interruptor interno prendido solo en esta prueba. R7 (en
- * Practicar, nada en tu turno; la segunda Pista ilumina la pieza; la Respuesta es la flecha A1), el dibujo de Carlos, y
- * una captura de cada frase que lleva marcas, en los dos perfiles: iterations/v3/capturas/marcas/<perfil>/, con su
- * índice (indice.md). Las capturas del iPhone, una sola corrida (y a escala CSS, para no cargar la memoria de imagen).
+ * Las marcas en el tablero (correcciones de la Caro-Kann, C5), con las reglas v1.3 (2026-10-30): lo del rival antes de
+ * tu jugada, lo tuyo después; lo pegado no se marca, salvo A5; A7, el plan o la amenaza del rival, en rojo punteado.
+ * R7 en la pantalla (en Practicar, nada en tu turno; ninguna marca ni frase que adelante una jugada que viene), los
+ * ejemplos de Carlos, y (`@marcas`) una captura de cada momento cuyas marcas cambiaron con la v1.3, más los seis
+ * ejemplos, en iterations/v3/capturas/marcas-v1.3/<perfil>/, con su índice. La lista de momentos sale de
+ * `scripts/marcas-cambios.ts` (cambios.json). Las del iPhone, en Chromium emulando el iPhone 16 Pro (402×874, táctil).
  */
 const c = cursoNuevo('caro-kann:b')!
-const CARPETA = 'iterations/v3/capturas/marcas'
+const CARPETA = 'iterations/v3/capturas/marcas-v1.3'
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const capa = (page: Page, testid = 'tablero') => page.getByTestId(testid).first().locator('[data-marca]')
-const prender = (page: Page) => page.addInitScript(() => localStorage.setItem('chess.interno.marcas', '1'))
+const flecha = (page: Page, de: string, a: string) => page.locator(`[data-marca="flecha"][data-de="${de}"][data-a="${a}"]`)
 
 async function abrirEn(page: Page, linea: string, vuelta: 'aprender' | 'practicar', ply: number) {
   await page.goto('/#/')
@@ -35,7 +38,60 @@ const uci = (jugadas: string[], ply: number) => {
   return j.from + j.to + (j.promotion ?? '')
 }
 
-test.describe('Correcciones · C5 · las marcas (interruptor prendido)', () => {
+/** Abre una jugada mía de una línea: en mi turno, o ya jugada (después). */
+async function abrirJugada(page: Page, info: Parameters<typeof jugar>[1], linea: string, vuelta: 'aprender' | 'practicar', ply: number, despues: boolean) {
+  await abrirEn(page, linea, vuelta, ply)
+  await momento(page, 'tuTurno')
+  if (!despues) return
+  await jugar(page, info, uci(lineaPorId(c, linea)!.jugadas, ply))
+  // si en Practicar todas las frases adelantan una jugada, no hay nada que leer: "Correcto" y sigue el rival
+  await momento(page, explicacionDespues(c, lineaPorId(c, linea)!, vuelta, ply).length ? 'leer' : 'rival')
+}
+
+type Foto = (nombre: string, fila: { momento: string; frases: string; antes: string; despues: string }, que?: Page | Locator) => Promise<void>
+const fig = (t: string) => mostrarTexto(t, 'figuras').replace(/\|/g, '\\|')
+
+/** Abre cada momento de una lista de `scripts/marcas-cambios.ts`, revisa cuántas marcas se ven y le saca su captura. */
+async function capturarMomentos(page: Page, info: Parameters<typeof jugar>[1], cambios: Cambio[], foto: Foto) {
+  for (const x of cambios) {
+    const frases = x.frases.map((f) => `«${fig(f.texto)}»${f.despues === null ? ' (no se muestra en Practicar)' : ''}`).join('<br>')
+    const fila = { frases, antes: x.antes.join('; '), despues: x.despues.join('; ') + (x.motivo ? ` _(${x.motivo})_` : '') }
+    const tambien = x.tambien.length ? ` (igual en ${x.tambien.map((t) => lineaPorId(c, t)!.nombre).join(', ')})` : ''
+    if (x.tipo === 'te-toca' || x.tipo === 'despues-aprender' || x.tipo === 'despues-practicar') {
+      const l = lineaPorId(c, x.linea!)!
+      const vuelta = x.tipo === 'despues-practicar' ? 'practicar' : 'aprender'
+      await abrirJugada(page, info, l.id, vuelta, x.ply!, x.tipo !== 'te-toca')
+      await expect(capa(page), x.id).toHaveCount(x.despues.length)
+      const cuando = x.tipo === 'te-toca' ? 'Aprender, antes de' : `${vuelta === 'aprender' ? 'Aprender' : 'Practicar'}, después de`
+      await foto(`${x.tipo}-${l.id.slice(2)}-${x.ply! + 1}`, { ...fila, momento: `${fig(l.nombre)}, ${cuando} ${fig(jugadaEs(l.jugadas[x.ply!]!, x.ply!))}${tambien}` })
+    } else if (x.tipo === 'plan') {
+      const l = lineaPorId(c, x.linea!)!
+      await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
+      await momento(page, 'plan')
+      await expect(capa(page), x.id).toHaveCount(x.despues.length)
+      await foto(`plan-${l.id.slice(2)}`, { ...fila, momento: `${fig(l.nombre)}, el plan` })
+    } else {
+      // el paso a paso: de una página de leer, o del plan de una variante
+      if (x.pieza) {
+        await page.goto(`/#/curso/caro-kann%3Ab/leer/${x.pieza}`)
+        await page.reload()
+        for (let j = 0; j < x.pagina!; j++) await page.getByTestId('pagina-siguiente').click()
+      } else {
+        const l = lineaPorId(c, x.linea!)!
+        await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
+        await momento(page, 'plan')
+      }
+      await page.getByTestId('ver-paso-a-paso').click()
+      for (let i = 0; i < x.paso!; i++) await page.getByTestId('pap-siguiente').click()
+      await expect(page.getByTestId('paso-a-paso')).toHaveAttribute('data-paso', String(x.paso! + 1))
+      await expect(capa(page, 'tablero-paso-a-paso'), x.id).toHaveCount(x.despues.length)
+      const donde = x.pieza ? `${{ idea: 'La idea', estructura: 'La estructura', repaso: 'El repaso' }[x.pieza]} ${x.pagina! + 1}` : `el plan de ${fig(lineaPorId(c, x.linea!)!.nombre)}`
+      await foto(`paso-${x.pieza ? `${x.pieza}-${x.pagina! + 1}` : `plan-${x.linea!.slice(2)}`}-${x.paso! + 1}`, { ...fila, momento: `Paso a paso, ${donde}, paso ${x.paso! + 1}` }, page.getByTestId('paso-a-paso'))
+    }
+  }
+}
+
+test.describe('Correcciones · las marcas (reglas v1.3)', () => {
   test('prendido de entrada (C7); con el interruptor en "0", la lección se ve como antes (sin la capa nueva)', async ({ page }) => {
     await abrirEn(page, 'v:avance-short', 'aprender', 5)
     await momento(page, 'tuTurno')
@@ -46,27 +102,35 @@ test.describe('Correcciones · C5 · las marcas (interruptor prendido)', () => {
     await expect(page.getByTestId('capa-marcas')).toHaveCount(0)
   })
 
-  test('el dibujo de Carlos: en "3.e5 le quita la casilla f6 a tu caballo", f6 en rojo y la flecha roja en L de g8 a f6, sin d6; y "Te toca: 3...♗f5", una flecha verde', async ({ page }, info) => {
-    await prender(page)
+  test('ejemplo 1 · el dibujo de Carlos: f6 en rojo y la L roja g8→f6, sin d6 y sin la verde de 3...♗f5 (antes de tu jugada, solo lo del rival)', async ({ page }) => {
     await abrirEn(page, 'v:avance-short', 'aprender', 5)
     await momento(page, 'tuTurno')
     await expect(page.getByTestId('narracion')).toContainText('le quita la casilla f6 a tu caballo')
     await expect(page.getByTestId('narracion')).toContainText('Te toca: 3...♗f5')
-    await expect(capa(page)).toHaveCount(3)
-    await expect(capa(page).and(page.locator('[data-marca="casilla"][data-en="f6"][data-color="rojo"]'))).toHaveCount(1)
-    await expect(capa(page).and(page.locator('[data-marca="flecha"][data-de="g8"][data-a="f6"][data-color="rojo"][data-puntos="3"]'))).toHaveCount(1)
-    await expect(capa(page).and(page.locator('[data-marca="flecha"][data-de="c8"][data-a="f5"][data-color="verde"][data-puntos="2"]'))).toHaveCount(1)
+    await expect(capa(page)).toHaveCount(2)
+    await expect(page.locator('[data-marca="casilla"][data-en="f6"][data-color="rojo"]')).toHaveCount(1)
+    await expect(flecha(page, 'g8', 'f6').and(page.locator('[data-color="rojo"][data-puntos="3"]'))).toHaveCount(1)
+    await expect(page.locator('[data-marca][data-color="verde"]')).toHaveCount(0)
     await expect(page.locator('[data-marca][data-en="d6"], [data-marca][data-a="d6"]')).toHaveCount(0)
-    // el alfil no se encierra: ninguna casilla en c8
-    await expect(page.locator('[data-marca="casilla"][data-en="c8"]')).toHaveCount(0)
-    mkdirSync(`${CARPETA}/${info.project.name}`, { recursive: true })
-    await page.waitForTimeout(250)
-    await page.screenshot({ path: `${CARPETA}/${info.project.name}/00-el-ejemplo-de-carlos.png`, scale: 'css' })
+    // la flecha de tu jugada sale solo con la Respuesta
+    await page.getByTestId('respuesta').click()
+    await expect(flecha(page, 'c8', 'f5').and(page.locator('[data-color="verde"][data-tipo="A1"]'))).toHaveCount(1)
   })
 
-  test('R7 · en Practicar, nada en tu turno; la segunda Pista ilumina la pieza; la Respuesta es la flecha; después de jugar, las de su explicación', async ({ page }, info) => {
-    await prender(page)
-    await abrirEn(page, 'v:avance-short', 'practicar', 5)
+  test('ejemplos 4 y 5 · la A7 en la Van der Wiel: e2→f4 y f4→g6, y h4→h5, rojas y punteadas', async ({ page }) => {
+    await abrirEn(page, 'v:avance-van-der-wiel', 'aprender', 11)
+    await momento(page, 'tuTurno')
+    await expect(capa(page)).toHaveCount(2)
+    for (const [de, a] of [['e2', 'f4'], ['f4', 'g6']]) await expect(flecha(page, de!, a!).and(page.locator('[data-tipo="A7"][data-color="rojo"][data-punteada="si"]'))).toHaveCount(1)
+    await abrirEn(page, 'v:avance-van-der-wiel', 'aprender', 13)
+    await momento(page, 'tuTurno')
+    await expect(capa(page)).toHaveCount(1)
+    await expect(flecha(page, 'h4', 'h5').and(page.locator('[data-tipo="A7"][data-color="rojo"][data-punteada="si"]'))).toHaveCount(1)
+    await expect(flecha(page, 'h7', 'h5')).toHaveCount(0)
+  })
+
+  test('R7 · en Practicar, nada en tu turno; la segunda Pista ilumina la pieza; la Respuesta es la flecha; después, nada que adelante tu siguiente jugada (el caso de Carlos: 3...♗f5 y ...e6)', async ({ page }, info) => {
+    await abrirEn(page, 'v:avance-van-der-wiel', 'practicar', 5)
     await momento(page, 'tuTurno')
     await expect(page.getByTestId('capa-marcas')).toHaveCount(0)
     await page.getByTestId('pista').click()
@@ -76,20 +140,30 @@ test.describe('Correcciones · C5 · las marcas (interruptor prendido)', () => {
     await expect(page.locator('[data-marca="casilla"][data-en="c8"][data-color="verde"]')).toHaveCount(1)
     await page.getByTestId('respuesta').click()
     await expect(capa(page)).toHaveCount(1)
-    await expect(page.locator('[data-marca="flecha"][data-de="c8"][data-a="f5"][data-color="verde"]')).toHaveCount(1)
+    await expect(flecha(page, 'c8', 'f5').and(page.locator('[data-color="verde"]'))).toHaveCount(1)
     await jugar(page, info, 'c8f5')
     await momento(page, 'leer')
-    // por qué ahora: ...e6 después (punteada: es plan)
-    await expect(capa(page)).toHaveCount(1)
-    await expect(page.locator('[data-marca="flecha"][data-punteada="si"][data-de="e7"][data-a="e6"]')).toHaveCount(1)
+    // ni la flecha punteada e7→e6 ni "Después vas a jugar ...e6": ...e6 es tu siguiente jugada (4.♘c3 e6)
+    await expect(page.getByTestId('narracion')).toContainText('Sacas tu alfil de casillas blancas fuera de la cadena de peones.')
+    await expect(page.getByTestId('narracion')).not.toContainText('e6')
+    await expect(page.getByTestId('capa-marcas')).toHaveCount(0)
     // y al jugar el rival, el tablero se limpia
     await page.getByTestId('siguiente').click()
     await momento(page, 'tuTurno')
     await expect(page.getByTestId('capa-marcas')).toHaveCount(0)
   })
 
+  test('ejemplo 6 · 6...♗g4 en el Cambio: la verde g4→d1 en Practicar, después de jugar; en Aprender, "Te toca" sin marcas tuyas', async ({ page }, info) => {
+    await abrirJugada(page, info, 'v:cambio', 'practicar', 11, true)
+    await expect(page.getByTestId('narracion')).toContainText('atacas a la dama de d1')
+    await expect(capa(page)).toHaveCount(1)
+    await expect(flecha(page, 'g4', 'd1').and(page.locator('[data-tipo="A2"][data-color="verde"][data-punteada="no"]'))).toHaveCount(1)
+    await abrirJugada(page, info, 'v:cambio', 'aprender', 11, false)
+    await expect(page.locator('[data-marca][data-color="verde"]')).toHaveCount(0)
+    await expect(flecha(page, 'f4', 'c7').and(page.locator('[data-color="rojo"]'))).toHaveCount(1)
+  })
+
   test('las páginas de leer: el tablero de la página queda limpio; las marcas van con su frase en el paso a paso', async ({ page }) => {
-    await prender(page)
     await page.goto('/#/curso/caro-kann%3Ab/leer/idea')
     await expect(page.getByTestId('tablero-leer')).toBeVisible()
     await expect(page.getByTestId('tablero-leer').locator('svg.cg-shapes line, svg.cg-shapes circle')).toHaveCount(0)
@@ -103,96 +177,99 @@ test.describe('Correcciones · C5 · las marcas (interruptor prendido)', () => {
     }
   })
 
-  test('@marcas una captura de cada frase que lleva marcas, con su índice', async ({ page }, info) => {
-    test.setTimeout(600_000)
-    await prender(page)
-    mkdirSync(`${CARPETA}/${info.project.name}`, { recursive: true })
+  test('@marcas una captura de cada momento cuyas marcas cambiaron con la v1.3, y los seis ejemplos, con su índice', async ({ page, isMobile }, info) => {
+    test.setTimeout(900_000)
+    if (isMobile) await page.setViewportSize({ width: 402, height: 874 })
+    const dir = `${CARPETA}/${info.project.name}`
+    mkdirSync(dir, { recursive: true })
     const indice: string[] = []
     let n = 1
-    const foto = async (nombre: string, frases: Ligada[], que: Page | Locator = page) => {
+    const foto = async (nombre: string, fila: { momento: string; frases: string; antes: string; despues: string }, que: Page | Locator = page) => {
       const archivo = `${String(n++).padStart(2, '0')}-${nombre}.png`
       await page.waitForTimeout(250)
-      await que.screenshot({ path: `${CARPETA}/${info.project.name}/${archivo}`, scale: 'css' })
-      indice.push(`| ${archivo} | ${frases.map((x) => `${x.donde}: «${mostrarTexto(x.frase, 'figuras')}»`).join('<br>')} | ${frases.flatMap((x) => x.marcas).map(enPalabras).join('; ')} |`)
-    }
-    const todas = ligadas(c)
-    const grupos = new Map<string, Ligada[]>()
-    for (const x of todas) for (const g of x.grupos) if (!g.startsWith('practicar:')) grupos.set(g, [...(grupos.get(g) ?? []), x])
-    const contar = (xs: Ligada[]) => new Set(xs.flatMap((x) => x.marcas).map((m: Marca) => `${m.de}-${m.a}-${m.en}`)).size
-    const lineas = lineasDe(c)
-    const dondeVa = (k: string) => {
-      const n = k.split(' ').length - 1
-      return lineas.find((l) => l.jugadas.slice(0, n + 1).join(' ') === k && n >= l.desde && (n % 2 === 0 ? 'w' : 'b') === l.lado)!
+      await que.screenshot({ path: `${dir}/${archivo}`, scale: 'css' })
+      indice.push(`| ${archivo} | ${fila.momento} | ${fila.frases} | ${fila.antes || '—'} | ${fila.despues || '—'} |`)
     }
 
-    // la lección: "Te toca" (con la frase del rival), y después de jugar (en Aprender)
-    for (const [g, xs] of grupos) {
-      if (!g.startsWith('tuTurno:') && !g.startsWith('aprender:')) continue
-      const k = g.slice(g.indexOf(':') + 1)
-      const l = dondeVa(k)
-      const ply = k.split(' ').length - 1
-      await abrirEn(page, l.id, 'aprender', ply)
+    // los seis ejemplos de §4 de las reglas, y el caso de Carlos en Practicar
+    const ejemplos: [string, string, 'aprender' | 'practicar', number, boolean, string, string][] = [
+      ['ejemplo-1-3e5', 'v:avance-short', 'aprender', 5, false, 'casilla f6 (A5, roja); flecha g8→f6 (A5, roja); flecha c8→f5 (A1, verde)', 'casilla f6 (A5, roja); flecha g8→f6 (A5, roja)'],
+      ['ejemplo-2-6Cf3-avance-c3', 'v:avance-c3', 'aprender', 11, false, 'flecha f3→d4 (A4, roja)', 'flecha f3→d4 (A4, roja)'],
+      ['ejemplo-3-5g4-van-der-wiel', 'v:avance-van-der-wiel', 'aprender', 9, false, '—', '— (pegada)'],
+      ['ejemplo-4-6Cge2-van-der-wiel', 'v:avance-van-der-wiel', 'aprender', 11, false, '—', 'flecha e2→f4 (A7, roja, punteada); flecha f4→g6 (A7, roja, punteada)'],
+      ['ejemplo-5-7h4-van-der-wiel', 'v:avance-van-der-wiel', 'aprender', 13, false, 'flecha h7→h5 (A1, verde)', 'flecha h4→h5 (A7, roja, punteada)'],
+      ['ejemplo-6-6Ag4-cambio-practicar', 'v:cambio', 'practicar', 11, true, 'flecha g4→d1 (A2, verde)', 'flecha g4→d1 (A2, verde)'],
+      ['caso-carlos-3Af5-van-der-wiel-practicar', 'v:avance-van-der-wiel', 'practicar', 5, true, 'flecha e7→e6 (A3, verde, punteada)', '— (...e6 es tu siguiente jugada)'],
+    ]
+    for (const [nombre, linea, vuelta, ply, despues, antes, ahora] of ejemplos) {
+      await abrirJugada(page, info, linea, vuelta, ply, despues)
+      const l = lineaPorId(c, linea)!
+      const frases = await page.getByTestId('narracion').locator('.mensaje-curso').allInnerTexts()
+      await foto(nombre, { momento: `${l.nombre}, ${vuelta === 'aprender' ? 'Aprender' : 'Practicar'}, ${despues ? 'después de' : 'antes de'} ${fig(jugadaEs(l.jugadas[ply]!, ply))}`, frases: frases.map((f) => `«${f.replace(/\n/g, ' ').replace(/\|/g, '\\|')}»`).join('<br>'), antes, despues: ahora })
+    }
+
+    // cada momento que cambió (cambios.json, de scripts/marcas-cambios.ts)
+    await capturarMomentos(page, info, JSON.parse(readFileSync(`${CARPETA}/cambios.json`, 'utf8')) as Cambio[], foto)
+    // S1 (la torre, 2026-10-30): la fila del interruptor, con cada vuelta escogida, siempre en verde la de ahora
+    for (const vuelta of ['practicar', 'aprender'] as const) {
+      await abrirEn(page, 'v:avance-tal', vuelta, 9)
       await momento(page, 'tuTurno')
-      if (g.startsWith('aprender:')) {
-        await jugar(page, info, uci(l.jugadas, ply))
-        await momento(page, 'leer')
-      }
-      await expect(capa(page), g).toHaveCount(contar(xs))
-      await foto(`${g.startsWith('tuTurno:') ? 'te-toca' : 'despues'}-${l.id.slice(2)}-${ply + 1}`, xs)
+      const fila = (await page.getByTestId('fase').boundingBox())!
+      const y = Math.max(0, fila.y - 16)
+      const archivo = `${String(n++).padStart(2, '0')}-s1-interruptor-${vuelta}.png`
+      await page.waitForTimeout(250)
+      await page.screenshot({ path: `${dir}/${archivo}`, scale: 'css', clip: { x: 0, y, width: page.viewportSize()!.width, height: fila.y + fila.height + 40 - y } })
+      const escogida = vuelta === 'aprender' ? 'Aprender' : 'Practicar'
+      const antes = vuelta === 'practicar' ? 'Practicar escogida, en gris (`chip-base`) y en negritas' : 'Aprender escogida, en verde (`chip-rep`): no cambia'
+      indice.push(`| ${archivo} | S1: la fila del interruptor, con ${escogida} escogida (Avance: 4.h4 (Tal), jugada 3) | — | ${antes} | ${escogida} en verde (\`chip-rep\`) y en negritas; la otra, sin fondo y gris |`)
     }
-    // el plan de cada variante
-    for (const [g, xs] of grupos) {
-      if (!g.startsWith('plan:')) continue
-      const v = c.variantes.find((x) => x.id === g.slice(5))!
-      await abrirEn(page, `v:${v.id}`, 'aprender', jugadasDeVariante(c, v).length)
-      await momento(page, 'plan')
-      await expect(capa(page), g).toHaveCount(contar(xs))
-      await foto(`plan-${v.id}`, xs)
-    }
-    // el paso a paso: cada paso con marcas, con lo que se acumula desde la última jugada
-    for (const pieza of ['idea', 'estructura', 'repaso'] as const)
-      for (const [k, pagina] of c.piezas[pieza].paginas.entries()) {
-        const pa = pagina.pasoAPaso!
-        if (!pa.pasos.some((p) => p.marcas?.length)) continue
-        await page.goto(`/#/curso/caro-kann%3Ab/leer/${pieza}`)
-        await page.reload()
-        for (let j = 0; j < k; j++) await page.getByTestId('pagina-siguiente').click()
-        await page.getByTestId('ver-paso-a-paso').click()
-        for (let i = 0; i < pa.pasos.length; i++) {
-          if (pa.pasos[i]!.marcas?.length) {
-            await expect(capa(page, 'tablero-paso-a-paso')).toHaveCount(marcasDelPaso(pa, i).length)
-            await foto(`paso-${pieza}-${k + 1}-${i + 1}`, todas.filter((x) => x.donde === `${pieza} ${k + 1}, paso ${i + 1}`), page.getByTestId('paso-a-paso'))
-          }
-          if (i < pa.pasos.length - 1) await page.getByTestId('pap-siguiente').click()
-        }
-      }
-    for (const v of c.variantes) {
-      const pa = v.plan.pasoAPaso!
-      if (!pa.pasos.some((p) => p.marcas?.length)) continue
-      await abrirEn(page, `v:${v.id}`, 'aprender', jugadasDeVariante(c, v).length)
-      await momento(page, 'plan')
-      await page.getByTestId('ver-paso-a-paso').click()
-      for (let i = 0; i < pa.pasos.length; i++) {
-        if (pa.pasos[i]!.marcas?.length) {
-          await expect(capa(page, 'tablero-paso-a-paso')).toHaveCount(marcasDelPaso(pa, i).length)
-          await foto(`paso-plan-${v.id}-${i + 1}`, todas.filter((x) => x.donde === `plan ${v.id} paso a paso, paso ${i + 1}`), page.getByTestId('paso-a-paso'))
-        }
-        if (i < pa.pasos.length - 1) await page.getByTestId('pap-siguiente').click()
-      }
-    }
-    if (info.project.name === 'escritorio')
+    if (info.project.name === 'escritorio' || !existsSync(`${CARPETA}/indice.md`))
       writeFileSync(
         `${CARPETA}/indice.md`,
         [
-          '# Las capturas de las marcas (correcciones de la Caro-Kann, C5)',
+          '# Las capturas de las marcas, v1.3 (2026-10-30)',
           '',
-          '> Generado por `tests/e2e/correcciones-marcas.spec.ts` (`@marcas`), con el interruptor interno prendido. Una captura por cada momento en que se ven marcas: "te toca" (la frase del rival y la tuya), "después" de tu jugada, el plan y cada paso del paso a paso. Las mismas en `iphone/` y `escritorio/`. `00-el-ejemplo-de-carlos.png` es su dibujo.',
+          '> Generado por `tests/e2e/correcciones-marcas.spec.ts` (`@marcas`). Primero los seis ejemplos de §4 de las reglas y el caso de Carlos en Practicar; después, una captura de cada momento cuyas marcas cambiaron con la v1.3, contra lo publicado (`ad72f10`), según `cambios.json` (`node scripts/marcas-cambios.ts`). Las mismas en `iphone/` (Chromium emulando el iPhone 16 Pro, 402×874, táctil) y `escritorio/` (Chromium, 1440×900). "Antes" es lo que se veía con las reglas v1.1; "después", lo que se ve hoy.',
           '',
-          '| Captura | Frases | Marcas |',
-          '|---|---|---|',
+          '| Captura | Momento | Frases | Antes | Después |',
+          '|---|---|---|---|---|',
           ...indice,
           '',
         ].join('\n'),
       )
+  })
+
+  test('@marcas2 la segunda vuelta de la revisión de la torre: las A2 nuevas y cada flecha punteada de una casilla, desde la 83, en el mismo índice', async ({ page, isMobile }, info) => {
+    test.setTimeout(900_000)
+    if (isMobile) await page.setViewportSize({ width: 402, height: 874 })
+    const dir = `${CARPETA}/${info.project.name}`
+    mkdirSync(dir, { recursive: true })
+    const filas: string[] = []
+    let n = 83
+    const foto: Foto = async (nombre, fila, que = page) => {
+      const archivo = `${String(n++).padStart(2, '0')}-${nombre}.png`
+      await page.waitForTimeout(250)
+      await que.screenshot({ path: `${dir}/${archivo}`, scale: 'css' })
+      filas.push(`| ${archivo} | ${fila.momento} | ${fila.frases} | ${fila.antes || '—'} | ${fila.despues || '—'} |`)
+    }
+    await capturarMomentos(page, info, JSON.parse(readFileSync(`${CARPETA}/cambios-2.json`, 'utf8')) as Cambio[], foto)
+    if (info.project.name !== 'escritorio') return
+    const SECCION = '## Segunda vuelta'
+    const antes = readFileSync(`${CARPETA}/indice.md`, 'utf8').split(SECCION)[0]!.trimEnd()
+    writeFileSync(
+      `${CARPETA}/indice.md`,
+      [
+        antes,
+        '',
+        `${SECCION} (la revisión de la torre: las A2 nuevas y la punteada de una casilla)`,
+        '',
+        '> Generado por `@marcas2`, desde `cambios-2.json` (`node scripts/marcas-cambios.ts <antes> --vuelta2 cambios-1.json`): lo que cambió desde la primera vuelta (lo tuyo desde lejos o saltando, A2, decisión 2 de la torre) y cada momento con una flecha punteada de una casilla, que ahora se dibuja a la medida (un tramo con rayas y la punta). "Antes" sigue siendo lo publicado (`ad72f10`).',
+        '',
+        '| Captura | Momento | Frases | Antes | Después |',
+        '|---|---|---|---|---|',
+        ...filas,
+        '',
+      ].join('\n'),
+    )
   })
 })

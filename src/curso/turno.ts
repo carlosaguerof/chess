@@ -1,7 +1,8 @@
 import type { DatosCurso, LineaCurso } from './tipos.ts'
 import type { Vuelta } from './ciclo.ts'
 import { textoMio } from './datos.ts'
-import { despues, jugadaEs, piezaQueSeMueve, pistaDe, posicion } from './textos.ts'
+import { frasesDe, jugadaEs, piezaQueSeMueve, pistaDe, posicion } from './textos.ts'
+import { frasesDespues } from './adelantar.ts'
 
 /**
  * Lo que la lección dice y marca en mi turno, según la vuelta y el escalón de ayuda que pedí (correcciones de la
@@ -52,12 +53,19 @@ export function vistaTuTurno(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: 
 /**
  * La explicación después de mi jugada (correcta, o tras ver la Respuesta). En Aprender, "qué hace" ya lo dijo "Te
  * toca": sigue por qué ahora → qué prepara → cuidado. En Practicar no se dijo nada antes: qué hace → por qué ahora →
- * qué prepara → cuidado.
+ * qué prepara → cuidado, sin las frases que adelantan una jugada que la línea todavía me va a pedir (2026-10-30,
+ * `src/curso/adelantar.ts`). Un campo con todas sus frases se lee tal cual.
  */
 export function explicacionDespues(c: DatosCurso, l: LineaCurso, vuelta: Vuelta, ply: number): string[] {
   const m = textoMio(c, l.jugadas, ply)
   if (!m) return []
-  return vuelta === 'practicar' && l.tipo === 'variante' ? [m.hace, ...despues(m)] : despues(m)
+  const frases = frasesDespues(c, l, vuelta, ply)
+  const campos = (['hace', 'porque', 'prepara', 'cuidado'] as const).filter((k) => frases.some((f) => f.campo === k))
+  return campos.map((k) => {
+    const suyas = frases.filter((f) => f.campo === k).map((f) => f.texto)
+    const texto = suyas.length === frasesDe(m[k] ?? '').length ? m[k]! : suyas.join(' ')
+    return k === 'cuidado' ? `Cuidado: ${texto}` : texto
+  })
 }
 
 /** La introducción de cada vuelta. */

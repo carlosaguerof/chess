@@ -23,10 +23,13 @@ import { marcasDelMomento, marcasNuevas } from '../curso/marcas.ts'
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
 
-/** Las dos opciones del interruptor de la vuelta, con los colores de los chips de antes. */
-const VUELTAS: { id: Vuelta; nombre: string; chip: string }[] = [
-  { id: 'aprender', nombre: 'Aprender', chip: 'chip-rep' },
-  { id: 'practicar', nombre: 'Practicar', chip: 'chip-base' },
+/**
+ * Las dos opciones del interruptor de la vuelta. La escogida va siempre en verde (`chip-rep`), sea Aprender o Practicar;
+ * la otra, en gris. El verde dice "aquí estás", no qué vuelta es (Carlos, 2026-10-30: antes Practicar escogido iba en gris).
+ */
+const VUELTAS: { id: Vuelta; nombre: string }[] = [
+  { id: 'aprender', nombre: 'Aprender' },
+  { id: 'practicar', nombre: 'Practicar' },
 ]
 
 /** La lección nueva (C3, diseño §4): una variante del curso o un "¿Y si…?" de Errores y trampas. */
@@ -253,7 +256,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
               {esVariante ? (
                 <div className="vueltas" role="radiogroup" aria-label="Vuelta" data-testid="interruptor-vuelta">
                   {VUELTAS.map((v) => (
-                    <button key={v.id} type="button" role="radio" aria-checked={e.vuelta === v.id} className={`chip ${e.vuelta === v.id ? v.chip : ''}`} onClick={() => cambiarVuelta(v.id)} data-testid={`vuelta-${v.id}`}>
+                    <button key={v.id} type="button" role="radio" aria-checked={e.vuelta === v.id} className={`chip ${e.vuelta === v.id ? 'chip-rep' : ''}`} onClick={() => cambiarVuelta(v.id)} data-testid={`vuelta-${v.id}`}>
                       {v.nombre}
                     </button>
                   ))}

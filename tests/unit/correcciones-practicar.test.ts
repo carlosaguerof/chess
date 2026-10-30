@@ -55,12 +55,19 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   it('después de mi jugada (correcta, o tras la Respuesta) espera "Siguiente" con la explicación: qué hace, por qué ahora y qué prepara', () => {
     for (const ply of misJugadas(tal)) {
       const m = textoMio(c, tal.jugadas, ply)!
-      const t = explicacionDespues(c, tal, 'practicar', ply)
-      expect(t[0]).toBe(m.hace)
-      expect(t.slice(1)).toEqual(despues(m))
-      if (m.porque) expect(t).toContain(m.porque)
-      if (m.prepara) expect(t).toContain(m.prepara)
+      expect(explicacionDespues(c, tal, 'practicar', ply)[0]).toBe(m.hace)
     }
+    // sin las frases que dicen una jugada que la línea todavía te va a pedir (2026-10-30): aquí, ...e6 hasta 6...e6
+    const sinE6 = (ply: number) => {
+      const m = textoMio(c, tal.jugadas, ply)!
+      return [m.hace, ...despues(m)].filter((t) => !t.includes('...e6'))
+    }
+    expect(explicacionDespues(c, tal, 'practicar', 5)).toEqual(sinE6(5))
+    expect(explicacionDespues(c, tal, 'practicar', 7)).toEqual(['Frenas el peón de h: ya no puede llegar a h5.'])
+    expect(explicacionDespues(c, tal, 'practicar', 9)).toEqual(sinE6(9))
+    // la última jugada: ya no queda nada que adelantar, se lee completa
+    const ultima = textoMio(c, tal.jugadas, 11)!
+    expect(explicacionDespues(c, tal, 'practicar', 11)).toEqual([ultima.hace, ...despues(ultima)])
     let e = pedirRespuesta(hastaMiTurno(empezar(tal, 'practicar')))
     const j = posicion(tal.jugadas, e.ply).move(tal.jugadas[e.ply]!)
     const r = intentar(tal, e, { san: j.san, desde: j.from, hasta: j.to }, { esperar: explicacionDespues(c, tal, e.vuelta, e.ply).length > 0 })

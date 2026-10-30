@@ -17,6 +17,10 @@
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --radio: 8px;
   --alto-nav: 64px;
+  /* las barras del sistema del iPhone (la hora arriba, la barra de inicio abajo), en un solo lugar: así una prueba
+     puede fijarlas con un estilo (Playwright no trae los env()) */
+  --seguro-arriba: env(safe-area-inset-top, 0px);
+  --seguro-abajo: env(safe-area-inset-bottom, 0px);
 }
 
 * { box-sizing: border-box; }
@@ -57,8 +61,8 @@ h1, h2, h3 { margin: 0; }
 /* ---------- marco: navegación abajo en el celular, a la izquierda en la computadora ---------- */
 .marco { min-height: 100vh; }
 .navegacion {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; height: calc(var(--alto-nav) + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; height: calc(var(--alto-nav) + var(--seguro-abajo));
+  padding-bottom: var(--seguro-abajo);
   display: flex; background: #21201d; border-top: 1px solid #3a3835;
 }
 .navegacion .marca { display: none; }
@@ -68,9 +72,13 @@ h1, h2, h3 { margin: 0; }
 }
 .nav-item svg { width: 24px; height: 24px; }
 .nav-item.activo, .nav-item:hover { color: #fff; }
-.contenido { padding: 16px 16px calc(var(--alto-nav) + 24px); max-width: 720px; margin: 0 auto; }
+/* 2026-10-30: el espacio de abajo cuenta la barra de inicio del iPhone, como la barra de navegación ("Palabras del curso"
+   quedaba tapado); arriba, lo de la hora: al cargar, nada empieza detrás de ella */
+.contenido { padding: calc(16px + var(--seguro-arriba)) 16px calc(var(--alto-nav) + var(--seguro-abajo) + 24px); max-width: 720px; margin: 0 auto; }
+/* arriba, una franja del color del fondo, del alto de la hora: lo que se desliza no se ve detrás de ella */
+.franja-arriba { position: fixed; top: 0; left: 0; right: 0; height: var(--seguro-arriba); background: var(--fondo); z-index: 35; }
 .menu-mas-fondo { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.4); }
-.menu-mas { position: fixed; right: 12px; bottom: calc(var(--alto-nav) + 12px); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 6px; min-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.menu-mas { position: fixed; right: 12px; bottom: calc(var(--alto-nav) + var(--seguro-abajo) + 12px); background: var(--fondo-panel-2); border-radius: var(--radio); padding: 6px; min-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
 .menu-mas a { display: block; padding: 12px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; }
 .menu-mas a:hover { background: var(--fondo-hover); }
 
@@ -99,7 +107,7 @@ h1, h2, h3 { margin: 0; }
 .volver { display: inline-flex; align-items: center; gap: 4px; color: var(--texto-apagado); text-decoration: none; font-weight: 600; }
 .volver svg { width: 20px; height: 20px; }
 .jugar { display: flex; flex-direction: column; padding-bottom: 150px; }
-.jugar-escogido { position: sticky; top: 0; z-index: 10; background: var(--fondo); margin: -16px -16px 0; padding: 14px 16px 10px; }
+.jugar-escogido { position: sticky; top: var(--seguro-arriba); z-index: 10; background: var(--fondo); margin: -16px -16px 0; padding: 14px 16px 10px; }
 .jugar-globo-fila { display: flex; align-items: center; gap: 14px; }
 .globo { position: relative; flex: 1; margin: 0; background: #fff; color: #1d1c1a; border-radius: 14px; padding: 12px 14px; font-size: 15px; line-height: 1.35; font-weight: 500; }
 .globo::before { content: ''; position: absolute; left: -7px; top: 50%; margin-top: -8px; border-style: solid; border-width: 8px 8px 8px 0; border-color: transparent #fff transparent transparent; }
@@ -112,7 +120,7 @@ h1, h2, h3 { margin: 0; }
 .casilla-bot .retrato { width: 100%; height: 100%; border-radius: 6px; }
 .casilla-bot.escogido { border-color: var(--acento); }
 .casilla-bot .estrellas { position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%); gap: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
-.jugar-acciones { position: fixed; left: 0; right: 0; bottom: calc(var(--alto-nav) + env(safe-area-inset-bottom)); z-index: 25; background: #262421; border-top: 1px solid #3a3835; padding: 10px 16px 12px; }
+.jugar-acciones { position: fixed; left: 0; right: 0; bottom: calc(var(--alto-nav) + var(--seguro-abajo)); z-index: 25; background: #262421; border-top: 1px solid #3a3835; padding: 10px 16px 12px; }
 .jugar-acciones-dentro { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
 .jugar-fila { display: flex; gap: 8px; }
 .boton-opciones { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 12px; background: var(--fondo-panel-2); border: 0; border-radius: var(--radio); font-weight: 700; font-size: 16px; cursor: pointer; }
@@ -124,7 +132,7 @@ h1, h2, h3 { margin: 0; }
 .colores button.activo { border-color: var(--acento); }
 .jugar-acciones .boton.grande { padding: 14px; }
 .dialogo-fondo.hoja-fondo { align-items: flex-end; padding: 0; }
-.hoja { width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
+.hoja { width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding-bottom: calc(22px + var(--seguro-abajo)); }
 .hoja .interruptor, .fila-opcion { background: var(--fondo-panel-2); }
 .fila-opcion { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 0; border-radius: var(--radio); padding: 14px; font-size: 16px; cursor: pointer; text-align: left; }
 .fila-opcion span { color: var(--texto-apagado); font-weight: 600; }
@@ -142,7 +150,7 @@ h1, h2, h3 { margin: 0; }
 /* ---------- partida ---------- */
 /* minmax(0, 1fr) y no 1fr: con 1fr la columna crecía con la lista de jugadas en un renglón y arrastraba al tablero y a la página
    a lo ancho (en el iPhone, Safari se alejaba solo). Así la columna mide la pantalla y la lista se desliza dentro de su espacio. */
-.partida { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
+.partida { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + var(--seguro-abajo)); }
 .partida-columna { display: flex; flex-direction: column; gap: 6px; }
 .partida-arriba { display: flex; align-items: center; gap: 4px; padding-left: 4px; }
 .partida-arriba .barra-jugador { flex: 1; }
@@ -270,13 +278,14 @@ h1, h2, h3 { margin: 0; }
 .enlace-chico.peligro { color: #ff8a80; }
 
 /* ---------- lecciones ---------- */
-.leccion { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + env(safe-area-inset-bottom)); }
+.leccion { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0 calc(16px + var(--seguro-abajo)); }
 .leccion-columna { display: flex; flex-direction: column; gap: 6px; }
 .leccion-titulo { display: flex; flex-direction: column; font-size: 13px; line-height: 1.3; }
 .leccion-titulo strong { font-size: 16px; }
 .leccion-panel { gap: 12px; }
 .leccion-fase { display: flex; align-items: center; justify-content: space-between; }
-/* el interruptor Aprender | Practicar (2026-10-30): dos chips en un contorno, la vuelta en curso con su color de antes.
+/* el interruptor Aprender | Practicar (2026-10-30): dos chips en un contorno. La vuelta en curso, siempre en verde
+   (chip-rep) y en negritas; la otra, sin fondo y gris: el verde dice "aquí estás", no qué vuelta es (Carlos, 2026-10-30).
    No agrega altura a la fila; lo que se toca crece 10 arriba y 10 abajo, dentro del margen del panel */
 .vueltas { display: inline-flex; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--borde); }
 .vueltas .chip { position: relative; margin: 0; border: 0; cursor: pointer; font-weight: 700; }
@@ -349,9 +358,9 @@ h1, h2, h3 { margin: 0; }
 
 /* en el celular, los tres botones de la partida siempre a la vista */
 @media (max-width: 899px) {
-  .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); z-index: 5; }
+  .partida-panel .botones-partida { position: sticky; bottom: 0; background: var(--fondo-panel); padding: 8px 0 calc(8px + var(--seguro-abajo)); z-index: 5; }
   /* con la guía, Pista y Respuesta se quedan a la vista justo encima de la barra fija (pase 2 de la T22) */
-  .partida-panel .panel-guia .botones-ayuda { position: sticky; bottom: calc(var(--alto-barra-partida, 76px) + env(safe-area-inset-bottom)); background: var(--fondo-panel); padding-top: 6px; z-index: 4; }
+  .partida-panel .panel-guia .botones-ayuda { position: sticky; bottom: calc(var(--alto-barra-partida, 76px) + var(--seguro-abajo)); background: var(--fondo-panel); padding-top: 6px; z-index: 4; }
 }
 
 /* ---------- reloj, tiempo y estrellas ---------- */
@@ -481,7 +490,7 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
    El botón de la narración va en una franja del color del panel, a todo lo ancho: el texto pasa por debajo sin asomarse a su
    lado (C9). La línea, en un solo renglón que se desliza: si se partiera, quitaría alto a la narración y al tablero. */
 @media (max-width: 899px) {
-  .leccion-curso { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 0; padding: max(8px, env(safe-area-inset-top)) 0 max(12px, env(safe-area-inset-bottom)); }
+  .leccion-curso { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 0; padding: max(8px, var(--seguro-arriba)) 0 max(12px, var(--seguro-abajo)); }
   .leccion-curso .leccion-columna { display: contents; }
   .leccion-curso .partida-arriba { flex: none; }
   /* el tablero toma lo ancho de la pantalla y cede alto solo si hace falta: mide el lado menor de su espacio (cqw, cqh) */
@@ -489,7 +498,9 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
   .leccion-curso .tablero-jugable { position: relative; width: min(100cqw, 100cqh); margin: 0 auto; }
   .leccion-curso .leccion-panel { flex: 1 0 auto; }
   .leccion-curso .narracion, .leccion-curso .resumen-texto { flex: 1 1 0; min-height: 140px; overflow-y: auto; }
-  .leccion-curso .narracion-pie { position: sticky; bottom: 0; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
+  /* la franja llega hasta el borde de abajo de la narración: pegada en bottom 0 quedaba arriba de su relleno de 10, y por
+     ahí se asomaba el texto que pasa debajo del botón (2026-10-30). Baja esos 10 (bottom y margin) y los cubre con el suyo */
+  .leccion-curso .narracion-pie { position: sticky; bottom: -10px; margin-bottom: -10px; padding-bottom: 10px; flex-shrink: 0; background: var(--fondo-panel); box-shadow: 0 -8px 10px var(--fondo-panel); }
   .leccion-curso .linea-leccion { white-space: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
   /* el resumen, no más alto que la lección: así el tablero no cambia de tamaño al terminar */
   .leccion-curso .resumen-curso { flex: 1 1 auto; gap: 8px; }

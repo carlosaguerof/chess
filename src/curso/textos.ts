@@ -10,6 +10,11 @@ import { textoMio } from './datos.ts'
  * pantalla lo convierte con `mostrarTexto`.
  */
 
+/** Corta un texto en frases: donde un punto va seguido de espacio y mayúscula ("1...c6" y "3.Cd2" no cortan). */
+export function frasesDe(texto: string): string[] {
+  return texto.split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑ¿«])/).filter(Boolean)
+}
+
 /** "3...Af5" (en la notación de las guías). */
 export const jugadaEs = (san: string, ply: number) => jugadaNumerada(sanAEspanol(san), ply)
 
