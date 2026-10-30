@@ -3170,6 +3170,24 @@
               "color": "verde"
             }
           ]
+        ],
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "d8",
+              "a": "b6",
+              "color": "verde",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "c5",
+              "a": "d4",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
         ]
       }
     },
@@ -3367,7 +3385,27 @@
       "pista": "Ya no hay alfil que encerrar: el peón que lo abre también sostiene d5.",
       "buenas": [
         "Qa5+"
-      ]
+      ],
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "c6",
+              "a": "c5",
+              "color": "verde",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "b8",
+              "a": "c6",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 g4 Be4": {
       "pregunta": "El peón de g4 ataca a tu alfil. ¿A dónde lo llevas, sin salir de su diagonal, para que además ataque algo?",
@@ -3483,7 +3521,27 @@
       "motor": [
         "M-bay-axf7"
       ],
-      "pista": "Piensa dónde queda tu rey después de retomar."
+      "pista": "Piensa dónde queda tu rey después de retomar.",
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "b8",
+              "a": "d7",
+              "color": "verde",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "g8",
+              "a": "f6",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 Ne2 e6": {
       "pregunta": "Tu alfil ya salió. ¿Cómo abres tu otro alfil y sostienes d5?",
@@ -3798,7 +3856,27 @@
         "Ngf6",
         "a5",
         "Rc8"
-      ]
+      ],
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "g8",
+              "a": "f6",
+              "color": "verde",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "d8",
+              "a": "c7",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 exd5 cxd5": {
       "pregunta": "Blancas cambió en d5. ¿Con qué retomas para seguir con un peón en el centro?",

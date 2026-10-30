@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 46 de 140.** Más 47 frases del plan y del paso a paso.
+**Jugadas con marcas: 49 de 140.** Más 47 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -23,7 +23,7 @@
 | 5.Ae2 | Avance: 4.c3 | del rival | no |  |
 | 5...c5 | Avance: 4.c3 | tuya | no |  |
 | 6.Cf3 | Avance: 4.c3 | del rival | sí | rival frase 1: flecha f3→d4 (A4, roja) |
-| 6...Cc6 | Avance: 4.c3 | tuya | sí | mía porque frase 1: flecha c6→d4 (A2, verde) |
+| 6...Cc6 | Avance: 4.c3 | tuya | sí | mía porque frase 1: flecha c6→d4 (A2, verde)<br>mía prepara frase 1: flecha d8→b6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | 4.Cc3 | Avance: 4.Cc3 (Van der Wiel) | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
 | 4...e6 | Avance: 4.Cc3 (Van der Wiel) | tuya | no |  |
 | 5.g4 | Avance: 4.Cc3 (Van der Wiel) | del rival | no |  |
@@ -39,7 +39,7 @@
 | 5.Ad3 | Avance: 4.h4 (Tal) | del rival | sí | rival frase 1: flecha d3→f5 (A4, roja) |
 | 5...Axd3 | Avance: 4.h4 (Tal) | tuya | no |  |
 | 6.Dxd3 | Avance: 4.h4 (Tal) | del rival | no |  |
-| 6...e6 | Avance: 4.h4 (Tal) | tuya | no |  |
+| 6...e6 | Avance: 4.h4 (Tal) | tuya | sí | mía prepara frase 1: flecha c6→c5 (A3, verde, punteada); flecha b8→c6 (A3, verde, punteada) |
 | 4.g4 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
 | 4...Ae4 | Avance: 4.g4 (Bayoneta) | tuya | sí | mía porque frase 1: flecha e4→h1 (A2, verde) |
 | 5.f3 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
@@ -47,7 +47,7 @@
 | 6.e6 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
 | 6...Dd6 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
 | 7.exf7+ | Avance: 4.g4 (Bayoneta) | del rival | no |  |
-| 7...Axf7 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
+| 7...Axf7 | Avance: 4.g4 (Bayoneta) | tuya | sí | mía prepara frase 1: flecha b8→d7 (A3, verde, punteada); flecha g8→f6 (A3, verde, punteada) |
 | 4.Ce2 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha e2→g3 (A7, roja, punteada); flecha g3→f5 (A7, roja, punteada) |
 | 4...e6 | Avance: 4.Ce2 (Bronstein) | tuya | no |  |
 | 5.Cg3 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
@@ -67,7 +67,7 @@
 | 9.Ad3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha d3→h7 (A4, roja) |
 | 9...Axd3 | Clásica: 3.Cc3 | tuya | no |  |
 | 10.Dxd3 | Clásica: 3.Cc3 | del rival | no |  |
-| 10...e6 | Clásica: 3.Cc3 | tuya | no |  |
+| 10...e6 | Clásica: 3.Cc3 | tuya | sí | mía prepara frase 1: flecha g8→f6 (A3, verde, punteada); flecha d8→c7 (A3, verde, punteada) |
 | 3.exd5 | Cambio: 3.exd5 | del rival | no |  |
 | 3...cxd5 | Cambio: 3.exd5 | tuya | no |  |
 | 4.Ad3 | Cambio: 3.exd5 | del rival | sí | rival frase 1: casilla f5 (A5, roja); flecha c8→f5 (A5, roja) |
