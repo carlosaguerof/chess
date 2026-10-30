@@ -533,3 +533,13 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** Carlos vio en su iPhone "Seguir: Avance: 4.♘c3 (Van der Wiel)" todo en 22 px, con "Wiel)" solo en el segundo renglón: se veía pesado. El botón sigue grande porque es la acción principal de la página, pero con jerarquía: la acción, grande; dónde retomo, chico.
 - **Quién:** Carlos (el prompt); la corrida de la Air. Una decisión de la corrida: "Seguir" lleva los dos renglones con cualquier cosa que siga (también "La estructura" o "Errores y trampas"), no solo con una variante, para que el botón se vea igual siempre.
 - **Dónde:** `fix/boton-seguir`: `fd0607c` (la prueba y las capturas de antes), `b8f4ac3` (el cambio), `ce3fb32` (las reglas) y `c9ec361` (las capturas de después). La regla, en `specs/cursos.md` §1 (la página del curso) y §5; lo aprendido, en `iterations/v3/learning.md` n.º 42. Las capturas, en `iterations/v3/capturas/correcciones/{iphone,escritorio}/boton-seguir-{antes,despues}-*` (las de antes, solo en `escritorio/`, de Chromium). El reporte, en `00_corridas/chess/2026-10-29_REPORTE_boton-seguir.md`.
+
+## [2026-10-29] corrida | Publicado el botón "Seguir" con jerarquía
+- **Qué:**
+  - Integrado a `main` en `9ca2bf5` (merge `--no-ff` de `fix/boton-seguir`, encima de `origin/main` `526a900`).
+  - `npm run publicar` subió `gh-pages` `4b3528c` a las 00:16:34 del 30. A las 00:17:47 la página servía `index-OUHVzM9S.js`, el del build.
+  - Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages -- --project=escritorio`: 9 pasan y 1 se salta (la del zoom, que es del iPhone). Con el iPhone emulado en Chromium (390×844, táctil): 10 de 10.
+  - Ninguna prueba de la página publicada mira el botón: se revisó aparte, en Chromium, con la Van der Wiel en curso. A 402×874 y a 360×740: "Seguir" en 22 px y "Avance: 4.♘c3 (Van der Wiel)" en 15 px, peso 400, en un renglón (19.5 de alto), el texto en un solo elemento y la página tan ancha como la pantalla.
+- **Por qué en Chromium:** el prompt (§5) pide WebKit una sola vez, y esa vez fue la suite completa (00:05–00:15). Es la misma salida que la corrida anterior (`iterations/v3/learning.md` n.º 41).
+- **Quién:** la corrida de la Air (publicar estaba autorizado en el prompt, con todo en verde).
+- **Dónde:** `main` `9ca2bf5`, `gh-pages` `4b3528c`; el reporte, en `00_corridas/chess/2026-10-29_REPORTE_boton-seguir.md`.
