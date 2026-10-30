@@ -65,13 +65,14 @@ const alrededor = (boton: Locator) =>
     const despues = document.createRange()
     despues.setStartAfter(b)
     despues.setEnd(p, p.childNodes.length)
-    return { tipo: p.getAttribute('data-tipo'), antes: antes.toString().trim(), despues: despues.toString().trim() }
+    return { tipo: p.getAttribute('data-tipo'), antes: antes.toString().trim(), despues: despues.toString().trim(), separa: antes.toString().at(-1) }
   })
 
 /**
  * Cómo queda el botón en su renglón: en cuántos renglones va su nombre, cuánto le sobra al cuadro, cuánto creció el mensaje
  * sobre lo que miden sus renglones (`crecioConRelleno`: la misma medida con el relleno de `.enlace-chico`, para ver que la
- * medida sí lo nota), lo que mide su zona de toque, si otro botón le queda encima y el contraste contra el fondo de su cuadro.
+ * medida sí lo nota), lo que mide su zona de toque, lo que le queda de ella con el texto deslizado hasta abajo (ahí el pie
+ * manda), si otro botón le queda encima y el contraste contra el fondo de su cuadro.
  */
 async function medirBoton(boton: Locator) {
   return boton.evaluate((b: HTMLElement) => {
@@ -100,15 +101,23 @@ async function medirBoton(boton: Locator) {
     n.scrollTop += c.top + c.height / 2 - (n.getBoundingClientRect().top + n.clientHeight / 2)
     const r = b.getBoundingClientRect()
     const [x, y] = [r.left + r.width / 2, r.top + r.height / 2]
-    const cae = (d: number) => document.elementFromPoint(x, y + d)?.closest('[data-testid="ver-que-pasa"]') === b
-    let [arriba, abajo] = [0, 0]
-    while (arriba < 60 && cae(-arriba - 1)) arriba++
-    while (abajo < 60 && cae(abajo + 1)) abajo++
+    const zona = (cx: number, cy: number) => {
+      const cae = (d: number) => document.elementFromPoint(cx, cy + d)?.closest('[data-testid="ver-que-pasa"]') === b
+      let [arriba, abajo] = [0, 0]
+      while (arriba < 60 && cae(-arriba - 1)) arriba++
+      while (abajo < 60 && cae(abajo + 1)) abajo++
+      return arriba + abajo + 1
+    }
+    const zonaDeToque = zona(x, y)
     const otroBotonEncima = Array.from(document.querySelectorAll('[data-testid="ver-que-pasa"]')).some((o) => {
       const q = o.getBoundingClientRect()
       return o !== b && Math.abs(q.top - r.top) < 44 && q.left < r.right && q.right > r.left
     })
     pie.style.visibility = ''
+    n.scrollTop = n.scrollHeight
+    const abajo = b.getBoundingClientRect()
+    // si el botón ya salió de la vista por arriba, ahí no hay nada que tocar
+    const zonaJuntoAlPie = abajo.top < n.getBoundingClientRect().top ? null : zona(abajo.left + abajo.width / 2, abajo.top + abajo.height / 2)
     n.scrollTop = scroll
 
     const luz = (css: string) => {
@@ -127,7 +136,8 @@ async function medirBoton(boton: Locator) {
       sobraEnElCuadro: Math.round((p.getBoundingClientRect().right - parseFloat(estilo.paddingRight) - r.right) * 10) / 10,
       crecio: Math.round(medidaCrecio * 100) / 100,
       crecioConRelleno: Math.round(crecioConRelleno * 100) / 100,
-      zonaDeToque: arriba + abajo + 1,
+      zonaDeToque,
+      zonaJuntoAlPie,
       otroBotonEncima,
       contraste: Math.round(((claro! + 0.05) / (oscuro! + 0.05)) * 100) / 100,
     }
@@ -355,6 +365,7 @@ test.describe('V1 · "Ver qué pasaría"', () => {
     const entre = await alrededor(page.getByTestId('ver-que-pasa').first())
     expect(entre.antes).toBe(`Cuidado: ${fig('Nunca con ...Dc7: el alfil de f4 se come tu dama.')}`)
     expect(entre.despues.startsWith(fig('Y si juegas ...e6, pierdes b7.'))).toBe(true)
+    expect(entre.separa, 'separado con medio eme: con un margen, al bajar de renglón quedaría sangrado').toBe('\u2002')
     expect(await delPie(page)).toEqual(['siguiente'])
   })
 
@@ -441,6 +452,7 @@ test.describe('V1 · "Ver qué pasaría"', () => {
         await medir('tal', botones)
         await despuesDe(page, info, 'v:cambio', 'aprender', 13)
         await medir('aMedias', botones.first())
+        await medir('aMediasLaSegunda', botones.last())
         await despuesDe(page, info, VDW, 'practicar', 13)
         await medir('dosLaPrimera', botones.first())
         await medir('dosLaSegunda', botones.last())
@@ -462,6 +474,8 @@ test.describe('V1 · "Ver qué pasaría"', () => {
           expect(m.crecioConRelleno, `${donde}: la medida sí ve un renglón que crece`).toBeGreaterThan(0.5)
           // dos botones en renglones seguidos comparten lo que hay entre ellos: 44 para cada uno no cabe en 22 de distancia
           expect(m.zonaDeToque, `${donde}: la zona de toque`).toBeGreaterThanOrEqual(m.otroBotonEncima ? 28 : 44)
+          // con el texto hasta abajo, el pie manda: a 19 de "Siguiente", la zona pierde 3
+          expect(m.zonaJuntoAlPie ?? 44, `${donde}: la zona de toque, junto al pie`).toBeGreaterThanOrEqual(28)
           expect(m.contraste, `${donde}: el contraste`).toBeGreaterThanOrEqual(4.5)
         }
       })
@@ -491,7 +505,6 @@ test.describe('V1 · "Ver qué pasaría"', () => {
       })
 
       test('al cerrar la ventana, el texto sigue deslizado donde estaba', async ({ page }, info) => {
-        test.skip(p.alto > 700, 'a este alto el texto cabe y no hay qué deslizar')
         await despuesDe(page, info, VDW, 'practicar', 13)
         const narracion = page.getByTestId('narracion')
         const antes = await narracion.evaluate((n) => {

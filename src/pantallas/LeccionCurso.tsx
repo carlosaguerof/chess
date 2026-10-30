@@ -37,7 +37,7 @@ const VUELTAS: { id: Vuelta; nombre: string }[] = [
  * Separa "Ver qué pasaría" del texto: un espacio de medio eme. Si el botón baja de renglón, el espacio se queda arriba y el
  * botón empieza en la orilla del texto; con un margen quedaba sangrado.
  */
-const SEPARA_VER = ' '
+const SEPARA_VER = '\u2002'
 
 /** La lección nueva (C3, diseño §4): una variante del curso o un "¿Y si…?" de Errores y trampas. */
 export function LeccionCurso({ cursoId, lineaId }: { cursoId: string; lineaId: string }) {

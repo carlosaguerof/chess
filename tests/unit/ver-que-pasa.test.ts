@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { Chess, type Square } from 'chess.js'
 import { CURSOS_NUEVOS, lineaPorId, lineasDe, misJugadas } from '../../src/curso/datos.ts'
@@ -380,19 +381,29 @@ describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-
   })
 
   it('en Practicar sale exactamente en las mismas frases que antes: las que se muestran y no adelantan nada', () => {
+    const filas: string[] = []
     let despues = 0
     let errores = 0
     for (const l of VARIANTES)
       for (const ply of misJugadas(l)) {
+        const vers = verDespues(c, l, 'practicar', ply).map((v) => v.titulo)
         const inventario = frasesDespues(c, l, 'practicar', ply).flatMap((f) => {
           const v = delInventario(l, ply, f.texto)
           return v && !verAdelanta(l, ply + 1, v.inicio, v.ver).length ? [f.texto] : []
         })
-        expect(verDespues(c, l, 'practicar', ply).map((v) => v.titulo), `${l.id} ${ply}`).toEqual(inventario)
-        despues += inventario.length
-        for (const san of Object.keys(c.mias[l.jugadas.slice(0, ply + 1).join(' ')]?.verErrores ?? {})) if (verDelError(c, l, 'practicar', ply, san)) errores++
+        expect(vers, `${l.id} ${ply}`).toEqual(inventario)
+        despues += vers.length
+        for (const t of vers) filas.push(`${l.id} ${ply} practicar · ${t}`)
+        for (const san of Object.keys(c.mias[l.jugadas.slice(0, ply + 1).join(' ')]?.errores ?? {})) {
+          const ver = verDelError(c, l, 'practicar', ply, san)
+          if (!ver) continue
+          errores++
+          filas.push(`${l.id} ${ply} practicar error ${san} · ${ver.titulo}`)
+        }
       }
-    // la cuenta de cuando el botón iba en el pie (`b2c1a9f`, 2026-10-30)
+    // la lista de cuando el botón iba en el pie (`b2c1a9f`, 2026-10-30), sacada con ese código: línea, jugada y frase. Si
+    // cambia a propósito (una frase o una línea nueva), se vuelve a sacar; si no, algo dejó de salir o salió de más
     expect({ despues, errores }).toEqual({ despues: 23, errores: 12 })
+    expect(createHash('sha256').update(filas.sort().join('\n')).digest('hex')).toBe('83c7b41b796f4f431423b9a3ec7a3abb5e0b00430df0d86cdc81d9b6d8002eb8')
   })
 })
