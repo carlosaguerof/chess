@@ -284,6 +284,42 @@
     "tambien": []
   },
   {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 Be3 Qb6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-short",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Tu dama ataca el peón de b2, que el alfil dejó sin defensa.",
+        "antes": [],
+        "despues": [
+          "flecha b6→b2 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Siguen ...Cc6 y ...cxd4 contra d4.",
+        "antes": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha b6→b2 (A2, verde)",
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "plan v:avance-short",
     "tipo": "plan",
     "linea": "v:avance-short",
@@ -346,6 +382,46 @@
     "despues": [
       "flecha d1→b3 (A7, roja, punteada)",
       "flecha b3→b7 (A7, roja, punteada)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5 Nf3 Nc6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-c3",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Ya atacas d4 dos veces: con el peón de c5 y con el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5 Nf3 Nc6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-c3",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Ya atacas d4 dos veces: con el peón de c5 y con el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
     ],
     "tambien": []
   },
@@ -413,6 +489,13 @@
     "ply": 9,
     "frases": [
       {
+        "texto": "Retiras el alfil sin salir de su diagonal: sigue mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
         "texto": "En e4 lo tomaría el caballo de c3.",
         "antes": [],
         "despues": [
@@ -422,6 +505,7 @@
     ],
     "antes": [],
     "despues": [
+      "flecha g6→e4 (A2, verde)",
       "flecha c3→e4 (A4, roja)"
     ],
     "tambien": []
@@ -611,6 +695,46 @@
     "tambien": []
   },
   {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 g4 Be4",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-bayoneta",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
+        "antes": [],
+        "despues": [
+          "flecha e4→h1 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e4→h1 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 g4 Be4",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-bayoneta",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
+        "antes": [],
+        "despues": [
+          "flecha e4→h1 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e4→h1 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "plan v:avance-bayoneta",
     "tipo": "plan",
     "linea": "v:avance-bayoneta",
@@ -666,6 +790,70 @@
     "despues": [
       "flecha e2→g3 (A7, roja, punteada)",
       "flecha g3→f5 (A7, roja, punteada)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-bronstein",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Tu alfil sigue en su diagonal, mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Si después blancas empuja h4, contesta ...h5 antes de seguir.",
+        "antes": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-bronstein",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Tu alfil sigue en su diagonal, mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Si después blancas empuja h4, contesta ...h5 antes de seguir.",
+        "antes": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha h7→h5 (A3, verde, punteada)"
     ],
     "tambien": []
   },
@@ -776,6 +964,50 @@
     "tambien": []
   },
   {
+    "id": "despues-aprender e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6",
+    "tipo": "despues-aprender",
+    "linea": "v:clasica",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)",
+          "flecha g6→c2 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha g6→c2 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6",
+    "tipo": "despues-practicar",
+    "linea": "v:clasica",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)",
+          "flecha g6→c2 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha g6→c2 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "te-toca e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6",
     "tipo": "te-toca",
     "linea": "v:clasica",
@@ -831,6 +1063,26 @@
     "tambien": []
   },
   {
+    "id": "despues-practicar e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7",
+    "tipo": "despues-practicar",
+    "linea": "v:clasica",
+    "ply": 13,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo y controlas e5.",
+        "antes": [],
+        "despues": [
+          "flecha d7→e5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha d7→e5 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "te-toca e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7",
     "tipo": "te-toca",
     "linea": "v:clasica",
@@ -871,6 +1123,26 @@
     "tambien": []
   },
   {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6",
+    "tipo": "despues-practicar",
+    "linea": "v:cambio",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo y atacas d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "te-toca e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6",
     "tipo": "te-toca",
     "linea": "v:cambio",
@@ -888,6 +1160,26 @@
       "flecha c3→d4 (A4, roja)"
     ],
     "despues": [],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6",
+    "tipo": "despues-practicar",
+    "linea": "v:cambio",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desarrollas el otro caballo, cuidas d5 y te acercas al enroque.",
+        "antes": [],
+        "despues": [
+          "flecha f6→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha f6→d5 (A2, verde)"
+    ],
     "tambien": []
   },
   {
@@ -984,6 +1276,26 @@
       "flecha c4→d5 (A4, roja)"
     ],
     "despues": [],
+    "tambien": []
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 c4 Nf6",
+    "tipo": "despues-practicar",
+    "linea": "v:panov",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Defiendes d5 y desarrollas el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha f6→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha f6→d5 (A2, verde)"
+    ],
     "tambien": []
   },
   {
@@ -1429,6 +1741,26 @@
     "tambien": []
   },
   {
+    "id": "despues-practicar e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5 Bg2 Ne7",
+    "tipo": "despues-practicar",
+    "linea": "v:breyer",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo; desde e7 también cuida d5.",
+        "antes": [],
+        "despues": [
+          "flecha e7→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e7→d5 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "plan v:breyer",
     "tipo": "plan",
     "linea": "v:breyer",
@@ -1487,6 +1819,26 @@
     "tambien": []
   },
   {
+    "id": "despues-aprender e4 c6 Bc4 d5",
+    "tipo": "despues-aprender",
+    "linea": "v:hillbilly",
+    "ply": 3,
+    "frases": [
+      {
+        "texto": "Tu peón de d5 está defendido por c6 y por tu dama.",
+        "antes": [],
+        "despues": [
+          "flecha d8→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha d8→d5 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
     "id": "despues-practicar e4 c6 Bc4 d5",
     "tipo": "despues-practicar",
     "linea": "v:hillbilly",
@@ -1505,13 +1857,22 @@
           "flecha d5→e4 (A2, verde)"
         ],
         "despues": []
+      },
+      {
+        "texto": "Tu peón de d5 está defendido por c6 y por tu dama.",
+        "antes": [],
+        "despues": [
+          "flecha d8→d5 (A2, verde)"
+        ]
       }
     ],
     "antes": [
       "flecha d5→c4 (A2, verde)",
       "flecha d5→e4 (A2, verde)"
     ],
-    "despues": [],
+    "despues": [
+      "flecha d8→d5 (A2, verde)"
+    ],
     "tambien": []
   },
   {
@@ -1686,6 +2047,26 @@
   {
     "tipo": "paso",
     "linea": "v:avance-short",
+    "id": "paso plan avance-short, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "...Cc6: tu caballo también ataca d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-short",
     "id": "paso plan avance-short, paso 3",
     "paso": 2,
     "frases": [
@@ -1703,6 +2084,7 @@
       "flecha c5→d4 (A2, verde)"
     ],
     "despues": [
+      "flecha c6→d4 (A2, verde)",
       "flecha c5→d4 (A3, verde, punteada)"
     ],
     "tambien": []
@@ -1736,6 +2118,26 @@
   {
     "tipo": "paso",
     "linea": "v:avance-van-der-wiel",
+    "id": "paso plan avance-van-der-wiel, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "...Cc6: tu caballo se suma contra d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": []
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-van-der-wiel",
     "id": "paso plan avance-van-der-wiel, paso 3",
     "paso": 2,
     "frases": [
@@ -1753,6 +2155,7 @@
       "flecha c5→d4 (A2, verde)"
     ],
     "despues": [
+      "flecha c6→d4 (A2, verde)",
       "flecha c5→d4 (A3, verde, punteada)"
     ],
     "tambien": []
@@ -1788,13 +2191,17 @@
         "antes": [
           "flecha c5→d4 (A2, verde)"
         ],
-        "despues": []
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
       }
     ],
     "antes": [
       "flecha c5→d4 (A2, verde)"
     ],
-    "despues": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
     "tambien": []
   },
   {

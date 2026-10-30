@@ -1,0 +1,1355 @@
+[
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 Be3 Qb6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-short",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Tu dama ataca el peón de b2, que el alfil dejó sin defensa.",
+        "antes": [],
+        "despues": [
+          "flecha b6→b2 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Siguen ...Cc6 y ...cxd4 contra d4.",
+        "antes": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha b6→b2 (A2, verde)",
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "cambió y trae una punteada de una casilla"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5 Nf3 Nc6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-c3",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Ya atacas d4 dos veces: con el peón de c5 y con el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5 Nf3 Nc6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-c3",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Ya atacas d4 dos veces: con el peón de c5 y con el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-van-der-wiel",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Retiras el alfil sin salir de su diagonal: sigue mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "En e4 lo tomaría el caballo de c3.",
+        "antes": [],
+        "despues": [
+          "flecha c3→e4 (A4, roja)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha c3→e4 (A4, roja)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 g4 Be4",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-bayoneta",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
+        "antes": [],
+        "despues": [
+          "flecha e4→h1 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e4→h1 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 g4 Be4",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-bayoneta",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
+        "antes": [],
+        "despues": [
+          "flecha e4→h1 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e4→h1 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-bronstein",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Tu alfil sigue en su diagonal, mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Si después blancas empuja h4, contesta ...h5 antes de seguir.",
+        "antes": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-bronstein",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Tu alfil sigue en su diagonal, mirando a e4.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)"
+        ]
+      },
+      {
+        "texto": "Si después blancas empuja h4, contesta ...h5 antes de seguir.",
+        "antes": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6",
+    "tipo": "despues-aprender",
+    "linea": "v:clasica",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)",
+          "flecha g6→c2 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha g6→c2 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6",
+    "tipo": "despues-practicar",
+    "linea": "v:clasica",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
+        "antes": [],
+        "despues": [
+          "flecha g6→e4 (A2, verde)",
+          "flecha g6→c2 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha g6→e4 (A2, verde)",
+      "flecha g6→c2 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7",
+    "tipo": "despues-practicar",
+    "linea": "v:clasica",
+    "ply": 13,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo y controlas e5.",
+        "antes": [],
+        "despues": [
+          "flecha d7→e5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha d7→e5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6",
+    "tipo": "despues-practicar",
+    "linea": "v:cambio",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo y atacas d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6",
+    "tipo": "despues-practicar",
+    "linea": "v:cambio",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "Desarrollas el otro caballo, cuidas d5 y te acercas al enroque.",
+        "antes": [],
+        "despues": [
+          "flecha f6→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha f6→d5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 exd5 cxd5 c4 Nf6",
+    "tipo": "despues-practicar",
+    "linea": "v:panov",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "Defiendes d5 y desarrollas el caballo.",
+        "antes": [],
+        "despues": [
+          "flecha f6→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha f6→d5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5 Bg2 Ne7",
+    "tipo": "despues-practicar",
+    "linea": "v:breyer",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Desarrollas el caballo; desde e7 también cuida d5.",
+        "antes": [],
+        "despues": [
+          "flecha e7→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha e7→d5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-aprender e4 c6 Bc4 d5",
+    "tipo": "despues-aprender",
+    "linea": "v:hillbilly",
+    "ply": 3,
+    "frases": [
+      {
+        "texto": "Tu peón de d5 está defendido por c6 y por tu dama.",
+        "antes": [],
+        "despues": [
+          "flecha d8→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha d8→d5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-practicar e4 c6 Bc4 d5",
+    "tipo": "despues-practicar",
+    "linea": "v:hillbilly",
+    "ply": 3,
+    "frases": [
+      {
+        "texto": "Atacas al alfil de c4.",
+        "antes": [
+          "flecha d5→c4 (A2, verde)"
+        ],
+        "despues": []
+      },
+      {
+        "texto": "A la vez, atacas el peón de e4.",
+        "antes": [
+          "flecha d5→e4 (A2, verde)"
+        ],
+        "despues": []
+      },
+      {
+        "texto": "Tu peón de d5 está defendido por c6 y por tu dama.",
+        "antes": [],
+        "despues": [
+          "flecha d8→d5 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha d5→c4 (A2, verde)",
+      "flecha d5→e4 (A2, verde)"
+    ],
+    "despues": [
+      "flecha d8→d5 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-short",
+    "id": "paso plan avance-short, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "...Cc6: tu caballo también ataca d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-short",
+    "id": "paso plan avance-short, paso 3",
+    "paso": 2,
+    "frases": [
+      {
+        "texto": "Tu peón de c5 ya ataca d4: cuando convenga, lo cambias.",
+        "antes": [
+          "flecha c5→d4 (A2, verde)"
+        ],
+        "despues": [
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c5→d4 (A2, verde)"
+    ],
+    "despues": [
+      "flecha c6→d4 (A2, verde)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "cambió y trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-van-der-wiel",
+    "id": "paso plan avance-van-der-wiel, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "...Cc6: tu caballo se suma contra d4.",
+        "antes": [],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-van-der-wiel",
+    "id": "paso plan avance-van-der-wiel, paso 3",
+    "paso": 2,
+    "frases": [
+      {
+        "texto": "Tu peón de c5 también ataca d4: ...cxd4 cuando convenga.",
+        "antes": [
+          "flecha c5→d4 (A2, verde)"
+        ],
+        "despues": [
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c5→d4 (A2, verde)"
+    ],
+    "despues": [
+      "flecha c6→d4 (A2, verde)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "cambió y trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-bronstein",
+    "id": "paso plan avance-bronstein, paso 1",
+    "paso": 0,
+    "frases": [
+      {
+        "texto": "...c5 y ...Cc6: vas contra d4.",
+        "antes": [
+          "flecha c5→d4 (A2, verde)"
+        ],
+        "despues": [
+          "flecha c6→d4 (A2, verde)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c5→d4 (A2, verde)"
+    ],
+    "despues": [
+      "flecha c6→d4 (A2, verde)"
+    ],
+    "tambien": [],
+    "motivo": "cambió"
+  },
+  {
+    "id": "despues-aprender e4 c6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-short",
+    "ply": 1,
+    "frases": [
+      {
+        "texto": "Si blancas cambia en d5, retomas con el peón de c y sigues con un peón en el centro.",
+        "antes": [
+          "flecha c6→d5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c6→d5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c6→d5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha c6→d5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5 Be3 Qb6",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-short",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "Siguen ...Cc6 y ...cxd4 contra d4.",
+        "antes": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-short",
+    "tipo": "plan",
+    "linea": "v:avance-short",
+    "frases": [
+      {
+        "texto": "Presiona d4, la base de la cadena: ...Cc6, ...cxd4 y el caballo de g8 por e7.",
+        "antes": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b8→c6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas sostiene d4 con piezas y, cuando pueda, abre el juego con c4.",
+        "antes": [],
+        "despues": [
+          "flecha c2→c4 (A7, roja, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha b8→c6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)",
+      "flecha c2→c4 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-c3",
+    "tipo": "plan",
+    "linea": "v:avance-c3",
+    "frases": [
+      {
+        "texto": "Como contra 4.Cf3: ...Db6 y ...cxd4 contra d4, y el caballo de g8 a e7.",
+        "antes": [
+          "flecha d8→b6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha d8→b6 (A3, verde, punteada)",
+          "flecha c5→d4 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas enroca y sostiene d4 con c3, Cf3 y su dama.",
+        "antes": [],
+        "despues": [
+          "flecha d1→d4 (A4, roja)",
+          "flecha f3→d4 (A4, roja)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha d8→b6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha d8→b6 (A3, verde, punteada)",
+      "flecha c5→d4 (A3, verde, punteada)",
+      "flecha d1→d4 (A4, roja)",
+      "flecha f3→d4 (A4, roja)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "te-toca e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6 Nge2 c5 h4 h5",
+    "tipo": "te-toca",
+    "linea": "v:avance-van-der-wiel",
+    "ply": 13,
+    "frases": [
+      {
+        "texto": "7.h4. Blancas empuja h4: si su peón llega a h5, tu alfil de g6 se queda sin casillas.",
+        "antes": [],
+        "despues": [
+          "flecha h4→h5 (A7, roja, punteada)"
+        ]
+      },
+      {
+        "texto": "Te toca: 7...h5. Frenas el peón de h: ya no puede llegar a h5.",
+        "antes": [
+          "flecha h7→h5 (A1, verde)"
+        ],
+        "despues": []
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A1, verde)"
+    ],
+    "despues": [
+      "flecha h4→h5 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-van-der-wiel",
+    "tipo": "plan",
+    "linea": "v:avance-van-der-wiel",
+    "frases": [
+      {
+        "texto": "Golpea el centro con ...cxd4 y ...Cc6.",
+        "antes": [
+          "flecha c5→d4 (A3, verde, punteada)",
+          "flecha b8→c6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c5→d4 (A3, verde, punteada)",
+          "flecha b8→c6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c5→d4 (A3, verde, punteada)",
+      "flecha b8→c6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha c5→d4 (A3, verde, punteada)",
+      "flecha b8→c6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "te-toca e4 c6 d4 d5 e5 Bf5 h4 h5",
+    "tipo": "te-toca",
+    "linea": "v:avance-tal",
+    "ply": 7,
+    "frases": [
+      {
+        "texto": "4.h4. Blancas empuja 4.h4: quiere seguir avanzando sus peones del lado de rey, g4 y h5, para dejar a tu alfil sin casillas.",
+        "antes": [],
+        "despues": [
+          "flecha g2→g4 (A7, roja, punteada)",
+          "flecha h4→h5 (A7, roja, punteada)"
+        ]
+      },
+      {
+        "texto": "Te toca: 4...h5. Frenas el peón de h: ya no puede llegar a h5.",
+        "antes": [
+          "flecha h7→h5 (A1, verde)"
+        ],
+        "despues": []
+      }
+    ],
+    "antes": [
+      "flecha h7→h5 (A1, verde)"
+    ],
+    "despues": [
+      "flecha g2→g4 (A7, roja, punteada)",
+      "flecha h4→h5 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-tal",
+    "tipo": "plan",
+    "linea": "v:avance-tal",
+    "frases": [
+      {
+        "texto": "Ahora ...c5 y ...Cc6 contra d4, como en todo el Avance, y el caballo de g8 por e7.",
+        "antes": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c6→c5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha c6→c5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "despues-aprender e4 c6 d4 d5 e5 Bf5",
+    "tipo": "despues-aprender",
+    "linea": "v:avance-bayoneta",
+    "ply": 5,
+    "frases": [
+      {
+        "texto": "Después vas a jugar ...e6 para abrir tu otro alfil; si ...e6 fuera primero, este alfil quedaría encerrado detrás de tus peones, como en la Francesa.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "despues-practicar e4 c6 d4 d5 e5 Bf5",
+    "tipo": "despues-practicar",
+    "linea": "v:avance-bayoneta",
+    "ply": 5,
+    "frases": [
+      {
+        "texto": "Después vas a jugar ...e6 para abrir tu otro alfil; si ...e6 fuera primero, este alfil quedaría encerrado detrás de tus peones, como en la Francesa.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-bayoneta",
+    "tipo": "plan",
+    "linea": "v:avance-bayoneta",
+    "frases": [
+      {
+        "texto": "Desarrolla con ...Cd7 y ...Cgf6 y busca ...c5 o ...e5: el lado de rey blanco quedó débil tras g4 y f3.",
+        "antes": [
+          "flecha b8→d7 (A3, verde, punteada)",
+          "flecha g8→f6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b8→d7 (A3, verde, punteada)",
+          "flecha g8→f6 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas tiene más espacio y busca empujar f4 y g5.",
+        "antes": [],
+        "despues": [
+          "flecha f3→f4 (A7, roja, punteada)",
+          "flecha g4→g5 (A7, roja, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha b8→d7 (A3, verde, punteada)",
+      "flecha g8→f6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha b8→d7 (A3, verde, punteada)",
+      "flecha g8→f6 (A3, verde, punteada)",
+      "flecha f3→f4 (A7, roja, punteada)",
+      "flecha g4→g5 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:avance-bronstein",
+    "tipo": "plan",
+    "linea": "v:avance-bronstein",
+    "frases": [
+      {
+        "texto": "...c5 y ...Cc6 contra d4.",
+        "antes": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Si blancas empuja h4, primero ...h5.",
+        "antes": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha h7→h5 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas busca c4 contra d5, o h4 contra tu alfil de g6.",
+        "antes": [],
+        "despues": [
+          "flecha c2→c4 (A7, roja, punteada)",
+          "flecha h2→h4 (A7, roja, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c6→c5 (A3, verde, punteada)",
+      "flecha h7→h5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha c6→c5 (A3, verde, punteada)",
+      "flecha h7→h5 (A3, verde, punteada)",
+      "flecha c2→c4 (A7, roja, punteada)",
+      "flecha h2→h4 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "te-toca e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6",
+    "tipo": "te-toca",
+    "linea": "v:clasica",
+    "ply": 11,
+    "frases": [
+      {
+        "texto": "6.h4. Blancas empuja h4: amenaza h5, y tu alfil de g6 se quedaría sin casillas.",
+        "antes": [],
+        "despues": [
+          "flecha h4→h5 (A7, roja, punteada)"
+        ]
+      },
+      {
+        "texto": "Te toca: 6...h6. Le abres al alfil la casilla h7.",
+        "antes": [
+          "flecha h7→h6 (A1, verde)"
+        ],
+        "despues": []
+      }
+    ],
+    "antes": [
+      "flecha h7→h6 (A1, verde)"
+    ],
+    "despues": [
+      "flecha h4→h5 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:clasica",
+    "tipo": "plan",
+    "linea": "v:clasica",
+    "frases": [
+      {
+        "texto": "Termina el desarrollo con ...Cgf6, ...Dc7 o ...Ae7 y enroca.",
+        "antes": [
+          "flecha g8→f6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha g8→f6 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Después, ...c5 contra d4.",
+        "antes": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c6→c5 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas suele enrocar largo, poner un caballo en e5 y empujar sus peones del lado de rey.",
+        "antes": [
+          "casilla e5 (A6, roja)"
+        ],
+        "despues": [
+          "casilla e5 (A6, roja)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha g8→f6 (A3, verde, punteada)",
+      "flecha c6→c5 (A3, verde, punteada)",
+      "casilla e5 (A6, roja)"
+    ],
+    "despues": [
+      "flecha g8→f6 (A3, verde, punteada)",
+      "flecha c6→c5 (A3, verde, punteada)",
+      "casilla e5 (A6, roja)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:cambio",
+    "tipo": "plan",
+    "linea": "v:cambio",
+    "frases": [
+      {
+        "texto": "...e6, ...Ad6 y 0-0.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Después, adelanta ...b5 y ...b4: es el ataque de minorías, avanzar los peones del lado donde tienes menos para debilitar los del rival.",
+        "antes": [
+          "flecha b7→b5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha b7→b5 (A3, verde, punteada)"
+        ]
+      },
+      {
+        "texto": "Blancas busca la casilla e5 para un caballo y atacar en el lado de rey.",
+        "antes": [],
+        "despues": [
+          "casilla e5 (A6, roja)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)",
+      "flecha b7→b5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)",
+      "flecha b7→b5 (A3, verde, punteada)",
+      "casilla e5 (A6, roja)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:dos-caballos",
+    "tipo": "plan",
+    "linea": "v:dos-caballos",
+    "frases": [
+      {
+        "texto": "...Cf6, ...Cbd7, el alfil a e7 o d6 y 0-0.",
+        "antes": [
+          "flecha g8→f6 (A3, verde, punteada)",
+          "flecha f8→e7 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha g8→f6 (A3, verde, punteada)",
+          "flecha f8→e7 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha g8→f6 (A3, verde, punteada)",
+      "flecha f8→e7 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g8→f6 (A3, verde, punteada)",
+      "flecha f8→e7 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "te-toca e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5",
+    "tipo": "te-toca",
+    "linea": "v:breyer",
+    "ply": 9,
+    "frases": [
+      {
+        "texto": "5.g3. Blancas prepara sacar su alfil por g2, a la diagonal larga.",
+        "antes": [],
+        "despues": [
+          "flecha f1→g2 (A7, roja, punteada)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha f1→g2 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:breyer",
+    "tipo": "plan",
+    "linea": "v:breyer",
+    "frases": [
+      {
+        "texto": "Blancas gana espacio en el lado de dama con b4 y b5.",
+        "antes": [],
+        "despues": [
+          "flecha b4→b5 (A7, roja, punteada)"
+        ]
+      }
+    ],
+    "antes": [],
+    "despues": [
+      "flecha b4→b5 (A7, roja, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "id": "plan v:hillbilly",
+    "tipo": "plan",
+    "linea": "v:hillbilly",
+    "frases": [
+      {
+        "texto": "Tienes un peón de más: desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.",
+        "antes": [
+          "flecha f8→g7 (A3, verde, punteada)",
+          "flecha c8→f5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha f8→g7 (A3, verde, punteada)",
+          "flecha c8→f5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha f8→g7 (A3, verde, punteada)",
+      "flecha c8→f5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha f8→g7 (A3, verde, punteada)",
+      "flecha c8→f5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "pieza": "idea",
+    "pagina": 0,
+    "id": "paso idea 1, paso 7",
+    "paso": 6,
+    "frases": [
+      {
+        "texto": "Si blancas avanza, 3.e5, tu alfil de casillas blancas sale antes de que cierres con ...e6: 3...Af5.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "pieza": "repaso",
+    "pagina": 0,
+    "id": "paso repaso 1, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "3.e5 Af5: tu alfil sale antes de ...e6.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "pieza": "repaso",
+    "pagina": 0,
+    "id": "paso repaso 1, paso 6",
+    "paso": 5,
+    "frases": [
+      {
+        "texto": "En la Clásica, contra 6.h4, juegas 6...h6: así tu alfil tiene h7.",
+        "antes": [
+          "flecha g6→h7 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha g6→h7 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha g6→h7 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha g6→h7 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:avance-bayoneta",
+    "id": "paso plan avance-bayoneta, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "Luego buscas ...c5 o ...e5, contra el centro de blancas.",
+        "antes": [
+          "flecha c6→c5 (A3, verde, punteada)",
+          "flecha e7→e5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c6→c5 (A3, verde, punteada)",
+          "flecha e7→e5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha c6→c5 (A3, verde, punteada)",
+      "flecha e7→e5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha c6→c5 (A3, verde, punteada)",
+      "flecha e7→e5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:oferta-final",
+    "id": "paso plan oferta-final, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "Luego ...e5 o ...g6, y llevas tus piezas al centro.",
+        "antes": [
+          "flecha e7→e5 (A3, verde, punteada)",
+          "flecha g7→g6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e5 (A3, verde, punteada)",
+          "flecha g7→g6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e5 (A3, verde, punteada)",
+      "flecha g7→g6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e5 (A3, verde, punteada)",
+      "flecha g7→g6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:panov-acelerado",
+    "id": "paso plan panov-acelerado, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "Luego ...e6 o ...g6, y enrocas: tu juego es cómodo.",
+        "antes": [
+          "flecha e7→e6 (A3, verde, punteada)",
+          "flecha g7→g6 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha e7→e6 (A3, verde, punteada)",
+          "flecha g7→g6 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha e7→e6 (A3, verde, punteada)",
+      "flecha g7→g6 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha e7→e6 (A3, verde, punteada)",
+      "flecha g7→g6 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:hillbilly",
+    "id": "paso plan hillbilly, paso 2",
+    "paso": 1,
+    "frases": [
+      {
+        "texto": "Desarrollas tu alfil por g7: ...Ag7.",
+        "antes": [
+          "flecha f8→g7 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha f8→g7 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha f8→g7 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha f8→g7 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  },
+  {
+    "tipo": "paso",
+    "linea": "v:hillbilly",
+    "id": "paso plan hillbilly, paso 3",
+    "paso": 2,
+    "frases": [
+      {
+        "texto": "Y el otro por f5: ...Af5.",
+        "antes": [
+          "flecha c8→f5 (A3, verde, punteada)"
+        ],
+        "despues": [
+          "flecha c8→f5 (A3, verde, punteada)"
+        ]
+      }
+    ],
+    "antes": [
+      "flecha f8→g7 (A3, verde, punteada)",
+      "flecha c8→f5 (A3, verde, punteada)"
+    ],
+    "despues": [
+      "flecha f8→g7 (A3, verde, punteada)",
+      "flecha c8→f5 (A3, verde, punteada)"
+    ],
+    "tambien": [],
+    "motivo": "trae una punteada de una casilla"
+  }
+]
