@@ -48,6 +48,49 @@ async function abrirJugada(page: Page, info: Parameters<typeof jugar>[1], linea:
   await momento(page, explicacionDespues(c, lineaPorId(c, linea)!, vuelta, ply).length ? 'leer' : 'rival')
 }
 
+type Foto = (nombre: string, fila: { momento: string; frases: string; antes: string; despues: string }, que?: Page | Locator) => Promise<void>
+const fig = (t: string) => mostrarTexto(t, 'figuras').replace(/\|/g, '\\|')
+
+/** Abre cada momento de una lista de `scripts/marcas-cambios.ts`, revisa cuántas marcas se ven y le saca su captura. */
+async function capturarMomentos(page: Page, info: Parameters<typeof jugar>[1], cambios: Cambio[], foto: Foto) {
+  for (const x of cambios) {
+    const frases = x.frases.map((f) => `«${fig(f.texto)}»${f.despues === null ? ' (no se muestra en Practicar)' : ''}`).join('<br>')
+    const fila = { frases, antes: x.antes.join('; '), despues: x.despues.join('; ') + (x.motivo ? ` _(${x.motivo})_` : '') }
+    const tambien = x.tambien.length ? ` (igual en ${x.tambien.map((t) => lineaPorId(c, t)!.nombre).join(', ')})` : ''
+    if (x.tipo === 'te-toca' || x.tipo === 'despues-aprender' || x.tipo === 'despues-practicar') {
+      const l = lineaPorId(c, x.linea!)!
+      const vuelta = x.tipo === 'despues-practicar' ? 'practicar' : 'aprender'
+      await abrirJugada(page, info, l.id, vuelta, x.ply!, x.tipo !== 'te-toca')
+      await expect(capa(page), x.id).toHaveCount(x.despues.length)
+      const cuando = x.tipo === 'te-toca' ? 'Aprender, antes de' : `${vuelta === 'aprender' ? 'Aprender' : 'Practicar'}, después de`
+      await foto(`${x.tipo}-${l.id.slice(2)}-${x.ply! + 1}`, { ...fila, momento: `${fig(l.nombre)}, ${cuando} ${fig(jugadaEs(l.jugadas[x.ply!]!, x.ply!))}${tambien}` })
+    } else if (x.tipo === 'plan') {
+      const l = lineaPorId(c, x.linea!)!
+      await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
+      await momento(page, 'plan')
+      await expect(capa(page), x.id).toHaveCount(x.despues.length)
+      await foto(`plan-${l.id.slice(2)}`, { ...fila, momento: `${fig(l.nombre)}, el plan` })
+    } else {
+      // el paso a paso: de una página de leer, o del plan de una variante
+      if (x.pieza) {
+        await page.goto(`/#/curso/caro-kann%3Ab/leer/${x.pieza}`)
+        await page.reload()
+        for (let j = 0; j < x.pagina!; j++) await page.getByTestId('pagina-siguiente').click()
+      } else {
+        const l = lineaPorId(c, x.linea!)!
+        await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
+        await momento(page, 'plan')
+      }
+      await page.getByTestId('ver-paso-a-paso').click()
+      for (let i = 0; i < x.paso!; i++) await page.getByTestId('pap-siguiente').click()
+      await expect(page.getByTestId('paso-a-paso')).toHaveAttribute('data-paso', String(x.paso! + 1))
+      await expect(capa(page, 'tablero-paso-a-paso'), x.id).toHaveCount(x.despues.length)
+      const donde = x.pieza ? `${{ idea: 'La idea', estructura: 'La estructura', repaso: 'El repaso' }[x.pieza]} ${x.pagina! + 1}` : `el plan de ${fig(lineaPorId(c, x.linea!)!.nombre)}`
+      await foto(`paso-${x.pieza ? `${x.pieza}-${x.pagina! + 1}` : `plan-${x.linea!.slice(2)}`}-${x.paso! + 1}`, { ...fila, momento: `Paso a paso, ${donde}, paso ${x.paso! + 1}` }, page.getByTestId('paso-a-paso'))
+    }
+  }
+}
+
 test.describe('Correcciones · las marcas (reglas v1.3)', () => {
   test('prendido de entrada (C7); con el interruptor en "0", la lección se ve como antes (sin la capa nueva)', async ({ page }) => {
     await abrirEn(page, 'v:avance-short', 'aprender', 5)
@@ -141,7 +184,6 @@ test.describe('Correcciones · las marcas (reglas v1.3)', () => {
     mkdirSync(dir, { recursive: true })
     const indice: string[] = []
     let n = 1
-    const fig = (t: string) => mostrarTexto(t, 'figuras').replace(/\|/g, '\\|')
     const foto = async (nombre: string, fila: { momento: string; frases: string; antes: string; despues: string }, que: Page | Locator = page) => {
       const archivo = `${String(n++).padStart(2, '0')}-${nombre}.png`
       await page.waitForTimeout(250)
@@ -167,43 +209,7 @@ test.describe('Correcciones · las marcas (reglas v1.3)', () => {
     }
 
     // cada momento que cambió (cambios.json, de scripts/marcas-cambios.ts)
-    const cambios = JSON.parse(readFileSync(`${CARPETA}/cambios.json`, 'utf8')) as Cambio[]
-    for (const x of cambios) {
-      const frases = x.frases.map((f) => `«${fig(f.texto)}»${f.despues === null ? ' (no se muestra en Practicar)' : ''}`).join('<br>')
-      const fila = { frases, antes: x.antes.join('; '), despues: x.despues.join('; ') }
-      const tambien = x.tambien.length ? ` (igual en ${x.tambien.map((t) => lineaPorId(c, t)!.nombre).join(', ')})` : ''
-      if (x.tipo === 'te-toca' || x.tipo === 'despues-aprender' || x.tipo === 'despues-practicar') {
-        const l = lineaPorId(c, x.linea!)!
-        const vuelta = x.tipo === 'despues-practicar' ? 'practicar' : 'aprender'
-        await abrirJugada(page, info, l.id, vuelta, x.ply!, x.tipo !== 'te-toca')
-        await expect(capa(page), x.id).toHaveCount(x.despues.length)
-        const cuando = x.tipo === 'te-toca' ? 'Aprender, antes de' : `${vuelta === 'aprender' ? 'Aprender' : 'Practicar'}, después de`
-        await foto(`${x.tipo}-${l.id.slice(2)}-${x.ply! + 1}`, { ...fila, momento: `${fig(l.nombre)}, ${cuando} ${fig(jugadaEs(l.jugadas[x.ply!]!, x.ply!))}${tambien}` })
-      } else if (x.tipo === 'plan') {
-        const l = lineaPorId(c, x.linea!)!
-        await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
-        await momento(page, 'plan')
-        await expect(capa(page), x.id).toHaveCount(x.despues.length)
-        await foto(`plan-${l.id.slice(2)}`, { ...fila, momento: `${fig(l.nombre)}, el plan` })
-      } else {
-        // el paso a paso: de una página de leer, o del plan de una variante
-        if (x.pieza) {
-          await page.goto(`/#/curso/caro-kann%3Ab/leer/${x.pieza}`)
-          await page.reload()
-          for (let j = 0; j < x.pagina!; j++) await page.getByTestId('pagina-siguiente').click()
-        } else {
-          const l = lineaPorId(c, x.linea!)!
-          await abrirEn(page, l.id, 'aprender', jugadasDeVariante(c, l.variante!).length)
-          await momento(page, 'plan')
-        }
-        await page.getByTestId('ver-paso-a-paso').click()
-        for (let i = 0; i < x.paso!; i++) await page.getByTestId('pap-siguiente').click()
-        await expect(page.getByTestId('paso-a-paso')).toHaveAttribute('data-paso', String(x.paso! + 1))
-        await expect(capa(page, 'tablero-paso-a-paso'), x.id).toHaveCount(x.despues.length)
-        const donde = x.pieza ? `${{ idea: 'La idea', estructura: 'La estructura', repaso: 'El repaso' }[x.pieza]} ${x.pagina! + 1}` : `el plan de ${fig(lineaPorId(c, x.linea!)!.nombre)}`
-        await foto(`paso-${x.pieza ? `${x.pieza}-${x.pagina! + 1}` : `plan-${x.linea!.slice(2)}`}-${x.paso! + 1}`, { ...fila, momento: `Paso a paso, ${donde}, paso ${x.paso! + 1}` }, page.getByTestId('paso-a-paso'))
-      }
-    }
+    await capturarMomentos(page, info, JSON.parse(readFileSync(`${CARPETA}/cambios.json`, 'utf8')) as Cambio[], foto)
     // S1 (la torre, 2026-10-30): la fila del interruptor, con cada vuelta escogida, siempre en verde la de ahora
     for (const vuelta of ['practicar', 'aprender'] as const) {
       await abrirEn(page, 'v:avance-tal', vuelta, 9)
@@ -231,5 +237,39 @@ test.describe('Correcciones · las marcas (reglas v1.3)', () => {
           '',
         ].join('\n'),
       )
+  })
+
+  test('@marcas2 la segunda vuelta de la revisión de la torre: las A2 nuevas y cada flecha punteada de una casilla, desde la 83, en el mismo índice', async ({ page, isMobile }, info) => {
+    test.setTimeout(900_000)
+    if (isMobile) await page.setViewportSize({ width: 402, height: 874 })
+    const dir = `${CARPETA}/${info.project.name}`
+    mkdirSync(dir, { recursive: true })
+    const filas: string[] = []
+    let n = 83
+    const foto: Foto = async (nombre, fila, que = page) => {
+      const archivo = `${String(n++).padStart(2, '0')}-${nombre}.png`
+      await page.waitForTimeout(250)
+      await que.screenshot({ path: `${dir}/${archivo}`, scale: 'css' })
+      filas.push(`| ${archivo} | ${fila.momento} | ${fila.frases} | ${fila.antes || '—'} | ${fila.despues || '—'} |`)
+    }
+    await capturarMomentos(page, info, JSON.parse(readFileSync(`${CARPETA}/cambios-2.json`, 'utf8')) as Cambio[], foto)
+    if (info.project.name !== 'escritorio') return
+    const SECCION = '## Segunda vuelta'
+    const antes = readFileSync(`${CARPETA}/indice.md`, 'utf8').split(SECCION)[0]!.trimEnd()
+    writeFileSync(
+      `${CARPETA}/indice.md`,
+      [
+        antes,
+        '',
+        `${SECCION} (la revisión de la torre: las A2 nuevas y la punteada de una casilla)`,
+        '',
+        '> Generado por `@marcas2`, desde `cambios-2.json` (`node scripts/marcas-cambios.ts <antes> --vuelta2 cambios-1.json`): lo que cambió desde la primera vuelta (lo tuyo desde lejos o saltando, A2, decisión 2 de la torre) y cada momento con una flecha punteada de una casilla, que ahora se dibuja a la medida (un tramo con rayas y la punta). "Antes" sigue siendo lo publicado (`ad72f10`).',
+        '',
+        '| Captura | Momento | Frases | Antes | Después |',
+        '|---|---|---|---|---|',
+        ...filas,
+        '',
+      ].join('\n'),
+    )
   })
 })

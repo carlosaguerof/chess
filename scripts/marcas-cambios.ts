@@ -3,6 +3,12 @@
 //   git show ad72f10:conocimiento/cursos/caro-kann.json > /tmp/antes.json
 //   node scripts/marcas-cambios.ts /tmp/antes.json > iterations/v3/capturas/marcas-v1.3/cambios.json
 //
+// La segunda vuelta de la revisión de la torre (lo que cambió desde la primera, y cada momento con una flecha punteada
+// de una casilla, que ahora se dibuja a la medida), con la lista de la primera vuelta guardada como cambios-1.json:
+//
+//   node scripts/marcas-cambios.ts /tmp/antes.json --vuelta2 iterations/v3/capturas/marcas-v1.3/cambios-1.json \
+//     > iterations/v3/capturas/marcas-v1.3/cambios-2.json
+//
 // "Antes" son los datos de antes con lo que se veía con las reglas v1.1 (en "Te toca", la frase del rival y la tuya;
 // después de jugar, la explicación; en Practicar, también "qué hace" sin la A1). "Después" es lo que se ve hoy
 // (`marcasDelMomento`, `marcasDelPaso`). La prueba de las capturas (`tests/e2e/correcciones-marcas.spec.ts`, `@marcas`)
@@ -31,16 +37,19 @@ export interface Cambio {
   frases: { texto: string; antes: string[]; despues: string[] | null }[]
   antes: string[]
   despues: string[]
+  /** en la segunda vuelta: por qué entra (cambió desde la primera, o trae una punteada de una casilla) */
+  motivo?: string
 }
 
 const palabras = (ms: Marca[]) => ms.map(enPalabras)
 const igual = (a: string[], b: string[]) => a.length === b.length && a.every((x) => b.includes(x))
 const todas = (m?: Marca[][]) => (m ?? []).flat()
 
-export function cambios(antes: DatosCurso, hoy: DatosCurso): Cambio[] {
+/** Los momentos cuyas marcas cambiaron (con `todos`, también los que no cambiaron). */
+export function cambios(antes: DatosCurso, hoy: DatosCurso, todos = false): Cambio[] {
   const r: Cambio[] = []
   const agregar = (x: Omit<Cambio, 'tambien'>, linea?: string) => {
-    if (igual(x.antes, x.despues)) return
+    if (!todos && igual(x.antes, x.despues)) return
     const ya = r.find((y) => y.id === x.id && igual(y.despues, x.despues) && igual(y.antes, x.antes))
     if (ya) {
       if (linea) ya.tambien.push(linea)
@@ -126,7 +135,33 @@ export function cambios(antes: DatosCurso, hoy: DatosCurso): Cambio[] {
 export const lineaDe = (c: DatosCurso, id: string): LineaCurso => lineasDe(c).find((l) => l.id === id)!
 export { jugadasDeVariante }
 
+/** Una flecha punteada de una casilla a la de junto, en palabras ("flecha h4→h5 (A7, roja, punteada)"). */
+const punteadaCorta = (p: string) => {
+  const m = /^flecha ([a-h][1-8])→([a-h][1-8]) \(.*punteada\)$/.exec(p)
+  return !!m && Math.max(Math.abs(m[1]!.charCodeAt(0) - m[2]!.charCodeAt(0)), Math.abs(Number(m[1]![1]) - Number(m[2]![1]))) === 1
+}
+
+/**
+ * La segunda vuelta: lo que cambió desde la lista de la primera (`vuelta1`), y cada momento que trae una flecha punteada
+ * de una casilla (cambie o no).
+ */
+export function vuelta2(antes: DatosCurso, hoy: DatosCurso, vuelta1: Cambio[]): Cambio[] {
+  const llave = (x: Cambio) => `${x.id}|${[...x.despues].sort().join(';')}`
+  const ya = new Set(vuelta1.map(llave))
+  const nuevos = cambios(antes, hoy).filter((x) => !ya.has(llave(x)))
+  const cortas = cambios(antes, hoy, true).filter((x) => x.despues.some(punteadaCorta))
+  const r: Cambio[] = []
+  for (const x of [...nuevos, ...cortas]) {
+    const motivo = nuevos.some((n) => llave(n) === llave(x)) ? (x.despues.some(punteadaCorta) ? 'cambió y trae una punteada de una casilla' : 'cambió') : 'trae una punteada de una casilla'
+    if (!r.some((y) => llave(y) === llave(x))) r.push({ ...x, motivo })
+  }
+  return r
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const antes = JSON.parse(readFileSync(process.argv[2]!, 'utf8')) as DatosCurso
-  process.stdout.write(JSON.stringify(cambios(antes, CURSOS_NUEVOS['caro-kann:b']!), null, 2) + '\n')
+  const hoy = CURSOS_NUEVOS['caro-kann:b']!
+  const i = process.argv.indexOf('--vuelta2')
+  const lista = i > 0 ? vuelta2(antes, hoy, JSON.parse(readFileSync(process.argv[i + 1]!, 'utf8')) as Cambio[]) : cambios(antes, hoy)
+  process.stdout.write(JSON.stringify(lista, null, 2) + '\n')
 }

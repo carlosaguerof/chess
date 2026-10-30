@@ -301,6 +301,38 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(a4).toContain(`fill="${COLORES.rojo}"`)
   })
 
+  it('R5 · la punteada de una casilla se lee como flecha: dentro de la casilla de llegada, al menos dos rayas enteras y la punta (revisión de la torre); las demás no cambian', () => {
+    const dibujo = (m: Marca) => renderToStaticMarkup(createElement(CapaMarcas, { marcas: [m], orientacion: 'black', fen: '8/8/8/8/7P/8/8/8 w - - 0 1' }))
+    const numeros = (s: string) => s.split(/[ ,]/).map(Number)
+    for (const [de, a, color] of [['h4', 'h5', 'rojo'], ['c5', 'd4', 'verde'], ['f1', 'g2', 'rojo'], ['e7', 'e6', 'verde']] as const) {
+      const svg = dibujo({ tipo: color === 'rojo' ? 'A7' : 'A3', de, a, color, punteada: true })
+      expect(svg, `${de}→${a}`).toContain('data-corta="si"')
+      expect(svg, `${de}→${a}: sin NaN`).not.toContain('NaN')
+      const [linea, punta] = [...svg.matchAll(/<polyline points="([^"]+)"/g)].map((x) => numeros(x[1]!))
+      const [rayaLarga, hueco] = numeros(/stroke-dasharray="([^"]+)"/.exec(svg)![1]!)
+      const [x0, y0, x1, y1] = linea!
+      const largo = Math.hypot(x1! - x0!, y1! - y0!)
+      // la punta: su base (el medio de sus dos alas) y su vértice, dentro de la casilla de llegada
+      const [cx, cy] = centro(a, 'black')
+      const base = [(punta![0]! + punta![4]!) / 2, (punta![1]! + punta![5]!) / 2]
+      const dentro = (x: number, y: number) => Math.abs(x - cx) <= 0.5 + 1e-9 && Math.abs(y - cy) <= 0.5 + 1e-9
+      expect(dentro(punta![2]!, punta![3]!), `${de}→${a}: la punta, en ${a}`).toBe(true)
+      // las rayas enteras que caen en la casilla de llegada, antes de la base de la punta
+      const hastaBase = Math.hypot(base[0]! - x0!, base[1]! - y0!)
+      let rayas = 0
+      for (let t = 0; t + rayaLarga! <= Math.min(largo, hastaBase) + 1e-9; t += rayaLarga! + hueco!) {
+        const [px, py] = [x0! + ((x1! - x0!) * t) / largo, y0! + ((y1! - y0!) * t) / largo]
+        if (dentro(px, py)) rayas++
+      }
+      expect(rayas, `${de}→${a}: rayas enteras en ${a}`).toBeGreaterThanOrEqual(2)
+    }
+    // una punteada de más de una casilla y una sólida, como siempre
+    const larga = dibujo({ tipo: 'A3', de: 'e7', a: 'e5', color: 'verde', punteada: true })
+    expect(larga).not.toContain('data-corta')
+    expect(larga).toContain('stroke-dasharray="0.11 0.08"')
+    expect(dibujo({ tipo: 'A4', de: 'f3', a: 'd4', color: 'rojo' })).toContain('stroke-width="0.16"')
+  })
+
   it('R6 · las flechas de caballo van en L, primero el tramo largo (g8→f6: baja a g6 y dobla a f6)', () => {
     // el dibujo de Carlos, con el tablero desde negras
     expect(puntosDeFlecha('g8', 'f6', 'black')).toEqual([

@@ -13,17 +13,31 @@ const PUNTA = 0.42
 const PUNTA_PLAN = 0.34
 
 /**
+ * La punteada de una sola casilla (h4→h5, c5→d4), a la medida (revisión de la torre, v1.3): con la de siempre se veía
+ * solo una "V" chica, porque las piezas van encima de las marcas y tapaban los guiones, y la punta tapaba el resto. Sale
+ * del borde entre las dos casillas, la punta (más chica) pasa un poco del centro de la de llegada, y el trazo es más
+ * fino con rayas más cortas: se ven dos o tres rayas y la punta, dentro de la casilla de llegada. Las demás no cambian.
+ */
+const CORTA = { sale: 0.5, pasa: 0.12, punta: 0.2, grueso: 0.075, raya: 0.09, hueco: 0.05 }
+/** De una casilla a la de junto, también en diagonal. */
+const deUnaCasilla = (de: string, a: string) => Math.max(Math.abs(de.charCodeAt(0) - a.charCodeAt(0)), Math.abs(Number(de[1]) - Number(a[1]))) === 1
+
+/**
  * Una flecha. La punteada (un plan) es de puntos, sale un poco afuera de su pieza y lleva la punta abierta: en una
  * flecha de una sola casilla, los guiones quedaban debajo de la pieza y parecía sólida, o un puntero (pases visuales 1 y 2).
  */
-function Flecha({ m, puntos, escala }: { m: Marca; puntos: [number, number][]; escala: number }) {
-  const punta = (m.punteada ? PUNTA_PLAN : PUNTA) * escala
+function Flecha({ m, ruta, escala }: { m: Marca; ruta: [number, number][]; escala: number }) {
+  // una copia: la ruta viene de la capa, y en desarrollo React dibuja dos veces (moverle la salida dos veces la rompía)
+  const puntos = [...ruta]
+  const corta = !!m.punteada && deUnaCasilla(m.de!, m.a!)
+  const punta = (corta ? CORTA.punta : m.punteada ? PUNTA_PLAN : PUNTA) * escala
   const color = colorDe(m)
   if (m.punteada) {
     const [sx, sy] = puntos[0]!
     const [nx, ny] = puntos[1]!
     const l = Math.hypot(nx - sx, ny - sy)
-    puntos[0] = [sx + ((nx - sx) / l) * 0.22, sy + ((ny - sy) / l) * 0.22]
+    const sale = corta ? CORTA.sale : 0.22
+    puntos[0] = [sx + ((nx - sx) / l) * sale, sy + ((ny - sy) / l) * sale]
   }
   // la línea termina donde empieza la punta, que llega cerca del centro de la casilla
   const [ax, ay] = puntos[puntos.length - 2]!
@@ -31,24 +45,26 @@ function Flecha({ m, puntos, escala }: { m: Marca; puntos: [number, number][]; e
   const largo = Math.hypot(bx - ax, by - ay)
   const ux = (bx - ax) / largo
   const uy = (by - ay) / largo
-  const fin: [number, number] = [bx - ux * 0.1, by - uy * 0.1]
+  const fin: [number, number] = corta ? [bx + ux * CORTA.pasa, by + uy * CORTA.pasa] : [bx - ux * 0.1, by - uy * 0.1]
   const base: [number, number] = [fin[0] - ux * punta, fin[1] - uy * punta]
   // la punteada, con la punta abierta y los puntos hasta ella: una punta hueca de triángulo parecía el puntero del ratón
-  const linea = [...puntos.slice(0, -1), m.punteada ? [fin[0] - ux * 0.14, fin[1] - uy * 0.14] : base]
+  const linea = [...puntos.slice(0, -1), m.punteada ? [fin[0] - ux * (corta ? 0.08 : 0.14), fin[1] - uy * (corta ? 0.08 : 0.14)] : base]
   const ancho = m.punteada ? punta * 0.65 : punta / 2
+  const grueso = (corta ? CORTA.grueso : m.punteada ? 0.12 : GRUESO) * escala
+  const rayas = corta ? `${CORTA.raya * escala} ${CORTA.hueco * escala}` : `${0.11 * escala} ${0.08 * escala}`
   const triangulo = [fin, [base[0] - uy * ancho, base[1] + ux * ancho], [base[0] + uy * ancho, base[1] - ux * ancho]]
   const trazo = linea.map((p) => p.join(',')).join(' ')
   const abierta = [triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')
   return (
-    <g data-marca="flecha" data-tipo={m.tipo} data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-puntos={puntos.length} opacity={escala > 1 ? 0.9 : 0.82}>
+    <g data-marca="flecha" data-tipo={m.tipo} data-de={m.de} data-a={m.a} data-color={m.color ?? 'verde'} data-punteada={m.punteada ? 'si' : 'no'} data-corta={corta ? 'si' : undefined} data-puntos={puntos.length} opacity={escala > 1 ? 0.9 : 0.82}>
       {/* en un tablero chico, un borde claro debajo: la flecha se distingue también sobre el amarillo de la última jugada */}
       {escala > 1 && (
         <g stroke="#f4f4e6" strokeOpacity={0.75} fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points={trazo} strokeWidth={(m.punteada ? 0.12 : GRUESO) * escala + 0.07} />
+          <polyline points={trazo} strokeWidth={grueso + 0.07} />
           {m.punteada ? <polyline points={abierta} strokeWidth={0.075 * escala + 0.07} /> : <polygon points={triangulo.map((p) => p.join(',')).join(' ')} strokeWidth={0.07} />}
         </g>
       )}
-      <polyline points={trazo} fill="none" stroke={color} strokeWidth={(m.punteada ? 0.12 : GRUESO) * escala} strokeLinecap={m.punteada ? 'butt' : 'round'} strokeLinejoin="round" strokeDasharray={m.punteada ? `${0.11 * escala} ${0.08 * escala}` : undefined} />
+      <polyline points={trazo} fill="none" stroke={color} strokeWidth={grueso} strokeLinecap={m.punteada ? 'butt' : 'round'} strokeLinejoin="round" strokeDasharray={m.punteada ? rayas : undefined} />
       {m.punteada ? (
         <polyline points={[triangulo[1]!, triangulo[0]!, triangulo[2]!].map((p) => p.join(',')).join(' ')} fill="none" stroke={color} strokeWidth={0.075 * escala} strokeLinecap="round" strokeLinejoin="round" />
       ) : (
@@ -97,7 +113,7 @@ export function CapaMarcas({ marcas, orientacion, fen, escala = 1 }: { marcas: M
   return (
     <svg className="capa-marcas" viewBox="0 0 8 8" aria-hidden="true" data-testid="capa-marcas">
       {marcas.filter((m) => m.en).map((m) => <Casilla key={`c-${m.en}`} m={m} orientacion={orientacion} />)}
-      {flechas.map((m, i) => <Flecha key={`f-${m.de}-${m.a}`} m={m} puntos={rutas[i]!} escala={escala} />)}
+      {flechas.map((m, i) => <Flecha key={`f-${m.de}-${m.a}`} m={m} ruta={rutas[i]!} escala={escala} />)}
     </svg>
   )
 }

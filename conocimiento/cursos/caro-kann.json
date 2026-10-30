@@ -730,6 +730,14 @@
               "frase": "...Cc6: tu caballo también ataca d4.",
               "jugadas": [
                 "...Nc6"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "c6",
+                  "a": "d4",
+                  "color": "verde"
+                }
               ]
             },
             {
@@ -935,6 +943,14 @@
               "frase": "...Cc6: tu caballo se suma contra d4.",
               "jugadas": [
                 "...Nc6"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "c6",
+                  "a": "d4",
+                  "color": "verde"
+                }
               ]
             },
             {
@@ -1195,6 +1211,14 @@
               "jugadas": [
                 "...c5",
                 "...Nc6"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "c6",
+                  "a": "d4",
+                  "color": "verde"
+                }
               ]
             },
             {
@@ -3045,6 +3069,16 @@
               "punteada": true
             }
           ]
+        ],
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "b6",
+              "a": "b2",
+              "color": "verde"
+            }
+          ]
         ]
       }
     },
@@ -3125,7 +3159,19 @@
         "a6",
         "Bg4",
         "Bg6"
-      ]
+      ],
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A2",
+              "de": "c6",
+              "a": "d4",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6": {
       "pregunta": "Tu alfil ya salió. ¿Cómo abres tu otro alfil y sostienes d5?",
@@ -3171,6 +3217,16 @@
               "de": "c3",
               "a": "e4",
               "color": "rojo"
+            }
+          ]
+        ],
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "g6",
+              "a": "e4",
+              "color": "verde"
             }
           ]
         ]
@@ -3317,7 +3373,7 @@
       "pregunta": "El peón de g4 ataca a tu alfil. ¿A dónde lo llevas, sin salir de su diagonal, para que además ataque algo?",
       "pista": "Hay una torre blanca que quedó destapada.",
       "hace": "Llevas el alfil a e4, una casilla central.",
-      "porque": "Desde ahí ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
+      "porque": "Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta.",
       "prepara": "Si blancas lo echa con f3, vuelve a g6.",
       "marcas": [
         {
@@ -3340,6 +3396,18 @@
         "prepara": [
           [
             "Bg6"
+          ]
+        ]
+      },
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A2",
+              "de": "e4",
+              "a": "h1",
+              "color": "verde"
+            }
           ]
         ]
       }
@@ -3449,7 +3517,7 @@
     "e4 c6 d4 d5 e5 Bf5 Ne2 e6 Ng3 Bg6": {
       "pregunta": "El caballo de g3 ataca a tu alfil. ¿A dónde lo retiras sin salir de su diagonal?",
       "hace": "Retiras el alfil a g6.",
-      "porque": "Sigue en su diagonal, mirando a e4.",
+      "porque": "Tu alfil sigue en su diagonal, mirando a e4.",
       "cuidado": "Si después blancas empuja h4, contesta ...h5 antes de seguir.",
       "marcas": [
         {
@@ -3474,6 +3542,16 @@
               "a": "h5",
               "color": "verde",
               "punteada": true
+            }
+          ]
+        ],
+        "porque": [
+          [
+            {
+              "tipo": "A2",
+              "de": "g6",
+              "a": "e4",
+              "color": "verde"
             }
           ]
         ]
@@ -3537,7 +3615,7 @@
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6": {
       "pregunta": "El caballo de g3 ataca a tu alfil. ¿A dónde lo retiras?",
       "hace": "Retiras el alfil a g6, en la misma diagonal.",
-      "porque": "Desde ahí sigue mirando a e4 y a c2.",
+      "porque": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
       "marcas": [
         {
           "de": "g6",
@@ -3550,7 +3628,25 @@
       "motor": [
         "M-cl-ag6"
       ],
-      "pista": "Retírate sobre la misma diagonal."
+      "pista": "Retírate sobre la misma diagonal.",
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A2",
+              "de": "g6",
+              "a": "e4",
+              "color": "verde"
+            },
+            {
+              "tipo": "A2",
+              "de": "g6",
+              "a": "c2",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6": {
       "clave": true,
@@ -3612,7 +3708,19 @@
         "e6",
         "Nf6",
         "Bh7"
-      ]
+      ],
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "d7",
+              "a": "e5",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5 Bh7": {
       "pregunta": "El peón de h5 ataca a tu alfil. ¿A dónde lo retiras?",
@@ -3748,7 +3856,19 @@
       "buenas": [
         "Nf6",
         "e6"
-      ]
+      ],
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "c6",
+              "a": "d4",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6": {
       "pregunta": "¿Qué pieza desarrollas ahora para cuidar d5 y acercarte al enroque?",
@@ -3771,7 +3891,19 @@
         "e5",
         "e6",
         "Qb6"
-      ]
+      ],
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "f6",
+              "a": "d5",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3 Nf6 Bf4 Bg4": {
       "clave": true,
@@ -3881,7 +4013,19 @@
         "e6",
         "a6",
         "Nc6"
-      ]
+      ],
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "f6",
+              "a": "d5",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6": {
       "pregunta": "d5 está atacado otra vez. ¿Qué peón lo defiende y abre tu alfil de f8?",
@@ -4427,6 +4571,18 @@
             "O-O"
           ]
         ]
+      },
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "e7",
+              "a": "d5",
+              "color": "verde"
+            }
+          ]
+        ]
       }
     },
     "e4 c6 d3 d5 Nd2 g6 Ngf3 Bg7 g3 e5 Bg2 Ne7 O-O O-O": {
@@ -4466,7 +4622,19 @@
       "motor": [
         "M-hb-d5"
       ],
-      "pista": "Un peón central puede atacar al alfil, apoyado por c6."
+      "pista": "Un peón central puede atacar al alfil, apoyado por c6.",
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A2",
+              "de": "d8",
+              "a": "d5",
+              "color": "verde"
+            }
+          ]
+        ]
+      }
     },
     "e4 c6 Bc4 d5 Bb3 dxe4": {
       "pregunta": "El alfil blanco se retiró a b3. ¿Qué ganas ahora?",

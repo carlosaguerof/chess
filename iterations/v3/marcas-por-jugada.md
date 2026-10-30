@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 37 de 140.** Más 44 frases del plan y del paso a paso.
+**Jugadas con marcas: 46 de 140.** Más 47 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -17,17 +17,17 @@
 | 5.Ae2 | Avance: 4.Cf3 | del rival | no |  |
 | 5...c5 | Avance: 4.Cf3 | tuya | sí | mía prepara frase 1: flecha f8→c5 (A3, verde, punteada) |
 | 6.Ae3 | Avance: 4.Cf3 | del rival | no |  |
-| 6...Db6 | Avance: 4.Cf3 | tuya | sí | mía prepara frase 1: flecha b8→c6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
+| 6...Db6 | Avance: 4.Cf3 | tuya | sí | mía hace frase 1: flecha b6→b2 (A2, verde)<br>mía prepara frase 1: flecha b8→c6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | 4.c3 | Avance: 4.c3 | del rival | sí | rival frase 2: flecha d1→b3 (A7, roja, punteada); flecha b3→b7 (A7, roja, punteada) |
 | 4...e6 | Avance: 4.c3 | tuya | no |  |
 | 5.Ae2 | Avance: 4.c3 | del rival | no |  |
 | 5...c5 | Avance: 4.c3 | tuya | no |  |
 | 6.Cf3 | Avance: 4.c3 | del rival | sí | rival frase 1: flecha f3→d4 (A4, roja) |
-| 6...Cc6 | Avance: 4.c3 | tuya | no |  |
+| 6...Cc6 | Avance: 4.c3 | tuya | sí | mía porque frase 1: flecha c6→d4 (A2, verde) |
 | 4.Cc3 | Avance: 4.Cc3 (Van der Wiel) | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
 | 4...e6 | Avance: 4.Cc3 (Van der Wiel) | tuya | no |  |
 | 5.g4 | Avance: 4.Cc3 (Van der Wiel) | del rival | no |  |
-| 5...Ag6 | Avance: 4.Cc3 (Van der Wiel) | tuya | sí | mía porque frase 1: flecha c3→e4 (A4, roja) |
+| 5...Ag6 | Avance: 4.Cc3 (Van der Wiel) | tuya | sí | mía hace frase 1: flecha g6→e4 (A2, verde)<br>mía porque frase 1: flecha c3→e4 (A4, roja) |
 | 6.Cge2 | Avance: 4.Cc3 (Van der Wiel) | del rival | sí | rival frase 1: flecha e2→f4 (A7, roja, punteada); flecha f4→g6 (A7, roja, punteada) |
 | 6...c5 | Avance: 4.Cc3 (Van der Wiel) | tuya | no |  |
 | 7.h4 | Avance: 4.Cc3 (Van der Wiel) | del rival | sí | rival frase 1: flecha h4→h5 (A7, roja, punteada) |
@@ -41,7 +41,7 @@
 | 6.Dxd3 | Avance: 4.h4 (Tal) | del rival | no |  |
 | 6...e6 | Avance: 4.h4 (Tal) | tuya | no |  |
 | 4.g4 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
-| 4...Ae4 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
+| 4...Ae4 | Avance: 4.g4 (Bayoneta) | tuya | sí | mía porque frase 1: flecha e4→h1 (A2, verde) |
 | 5.f3 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
 | 5...Ag6 | Avance: 4.g4 (Bayoneta) | tuya | no |  |
 | 6.e6 | Avance: 4.g4 (Bayoneta) | del rival | no |  |
@@ -51,17 +51,17 @@
 | 4.Ce2 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha e2→g3 (A7, roja, punteada); flecha g3→f5 (A7, roja, punteada) |
 | 4...e6 | Avance: 4.Ce2 (Bronstein) | tuya | no |  |
 | 5.Cg3 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
-| 5...Ag6 | Avance: 4.Ce2 (Bronstein) | tuya | sí | mía cuidado frase 1: flecha h7→h5 (A3, verde, punteada) |
+| 5...Ag6 | Avance: 4.Ce2 (Bronstein) | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde)<br>mía cuidado frase 1: flecha h7→h5 (A3, verde, punteada) |
 | 3.Cc3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
 | 3...dxe4 | Clásica: 3.Cc3 | tuya | no |  |
 | 4.Cxe4 | Clásica: 3.Cc3 | del rival | no |  |
 | 4...Af5 | Clásica: 3.Cc3 | tuya | no |  |
 | 5.Cg3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
-| 5...Ag6 | Clásica: 3.Cc3 | tuya | no |  |
+| 5...Ag6 | Clásica: 3.Cc3 | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde); flecha g6→c2 (A2, verde) |
 | 6.h4 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha h4→h5 (A7, roja, punteada) |
 | 6...h6 | Clásica: 3.Cc3 | tuya | no |  |
 | 7.Cf3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha f3→e5 (A7, roja, punteada); flecha e5→g6 (A7, roja, punteada) |
-| 7...Cd7 | Clásica: 3.Cc3 | tuya | no |  |
+| 7...Cd7 | Clásica: 3.Cc3 | tuya | sí | mía hace frase 1: flecha d7→e5 (A2, verde) |
 | 8.h5 | Clásica: 3.Cc3 | del rival | no |  |
 | 8...Ah7 | Clásica: 3.Cc3 | tuya | sí | mía cuidado frase 1: flecha g3→f5 (A4, roja) |
 | 9.Ad3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha d3→h7 (A4, roja) |
@@ -71,15 +71,15 @@
 | 3.exd5 | Cambio: 3.exd5 | del rival | no |  |
 | 3...cxd5 | Cambio: 3.exd5 | tuya | no |  |
 | 4.Ad3 | Cambio: 3.exd5 | del rival | sí | rival frase 1: casilla f5 (A5, roja); flecha c8→f5 (A5, roja) |
-| 4...Cc6 | Cambio: 3.exd5 | tuya | no |  |
+| 4...Cc6 | Cambio: 3.exd5 | tuya | sí | mía hace frase 1: flecha c6→d4 (A2, verde) |
 | 5.c3 | Cambio: 3.exd5 | del rival | no |  |
-| 5...Cf6 | Cambio: 3.exd5 | tuya | no |  |
+| 5...Cf6 | Cambio: 3.exd5 | tuya | sí | mía hace frase 1: flecha f6→d5 (A2, verde) |
 | 6.Af4 | Cambio: 3.exd5 | del rival | sí | rival frase 1: flecha f4→c7 (A4, roja) |
 | 6...Ag4 | Cambio: 3.exd5 | tuya | sí | mía hace frase 1: flecha g4→d1 (A2, verde) |
 | 7.Db3 | Cambio: 3.exd5 | del rival | sí | rival frase 1: flecha b3→b7 (A4, roja) |
 | 7...Dd7 | Cambio: 3.exd5 | tuya | sí | mía cuidado frase 1: flecha f4→c7 (A4, roja) |
 | 4.c4 | Panov: 4.c4 | del rival | no |  |
-| 4...Cf6 | Panov: 4.c4 | tuya | no |  |
+| 4...Cf6 | Panov: 4.c4 | tuya | sí | mía hace frase 1: flecha f6→d5 (A2, verde) |
 | 5.Cc3 | Panov: 4.c4 | del rival | sí | rival frase 1: flecha c3→d5 (A4, roja) |
 | 5...e6 | Panov: 4.c4 | tuya | no |  |
 | 6.Cf3 | Panov: 4.c4 | del rival | no |  |
@@ -124,12 +124,12 @@
 | 5.g3 | 2.d3 | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
 | 5...e5 | 2.d3 | tuya | no |  |
 | 6.Ag2 | 2.d3 | del rival | no |  |
-| 6...Ce7 | 2.d3 | tuya | no |  |
+| 6...Ce7 | 2.d3 | tuya | sí | mía hace frase 1: flecha e7→d5 (A2, verde) |
 | 7.0-0 | 2.d3 | del rival | no |  |
 | 7...0-0 | 2.d3 | tuya | no |  |
 | 8.b4 | 2.d3 | del rival | no |  |
 | 2.Ac4 | 2.Ac4 | del rival | sí | rival frase 1: flecha c4→f7 (A4, roja) |
-| 2...d5 | 2.Ac4 | tuya | no |  |
+| 2...d5 | 2.Ac4 | tuya | sí | mía porque frase 1: flecha d8→d5 (A2, verde) |
 | 3.Ab3 | 2.Ac4 | del rival | no |  |
 | 3...dxe4 | 2.Ac4 | tuya | no |  |
 | 4.Dh5 | 2.Ac4 | del rival | sí | rival frase 1: flecha h5→f7 (A4, roja); flecha b3→f7 (A4, roja) |
@@ -184,10 +184,13 @@
 | repaso 1, paso 6 | En la Clásica, contra 6.h4, juegas 6...h6: así tu alfil tiene h7. | flecha g6→h7 (A3, verde, punteada) |
 | repaso 1, paso 9 | Nunca la pongas en c7: ahí la atacaría el alfil de f4. | flecha f4→c7 (A4, roja) |
 | repaso 2, paso 4 | «En la Clásica, el caballo ataca d5»: 3.Cc3 sobre todo defiende e4. | flecha c3→e4 (A4, roja) |
+| plan avance-short paso a paso, paso 2 | ...Cc6: tu caballo también ataca d4. | flecha c6→d4 (A2, verde) |
 | plan avance-short paso a paso, paso 3 | Tu peón de c5 ya ataca d4: cuando convenga, lo cambias. | flecha c5→d4 (A3, verde, punteada) |
 | plan avance-c3 paso a paso, paso 4 | Blancas enroca, 0-0, y sostiene d4 con c3 y el caballo de f3. | flecha f3→d4 (A4, roja) |
+| plan avance-van-der-wiel paso a paso, paso 2 | ...Cc6: tu caballo se suma contra d4. | flecha c6→d4 (A2, verde) |
 | plan avance-van-der-wiel paso a paso, paso 3 | Tu peón de c5 también ataca d4: ...cxd4 cuando convenga. | flecha c5→d4 (A3, verde, punteada) |
 | plan avance-bayoneta paso a paso, paso 2 | Luego buscas ...c5 o ...e5, contra el centro de blancas. | flecha c6→c5 (A3, verde, punteada); flecha e7→e5 (A3, verde, punteada) |
+| plan avance-bronstein paso a paso, paso 1 | ...c5 y ...Cc6: vas contra d4. | flecha c6→d4 (A2, verde) |
 | plan cambio paso a paso, paso 3 | Después adelantas ...b5 y ...b4: es el ataque de minorías. | flecha b7→b5 (A3, verde, punteada) |
 | plan cambio paso a paso, paso 4 | Blancas busca la casilla e5 para un caballo y atacar en el lado de rey. | casilla e5 (A6, roja) |
 | plan oferta-final paso a paso, paso 2 | Luego ...e5 o ...g6, y llevas tus piezas al centro. | flecha e7→e5 (A3, verde, punteada); flecha g7→g6 (A3, verde, punteada) |
