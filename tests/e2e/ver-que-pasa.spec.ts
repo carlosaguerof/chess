@@ -90,6 +90,7 @@ test.describe('V3 · la acción principal va a la derecha del pie', () => {
 const ventana = (page: Page) => page.getByTestId('paso-a-paso')
 const fraseDe = (page: Page) => page.getByTestId('paso-a-paso-frase')
 const tituloDe = (page: Page) => page.getByTestId('paso-a-paso-titulo')
+const amarillas = (page: Page) => page.getByTestId('tablero-paso-a-paso').locator('square.last-move')
 const fig = (t: string) => mostrarTexto(t, 'figuras')
 
 /** Recorre todos los pasos con Siguiente: la frase y el tablero de cada uno son los de los datos. Termina en el último. */
@@ -115,7 +116,8 @@ test.describe('V1 · "Ver qué pasa"', () => {
     await page.getByTestId('ver-que-pasa').click()
     await expect(tituloDe(page)).toHaveText(fig('Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.'))
     await expect(page.getByTestId('tablero-paso-a-paso')).toHaveAttribute('data-fen', posicion(tal.jugadas, 7).fen())
-    await expect(fraseDe(page)).toHaveText(fig('Esta es la posición después de 4.h4.'))
+    await expect(fraseDe(page)).toHaveText(fig('Regresamos a la posición después de 4.h4.'))
+    await expect(amarillas(page), 'la última jugada, en amarillo').toHaveCount(2)
     await recorrer(page, verDespues(c, tal, 'aprender', 7)!)
     await expect(fraseDe(page)).toContainText('lo pierdes')
     await expect(page.getByTestId('pap-siguiente')).toHaveText('Salir')
@@ -200,8 +202,18 @@ test.describe('V1 · "Ver qué pasa"', () => {
     await despuesDe(page, info, id, 'aprender', 13)
     await page.getByTestId('ver-que-pasa').click()
     await expect(tituloDe(page)).toHaveText(fig('Nunca con ...Dc7: el alfil de f4 se come tu dama.'))
-    await recorrer(page, verDespues(c, lineaPorId(c, id)!, 'aprender', 13)!)
+    await expect(page.getByTestId('paso-a-paso-cual')).toHaveText('Frase 1 de 2')
+    const v = verDespues(c, lineaPorId(c, id)!, 'aprender', 13)!
+    const antes = await page.getByTestId('pap-siguiente').boundingBox()
+    await recorrer(page, v)
     await expect(tituloDe(page)).toHaveText(fig('Y si juegas ...e6, pierdes b7.'))
+    await expect(page.getByTestId('paso-a-paso-cual')).toHaveText('Frase 2 de 2')
+    // el botón no se movió bajo el dedo, y el primer paso de la segunda frase también trae su amarillo
+    expect((await page.getByTestId('pap-siguiente').boundingBox())!.y).toBe(antes!.y)
+    const segunda = v.pa.pasos.findIndex((p, i) => i > 0 && p.titulo)
+    for (let i = v.pa.pasos.length - 1; i > segunda; i--) await page.getByTestId('pap-atras').click()
+    await expect(ventana(page)).toHaveAttribute('data-paso', String(segunda + 1))
+    await expect(amarillas(page)).toHaveCount(2)
   })
 
   for (const p of [
@@ -305,7 +317,8 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
     const nombre = `${l.id.slice(2)}-${ply + 1}-${v.campo}-${String(v.i).replace(/[^A-Za-z0-9]/g, '')}`
     for (let i = 0; i <= hasta; i++) {
       await expect(ventana(page)).toHaveAttribute('data-paso', String(i + 1))
-      if (i === desde || i === hasta) await foto(`${nombre}-${i === desde ? 'primero' : 'ultimo'}`, { momento: `${lugar}: paso ${i + 1} de ${abierta.pa.pasos.length}`, frase: `Título: ${fig(v.frase)}<br>Paso: ${fig(abierta.pa.pasos[i]!.frase)}`, marcas: await marcasVistas('tablero-paso-a-paso') })
+      // además del primero y el último, cada paso con marcas
+      if (i === desde || i === hasta || abierta.pa.pasos[i]!.marcas?.length) await foto(`${nombre}-${i === desde ? 'primero' : i === hasta ? 'ultimo' : `paso-${i + 1}`}`, { momento: `${lugar}: paso ${i + 1} de ${abierta.pa.pasos.length}`, frase: `Título: ${fig(v.frase)}<br>Paso: ${fig(abierta.pa.pasos[i]!.frase)}`, marcas: await marcasVistas('tablero-paso-a-paso') })
       if (i < hasta) await page.getByTestId('pap-siguiente').click()
     }
     await page.keyboard.press('Escape')
@@ -331,6 +344,27 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
   await page.reload()
   await momento(page, 'intro')
   await foto('empezar-solo-clasica', { momento: 'La Clásica, la introducción', frase: lineaPorId(c, 'v:clasica')!.intro })
+
+  // 6. Practicar y el error: el pie con y sin "Ver", y "Ver qué pasa" con "Reintentar"
+  await despuesDe(page, info, TAL, 'practicar', 7)
+  await foto('practicar-tal-sin-ver', { momento: 'La Tal, Practicar, después de 4...h5: la frase oculta no trae "Ver"', frase: explicacionDespues(c, tal, 'practicar', 7).map(fig).join('<br>') })
+  await despuesDe(page, info, 'v:avance-bayoneta', 'practicar', 13)
+  await foto('practicar-bayoneta-con-ver', { momento: 'La Bayoneta, Practicar, después de 7...♗xf7: la frase se muestra y no adelanta nada', frase: explicacionDespues(c, lineaPorId(c, 'v:avance-bayoneta')!, 'practicar', 13).map(fig).join('<br>') })
+  await abrirEn(page, TAL, 'practicar', 7)
+  await momento(page, 'tuTurno')
+  await tocar(page, info, 'h7')
+  await tocar(page, info, 'h6')
+  await momento(page, 'error')
+  await foto('practicar-error-con-ver-y-reintentar', { momento: 'La Tal, Practicar, si juegas 4...h6: "Ver qué pasa" y "Reintentar"', frase: fig(c.mias['e4 c6 d4 d5 e5 Bf5 h4 h5']!.errores!.h6!) })
+
+  // 7. en la pantalla más chica, la ventana con la frase más larga
+  if (isMobile) {
+    await page.setViewportSize({ width: 375, height: 667 })
+    await despuesDe(page, info, TAL, 'aprender', 5)
+    await foto('375x667-pie', { momento: 'A 375×667: el pie, después de 3...♗f5', frase: 'la explicación más larga con "Ver"' })
+    await page.getByTestId('ver-que-pasa').click()
+    await foto('375x667-ventana', { momento: 'A 375×667: la ventana con el título más largo', frase: 'el título más largo' })
+  }
 
   if (info.project.name === 'escritorio')
     writeFileSync(

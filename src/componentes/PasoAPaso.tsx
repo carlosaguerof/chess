@@ -9,7 +9,8 @@ import type { VerDelMomento } from '../curso/ver.ts'
 import type { PasoAPaso } from '../curso/tipos.ts'
 
 /** La última jugada de una línea, para el amarillo. */
-function ultimaDe(jugadas: string[]): [string, string] {
+function ultimaDe(jugadas: string[]): [string, string] | undefined {
+  if (!jugadas.length) return undefined
   const m = posicion(jugadas, jugadas.length - 1).move(jugadas.at(-1)!)
   return [m.from, m.to]
 }
@@ -69,21 +70,39 @@ function VentanaPasoAPaso({ titulo, pa, inicio, orientacion, verQuePasa, onCerra
     for (let j = k; j >= 0; j--) {
       const m = fotos[j]!.hechas.at(-1)
       if (m) return [m.from, m.to]
-      if (pa.pasos[j]!.reinicio) return undefined
+      const reinicio = pa.pasos[j]!.reinicio
+      if (reinicio) return verQuePasa ? ultimaDe([...(inicio ?? []), ...reinicio]) : undefined
     }
-    return verQuePasa && inicio?.length ? ultimaDe(inicio) : undefined
+    return verQuePasa ? ultimaDe(inicio ?? []) : undefined
   }
   // en una ventana con dos frases, el título sigue a la frase de la que hablan los pasos
   const tituloDe = (k: number) => pa.pasos.slice(0, k + 1).findLast((p) => p.titulo)?.titulo ?? titulo
+  const titulos = pa.pasos.flatMap((p) => (p.titulo ? [p.titulo] : []))
   const foto = fotos[i]!
   const fen = pa.soloPeones ? soloPeones(foto.fen) : foto.fen
 
   return createPortal(
     <div className="dialogo-fondo" onClick={onCerrar} data-testid="paso-a-paso-fondo">
       <div className={`dialogo paso-a-paso ${verQuePasa ? 'ver-que-pasa' : ''}`} role="dialog" aria-modal="true" aria-label={`${titulo}, paso a paso`} onClick={(e) => e.stopPropagation()} data-testid="paso-a-paso" data-paso={i + 1}>
-        <h2 data-testid="paso-a-paso-titulo">
-          <Texto t={tituloDe(i)} />
-        </h2>
+        {titulos.length > 1 ? (
+          <>
+            <p className="paso-a-paso-nota" data-testid="paso-a-paso-cual">
+              Frase {titulos.indexOf(tituloDe(i)) + 1} de {titulos.length}
+            </p>
+            {/* las frases en la misma celda: la ventana mide la más larga, y los botones no se mueven bajo el dedo al cambiar */}
+            <h2 className="titulos-paso">
+              {titulos.map((t) => (
+                <span key={t} className={t === tituloDe(i) ? undefined : 'titulo-oculto'} data-testid={t === tituloDe(i) ? 'paso-a-paso-titulo' : undefined}>
+                  <Texto t={t} />
+                </span>
+              ))}
+            </h2>
+          </>
+        ) : (
+          <h2 data-testid="paso-a-paso-titulo">
+            <Texto t={tituloDe(i)} />
+          </h2>
+        )}
         {pa.ilustrativo && <p className="paso-a-paso-nota">Es una ilustración: el rival no contesta cada jugada.</p>}
         {/* C5: las marcas de la frase, que se acumulan hasta que el tablero vuelve a mover (detrás del interruptor) */}
         <TableroMini fen={fen} orientacion={orientacion} ultima={ultimaJugada(i)} testid="tablero-paso-a-paso" coordenadas marcas={marcasNuevas() ? marcasDelPaso(pa, i) : undefined} />

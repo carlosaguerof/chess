@@ -2994,7 +2994,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 1.e4.",
+                "frase": "Regresamos a la posición después de 1.e4.",
                 "fuente": [
                   "WB-1c6",
                   "WP-CK",
@@ -3123,7 +3123,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 3.e5.",
+                "frase": "Regresamos a la posición después de 3.e5.",
                 "fuente": [
                   "WB-3e5",
                   "WB-3Af5",
@@ -3572,7 +3572,7 @@
                 ]
               },
               {
-                "frase": "O 5...Db6: tu dama se pone delante y también lo defiende. Las dos valen casi lo mismo para el motor.",
+                "frase": "O 5...Db6: tu dama se pone delante y también lo defiende. Las dos sirven.",
                 "reinicio": [
                   "Qb3"
                 ],
@@ -3719,7 +3719,8 @@
               "tipo": "A2",
               "de": "c6",
               "a": "d4",
-              "color": "verde"
+              "color": "verde",
+              "por": "d6"
             }
           ]
         ],
@@ -3779,7 +3780,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 5.g4.",
+                "frase": "Regresamos a la posición después de 5.g4.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -3832,7 +3833,7 @@
                 ]
               },
               {
-                "frase": "6...dxe4: retomas con el peón: tu alfil se cambió por el caballo y el motor te ve peor.",
+                "frase": "6...dxe4: retomas con el peón: tu alfil se cambió por el caballo, y blancas se queda con sus dos alfiles.",
                 "jugadas": [
                   "dxe4"
                 ],
@@ -3918,7 +3919,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 7.h4.",
+                "frase": "Regresamos a la posición después de 7.h4.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -3960,7 +3961,21 @@
                 ]
               },
               {
-                "frase": "Tu alfil de g6 se queda sin casillas: g4 cubre f5 y h5, el caballo de c3 cubre e4, y la dama, d3 y c2.",
+                "frase": "Tu alfil de g6 se queda sin casillas seguras: g4 cubre f5 y h5, el caballo de c3 cubre e4, y la dama, d3 y c2.",
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "d1",
+                    "a": "d3",
+                    "color": "rojo"
+                  },
+                  {
+                    "tipo": "A4",
+                    "de": "c3",
+                    "a": "e4",
+                    "color": "rojo"
+                  }
+                ],
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -3979,7 +3994,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 7.h4.",
+                "frase": "Regresamos a la posición después de 7.h4.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -4409,7 +4424,7 @@
                 ]
               },
               {
-                "frase": "10...Axc5: tu alfil de f8 retoma y sale. Blancas ganó un peón, pero tus piezas quedan activas: el motor ve la partida pareja.",
+                "frase": "10...Axc5: tu alfil de f8 retoma y sale. Blancas ganó un peón, pero tus piezas quedan activas y la partida sigue pareja.",
                 "jugadas": [
                   "Bxc5"
                 ],
@@ -4454,7 +4469,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 4.h4.",
+                "frase": "Regresamos a la posición después de 4.h4.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -4541,7 +4556,7 @@
                 ]
               },
               {
-                "frase": "6...Ag6: tu alfil regresa a g6.",
+                "frase": "6...Ag6: tu alfil se retira a g6.",
                 "jugadas": [
                   "Bg6"
                 ],
@@ -4577,7 +4592,51 @@
                 ]
               },
               {
-                "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. Por eso lo pierdes: blancas gana una pieza.",
+                "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2.",
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "d1",
+                    "a": "d3",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "WB-3Af5",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "M-tal-e6",
+                  "E-tal",
+                  "E-tal-b",
+                  "E-tal-g6",
+                  "V-tal-e6",
+                  "V-tal-e6-g"
+                ]
+              },
+              {
+                "frase": "7...Axh5: lo más que puede hacer es llevarse un peón.",
+                "jugadas": [
+                  "Bxh5"
+                ],
+                "fuente": [
+                  "WB-3Af5",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "M-tal-e6",
+                  "E-tal",
+                  "E-tal-b",
+                  "E-tal-g6",
+                  "V-tal-e6",
+                  "V-tal-e6-g"
+                ]
+              },
+              {
+                "frase": "8.Txh5: la torre lo toma: lo pierdes, y blancas gana una pieza por un peón.",
+                "jugadas": [
+                  "Rxh5"
+                ],
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -4687,7 +4746,7 @@
               ]
             },
             {
-              "frase": "6...Ag6: tu alfil regresa a g6.",
+              "frase": "6...Ag6: tu alfil se retira a g6.",
               "jugadas": [
                 "Bg6"
               ],
@@ -4723,7 +4782,51 @@
               ]
             },
             {
-              "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2. Por eso lo pierdes: blancas gana una pieza.",
+              "frase": "Tu alfil se queda sin casillas: g4 cubre f5 y h5, f3 cubre e4, y la dama, d3 y c2.",
+              "marcas": [
+                {
+                  "tipo": "A4",
+                  "de": "d1",
+                  "a": "d3",
+                  "color": "rojo"
+                }
+              ],
+              "fuente": [
+                "WB-3Af5",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-tal-e6",
+                "E-tal",
+                "E-tal-b",
+                "E-tal-g6",
+                "V-tal-e6",
+                "V-tal-e6-g"
+              ]
+            },
+            {
+              "frase": "7...Axh5: lo más que puede hacer es llevarse un peón.",
+              "jugadas": [
+                "Bxh5"
+              ],
+              "fuente": [
+                "WB-3Af5",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-tal-e6",
+                "E-tal",
+                "E-tal-b",
+                "E-tal-g6",
+                "V-tal-e6",
+                "V-tal-e6-g"
+              ]
+            },
+            {
+              "frase": "8.Txh5: la torre lo toma: lo pierdes, y blancas gana una pieza por un peón.",
+              "jugadas": [
+                "Rxh5"
+              ],
               "fuente": [
                 "WB-3Af5",
                 "MOTOR"
@@ -4820,7 +4923,7 @@
               ]
             },
             {
-              "frase": "6...Ah7: tu alfil llega a h7, pero blancas lo persiguió ganando terreno: el motor lo ve peor.",
+              "frase": "6...Ah7: tu alfil llega a h7, pero blancas lo persiguió y ganó terreno con sus peones.",
               "jugadas": [
                 "Bh7"
               ],
@@ -4971,7 +5074,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 5.f3.",
+                "frase": "Regresamos a la posición después de 5.f3.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -5016,7 +5119,7 @@
                 ]
               },
               {
-                "frase": "Perdiste tu alfil: el motor ve que blancas queda con una pieza de más.",
+                "frase": "Perdiste tu alfil: blancas queda con una pieza de más.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -5082,7 +5185,7 @@
               ]
             },
             {
-              "frase": "Perdiste tu alfil: el motor ve que blancas queda con una pieza de más.",
+              "frase": "Perdiste tu alfil: blancas queda con una pieza de más.",
               "fuente": [
                 "WB-3Af5",
                 "MOTOR"
@@ -5156,7 +5259,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 7.exf7+.",
+                "frase": "Regresamos a la posición después de 7.exf7+.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -5210,7 +5313,7 @@
                 ]
               },
               {
-                "frase": "Tu rey ya no puede enrocar y queda más expuesto: el motor lo ve peor.",
+                "frase": "Tu rey ya no puede enrocar y queda más expuesto: por eso es peor.",
                 "fuente": [
                   "WB-3Af5",
                   "MOTOR"
@@ -5432,7 +5535,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 4.Cxe4.",
+                "frase": "Regresamos a la posición después de 4.Cxe4.",
                 "fuente": [
                   "WB-4Cxe4",
                   "CB",
@@ -5593,7 +5696,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 6.h4.",
+                "frase": "Regresamos a la posición después de 6.h4.",
                 "fuente": [
                   "WB-6h4",
                   "CB",
@@ -5601,6 +5704,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5618,6 +5722,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5635,6 +5740,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5660,6 +5766,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5677,6 +5784,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5702,6 +5810,7 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5719,13 +5828,14 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
                 ]
               },
               {
-                "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+                "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
                 "jugadas": [
                   "Qxf5"
                 ],
@@ -5736,6 +5846,22 @@
                 ],
                 "motor": [
                   "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
+                  "V-cl-cd7",
+                  "V-cl-cd7-b",
+                  "V-cl-cd7-c"
+                ]
+              },
+              {
+                "frase": "Con ...e6 sería igual: el peón de h echa a tu alfil y blancas queda mucho mejor.",
+                "fuente": [
+                  "WB-6h4",
+                  "CB",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "M-cl-sin-h6",
+                  "M-cl-sin-h6b",
                   "V-cl-cd7",
                   "V-cl-cd7-b",
                   "V-cl-cd7-c"
@@ -5882,7 +6008,7 @@
               ]
             },
             {
-              "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+              "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
               "jugadas": [
                 "Qxf5"
               ],
@@ -5994,7 +6120,7 @@
               ]
             },
             {
-              "frase": "8...exf5: retomas con el peón, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+              "frase": "8...exf5: retomas con el peón, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
               "jugadas": [
                 "exf5"
               ],
@@ -6141,7 +6267,7 @@
               ]
             },
             {
-              "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+              "frase": "9...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
               "jugadas": [
                 "Qxf5"
               ],
@@ -6232,7 +6358,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 8.h5.",
+                "frase": "Regresamos a la posición después de 8.h5.",
                 "fuente": [
                   "CB",
                   "MOTOR"
@@ -6325,7 +6451,7 @@
                 ]
               },
               {
-                "frase": "10...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+                "frase": "10...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
                 "jugadas": [
                   "Qxf5"
                 ],
@@ -6442,7 +6568,7 @@
               ]
             },
             {
-              "frase": "10...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: el motor ve a blancas mucho mejor.",
+              "frase": "10...Dxf5: recuperas la pieza, pero tu alfil se cambió por el caballo: blancas queda mucho mejor.",
               "jugadas": [
                 "Qxf5"
               ],
@@ -6500,7 +6626,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 9.Ad3.",
+                "frase": "Regresamos a la posición después de 9.Ad3.",
                 "fuente": [
                   "CB",
                   "WP-CK",
@@ -6640,7 +6766,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 3.exd5.",
+                "frase": "Regresamos a la posición después de 3.exd5.",
                 "fuente": [
                   "WB-3exd5",
                   "WB-1c6",
@@ -6682,7 +6808,7 @@
                 ]
               },
               {
-                "frase": "4...Da5+: tu dama se mueve de nuevo y tus demás piezas siguen en casa: salió demasiado pronto, y el motor lo ve peor.",
+                "frase": "4...Da5+: tu dama se mueve de nuevo y tus demás piezas siguen en casa: salió demasiado pronto.",
                 "jugadas": [
                   "Qa5+"
                 ],
@@ -6747,7 +6873,7 @@
               ]
             },
             {
-              "frase": "4...Da5+: tu dama se mueve de nuevo y tus demás piezas siguen en casa: salió demasiado pronto, y el motor lo ve peor.",
+              "frase": "4...Da5+: tu dama se mueve de nuevo y tus demás piezas siguen en casa: salió demasiado pronto.",
               "jugadas": [
                 "Qa5+"
               ],
@@ -6872,7 +6998,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 6.Af4.",
+                "frase": "Regresamos a la posición después de 6.Af4.",
                 "fuente": [
                   "WP-CK",
                   "MOTOR"
@@ -6951,7 +7077,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 7.Db3.",
+                "frase": "Regresamos a la posición después de 7.Db3.",
                 "fuente": [
                   "MOTOR",
                   "BASE"
@@ -7014,7 +7140,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 7.Db3.",
+                "frase": "Regresamos a la posición después de 7.Db3.",
                 "fuente": [
                   "MOTOR",
                   "BASE"
@@ -7061,7 +7187,7 @@
                 ]
               },
               {
-                "frase": "Perdiste el peón de b7: el motor ve a blancas claramente mejor.",
+                "frase": "Perdiste el peón de b7: blancas queda con un peón de más.",
                 "fuente": [
                   "MOTOR",
                   "BASE"
@@ -7190,7 +7316,7 @@
               ]
             },
             {
-              "frase": "Perdiste el peón de b7: el motor ve a blancas claramente mejor.",
+              "frase": "Perdiste el peón de b7: blancas queda con un peón de más.",
               "fuente": [
                 "MOTOR",
                 "BASE"
@@ -7253,7 +7379,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 4.c4.",
+                "frase": "Regresamos a la posición después de 4.c4.",
                 "fuente": [
                   "WB-4c4",
                   "CB",
@@ -7280,7 +7406,7 @@
                 ]
               },
               {
-                "frase": "5.Axc4: el alfil blanco recupera el peón y de paso se desarrolla. El motor lo ve peor para ti.",
+                "frase": "5.Axc4: el alfil blanco recupera el peón y de paso se desarrolla, y tú no has sacado ninguna pieza.",
                 "jugadas": [
                   "Bxc4"
                 ],
@@ -7330,7 +7456,7 @@
               ]
             },
             {
-              "frase": "5.Axc4: el alfil blanco recupera el peón y de paso se desarrolla. El motor lo ve peor para ti.",
+              "frase": "5.Axc4: el alfil blanco recupera el peón y de paso se desarrolla, y tú no has sacado ninguna pieza.",
               "jugadas": [
                 "Bxc4"
               ],
@@ -7634,7 +7760,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 4.Ce5.",
+                "frase": "Regresamos a la posición después de 4.Ce5.",
                 "fuente": [
                   "MOTOR",
                   "WP-CK"
@@ -8032,7 +8158,7 @@
             "antes": true,
             "pasos": [
               {
-                "frase": "Esta es la posición después de 4.cxd5.",
+                "frase": "Regresamos a la posición después de 4.cxd5.",
                 "fuente": [
                   "WB-2c4",
                   "MOTOR"
@@ -8082,7 +8208,7 @@
                 ]
               },
               {
-                "frase": "5...Dd6: tu dama se mueve otra vez, y el motor lo ve peor.",
+                "frase": "5...Dd6: tu dama se mueve otra vez y tus demás piezas siguen en casa.",
                 "jugadas": [
                   "Qd6"
                 ],
@@ -8155,7 +8281,7 @@
               ]
             },
             {
-              "frase": "5...Dd6: tu dama se mueve otra vez, y el motor lo ve peor.",
+              "frase": "5...Dd6: tu dama se mueve otra vez y tus demás piezas siguen en casa.",
               "jugadas": [
                 "Qd6"
               ],

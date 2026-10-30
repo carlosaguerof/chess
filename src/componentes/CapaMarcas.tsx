@@ -112,7 +112,7 @@ export function CapaMarcas({ marcas, orientacion, fen, escala = 1 }: { marcas: M
   const llenas = ocupadas(fen)
   // las flechas en su orden: cada L evita las piezas y el camino de las de antes (puntosDeFlechas)
   const flechas = marcas.filter((m) => m.de && m.a)
-  const rutas = puntosDeFlechas(flechas as { de: string; a: string }[], orientacion, (c) => llenas.has(c))
+  const rutas = puntosDeFlechas(flechas as { de: string; a: string; por?: string }[], orientacion, (c) => llenas.has(c))
   return (
     <svg className="capa-marcas" viewBox="0 0 8 8" aria-hidden="true" data-testid="capa-marcas">
       {marcas.filter((m) => m.en).map((m) => <Casilla key={`c-${m.en}`} m={m} orientacion={orientacion} />)}

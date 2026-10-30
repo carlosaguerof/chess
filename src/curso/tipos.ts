@@ -22,6 +22,8 @@ export interface Marca {
   tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7'
   /** "después": un plan, una ruta o una amenaza (A3 verde, A7 roja) */
   punteada?: boolean
+  /** la esquina de la L de un caballo, si su camino de siempre pasa sobre la pieza de la que sale otra flecha */
+  por?: string
 }
 
 /** Los campos de la explicación de una jugada mía, en el orden en que se leen. */

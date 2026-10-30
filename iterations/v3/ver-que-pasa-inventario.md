@@ -21,8 +21,8 @@
 | 7...h5 | cuidado | Si juegas ...♘c6 como si nada, 8.h5 echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | Aprender y Practicar |
 | 7...h5 (si juegas 7...♘c6) | errores | Si no frenas el peón de h, da un paso más, echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | solo Aprender |
 | 8...♗h7 | prepara | Si blancas toma tu peón de h5, tus piezas quedan activas a cambio. | 9.♘xh5 9...♘c6 10.dxc5 10...♗xc5 | Aprender y Practicar |
-| 4...h5 | porque | Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 | solo Aprender |
-| 4...h5 (si juegas 4...e6) | errores | Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 | solo Aprender |
+| 4...h5 | porque | Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 7...♗xh5 8.♖xh5 | solo Aprender |
+| 4...h5 (si juegas 4...e6) | errores | Con ...e6 siguen g4, f3 y otro paso del peón de h, y tu alfil se queda sin casillas: lo pierdes. | 4...e6 5.g4 5...♗e4 6.f3 6...♗g6 7.h5 7...♗xh5 8.♖xh5 | solo Aprender |
 | 4...h5 (si juegas 4...h6) | errores | Con ...h6 tu alfil tendría h7, pero blancas sigue con 5.g4 contra tu alfil. | 4...h6 5.g4 5...♗e4 6.f3 6...♗h7 | Aprender y Practicar |
 | 5...♗g6 | cuidado | Aquí no juegues ...e6: el peón de f3 se come tu alfil. | 5...e6 6.fxe4 | Aprender y Practicar |
 | 5...♗g6 (si juegas 5...e6) | errores | Con ...e6, el peón de f3 se come tu alfil. | 5...e6 6.fxe4 | Aprender y Practicar |

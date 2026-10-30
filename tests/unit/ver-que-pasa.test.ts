@@ -56,7 +56,8 @@ describe('"Ver qué pasa" · los datos', () => {
       const ultima = v.inicio.at(-1)!
       const n = v.inicio.length - 1
       const esperada = `${Math.floor(n / 2) + 1}.${n % 2 ? '..' : ''}${sanAEspanol(ultima)}`
-      expect(p.frase, donde(v)).toBe(`Esta es la posición después de ${esperada}.`)
+      // si habla de antes de mi jugada, el tablero regresa, y lo dice (con un error a la vista no regresa: no se hizo)
+      expect(p.frase, donde(v)).toBe(`${v.ver.antes && v.campo !== 'errores' ? 'Regresamos a' : 'Esta es'} la posición después de ${esperada}.`.replace('Esta es la', 'Esta es la'))
     }
     // las de `errores` hablan de antes de mi jugada; "Si juegas ...e6 ahora", también
     for (const v of TODOS.filter((x) => x.campo === 'errores')) expect(v.ver.antes, donde(v)).toBe(true)
@@ -127,17 +128,22 @@ describe('"Ver qué pasa" · los datos', () => {
     expect(readFileSync('iterations/v3/ver-que-pasa-inventario.md', 'utf8')).toBe(listaDelInventario(c))
   })
 
-  it('tiene la línea de la Tal que Carlos no veía: 4...e6 5.g4 ...Ae4 6.f3 ...Ag6 7.h5, igual que el «¿Y si…?»', () => {
+  it('tiene la línea de la Tal que Carlos no veía: 4...e6 5.g4 ...Ae4 6.f3 ...Ag6 7.h5, igual que el «¿Y si…?», y juega la pérdida', () => {
     const v = TODOS.find((x) => x.frase.startsWith('Si juegas ...e6 ahora'))!
     expect(v.ver.antes).toBe(true)
     expect(v.inicio).toEqual(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'])
-    expect(v.ver.pasos.flatMap((p) => p.jugadas ?? [])).toEqual(c.piezas.errores.lista.find((e) => e.id === 'tal-e6')!.jugadas.slice(7))
+    expect(v.ver.pasos.flatMap((p) => p.jugadas ?? [])).toEqual([...c.piezas.errores.lista.find((e) => e.id === 'tal-e6')!.jugadas.slice(7), 'Bxh5', 'Rxh5'])
     expect(v.ver.pasos.at(-1)!.frase).toContain('lo pierdes')
   })
 })
 
 describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess.js)', () => {
   const final = (frase: string) => new Chess(fotos(TODOS.find((v) => v.frase === frase)!).at(-1)!.fen)
+  /** La posición del paso cuya frase empieza con `inicio`. */
+  const enPaso = (frase: string, inicio: string) => {
+    const v = TODOS.find((x) => x.frase === frase)!
+    return new Chess(fotos(v)[v.ver.pasos.findIndex((p) => p.frase.startsWith(inicio))]!.fen)
+  }
   const salidas = (ch: Chess, de: string, turno = 'b') => {
     const [tab, , enroques, , ...resto] = ch.fen().split(' ')
     return new Chess([tab, turno, enroques, '-', ...resto].join(' ')).moves({ square: de as Square, verbose: true }).map((m) => m.to as string)
@@ -157,12 +163,35 @@ describe('"Ver qué pasa" · las consecuencias que se miden en el tablero (chess
       ['Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas.', 'c3'],
       ['Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.', 'f3'],
     ] as const) {
-      const ch = final(f)
+      const ch = enPaso(f, 'Tu alfil')
       expect(ch.get('g6'), f).toEqual({ type: 'b', color: 'b' })
       expect(salidas(ch, 'g6').sort(), f).toEqual(['c2', 'd3', 'e4', 'f5', 'h5'])
       // lo que dice el último paso: quién cubre cada casilla
       for (const [casilla, quien] of [['f5', 'g4'], ['h5', 'g4'], ['e4', e4], ['d3', 'd1'], ['c2', 'd1']] as const) expect(ch.attackers(casilla, 'w'), `${f}: ${casilla}`).toContain(quien)
     }
+  })
+
+  it('"lo pierdes": al final de la Tal ya no está tu alfil, y blancas tiene una pieza por un peón', () => {
+    const ch = final('Si juegas ...e6 ahora, siguen 5.g4, 6.f3 y 7.h5, y tu alfil se queda sin casillas: lo pierdes.')
+    expect(ch.findPiece({ type: 'b', color: 'b' })).toEqual(['f8'])
+    const valor = (color: 'w' | 'b') => ch.board().flat().filter((p) => p?.color === color).reduce((s, p) => s + { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 }[p!.type], 0)
+    expect(valor('w') - valor('b')).toBe(2)
+  })
+
+  it('lo que se ve al final: blancas con sus dos alfiles, tus piezas en casa y un peón de más', () => {
+    const vdw = final('En e4 lo tomaría el caballo de c3.')
+    expect(vdw.findPiece({ type: 'b', color: 'w' })).toHaveLength(2)
+    expect(vdw.findPiece({ type: 'b', color: 'b' })).toHaveLength(1)
+    // 5.Axc4: ninguna pieza negra salió de su fila; lo mismo con la dama que sale temprano, salvo la dama
+    const panov = final('Tomar en c4 es peor: el alfil blanco recupera el peón y de paso se desarrolla.')
+    for (const fila of panov.board().slice(1)) expect(fila.filter((p) => p?.color === 'b' && p.type !== 'p')).toEqual([])
+    for (const f of ['Retomar con la dama la saca demasiado pronto, y es peor.', 'Retomar con la dama es peor: con 5.Cc3 blancas la ataca y gana tiempo.']) {
+      const ch = final(f)
+      for (const fila of ch.board().slice(1)) expect(fila.filter((p) => p?.color === 'b' && p.type !== 'p' && p.type !== 'q'), f).toEqual([])
+    }
+    const b7 = final('Y si juegas ...e6, pierdes b7.')
+    const cuenta = (color: 'w' | 'b') => b7.board().flat().filter((p) => p?.type === 'p' && p.color === color).length
+    expect(cuenta('w') - cuenta('b')).toBe(1)
   })
 
   it('"sin apoyo": ninguna pieza blanca defiende e5, y ya no hay peón en d4', () => {

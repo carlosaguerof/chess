@@ -438,6 +438,24 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
   })
 
+  it('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasa"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
+    const tablero = (l: LineaCurso, ply: number) => posicion(l.jugadas, ply + 1)
+    const rutasDe = (id: string, ply: number) => {
+      const l = lineaPorId(c, id)!
+      const fs = flechas(marcasDelMomento(c, l, despuesDe(l, 'aprender', ply))) as { de: string; a: string }[]
+      const t = tablero(l, ply)
+      const rutas = puntosDeFlechas(fs, 'black', (x) => !!t.get(x as Square))
+      return new Map(fs.map((f, i) => [`${f.de}-${f.a}`, rutas[i]!]))
+    }
+    // ...c5 y ...Cc6 en la Tal: la L llega a c6 de lado, por b6, no por c7 en la línea de c6→c5
+    expect(rutasDe('v:avance-tal', 11).get('b8-c6')![1]).toEqual(centro('b6', 'black'))
+    // 6...Cc6 en el 4.c3: la L a d4 no pasa por c5, de donde sale ...cxd4
+    expect(rutasDe('v:avance-c3', 11).get('c6-d4')![1]).toEqual(centro('d6', 'black'))
+    // las rutas de siempre no cambian si nada estorba
+    expect(puntosDeFlechas([{ de: 'b8', a: 'c6' }], 'black')[0]![1]).toEqual(centro('b6', 'black'))
+    expect(puntosDeFlechas([{ de: 'g8', a: 'f6' }, { de: 'd8', a: 'c7' }], 'black')[0]![1]).toEqual(centro('g6', 'black'))
+  })
+
   it('R7 · nada tuyo antes de tu jugada: en los datos, la frase del rival solo trae lo del rival y no hay ninguna A1', () => {
     expect(revisarR7Datos(TODAS)).toEqual([])
   })
