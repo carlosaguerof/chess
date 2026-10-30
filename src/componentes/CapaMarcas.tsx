@@ -14,11 +14,13 @@ const PUNTA_PLAN = 0.34
 
 /**
  * La punteada de una sola casilla (h4→h5, c5→d4), a la medida (revisión de la torre, v1.3): con la de siempre se veía
- * solo una "V" chica, porque las piezas van encima de las marcas y tapaban los guiones, y la punta tapaba el resto. Sale
- * del borde entre las dos casillas, la punta (más chica) pasa un poco del centro de la de llegada, y el trazo es más
- * fino con rayas más cortas: se ven dos o tres rayas y la punta, dentro de la casilla de llegada. Las demás no cambian.
+ * solo una "V" chica, porque sus rayas caían sobre la pieza, donde casi no se ven, y la punta tapaba el resto. Sale del
+ * borde entre las dos casillas, con la punta más chica y el trazo más fino y de rayas más cortas: dentro de la casilla
+ * de llegada se ven dos o tres rayas y la punta. La recta pasa un poco del centro de la de llegada (si no, no caben);
+ * la diagonal tiene lugar y llega antes del centro, como las demás, para no chocar con otra punta en esa casilla. Las
+ * demás flechas no cambian.
  */
-const CORTA = { sale: 0.5, pasa: 0.12, punta: 0.2, grueso: 0.075, raya: 0.09, hueco: 0.05 }
+const CORTA = { sale: 0.5, pasaRecta: 0.12, pasaDiagonal: -0.1, punta: 0.2, grueso: 0.075, raya: 0.09, hueco: 0.05 }
 /** De una casilla a la de junto, también en diagonal. */
 const deUnaCasilla = (de: string, a: string) => Math.max(Math.abs(de.charCodeAt(0) - a.charCodeAt(0)), Math.abs(Number(de[1]) - Number(a[1]))) === 1
 
@@ -45,7 +47,8 @@ function Flecha({ m, ruta, escala }: { m: Marca; ruta: [number, number][]; escal
   const largo = Math.hypot(bx - ax, by - ay)
   const ux = (bx - ax) / largo
   const uy = (by - ay) / largo
-  const fin: [number, number] = corta ? [bx + ux * CORTA.pasa, by + uy * CORTA.pasa] : [bx - ux * 0.1, by - uy * 0.1]
+  const pasa = !corta ? -0.1 : m.de![0] === m.a![0] || m.de![1] === m.a![1] ? CORTA.pasaRecta : CORTA.pasaDiagonal
+  const fin: [number, number] = [bx + ux * pasa, by + uy * pasa]
   const base: [number, number] = [fin[0] - ux * punta, fin[1] - uy * punta]
   // la punteada, con la punta abierta y los puntos hasta ella: una punta hueca de triángulo parecía el puntero del ratón
   const linea = [...puntos.slice(0, -1), m.punteada ? [fin[0] - ux * (corta ? 0.08 : 0.14), fin[1] - uy * (corta ? 0.08 : 0.14)] : base]

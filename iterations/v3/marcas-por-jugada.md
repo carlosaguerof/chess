@@ -57,7 +57,7 @@
 | 4.Cxe4 | Clásica: 3.Cc3 | del rival | no |  |
 | 4...Af5 | Clásica: 3.Cc3 | tuya | no |  |
 | 5.Cg3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
-| 5...Ag6 | Clásica: 3.Cc3 | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde); flecha g6→c2 (A2, verde) |
+| 5...Ag6 | Clásica: 3.Cc3 | tuya | sí | mía porque frase 1: flecha g6→c2 (A2, verde) |
 | 6.h4 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha h4→h5 (A7, roja, punteada) |
 | 6...h6 | Clásica: 3.Cc3 | tuya | no |  |
 | 7.Cf3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha f3→e5 (A7, roja, punteada); flecha e5→g6 (A7, roja, punteada) |

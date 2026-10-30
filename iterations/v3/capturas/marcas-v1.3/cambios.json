@@ -973,14 +973,12 @@
         "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
         "antes": [],
         "despues": [
-          "flecha g6→e4 (A2, verde)",
           "flecha g6→c2 (A2, verde)"
         ]
       }
     ],
     "antes": [],
     "despues": [
-      "flecha g6→e4 (A2, verde)",
       "flecha g6→c2 (A2, verde)"
     ],
     "tambien": []
@@ -995,14 +993,12 @@
         "texto": "Desde ahí tu alfil sigue mirando a e4 y a c2.",
         "antes": [],
         "despues": [
-          "flecha g6→e4 (A2, verde)",
           "flecha g6→c2 (A2, verde)"
         ]
       }
     ],
     "antes": [],
     "despues": [
-      "flecha g6→e4 (A2, verde)",
       "flecha g6→c2 (A2, verde)"
     ],
     "tambien": []

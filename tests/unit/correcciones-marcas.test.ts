@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { Chess, type Color, type Square } from 'chess.js'
 import { CURSOS_NUEVOS, lineaPorId, lineasDe, misJugadas, textoRival } from '../../src/curso/datos.ts'
 import { empezar, pedirPista, pedirRespuesta, type EstadoCiclo, type Vuelta } from '../../src/curso/ciclo.ts'
-import { caminosDeCaballo, centro, COLORES, colorDe, marcasDelMomento, marcasDelPaso, puntosDeFlecha, puntosDeFlechas, frasesDe, MARCAS_NUEVAS_DE_ENTRADA } from '../../src/curso/marcas.ts'
+import { caminosDeCaballo, centro, COLORES, colorDe, esSaltoDeCaballo, marcasDelMomento, marcasDelPaso, puntosDeFlecha, puntosDeFlechas, frasesDe, MARCAS_NUEVAS_DE_ENTRADA } from '../../src/curso/marcas.ts'
 import { explicacionDespues } from '../../src/curso/turno.ts'
 import { posicion } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
@@ -384,12 +384,14 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
       const tablero = new Chess(v.fen)
       const fs = flechas(v.marcas) as { de: string; a: string }[]
       const rutas = puntosDeFlechas(fs, 'black', (c) => !!tablero.get(c as Square))
-      // dos flechas de la misma pieza sí pueden salir juntas (8.♘f4 ataca g6 y h5: se lee como una horquilla)
+      // dos saltos del mismo caballo sí pueden salir juntos (8.♘f4 ataca g6 y h5: se lee como una horquilla); dos flechas
+      // de la misma pieza en la misma línea, no (g6→e4 y g6→c2: la larga iba encima de la corta, pase de la segunda vuelta)
       const vistos = new Map<string, { de: string; a: string }>()
       rutas.forEach((r, i) => {
         for (const t of tramos(r)) {
           const otra = vistos.get(t)
-          if (otra && otra.de !== fs[i]!.de) expect.fail(`${g}: ${fs[i]!.de}→${fs[i]!.a} comparte un tramo con ${otra.de}→${otra.a}`)
+          const horquilla = otra && otra.de === fs[i]!.de && esSaltoDeCaballo(otra.de, otra.a) && esSaltoDeCaballo(fs[i]!.de, fs[i]!.a)
+          if (otra && !horquilla) expect.fail(`${g}: ${fs[i]!.de}→${fs[i]!.a} comparte un tramo con ${otra.de}→${otra.a}`)
           vistos.set(t, fs[i]!)
         }
       })

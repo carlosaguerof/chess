@@ -3635,12 +3635,6 @@
             {
               "tipo": "A2",
               "de": "g6",
-              "a": "e4",
-              "color": "verde"
-            },
-            {
-              "tipo": "A2",
-              "de": "g6",
               "a": "c2",
               "color": "verde"
             }
