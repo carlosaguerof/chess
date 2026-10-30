@@ -284,7 +284,8 @@ h1, h2, h3 { margin: 0; }
 .leccion-titulo strong { font-size: 16px; }
 .leccion-panel { gap: 12px; }
 .leccion-fase { display: flex; align-items: center; justify-content: space-between; }
-/* el interruptor Aprender | Practicar (2026-10-30): dos chips en un contorno, la vuelta en curso con su color de antes.
+/* el interruptor Aprender | Practicar (2026-10-30): dos chips en un contorno. La vuelta en curso, siempre en verde
+   (chip-rep) y en negritas; la otra, sin fondo y gris: el verde dice "aquí estás", no qué vuelta es (Carlos, 2026-10-30).
    No agrega altura a la fila; lo que se toca crece 10 arriba y 10 abajo, dentro del margen del panel */
 .vueltas { display: inline-flex; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--borde); }
 .vueltas .chip { position: relative; margin: 0; border: 0; cursor: pointer; font-weight: 700; }
