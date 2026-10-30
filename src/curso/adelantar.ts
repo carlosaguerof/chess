@@ -35,25 +35,36 @@ export function jugadaReducida(sanEs: string): string {
 
 const JUGADA = '(?:[RDTAC][a-h]?[1-8]?x?[a-h][1-8]|[a-h]x[a-h][1-8]|[a-h][1-8])'
 
+/** Una jugada escrita en una frase: reducida, y con su número si lo trae ("4...h5" → 4; "...h5" → sin número). */
+export interface JugadaEscrita {
+  jugada: string
+  numero?: number
+}
+
 /**
  * Las jugadas de un color que una frase escribe en la notación de adentro: las de negras con "..." ("...e6", "4...h5",
  * "...Cc6"); las de blancas con su número ("5.g4"). El enroque, "0-0", va sin puntos en las guías: cuenta suelto.
  */
-export function jugadasEscritas(frase: string, color: 'w' | 'b'): string[] {
-  const re = color === 'b' ? new RegExp(`\\.\\.\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g') : new RegExp(`(?<![.\\d])\\d+\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g')
-  const r = [...frase.matchAll(re)].map((m) => jugadaReducida(m[1]!))
-  for (const m of frase.matchAll(/(?<![\d-])0-0(-0)?(?![\d-])/g)) r.push(m[1] ? '0-0-0' : '0-0')
+export function jugadasEscritas(frase: string, color: 'w' | 'b'): JugadaEscrita[] {
+  const re = color === 'b' ? new RegExp(`(?:(\\d+))?\\.\\.\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g') : new RegExp(`(?<![.\\d])(\\d+)\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g')
+  const r: JugadaEscrita[] = [...frase.matchAll(re)].map((m) => ({ jugada: jugadaReducida(m[2]!), ...(m[1] ? { numero: Number(m[1]) } : {}) }))
+  for (const m of frase.matchAll(/(?<![\d-])0-0(-0)?(?![\d-])/g)) r.push({ jugada: m[1] ? '0-0-0' : '0-0' })
   return r
 }
 
+/** El número de una jugada ("4...e6" es la 4). */
+const numeroDe = (ply: number) => Math.floor(ply / 2) + 1
+
 /**
  * Las jugadas mías que una frase de mi jugada `ply` adelanta: las que escribe o describe (`describe`, SAN inglés) y
- * que la línea todavía me va a pedir. Vacío si no adelanta nada.
+ * que la línea todavía me va a pedir. Escrita con su número, solo si es esa misma: "(1...e6)" habla de la Francesa,
+ * no de 4...e6; sin número, cualquiera. Vacío si no adelanta nada.
  */
 export function adelanta(l: LineaCurso, ply: number, frase: string, describe: string[] = []): string[] {
-  const despues = new Map(misJugadasDespues(l, ply).map((p) => [jugadaReducida(sanAEspanol(l.jugadas[p]!)), l.jugadas[p]!]))
-  const nombradas = [...jugadasEscritas(frase, l.lado), ...describe.map((s) => jugadaReducida(sanAEspanol(s)))]
-  return [...new Set(nombradas.filter((j) => despues.has(j)).map((j) => despues.get(j)!))]
+  const despues = misJugadasDespues(l, ply).map((p) => ({ jugada: jugadaReducida(sanAEspanol(l.jugadas[p]!)), numero: numeroDe(p), san: l.jugadas[p]! }))
+  const nombradas: JugadaEscrita[] = [...jugadasEscritas(frase, l.lado), ...describe.map((s) => ({ jugada: jugadaReducida(sanAEspanol(s)) }))]
+  const r = despues.filter((d) => nombradas.some((n) => n.jugada === d.jugada && (n.numero === undefined || n.numero === d.numero)))
+  return [...new Set(r.map((d) => d.san))]
 }
 
 /**

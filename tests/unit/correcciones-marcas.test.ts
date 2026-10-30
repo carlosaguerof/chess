@@ -395,9 +395,11 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
         for (const q of misJugadas(l).filter((p) => p > ply)) {
           const j = posicion(l.jugadas, q).move(l.jugadas[q]!)
           const es = sanAEspanol(j.san).replace(/[+#]/g, '')
-          // escrita en la notación de adentro: "...e6", "...Cc6", "4...h5"; y el enroque, "0-0"
+          // escrita en la notación de adentro: "...e6", "...Cc6", o con su número, "4...h5" ("1...e6" de la Francesa no
+          // es 4...e6); y el enroque, "0-0"
+          const numero = Math.floor(q / 2) + 1
           if (es.startsWith('0-0')) expect(texto, `${l.id} ${ply}: dice ${es}`).not.toMatch(/(?<![\d-])0-0(?![\d-])/)
-          else expect(texto, `${l.id} ${ply}: dice ...${es}, que viene después`).not.toContain(`...${es}`)
+          else expect(texto, `${l.id} ${ply}: dice ...${es}, que viene después`).not.toMatch(new RegExp(`(?:(?<!\\d)|(?<![\\d])${numero})\\.\\.\\.${es.replace(/[+]/g, '\\+')}(?![a-h1-8])`))
         }
       }
     expect(jugadas).toBe(VARIANTES.reduce((n, l) => n + misJugadas(l).length, 0))
@@ -406,6 +408,9 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(explicacionDespues(c, vdw, 'practicar', 5)).toEqual(['Sacas tu alfil de casillas blancas fuera de la cadena de peones.'])
     // Aprender no cambia: ahí la jugada se dice de todos modos
     expect(explicacionDespues(c, vdw, 'aprender', 5).join(' ')).toContain('Después vas a jugar ...e6')
+    // con su número, solo esa jugada: "(1...e6)" es la Francesa, no 4...e6 de la línea
+    const short = lineaPorId(c, 'v:avance-short')!
+    expect(explicacionDespues(c, short, 'practicar', 1).join(' ')).toContain('A diferencia de la Francesa (1...e6)')
     // y una descrita sin escribirla: "Tu alfil podrá esconderse en h7" (7...h5, antes de 8...Ah7)
     expect(explicacionDespues(c, vdw, 'practicar', 13).join(' ')).not.toContain('esconderse en h7')
     expect(explicacionDespues(c, vdw, 'aprender', 13).join(' ')).toContain('esconderse en h7')
