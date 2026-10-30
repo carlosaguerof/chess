@@ -91,9 +91,10 @@ export function CursoPagina({ id }: { id: string }) {
           {!alguno ? (
             'Empezar'
           ) : sigue ? (
-            <>
+            // en un solo elemento: .boton es inline-flex y cada trozo (las letras, la figura ♘) sería una columna aparte (Nota 1)
+            <span>
               Seguir: <Texto t={sigue.nombre} />
-            </>
+            </span>
           ) : (
             'Repasar el curso'
           )}
@@ -185,9 +186,9 @@ export function PiezaDeLeer({ id, pieza }: { id: string; pieza: PiezaLeerId }) {
           <button type="button" className="boton primario" onClick={() => (ultima ? terminar() : setI(i + 1))} data-testid={ultima ? 'pieza-listo' : 'pagina-siguiente'}>
             {ultima ? (
               sigue ? (
-                <>
+                <span>
                   Listo · Sigue: <Texto t={sigue.nombre} />
-                </>
+                </span>
               ) : (
                 'Listo'
               )

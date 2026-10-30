@@ -200,19 +200,30 @@ test.describe('C3 · la lección nueva', () => {
     await expect(page.getByTestId('paso-v:avance-tal')).toHaveAttribute('data-estado', 'pendiente')
   })
 
-  test('"Empezar de nuevo" pregunta antes', async ({ page }, info) => {
+  test('"Reiniciar", el cuarto botón de la fila, pregunta antes (la ventana de "Empezar de nuevo", igual)', async ({ page }, info) => {
     await page.goto(TAL)
     await page.getByTestId('empezar-vuelta').click()
     await momento(page, 'tuTurno')
     await jugar(page, info, 'c8f5')
     await page.getByTestId('siguiente').click()
     await momento(page, 'tuTurno')
-    await page.getByTestId('empezar-de-nuevo').click()
+    // 2026-10-29: va en la fila, junto a Pista, Respuesta y Atrás, con su ícono; ya no hay enlace debajo
+    const fila = await page.locator('.botones-curso button').evaluateAll((bs) => bs.map((b) => ({ id: b.getAttribute('data-testid'), texto: b.textContent, arriba: Math.round(b.getBoundingClientRect().top), icono: !!b.querySelector('svg') })))
+    expect(fila.map((b) => [b.id, b.texto])).toEqual([['pista', 'Pista'], ['respuesta', 'Respuesta'], ['atras', 'Atrás'], ['reiniciar', 'Reiniciar']])
+    expect(new Set(fila.map((b) => b.arriba)).size, 'en un solo renglón').toBe(1)
+    expect(fila.every((b) => b.icono)).toBe(true)
+    await expect(page.getByText('Empezar de nuevo')).toHaveCount(0)
+    await page.getByTestId('reiniciar').click()
     const d = page.getByRole('dialog', { name: '¿Empezar de nuevo?' })
     await expect(d).toBeVisible()
+    // Cancelar no cambia nada
     await d.getByRole('button', { name: 'Cancelar' }).click()
+    await expect(d).toHaveCount(0)
+    await momento(page, 'tuTurno')
     await expect(leccion(page)).toHaveAttribute('data-ply', '7')
-    await page.getByTestId('empezar-de-nuevo').click()
+    await expect(page.getByTestId('linea')).toContainText('f5 4.h4')
+    // confirmar vuelve a la primera jugada
+    await page.getByTestId('reiniciar').click()
     await page.getByRole('dialog', { name: '¿Empezar de nuevo?' }).getByRole('button', { name: 'Empezar de nuevo' }).click()
     await momento(page, 'tuTurno')
     await expect(leccion(page)).toHaveAttribute('data-ply', '5')

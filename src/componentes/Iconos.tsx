@@ -5,7 +5,9 @@ export const IconoDeshacer = (p: P) => (<svg {...base} {...p}><path d="M9 14 4 9
 export const IconoVoltear = (p: P) => (<svg {...base} {...p}><path d="M7 4v16" /><path d="m3 8 4-4 4 4" /><path d="M17 20V4" /><path d="m21 16-4 4-4-4" /></svg>)
 export const IconoBandera = (p: P) => (<svg {...base} {...p}><path d="M5 21V4" /><path d="M5 4h11l-2 4 2 4H5" /></svg>)
 export const IconoAtras = (p: P) => (<svg {...base} {...p}><path d="M15 18 9 12l6-6" /></svg>)
-export const IconoCasa = (p: P) => (<svg {...base} {...p}><path d="M3 11 12 4l9 7" /><path d="M5 10v10h14V10" /></svg>)
+/** Reiniciar la lección: una flecha en círculo, hacia atrás (2026-10-29). */
+export const IconoReiniciar = (p: P) => (<svg {...base} {...p}><path d="M4 12a8 8 0 1 0 2.34-5.66" /><path d="M4 4v4h4" /></svg>)
+export const IconoCasa =(p: P) => (<svg {...base} {...p}><path d="M3 11 12 4l9 7" /><path d="M5 10v10h14V10" /></svg>)
 export const IconoJugar = (p: P) => (<svg {...base} {...p}><circle cx="12" cy="6" r="3" /><path d="M9 21h6" /><path d="M10 9.5 8.5 18h7L14 9.5" /></svg>)
 export const IconoLibro = (p: P) => (<svg {...base} {...p}><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M4 19V5" /></svg>)
 export const IconoArbol = (p: P) => (<svg {...base} {...p}><circle cx="6" cy="5" r="2" /><circle cx="6" cy="19" r="2" /><circle cx="18" cy="12" r="2" /><path d="M6 7v10" /><path d="M6 12h10" /></svg>)

@@ -219,7 +219,10 @@ export function Practica({ curso, leccion, indice, repaso }: { curso: Curso; lec
             {leccion.plan && <p className="plan"><Texto t={planDeMiLado(leccion.plan, color)} /></p>}
             {siguiente && siguiente.id !== leccion.id ? (
               <button type="button" className="boton primario grande" onClick={() => navegar(`/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(siguiente)}`)} data-testid="siguiente-leccion">
-                Siguiente: <Texto t={siguiente.nombre} />
+                {/* en un solo elemento: .boton es inline-flex y la figura ♘ sería una columna aparte (Nota 1, 2026-10-29) */}
+                <span>
+                  Siguiente: <Texto t={siguiente.nombre} />
+                </span>
               </button>
             ) : (
               <a className="boton primario grande" href={`#/curso/${encodeURIComponent(curso.id)}`}>
