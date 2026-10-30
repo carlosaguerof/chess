@@ -555,3 +555,13 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué:** Carlos quería saltar directo a Practicar, por ejemplo con una variante que ya aprendió; hasta hoy solo llegaba terminando Aprender. Sin preguntar, porque son pocas jugadas y volver es otro toque.
 - **Quién:** Carlos (el prompt, con el diseño ya decidido); la corrida de la Air. Una decisión de la corrida: la vuelta marcada lleva negritas, además de su color, porque con Practicar marcado el gris de `chip-base` casi no se distinguía de la otra opción (`iterations/v3/learning.md` n.º 43).
 - **Dónde:** `feat/saltar-a-practicar`: `7f74731` (la prueba y las capturas de antes), `17b7e25` (el cambio), `a8d5f0d` (la regla) y `195cd4c` (las capturas de después). La regla, en `specs/cursos.md` §2 ("Saltar de una vuelta a la otra") y §5; lo aprendido, en `iterations/v3/learning.md` n.º 43 y 44. La prueba: `tests/e2e/saltar-a-practicar.spec.ts`. Las capturas, en `iterations/v3/capturas/correcciones/{iphone,escritorio}/saltar-{antes,despues}-*` (las de antes, solo en `escritorio/`, de Chromium). El reporte, en `00_corridas/chess/2026-10-30_REPORTE_saltar-a-practicar.md`.
+
+## [2026-10-30] corrida | Publicado el interruptor Aprender | Practicar
+- **Qué:**
+  - Integrado a `main` en `8d70d68` (merge `--no-ff` de `feat/saltar-a-practicar`, encima de `origin/main` `0cdec0c`).
+  - `npm run publicar` subió `gh-pages` `93d0ae3` a las 00:53:52 del 30. A las 00:54:18 la página servía `index-CML2fesy.js`, el del build.
+  - Comprobación: `curl -sI` da 200 y el `.wasm` sale como `application/wasm`. `SITIO=https://carlosaguerof.github.io/chess/ npm run e2e:pages -- --project=escritorio`: 9 pasan y 1 se salta (la del zoom, que es del iPhone). Con el iPhone emulado en Chromium (390×844, táctil): 10 de 10.
+  - Ninguna prueba de la página publicada mira el interruptor: se revisó aparte, en Chromium (escritorio y el iPhone emulado), con la Tal en la jugada 3 de Aprender. A 402×874 y a 360×740: el interruptor a la vista y marcado en Aprender; "Practicar" lleva a la introducción de Practicar en "Jugada 1 de 4" y, con "Empezar", al primer turno sin marcas; "Aprender" regresa a la jugada 1. La página mide lo mismo que la pantalla (874 y 740) y la fila, 19 a 20.
+- **Por qué en Chromium:** el prompt (§5) pide WebKit una sola vez, y esa vez fue la suite completa (00:42–00:52). Es la misma salida que las dos corridas anteriores (`iterations/v3/learning.md` n.º 41).
+- **Quién:** la corrida de la Air (publicar estaba autorizado en el prompt, con todo en verde).
+- **Dónde:** `main` `8d70d68`, `gh-pages` `93d0ae3`; el reporte, en `00_corridas/chess/2026-10-30_REPORTE_saltar-a-practicar.md`.
