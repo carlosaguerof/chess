@@ -1,0 +1,66 @@
+# Las pruebas completas (npm test y npm run e2e, los dos perfiles) en una máquina de GitHub, nueva en cada corrida.
+# Se lanza a mano y sirve para cualquier rama: gh workflow run pruebas.yml -f rama=<rama>
+# No hace commits ni publica nada. Los registros y el artefacto son públicos: nada privado aquí.
+name: Pruebas
+run-name: Pruebas de ${{ inputs.rama }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      rama:
+        description: Rama que se prueba
+        required: true
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Baja la rama
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.rama }}
+          persist-credentials: false
+
+      # lo que quede más viejo que esta marca no lo rehízo la corrida
+      - name: Marca el inicio
+        run: touch "$RUNNER_TEMP/inicio"
+
+      - name: Instala Node, el mismo de la Air
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.12.1'
+
+      - name: Instala las dependencias
+        run: npm ci
+
+      - name: Instala los navegadores
+        run: npx playwright install webkit chromium
+
+      - name: npm test
+        run: npm test
+
+      # pw:browser deja en el registro con qué navegador arranca cada perfil
+      - name: npm run e2e
+        run: npm run e2e
+        env:
+          DEBUG: pw:browser
+
+      # la máquina se tira al acabar: esto no toca el repo, solo evita subir como nuevas las capturas viejas
+      - name: Deja en iterations/ solo lo que rehízo la corrida
+        if: always()
+        run: find iterations -type f ! -newer "$RUNNER_TEMP/inicio" -delete
+
+      - name: Sube lo que sirve para revisar
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pruebas-${{ github.run_id }}
+          path: |
+            test-results/
+            iterations/
+          retention-days: 14
