@@ -562,7 +562,7 @@
                 ]
               },
               {
-                "frase": "Nunca la pongas en c7: ahí la atacaría el alfil de f4.",
+                "frase": "Nunca pongas tu dama en c7: ahí la atacaría el alfil de f4.",
                 "marcas": [
                   {
                     "tipo": "A4",
@@ -3765,7 +3765,7 @@
     },
     "e4 c6 d4 d5 e5 Bf5 Nc3 e6 g4 Bg6": {
       "pregunta": "El peón de g4 ataca a tu alfil de f5. ¿A dónde lo retiras?",
-      "pista": "En e4 lo tomaría el caballo de c3.",
+      "pista": "En e4, el caballo de c3 tomaría tu alfil.",
       "hace": "Retiras el alfil sin salir de su diagonal: sigue mirando a e4.",
       "porque": "En e4, el caballo de c3 tomaría tu alfil.",
       "marcas": [
@@ -6415,7 +6415,7 @@
                 ]
               },
               {
-                "frase": "9.Cxf5: el caballo de g3 lo toma.",
+                "frase": "9.Cxf5: el caballo de g3 toma tu alfil.",
                 "jugadas": [
                   "Nxf5"
                 ],
@@ -6532,7 +6532,7 @@
               ]
             },
             {
-              "frase": "9.Cxf5: el caballo de g3 lo toma.",
+              "frase": "9.Cxf5: el caballo de g3 toma tu alfil.",
               "jugadas": [
                 "Nxf5"
               ],

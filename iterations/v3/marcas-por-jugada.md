@@ -182,7 +182,7 @@
 | estructura 2, paso 4 | Blancas tiene más espacio y la casilla e5 para un caballo. | casilla e5 (A6, roja) |
 | repaso 1, paso 2 | 3.e5 Af5: tu alfil sale antes de ...e6. | flecha e7→e6 (A3, verde, punteada) |
 | repaso 1, paso 6 | En la Clásica, contra 6.h4, juegas 6...h6: así tu alfil tiene h7. | flecha g6→h7 (A3, verde, punteada) |
-| repaso 1, paso 9 | Nunca la pongas en c7: ahí la atacaría el alfil de f4. | flecha f4→c7 (A4, roja) |
+| repaso 1, paso 9 | Nunca pongas tu dama en c7: ahí la atacaría el alfil de f4. | flecha f4→c7 (A4, roja) |
 | repaso 2, paso 4 | «En la Clásica, el caballo ataca d5»: 3.Cc3 sobre todo defiende e4. | flecha c3→e4 (A4, roja) |
 | plan avance-short paso a paso, paso 2 | ...Cc6: tu caballo también ataca d4. | flecha c6→d4 (A2, verde) |
 | plan avance-short paso a paso, paso 3 | Tu peón de c5 ya ataca d4: cuando convenga, lo cambias. | flecha c5→d4 (A3, verde, punteada) |
