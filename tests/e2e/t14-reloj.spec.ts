@@ -17,7 +17,8 @@ test.describe('T14 · reloj', () => {
     await page.getByTestId('opciones-listo').click()
     await expect(page.getByTestId('opciones')).toContainText('3 | 2')
     await page.getByTestId('jugar').click()
-    await expect(page.getByTestId('reloj-yo')).toContainText('3:00')
+    // arrancó con los 3 minutos elegidos: corriendo, "3:00" dura menos de un segundo (iterations/v3/learning.md n.º 86)
+    await expect(page.getByTestId('reloj-yo')).toHaveText(/^(3:00|2:5\d)$/)
     await page.goto('/#/bot/hugo')
     await expect(page.getByTestId('opciones')).toContainText('3 | 2')
   })
@@ -30,7 +31,8 @@ test.describe('T14 · reloj', () => {
     })
     await page.goto('/')
     await page.getByTestId('jugar-recomendado').click()
-    await expect(page.getByTestId('reloj-yo')).toContainText('1:00')
+    // arrancó con 1 minuto: este reloj de prueba también corre en tiempo real
+    await expect(page.getByTestId('reloj-yo')).toHaveText(/^(1:00|0:5\d)$/)
     const segundos = async () => {
       const [m, s] = (await page.getByTestId('reloj-yo').textContent())!.split(':').map(Number) as [number, number]
       return m * 60 + s

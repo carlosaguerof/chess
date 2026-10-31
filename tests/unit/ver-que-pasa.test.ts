@@ -182,7 +182,7 @@ describe('"Ver qué pasaría" · las consecuencias que se miden en el tablero (c
   })
 
   it('lo que se ve al final: blancas con sus dos alfiles, tus piezas en casa y un peón de más', () => {
-    const vdw = final('En e4 lo tomaría el caballo de c3.')
+    const vdw = final('En e4, el caballo de c3 tomaría tu alfil.')
     expect(vdw.findPiece({ type: 'b', color: 'w' })).toHaveLength(2)
     expect(vdw.findPiece({ type: 'b', color: 'b' })).toHaveLength(1)
     // 5.Axc4: ninguna pieza negra salió de su fila; lo mismo con la dama que sale temprano, salvo la dama
@@ -402,8 +402,10 @@ describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-
         }
       }
     // la lista de cuando el botón iba en el pie (`b2c1a9f`, 2026-10-30), sacada con ese código: línea, jugada y frase. Si
-    // cambia a propósito (una frase o una línea nueva), se vuelve a sacar; si no, algo dejó de salir o salió de más
+    // cambia a propósito (una frase o una línea nueva), se vuelve a sacar; si no, algo dejó de salir o salió de más.
+    // Sacada otra vez el 2026-10-31: las mismas 35 filas, y solo cambió el texto de dos frases ("En e4, el caballo de c3
+    // tomaría tu alfil." y "No saques todavía el alfil a f5: con 5.Ab5+ quedas claramente peor.")
     expect({ despues, errores }).toEqual({ despues: 23, errores: 12 })
-    expect(createHash('sha256').update(filas.sort().join('\n')).digest('hex')).toBe('83c7b41b796f4f431423b9a3ec7a3abb5e0b00430df0d86cdc81d9b6d8002eb8')
+    expect(createHash('sha256').update(filas.sort().join('\n')).digest('hex')).toBe('4a275d993543884cdb869030211a3faa1ef8de7086d9ce1994edc3009615d791')
   })
 })

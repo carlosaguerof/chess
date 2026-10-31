@@ -66,7 +66,8 @@ test.describe('L2 · Jugar, como "Play Bots"', () => {
     await page.getByTestId('jugar').click()
     await expect(page.getByTestId('barra-rival')).toContainText('Itzel')
     await expect(page.getByTestId('tablero')).toHaveAttribute('data-orientacion', 'black')
-    await expect(page.getByTestId('reloj-yo')).toContainText('5:00')
+    // arrancó con 5 minutos: si Itzel ya jugó, el mío ya corre (iterations/v3/learning.md n.º 86)
+    await expect(page.getByTestId('reloj-yo')).toHaveText(/^(5:00|4:5\d)$/)
     await expect(jugadas(page)).toHaveCount(1, { timeout: 15_000 })
     // y Jugar entra después con el último bot con el que jugué
     await page.goto('/#/bots')
