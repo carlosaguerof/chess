@@ -16,7 +16,7 @@
 | 5...c5 | prepara | Si blancas toma en c5, tu alfil de f8 retoma. | 6.dxc5 6...♗xc5 | Aprender y Practicar |
 | 4...e6 | cuidado | Si blancas juega 5.♕b3 contra b7, defiéndelo con la dama: ...♕c7 o ...♕b6. | 5.♕b3 5...♕c7 · 5...♕b6 | Aprender y Practicar |
 | 5...c5 | porque | Si blancas cambia en c5, tu alfil de f8 retoma y se desarrolla. | 6.dxc5 6...♗xc5 | Aprender y Practicar |
-| 5...♗g6 | porque | En e4 lo tomaría el caballo de c3. | 5...♗e4 6.♘xe4 6...dxe4 | Aprender y Practicar |
+| 5...♗g6 | porque | En e4, el caballo de c3 tomaría tu alfil. | 5...♗e4 6.♘xe4 6...dxe4 | Aprender y Practicar |
 | 7...h5 | porque | Si lo dejaras avanzar, tu alfil de g6 se quedaría sin casillas. | 7...♘c6 8.h5 | Aprender y Practicar |
 | 7...h5 | cuidado | Si juegas ...♘c6 como si nada, 8.h5 echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | Aprender y Practicar |
 | 7...h5 (si juegas 7...♘c6) | errores | Si no frenas el peón de h, da un paso más, echa a tu alfil y pierdes casi un peón de ventaja. | 7...♘c6 8.h5 8...♗e4 9.♖h3 9...♘h6 10.♘xe4 10...dxe4 | solo Aprender |
@@ -29,7 +29,7 @@
 | 7...♗xf7 | porque | Tomar con el rey también se puede, pero el rey queda más expuesto y es peor. | 7...♔xf7 8.f4 | Aprender y Practicar |
 | 5...♗g6 | cuidado | Si después blancas empuja h4, contesta ...h5 antes de seguir. | 6.h4 6...h5 | Aprender y Practicar |
 | 4...♗f5 | porque | Si jugaras ...e6 primero, tu alfil quedaría encerrado detrás de tus peones. | 4...e6 | solo Aprender |
-| 6...h6 | porque | Si h5 lo echa de g6, se retira a h7 y no queda atrapado. | 7.h5 7...♗h7 | solo Aprender |
+| 6...h6 | porque | Si h5 echa a tu alfil de g6, se retira a h7 y no queda atrapado. | 7.h5 7...♗h7 | solo Aprender |
 | 6...h6 | cuidado | Si juegas ...♘d7 o ...e6 sin atender h4, después de 7.h5 tu alfil queda en apuros y blancas queda mucho mejor. | 6...♘d7 7.h5 7...♗f5 8.♘xf5 8...♕a5+ 9.♗d2 9...♕xf5 | solo Aprender |
 | 6...h6 (si juegas 6...♘d7) | errores | Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor. | 6...♘d7 7.h5 7...♗f5 8.♘xf5 8...♕a5+ 9.♗d2 9...♕xf5 | solo Aprender |
 | 6...h6 (si juegas 6...e6) | errores | Sin atender h4, 7.h5 echa a tu alfil de g6 y blancas queda mucho mejor. | 6...e6 7.h5 7...♗f5 8.♘xf5 8...exf5 | solo Aprender |
@@ -46,7 +46,7 @@
 | 7...♕d7 (si juegas 7...e6) | errores | Dejas caer el peón de b7. | 7...e6 8.♕xb7 | Aprender y Practicar |
 | 4...♘f6 | cuidado | Tomar en c4 es peor: el alfil blanco recupera el peón y de paso se desarrolla. | 4...dxc4 5.♗xc4 | Aprender y Practicar |
 | 4...♘f6 (si juegas 4...dxc4) | errores | Es peor: el alfil blanco recupera el peón y de paso se desarrolla. | 4...dxc4 5.♗xc4 | Aprender y Practicar |
-| 4...e6 | cuidado | No saques todavía el alfil a f5: 5.♗b5+ y negras queda claramente peor. | 4...♗f5 5.♗b5+ 5...♗d7 6.♕h5 6...♘h6 7.♘xd7 7...♘xd7 8.♕xd5 | Aprender y Practicar |
+| 4...e6 | cuidado | No saques todavía el alfil a f5: con 5.♗b5+ quedas claramente peor. | 4...♗f5 5.♗b5+ 5...♗d7 6.♕h5 6...♘h6 7.♘xd7 7...♘xd7 8.♕xd5 | Aprender y Practicar |
 | 4...e6 (si juegas 4...♗f5) | errores | Todavía no: 5.♗b5+ y quedas claramente peor. | 4...♗f5 5.♗b5+ 5...♗d7 6.♕h5 6...♘h6 7.♘xd7 7...♘xd7 8.♕xd5 | Aprender y Practicar |
 | 4...♘f6 | cuidado | Retomar con la dama es peor: con 5.♘c3 blancas la ataca y gana tiempo. | 4...♕xd5 5.♘c3 5...♕d6 | Aprender y Practicar |
 | 4...♘f6 (si juegas 4...♕xd5) | errores | Así sacas la dama: con 5.♘c3 blancas la ataca y gana tiempo. | 4...♕xd5 5.♘c3 5...♕d6 | Aprender y Practicar |
@@ -61,29 +61,29 @@
 | 3...♗f5 | prepara | Con el alfil afuera, ...e6 y ...c5 ya no encierran nada. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...e6 | porque | Ahora sí puedes jugarla: el alfil de c8 ya está afuera y no se encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...e6 | prepara | Con el alfil de f8 listo, viene ...c5 contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 6...♕b6 | porque | Además se pone detrás de tu peón de c5, apuntando a d4. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6...♕b6 | porque | Además tu dama se pone detrás de tu peón de c5, apuntando a d4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♕b6 | prepara | Siguen ...♘c6 y ...cxd4 contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...e6 | porque | Tu alfil de c8 ya salió, así que ...e6 no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...c5 | prepara | Después, más piezas contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6...♘c6 | porque | Ya atacas d4 dos veces: con el peón de c5 y con el caballo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♘c6 | prepara | Siguen ...♕b6 y ...cxd4, como contra 4.♘f3. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 4...e6 | porque | El de c8 ya está afuera: ...e6 no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4...e6 | porque | Tu alfil de c8 ya está afuera: ...e6 no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...e6 | prepara | Tu plan sigue siendo ...c5 contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6...c5 | porque | Blancas está ocupada persiguiendo a tu alfil; tú atacas su centro. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7...h5 | prepara | Tu alfil podrá esconderse en h7. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 8...♗h7 | porque | Ahí ya no lo alcanza el caballo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 8...♗h7 | porque | Ahí el caballo ya no alcanza a tu alfil. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...h5 | prepara | Ahora sí puedes seguir con ...e6. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5...♗xd3 | porque | Es la jugada de la teoría: cambias el alfil que en la Francesa sería tu alfil malo, el que queda encerrado detrás de sus peones. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...♗xd3 | prepara | Después, ...e6 ya no encierra a nadie. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6...e6 | porque | Ya no queda ningún alfil que encerrar. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...e6 | prepara | Siguen ...c5 y ...♘c6 contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...♗e4 | porque | Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4...♗e4 | prepara | Si blancas lo echa con f3, vuelve a g6. | lo que dice se juega en las jugadas que siguen de la línea |
-| 5...♗g6 | porque | Sigue en su diagonal y a salvo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4...♗e4 | prepara | Si f3 echa a tu alfil, vuelve a g6. | lo que dice se juega en las jugadas que siguen de la línea |
+| 5...♗g6 | porque | Tu alfil sigue en su diagonal y a salvo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♕d6 | porque | Si blancas lo cambia en f7, retomas con el alfil y recuperas el peón. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7...♗xf7 | prepara | Tu alfil cuida a tu rey desde f7; siguen ...♘d7 y ...♘gf6. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...e6 | porque | Tu alfil de c8 ya está afuera. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4...e6 | prepara | Si el caballo llega a g3 y ataca a tu alfil, tendrá g6. | lo que dice se juega en las jugadas que siguen de la línea |
+| 4...e6 | prepara | Si el caballo llega a g3 y ataca a tu alfil, tendrás g6. | lo que dice se juega en las jugadas que siguen de la línea |
 | 5...♗g6 | porque | Tu alfil sigue en su diagonal, mirando a e4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3...dxe4 | porque | Además, f5 queda libre para tu alfil: el peón de e4 ya no la vigila. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...♗f5 | prepara | Más adelante, ...e6 ya no lo encierra. | dice qué sigue (un plan), no qué pasaría con otra cosa |

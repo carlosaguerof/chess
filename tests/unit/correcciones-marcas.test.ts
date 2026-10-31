@@ -550,7 +550,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     const idea = c.piezas.idea.paginas[0]!.pasoAPaso!
     expect(marcasDelPaso(idea, 1)).toEqual([{ tipo: 'A3', de: 'd7', a: 'd5', color: 'verde', punteada: true }])
     expect(marcasDelPaso(idea, 2)).toEqual([])
-    // "Desarrollas tu alfil por g7" y "Y el otro por f5": sigue con lo mismo, se acumulan
+    // "Desarrollas tu alfil por g7" y "Y tu otro alfil por f5": sigue con lo mismo, se acumulan
     const plan = (id: string) => c.variantes.find((v) => v.id === id)!.plan.pasoAPaso!
     expect(marcasDelPaso(plan('hillbilly'), 2).map((m) => `${m.de}→${m.a}`)).toEqual(['f8→g7', 'c8→f5'])
     // un paso sin marcas habla de otra cosa: no arrastra las de antes (pase visual de la v1.3: la flecha de ...cxd4 se

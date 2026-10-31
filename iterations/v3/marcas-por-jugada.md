@@ -197,7 +197,7 @@
 | plan apocalipsis paso a paso, paso 3 | Blancas usa su caballo de e5 y busca jaques con su alfil en b5. | flecha f1→b5 (A7, roja, punteada) |
 | plan panov-acelerado paso a paso, paso 2 | Luego ...e6 o ...g6, y enrocas: tu juego es cómodo. | flecha e7→e6 (A3, verde, punteada); flecha g7→g6 (A3, verde, punteada) |
 | plan hillbilly paso a paso, paso 2 | Desarrollas tu alfil por g7: ...Ag7. | flecha f8→g7 (A3, verde, punteada) |
-| plan hillbilly paso a paso, paso 3 | Y el otro por f5: ...Af5. | flecha c8→f5 (A3, verde, punteada) |
+| plan hillbilly paso a paso, paso 3 | Y tu otro alfil por f5: ...Af5. | flecha c8→f5 (A3, verde, punteada) |
 | ver de e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5, prepara 0, paso 2 | 6.dxc5: blancas toma tu peón, pero tu alfil de f8 ataca c5. | flecha f8→c5 (A2, verde) |
 | ver de e4 c6 d4 d5 e5 Bf5 c3 e6, cuidado 0, paso 2 | 5.Db3: la dama blanca ataca tu peón de b7. | flecha b3→b7 (A4, roja) |
 | ver de e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5, porque 0, paso 2 | 6.dxc5: blancas cambia en c5, y tu alfil de f8 ataca esa casilla. | flecha f8→c5 (A2, verde) |
