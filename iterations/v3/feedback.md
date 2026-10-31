@@ -20,3 +20,13 @@ Lo que dijo mientras recorría el curso publicado, de las 11:22 a las 12:44. Sus
 |---|---|---|---|
 | 8 | El botón "Ver qué pasa", en la lección | "No se entiende a menos que leas el texto y luego te lo preguntes." Propuso "Ver qué pasaría" o "Qué pasaría" | El botón se llama "Ver qué pasaría": lo que se ve es un supuesto, no lo que sigue en la partida. El presente suena a lo que sigue; el condicional dice que es un supuesto. La torre conservó el "Ver", que hace par con "Ver paso a paso" (`specs/cursos.md` §2.3) |
 | 9 | "Ver qué pasaría", en el pie, junto a "Siguiente" | "Está al mismo nivel que Siguiente. [...] Preferiría que esté dentro del cuadro de texto de la explicación, más pequeño y justo al final que se menciona eso que pudiera pasar o lo que se evita que pase. En el UX alguien que nomás está haciéndolo casi que sin leer la explicación, le es muy fácil ignorarlo o incluso no verlo en los casos donde el texto necesita scroll para leerlo todo. Y en el caso de alguien que está leyendo la explicación, leerá lo que podría pasar y justo después ver ese botón más sutil." | Un botón que habla de una frase va pegado a esa frase; el pie es para seguir. Cada frase con "Ver" lleva su botón, un enlace chico, justo después de su punto final; dos frases, dos botones y dos ventanas (`specs/cursos.md` §2.3 y `specs/ux.md`) |
+
+## Las frases de la lección en el iPhone (2026-10-31)
+
+Carlos, en la Bronstein, en Aprender, después de 4...e6. Su captura se queda fuera de este repo (es público).
+
+| # | Dónde | Lo que dijo | La regla que sale |
+|---|---|---|---|
+| 10 | La explicación de 4...e6, "Si el caballo llega a g3 y ataca a tu alfil, tendrá g6." | "Lo que no entendí fue "…tendrá g6." Como habla en tercera persona, parece que se refiere al rival. [...] La corrección es que cuando hable de las piezas del usuario, que lo diga en segunda persona o que si habla en tercera persona refiriéndose a una pieza, que mencione la pieza. En este caso las dos opciones válidas serían: "… tendrás g6" / "… tu alfil tendrá g6"." | Lo tuyo se dice en segunda persona, o nombrando la pieza (`specs/cursos.md` §3). Hoy dice "tendrás g6": la torre escogió esa para no repetir "tu alfil" dos veces en la frase |
+| 11 | La misma explicación, "Tu alfil de c8 ya está afuera." | "Eso no se me hizo mal. Se entiende." | No se toca. No se corrige un hecho porque le falte su "y qué", ni una frase del rival, ni nada por gusto |
+| 12 | "Enviar feedback" en Más (una idea, no esta pantalla) | "en su momento definimos si lo aplicamos y los detalles"; "entre menos necesitemos pedirle al usuario, mejor" | Se anota en `context/despues.md` y no se construye nada |
