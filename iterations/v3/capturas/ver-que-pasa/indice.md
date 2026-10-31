@@ -1,5 +1,7 @@
 # Las capturas de "Ver qué pasa" (2026-10-30)
 
+> **Muestran el diseño anterior, con el botón en el pie, junto a "Siguiente".** Desde el 2026-10-30 el botón va dentro de la explicación, justo después de su frase (`specs/cursos.md` §2.3). No se rehicieron.
+
 > Generado por `tests/e2e/ver-que-pasa.spec.ts` (`--grep @capturas-ver`). Las mismas en `iphone/` (Chromium emulando el iPhone 16 Pro, 402×874, táctil) y `escritorio/` (Chromium, 1440×900). Primero el pie y cada paso del ejemplo de la Tal; después, el primero y el último paso de cada "Ver qué pasa"; al final, las frases "Siguen…" con sus marcas, "Siguiente" y "Empezar" solos. Las líneas completas, en `iterations/v3/ver-que-pasa-inventario.md`.
 
 | Captura | Momento | Frase | Marcas |

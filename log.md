@@ -698,3 +698,17 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **No se republicó:** no cambia la app. No se lanzó `pruebas.yml` para esta rama: lo que cambia no lo toca esa suite, y lo prueba la primera corrida del workflow.
 - **Quién:** la torre (el prompt, que responde a los n.º 41 y 58); la corrida de la Air (el `trace` y el `timeout-minutes`).
 - **Dónde:** `chore/pagina-publicada` `338ed64`, merge a `main` `d42a733`. Lo aprendido, en `iterations/v3/learning.md` n.º 73 a 77.
+
+## [2026-10-30] cambio | "Ver qué pasaría" va junto a su frase
+- **Qué:**
+  - Cada frase con "Ver" lleva su botón justo después de su punto final, en el mismo renglón, y la frase que sigue continúa después del botón. Con un error, igual, dentro del cuadro rojo. El pie queda solo con el principal; `dos-botones` sigue solo en el plan, con "Ver paso a paso".
+  - Dos frases con "Ver" en un momento: dos botones, y cada uno abre su ventana, con su frase de título y desde su propia posición. Se acabaron "Frase 1 de 2" y el juntar frases: fuera `juntar`, `pasosYaVistos`, `PasoLeer.titulo` y `.titulos-paso`.
+  - El aspecto es `.enlace-chico` con `.enlace-ver`: sin relleno de alto para que el renglón no crezca, `nowrap`, y una zona de toque de 44 en `::after`. Se separa con un espacio de medio eme: con un margen, al bajar de renglón quedaba sangrado. Lo que se ve de cada botón manda sobre la zona del otro, y el pie (`position: relative; z-index: 2`) sobre todo.
+  - Ninguna frase cambió: `explicacionDespues` no se tocó y `tramosDe` corta su salida. Se quedan el nombre, el testid `ver-que-pasa`, las 43 frases, la ventana, sus pasos, las marcas y las reglas de Practicar. `verDespues` devuelve una lista.
+- **Por qué:** Carlos, en su iPhone: "Está al mismo nivel que Siguiente. [...] Preferiría que esté dentro del cuadro de texto de la explicación, más pequeño y justo al final que se menciona eso que pudiera pasar". El pie es para seguir. El botón deja de competir con "Siguiente" y queda pegado a la frase de la que habla: quien lee lo encuentra justo ahí, y quien va rápido lo pasa de largo. La regla queda en `specs/ux.md` y en `specs/cursos.md` §2.3, para los otros siete cursos.
+- **Cómo se comprobó:**
+  - La foto de los textos y de las frases con "Ver", de `b2c1a9f` contra este cambio: 196 momentos y 90 frases, idénticas byte por byte. En Practicar, 23 después de jugar y 12 en errores, con su huella en la prueba.
+  - En la Air, solo Chromium: `npm test` y Playwright en los dos perfiles, con el iPhone emulado. Cada protección del CSS se quitó una por una y su prueba falló.
+  - **Medidas, en Chromium:** contraste de 8.65:1 sobre el panel y 7.5:1 en el cuadro rojo, así que el verde se queda. El botón mide 99.3 de ancho, no se parte y cabe a 375. El renglón no crece. Zona de toque: 44 libre; 39 o 40 justo arriba del pie; de 30 a 36 con dos botones uno sobre otro (solo en la ...♕c7 del Cambio).
+- **Quién:** Carlos (la queja y el diseño); la torre (el prompt y su revisión); la corrida de la Air (la separación con medio eme y las capas de la zona de toque).
+- **Dónde:** rama `feat/ver-en-la-frase`. Lo aprendido, en `iterations/v3/learning.md` n.º 78 a 84. El reporte, en `00_corridas/chess/2026-10-30_REPORTE_ver-en-la-frase.md`.

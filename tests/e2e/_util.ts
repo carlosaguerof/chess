@@ -1,4 +1,4 @@
-import { expect, type Page, type TestInfo } from '@playwright/test'
+import { expect, type Locator, type Page, type TestInfo } from '@playwright/test'
 
 /** Guarda una captura en iterations/v2/capturas/pruebas/<perfil>/<nombre>.png (las de la v1 se quedan como estaban) */
 export async function captura(page: Page, info: TestInfo, nombre: string) {
@@ -7,11 +7,23 @@ export async function captura(page: Page, info: TestInfo, nombre: string) {
 
 export const esCelular = (info: TestInfo) => info.project.name === 'iphone'
 
+/**
+ * La caja del tablero. Recién abierta la página, `boundingBox` puede dar vacío un instante aunque el tablero ya esté (dos
+ * pruebas cayeron así en GitHub, 2026-10-30): se mide otra vez, hasta un segundo.
+ */
+async function cajaDelTablero(page: Page, tablero: Locator) {
+  for (let i = 0; i < 20; i++) {
+    const caja = await tablero.locator('cg-board').boundingBox()
+    if (caja) return caja
+    await page.waitForTimeout(50)
+  }
+  throw new Error('no se ve el tablero')
+}
+
 /** El centro de una casilla ("e2") en la pantalla, según hacia dónde mira el tablero. */
 export async function centroCasilla(page: Page, casilla: string, tablero = page.getByTestId('tablero').first()) {
   const orientacion = await tablero.getAttribute('data-orientacion')
-  const caja = await tablero.locator('cg-board').boundingBox()
-  if (!caja) throw new Error('no se ve el tablero')
+  const caja = await cajaDelTablero(page, tablero)
   const columna = casilla.charCodeAt(0) - 97
   const fila = Number(casilla[1]) - 1
   const lado = caja.width / 8

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Texto } from '../componentes/Notacion.tsx'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
@@ -19,7 +19,7 @@ import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../curso/turn
 import { flechasPrendidas } from '../curso/flechas.ts'
 import { BotonPasoAPaso, BotonVerQuePasa } from '../componentes/PasoAPaso.tsx'
 import { marcasDelMomento, marcasNuevas } from '../curso/marcas.ts'
-import { verDelError, verDespues } from '../curso/ver.ts'
+import { tramosDe, verDelError, verDespues, type VerDelMomento } from '../curso/ver.ts'
 
 /** El rival contesta "como un segundo después" (diseño §4). */
 const PAUSA_RIVAL_MS = 900
@@ -32,6 +32,12 @@ const VUELTAS: { id: Vuelta; nombre: string }[] = [
   { id: 'aprender', nombre: 'Aprender' },
   { id: 'practicar', nombre: 'Practicar' },
 ]
+
+/**
+ * Separa "Ver qué pasaría" del texto: un espacio de medio eme. Si el botón baja de renglón, el espacio se queda arriba y el
+ * botón empieza en la orilla del texto; con un margen quedaba sangrado.
+ */
+const SEPARA_VER = '\u2002'
 
 /** La lección nueva (C3, diseño §4): una variante del curso o un "¿Y si…?" de Errores y trampas. */
 export function LeccionCurso({ cursoId, lineaId }: { cursoId: string; lineaId: string }) {
@@ -52,6 +58,8 @@ interface Mensaje {
   texto: string
   /** la jugada, en negritas, antes del texto */
   jugada?: string
+  /** los "Ver qué pasaría" del momento: cada uno va en el renglón, justo después de su frase */
+  vers?: VerDelMomento[]
 }
 
 function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
@@ -200,10 +208,12 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     mensajes.push(...turno.textos)
   } else if (e.momento === 'leer' && e.ultima !== null) {
     mensajes.push({ tipo: 'correcta', jugada: jugadaEs(l.jugadas[e.ultima]!, e.ultima), texto: 'Correcto.' })
-    for (const t of explicacionDespues(c, l, e.vuelta, e.ultima)) mensajes.push({ tipo: 'explica', texto: t })
+    const vers = verDespues(c, l, e.vuelta, e.ultima)
+    for (const t of explicacionDespues(c, l, e.vuelta, e.ultima)) mensajes.push({ tipo: 'explica', texto: t, vers })
     boton = { texto: 'Siguiente', testid: 'siguiente', accion: () => setE(continuar(l, e)) }
   } else if (e.momento === 'error' && e.intento && esperada) {
-    mensajes.push({ tipo: 'incorrecta', jugada: `Esa no es: ${jugadaEs(e.intento.san, e.ply)}`, texto: porQueNo(c, l, e.ply, e.intento.san, e.vuelta) })
+    const ver = verDelError(c, l, e.vuelta, e.ply, e.intento.san)
+    mensajes.push({ tipo: 'incorrecta', jugada: `Esa no es: ${jugadaEs(e.intento.san, e.ply)}`, texto: porQueNo(c, l, e.ply, e.intento.san, e.vuelta), vers: ver ? [ver] : [] })
     if (notaMotor) mensajes.push({ tipo: 'incorrecta', texto: notaMotor })
     boton = { texto: 'Reintentar', testid: 'reintentar', accion: () => setE(reintentar(e)) }
   } else if (e.momento === 'buena' && e.intento) {
@@ -214,10 +224,9 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     boton = { texto: 'Ahora, Practicar', testid: 'a-practicar', accion: () => setE(empezar(l, 'practicar')) }
   }
 
-  // el botón secundario del pie, a la izquierda del principal: "Ver paso a paso" en el plan; "Ver qué pasaría" cuando la explicación del momento lo trae
+  // el pie es para seguir: su único secundario es "Ver paso a paso", en el plan, a la izquierda del principal
   const orientacion = l.lado === 'w' ? 'white' : 'black'
   const pasosDelPlan = e.momento === 'plan' ? l.variante?.plan.pasoAPaso : undefined
-  const ver = e.momento === 'leer' && e.ultima !== null ? verDespues(c, l, e.vuelta, e.ultima) : e.momento === 'error' && e.intento ? verDelError(c, l, e.vuelta, e.ply, e.intento.san) : null
 
   // Pista y Respuesta, a la mano también con un error a la vista (lo quitan y ayudan en un solo toque)
   const conAyuda = e.momento === 'tuTurno' || e.momento === 'error' || e.momento === 'buena'
@@ -286,15 +295,21 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
                       {/[:.]$/.test(x.jugada) ? ' ' : '. '}
                     </strong>
                   )}
-                  <Texto t={x.texto} />
+                  {tramosDe(x.texto, x.vers ?? []).map((t, k) => (
+                    <Fragment key={k}>
+                      {k > 0 && SEPARA_VER}
+                      <Texto t={t.texto} />
+                      {t.ver && SEPARA_VER}
+                      {t.ver && <BotonVerQuePasa ver={t.ver} orientacion={orientacion} />}
+                    </Fragment>
+                  ))}
                 </p>
               ))}
               {/* en el iPhone, una franja a todo lo ancho: el texto que pasa debajo del botón no se asoma a su lado */}
               {boton && (
-                <div className={`narracion-pie ${pasosDelPlan || ver ? 'dos-botones' : ''}`}>
+                <div className={`narracion-pie ${pasosDelPlan ? 'dos-botones' : ''}`}>
                   {/* correcciones, C3: el plan también se ve paso a paso, desde el final de la variante */}
                   {pasosDelPlan && <BotonPasoAPaso titulo="Tu plan" pa={pasosDelPlan} inicio={l.jugadas} orientacion={orientacion} />}
-                  {ver && <BotonVerQuePasa ver={ver} orientacion={orientacion} />}
                   <button type="button" className="boton primario" onClick={boton.accion} data-testid={boton.testid}>
                     {boton.texto}
                   </button>
