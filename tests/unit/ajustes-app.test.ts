@@ -26,9 +26,9 @@ describe('ajustes de la app · solo mis cursos', () => {
     const blancas = cursos().filter((c) => c.color === 'w').map((c) => c.id)
     const negras = cursos().filter((c) => c.color === 'b').map((c) => c.id)
     expect(blancas).toEqual(['italiana:w', 'siciliana:w', 'caro-kann:w', 'francesa:w', 'escandinava:w', 'otros-1e4:w'])
-    expect(negras).toEqual(['caro-kann:b', 'eslava:b', 'otros-negras:b'])
+    expect(negras).toEqual(['caro-kann:b', 'caro-kann-estructuras:b', 'eslava:b', 'otros-negras:b'])
     expect(cursos().filter((c) => c.color === 'w').map((c) => c.nombre)).toEqual(['Apertura Italiana', 'Contra la Siciliana', 'Contra la Caro-Kann', 'Contra la Francesa', 'Contra la Escandinava', 'Otras defensas contra 1.e4'])
-    expect(cursos().filter((c) => c.color === 'b').map((c) => c.nombre)).toEqual(['Defensa Caro-Kann', 'Defensa Eslava', 'Otras aperturas de blancas'])
+    expect(cursos().filter((c) => c.color === 'b').map((c) => c.nombre)).toEqual(['Defensa Caro-Kann', 'Caro-Kann por estructuras', 'Defensa Eslava', 'Otras aperturas de blancas'])
   })
 
   it('las 5 populares están apagadas, y todo curso de la base es mío o popular (nada queda suelto)', () => {

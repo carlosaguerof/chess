@@ -156,4 +156,4 @@ export function listaDeMarcas(c: DatosCurso): string {
   ].join('\n')
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDeMarcas(CURSOS_NUEVOS['caro-kann:b']!))
+if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDeMarcas(CURSOS_NUEVOS[process.argv[2] ?? 'caro-kann:b']!))

@@ -1,12 +1,12 @@
 import { expect, test, type Page } from '@playwright/test'
-import { cursoNuevo } from '../../src/curso/datos.ts'
+import { cursoNuevo, obligatorias } from '../../src/curso/datos.ts'
 
 /**
  * El botón "Seguir" de la página del curso, con jerarquía (2026-10-29). Decía "Seguir: Avance: 4.♘c3 (Van der Wiel)" todo
  * con la letra de `grande` (22 px) y el nombre se partía: "Wiel)" quedaba solo en el segundo renglón. Ahora "Seguir" va
  * arriba, grande, y el nombre de la variante abajo, chico y de peso normal, en un solo renglón: dice dónde retomo.
- * Se prueba con cada una de las 16 variantes en curso, a 360, 375, 402 y 430 de ancho. "Empezar" y "Repasar el curso" se
- * quedan como estaban. Las capturas, a 402×874 y 360×740 y a escala CSS, en iterations/v3/capturas/correcciones/<perfil>/;
+ * Se prueba con cada una de las 16 variantes en curso, a 360, 375, 402 y 430 de ancho, y con cada una de las 8 obligatorias
+ * del curso por estructuras: una opcional nunca sale en "Seguir". "Empezar" y "Repasar el curso" se quedan como estaban. Las capturas, a 402×874 y 360×740 y a escala CSS, en iterations/v3/capturas/correcciones/<perfil>/;
  * las de antes del cambio salieron de esta misma prueba con CAPTURAS=antes, en Chromium.
  */
 
@@ -23,22 +23,23 @@ const CON_CAPTURA = [
 const CUANDO = process.env.CAPTURAS === 'antes' ? 'antes' : 'despues'
 
 const CURSO = cursoNuevo('caro-kann:b')!
-const CLAVE = 'ajedrez.v1.curso:caro-kann:b'
-const URL = '/#/curso/caro-kann%3Ab'
+const ESTRUCTURAS = cursoNuevo('caro-kann-estructuras:b')!
+const clave = (c: typeof CURSO) => `ajedrez.v1.curso:${c.id}`
+const urlDe = (c: typeof CURSO) => `/#/curso/${encodeURIComponent(c.id)}`
 const boton = (page: Page) => page.getByTestId('empezar-curso')
 
 type Avance = { piezas?: Record<string, number>; terminadas?: string[]; enCurso?: string }
 
 /** Guarda el avance en el teléfono, como lo deja la app, y vuelve a abrir la página del curso. */
-async function conAvance(page: Page, a: Avance) {
+async function conAvance(page: Page, a: Avance, curso = CURSO) {
   const avance = {
     piezas: a.piezas ?? {},
     variantes: Object.fromEntries((a.terminadas ?? []).map((id) => [id, { aprendida: 1, terminada: 1 }])),
     errores: {},
     enCurso: a.enCurso ? { linea: `v:${a.enCurso}`, vuelta: 'aprender', ply: 1, fecha: Date.now() } : undefined,
   }
-  await page.goto(URL)
-  await page.evaluate(([clave, avance]) => localStorage.setItem(clave, avance), [CLAVE, JSON.stringify(avance)] as const)
+  await page.goto(urlDe(curso))
+  await page.evaluate(([clave, avance]) => localStorage.setItem(clave, avance), [clave(curso), JSON.stringify(avance)] as const)
   await page.reload()
   await expect(boton(page)).toBeVisible()
   await page.evaluate(() => document.fonts.ready)
@@ -73,14 +74,18 @@ const medir = (page: Page) =>
   })
 
 test.describe('El botón "Seguir" de la página del curso, con jerarquía', () => {
-  test('con cada una de las 16 variantes en curso, "Seguir" grande y el nombre chico en un renglón, a 360, 375, 402 y 430', async ({ page }) => {
-    expect(CURSO.variantes).toHaveLength(16)
+  for (const { curso, variantes } of [
+    { curso: CURSO, variantes: CURSO.variantes },
+    { curso: ESTRUCTURAS, variantes: obligatorias(ESTRUCTURAS) },
+  ])
+    test(`${curso.nombre}: con cada una de las ${variantes.length} variantes en curso, "Seguir" grande y el nombre chico en un renglón, a 360, 375, 402 y 430`, async ({ page }) => {
+    expect(variantes).toHaveLength(curso === CURSO ? 16 : 8)
     // la página se abre ya en cada ancho, como en el teléfono: si se achica la ventana con la página abierta, el tablero
     // tarda un momento en ajustarse y la medida ve una página más ancha que no existe
     for (const { ancho, alto } of ANCHOS) {
       await page.setViewportSize({ width: ancho, height: alto })
-      for (const v of CURSO.variantes) {
-        await conAvance(page, { piezas: { idea: 1, estructura: 1 }, enCurso: v.id })
+      for (const v of variantes) {
+        await conAvance(page, { piezas: { idea: 1, estructura: 1 }, enCurso: v.id }, curso)
         // el nombre como lo muestra la página (en figuras), sin su número: "3. Avance: 4.♘c3 (Van der Wiel)"
         const nombre = ((await page.getByTestId(`paso-v:${v.id}`).locator('.nombre').textContent()) ?? '').replace(/^\d+\.\s*/, '')
         const m = await medir(page)
@@ -102,7 +107,7 @@ test.describe('El botón "Seguir" de la página del curso, con jerarquía', () =
     }
   })
 
-  test('"Empezar" y "Repasar el curso" se quedan como estaban: una sola palabra grande', async ({ page }) => {
+  test('"Empezar" y "Repasar el curso" se quedan como estaban: una sola palabra grande, también en el curso por estructuras', async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 740 })
     const comoEstaba = async (texto: string) => {
       await expect(boton(page)).toHaveText(texto)
@@ -112,6 +117,10 @@ test.describe('El botón "Seguir" de la página del curso, con jerarquía', () =
     await conAvance(page, {})
     await comoEstaba('Empezar')
     await conAvance(page, { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, terminadas: CURSO.variantes.map((v) => v.id) })
+    await comoEstaba('Repasar el curso')
+    await conAvance(page, {}, ESTRUCTURAS)
+    await comoEstaba('Empezar')
+    await conAvance(page, { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, terminadas: obligatorias(ESTRUCTURAS).map((v) => v.id) }, ESTRUCTURAS)
     await comoEstaba('Repasar el curso')
   })
 

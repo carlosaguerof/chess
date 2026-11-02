@@ -28,3 +28,17 @@ test('el curso de la Caro-Kann abre y su lección se juega hasta el plan', async
   await expect(page.getByTestId('narracion')).toContainText('Tu plan:')
   await expect(page.getByTestId('a-practicar')).toBeVisible()
 })
+
+/** 2026-11-01: en Aprender, pestaña negras, salen los dos cursos de la Caro-Kann, y el nuevo abre con sus secciones. */
+test('en Aprender salen las dos tarjetas de la Caro-Kann, y el curso por estructuras abre', async ({ page }) => {
+  await page.goto('./#/cursos/negras')
+  const tarjetas = page.getByTestId('lista-aperturas').locator('[data-testid^="tarjeta-"]')
+  await expect(tarjetas.nth(0)).toContainText('Defensa Caro-Kann')
+  await expect(tarjetas.nth(0)).toContainText('de 16 variantes')
+  await expect(tarjetas.nth(1)).toContainText('Caro-Kann por estructuras')
+  await expect(tarjetas.nth(1)).toContainText('de 8 variantes')
+  await tarjetas.nth(1).click()
+  await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Caro-Kann por estructuras')
+  await expect(page.getByTestId('seccion-base')).toHaveText('La base')
+  await expect(page.getByTestId('seccion-opcional')).toContainText('No cuentan para terminar el curso.')
+})

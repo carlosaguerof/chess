@@ -10,7 +10,7 @@ import type { PasoAPaso } from '../../src/curso/tipos.ts'
  * Correcciones de la Caro-Kann, C3 (puntos 2 y 3 del feedback): "Ver paso a paso" en La idea, La estructura, el plan y
  * el repaso. La prueba sobre los datos: cada paso es una frase, y cada paso que habla de una jugada trae esa jugada.
  */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 
 /** Todos los paso a paso del curso, con su salida. */
 const TODOS: { nombre: string; pa: PasoAPaso; inicio: string[] }[] = [
@@ -26,7 +26,8 @@ const escrita = (frase: string, sanEs: string) => new RegExp(`(^|[^A-Za-zÁÉÍ�
 
 describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('La idea, las dos páginas de La estructura, las dos del Repaso y los 16 planes traen su paso a paso', () => {
-    expect(TODOS).toHaveLength(1 + 2 + 2 + 16)
+    // en el curso por estructuras, La estructura trae cinco páginas: El mapa, las cuatro estructuras
+    expect(TODOS).toHaveLength(1 + (c.secciones ? 5 : 2) + 2 + 16)
     for (const t of TODOS) expect(t.pa?.pasos.length ?? 0, t.nombre).toBeGreaterThanOrEqual(3)
   })
 
