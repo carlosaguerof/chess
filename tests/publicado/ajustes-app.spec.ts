@@ -6,7 +6,7 @@ test('el sitio publicado trae Aprender por color, Respaldo en Ajustes, la guía 
   await expect(page.getByTestId('pestana-blancas')).toHaveText('Con blancas')
   await expect(page.locator('.tarjeta-apertura')).toHaveCount(6)
   await page.getByTestId('pestana-negras').click()
-  await expect(page.locator('.tarjeta-apertura')).toHaveCount(3)
+  await expect(page.locator('.tarjeta-apertura')).toHaveCount(4)
   await expect(page.locator('main')).not.toContainText(/Mis favoritas|Londres|Gambito/)
   // Refuerza sin fallos, en una línea
   await page.goto('./#/refuerza')

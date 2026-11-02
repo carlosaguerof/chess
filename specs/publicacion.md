@@ -17,7 +17,7 @@
 ## Comprobación después de publicar
 
 1. `curl -sI https://carlosaguerof.github.io/chess/` da 200, y el `.wasm` del motor sale como `application/wasm`.
-2. **Playwright contra la página publicada corre en GitHub,** con `.github/workflows/pagina-publicada.yml`, los dos perfiles: `npm run e2e:pages` (`playwright.publicado.config.ts`) con `SITIO=https://carlosaguerof.github.io/chess/`, y el iPhone en WebKit, que en la Air no se corre. Abre la app y el bot juega; y sin internet la app carga y el bot juega (service worker). Se lanza a mano después de publicar (`AGENTS.md`), prueba la página con las pruebas de `main`, no hace commits ni publica nada, y deja `test-results-publicado/` en un artefacto de 14 días.
+2. **Playwright contra la página publicada corre en GitHub,** con `.github/workflows/pagina-publicada.yml`, los dos perfiles: `npm run e2e:pages` (`playwright.publicado.config.ts`) con `SITIO=https://carlosaguerof.github.io/chess/`, y el iPhone en WebKit, que en la Air no se corre. Abre la app y el bot juega; y sin internet la app carga y el bot juega (service worker). Se lanza a mano después de publicar (`AGENTS.md`), prueba la página con las pruebas de `main`, no hace commits ni publica nada, y deja `test-results-publicado/` en un artefacto de 14 días. **Esas pruebas no corren con `npm test` ni con `npm run e2e`:** al cambiar algo que la app lista (tarjetas, conteos), se busca también en `tests/publicado/`, antes de publicar. Si solo cae una prueba de esa carpeta y el `trace` muestra que la página está bien, se corrige la prueba y no se vuelve a publicar.
 
 ## Licencia (GPL)
 
