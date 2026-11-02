@@ -10,7 +10,7 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
  * ningún texto pasa de 40 palabras salvo las jugadas clave; ningún texto trae símbolos de evaluación; la pregunta de
  * Practicar no delata la jugada.
  */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 const lineas = lineasDe(c)
 const variantes = lineas.filter((l) => l.tipo === 'variante')
 const fenCorto = (f: string) => f.split(' ').slice(0, 4).join(' ')
@@ -46,14 +46,17 @@ describe('C4 · el curso de la Caro-Kann', () => {
     expect(c.piezas.repaso.paginas.length).toBeGreaterThan(0)
     expect(c.variantes.length).toBeGreaterThanOrEqual(10)
     const f = c.variantes.map((v) => v.frecuencia)
-    expect([...f].sort((a, b) => b - a)).toEqual(f)
+    // un curso con secciones sigue el orden de sus secciones (`tests/unit/curso-estructuras.test.ts`)
+    if (!c.secciones) expect([...f].sort((a, b) => b - a)).toEqual(f)
     for (const v of c.variantes) expect(v.plan.tuyo.length, v.id).toBeGreaterThan(0)
     expect(c.glosario.length).toBeGreaterThan(5)
   })
 
   it('primero los errores tuyos y luego los del rival', () => {
     const de = c.piezas.errores.lista.map((e) => e.de)
-    expect(de.indexOf('rival')).toBeGreaterThan(de.lastIndexOf('tuyo'))
+    // el curso por estructuras solo trae errores tuyos
+    expect(c.secciones ? de.length : de.indexOf('rival')).toBeGreaterThan(de.lastIndexOf('tuyo'))
+    if (c.secciones) expect(de).not.toContain('rival')
   })
 
   it('cada jugada de cada línea es legal, y las de las variantes están en la base', () => {
@@ -186,7 +189,8 @@ describe('C4 · el curso de la Caro-Kann', () => {
   })
 
   it('La estructura del Avance: la cadena blanca d4-e5 contra c5, d5 y e6', () => {
-    const ch = new Chess(c.piezas.estructura.paginas[0]!.tablero!.fen!)
+    // en el curso por estructuras, antes va El mapa
+    const ch = new Chess(c.piezas.estructura.paginas[c.secciones ? 1 : 0]!.tablero!.fen!)
     const peones = (color: 'w' | 'b') => ch.board().flat().filter((s) => s && s.type === 'p' && s.color === color).map((s) => s!.square).sort()
     expect(peones('w')).toEqual(['a2', 'b2', 'c2', 'd4', 'e5', 'f2', 'g2', 'h2'])
     expect(peones('b')).toEqual(['a7', 'b7', 'c5', 'd5', 'e6', 'f7', 'g7', 'h7'])

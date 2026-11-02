@@ -13,7 +13,7 @@ import { IconoAdelante, IconoAtras, IconoCorazon, IconoFinal, IconoInicio } from
 import { guardar, leer } from '../estado/almacen.ts'
 import { navegar } from '../ruta.ts'
 import { useEffect, useState } from 'react'
-import { cursoNuevo } from '../curso/datos.ts'
+import { avanceVariantes, cursoNuevo } from '../curso/datos.ts'
 import { leerAvance } from '../curso/avance.ts'
 
 /**
@@ -47,7 +47,7 @@ const aprendidas = (c: Curso, hechas: Record<string, unknown>) => c.lecciones.fi
 const avance = (c: Curso, hechas: Record<string, unknown>) => {
   // C6: el curso piloto lleva su propio avance (variantes terminadas en sus dos vueltas)
   const n = cursoNuevo(c.id)
-  if (n) return `${n.variantes.filter((v) => leerAvance(n.id).variantes[v.id]?.terminada).length} de ${n.variantes.length} variantes`
+  if (n) return avanceVariantes(n, leerAvance(n.id))
   return `${aprendidas(c, hechas)} de ${c.lecciones.length} ${c.lecciones.length === 1 ? 'variante aprendida' : 'variantes aprendidas'}`
 }
 const enlaceCurso = (id: string) => `#/curso/${encodeURIComponent(id)}`

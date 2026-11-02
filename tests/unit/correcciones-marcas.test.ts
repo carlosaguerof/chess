@@ -20,7 +20,7 @@ import type { DatosCurso, LineaCurso, Marca } from '../../src/curso/tipos.ts'
  * dibuja; una por cada ejemplo de §4; y una que mete errores a propósito para ver que las reglas los atrapan. R7 tiene
  * además su prueba en Playwright.
  */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 const TODAS = ligadas(c)
 const flechas = (ms: Marca[]) => ms.filter((m) => m.de && m.a)
 const casillas = (ms: Marca[]) => ms.filter((m) => m.en)
@@ -543,7 +543,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(revisarR8(TODAS)).toEqual([])
     // la A5 sí, aunque la pieza esté pegada (se cumple en dos jugadas)
     expect(TODAS.some((x) => x.marcas.some((m) => m.tipo === 'A5'))).toBe(true)
-    expect(readFileSync('iterations/v3/marcas-por-jugada.md', 'utf8')).toBe(listaDeMarcas(c))
+    expect(readFileSync(c.secciones ? 'iterations/v3/marcas-por-jugada-estructuras.md' : 'iterations/v3/marcas-por-jugada.md', 'utf8')).toBe(listaDeMarcas(c))
   })
 
   it('el paso a paso acumula las marcas mientras la frase sigue con lo mismo, hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
@@ -558,7 +558,8 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(marcasDelPaso(plan('avance-van-der-wiel'), 3)).toEqual([])
     expect(marcasDelPaso(plan('hillbilly'), 3)).toEqual([])
     // ni las del otro lado: en el plan del Cambio, la casilla e5 del rival no lleva la verde de ...b5
-    expect(marcasDelPaso(plan('cambio'), 3)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
+    const casillaE5 = plan('cambio').pasos.findIndex((p) => p.frase.startsWith('Blancas busca la casilla e5'))
+    expect(marcasDelPaso(plan('cambio'), casillaE5)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
     // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
     for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
       pa.pasos.forEach((p, i) => {

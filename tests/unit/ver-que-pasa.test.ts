@@ -18,7 +18,7 @@ import type { LineaCurso } from '../../src/curso/tipos.ts'
  * R8 por `ligadas` (`tests/unit/correcciones-marcas.test.ts`). Las consecuencias que dice el motor, con sus comandos, en
  * `iterations/v3/comprobaciones-del-curso.md`; aquí, las que se miden con chess.js.
  */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 const TODOS = todosLosVer(c)
 const VARIANTES = lineasDe(c).filter((l) => l.tipo === 'variante')
 const linea = (id: string) => lineaPorId(c, id)!

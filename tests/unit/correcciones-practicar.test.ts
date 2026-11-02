@@ -9,7 +9,7 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
  * Correcciones de la Caro-Kann, C2 (punto 5 del feedback): Practicar sin ayudas que no pediste. Los escalones de
  * ayuda, sin pantalla. "Aprender" no cambia.
  */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 const tal = lineaPorId(c, 'v:avance-tal')!
 const errorTal = lineaPorId(c, 'e:tal-e6')!
 const hastaMiTurno = (e: EstadoCiclo) => {

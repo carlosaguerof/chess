@@ -175,6 +175,23 @@ export interface VarianteCurso {
   regla: string
   frecuencia: number
   fuenteFrecuencia: string
+  /** la estructura de la lección, en letra chica debajo de su nombre (solo en un curso con `secciones`) */
+  estructura?: string
+}
+
+/**
+ * Una sección de la página de un curso (`specs/cursos.md` §6). Sin `secciones`, el curso se ve como siempre: "Las
+ * variantes", todas obligatorias.
+ */
+export interface SeccionCurso {
+  id: string
+  titulo: string
+  /** no cuenta para terminar el curso: va después del Repaso, con su propia numeración, y no entra al Repaso de hoy */
+  opcional?: boolean
+  /** una línea debajo del título */
+  nota?: string
+  /** los ids de sus variantes, en orden */
+  variantes: string[]
 }
 
 export interface ErrorCurso {
@@ -197,6 +214,13 @@ export interface DatosCurso {
   color: 'w' | 'b'
   nombre: string
   version: string
+  /**
+   * el curso del que sale este (`specs/cursos.md` §6): enseña las mismas líneas, así que sus fichas de Repaso son las de
+   * ese curso. Una línea tiene una sola ficha, aunque salga en dos cursos
+   */
+  fichasDe?: string
+  /** las secciones de la página del curso; sin ellas, "Las variantes" */
+  secciones?: SeccionCurso[]
   fuentes: Record<string, string>
   piezas: {
     idea: PiezaLeer
@@ -210,6 +234,63 @@ export interface DatosCurso {
   /** la de cada jugada mía (o de quien castiga en Errores y trampas) */
   mias: Record<string, JugadaMia>
   glosario: { termino: string; definicion: string }[]
+}
+
+/** Un cambio dentro de un texto del curso de origen: [lo que dice, lo que va a decir]. Si no lo encuentra, el curso no carga. */
+export type CambioDeTexto = [string, string]
+
+/** Un párrafo de una capa: un texto nuevo, o el párrafo `de` de la misma página del curso de origen, con sus cambios. */
+export type ParrafoCapa = string | { de: number; cambia?: CambioDeTexto[] }
+
+/** Una página de una capa: la página `de` del curso de origen, con lo que cambia, o una página nueva completa. */
+export interface PaginaCapa extends Partial<Omit<PaginaLeer, 'texto'>> {
+  de?: number
+  texto?: ParrafoCapa[]
+}
+
+/** Una lección de una capa: la variante `id` del curso de origen, con su estructura y lo nuevo de su introducción. */
+export interface LeccionCapa {
+  id: string
+  estructura?: string
+  /** la frase que abre la introducción */
+  frase: string
+  /** lo que deja de ser cierto en la introducción de hoy */
+  cambia?: CambioDeTexto[]
+  /** lo que cambia en su idea, solo en este curso */
+  idea?: CambioDeTexto[]
+  /** lo que cambia en "Tu plan", solo en este curso */
+  planTuyo?: CambioDeTexto[]
+  /** lo que cambia en las frases del paso a paso de su plan (las marcas se quedan), o un paso nuevo antes de una frase */
+  pasosDelPlan?: (CambioDeTexto | { antesDe: string; paso: PasoLeer })[]
+  /** de dónde sale la frase */
+  fuente: string[]
+}
+
+export type SeccionCapa = Omit<SeccionCurso, 'variantes'> & { lecciones: LeccionCapa[] }
+
+/**
+ * Lo que un curso cambia de otro (`conocimiento/cursos/caro-kann-estructuras.json`). Las explicaciones de cada jugada,
+ * los planes, las fuentes y el glosario no se copian: los compone `componerCurso`, y una corrección en el curso de
+ * origen llega a los dos.
+ */
+export interface CapaCurso {
+  id: string
+  /** el curso de origen */
+  de: string
+  nombre: string
+  version: string
+  nota: string
+  /** las que se suman a las del curso de origen */
+  fuentes?: Record<string, string>
+  /** los términos que se suman a los del curso de origen */
+  glosario?: { termino: string; definicion: string }[]
+  piezas: {
+    idea: { paginas: PaginaCapa[] }
+    estructura: { paginas: PaginaCapa[] }
+    errores: { intro: string; lista: string[] }
+    repaso: { paginas: PaginaCapa[] }
+  }
+  secciones: SeccionCapa[]
 }
 
 /** Una línea interactiva: una variante (con su línea de la base) o un "¿Y si…?" de Errores y trampas. */

@@ -27,3 +27,10 @@ Anotado el 2026-10-29 (ajustes de la app; `log.md`). Hoy la app es de un solo us
 - **La analítica con PostHog**, siguiendo la receta de la dirección (`00_direccion/recetas/posthog.md`, fuera de este repo). *Por qué espera:* medir el uso tiene sentido con más de un usuario.
 - **Un aviso de cookies y privacidad** que separe lo básico (lo que la app necesita para funcionar) de la analítica. *Por qué espera:* va con la analítica; sin ella no hay nada que avisar.
 - **"Escoger tu ruta de aperturas":** una parte didáctica que le explique al usuario qué aperturas y defensas puede escoger como principiante, con sus ventajas y desventajas; él escoge su ruta y de ahí le aparecen sus cursos. Es lo que Carlos hizo a mano con sus guías (`input/`). *Por qué espera:* Carlos ya tiene su ruta; es para los que vengan. Se apoyaría en las populares y en `conocimiento/fuentes-aperturas-populares.md`.
+
+## Ideas de Carlos, estacionadas
+
+Anotado el 2026-11-01, copiado de `00_corridas/chess/2026-10-29_PENDIENTES_torre-chess.md`. Solo se anota; no se construye nada.
+
+- **El Progreso más gamificado (2026-10-31).** "Idea para después": los cursos en un orden lógico de aprendizaje, con una UX/UI tipo camino, como Duolingo o Candy Crush. Por ver: el orden, cómo entran el reforzamiento de fallos y el aprendizaje espaciado, cuántas lecciones lleva cada "bolita", y si el usuario que no quiera seguir el orden del producto puede explorar el catálogo y escoger lo que quiere aprender, como hoy. Parte de lo que ya existe (Refuerza y el Repaso de hoy) y del orden que Carlos preguntó el 31; ese orden entre cursos sigue sin definirse. Solo se inspira en la idea del camino: nada de sus archivos ni su marca.
+  - **Insumo de la torre, como maestro (2026-10-31; criterio propio, sin probar):** el orden depende del objetivo, el tiempo y el ritmo del alumno, así que un solo orden fijo no le sirve a todos. Se liga con "Escoger tu ruta" (arriba). Para Carlos: una respuesta por color primero (Caro-Kann e Italiana), luego Eslava y Alapin, y lo demás solo si sus partidas lo piden. Esto cambia el orden que la torre le dio antes, que ponía la Eslava antes que la Italiana.

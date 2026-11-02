@@ -519,6 +519,9 @@ button.enlace { background: none; border: 0; cursor: pointer; width: 100%; }
 .lista-curso .titulo-grupo { list-style: none; padding: 8px 2px 0; }
 .lista-curso .titulo-grupo h2 { font-size: 16px; margin: 0; color: var(--texto-suave); }
 .numero-variante { color: var(--texto-apagado); font-weight: 600; }
+.nombre-con-estructura { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.estructura-leccion { font-size: 13px; font-weight: 400; color: var(--texto-suave); }
+.lista-curso .nota-seccion { margin: 2px 0 0; font-size: 13px; color: var(--texto-suave); }
 .pieza-leer .subtitulo-pieza { font-size: 17px; margin: 0; color: var(--texto-suave); }
 /* correcciones, C3: "Ver paso a paso" bajo el tablero de leer, y su ventana */
 .ver-paso-a-paso { width: 100%; max-width: 420px; align-self: center; }

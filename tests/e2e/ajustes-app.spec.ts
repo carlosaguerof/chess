@@ -44,7 +44,7 @@ test.describe('ajustes de la app', () => {
     await captura(page, info, 'ajustes-aprender-blancas')
     await page.getByTestId('pestana-negras').click()
     await expect(page.getByTestId('pestana-negras')).toHaveAttribute('aria-selected', 'true')
-    expect(await ids()).toEqual(['tarjeta-caro-kann:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
+    expect(await ids()).toEqual(['tarjeta-caro-kann:b', 'tarjeta-caro-kann-estructuras:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
     await sinFavoritas()
     // las populares apagadas no se abren ni por su dirección
     for (const id of ['londres:w', 'gambito-dama:w', 'siciliana:b', 'escandinava:b', 'gambito-dama-declinado:b']) {

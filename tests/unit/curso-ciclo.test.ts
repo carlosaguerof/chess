@@ -11,7 +11,7 @@ import { LECCIONES_CARO_KANN, pasarCaroKann } from '../../src/aprender/migracion
 import type { EntradaRegistro } from '../../src/registro/registro.ts'
 
 /** C3: el ciclo de la lección nueva, sin pantalla; y el registro sigue alimentando Refuerza y el Repaso de hoy. */
-const c = CURSOS_NUEVOS['caro-kann:b']!
+const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 const tal = lineaPorId(c, 'v:avance-tal')!
 const mov = (san: string, e: EstadoCiclo) => {
   const m = posicion(tal.jugadas, e.ply).move(san)
@@ -157,7 +157,8 @@ describe('C3 · el registro sigue alimentando Refuerza y el Repaso de hoy', () =
 
   it('las variantes del curso son las lecciones de la Caro-Kann para el Repaso: al terminar una, vuelve mañana', () => {
     const ck = cursos().find((x) => x.id === 'caro-kann:b')!
-    expect(ck.lecciones.map((l) => l.id)).toEqual(leccionesDe(c).map((l) => l.id))
+    // los dos cursos de la Caro-Kann, con las mismas fichas (cada uno en su orden)
+    expect(ck.lecciones.map((l) => l.id).sort()).toEqual(leccionesDe(c).map((l) => l.id).sort())
     const l = ck.lecciones.find((x) => x.id.endsWith('/curso-avance-tal'))!
     expect(l.nombre).toBe(tal.nombre)
     const hoy = dia()

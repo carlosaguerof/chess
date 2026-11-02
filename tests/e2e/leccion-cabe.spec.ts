@@ -1,6 +1,8 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { Chess } from 'chess.js'
+import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { cursoNuevo, lineaPorId } from '../../src/curso/datos.ts'
+import { palabras } from '../../src/curso/textos.ts'
 import { jugar, tocar } from './_util.ts'
 
 /**
@@ -20,6 +22,7 @@ const PANTALLAS = [
   { nombre: 'iPhone 16 Pro', ancho: 402, alto: 874 },
   { nombre: 'iPhone Pro Max', ancho: 430, alto: 932 },
 ]
+/** las capturas son del curso de hoy: el curso por estructuras tiene las suyas (`capturas-estructuras.spec.ts`) */
 const CON_CAPTURA = ['402x874', '375x667']
 const CUANDO = process.env.CAPTURAS === 'antes' ? 'antes' : 'despues'
 
@@ -30,13 +33,17 @@ const enUci = (san: string[]) => {
     return m.from + m.to + (m.promotion ?? '')
   })
 }
-const CLASICA = lineaPorId(cursoNuevo('caro-kann:b')!, 'v:clasica')!
+const CURSO = 'caro-kann:b'
+const ESTRUCTURAS = 'caro-kann-estructuras:b'
+/** la introducción más larga del curso por estructuras: la frase nueva le suma alto */
+const MAS_LARGA = [...cursoNuevo(ESTRUCTURAS)!.variantes].sort((a, b) => palabras(b.intro) - palabras(a.intro))[0]!
+const CLASICA = lineaPorId(cursoNuevo(CURSO)!, 'v:clasica')!
 const UCI = enUci(CLASICA.jugadas)
 /** 10...e6, la última jugada mía: la línea ya es la más larga del curso */
 const ULTIMA = CLASICA.jugadas.length - 1
 /** 10...Cc5?? 11.dxc5: el motor ve que pierde material */
 const MALA = 'd7c5'
-const URL = '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(CLASICA.id)
+const URL = (curso: string, linea: string = CLASICA.id) => `/#/curso/${encodeURIComponent(curso)}/linea/${encodeURIComponent(linea)}`
 const BOTONES = ['pista', 'respuesta', 'atras', 'reiniciar']
 
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
@@ -45,9 +52,9 @@ const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute
 const toca = (page: Page, id: string) => page.getByTestId(id).dispatchEvent('click')
 
 /** Retoma la Clásica en su última jugada, como al volver a la lección a medias. */
-async function retomarEnLaUltima(page: Page, vuelta: 'aprender' | 'practicar') {
-  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [CLASICA.id, vuelta, ULTIMA] as const)
-  await page.goto(URL)
+async function retomarEnLaUltima(page: Page, vuelta: 'aprender' | 'practicar', curso: string) {
+  await page.evaluate(([clave, linea, vuelta, ply]) => localStorage.setItem(clave as string, JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [`ajedrez.v1.curso:${curso}`, CLASICA.id, vuelta, ULTIMA] as const)
+  await page.goto(URL(curso))
   await page.reload()
   await momento(page, 'tuTurno')
   await expect(leccion(page)).toHaveAttribute('data-ply', String(ULTIMA))
@@ -74,7 +81,7 @@ async function cabe(page: Page, info: TestInfo, cuando: string, aLaVista: string
     [aLaVista, texto] as const,
   )
   const pantalla = `${m.pantalla}x${m.ventana}`
-  if (CON_CAPTURA.includes(pantalla)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
+  if (CON_CAPTURA.includes(pantalla) && !info.title.startsWith(ESTRUCTURAS)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
   expect.soft(m.pagina, `${cuando}: sin scroll de la página`).toBeLessThanOrEqual(m.ventana)
   expect.soft(m.fuera, `${cuando}: completos dentro de la ventana`).toEqual([])
   expect.soft(Math.round(m.texto), `${cuando}: la narración`).toBeGreaterThanOrEqual(140)
@@ -88,12 +95,20 @@ for (const p of PANTALLAS) {
   test.describe(`La lección cabe en ${p.nombre} (${p.ancho}×${p.alto})`, () => {
     test.use({ viewport: { width: p.ancho, height: p.alto } })
 
-    test('sin scroll de la página en los momentos más altos, y el botón del resumen en un renglón', async ({ page }, info) => {
+    test(`${ESTRUCTURAS}: la introducción más larga, con su frase nueva, sin scroll de la página`, async ({ page }, info) => {
+      await page.goto(URL(ESTRUCTURAS, `v:${MAS_LARGA.id}`))
+      await momento(page, 'intro')
+      await expect(page.getByTestId('narracion')).toContainText(mostrarTexto(MAS_LARGA.intro, 'figuras'))
+      await cabe(page, info, '0-introduccion', [...BOTONES, 'empezar-vuelta'], 'narracion')
+    })
+
+    for (const curso of [CURSO, ESTRUCTURAS])
+    test(`${curso}: sin scroll de la página en los momentos más altos, y el botón del resumen en un renglón`, async ({ page }, info) => {
       test.setTimeout(120_000)
       await page.goto('/#/')
 
       // 1. "Te toca", con la frase del rival (10.Dxd3) y lo que hace tu jugada
-      await retomarEnLaUltima(page, 'aprender')
+      await retomarEnLaUltima(page, 'aprender', curso)
       await expect(page.getByTestId('narracion').locator('[data-tipo="rival"]')).toHaveCount(1)
       await cabe(page, info, '1-te-toca', BOTONES, 'narracion')
       // "Reiniciar" (y "Respuesta") caben en un renglón también a 360 de ancho
@@ -121,7 +136,7 @@ for (const p of PANTALLAS) {
       await cabe(page, info, '4-plan', [...BOTONES, 'ver-paso-a-paso', 'a-practicar'], 'narracion')
 
       // 5. el resumen de Practicar, con un tropiezo (Pista y un error): su texto se desliza por dentro y las salidas, abajo
-      await retomarEnLaUltima(page, 'practicar')
+      await retomarEnLaUltima(page, 'practicar', curso)
       await toca(page, 'pista')
       await tocar(page, info, MALA.slice(0, 2))
       await tocar(page, info, MALA.slice(2, 4))
