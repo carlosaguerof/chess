@@ -7,7 +7,23 @@ import { expect, test, type Page } from '@playwright/test'
 const CARPETA = process.env.CARPETA_CAPTURAS ?? 'test-results/capturas-estructuras'
 const CURSO = '/#/curso/caro-kann-estructuras%3Ab'
 const linea = (id: string) => `${CURSO}/linea/${encodeURIComponent(id)}`
-const foto = (page: Page, nombre: string, fullPage = false) => page.screenshot({ path: `${CARPETA}/${nombre}.png`, fullPage })
+
+/** Con el tablero ya quieto: al cambiar de página, sus piezas se animan de una posición a la otra. */
+async function foto(page: Page, nombre: string) {
+  await page.waitForTimeout(450)
+  await page.screenshot({ path: `${CARPETA}/${nombre}.png` })
+}
+
+/** Una página que no cabe: arriba y, si se desliza, también abajo (la barra de abajo tapa lo que quede detrás de ella). */
+async function fotoDePagina(page: Page, nombre: string) {
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await foto(page, `${nombre}-arriba`)
+  if (await page.evaluate(() => document.documentElement.scrollHeight > innerHeight)) {
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+    await foto(page, `${nombre}-abajo`)
+    await page.evaluate(() => window.scrollTo(0, 0))
+  }
+}
 
 test.describe('capturas del curso por estructuras', () => {
   test.use({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
@@ -25,19 +41,16 @@ test.describe('capturas del curso por estructuras', () => {
     await page.getByTestId('paso-v:hillbilly').scrollIntoViewIfNeeded()
     await foto(page, '03-curso-en-medio')
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
-    await page.waitForTimeout(150)
     await foto(page, '04-curso-abajo')
-    await foto(page, '04b-curso-completa', true)
 
     await page.goto(`${CURSO}/leer/estructura`)
     await expect(page.getByTestId('pieza-estructura')).toBeVisible()
     const n = 5
     for (let i = 1; i <= n; i++) {
       await expect(page.getByTestId('pagina-n-de-m')).toHaveText(`${i} de ${n}`)
-      await foto(page, `05-estructura-${i}`, true)
+      await fotoDePagina(page, `05-estructura-${i}`)
       if (i === 1 || i === 3 || i === 5) {
         await page.getByTestId('ver-paso-a-paso').click()
-        await page.waitForTimeout(200)
         await foto(page, `05-estructura-${i}-paso-a-paso`)
         await page.keyboard.press('Escape')
       }
@@ -57,12 +70,12 @@ test.describe('capturas del curso por estructuras', () => {
 
     await page.goto(`${CURSO}/leer/idea`)
     await expect(page.getByTestId('pieza-idea')).toBeVisible()
-    await foto(page, '09-la-idea', true)
+    await fotoDePagina(page, '09-la-idea')
     await page.goto(`${CURSO}/errores`)
     await expect(page.getByTestId('pieza-errores')).toBeVisible()
     await foto(page, '10-errores')
     await page.goto(`${CURSO}/leer/repaso`)
     await expect(page.getByTestId('pieza-repaso')).toBeVisible()
-    await foto(page, '11-repaso', true)
+    await fotoDePagina(page, '11-repaso')
   })
 })

@@ -30,3 +30,13 @@ Carlos, en la Bronstein, en Aprender, después de 4...e6. Su captura se queda fu
 | 10 | La explicación de 4...e6, "Si el caballo llega a g3 y ataca a tu alfil, tendrá g6." | "Lo que no entendí fue "…tendrá g6." Como habla en tercera persona, parece que se refiere al rival. [...] La corrección es que cuando hable de las piezas del usuario, que lo diga en segunda persona o que si habla en tercera persona refiriéndose a una pieza, que mencione la pieza. En este caso las dos opciones válidas serían: "… tendrás g6" / "… tu alfil tendrá g6"." | Lo tuyo se dice en segunda persona, o nombrando la pieza (`specs/cursos.md` §3). Hoy dice "tendrás g6": la torre escogió esa para no repetir "tu alfil" dos veces en la frase |
 | 11 | La misma explicación, "Tu alfil de c8 ya está afuera." | "Eso no se me hizo mal. Se entiende." | No se toca. No se corrige un hecho porque le falte su "y qué", ni una frase del rival, ni nada por gusto |
 | 12 | "Enviar feedback" en Más (una idea, no esta pantalla) | "en su momento definimos si lo aplicamos y los detalles"; "entre menos necesitemos pedirle al usuario, mejor" | Se anota en `context/despues.md` y no se construye nada |
+
+## La Caro-Kann por estructuras (2026-11-01)
+
+Carlos, tomando el curso para aprender. Lo hace la corrida `00_corridas/chess/2026-11-01_PROMPT_curso-por-estructuras.md`.
+
+| # | Dónde | Lo que dijo | La regla que sale |
+|---|---|---|---|
+| 13 | El curso de la Caro-Kann | "Lo que quiero es que la base e idea general me quede sumamente clara. No tener que aprenderme de memoria cada variante posible." | Primero el mapa: una pregunta, cuatro respuestas, y de ahí el plan (`specs/cursos.md` §6) |
+| 14 | Las variantes | "Siento que no se explica así en el curso, sino como lecciones aisladas." | Una lección por estructura; cada introducción dice en qué estructura estás y qué buscas |
+| 15 | Cómo probarlo | "Que lo hagan en un curso nuevo, para yo poder compararlos. O sea que en la app me aparezcan dos cursos de la caro kann. El actual y el nuevo." | Dos tarjetas. El curso actual no cambia ni un byte. El avance va aparte, para empezar el nuevo desde cero |

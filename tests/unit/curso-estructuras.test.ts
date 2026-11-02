@@ -29,7 +29,7 @@ const linea = (id: string) => lineaPorId(nuevo, `v:${id}`)!
 const CADENA = 'Blancas empuja a e5'
 const CAMBIO = 'Blancas cambia en d5'
 const CLASICA = 'Tú cambias en e4'
-const TENSION = 'Nadie cambia'
+const TENSION = 'Nadie cambia peones'
 const TABLA: [string, string, boolean, [string, string | undefined][]][] = [
   ['La base', 'base', false, [['avance-short', CADENA], ['cambio', CAMBIO], ['clasica', CLASICA], ['dos-caballos', TENSION]]],
   ['Las que más te van a salir', 'frecuentes', false, [['avance-van-der-wiel', CADENA], ['oferta-final', undefined], ['breyer', TENSION], ['hillbilly', undefined]]],
@@ -169,7 +169,7 @@ describe('El curso por estructuras · los textos', () => {
   it('El mapa: cada respuesta tiene su nombre, y el tablero la muestra', () => {
     const p = pagina('El mapa')
     expect(p.texto[0]).toContain('¿qué pasó con el peón de e4?')
-    for (const [q, n] of [['empujó a e5', 'la Cadena'], ['cambió en d5', 'el Cambio'], ['capturaste en e4', 'la Clásica'], ['Sigue en e4', 'la Tensión']]) expect(p.texto[1], q).toMatch(new RegExp(`${q}: ${n}`))
+    for (const [q, n] of [['empujó a e5', 'la Cadena'], ['cambió en d5', 'el Cambio'], ['capturaste en e4 y blancas retomó con una pieza', 'la Clásica'], ['Sigue en e4', 'la Tensión']]) expect(p.texto[1], q).toMatch(new RegExp(`${q}: ${n}`))
     const fotos = fotosDePasos(p.pasoAPaso!)
     const cuando = (texto: string) => new Chess(fotos[p.pasoAPaso!.pasos.findIndex((x) => x.frase.startsWith(texto))]!.fen)
     // la Cadena: el peón llegó a e5
@@ -237,7 +237,11 @@ describe('El curso por estructuras · los textos', () => {
     expect(peones(new Chess(fotos[3]!.fen), 'w')).toEqual(expect.arrayContaining(['d4', 'e5']))
     expect(new Chess(fotos[4]!.fen).get('d5')).toMatchObject({ type: 'p', color: 'b' })
     expect(peones(new Chess(fotos[4]!.fen), 'b')).not.toContain('c6')
-    expect(new Chess(fotos[5]!.fen).get('e4')).toMatchObject({ type: 'q', color: 'w' })
+    // la captura en e4 no se juega: la frase no dice con qué pieza retoma blancas, y lleva su flecha de plan (`specs/cursos.md` §2.1, regla 4)
+    const captura = p.pasoAPaso!.pasos[5]!
+    expect(captura.jugadas).toBeUndefined()
+    expect(captura.marcas).toEqual([{ tipo: 'A3', de: 'd5', a: 'e4', color: 'verde', punteada: true }])
+    expect(fotos[5]!.fen).toBe(ch.fen())
   })
 
   it('cada introducción abre con su frase y sigue con la de hoy; "La más común" se fue', () => {
@@ -254,7 +258,7 @@ describe('El curso por estructuras · los textos', () => {
   })
 
   it('cada frase es una sola, nombra su estructura (o dice que queda fuera del mapa) y dice lo que se busca', () => {
-    const nombre: Record<string, RegExp> = { [CADENA]: /^Estás en la Cadena: /, [CAMBIO]: /^Estás en el Cambio: /, [CLASICA]: /^Estás en la Clásica: /, [TENSION]: /^Estás en la Tensión: / }
+    const nombre: Record<string, RegExp> = { [CADENA]: /^Estás en la Cadena: /, [CAMBIO]: /^Estás en el Cambio[:,] /, [CLASICA]: /^Estás en la Clásica: /, [TENSION]: /^Estás en la Tensión: / }
     for (const l of capa.secciones.flatMap((s) => s.lecciones)) {
       expect(l.frase, l.id).toMatch(l.estructura ? nombre[l.estructura]! : /^Esta línea queda fuera del mapa: blancas /)
       if (l.estructura) expect(l.frase, l.id).toMatch(/tu objetivo es/)
@@ -273,14 +277,21 @@ describe('El curso por estructuras · los textos', () => {
     }
   })
 
-  it('las dos de fuera del mapa: blancas de verdad no pone un peón en d4', () => {
-    for (const id of ['oferta-final', 'hillbilly']) expect(jugadas(linea(id)).some((x) => x.color === 'w' && x.piece === 'p' && x.to === 'd4'), id).toBe(false)
-    expect(jugadas(linea('breyer')).some((x) => x.color === 'w' && x.piece === 'p' && x.to === 'd4')).toBe(false)
-    expect(jugadas(linea('hillbilly')).find((x) => x.color === 'w')).toMatchObject({ san: 'e4' })
-    expect(jugadas(linea('hillbilly')).filter((x) => x.color === 'w')[1]).toMatchObject({ san: 'Bc4' })
+  it('lo que hace blancas en las dos de fuera del mapa, y en las que dicen que no ha jugado d4', () => {
+    // 2.Cf3 y 3.d3: sostiene e4 con otro peón; al final, su peón de e4 sigue ahí y el de d se fue: otra forma
+    const oferta = linea('oferta-final')
+    expect(jugadas(oferta).filter((x) => x.color === 'w').map((x) => x.san)).toContain('d3')
+    expect(alFinal(oferta).get('e4')).toMatchObject({ type: 'p', color: 'w' })
+    expect(peones(alFinal(oferta), 'w').some((s) => s[0] === 'd')).toBe(false)
+    expect(peones(alFinal(oferta), 'b').some((s) => s[0] === 'd')).toBe(false)
+    // 2.Ac4: después de 1.e4, solo mueve su alfil y su dama
+    expect(jugadas(linea('hillbilly')).filter((x) => x.color === 'w').map((x) => x.piece)).toEqual(['p', 'b', 'b', 'q'])
+    // en las que dicen que blancas no tiene peón en d4 o no lo ha jugado
+    for (const id of ['breyer', 'apocalipsis', 'panov-acelerado']) expect(jugadas(linea(id)).some((x) => x.color === 'w' && x.piece === 'p' && x.to === 'd4'), id).toBe(false)
   })
 
-  it('El centro se abre pronto en 2.c4, y el peón de d4 del Panov puede quedar aislado (chess.js)', () => {
+  it('El Panov lleva un peón blanco en c4, el centro se abre pronto en 2.c4, y el peón de d4 del Panov puede quedar aislado (chess.js)', () => {
+    expect(alFinal(linea('panov')).get('c4')).toMatchObject({ type: 'p', color: 'w' })
     const c4 = alFinal(linea('panov-acelerado'))
     expect(c4.board().flat().filter((s) => s && s.type === 'p' && (s.square[1] === '4' || s.square[1] === '5') && 'cde'.includes(s.square[0]!))).toEqual([])
     // si blancas cambia en d5 y retomas, ya no le queda peón de c ni de e junto al de d4
@@ -294,7 +305,7 @@ describe('El curso por estructuras · los textos', () => {
 
   it('Errores y trampas: solo los dos que dijo Carlos, y la frase de arriba lo dice', () => {
     expect(nuevo.piezas.errores.lista.map((e) => e.id)).toEqual(['tal-e6', 'cambio-dc7'])
-    expect(nuevo.piezas.errores.intro).toMatch(/^Dos «¿Y si…\?»: dos errores tuyos/)
+    expect(nuevo.piezas.errores.intro).toMatch(/^Dos «¿Y si…\?»: errores tuyos/)
     expect(nuevo.piezas.errores.intro).not.toMatch(/Cuatro|tres|castigas tú/)
     expect(actual.piezas.errores.lista).toHaveLength(4)
   })
@@ -316,7 +327,7 @@ describe('El curso por estructuras · los textos', () => {
     const citadas = [...capa.secciones.flatMap((s) => s.lecciones.flatMap((l) => l.fuente)), ...nuevo.piezas.estructura.paginas.flatMap((p) => p.fuente)]
     for (const f of citadas) expect(nuevo.fuentes[f], f).toBeDefined()
     const terminos = nuevo.glosario.map((g) => g.termino)
-    for (const t of ['Ataque de minorías', 'Estructura', 'Tensión', 'Lado de dama y lado de rey', 'Cadena de peones', 'Peón aislado', 'Ruptura']) expect(terminos, t).toContain(t)
+    for (const t of ['Ataque de minorías', 'Estructura', 'Tensión', 'Lado de dama y lado de rey', 'Cadena de peones', 'Peón aislado', 'Peón débil', 'Ruptura']) expect(terminos, t).toContain(t)
   })
 
   it('ninguna frase nueva pasa de 40 palabras con su introducción', () => {

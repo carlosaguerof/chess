@@ -11,6 +11,7 @@
     { "termino": "Ataque de minorías", "definicion": "Avanzar los peones del lado donde tienes menos para debilitar los del rival." },
     { "termino": "Estructura", "definicion": "La forma que dejan los peones en el tablero." },
     { "termino": "Lado de dama y lado de rey", "definicion": "Las dos mitades del tablero: de la columna a a la d, el lado de dama; de la e a la h, el lado de rey." },
+    { "termino": "Peón débil", "definicion": "Un peón que cuesta defender." },
     { "termino": "Tensión", "definicion": "Dos peones que se atacan y ninguno ha capturado todavía." }
   ],
   "piezas": {
@@ -32,7 +33,7 @@
           "subtitulo": "El mapa",
           "texto": [
             "Después de 1.e4 c6, juegas ...d5 y atacas el peón de e4. De ahí sale la pregunta que ordena este curso: ¿qué pasó con el peón de e4?",
-            "Hay cuatro respuestas, cada una con su nombre. Blancas lo empujó a e5: la Cadena. Blancas lo cambió en d5: el Cambio. Tú lo capturaste en e4: la Clásica. Sigue en e4: la Tensión.",
+            "Hay cuatro respuestas, cada una con su nombre. Blancas lo empujó a e5: la Cadena. Blancas lo cambió en d5: el Cambio. Tú lo capturaste en e4 y blancas retomó con una pieza: la Clásica. Sigue en e4: la Tensión.",
             "Y la idea que une a las cuatro lecciones de La base: tu alfil de c8 sale antes de ...e6."
           ],
           "tablero": { "jugadas": ["e4", "c6", "d4", "d5"] },
@@ -57,10 +58,10 @@
           "subtitulo": "El Cambio",
           "texto": [
             "Tus peones: d5 y e6. Los de blancas: c3 y d4. Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c.",
-            "Tu ruptura: ...b5 y ...b4, contra c3. Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival. La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey."
+            "Tu ruptura, con una torre en b8: ...b5 y ...b4, contra c3. Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival. La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey."
           ],
           "tablero": { "fen": "4k3/pp3ppp/4p3/3p4/3P4/2P5/PP3PPP/4K3 w - - 0 1", "soloPeones": true },
-          "fuente": ["WP-PS", "WP-MA", "WP-CK", "WB-3exd5", "BASE", "AJEDREZ"],
+          "fuente": ["WP-PS", "WP-MA", "WP-CK", "WB-3exd5", "BASE", "MOTOR", "AJEDREZ"],
           "pasoAPaso": {
             "fen": "4k3/pp3ppp/4p3/3p4/3P4/2P5/PP3PPP/4K3 b - - 0 1",
             "soloPeones": true,
@@ -70,13 +71,13 @@
               { "frase": "Los de blancas: c3 y d4." },
               { "frase": "Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c." },
               {
-                "frase": "Tu ruptura empieza con ...b5, y después sigue ...b4, contra c3.",
+                "frase": "Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3.",
                 "jugadas": ["...b5"],
                 "marcas": [{ "tipo": "A3", "de": "b5", "a": "b4", "color": "verde", "punteada": true }]
               },
               { "frase": "Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival." },
               {
-                "frase": "La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey.",
+                "frase": "La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey.",
                 "marcas": [{ "tipo": "A6", "en": "e5", "color": "rojo" }]
               }
             ]
@@ -86,8 +87,8 @@
         {
           "subtitulo": "La Tensión",
           "texto": [
-            "Tus peones: c6, d5 y e6. Los de blancas: e4 y d2. Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado: el centro todavía no se decide.",
-            "Por eso puede terminar en otra forma. Si blancas juega d4 y empuja a e5, se forma la Cadena. Si blancas cambia en d5, vas hacia el Cambio. Si tú capturas en e4, vas hacia la Clásica."
+            "Tus peones: c6, d5 y e6. Los de blancas: e4 y d2. Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado peones: el centro todavía no se decide.",
+            "Por eso puede terminar en otra forma. Si blancas juega d4 y empuja a e5, se forma la Cadena. Si blancas cambia en d5, vas hacia el Cambio. Si tú capturas en e4 y blancas retoma con una pieza, vas hacia la Clásica."
           ],
           "tablero": { "jugadas": ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4", "h3", "Bxf3", "Qxf3", "e6"], "soloPeones": true },
           "fuente": ["WP-CK", "HOU", "BASE", "MOTOR", "AJEDREZ"],
@@ -98,17 +99,21 @@
             "pasos": [
               { "frase": "Tus peones: c6, d5 y e6." },
               { "frase": "Los de blancas: e4 y d2." },
-              { "frase": "Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado: el centro todavía no se decide." },
+              { "frase": "Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado peones: el centro todavía no se decide." },
               { "frase": "Puede terminar en otra forma: si blancas juega d4 y e5, se forma la Cadena.", "jugadas": ["d4", "e5"] },
               { "frase": "Si blancas cambia, exd5, y retomas con el peón de c, ...cxd5, vas hacia el Cambio.", "reinicio": [], "jugadas": ["exd5", "...cxd5"] },
-              { "frase": "Si capturas, ...dxe4, y blancas retoma con la dama, Dxe4, vas hacia la Clásica.", "reinicio": [], "jugadas": ["...dxe4", "Qxe4"] }
+              {
+                "frase": "Si capturas en e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica.",
+                "reinicio": [],
+                "marcas": [{ "tipo": "A3", "de": "d5", "a": "e4", "color": "verde", "punteada": true }]
+              }
             ]
           }
         }
       ]
     },
     "errores": {
-      "intro": "Dos «¿Y si…?»: dos errores tuyos que blancas castiga. En cada uno, mueves tú la pieza que castiga.",
+      "intro": "Dos «¿Y si…?»: errores tuyos que blancas castiga. En cada uno, mueves tú la pieza que castiga.",
       "lista": ["tal-e6", "cambio-dc7"]
     },
     "repaso": {
@@ -133,7 +138,7 @@
         {
           "id": "avance-short",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
+          "frase": "Estás en la Cadena: tu objetivo es su base, d4.",
           "cambia": [["La más común. Empiezas", "Empiezas"]],
           "fuente": ["WB-3e5", "WP-PS"]
         },
@@ -151,7 +156,7 @@
         },
         {
           "id": "dos-caballos",
-          "estructura": "Nadie cambia",
+          "estructura": "Nadie cambia peones",
           "frase": "Estás en la Tensión: el centro todavía no se decide y tu objetivo es sacar tus piezas.",
           "fuente": ["WP-CK", "HOU", "BASE"]
         }
@@ -164,23 +169,23 @@
         {
           "id": "avance-van-der-wiel",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
+          "frase": "Estás en la Cadena: tu objetivo es su base, d4.",
           "fuente": ["WB-3e5", "WP-PS"]
         },
         {
           "id": "oferta-final",
-          "frase": "Esta línea queda fuera del mapa: blancas no pone un peón en d4.",
+          "frase": "Esta línea queda fuera del mapa: blancas apoya su peón de e con otro peón y el centro termina en otra forma.",
           "fuente": ["AJEDREZ"]
         },
         {
           "id": "breyer",
-          "estructura": "Nadie cambia",
-          "frase": "Estás en la Tensión: tu objetivo es el centro, porque blancas no tiene peón en d4.",
+          "estructura": "Nadie cambia peones",
+          "frase": "Estás en la Tensión: tu objetivo es aprovechar que blancas no tiene peón en d4.",
           "fuente": ["LICHESS-CC0", "BASE", "AJEDREZ"]
         },
         {
           "id": "hillbilly",
-          "frase": "Esta línea queda fuera del mapa: blancas saca primero su alfil y no pone un peón en d4.",
+          "frase": "Esta línea queda fuera del mapa: blancas juega con su alfil y su dama, no con sus peones del centro.",
           "fuente": ["AJEDREZ"]
         }
       ]
@@ -194,49 +199,49 @@
         {
           "id": "avance-c3",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
+          "frase": "Estás en la Cadena: tu objetivo es su base, d4.",
           "fuente": ["WB-3e5", "WP-PS"]
         },
         {
           "id": "avance-tal",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
+          "frase": "Estás en la Cadena: tu objetivo es su base, d4.",
           "fuente": ["WB-3e5", "WP-PS"]
         },
         {
           "id": "avance-bayoneta",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
-          "fuente": ["WB-3e5", "WP-PS"]
+          "frase": "Estás en la Cadena: tu objetivo es el centro de blancas.",
+          "fuente": ["WB-3Af5", "MOTOR"]
         },
         {
           "id": "avance-bronstein",
           "estructura": "Blancas empuja a e5",
-          "frase": "Estás en la Cadena: tu objetivo es la base, d4.",
+          "frase": "Estás en la Cadena: tu objetivo es su base, d4.",
           "fuente": ["WB-3e5", "WP-PS"]
         },
         {
           "id": "panov",
           "estructura": "Blancas cambia en d5",
-          "frase": "Estás en el Cambio: tu objetivo es el peón de d4, que puede quedar aislado.",
+          "frase": "Estás en el Cambio, pero con un peón blanco en c4: tu objetivo es el peón de d4, que puede quedar aislado.",
           "fuente": ["WP-IQP", "WP-CK"]
         },
         {
           "id": "apocalipsis",
           "estructura": "Blancas cambia en d5",
-          "frase": "Estás en el Cambio: tu objetivo es sacar tus piezas sin caer en los jaques de blancas.",
+          "frase": "Estás en el Cambio, pero blancas todavía no juega d4: tu objetivo es sacar tus piezas sin caer en los jaques de blancas.",
           "fuente": ["MOTOR", "BASE"]
         },
         {
           "id": "panov-acelerado",
           "estructura": "Blancas cambia en d5",
-          "frase": "Estás en el Cambio: el centro se abre pronto y tu objetivo es sacar tus piezas.",
+          "frase": "Estás en el Cambio, pero blancas todavía no juega d4: el centro se abre pronto y tu objetivo es sacar tus piezas.",
           "fuente": ["WB-2c4", "BASE", "AJEDREZ"]
         },
         {
           "id": "fantasia",
-          "estructura": "Nadie cambia",
-          "frase": "Estás en la Tensión: tu objetivo es que blancas no se quede con sus dos peones en el centro.",
+          "estructura": "Nadie cambia peones",
+          "frase": "Estás en la Tensión: tu objetivo es terminar de sacar tus piezas y enrocar.",
           "fuente": ["WB-3f3", "WP-CK", "BASE"]
         }
       ]
