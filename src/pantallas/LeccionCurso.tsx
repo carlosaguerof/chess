@@ -10,7 +10,7 @@ import { navegar } from '../ruta.ts'
 import { marcarLeccion } from '../repertorio/estado.ts'
 import { registrarPasoCurso } from '../registro/eventos.ts'
 import { evaluar } from '../ayudas/analisis.ts'
-import { cursoNuevo, jugadasDeLaBaseEn, lineaPorId, lineasDe, textoMio, textoRival } from '../curso/datos.ts'
+import { cursoNuevo, esOpcional, grupoDeLinea, jugadasDeLaBaseEn, lineaPorId, textoMio, textoRival } from '../curso/datos.ts'
 import type { DatosCurso, LineaCurso } from '../curso/tipos.ts'
 import { atras, continuar, empezar, empezarDeNuevo, intentar, jugarRival, pedirPista, pedirRespuesta, plyDeAtras, progreso, reintentar, retomar, tropiezos, type EstadoCiclo, type Vuelta } from '../curso/ciclo.ts'
 import { borrarEnCurso, guardarEnCurso, leerAvance, marcarError, marcarPieza, marcarVariante } from '../curso/avance.ts'
@@ -73,9 +73,10 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
   const narracion = useRef<HTMLDivElement>(null)
   const linea = useRef<HTMLParagraphElement>(null)
   const tablero = useMemo(() => posicion(l.jugadas, e.ply), [l, e.ply])
-  const lineas = useMemo(() => lineasDe(c), [c])
   const esVariante = l.tipo === 'variante'
-  const lista = lineas.filter((x) => x.tipo === l.tipo)
+  // "Variante N de 8" u "Opcional N de 8": cada lección camina con las de su grupo
+  const lista = useMemo(() => grupoDeLinea(c, l), [c, l])
+  const opcional = !!l.variante && esOpcional(c, l.variante.id)
   const indice = lista.findIndex((x) => x.id === l.id)
   const esperada = e.momento === 'tuTurno' || e.momento === 'error' || e.momento === 'buena' ? l.jugadas[e.ply] : undefined
   const mia = esperada ? textoMio(c, l.jugadas, e.ply) : undefined
@@ -244,7 +245,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
           </a>
           <div className="leccion-titulo">
             <span className="apagado" data-testid="cual-variante">
-              {esVariante ? `Variante ${indice + 1} de ${lista.length}` : `¿Y si…? ${indice + 1} de ${lista.length}`}
+              {`${esVariante ? (opcional ? 'Opcional' : 'Variante') : '¿Y si…?'} ${indice + 1} de ${lista.length}`}
             </span>
             <strong data-testid="nombre-linea"><Texto t={l.nombre} /></strong>
           </div>
@@ -258,9 +259,10 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
           <Resumen
             l={l}
             e={e}
-            siguiente={siguienteLinea ? () => navegar(`/curso/${encodeURIComponent(c.id)}/linea/${encodeURIComponent(siguienteLinea.id)}`) : () => navegar(`/curso/${encodeURIComponent(c.id)}${esVariante ? '/errores' : ''}`)}
+            // la última obligatoria lleva a Errores y trampas; la última opcional, de vuelta al curso
+            siguiente={siguienteLinea ? () => navegar(`/curso/${encodeURIComponent(c.id)}/linea/${encodeURIComponent(siguienteLinea.id)}`) : () => navegar(`/curso/${encodeURIComponent(c.id)}${esVariante && !opcional ? '/errores' : ''}`)}
             // Nota 1 (2026-10-29): solo "Siguiente variante"; su nombre se ve al abrirla
-            textoSiguiente={siguienteLinea ? (esVariante ? 'Siguiente variante' : 'Siguiente «¿Y si…?»') : esVariante ? 'Errores y trampas' : 'Volver al curso'}
+            textoSiguiente={siguienteLinea ? (esVariante ? 'Siguiente variante' : 'Siguiente «¿Y si…?»') : esVariante && !opcional ? 'Errores y trampas' : 'Volver al curso'}
             repetir={() => setE(empezar(l, 'aprender'))}
             urlCurso={urlCurso}
           />

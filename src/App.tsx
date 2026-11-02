@@ -65,8 +65,9 @@ export function App() {
   // Nota 1: Aprender es "Aperturas y defensas" (Con blancas / Con negras); Repertorio y Aperturas ya no son pantallas aparte
   else if (primera === 'cursos') pantalla = <AperturasYDefensas key={segunda ?? ''} pestana={pestanaDe(segunda)} />
   else if (primera === 'curso' && nuevo && ruta.partes[2] === 'leer' && ['idea', 'estructura', 'repaso'].includes(ruta.partes[3] ?? '')) pantalla = <PiezaDeLeer key={ruta.camino} id={nuevo.id} pieza={(ruta.partes[3] ?? 'idea') as 'idea' | 'estructura' | 'repaso'} />
-  else if (primera === 'curso' && nuevo && ruta.partes[2] === 'errores') pantalla = <ErroresDelCurso id={nuevo.id} />
-  else if (primera === 'curso' && nuevo && ruta.partes[2] === undefined) pantalla = <CursoPagina id={nuevo.id} />
+  // con `key`: de un curso al otro, cada página lee su propio avance
+  else if (primera === 'curso' && nuevo && ruta.partes[2] === 'errores') pantalla = <ErroresDelCurso key={nuevo.id} id={nuevo.id} />
+  else if (primera === 'curso' && nuevo && ruta.partes[2] === undefined) pantalla = <CursoPagina key={nuevo.id} id={nuevo.id} />
   else if (primera === 'curso' && segunda && ruta.partes[2] !== undefined) pantalla = <PaginaVariante key={ruta.camino} id={decodeURIComponent(segunda)} indice={Number(ruta.partes[2])} />
   else if (primera === 'curso' && segunda) pantalla = <PaginaApertura id={decodeURIComponent(segunda)} />
   else if (primera === 'repertorio') pantalla = <AperturasYDefensas pestana={pestanaDe(undefined)} />

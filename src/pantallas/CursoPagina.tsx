@@ -6,8 +6,8 @@ import { TableroMini } from '../componentes/TableroMini.tsx'
 import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
-import { cursoNuevo, lineasDe } from '../curso/datos.ts'
-import type { DatosCurso, PaginaLeer, TableroLeer } from '../curso/tipos.ts'
+import { avanceVariantes, cursoNuevo, lineasDe, obligatorias, opcionales } from '../curso/datos.ts'
+import type { DatosCurso, PaginaLeer, SeccionCurso, TableroLeer, VarianteCurso } from '../curso/tipos.ts'
 import { marcarPieza, useAvance, type AvanceCurso, type PiezaLeerId } from '../curso/avance.ts'
 import { formas, lineaHasta } from '../curso/textos.ts'
 import { soloPeones } from '../curso/pasos.ts'
@@ -16,27 +16,23 @@ import { marcasNuevas } from '../curso/marcas.ts'
 /**
  * C6 (diseño §7): la página de un curso nuevo. Las piezas en orden (La idea, La estructura, las variantes, Errores y
  * trampas, Repaso), cada una con su estado, y un botón grande: "Empezar", "Seguir" con el nombre de lo que sigue abajo, o
- * "Repasar el curso".
+ * "Repasar el curso". Un curso con `secciones` agrupa sus variantes y deja las opcionales al final (`specs/cursos.md` §6).
  */
-type Paso = { id: string; nombre: string; url: string; hecho: boolean }
+type Paso = { id: string; nombre: string; url: string; hecho: boolean; estructura?: string }
 
 const url = (c: DatosCurso, resto: string) => `/curso/${encodeURIComponent(c.id)}${resto}`
 
-/** Todo el curso en orden, con lo hecho y lo pendiente. */
+const pasoDeVariante = (c: DatosCurso, a: AvanceCurso, v: VarianteCurso): Paso => ({ id: `v:${v.id}`, nombre: v.nombre, url: url(c, `/linea/${encodeURIComponent(`v:${v.id}`)}`), hecho: !!a.variantes[v.id]?.terminada, estructura: v.estructura })
+
+/** Lo que hay que hacer para terminar el curso, en orden, con lo hecho y lo pendiente: las opcionales no entran. */
 export function pasosDelCurso(c: DatosCurso, a: AvanceCurso): Paso[] {
   return [
     { id: 'idea', nombre: c.piezas.idea.titulo, url: url(c, '/leer/idea'), hecho: !!a.piezas.idea },
     { id: 'estructura', nombre: c.piezas.estructura.titulo, url: url(c, '/leer/estructura'), hecho: !!a.piezas.estructura },
-    ...c.variantes.map((v) => ({ id: `v:${v.id}`, nombre: v.nombre, url: url(c, `/linea/${encodeURIComponent(`v:${v.id}`)}`), hecho: !!a.variantes[v.id]?.terminada })),
+    ...obligatorias(c).map((v) => pasoDeVariante(c, a, v)),
     { id: 'errores', nombre: c.piezas.errores.titulo, url: url(c, '/errores'), hecho: !!a.piezas.errores },
     { id: 'repaso', nombre: c.piezas.repaso.titulo, url: url(c, '/leer/repaso'), hecho: !!a.piezas.repaso },
   ]
-}
-
-/** "3 de 16 variantes" */
-export function avanceVariantes(c: DatosCurso, a: AvanceCurso): string {
-  const n = c.variantes.filter((v) => a.variantes[v.id]?.terminada).length
-  return `${n} de ${c.variantes.length} variantes`
 }
 
 /** Lo que sigue: la variante a medias, o lo primero pendiente. */
@@ -60,19 +56,43 @@ export function CursoPagina({ id }: { id: string }) {
   const a = useAvance(c.id)
   const pasos = pasosDelCurso(c, a)
   const sigue = siguientePaso(c, a)
-  const alguno = pasos.some((p) => p.hecho) || !!a.enCurso
+  // una opcional a medias no cambia el botón grande: no es parte de terminar el curso
+  const alguno = pasos.some((p) => p.hecho) || pasos.some((p) => p.id === a.enCurso?.linea)
   const estado = (p: Paso) => (p.hecho ? 'Hecha' : p.id.startsWith('v:') && a.variantes[p.id.slice(2)]?.aprendida ? 'Aprendida' : 'Pendiente')
-  const fila = (p: Paso, n?: number) => (
-    <li key={p.id}>
-      <a href={'#' + p.url} className="fila-variante fila-curso" data-testid={`paso-${p.id}`} data-estado={p.hecho ? 'hecha' : 'pendiente'}>
-        <span className="nombre">
-          {n !== undefined && <span className="numero-variante">{n}. </span>}
-          <Texto t={p.nombre} />
-        </span>
-        <span className={p.hecho ? 'aprendida' : 'apagado'}>{estado(p)}</span>
-      </a>
+  const fila = (p: Paso, n?: number) => {
+    const nombre = (
+      <span className="nombre">
+        {n !== undefined && <span className="numero-variante">{n}. </span>}
+        <Texto t={p.nombre} />
+      </span>
+    )
+    return (
+      <li key={p.id}>
+        <a href={'#' + p.url} className="fila-variante fila-curso" data-testid={`paso-${p.id}`} data-estado={p.hecho ? 'hecha' : 'pendiente'}>
+          {p.estructura ? (
+            <span className="nombre-con-estructura">
+              {nombre}
+              <span className="estructura-leccion" data-testid="estructura-leccion">{p.estructura}</span>
+            </span>
+          ) : (
+            nombre
+          )}
+          <span className={p.hecho ? 'aprendida' : 'apagado'}>{estado(p)}</span>
+        </a>
+      </li>
+    )
+  }
+  const titulo = (s: Pick<SeccionCurso, 'id' | 'titulo' | 'nota'>) => (
+    <li key={`titulo-${s.id}`} className="titulo-grupo" data-testid={`seccion-${s.id}`}>
+      <h2>{s.titulo}</h2>
+      {s.nota && <p className="nota-seccion">{s.nota}</p>}
     </li>
   )
+  const delCurso = pasos.slice(2, -2)
+  const secciones: SeccionCurso[] = c.secciones ?? [{ id: 'variantes', titulo: 'Las variantes', variantes: c.variantes.map((v) => v.id) }]
+  const seccionOpcional = secciones.find((s) => s.opcional)
+  // los números de las obligatorias corren de una sección a la otra; las opcionales llevan los suyos
+  const filas = (s: SeccionCurso) => delCurso.flatMap((p, i) => (s.variantes.includes(p.id.slice(2)) ? [fila(p, i + 1)] : []))
   return (
     <div className="pagina-apertura pagina-curso" data-testid="pagina-curso">
       <a className="volver" href={c.color === 'b' ? '#/cursos/negras' : '#/cursos'}>
@@ -109,13 +129,13 @@ export function CursoPagina({ id }: { id: string }) {
       <ol className="lista-variantes lista-curso" data-testid="piezas-curso">
         {fila(pasos[0]!)}
         {fila(pasos[1]!)}
-        <li className="titulo-grupo">
-          <h2>Las variantes</h2>
-        </li>
-        {pasos.slice(2, 2 + c.variantes.length).map((p, i) => fila(p, i + 1))}
+        {secciones
+          .filter((s) => !s.opcional)
+          .flatMap((s) => [titulo(s), ...filas(s)])}
         <li className="titulo-grupo" aria-hidden="true" />
         {fila(pasos[pasos.length - 2]!)}
         {fila(pasos[pasos.length - 1]!)}
+        {seccionOpcional && [titulo(seccionOpcional), ...opcionales(c).map((v, i) => fila(pasoDeVariante(c, a, v), i + 1))]}
       </ol>
       <details className="detalles">
         <summary>Palabras del curso</summary>
