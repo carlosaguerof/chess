@@ -278,16 +278,18 @@ describe('El curso por estructuras · los textos', () => {
   })
 
   it('lo que hace blancas en las dos de fuera del mapa, y en las que dicen que no ha jugado d4', () => {
-    // 2.Cf3 y 3.d3: sostiene e4 con otro peón; al final, su peón de e4 sigue ahí y el de d se fue: otra forma
-    const oferta = linea('oferta-final')
-    expect(jugadas(oferta).filter((x) => x.color === 'w').map((x) => x.san)).toContain('d3')
-    expect(alFinal(oferta).get('e4')).toMatchObject({ type: 'p', color: 'w' })
-    expect(peones(alFinal(oferta), 'w').some((s) => s[0] === 'd')).toBe(false)
-    expect(peones(alFinal(oferta), 'b').some((s) => s[0] === 'd')).toBe(false)
-    // 2.Ac4: después de 1.e4, solo mueve su alfil y su dama
-    expect(jugadas(linea('hillbilly')).filter((x) => x.color === 'w').map((x) => x.piece)).toEqual(['p', 'b', 'b', 'q'])
+    // 2.Cf3 y 3.d3: es la única línea que termina sin peón blanco en la columna d
+    const sinD = nuevo.variantes.filter((v) => !peones(alFinal(linea(v.id)), 'w').some((s) => s[0] === 'd')).map((v) => v.id)
+    expect(sinD).toEqual(['oferta-final'])
+    // 2.Ac4: después de 1.e4, solo mueve su alfil y su dama, y los dos llegan a atacar f7
+    const hill = linea('hillbilly')
+    expect(jugadas(hill).filter((x) => x.color === 'w').map((x) => x.piece)).toEqual(['p', 'b', 'b', 'q'])
+    const antes = posicion(hill.jugadas, hill.jugadas.length - 1)
+    expect(antes.attackers('f7', 'w').sort()).toEqual(['b3', 'h5'])
+    // 2.c4: blancas cambia también su peón de c
+    expect(jugadas(linea('panov-acelerado')).some((x) => x.color === 'w' && x.from[0] === 'c' && x.piece === 'p' && !!x.captured)).toBe(true)
     // en las que dicen que blancas no tiene peón en d4 o no lo ha jugado
-    for (const id of ['breyer', 'apocalipsis', 'panov-acelerado']) expect(jugadas(linea(id)).some((x) => x.color === 'w' && x.piece === 'p' && x.to === 'd4'), id).toBe(false)
+    for (const id of ['breyer', 'apocalipsis']) expect(jugadas(linea(id)).some((x) => x.color === 'w' && x.piece === 'p' && x.to === 'd4'), id).toBe(false)
   })
 
   it('El Panov lleva un peón blanco en c4, el centro se abre pronto en 2.c4, y el peón de d4 del Panov puede quedar aislado (chess.js)', () => {

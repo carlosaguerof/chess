@@ -73,7 +73,10 @@
               {
                 "frase": "Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3.",
                 "jugadas": ["...b5"],
-                "marcas": [{ "tipo": "A3", "de": "b5", "a": "b4", "color": "verde", "punteada": true }]
+                "marcas": [
+                  { "tipo": "A6", "en": "b8", "color": "verde" },
+                  { "tipo": "A3", "de": "b5", "a": "b4", "color": "verde", "punteada": true }
+                ]
               },
               { "frase": "Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival." },
               {
@@ -174,7 +177,7 @@
         },
         {
           "id": "oferta-final",
-          "frase": "Esta línea queda fuera del mapa: blancas apoya su peón de e con otro peón y el centro termina en otra forma.",
+          "frase": "Esta línea queda fuera del mapa: blancas termina sin peón en la columna d, algo que no pasa en ninguna de las cuatro formas.",
           "fuente": ["AJEDREZ"]
         },
         {
@@ -185,7 +188,7 @@
         },
         {
           "id": "hillbilly",
-          "frase": "Esta línea queda fuera del mapa: blancas juega con su alfil y su dama, no con sus peones del centro.",
+          "frase": "Esta línea queda fuera del mapa: blancas va contra f7 con su alfil y su dama, no por el centro.",
           "fuente": ["AJEDREZ"]
         }
       ]
@@ -212,7 +215,7 @@
           "id": "avance-bayoneta",
           "estructura": "Blancas empuja a e5",
           "frase": "Estás en la Cadena: tu objetivo es el centro de blancas.",
-          "fuente": ["WB-3Af5", "MOTOR"]
+          "fuente": ["BASE"]
         },
         {
           "id": "avance-bronstein",
@@ -235,13 +238,13 @@
         {
           "id": "panov-acelerado",
           "estructura": "Blancas cambia en d5",
-          "frase": "Estás en el Cambio, pero blancas todavía no juega d4: el centro se abre pronto y tu objetivo es sacar tus piezas.",
+          "frase": "Estás en el Cambio, pero blancas cambia también su peón de c: el centro se abre pronto y tu objetivo es sacar tus piezas.",
           "fuente": ["WB-2c4", "BASE", "AJEDREZ"]
         },
         {
           "id": "fantasia",
           "estructura": "Nadie cambia peones",
-          "frase": "Estás en la Tensión: tu objetivo es terminar de sacar tus piezas y enrocar.",
+          "frase": "Estás en la Tensión: tu objetivo es sacar tus piezas y enrocar.",
           "fuente": ["WB-3f3", "WP-CK", "BASE"]
         }
       ]

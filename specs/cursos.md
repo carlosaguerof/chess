@@ -246,8 +246,8 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 **Las introducciones.** Cada una abre con **una frase** que nombra la estructura y lo que se busca en ella, y sigue con la de hoy. Las dos fuera del mapa dicen eso, con lo que hace blancas.
 - **La frase no nombra ni describe una jugada tuya que la línea te va a pedir.** "Estás en la Cadena: tu objetivo es su base, d4" sí; "Vas a jugar ...c5" no. **Tampoco se dice lo que define a la estructura si eso es tu jugada:** la de la Clásica no dice "capturas en e4" (es 3...dxe4, en la línea), y la de Dos Caballos no dice "tu peón de d5" (es 2...d5).
 - Se quita lo que deja de ser cierto ("La más común", en el Avance 4.Cf3: en partidas reales no lo es).
-- **Si la lección no trae la misma forma de la página, la frase lo dice:** en el Panov y en las dos sin d4, "Estás en el Cambio, pero…", porque la etiqueta es cierta y la página habla de c3 y d4.
-- **Una razón tiene que distinguir:** "blancas no pone un peón en d4" no explicaba por qué una línea queda fuera del mapa, porque otras cuatro lecciones del mapa tampoco lo ponen.
+- **Si la lección termina en una forma que cambia el plan de la página, la frase lo dice:** en el Panov, 2.♘f3 y 4.♘e5 y 2.c4, "Estás en el Cambio, pero…", porque la etiqueta es cierta y la página habla de c3 y d4; en la Bayoneta, tu objetivo es el centro de blancas, no su base, porque blancas entrega su peón de e. La frase no dice eso último: sería adelantar lo que recuperas.
+- **Una razón tiene que distinguir:** "blancas no pone un peón en d4" no explicaba por qué una línea queda fuera del mapa, porque otras cuatro lecciones del mapa tampoco lo ponen. 2.♘f3 y 3.d3 es la única de las 16 que termina sin peón blanco en la columna d, y en 2.♗c4 blancas va contra f7, no por el centro.
 - Hoy Practicar abre con `INTRO_PRACTICAR`, no con la introducción de la lección. La regla se cumple de todos modos, por si eso cambia.
 
 **La regla de obligatorio y opcional (en prueba).** Propuesta de la torre sobre los dos objetivos de Carlos: "El entendimiento de estructura esencial de la defensa. Es comprender." y "Ver cuáles suceden más en partidas reales."

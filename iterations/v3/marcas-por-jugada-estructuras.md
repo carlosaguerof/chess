@@ -175,7 +175,7 @@
 | plan fantasia tuyo frase 1 | Termina el desarrollo con ...Ce7 o ...Cf6 y enroca: el peón de f3 debilitó el lado de rey blanco. | flecha g8→f6 (A3, verde, punteada) |
 | idea 1, paso 2 | Contestas 1...c6: preparas ...d5 con un peón detrás que lo apoya. | flecha d7→d5 (A3, verde, punteada) |
 | idea 1, paso 7 | Si blancas avanza, 3.e5, tu alfil de casillas blancas sale antes de que cierres con ...e6: 3...Af5. | flecha e7→e6 (A3, verde, punteada) |
-| estructura 3, paso 4 | Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3. | flecha b5→b4 (A3, verde, punteada) |
+| estructura 3, paso 4 | Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3. | casilla b8 (A6, verde); flecha b5→b4 (A3, verde, punteada) |
 | estructura 3, paso 6 | La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey. | casilla e5 (A6, roja) |
 | estructura 4, paso 4 | Blancas tiene más espacio y la casilla e5 para un caballo. | casilla e5 (A6, roja) |
 | estructura 5, paso 6 | Si capturas en e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica. | flecha d5→e4 (A3, verde, punteada) |
