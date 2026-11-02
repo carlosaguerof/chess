@@ -150,7 +150,7 @@
 | plan avance-short tuyo frase 1 | Presiona d4, la base de la cadena: ...Cc6, ...cxd4 y el caballo de g8 por e7. | flecha b8→c6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | plan avance-short rival frase 1 | Blancas sostiene d4 con piezas y, cuando pueda, abre el juego con c4. | flecha c2→c4 (A7, roja, punteada) |
 | plan cambio tuyo frase 1 | ...e6, ...Ad6 y 0-0. | flecha e7→e6 (A3, verde, punteada) |
-| plan cambio tuyo frase 2 | Después, adelanta ...b5 y ...b4: es el ataque de minorías, avanzar los peones del lado donde tienes menos para debilitar los del rival. | flecha b7→b5 (A3, verde, punteada) |
+| plan cambio tuyo frase 2 | Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón: es el ataque de minorías, avanzar los peones del lado donde tienes menos para debilitar los del rival. | flecha b7→b5 (A3, verde, punteada) |
 | plan cambio rival frase 1 | Blancas busca la casilla e5 para un caballo y atacar en el lado de rey. | casilla e5 (A6, roja) |
 | plan clasica tuyo frase 1 | Termina el desarrollo con ...Cgf6, ...Dc7 o ...Ae7 y enroca. | flecha g8→f6 (A3, verde, punteada) |
 | plan clasica tuyo frase 2 | Después, ...c5 contra d4. | flecha c6→c5 (A3, verde, punteada) |
@@ -175,8 +175,8 @@
 | plan fantasia tuyo frase 1 | Termina el desarrollo con ...Ce7 o ...Cf6 y enroca: el peón de f3 debilitó el lado de rey blanco. | flecha g8→f6 (A3, verde, punteada) |
 | idea 1, paso 2 | Contestas 1...c6: preparas ...d5 con un peón detrás que lo apoya. | flecha d7→d5 (A3, verde, punteada) |
 | idea 1, paso 7 | Si blancas avanza, 3.e5, tu alfil de casillas blancas sale antes de que cierres con ...e6: 3...Af5. | flecha e7→e6 (A3, verde, punteada) |
-| estructura 3, paso 4 | Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3. | casilla b8 (A6, verde); flecha b5→b4 (A3, verde, punteada) |
-| estructura 3, paso 6 | La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey. | casilla e5 (A6, roja) |
+| estructura 3, paso 5 | Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3, cuidando de no regalar el peón. | casilla b8 (A6, verde); flecha b5→b4 (A3, verde, punteada) |
+| estructura 3, paso 7 | La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey. | casilla e5 (A6, roja) |
 | estructura 4, paso 4 | Blancas tiene más espacio y la casilla e5 para un caballo. | casilla e5 (A6, roja) |
 | estructura 5, paso 6 | Si capturas en e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica. | flecha d5→e4 (A3, verde, punteada) |
 | repaso 1, paso 2 | 3.e5 Af5: tu alfil sale antes de ...e6. | flecha e7→e6 (A3, verde, punteada) |
@@ -185,8 +185,8 @@
 | repaso 2, paso 4 | «En la Clásica, el caballo ataca d5»: 3.Cc3 sobre todo defiende e4. | flecha c3→e4 (A4, roja) |
 | plan avance-short paso a paso, paso 2 | ...Cc6: tu caballo también ataca d4. | flecha c6→d4 (A2, verde) |
 | plan avance-short paso a paso, paso 3 | Tu peón de c5 ya ataca d4: cuando convenga, lo cambias. | flecha c5→d4 (A3, verde, punteada) |
-| plan cambio paso a paso, paso 3 | Después adelantas ...b5 y ...b4: es el ataque de minorías. | flecha b7→b5 (A3, verde, punteada) |
-| plan cambio paso a paso, paso 4 | Blancas busca la casilla e5 para un caballo y atacar en el lado de rey. | casilla e5 (A6, roja) |
+| plan cambio paso a paso, paso 4 | Después, con una torre en b8, adelantas ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías. | flecha b7→b5 (A3, verde, punteada) |
+| plan cambio paso a paso, paso 5 | Blancas busca la casilla e5 para un caballo y atacar en el lado de rey. | casilla e5 (A6, roja) |
 | plan avance-van-der-wiel paso a paso, paso 2 | ...Cc6: tu caballo se suma contra d4. | flecha c6→d4 (A2, verde) |
 | plan avance-van-der-wiel paso a paso, paso 3 | Tu peón de c5 también ataca d4: ...cxd4 cuando convenga. | flecha c5→d4 (A3, verde, punteada) |
 | plan oferta-final paso a paso, paso 2 | Luego ...e5 o ...g6, y llevas tus piezas al centro. | flecha e7→e5 (A3, verde, punteada); flecha g7→g6 (A3, verde, punteada) |

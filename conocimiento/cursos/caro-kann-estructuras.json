@@ -58,7 +58,7 @@
           "subtitulo": "El Cambio",
           "texto": [
             "Tus peones: d5 y e6. Los de blancas: c3 y d4. Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c.",
-            "Tu ruptura, con una torre en b8: ...b5 y ...b4, contra c3. Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival. La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey."
+            "Primero sacas tus piezas y enrocas. Después, con una torre en b8, tu ruptura: ...b5 y ...b4, contra c3, cuidando de no regalar el peón. Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival. La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey."
           ],
           "tablero": { "fen": "4k3/pp3ppp/4p3/3p4/3P4/2P5/PP3PPP/4K3 w - - 0 1", "soloPeones": true },
           "fuente": ["WP-PS", "WP-MA", "WP-CK", "WB-3exd5", "BASE", "MOTOR", "AJEDREZ"],
@@ -70,8 +70,9 @@
               { "frase": "Tus peones: d5 y e6." },
               { "frase": "Los de blancas: c3 y d4." },
               { "frase": "Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c." },
+              { "frase": "Primero sacas tus piezas y enrocas." },
               {
-                "frase": "Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3.",
+                "frase": "Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3, cuidando de no regalar el peón.",
                 "jugadas": ["...b5"],
                 "marcas": [
                   { "tipo": "A6", "en": "b8", "color": "verde" },
@@ -123,9 +124,10 @@
       "paginas": [
         {
           "de": 0,
+          "fuente": ["WB-3e5", "WB-3Af5", "WB-6h4", "INV", "WP-CK", "WP-MA", "MOTOR"],
           "texto": [
             "La pregunta: ¿qué pasó con el peón de e4? La respuesta te dice qué plan toca.",
-            { "de": 0 },
+            { "de": 0, "cambia": [["sale antes de ...e6, y después golpeas el centro de blancas con ...c5.", "sale antes de ...e6. Después, el plan depende de la estructura: en la Cadena golpeas el centro con ...c5; en la Clásica también, después de sacar tus piezas y enrocar; en el Cambio, con una torre en b8, avanzas ...b5 y ...b4, cuidando de no regalar el peón; en la Tensión sacas tus piezas."]] },
             { "de": 1, "cambia": [["para que tenga h7", "para que tu alfil tenga h7"]] }
           ]
         },
@@ -149,12 +151,18 @@
           "id": "cambio",
           "estructura": "Blancas cambia en d5",
           "frase": "Estás en el Cambio: tu objetivo es atacar los peones de blancas en el lado de dama.",
+          "planTuyo": [["Después, adelanta ...b5 y ...b4:", "Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:"]],
+          "pasosDelPlan": [
+            { "antesDe": "Después adelantas ...b5 y ...b4", "paso": { "frase": "...Tab8: pones una torre en b8, para defender tu peón cuando avance.", "jugadas": ["...Rab8"] } },
+            ["Después adelantas ...b5 y ...b4: es el ataque de minorías.", "Después, con una torre en b8, adelantas ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías."]
+          ],
           "fuente": ["WP-PS", "WP-MA"]
         },
         {
           "id": "clasica",
           "estructura": "Tú cambias en e4",
           "frase": "Estás en la Clásica: tu objetivo es una posición sólida, sin peones débiles.",
+          "idea": [["para que tenga h7", "para que tu alfil tenga h7"]],
           "fuente": ["WP-PS", "WP-CK"]
         },
         {

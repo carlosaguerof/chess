@@ -1,4 +1,4 @@
-import type { CambioDeTexto, CapaCurso, DatosCurso, PaginaCapa, PaginaLeer, ParrafoCapa, PiezaLeer } from './tipos.ts'
+import type { CambioDeTexto, CapaCurso, DatosCurso, LeccionCapa, PaginaCapa, PaginaLeer, ParrafoCapa, PasoAPaso, PiezaLeer, PlanVariante, VarianteCurso } from './tipos.ts'
 
 /**
  * Un curso que sale de otro (`specs/cursos.md` §6): la capa trae solo lo que cambia y aquí se compone con el curso de
@@ -11,6 +11,27 @@ function cambiar(texto: string, cambios: CambioDeTexto[] = [], donde: string): s
     if (!t.includes(de)) throw new Error(`${donde}: no encontré "${de}"`)
     return t.replace(de, a)
   }, texto)
+}
+
+/**
+ * Cambia la frase que trae el texto, en el paso que sea (el paso, sus jugadas y sus marcas se quedan), o pone un paso
+ * nuevo antes de esa frase.
+ */
+function cambiarPasos(pa: PasoAPaso | undefined, cambios: NonNullable<LeccionCapa['pasosDelPlan']>, donde: string): PasoAPaso | undefined {
+  if (!pa) throw new Error(`${donde}: el plan no trae paso a paso`)
+  return cambios.reduce((p, cambio) => {
+    const texto = Array.isArray(cambio) ? cambio[0] : cambio.antesDe
+    const i = p.pasos.findIndex((x) => x.frase.includes(texto))
+    if (i < 0) throw new Error(`${donde}: no encontré "${texto}"`)
+    if (!Array.isArray(cambio)) return { ...p, pasos: [...p.pasos.slice(0, i), cambio.paso, ...p.pasos.slice(i)] }
+    return { ...p, pasos: p.pasos.map((x, k) => (k === i ? { ...x, frase: cambiar(x.frase, [cambio], donde) } : x)) }
+  }, pa)
+}
+
+/** Sin cambios, el plan es el mismo objeto del curso de origen; con ellos, cambia solo lo que la capa dice. */
+function planDe(v: VarianteCurso, l: LeccionCapa, donde: string): PlanVariante {
+  if (!l.planTuyo && !l.pasosDelPlan) return v.plan
+  return { ...v.plan, tuyo: cambiar(v.plan.tuyo, l.planTuyo, donde), pasoAPaso: l.pasosDelPlan ? cambiarPasos(v.plan.pasoAPaso, l.pasosDelPlan, donde) : v.plan.pasoAPaso }
 }
 
 function parrafo(p: ParrafoCapa, origen: PaginaLeer | undefined, donde: string): string {
@@ -39,8 +60,10 @@ export function componerCurso(origen: DatosCurso, capa: CapaCurso): DatosCurso {
     s.lecciones.map((l) => {
       const v = origen.variantes.find((x) => x.id === l.id)
       if (!v) throw new Error(`${capa.id}: no existe la variante ${l.id}`)
-      const intro = `${l.frase} ${cambiar(v.intro, l.cambia, `${capa.id}, ${l.id}`)}`
-      return l.estructura ? { ...v, intro, estructura: l.estructura } : { ...v, intro }
+      const donde = `${capa.id}, ${l.id}`
+      const intro = `${l.frase} ${cambiar(v.intro, l.cambia, donde)}`
+      const nueva = { ...v, intro, idea: cambiar(v.idea, l.idea, donde), plan: planDe(v, l, donde) }
+      return l.estructura ? { ...nueva, estructura: l.estructura } : nueva
     }),
   )
   const lista = capa.piezas.errores.lista.map((id) => {

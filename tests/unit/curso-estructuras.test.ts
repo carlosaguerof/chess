@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { CURSOS_NUEVOS, grupoDeLinea, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { CURSOS_NUEVOS, grupoDeLinea, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -80,7 +80,8 @@ describe('El curso por estructuras · la capa', () => {
   it('las explicaciones, los planes y el glosario son los del curso actual: una corrección llega a los dos', () => {
     expect(nuevo.mias).toBe(actual.mias)
     expect(nuevo.rival).toBe(actual.rival)
-    for (const v of nuevo.variantes) expect(v.plan, v.id).toBe(actual.variantes.find((x) => x.id === v.id)!.plan)
+    // el plan es el mismo objeto, salvo el del Cambio, que cambia en su frase de la ruptura
+    for (const v of nuevo.variantes) if (v.id !== 'cambio') expect(v.plan, v.id).toBe(actual.variantes.find((x) => x.id === v.id)!.plan)
     for (const g of actual.glosario) expect(nuevo.glosario, g.termino).toContainEqual(g)
     for (const [k, f] of Object.entries(actual.fuentes)) expect(nuevo.fuentes[k]).toBe(f)
     // el glosario sigue en orden
@@ -92,6 +93,11 @@ describe('El curso por estructuras · la capa', () => {
     roto.secciones[0]!.lecciones[0]!.cambia = [['Esto no está', 'x']]
     expect(() => componerCurso(actual, roto)).toThrow('no encontré')
     expect(() => componerCurso(actual, { ...capa, de: 'otro:b' })).toThrow()
+    for (const campo of ['idea', 'planTuyo', 'pasosDelPlan'] as const) {
+      const r = structuredClone(capa)
+      r.secciones[0]!.lecciones[1]![campo] = [['Esto no está', 'x']]
+      expect(() => componerCurso(actual, r), campo).toThrow('no encontré')
+    }
   })
 
   it('el curso actual no lleva secciones: su página se ve como hoy', () => {
@@ -316,13 +322,55 @@ describe('El curso por estructuras · los textos', () => {
     const [p, q] = nuevo.piezas.repaso.paginas
     const [hoy, guia] = actual.piezas.repaso.paginas
     expect(p!.texto[0]).toContain('¿qué pasó con el peón de e4?')
-    expect(p!.texto[1]).toBe(hoy!.texto[0])
+    expect(p!.texto[1]).toBe('La idea: tu alfil de casillas blancas sale antes de ...e6. Después, el plan depende de la estructura: en la Cadena golpeas el centro con ...c5; en la Clásica también, después de sacar tus piezas y enrocar; en el Cambio, con una torre en b8, avanzas ...b5 y ...b4, cuidando de no regalar el peón; en la Tensión sacas tus piezas.')
     expect(p!.texto[2]).toBe(hoy!.texto[1]!.replace('para que tenga h7', 'para que tu alfil tenga h7'))
     expect(p!.texto[2]).not.toContain('para que tenga h7')
     expect(p!.pasoAPaso).toBe(hoy!.pasoAPaso)
     expect(q).toEqual(guia)
     // el curso actual se queda con su texto: es de otro lote
     expect(hoy!.texto[1]).toContain('para que tenga h7')
+  })
+
+  it('el Cambio pide la torre en b8 en su plan y en su paso a paso, sin tocar lo demás, y sus marcas se quedan', () => {
+    const v = nuevo.variantes.find((x) => x.id === 'cambio')!
+    const hoy = actual.variantes.find((x) => x.id === 'cambio')!
+    expect(v.plan.tuyo).toBe(hoy.plan.tuyo.replace('Después, adelanta ...b5 y ...b4:', 'Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:'))
+    // un paso nuevo enseña la torre en el tablero; los demás conservan sus jugadas y sus marcas
+    const pasos = v.plan.pasoAPaso!.pasos
+    const i = pasos.findIndex((x) => x.jugadas?.[0] === '...Rab8')
+    expect(pasos[i]!.frase).toContain('...Tab8')
+    expect(pasos[i + 1]!.frase).toBe('Después, con una torre en b8, adelantas ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías.')
+    const sinElNuevo = pasos.filter((_, k) => k !== i)
+    expect(sinElNuevo.map((x) => x.marcas)).toEqual(hoy.plan.pasoAPaso!.pasos.map((x) => x.marcas))
+    expect(sinElNuevo.map((x) => x.jugadas)).toEqual(hoy.plan.pasoAPaso!.pasos.map((x) => x.jugadas))
+    // con la torre en b8 y el peón en b5, la torre lo defiende (chess.js)
+    const fotos = fotosDePasos(v.plan.pasoAPaso!, jugadasDeVariante(nuevo, v))
+    const ch = new Chess(fotos[i]!.fen)
+    expect(ch.get('b8')).toMatchObject({ type: 'r', color: 'b' })
+    ch.remove('b7')
+    ch.put({ type: 'p', color: 'b' }, 'b5')
+    expect(ch.attackers('b5', 'b')).toContain('b8')
+    for (const k of ['rival', 'marcas', 'marcasDe', 'fuente'] as const) expect(v.plan[k], k).toBe(hoy.plan[k])
+    // en el curso actual se queda; es un pendiente de otro lote
+    expect(hoy.plan.tuyo).toContain('Después, adelanta ...b5 y ...b4')
+  })
+
+  it('la idea de la Clásica nombra a tu alfil, solo en este curso, y las demás ideas son las de hoy', () => {
+    const clasica = nuevo.variantes.find((x) => x.id === 'clasica')!
+    const hoy = actual.variantes.find((x) => x.id === 'clasica')!
+    expect(clasica.idea).toBe(hoy.idea.replace('para que tenga h7', 'para que tu alfil tenga h7'))
+    expect(hoy.idea).toContain('para que tenga h7')
+    for (const v of nuevo.variantes) if (v.id !== 'clasica') expect(v.idea, v.id).toBe(actual.variantes.find((x) => x.id === v.id)!.idea)
+  })
+
+  it('la página del Cambio: primero sacas tus piezas y enrocas, y después la ruptura, en el texto y en el paso a paso', () => {
+    const p = pagina('El Cambio')
+    expect(p.texto[1]).toMatch(/^Primero sacas tus piezas y enrocas\. Después, con una torre en b8, tu ruptura: \.\.\.b5 y \.\.\.b4, contra c3, cuidando de no regalar el peón\./)
+    const pasos = p.pasoAPaso!.pasos
+    const i = pasos.findIndex((x) => x.frase === 'Primero sacas tus piezas y enrocas.')
+    expect(i).toBeGreaterThan(0)
+    expect(pasos[i]!.jugadas).toBeUndefined()
+    expect(pasos[i + 1]!.frase).toContain('tu ruptura empieza con ...b5')
   })
 
   it('cada fuente citada existe, y cada término nuevo está en el glosario', () => {

@@ -558,7 +558,8 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(marcasDelPaso(plan('avance-van-der-wiel'), 3)).toEqual([])
     expect(marcasDelPaso(plan('hillbilly'), 3)).toEqual([])
     // ni las del otro lado: en el plan del Cambio, la casilla e5 del rival no lleva la verde de ...b5
-    expect(marcasDelPaso(plan('cambio'), 3)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
+    const casillaE5 = plan('cambio').pasos.findIndex((p) => p.frase.startsWith('Blancas busca la casilla e5'))
+    expect(marcasDelPaso(plan('cambio'), casillaE5)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
     // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
     for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
       pa.pasos.forEach((p, i) => {

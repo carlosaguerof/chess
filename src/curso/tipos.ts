@@ -256,6 +256,12 @@ export interface LeccionCapa {
   frase: string
   /** lo que deja de ser cierto en la introducción de hoy */
   cambia?: CambioDeTexto[]
+  /** lo que cambia en su idea, solo en este curso */
+  idea?: CambioDeTexto[]
+  /** lo que cambia en "Tu plan", solo en este curso */
+  planTuyo?: CambioDeTexto[]
+  /** lo que cambia en las frases del paso a paso de su plan (las marcas se quedan), o un paso nuevo antes de una frase */
+  pasosDelPlan?: (CambioDeTexto | { antesDe: string; paso: PasoLeer })[]
   /** de dónde sale la frase */
   fuente: string[]
 }

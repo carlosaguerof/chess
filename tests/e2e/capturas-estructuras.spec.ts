@@ -53,7 +53,7 @@ test.describe('capturas del curso por estructuras', () => {
         await page.getByTestId('ver-paso-a-paso').click()
         await foto(page, `05-estructura-${i}-paso-a-paso`)
         // lo que solo se ve avanzando: las marcas de la ruptura del Cambio y la flecha de la Tensión
-        const hasta = i === 3 ? 4 : i === 5 ? 6 : 0
+        const hasta = i === 3 ? 5 : i === 5 ? 6 : 0
         for (let k = 2; k <= hasta; k++) await page.getByTestId('pap-siguiente').click()
         if (hasta) await foto(page, `05-estructura-${i}-paso-${hasta}`)
         await page.keyboard.press('Escape')
