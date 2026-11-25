@@ -231,11 +231,13 @@ describe('Los cursos del Avance · lo guardado, el Repaso y Refuerza', () => {
       expect(lineas.map((l) => l.claveBase).sort()).toEqual(obligatorias(c).map((v) => `${c.apertura}/${v.base}`).sort())
       for (const v of obligatorias(c)) expect(lineas.find((l) => l.claveBase === `${c.apertura}/${v.base}`)!.jugadas).toEqual(jugadasDeVariante(c, v))
     }
-    // una apertura sin curso por estructuras no cambia
+    // una apertura sin curso por estructuras no cambia (la Italiana y la Alapin ya tienen el suyo, con opcionales: se miden
+    // todas las que no lo tienen)
     const todas = repertorioCompleto()
-    // (la Italiana ya tiene su curso por estructuras, con opcionales: el ejemplo es la Siciliana)
-    expect(todas.lineas.filter((l) => l.apertura === 'siciliana').length).toBeGreaterThan(0)
-    expect(rep.lineas.filter((l) => l.apertura === 'siciliana').length).toBe(todas.lineas.filter((l) => l.apertura === 'siciliana').length)
+    const conSecciones = new Set(Object.values(CURSOS_NUEVOS).filter((x) => x.secciones).map((x) => `${x.apertura}:${x.color}`))
+    const sinCurso = (l: (typeof todas.lineas)[number]) => !conSecciones.has(`${l.apertura}:${l.color}`)
+    expect(todas.lineas.filter(sinCurso).length).toBeGreaterThan(0)
+    expect(rep.lineas.filter(sinCurso)).toEqual(todas.lineas.filter(sinCurso))
   })
 
   it('el filtro distingue por apertura y color: la Caro-Kann con blancas (el Avance) no choca con la de negras', () => {
