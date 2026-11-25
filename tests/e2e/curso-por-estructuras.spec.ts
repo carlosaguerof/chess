@@ -5,8 +5,9 @@ import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { jugar } from './_util.ts'
 
 /**
- * El segundo curso de la Caro-Kann, por estructuras (`specs/cursos.md` §6): las mismas jugadas con otra organización,
- * para que Carlos compare. Las dos tarjetas, las secciones, "N de 8", "Seguir" sin las opcionales, "Variante N de 8" y
+ * La Caro-Kann por estructuras (`specs/cursos.md` §6): las mismas jugadas del curso de antes con otra organización.
+ * Desde el 2026-11-25 es la única Caro-Kann que se ve (una sola tarjeta, "Defensa Caro-Kann"); la dirección del curso de
+ * antes lleva a ella y lo que terminé allá sale hecho aquí. Las secciones, "N de 8", "Seguir" sin las opcionales, "Variante N de 8" y
  * "Opcional N de 8", "Siguiente variante" al cruzar secciones, un avance por curso y una sola ficha de Repaso por línea.
  * Lo que sale de los datos y lo que afirman los textos: `tests/unit/curso-estructuras.test.ts`.
  */
@@ -22,6 +23,7 @@ const MANANA = new Date('2026-11-03T10:00:00')
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const urlDe = (c: typeof NUEVO, id: string) => `/#/curso/${encodeURIComponent(c.id)}/linea/${encodeURIComponent(id)}`
+const escapar = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')
 const leido = (page: Page, clave: string) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), clave)
 
 type Avance = { piezas?: Record<string, number>; terminadas?: string[]; enCurso?: string }
@@ -66,17 +68,18 @@ async function terminar(page: Page, info: TestInfo, c: typeof NUEVO, id: string)
 }
 
 test.describe('El curso por estructuras', () => {
-  test('en Aprender, pestaña negras, dos tarjetas: la de hoy y, justo después, la nueva, con su avance aparte', async ({ page }) => {
+  test('en Aprender, pestaña negras, una sola Caro-Kann: la primera, "Defensa Caro-Kann", con el curso por estructuras adentro', async ({ page }) => {
     await page.goto('/#/cursos/negras')
     const tarjetas = page.getByTestId('lista-aperturas').locator('[data-testid^="tarjeta-"]')
-    await expect(tarjetas).toHaveCount(4)
-    expect(await tarjetas.evaluateAll((ts) => ts.map((t) => t.getAttribute('data-testid')))).toEqual(['tarjeta-caro-kann:b', 'tarjeta-caro-kann-estructuras:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
-    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('Defensa Caro-Kann')
-    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('0 de 16 variantes')
-    await expect(page.getByTestId('tarjeta-caro-kann-estructuras:b')).toContainText('Caro-Kann por estructuras')
-    await expect(page.getByTestId('tarjeta-caro-kann-estructuras:b')).toContainText('0 de 8 variantes')
-    await page.getByTestId('tarjeta-caro-kann-estructuras:b').click()
-    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Caro-Kann por estructuras')
+    await expect(tarjetas).toHaveCount(3)
+    expect(await tarjetas.evaluateAll((ts) => ts.map((t) => t.getAttribute('data-testid')))).toEqual(['tarjeta-caro-kann:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
+    await expect(tarjetas).toContainText(['Defensa Caro-Kann', 'Defensa Eslava', 'Otras aperturas de blancas'])
+    await expect(page.getByTestId('lista-aperturas')).not.toContainText('por estructuras')
+    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('0 de 8 variantes')
+    await page.getByTestId('tarjeta-caro-kann:b').click()
+    await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab$/)
+    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Defensa Caro-Kann')
+    await expect(page.getByTestId('seccion-base')).toHaveText('La base')
   })
 
   test('la página: La idea, La estructura, La base, Las que más te van a salir, Errores y trampas, Repaso y Opcional, en ese orden', async ({ page }) => {
@@ -110,13 +113,32 @@ test.describe('El curso por estructuras', () => {
     expect(parseFloat(m.nombre)).toBeGreaterThan(13)
   })
 
-  test('el curso de hoy se ve como siempre: "Las variantes", 16, sin secciones ni estructuras', async ({ page }) => {
+  test('la dirección del curso de antes lleva al que queda: su página, una línea, una pieza de leer y "#/leccion"', async ({ page }) => {
     await page.goto(URL_ACTUAL)
-    await expect(page.getByTestId('avance')).toHaveText('0 de 16 variantes')
-    await expect(page.getByTestId('pagina-curso').locator('h2', { hasText: 'Las variantes' })).toHaveCount(1)
-    await expect(page.getByTestId('piezas-curso').locator('[data-testid^="paso-"]')).toHaveCount(2 + 16 + 2)
-    await expect(page.getByTestId('estructura-leccion')).toHaveCount(0)
-    await expect(page.locator('.nota-seccion')).toHaveCount(0)
+    await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab$/)
+    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Defensa Caro-Kann')
+    await expect(page.getByTestId('avance')).toHaveText('0 de 8 variantes')
+    await expect(page.getByTestId('seccion-base')).toBeVisible()
+
+    await page.goto(urlDe(ACTUAL, 'v:cambio'))
+    await expect(page).toHaveURL(new RegExp(`${escapar(urlDe(NUEVO, 'v:cambio').slice(2))}$`))
+    await expect(page.getByTestId('cual-variante')).toHaveText('Variante 2 de 8')
+
+    await page.goto(`${URL_ACTUAL}/leer/estructura`)
+    await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab\/leer\/estructura$/)
+    await expect(page.getByTestId('pieza-estructura')).toBeVisible()
+
+    // "Practicar esta línea" y el resumen de una lección llevan a "#/leccion/<curso>/<n>": la misma línea
+    const i = ACTUAL.variantes.findIndex((v) => v.id === 'fantasia')
+    await page.goto(`/#/leccion/caro-kann%3Ab/${i}`)
+    await expect(page).toHaveURL(new RegExp(`${escapar(urlDe(NUEVO, 'v:fantasia').slice(2))}$`))
+    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(lineaPorId(NUEVO, 'v:fantasia')!.nombre, 'figuras'))
+    await expect(page.getByTestId('cual-variante')).toHaveText('Opcional 8 de 8')
+
+    // un «¿Y si…?» que ya no está en el curso, a su página: ni página vacía ni error
+    await page.goto(urlDe(ACTUAL, 'e:bayoneta-h6'))
+    await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab$/)
+    await expect(page.getByTestId('pagina-curso')).toBeVisible()
   })
 
   test('"N de 8" cuenta solo las obligatorias, y una opcional hecha se marca igual que cualquier lección', async ({ page }) => {
@@ -126,7 +148,7 @@ test.describe('El curso por estructuras', () => {
     await expect(page.getByTestId('paso-v:panov')).toContainText('Hecha')
     await expect(page.getByTestId('paso-v:avance-c3')).toContainText('Pendiente')
     await page.goto('/#/cursos/negras')
-    await expect(page.getByTestId('tarjeta-caro-kann-estructuras:b')).toContainText('2 de 8 variantes')
+    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('2 de 8 variantes')
   })
 
   test('"Seguir" salta las opcionales, y con lo obligatorio hecho el botón dice "Repasar el curso"', async ({ page }) => {
@@ -163,8 +185,6 @@ test.describe('El curso por estructuras', () => {
       await page.goto(urlDe(NUEVO, `v:${v.id}`))
       await expect(page.getByTestId('cual-variante'), v.id).toHaveText(`Opcional ${i + 1} de 8`)
     }
-    await page.goto(urlDe(ACTUAL, 'v:fantasia'))
-    await expect(page.getByTestId('cual-variante')).toHaveText(`Variante ${ACTUAL.variantes.findIndex((v) => v.id === 'fantasia') + 1} de 16`)
   })
 
   test('la introducción abre con la frase de su estructura, y Practicar no la repite', async ({ page }) => {
@@ -204,46 +224,99 @@ test.describe('El curso por estructuras', () => {
     await terminar(page, info, NUEVO, 'fantasia')
     await expect(page.getByTestId('salida-siguiente')).toHaveText('Volver al curso')
     await page.getByTestId('salida-siguiente').click()
-    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Caro-Kann por estructuras')
+    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Defensa Caro-Kann')
   })
 
-  test('el avance de un curso no toca el del otro', async ({ page }, info) => {
-    test.setTimeout(120_000)
-    await terminar(page, info, NUEVO, 'dos-caballos')
-    expect(await leido(page, CLAVE_ACTUAL), 'el curso de hoy, sin tocar').toBeNull()
-    await page.goto(URL_NUEVO)
+  test('una lección hecha en el curso de antes sale hecha en el que queda, sin reescribir lo guardado', async ({ page }) => {
+    const antes = { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, variantes: { cambio: { aprendida: 1, terminada: 2 }, panov: { aprendida: 1, terminada: 2 } }, errores: { 'tal-e6': 3, 'cambio-dc7': 3 } }
+    await page.goto('/#/')
+    await page.evaluate(([k, v]) => localStorage.setItem(k, v), [CLAVE_ACTUAL, JSON.stringify(antes)] as const)
+    await page.goto('/#/cursos/negras')
+    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('1 de 8 variantes')
+    await page.getByTestId('tarjeta-caro-kann:b').click()
     await expect(page.getByTestId('avance')).toHaveText('1 de 8 variantes')
-    await page.goto(URL_ACTUAL)
-    await expect(page.getByTestId('avance')).toHaveText('0 de 16 variantes')
-    await expect(page.getByTestId('paso-v:dos-caballos')).toHaveAttribute('data-estado', 'pendiente')
-
-    // y al revés
-    const antes = await leido(page, CLAVE)
-    await terminar(page, info, ACTUAL, 'fantasia')
-    expect(await leido(page, CLAVE), 'el curso nuevo, sin tocar').toEqual(antes)
-    await page.goto(URL_ACTUAL)
-    await expect(page.getByTestId('avance')).toHaveText('1 de 16 variantes')
-    await page.goto(URL_NUEVO)
-    await expect(page.getByTestId('avance')).toHaveText('1 de 8 variantes')
-    await expect(page.getByTestId('paso-v:fantasia')).toHaveAttribute('data-estado', 'pendiente')
+    await expect(page.getByTestId('paso-v:cambio')).toHaveAttribute('data-estado', 'hecha')
+    await expect(page.getByTestId('paso-v:panov')).toHaveAttribute('data-estado', 'hecha')
+    await expect(page.getByTestId('paso-v:clasica')).toHaveAttribute('data-estado', 'pendiente')
+    // las piezas de leer cambiaron: no se pasan
+    for (const p of ['idea', 'estructura', 'errores', 'repaso']) await expect(page.getByTestId(`paso-${p}`), p).not.toHaveAttribute('data-estado', 'hecha')
+    expect(await leido(page, CLAVE), 'el que queda no guardó nada').toBeNull()
+    expect(await leido(page, CLAVE_ACTUAL), 'el de antes, sin tocar').toEqual(antes)
   })
 
-  test('una sola ficha de Repaso por línea: una obligatoria cuenta para la del curso de hoy, y no sale dos veces', async ({ page }, info) => {
+  test('"Seguir" lleva al curso que queda y se salta lo que terminé en el de antes', async ({ page }) => {
+    await page.goto('/#/')
+    const antes = { piezas: {}, variantes: Object.fromEntries(['avance-short', 'cambio', 'clasica', 'dos-caballos'].map((id) => [id, { aprendida: 1, terminada: 2 }])), errores: {} }
+    await page.evaluate(([k, v]) => localStorage.setItem(k, v), [CLAVE_ACTUAL, JSON.stringify(antes)] as const)
+    await page.evaluate(([k, v]) => localStorage.setItem(k, v), [CLAVE, JSON.stringify({ piezas: { idea: 1, estructura: 1 }, variantes: {}, errores: {} })] as const)
+    await page.goto('/#/cursos/negras')
+    await page.getByTestId('tarjeta-caro-kann:b').click()
+    await expect(page.getByTestId('avance')).toHaveText('4 de 8 variantes')
+    await expect(page.getByTestId('seguir-nombre')).toHaveText(mostrarTexto(lineaPorId(NUEVO, 'v:avance-van-der-wiel')!.nombre, 'figuras'))
+    await page.getByTestId('empezar-curso').click()
+    await expect(page).toHaveURL(new RegExp(`${escapar(urlDe(NUEVO, 'v:avance-van-der-wiel').slice(2))}$`))
+    await expect(page.getByTestId('cual-variante')).toHaveText('Variante 5 de 8')
+  })
+
+  test('una sola ficha de Repaso por línea: lo del curso de antes y lo del que queda, sin repetir ninguna', async ({ page }, info) => {
     test.setTimeout(120_000)
     await page.clock.setFixedTime(HOY)
-    // la misma línea, terminada en los dos cursos
-    await terminar(page, info, NUEVO, 'dos-caballos')
     const v = ACTUAL.variantes.find((x) => x.id === 'dos-caballos')!
-    expect(Object.keys(await leido(page, 'ajedrez.v1.progreso'))).toEqual([leccionIdDe(ACTUAL, v)])
-    await terminar(page, info, ACTUAL, 'dos-caballos')
-    expect(Object.keys(await leido(page, 'ajedrez.v1.progreso'))).toEqual([leccionIdDe(ACTUAL, v)])
+    const w = ACTUAL.variantes.find((x) => x.id === 'cambio')!
+    // como lo dejó el curso de antes: dos líneas terminadas, cada una con su ficha
+    await page.goto('/#/')
+    await page.evaluate(
+      ([ids, clave, avance]) => {
+        localStorage.setItem('ajedrez.v1.progreso', JSON.stringify(Object.fromEntries((ids as readonly string[]).map((id) => [id, { fecha: Date.now() }]))))
+        localStorage.setItem(clave as string, avance as string)
+      },
+      [[leccionIdDe(ACTUAL, v), leccionIdDe(ACTUAL, w)], CLAVE_ACTUAL, JSON.stringify({ piezas: {}, variantes: { 'dos-caballos': { terminada: 1 }, cambio: { terminada: 1 } }, errores: {} })] as const,
+    )
+    // una de ellas, terminada otra vez en el que queda: usa la misma ficha
+    await terminar(page, info, NUEVO, 'dos-caballos')
+    expect(Object.keys(await leido(page, 'ajedrez.v1.progreso')).sort()).toEqual([leccionIdDe(ACTUAL, v), leccionIdDe(ACTUAL, w)].sort())
 
     await page.clock.setFixedTime(MANANA)
     await page.goto('/#/')
     await page.reload()
-    await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
+    await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '2')
     await page.goto('/#/repaso')
-    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(v.nombre, 'figuras'))
+    await expect(page.getByTestId('nombre-linea')).toHaveText(new RegExp(`^(${escapar(mostrarTexto(v.nombre, 'figuras'))}|${escapar(mostrarTexto(w.nombre, 'figuras'))})$`))
+  })
+
+  test('las opcionales no salen en el Repaso ni en Refuerza; lo guardado se queda', async ({ page }) => {
+    await page.clock.setFixedTime(MANANA)
+    const id = (v: string) => leccionIdDe(ACTUAL, ACTUAL.variantes.find((x) => x.id === v)!)
+    const ayer = HOY.getTime()
+    const fen = (camino: string[]) => {
+      const ch = new Chess()
+      for (const s of camino) ch.move(s)
+      return ch.fen().split(' ').slice(0, 4).join(' ')
+    }
+    const fallo = (camino: string[], esperada: string) => ({ fen: fen(camino), esperada, resultado: 'fallo', lugar: 'curso', fecha: ayer, linea: 'x', camino })
+    // como lo dejó el curso de antes: la Tal (opcional) y el Cambio (obligatoria) aprendidas, y un fallo solo de la Tal
+    const progreso = { [id('avance-tal')]: { fecha: ayer }, [id('cambio')]: { fecha: ayer } }
+    const registro = [fallo(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'], 'h5')]
+    await page.goto('/#/')
+    await page.evaluate(([p, r]) => {
+      localStorage.setItem('ajedrez.v1.progreso', p)
+      localStorage.setItem('ajedrez.v1.registro', r)
+    }, [JSON.stringify(progreso), JSON.stringify(registro)] as const)
+    await page.reload()
+    await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
+    await expect(page.getByTestId('ir-refuerza')).toHaveAttribute('data-n', '0')
+    await page.goto('/#/repaso')
+    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(ACTUAL.variantes.find((x) => x.id === 'cambio')!.nombre, 'figuras'))
+    await page.goto('/#/refuerza')
+    await expect(page.getByTestId('refuerza-vacia')).toBeVisible()
+    // un fallo en una obligatoria sí sale
+    await page.evaluate((r) => localStorage.setItem('ajedrez.v1.registro', r), JSON.stringify([...registro, fallo(['e4', 'c6', 'd4', 'd5', 'e5'], 'Bf5')]))
+    await page.goto('/#/')
+    await page.reload()
+    await expect(page.getByTestId('ir-refuerza')).toHaveAttribute('data-n', '1')
+    // nada se borró
+    expect(Object.keys(await leido(page, 'ajedrez.v1.progreso')).sort()).toEqual(Object.keys(progreso).sort())
+    expect(await leido(page, 'ajedrez.v1.registro')).toHaveLength(2)
   })
 
   test('una opcional no entra al Repaso', async ({ page }, info) => {
@@ -262,7 +335,7 @@ test.describe('El curso por estructuras', () => {
     await page.setViewportSize({ width: 360, height: 740 })
     for (const u of ['/#/cursos/negras', URL_NUEVO]) {
       await page.goto(u)
-      await expect(page.getByText('Caro-Kann por estructuras').first()).toBeVisible()
+      await expect(page.getByText('Defensa Caro-Kann').first()).toBeVisible()
       const m = await page.evaluate(() => ({ pagina: document.documentElement.scrollWidth, pantalla: innerWidth }))
       expect(m.pagina, u).toBeLessThanOrEqual(m.pantalla)
     }

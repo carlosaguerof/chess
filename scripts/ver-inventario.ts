@@ -1,4 +1,4 @@
-// El inventario de "Ver qué pasa" (2026-10-30): cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso, con
+// El inventario de "Ver qué pasaría" (2026-10-30): cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso, con
 // su "Ver" o con el porqué no lo lleva.
 //
 //   node scripts/ver-inventario.ts > iterations/v3/ver-que-pasa-inventario.md
@@ -100,7 +100,7 @@ export function listaDelInventario(c: DatosCurso): string {
   const conteo = (Object.keys(RAZONES) as Razon[]).map((k) => `${cuenta(k)} porque ${RAZONES[k]}`).join('; ')
   const adelantan = vers.filter((v) => lineasDe(c).some((l) => l.tipo === 'variante' && misJugadas(l).some((p) => l.jugadas.slice(0, p + 1).join(' ') === v.clave && verAdelanta(l, v.campo === 'errores' ? p : p + 1, v.inicio, v.ver).length)))
   return [
-    '# El inventario de "Ver qué pasa"',
+    '# El inventario de "Ver qué pasaría"',
     '',
     (c.fichasDe ?? c.id) === 'caro-kann:b'
       ? '> Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.'

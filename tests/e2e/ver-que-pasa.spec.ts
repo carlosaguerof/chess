@@ -16,15 +16,15 @@ import { jugar, tocar } from './_util.ts'
  * después de su frase ("más pequeño y justo al final"). Las capturas para la torre (`--grep @capturas-ver`), en
  * iterations/v3/capturas/ver-que-pasa/<perfil>/, con su índice.
  */
-const c = cursoNuevo('caro-kann:b')!
+const c = cursoNuevo('caro-kann-estructuras:b')!
 const TAL = 'v:avance-tal'
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 
 async function abrirEn(page: Page, linea: string, vuelta: 'aprender' | 'practicar', ply: number) {
   await page.goto('/#/')
-  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
-  await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
+  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
+  await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(linea))
   await page.reload()
 }
 
@@ -183,7 +183,7 @@ const bordeDelPie = (page: Page, testid: string) =>
 
 test.describe('V3 · la acción principal va a la derecha del pie', () => {
   test('sola: "Empezar" y "Siguiente" quedan pegados a la derecha', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:clasica'))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:clasica'))
     await momento(page, 'intro')
     const empezar = await orillas(page, 'empezar-vuelta')
     expect(empezar.derecha, '"Empezar", pegado a la derecha').toBe(0)
@@ -617,8 +617,8 @@ test('@capturas-ver el pie, los pasos de la Tal, el primero y el último de cada
   // 5. "Siguiente" solo, a la derecha, y "Empezar"
   await despuesDe(page, info, TAL, 'aprender', 9)
   await foto('siguiente-solo-tal', { momento: 'La Tal, Aprender, después de 5...♗xd3: sin nada que ver', frase: explicacionDespues(c, tal, 'aprender', 9).map(fig).join('<br>') })
-  await page.evaluate(() => localStorage.removeItem('ajedrez.v1.curso:caro-kann:b'))
-  await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:clasica'))
+  await page.evaluate(() => localStorage.removeItem('ajedrez.v1.curso:caro-kann-estructuras:b'))
+  await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:clasica'))
   await page.reload()
   await momento(page, 'intro')
   await foto('empezar-solo-clasica', { momento: 'La Clásica, la introducción', frase: lineaPorId(c, 'v:clasica')!.intro })

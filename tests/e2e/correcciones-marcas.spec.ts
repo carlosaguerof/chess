@@ -17,7 +17,7 @@ import { jugar } from './_util.ts'
  * ejemplos, en iterations/v3/capturas/marcas-v1.3/<perfil>/, con su índice. La lista de momentos sale de
  * `scripts/marcas-cambios.ts` (cambios.json). Las del iPhone, en Chromium emulando el iPhone 16 Pro (402×874, táctil).
  */
-const c = cursoNuevo('caro-kann:b')!
+const c = cursoNuevo('caro-kann-estructuras:b')!
 const CARPETA = 'iterations/v3/capturas/marcas-v1.3'
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
@@ -26,8 +26,8 @@ const flecha = (page: Page, de: string, a: string) => page.locator(`[data-marca=
 
 async function abrirEn(page: Page, linea: string, vuelta: 'aprender' | 'practicar', ply: number) {
   await page.goto('/#/')
-  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
-  await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
+  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
+  await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(linea))
   await page.reload()
 }
 
@@ -73,7 +73,7 @@ async function capturarMomentos(page: Page, info: Parameters<typeof jugar>[1], c
     } else {
       // el paso a paso: de una página de leer, o del plan de una variante
       if (x.pieza) {
-        await page.goto(`/#/curso/caro-kann%3Ab/leer/${x.pieza}`)
+        await page.goto(`/#/curso/caro-kann-estructuras%3Ab/leer/${x.pieza}`)
         await page.reload()
         for (let j = 0; j < x.pagina!; j++) await page.getByTestId('pagina-siguiente').click()
       } else {
@@ -164,7 +164,7 @@ test.describe('Correcciones · las marcas (reglas v1.3)', () => {
   })
 
   test('las páginas de leer: el tablero de la página queda limpio; las marcas van con su frase en el paso a paso', async ({ page }) => {
-    await page.goto('/#/curso/caro-kann%3Ab/leer/idea')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/idea')
     await expect(page.getByTestId('tablero-leer')).toBeVisible()
     await expect(page.getByTestId('tablero-leer').locator('svg.cg-shapes line, svg.cg-shapes circle')).toHaveCount(0)
     await expect(page.getByTestId('tablero-leer').locator('[data-marca]')).toHaveCount(0)

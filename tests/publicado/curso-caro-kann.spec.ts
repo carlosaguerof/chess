@@ -12,7 +12,7 @@ test('el curso de la Caro-Kann abre y su lección se juega hasta el plan', async
   await expect(page.getByTestId('piezas-curso').locator('[data-testid^="paso-"]')).toHaveCount(2 + 16 + 2)
 
   // la lección de la Tal, en Aprender: la Respuesta una vez y las cuatro jugadas hasta el plan
-  await page.goto('./#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
+  await page.goto('./#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
   const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m)
   await page.getByTestId('empezar-vuelta').click()
   await momento('tuTurno')
@@ -29,16 +29,21 @@ test('el curso de la Caro-Kann abre y su lección se juega hasta el plan', async
   await expect(page.getByTestId('a-practicar')).toBeVisible()
 })
 
-/** 2026-11-01: en Aprender, pestaña negras, salen los dos cursos de la Caro-Kann, y el nuevo abre con sus secciones. */
-test('en Aprender salen las dos tarjetas de la Caro-Kann, y el curso por estructuras abre', async ({ page }) => {
+/** 2026-11-25: en Aprender, pestaña negras, una sola Caro-Kann; abre el curso por estructuras, con sus secciones, y la dirección de antes lleva a él. */
+test('en Aprender sale una sola Caro-Kann, y abre el curso por estructuras', async ({ page }) => {
   await page.goto('./#/cursos/negras')
   const tarjetas = page.getByTestId('lista-aperturas').locator('[data-testid^="tarjeta-"]')
+  await expect(tarjetas).toHaveCount(3)
   await expect(tarjetas.nth(0)).toContainText('Defensa Caro-Kann')
-  await expect(tarjetas.nth(0)).toContainText('de 16 variantes')
-  await expect(tarjetas.nth(1)).toContainText('Caro-Kann por estructuras')
-  await expect(tarjetas.nth(1)).toContainText('de 8 variantes')
-  await tarjetas.nth(1).click()
-  await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Caro-Kann por estructuras')
+  await expect(tarjetas.nth(0)).toContainText('de 8 variantes')
+  await expect(page.getByTestId('lista-aperturas')).not.toContainText('por estructuras')
+  await tarjetas.nth(0).click()
+  await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab$/)
+  await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Defensa Caro-Kann')
   await expect(page.getByTestId('seccion-base')).toHaveText('La base')
   await expect(page.getByTestId('seccion-opcional')).toContainText('No cuentan para terminar el curso.')
+  // la dirección del curso de antes lleva al que queda
+  await page.goto('./#/curso/caro-kann%3Ab')
+  await expect(page).toHaveURL(/#\/curso\/caro-kann-estructuras%3Ab$/)
+  await expect(page.getByTestId('seccion-base')).toHaveText('La base')
 })
