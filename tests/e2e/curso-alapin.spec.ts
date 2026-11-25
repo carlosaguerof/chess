@@ -202,8 +202,11 @@ test.describe('La Alapin en el celular', () => {
     const v = [...C.variantes].sort((a, b) => palabras(b.intro) - palabras(a.intro))[0]!
     for (const { ancho, alto } of [...ANCHOS, { ancho: 390, alto: 844 }]) {
       await page.setViewportSize({ width: ancho, height: alto })
+      // la página se abre ya en su ancho (iterations/v3/learning.md n.º 42): la misma dirección no recarga sola
       await page.goto(urlDe(`v:${v.id}`))
+      await page.reload()
       await momento(page, 'intro')
+      await page.evaluate(() => document.fonts.ready)
       const m = await page.evaluate(() => {
         const dentro = (id: string) => {
           const r = document.querySelector(`[data-testid="${id}"]`)?.getBoundingClientRect()
