@@ -48,6 +48,9 @@ export interface JugadaEscrita {
 export function jugadasEscritas(frase: string, color: 'w' | 'b'): JugadaEscrita[] {
   const re = color === 'b' ? new RegExp(`(?:(\\d+))?\\.\\.\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g') : new RegExp(`(?<![.\\d])(\\d+)\\.\\s?(${JUGADA})(?![a-h1-8])`, 'g')
   const r: JugadaEscrita[] = [...frase.matchAll(re)].map((m) => ({ jugada: jugadaReducida(m[2]!), ...(m[1] ? { numero: Number(m[1]) } : {}) }))
+  // con blancas, una jugada de pieza también se escribe suelta: "Cf3, Ae2 y 0-0" (los cursos del Avance, 2026-11-25). Un
+  // avance de peón suelto ("b4") no se distingue de una casilla: ese va en `describe`
+  if (color === 'w') for (const m of frase.matchAll(/(?<![.\w])([RDTAC][a-h]?[1-8]?x?[a-h][1-8])(?![a-h1-8])/g)) r.push({ jugada: jugadaReducida(m[1]!) })
   for (const m of frase.matchAll(/(?<![\d-])0-0(-0)?(?![\d-])/g)) r.push({ jugada: m[1] ? '0-0-0' : '0-0' })
   return r
 }
