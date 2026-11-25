@@ -57,8 +57,8 @@ describe('C4 · el curso de la Caro-Kann', () => {
 
   it('primero los errores tuyos y luego los del rival', () => {
     const de = c.piezas.errores.lista.map((e) => e.de)
-    // la capa por estructuras de la Caro-Kann solo trae errores tuyos (así lo escogió su corrida); un curso nuevo trae los
-    // suyos, primero los tuyos y después los del rival (specs/cursos.md §1, pieza 5)
+    // la capa por estructuras de la Caro-Kann solo trae errores tuyos (así lo escogió su corrida); los cursos nuevos traen los
+    // suyos, primero los tuyos y después los del rival (specs/cursos.md §1, pieza 5): la Italiana y la Alapin traen del rival
     const soloTuyos = !!c.secciones && !!c.fichasDe
     expect(de.includes('rival') ? de.indexOf('rival') : de.length).toBeGreaterThan(de.lastIndexOf('tuyo'))
     if (soloTuyos) expect(de).not.toContain('rival')

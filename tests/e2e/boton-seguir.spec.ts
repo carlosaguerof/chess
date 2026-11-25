@@ -77,9 +77,10 @@ const medir = (page: Page) =>
 
 test.describe('El botón "Seguir" de la página del curso, con jerarquía', () => {
   // "Seguir" solo pasa por las obligatorias: una opcional a medias no sale en el botón
-  for (const { curso, variantes } of [{ curso: CURSO, variantes: obligatorias(CURSO) }, ...AVANCES.map((c) => ({ curso: c, variantes: obligatorias(c) }))])
+  // y la Italiana por estructuras (2026-11-25): su nombre más largo, «3...♗c5 4.c3 ♘f6 (Giuoco Pianissimo)»
+  for (const { curso, variantes } of [{ curso: CURSO, variantes: obligatorias(CURSO) }, ...[...AVANCES, cursoNuevo('italiana:w')!].map((c) => ({ curso: c, variantes: obligatorias(c) }))])
     test(`${curso.nombre}: con cada una de las ${variantes.length} variantes en curso, "Seguir" grande y el nombre chico en un renglón, a 360, 375, 402 y 430`, async ({ page }) => {
-    expect(variantes).toHaveLength(curso === CURSO ? 8 : curso.id === 'caro-kann:w' ? 2 : 3)
+    expect(variantes).toHaveLength(curso === CURSO ? 8 : curso.id === 'caro-kann:w' ? 2 : curso.id === 'italiana:w' ? 6 : 3)
     // la página se abre ya en cada ancho, como en el teléfono: si se achica la ventana con la página abierta, el tablero
     // tarda un momento en ajustarse y la medida ve una página más ancha que no existe
     for (const { ancho, alto } of ANCHOS) {

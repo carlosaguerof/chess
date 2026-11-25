@@ -2,6 +2,7 @@ import { Chess } from 'chess.js'
 import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'json' }
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
 import alapin from '../../conocimiento/cursos/alapin.json' with { type: 'json' }
+import italiana from '../../conocimiento/cursos/italiana.json' with { type: 'json' }
 import eslava from '../../conocimiento/cursos/eslava.json' with { type: 'json' }
 import otrosNegras from '../../conocimiento/cursos/otros-negras.json' with { type: 'json' }
 import avanceCaroKann from '../../conocimiento/cursos/avance-caro-kann.json' with { type: 'json' }
@@ -27,6 +28,8 @@ export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'caro-kann-estructuras:b': componerCurso(caroKannCurso, caroKannEstructuras as unknown as CapaCurso),
   // la Alapin contra la Siciliana, por estructuras (2026-11-25): un archivo completo, con sus secciones
   'siciliana:w': alapin as unknown as DatosCurso,
+  // la Italiana, por estructuras (2026-11-25): un solo archivo, con sus secciones
+  'italiana:w': italiana as unknown as DatosCurso,
   // la Eslava, por estructuras (2026-11-25): un solo archivo, con sus secciones (specs/cursos.md §6)
   'eslava:b': eslava as unknown as DatosCurso,
   // ...c6 + ...d5 contra lo demás, por estructuras (2026-11-25)
