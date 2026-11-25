@@ -85,7 +85,7 @@ async function cabe(page: Page, info: TestInfo, cuando: string, aLaVista: string
     [aLaVista, texto] as const,
   )
   const pantalla = `${m.pantalla}x${m.ventana}`
-  if (CON_CAPTURA.includes(pantalla) && !info.title.startsWith(ESTRUCTURAS)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
+  if (CON_CAPTURA.includes(pantalla) && !info.title.startsWith(ESTRUCTURAS) && !info.title.startsWith(ESCANDINAVA)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
   expect.soft(m.pagina, `${cuando}: sin scroll de la página`).toBeLessThanOrEqual(m.ventana)
   expect.soft(m.fuera, `${cuando}: completos dentro de la ventana`).toEqual([])
   expect.soft(Math.round(m.texto), `${cuando}: la narración`).toBeGreaterThanOrEqual(140)
