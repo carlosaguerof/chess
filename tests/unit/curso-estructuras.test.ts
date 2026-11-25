@@ -411,6 +411,13 @@ describe('El curso por estructuras · una sola ficha de Repaso por línea', () =
     expect(new Set(ids).size).toBe(ids.length)
   })
 
+  it('en el Repaso, cada ficha muestra el plan del curso que queda (el Cambio, con la torre en b8), con el mismo orden e ids', () => {
+    const lecciones = cursos().find((c) => c.id === 'caro-kann:b')!.lecciones
+    expect(lecciones.map((l) => l.id)).toEqual(leccionesDe(actual).map((l) => l.id))
+    for (const v of nuevo.variantes) expect(lecciones.find((l) => l.id === leccionIdDe(nuevo, v))!.plan, v.id).toBe(v.plan.tuyo)
+    expect(lecciones.find((l) => l.id.endsWith('/curso-cambio'))!.plan).toContain('con una torre en b8')
+  })
+
   it('terminada en el curso nuevo, la línea sale una vez en el Repaso, y en el curso que usa "Practicar esta línea"', () => {
     const lecciones = cursos().flatMap((c) => c.lecciones)
     const id = lineasDe(nuevo).find((l) => l.id === 'v:cambio')!.leccionId!

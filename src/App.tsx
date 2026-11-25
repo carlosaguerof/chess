@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useRuta, navegar } from './ruta.ts'
 import { empezarPartida } from './partida/usePartidaBot.ts'
 import { CLAVES, guardar } from './estado/almacen.ts'
@@ -89,9 +89,12 @@ export function App() {
   )
 }
 
-/** Lleva a otra dirección sin dejar la de antes en el historial (Atrás no regresa a ella). */
+/**
+ * Lleva a otra dirección sin dejar la de antes en el historial (Atrás no regresa a ella). Antes de pintar: así no se ve
+ * un instante en blanco.
+ */
 function Redirigir({ a }: { a: string }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     navegar(a, true)
   }, [a])
   return null
