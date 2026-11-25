@@ -39,15 +39,15 @@ test.describe('C2 · la notación', () => {
   })
 
   test('los planes y las líneas de Aprender también cambian de notación', async ({ page }) => {
-    // la Eslava, Variante Checa: 1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.a4 Af5
-    await page.goto('/#/curso/' + encodeURIComponent('eslava:b') + '/0')
-    await expect(page.getByTestId('linea')).toContainText('5.a4 ♗f5')
-    await expect(page.getByTestId('linea')).toContainText('3.♘f3')
+    // la Pirc, con la página de antes: 1.e4 d6 2.d4 Cf6 3.Cc3 g6 4.Cf3 Ag7 5.Ae2
+    await page.goto('/#/curso/' + encodeURIComponent('otros-1e4:w') + '/0')
+    await expect(page.getByTestId('linea')).toContainText('4.♘f3 ♗g7')
+    await expect(page.getByTestId('linea')).toContainText('3.♘c3')
     await page.goto('/#/ajustes')
     await page.getByTestId('notacion-letras').click()
     await page.goBack()
     await page.reload()
-    await expect(page.getByTestId('linea')).toContainText('5.a4 Bf5')
+    await expect(page.getByTestId('linea')).toContainText('4.Nf3 Bg7')
     await expect(page.getByTestId('linea')).not.toContainText('♗')
   })
 })

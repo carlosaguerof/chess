@@ -3926,7 +3926,7 @@
       "e6"
      ],
      "lado": "negras",
-     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.",
+     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Con ...e6 ya jugado, si Ch4 persigue tu alfil, retíralo a g6. Si Db3 ataca b7 antes de cambiar en d5, defiéndelo con ...Db6.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3959,7 +3959,7 @@
       "Bf5"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con tu caballo en c6 y ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3986,7 +3986,7 @@
       "dxc4"
      ],
      "lado": "negras",
-     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4, porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
+     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4 (si blancas no saca su alfil por g2), porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4223,7 +4223,7 @@
       "e5"
      ],
      "lado": "negras",
-     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea aguda: prioriza desarrollar y enrocar.",
+     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea con mucha pelea: prioriza desarrollar y enrocar.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4278,7 +4278,7 @@
       "e4"
      ],
      "lado": "negras",
-     "plan": "Toma con 3...dxe4 y te quedas con un peón de más. No te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.",
+     "plan": "Toma con 3...dxe4. Blancas puede recuperar el peón, así que no te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4287,6 +4287,393 @@
       "eco": "D10",
       "name": "Slav Defense: Diemer Gambit",
       "pgn": "1. d4 d5 2. c4 c6 3. e4"
+     }
+    },
+    {
+     "id": "curso-checa",
+     "clave": "eslava/curso-checa",
+     "familia": "Variante Checa",
+     "nombre": "Defensa Eslava: Variante Checa (6.e3 e6 7.Axc4 Ab4 8.0-0 0-0)",
+     "nombreIngles": "Slav Defense: Czech Variation",
+     "eco": "D17",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "dxc4",
+      "a4",
+      "Bf5",
+      "e3",
+      "e6",
+      "Bxc4",
+      "Bb4",
+      "O-O",
+      "O-O"
+     ],
+     "lado": "negras",
+     "plan": "Blancas impide ...b5 con 5.a4, así que tu alfil sale a f5: tu peón de c4 controla b3 y no hay Db3. Después ...e6, ...Ab4 (clava el Cc3) y 0-0; blancas recupera el peón con Axc4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D17",
+      "name": "Slav Defense: Czech Variation",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikipedia, Slav Defense (6.e3 e6 7.Bxc4 Bb4 8.0-0 0-0, la Variante Holandesa)",
+       "Wikibooks, 6.e3 (6...e6 y el alfil a b4)",
+       "motor: 6...e6 a 3 de la mejor, 7...Ab4 y 8...0-0 las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-checa-clasica",
+     "clave": "eslava/curso-checa-clasica",
+     "familia": "Variante Checa",
+     "nombre": "Defensa Eslava: Variante Checa, Sämisch (10...Ag6)",
+     "nombreIngles": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
+     "eco": "D19",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "dxc4",
+      "a4",
+      "Bf5",
+      "e3",
+      "e6",
+      "Bxc4",
+      "Bb4",
+      "O-O",
+      "O-O",
+      "Qe2",
+      "Ne4",
+      "g4",
+      "Bg6"
+     ],
+     "lado": "negras",
+     "plan": "Blancas recupera el peón con Axc4 y tú terminas el desarrollo: ...e6, ...Ab4 (clava el Cc3) y 0-0. Contra 9.De2, 9...Ce4 ocupa el centro; contra g4, el alfil se retira a g6.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D19",
+      "name": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2 Ne4 10. g4"
+     },
+     "continuacion": {
+      "desde": 19,
+      "fuente": [
+       "motor: 10...Ag6 es la mejor (+0.37)"
+      ]
+     }
+    },
+    {
+     "id": "curso-alekhine-e3",
+     "clave": "eslava/curso-alekhine-e3",
+     "familia": "Variante de los Tres Caballos",
+     "nombre": "Defensa Eslava: Variante Alekhine (5...b5 6.a4 b4 7.Ca2 e6 8.Axc4 Ab7)",
+     "nombreIngles": "Slav Defense: Alekhine Variation",
+     "eco": "D15",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "dxc4",
+      "e3",
+      "b5",
+      "a4",
+      "b4",
+      "Na2",
+      "e6",
+      "Bxc4",
+      "Bb7"
+     ],
+     "lado": "negras",
+     "plan": "Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón con Axc4, pero su caballo quedó en a2; tu alfil sale a b7.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D15",
+      "name": "Slav Defense: Alekhine Variation",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e3"
+     },
+     "continuacion": {
+      "desde": 9,
+      "fuente": [
+       "Wikipedia, Slav Defense (5.e3 b5 6.a4 b4 7.Na2 e6 8.Bxc4)",
+       "motor: 5...b5, 6...b4, 7...e6 y 8...Ab7 son las mejores o a 1 de la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-geller",
+     "clave": "eslava/curso-geller",
+     "familia": "Variante de los Tres Caballos",
+     "nombre": "Defensa Eslava: Gambito Geller (6...Cd5 7.a4 e6)",
+     "nombreIngles": "Slav Defense: Geller Gambit",
+     "eco": "D15",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "dxc4",
+      "e4",
+      "b5",
+      "e5",
+      "Nd5",
+      "a4",
+      "e6"
+     ],
+     "lado": "negras",
+     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: termina tu desarrollo y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D15",
+      "name": "Slav Defense: Geller Gambit",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e4 b5 6. e5"
+     },
+     "continuacion": {
+      "desde": 11,
+      "fuente": [
+       "Wikipedia, Slav Defense (5.e4 b5 6.e5 Nd5 7.a4 e6)",
+       "motor: 6...Cd5 y 7...e6 son las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-cc3",
+     "clave": "eslava/curso-cc3",
+     "familia": "Variante 3.Cc3",
+     "nombre": "Defensa Eslava: 3.Cc3 dxc4 (4.e4 b5 5.a4 b4 6.Cb1 Aa6 7.Dc2 Dxd4 8.Cf3 Db6)",
+     "nombreIngles": "Slav Defense",
+     "eco": "D10",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nc3",
+      "dxc4",
+      "e4",
+      "b5",
+      "a4",
+      "b4",
+      "Nb1",
+      "Ba6",
+      "Qc2",
+      "Qxd4",
+      "Nf3",
+      "Qb6"
+     ],
+     "lado": "negras",
+     "plan": "Contra 3.Cc3 tomas en c4 y, si blancas no saca su alfil por g2, sostienes el peón con ...b5; si a4, ...b4 echa al caballo de c3. Tu alfil cuida c4 desde a6 y tu dama gana el peón de d4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D10",
+      "name": "Slav Defense",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nc3 dxc4"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 3.Nc3 dxc4 (tabla: 4.e4 b5 5.a4 b4 6.Nb1 Ba6 7.Qc2 Qxd4 8.Nf3 Qb6)",
+       "Wikipedia, Slav Defense (4.e4 b5 5.a4 b4)",
+       "motor: cada jugada de negras, la mejor o a 7 de la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-tranquila-schallopp",
+     "clave": "eslava/curso-tranquila-schallopp",
+     "familia": "Variante Tranquila",
+     "nombre": "Defensa Eslava: Variante Tranquila, Defensa Schallopp (6.Ch4 Ag6 7.Cxg6 hxg6)",
+     "nombreIngles": "Slav Defense: Quiet Variation, Schallopp Defense",
+     "eco": "D12",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "e3",
+      "Bf5",
+      "Nc3",
+      "e6",
+      "Nh4",
+      "Bg6",
+      "Nxg6",
+      "hxg6"
+     ],
+     "lado": "negras",
+     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Con ...e6 jugado, si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D12",
+      "name": "Slav Defense: Quiet Variation, Schallopp Defense",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bf5 5. Nc3 e6"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikipedia, Slav Defense (4...Bf5 5.Nc3 e6 6.Nh4)",
+       "motor: 6.Ch4 es la mejor de blancas; 6...Ag6 y 7...hxg6 las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-moderna-g3",
+     "clave": "eslava/curso-moderna-g3",
+     "familia": "Línea Moderna",
+     "nombre": "Defensa Eslava: Línea Moderna (6...Ae7)",
+     "nombreIngles": "Slav Defense: Modern Line",
+     "eco": "D11",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "g3",
+      "Bg4",
+      "Bg2",
+      "e6",
+      "O-O",
+      "Be7"
+     ],
+     "lado": "negras",
+     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a g4 antes de cerrar con ...e6. Sigue ...Ae7, ...Cbd7 y 0-0; tu centro de peones en c6, d5 y e6 es muy sólido.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D11",
+      "name": "Slav Defense: Modern Line",
+      "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. g3 Bg4 5. Bg2 e6 6. O-O"
+     },
+     "continuacion": {
+      "desde": 11,
+      "fuente": [
+       "motor: 6...Ae7 empata con la mejor (+0.18)"
+      ]
+     }
+    },
+    {
+     "id": "curso-cambio",
+     "clave": "eslava/curso-cambio",
+     "familia": "Variante del Cambio",
+     "nombre": "Defensa Eslava: Variante del Cambio, Línea Simétrica (7.e3 e6)",
+     "nombreIngles": "Slav Defense: Exchange Variation, Symmetrical Line",
+     "eco": "D14",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "cxd5",
+      "cxd5",
+      "Nc3",
+      "Nf6",
+      "Nf3",
+      "Nc6",
+      "Bf4",
+      "Bf5",
+      "e3",
+      "e6"
+     ],
+     "lado": "negras",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con tu caballo en c6 y ...e6 ya jugado, si Db3 ataca b7, ...Ab4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D14",
+      "name": "Slav Defense: Exchange Variation, Symmetrical Line",
+      "pgn": "1. d4 d5 2. c4 c6 3. cxd5 cxd5 4. Nc3 Nf6 5. Nf3 Nc6 6. Bf4 Bf5"
+     },
+     "continuacion": {
+      "desde": 12,
+      "fuente": [
+       "Wikibooks, 3.cxd5 cxd5 (tabla: 4.Nc3 Nf6 5.Nf3 Nc6 6.Bf4 Bf5)",
+       "motor: 7.e3 es la mejor de blancas y 7...e6 la mejor de negras"
+      ]
+     }
+    },
+    {
+     "id": "curso-diemer",
+     "clave": "eslava/curso-diemer",
+     "familia": "Gambito Diemer",
+     "nombre": "Defensa Eslava: Gambito Diemer (3...dxe4 4.Cc3 e5 5.Ae3 exd4 6.Dxd4 Dxd4 7.Axd4 Cf6)",
+     "nombreIngles": "Slav Defense: Diemer Gambit",
+     "eco": "D10",
+     "jugadas": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "e4",
+      "dxe4",
+      "Nc3",
+      "e5",
+      "Be3",
+      "exd4",
+      "Qxd4",
+      "Qxd4",
+      "Bxd4",
+      "Nf6"
+     ],
+     "lado": "negras",
+     "plan": "Tomas el peón de e4 y contestas en el centro con ...e5. Las damas se cambian: blancas puede recuperar el peón, pero tu posición queda un poco mejor; desarrolla ...Cf6, ...Af5 y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "D10",
+      "name": "Slav Defense: Diemer Gambit",
+      "pgn": "1. d4 d5 2. c4 c6 3. e4"
+     },
+     "continuacion": {
+      "desde": 5,
+      "fuente": [
+       "motor: 3...dxe4, 4...e5, 5...exd4, 6...Dxd4 y 7...Cf6 son las mejores o a 3 de la mejor; 5.Ae3 y 6.Dxd4 las mejores de blancas"
+      ]
      }
     }
    ]
@@ -4298,7 +4685,7 @@
    "eco": "A00–A14, D02",
    "lado": "negras",
    "raiz": [],
-   "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios.",
+   "idea": "Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 (y ...c6 cuando un peón lo ataca), saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios.",
    "variantes": [
     {
      "id": "inglesa-caro-kann",
@@ -4344,7 +4731,7 @@
       "d3"
      ],
      "lado": "negras",
-     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, ...Cc6 o ...Db6, no ...e6, que deja caer b7.",
+     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Sin caballo blanco en c3 y con tu caballo en f6: si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, también ...Db6, no ...e6, que deja caer b7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4375,7 +4762,7 @@
       "Bd6"
      ],
      "lado": "negras",
-     "plan": "Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Después busca la ruptura ...e5.",
+     "plan": "Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Con su caballo en c3, lo más sencillo es ...e6 antes del alfil: si tu alfil saliera a f5, cxd5 y Db3 lo harían volver a c8. Si blancas pone su peón en d4, ya es la Eslava.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4403,7 +4790,7 @@
       "Bb2"
      ],
      "lado": "negras",
-     "plan": "El mismo esquema: ...c6 sostiene d5 y el alfil sale a f5 antes de cerrar con ...e6. Sigue ...e6, ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
+     "plan": "Contra 2.c4, ...c6 sostiene d5 y, con b3 jugado, el alfil sale a f5 antes de cerrar con ...e6. Sigue ...e6, ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4457,7 +4844,7 @@
       "d5"
      ],
      "lado": "negras",
-     "plan": "Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 o g4; luego ...e6, ...c6 y enroca. Con un centro de peones firme y tus piezas fuera, no necesitas más teoría.",
+     "plan": "Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 o g4; luego ...e6, ...h6 y enroca; ...c6 si blancas juega c4. Con un centro de peones firme y tus piezas fuera, no necesitas más teoría.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4505,7 +4892,7 @@
       "d5"
      ],
      "lado": "negras",
-     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
+     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Contra 2.Cf3 Cf6 3.g3, el motor prefiere ...g6 y ...Ag7. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4514,6 +4901,243 @@
       "eco": "A03",
       "name": "Bird Opening: Dutch Variation",
       "pgn": "1. f4 d5"
+     }
+    },
+    {
+     "id": "curso-inglesa-caro-kann",
+     "clave": "otros-negras/curso-inglesa-caro-kann",
+     "familia": "Apertura Inglesa (1.c4)",
+     "nombre": "Apertura Inglesa: Sistema defensivo Caro-Kann (2.Cc3 d5 3.cxd5 cxd5 4.d4 Cf6 5.Af4 Cc6)",
+     "nombreIngles": "English Opening: Caro-Kann Defensive System",
+     "eco": "A11",
+     "jugadas": [
+      "c4",
+      "c6",
+      "Nc3",
+      "d5",
+      "cxd5",
+      "cxd5",
+      "d4",
+      "Nf6",
+      "Bf4",
+      "Nc6"
+     ],
+     "lado": "negras",
+     "plan": "1...c6 prepara ...d5 con apoyo. Con 2.Cc3 d5 3.cxd5 cxd5 4.d4 llegas al Cambio de la Eslava: desarrolla con ...Cf6, ...Cc6, ...Af5 o ...Ag4, ...e6 y 0-0. Si Db3 llega antes de ...e6, ...Ca5 echa a la dama.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A11",
+      "name": "English Opening: Caro-Kann Defensive System",
+      "pgn": "1. c4 c6"
+     },
+     "continuacion": {
+      "desde": 2,
+      "fuente": [
+       "partidas de lichess (1000–1400): 2.Cc3 es la más común tras 1.c4 c6, y luego 3.cxd5 y 4.d4",
+       "motor: 2...d5 y 3...cxd5 las mejores, 4...Cf6 a 11, 5.Af4 la mejor de blancas y 5...Cc6 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-inglesa-anglo-eslava-g3",
+     "clave": "otros-negras/curso-inglesa-anglo-eslava-g3",
+     "familia": "Apertura Inglesa (1.c4)",
+     "nombre": "Apertura Réti: Variante Anglo-Eslava, con g3 (6...dxc4 7.dxc4 Dxd1 8.Txd1 Cbd7)",
+     "nombreIngles": "Réti Opening: Anglo-Slav Variation, with g3",
+     "eco": "A11",
+     "jugadas": [
+      "c4",
+      "c6",
+      "Nf3",
+      "d5",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "Bf5",
+      "O-O",
+      "e6",
+      "d3",
+      "dxc4",
+      "dxc4",
+      "Qxd1",
+      "Rxd1",
+      "Nbd7"
+     ],
+     "lado": "negras",
+     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6. Contra 6.d3, ...dxc4 cambia el centro y las damas; sigue ...Cbd7, ...Ae7 y 0-0.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A11",
+      "name": "Réti Opening: Anglo-Slav Variation, with g3",
+      "pgn": "1. c4 c6 2. Nf3 d5 3. g3 Nf6 4. Bg2 Bf5 5. O-O e6 6. d3"
+     },
+     "continuacion": {
+      "desde": 11,
+      "fuente": [
+       "motor: 6...dxc4 es la mejor (las demás pierden 36 o más), 7.dxc4 a 7 de la mejor de blancas, 7...Dxd1 y 8...Cbd7 las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-reti-bogoljubow",
+     "clave": "otros-negras/curso-reti-bogoljubow",
+     "familia": "Apertura Réti (1.Cf3)",
+     "nombre": "Apertura Réti: Variante Anglo-Eslava, Bogoljubow (4...e6 5.e3 Cf6)",
+     "nombreIngles": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation",
+     "eco": "A12",
+     "jugadas": [
+      "Nf3",
+      "d5",
+      "c4",
+      "c6",
+      "b3",
+      "Bf5",
+      "Bb2",
+      "e6",
+      "e3",
+      "Nf6"
+     ],
+     "lado": "negras",
+     "plan": "Con b3 jugado no hay Db3, así que el alfil sale a f5 antes de ...e6. Sigue ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A12",
+      "name": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation",
+      "pgn": "1. Nf3 d5 2. c4 c6 3. b3 Bf5 4. Bb2"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikipedia, Réti Opening (4.Bb2 e6)",
+       "motor: 4...e6 la mejor, 5.e3 la mejor de blancas y 5...Cf6 a 10 de la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-larsen-clasica",
+     "clave": "otros-negras/curso-larsen-clasica",
+     "familia": "Ataque Nimzo-Larsen (1.b3)",
+     "nombre": "Ataque Nimzo-Larsen: Variante Clásica (2.Ab2 Cf6 3.e3 Af5 4.Cf3 e6 5.Ae2 h6)",
+     "nombreIngles": "Nimzo-Larsen Attack: Classical Variation",
+     "eco": "A01",
+     "jugadas": [
+      "b3",
+      "d5",
+      "Bb2",
+      "Nf6",
+      "e3",
+      "Bf5",
+      "Nf3",
+      "e6",
+      "Be2",
+      "h6"
+     ],
+     "lado": "negras",
+     "plan": "Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 antes de ...e6; ...h6 le guarda la casilla h7. Luego ...Ad6 o ...Ae7 y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A01",
+      "name": "Nimzo-Larsen Attack: Classical Variation",
+      "pgn": "1. b3 d5"
+     },
+     "continuacion": {
+      "desde": 2,
+      "fuente": [
+       "Wikipedia, Nimzowitsch–Larsen Attack (una Londres al revés: ...d5, ...Af5, ...Cf6, ...e6)",
+       "partidas de lichess: 2.Ab2 (86 %) y 3.e3 (47 %) son las más comunes",
+       "motor: cada jugada de negras, la mejor o a 7 de la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-otras-hungara",
+     "clave": "otros-negras/curso-otras-hungara",
+     "familia": "Apertura Húngara (1.g3)",
+     "nombre": "Apertura Húngara: Formación Eslava (3.Cf3 Cf6 4.0-0 Ag4 5.d3 Cbd7 6.Cbd2 e5)",
+     "nombreIngles": "Hungarian Opening: Slav Formation",
+     "eco": "A00",
+     "jugadas": [
+      "g3",
+      "d5",
+      "Bg2",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "O-O",
+      "Bg4",
+      "d3",
+      "Nbd7",
+      "Nbd2",
+      "e5"
+     ],
+     "lado": "negras",
+     "plan": "El peón de d5, apoyado por ...c6, tapa la diagonal larga del alfil de g2. El alfil sale a g4; contra d3, ...e5 te da más centro. Sigue ...Ad6 o ...Ae7 y 0-0.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A00",
+      "name": "Hungarian Opening: Slav Formation",
+      "pgn": "1. g3 d5 2. Bg2 c6"
+     },
+     "continuacion": {
+      "desde": 4,
+      "fuente": [
+       "Wikibooks, 1.Nf3 d5 (tabla: contra d3, ...Nbd7 y ...e5)",
+       "partidas de lichess: 3.Cf3 es la más común tras 2...c6",
+       "motor: cada jugada de negras a 12 o menos de la mejor (3...Cf6 como en la Réti con 2.g3, la misma posición); 5.d3 a 5 y 6.Cbd2 empata con la mejor de blancas"
+      ]
+     }
+    },
+    {
+     "id": "curso-otras-bird",
+     "clave": "otros-negras/curso-otras-bird",
+     "familia": "Apertura Bird (1.f4)",
+     "nombre": "Apertura Bird: Variante Holandesa (2.Cf3 Cf6 3.e3 Af5 4.Ae2 e6 5.0-0 Ae7)",
+     "nombreIngles": "Bird Opening: Dutch Variation",
+     "eco": "A03",
+     "jugadas": [
+      "f4",
+      "d5",
+      "Nf3",
+      "Nf6",
+      "e3",
+      "Bf5",
+      "Be2",
+      "e6",
+      "O-O",
+      "Be7"
+     ],
+     "lado": "negras",
+     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a f5 y luego ...e6, ...Ae7 y 0-0; ...c5 o ...h6 vienen después.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "A03",
+      "name": "Bird Opening: Dutch Variation",
+      "pgn": "1. f4 d5"
+     },
+     "continuacion": {
+      "desde": 2,
+      "fuente": [
+       "partidas de lichess: 2.Cf3 (71 %) es la más común; 3.e3, la segunda (24 %)",
+       "motor: 3.e3 es la mejor de blancas y 3...Af5 la mejor de negras; 4.Ae2 a 7 de la mejor; 4...e6, 5.0-0 y 5...Ae7 son la línea principal del motor"
+      ]
      }
     }
    ]

@@ -125,6 +125,65 @@ export function pasarItaliana<T>(r: Record<string, T>): Record<string, T> {
 }
 
 /**
+ * La Eslava y "...c6 + ...d5 contra lo demás" pasaron al curso por estructuras (2026-11-25, `specs/cursos.md` §6). Como
+ * en la Caro-Kann, lo que ya llevaba en el Repaso y el avance de cada lección vieja se muda a la lección nueva de la misma
+ * respuesta del rival (no se copia: no cuenta dos veces). Las dos de una jugada mía distinta en la misma posición (la
+ * Semieslava, 4...e6, y la Defensa de la Clavada, 4...Ag4) van a la lección de esa misma respuesta del rival, como la
+ * Karpov en la Caro-Kann. Las que no cambiaron de línea (`checa-carlsbad`, `cambio-trifunovic`, `inglesa-gurevich` y
+ * `reti-fianchetto`) conservan su id y no se tocan.
+ */
+export const LECCIONES_ESLAVA: Record<string, string> = {
+  checa: 'curso-checa',
+  'tranquila-schallopp': 'curso-tranquila-schallopp',
+  cambio: 'curso-cambio',
+  cc3: 'curso-cc3',
+  'checa-clasica': 'curso-checa-clasica',
+  'alekhine-e3': 'curso-alekhine-e3',
+  'moderna-g3': 'curso-moderna-g3',
+  geller: 'curso-geller',
+  diemer: 'curso-diemer',
+  // una jugada mía distinta (4...Ag4 y 4...e6): a la lección de la misma respuesta de blancas (4.e3 y 4.Cc3)
+  'tranquila-clavada': 'curso-tranquila-schallopp',
+  semieslava: 'curso-checa',
+}
+
+export const LECCIONES_OTROS_NEGRAS: Record<string, string> = {
+  'inglesa-caro-kann': 'curso-inglesa-caro-kann',
+  'inglesa-anglo-eslava-g3': 'curso-inglesa-anglo-eslava-g3',
+  'reti-bogoljubow': 'curso-reti-bogoljubow',
+  'larsen-clasica': 'curso-larsen-clasica',
+  'otras-hungara': 'curso-otras-hungara',
+  'otras-bird': 'curso-otras-bird',
+}
+
+/** Muda lo de cada lección vieja de un curso a su lección nueva (si la nueva aún no tiene nada). */
+function mudarLecciones<T>(r: Record<string, T>, prefijo: string, tabla: Record<string, string>): Record<string, T> {
+  const nuevo = { ...r }
+  for (const [viejo, nueva] of Object.entries(tabla)) {
+    const v = nuevo[prefijo + viejo]
+    if (v !== undefined && !(prefijo + nueva in nuevo)) {
+      nuevo[prefijo + nueva] = v
+      delete nuevo[prefijo + viejo]
+    }
+  }
+  return nuevo
+}
+
+/** Lo de la Eslava y lo de "...c6 + ...d5", cada uno con su tabla. */
+export const pasarEslavaYOtrosNegras = <T>(r: Record<string, T>): Record<string, T> =>
+  mudarLecciones(mudarLecciones(r, 'eslava:b/b:eslava/', LECCIONES_ESLAVA), 'otros-negras:b/b:otros-negras/', LECCIONES_OTROS_NEGRAS)
+
+/** Corre una sola vez al abrir la app. */
+export function migrarAlCursoEslava(): void {
+  if (leer<number>('modelo-eslava', 0) >= 1) return
+  const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
+  const repaso = leer<Record<string, unknown>>('repaso', {})
+  if (progreso && typeof progreso === 'object') guardar('progreso', pasarEslavaYOtrosNegras(progreso))
+  if (repaso && typeof repaso === 'object') guardar('repaso', pasarEslavaYOtrosNegras(repaso))
+  guardar('modelo-eslava', 1)
+}
+
+/**
  * Los cursos del Avance (2026-11-25), contra la Caro-Kann y contra la Francesa, pasan a la lección nueva por estructuras.
  * Cada lección vieja que sigue siendo obligatoria tiene su lección nueva de la misma línea (la misma fila de la base, ahora
  * con su continuación): lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. Las de tus otras cuartas

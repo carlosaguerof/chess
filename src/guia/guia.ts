@@ -5,6 +5,7 @@ import { jugadaNumerada, nombrePieza, sanAEspanol } from '../ajedrez/notacion.ts
 import { GUIA, esMiPly, siguientesEnRepertorio, lineaQueTerminaEn, posicionDe, estaEnRepertorio, lineaDeVariante, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import { ideaPorTipo, planDeMiLado } from '../cursos/modelo.ts'
 import { cursoActivo } from '../aprender/interruptores.ts'
+import { esLeccionDeCurso } from '../curso/datos.ts'
 
 /** La guía de aperturas en una partida real (T9). Todo sale de mi repertorio y de la base; nunca del motor. */
 export interface Contexto {
@@ -177,10 +178,27 @@ export interface Ayuda {
 
 const PRINCIPIOS = 'Fuera de teoría: aquí ya no hay una línea de tu apertura. Plan de principios: desarrolla tus piezas, controla el centro y enroca.'
 
+/** ¿La línea es lección de un curso? (`esLeccionDeCurso`, con la variante de la base que dice su id: "b:otros-negras/curso-otras-hungara"). */
+const esLeccion = (l: LineaRepertorio) => esLeccionDeCurso(l.apertura, l.color, l.id.slice(l.id.indexOf('/') + 1))
+
+/**
+ * Las jugadas de mi repertorio en esta posición, con el empate de frecuencia resuelto a favor de la que es lección de un
+ * curso (el orden por frecuencia no cambia: `sort` es estable y solo mira el empate).
+ */
+function siguientesConLeccionPrimero(ctx: Contexto, historia: string[]) {
+  const frec = (ls: LineaRepertorio[]) => Math.max(...ls.map((l) => l.frecuencia))
+  // si las dos son lección (una posición a la que llegan dos cursos o dos lecciones), gana la que vino por el mismo orden
+  const puntos = (ls: LineaRepertorio[]) => Math.max(0, ...ls.filter((l) => l.frecuencia === frec(ls) && esLeccion(l)).map((l) => (mismoOrden(l, historia) ? 2 : 1)))
+  return siguientesEnRepertorio(ctx.rep, ctx.color, historia).sort((a, b) => frec(b.lineas) - frec(a.lineas) || puntos(b.lineas) - puntos(a.lineas))
+}
+
+/** ¿La línea llegó a esta posición por las mismas jugadas de la partida (y no por transposición)? */
+const mismoOrden = (l: LineaRepertorio, historia: string[]) => historia.every((s, i) => l.jugadas[i] === s)
+
 /** Pista y Respuesta en mi turno: de mi repertorio; si no, de la base; si no, fuera de teoría. */
 export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   const ply = historia.length
-  const deRep = siguientesEnRepertorio(ctx.rep, ctx.color, historia)
+  const deRep = siguientesConLeccionPrimero(ctx, historia)
   let san: string | undefined
   let nombre: string | undefined
   let plan: string | undefined
@@ -188,7 +206,9 @@ export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   let origen: Ayuda['origen'] = 'fuera'
   if (deRep.length > 0) {
     const lineas: LineaRepertorio[] = deRep[0]!.lineas
-    const l = lineas[0]!
+    // con la misma frecuencia que la primera, gana la que es lección de un curso: su plan es el que enseña el curso
+    const empatan = lineas.filter((x) => x.frecuencia === lineas[0]!.frecuencia && esLeccion(x))
+    const l = empatan.find((x) => mismoOrden(x, historia)) ?? empatan[0] ?? lineas[0]!
     san = deRep[0]!.san
     // si esta jugada todavía sirve a varias variantes, se nombra la apertura; si ya es de una sola, esa variante
     const familias = new Set(lineas.map((x) => x.familia))
