@@ -28,15 +28,22 @@ const CLAVADA = 'La clavada'
 const CASA = 'La dama en casa'
 const GRANDE = 'El centro grande'
 const D6 = 'La dama en d6 (fuera del mapa)'
+/**
+ * El jaque (3...De5+ o 3...De6+): entrada del mapa con sus lecciones desde el 2026-11-25 (D1 A de Carlos: "agregarles
+ * lección"). Antes iba en `otras`, como "El jaque (3...De5+ o 3...De6+), sin lección".
+ */
+const JAQUE = 'El jaque'
 // las filas del mapa sin lección (`otras`)
-const JAQUE = 'El jaque (3...De5+ o 3...De6+), sin lección'
 /** La única con datos: 2...Cf6 3.d4 Dxd5 4.Cc3 De6+ (1000–1400). El mapa no la suma al jaque: su fila es 3...De5+ o 3...De6+. */
 const JAQUE_OTRO = 'La dama a e5 o e6 por otro camino (2...Cf6 3.d4 Dxd5 4.Cc3 De6+), sin lección y fuera de la fila del jaque'
 const OTRA = 'La dama a otra casilla (d4, c6, d7, c5, f5…), sin lección'
 const NADIE = 'Nadie recupera todavía (2...c6, 2...e6, 2...e5, y 2...Cf6 sin datos), sin lección'
 const OTRA_PIEZA = 'Otra pieza recupera en d5 (el peón), sin lección'
 
-/** Las jugadas del rival sin lección de la tabla del mapa (notas 1 y 2), por su secuencia exacta. */
+/**
+ * Las jugadas del rival de la tabla del mapa (notas 1 y 2), por su secuencia exacta. Eran las que no tenían lección; desde
+ * el 2026-11-25, 3...De5+ y 3...De6+ la tienen (las lecciones del jaque), y sus filas se quedan como medida.
+ */
 const SIN_LECCION = {
   '3...De5+': 'e4 d5 exd5 Qxd5 Nc3 Qe5',
   '3...De6+': 'e4 d5 exd5 Qxd5 Nc3 Qe6',
@@ -56,6 +63,16 @@ const JAQUES = ['3...De5+', '3...De6+']
 const DG = ['3...De5+ 4.Ae2 Dg5', '3...De6+ 4.Ae2 Dg6']
 const SEQ_JAQUES = JAQUES.map((k) => SIN_LECCION[k])
 
+/**
+ * La jugada que nombra a una lección cuando su fila de la base no la trae. Las dos del jaque salen de la fila
+ * Mieses-Kotroc (1.e4 d5 2.exd5 Dxd5), que no dice nada del jaque; las nombra la primera respuesta del rival a 4.Ae2
+ * (4...Ag4 y 4...Cc6), como la Valenciana se mide en 5...Ag4 y no en toda la dama en casa (nota 11 del mapa).
+ */
+const NOMBRADA = {
+  'jaque-e5': 'e4 d5 exd5 Qxd5 Nc3 Qe5 Be2 Bg4',
+  'jaque-e6': 'e4 d5 exd5 Qxd5 Nc3 Qe6 Be2 Nc6',
+}
+
 /** Las líneas del curso, desde la base del repo, y dónde empieza la continuación del curso en cada una. */
 function lecciones() {
   const curso = cursoDelRepo('escandinava')
@@ -74,6 +91,10 @@ function lecciones() {
  * Marshall: su parte de la base termina en 3...Cxd5, que comparten la Gipslis y la Richter; se separa en 4...Af5).
  */
 function definicion(ls, l) {
+  if (NOMBRADA[l.id]) {
+    if (!l.jugadas.join(' ').startsWith(NOMBRADA[l.id] + ' ')) throw new Error(`la jugada que nombra a ${l.id} no está en su línea`)
+    return NOMBRADA[l.id]
+  }
   let hasta = l.desde - 1
   for (const o of ls) {
     if (o === l) continue
@@ -217,7 +238,7 @@ export default function medir(datos) {
 
   const partidas = {}
   const lec = Object.fromEntries(ls.map((l) => [l.id, { forma: formaDeLinea(l.jugadas) }]))
-  const formas = Object.fromEntries([CLAVADA, CASA, GRANDE, D6].map((f) => [f, {}]))
+  const formas = Object.fromEntries([CLAVADA, CASA, JAQUE, GRANDE, D6].map((f) => [f, {}]))
   const otras = {}
   const fila = (k) => (otras[k] ??= {})
 
@@ -230,7 +251,7 @@ export default function medir(datos) {
     if (Math.abs(total - 1) > 1e-9) throw new Error(`las entradas no suman 100 % en ${b}: ${total}`)
     const valor = (e) => banda(masa.get(e) ? masa.get(e) : null, reales.get(e) ?? 0)
     for (const f of Object.keys(formas)) formas[f][b] = valor(f)
-    for (const e of [JAQUE, JAQUE_OTRO, OTRA, NADIE, OTRA_PIEZA]) fila(e)[b] = valor(e)
+    for (const e of [JAQUE_OTRO, OTRA, NADIE, OTRA_PIEZA]) fila(e)[b] = valor(e)
 
     for (const l of ls) {
       const r = porSecuencia(A, definicion(ls, l))
@@ -251,12 +272,12 @@ export default function medir(datos) {
   return {
     metodo:
       'Las partidas del curso: las que llegan a 1.e4 d5 y siguen. En cada posición, una jugada pesa por sus partidas entre las ' +
-      'que siguen (n - fin). Las entradas del mapa (`formas`, y en `otras` el jaque y lo que no tiene lección): juegas lo del ' +
+      'que siguen (n - fin). Las entradas del mapa (`formas`, con el jaque, que tiene lección desde el 2026-11-25; en `otras`, lo que no tiene lección): juegas lo del ' +
       'curso mientras haya respuesta (por posición) y si no, lo que juega la gente; lo del rival pesa por lo que se juega; ' +
       'cada partida se clasifica con su línea en la media jugada 12 (la primera captura de negras en d5 dice la pieza; si es ' +
       'la dama, su jugada siguiente dice la casilla); su `n`, las partidas que llegaron a la jugada que la decide. Cada ' +
       'lección, en la posición que la define en la base (la última jugada de negras de su variante de la base, o la jugada en ' +
-      'que se separa de las demás lecciones), por la secuencia exacta: el producto de la parte de cada jugada de negras desde ' +
+      'que se separa de las demás lecciones; las dos del jaque, en la primera respuesta del rival a 4.Ae2, que las nombra), por la secuencia exacta: el producto de la parte de cada jugada de negras desde ' +
       '2...; su `n`, las partidas de esa última jugada. Las jugadas del rival sin lección, igual (del curso) y su parte de las ' +
       'partidas de su posición. `null`: ninguna secuencia de 3 partidas o más llega ahí. Es el método de formas.mjs, ' +
       'lecciones-freq.mjs y consulta.mjs del worker del curso.',

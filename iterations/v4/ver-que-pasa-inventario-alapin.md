@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/ver-inventario.ts siciliana:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Alapin contra la Siciliana»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**51 frases: 3 con "Ver"; 48 sin él** (34 porque explica la jugada que ya está en la línea, sin una alternativa; 11 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 3 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 1 de las 3 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**65 frases: 5 con "Ver"; 60 sin él** (43 porque explica la jugada que ya está en la línea, sin una alternativa; 12 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 5 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 1 de las 5 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
@@ -11,6 +11,8 @@
 | 6.♘f3 | porque | Va primero este caballo: si hubieras sacado antes el de b1 a c3, la dama del rival tomaría en d4. | 6.♘c3 6...♕xd4 | solo Aprender |
 | 7.♗e2 | prepara | Si cambia en f3, retomas con el alfil, y si su dama toma d4, ♗xc6+ le quita el defensor con jaque: ganas su dama. | 7...♗xf3 8.♗xf3 8...♕xd4 9.♗xc6+ 9...bxc6 10.♕xd4 | Aprender y Practicar |
 | 8.♗b5 | cuidado | Si el rival cambia en e5, retomas con el caballo: te queda el peón de d4 solo, como en El aislado. | 8...dxe5 9.♘xe5 | Aprender y Practicar |
+| 6.d5 | porque | Tu peón de e4 sigue atacado, pero si el caballo de f6 se lo come, tú te comes el de c6. | 6...♘xe4 7.dxc6 7...bxc6 | Aprender y Practicar |
+| 5.♘c3 (si juegas 5.e5) | errores | El rival cambia en e5, cambia las damas y se come tu peón: pierdes un peón y tu rey ya no puede enrocar. | 5.e5 5...dxe5 6.dxe5 6...♕xd1+ 7.♔xd1 7...♘g4 8.♔e1 8...♘xe5 | Aprender y Practicar |
 
 ## Sin "Ver"
 
@@ -64,3 +66,15 @@
 | 5.♔xf2 | porque | Ganas una pieza por un peón. | explica la jugada que ya está en la línea, sin una alternativa |
 | 9.♗xc6+ | porque | Y su dama de d4 se queda sin defensa frente a la tuya. | explica la jugada que ya está en la línea, sin una alternativa |
 | 10.♕xd4 | porque | Ganaste su dama y su caballo; diste tu alfil y tu peón de d4. | explica la jugada que ya está en la línea, sin una alternativa |
+| 3.d4 | porque | Es la regla para tu jugada 3: si nadie ataca tu e4, juegas d4. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.cxd4 | porque | Para eso jugaste 2.c3: un peón listo para retomar. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.cxd4 | prepara | Tu caballo de b1 ya tiene libre la casilla c3. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 5.♘f3 | porque | Es el orden de la página: primero el caballo de g1, que defiende d4; después, el de b1. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6.d5 | porque | Es la regla de la página: con su caballo de dama ya en c6, avanzas contra él. | explica la jugada que ya está en la línea, sin una alternativa |
+| 3.d4 | porque | Es la regla para tu jugada 3: si nadie ataca tu e4, juegas d4. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.cxd4 | porque | Para eso jugaste 2.c3: un peón listo para retomar. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.cxd4 | prepara | Tu caballo de b1 ya tiene libre la casilla c3. | lo que dice se juega en las jugadas que siguen de la línea |
+| 5.♘c3 | porque | Su caballo de dama no está en c6: la regla de la página dice defender e4 con una pieza. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6.♘f3 | porque | Es el plan de la página: después de atender tu e4, el caballo de g1, que defiende d4. | explica la jugada que ya está en la línea, sin una alternativa |
+| 7.♗e2 | prepara | Ya puedes enrocar. | lo que dice se juega en las jugadas que siguen de la línea |
+| 8.0-0 | porque | Con tu rey a salvo y tus peones de e4 y d4 defendidos, ya terminó la apertura. | explica la jugada que ya está en la línea, sin una alternativa |

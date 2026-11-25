@@ -1723,6 +1723,88 @@
        "motor: 8.Ab5 es la mejor; 6.Cf3 a 0.20 de 6.Ac4, iterations/v4/comprobaciones-alapin.md"
       ]
      }
+    },
+    {
+     "id": "alapin-curso-centro-cc6",
+     "clave": "siciliana/alapin-curso-centro-cc6",
+     "familia": "Variante Alapin",
+     "nombre": "Variante Alapin: 2...Cc6 3.d4 cxd4 4.cxd4 e6 (5.Cf3 Cf6 6.d5)",
+     "nombreIngles": "Sicilian Defense: Alapin Variation",
+     "eco": "B22",
+     "jugadas": [
+      "e4",
+      "c5",
+      "c3",
+      "Nc6",
+      "d4",
+      "cxd4",
+      "cxd4",
+      "e6",
+      "Nf3",
+      "Nf6",
+      "d5"
+     ],
+     "lado": "blancas",
+     "plan": "Tus peones de e4 y d4 tomaron el centro, y tu peón de d5 echa a su caballo de c6. Si negras cambia en d5, retomas con tu peón de e4; si te da jaque con su alfil desde b4, lo tapas con tu caballo de b1 en c3.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B22",
+      "name": "Sicilian Defense: Alapin Variation",
+      "pgn": "1. e4 c5 2. c3"
+     },
+     "continuacion": {
+      "desde": 3,
+      "fuente": [
+       "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): tras 2.c3, 2...Cc6 es la más jugada (43.8 % y 42.2 %); 3.d4 cxd4 (64.2 %), 4.cxd4 e6 (30.7 %, la más jugada); tras 5.Cf3, 5...Cf6 y 5...d5 empatan (3 y 3)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-alapin.md, ids D-…): 3.d4 y 4.cxd4, la mejor; 5.Cf3 a 0.05 de la mejor; 6.d5, a 0.25–0.49 de 6.Cc3, es la regla de la página de los dos peones del centro (no pierde material, K-nc6x-e6-nf3-nf6-d5)"
+      ]
+     }
+    },
+    {
+     "id": "alapin-curso-centro-d6",
+     "clave": "siciliana/alapin-curso-centro-d6",
+     "familia": "Variante Alapin",
+     "nombre": "Variante Alapin: 2...d6 3.d4 cxd4 4.cxd4 Cf6 5.Cc3 g6",
+     "nombreIngles": "Sicilian Defense: Alapin Variation",
+     "eco": "B22",
+     "jugadas": [
+      "e4",
+      "c5",
+      "c3",
+      "d6",
+      "d4",
+      "cxd4",
+      "cxd4",
+      "Nf6",
+      "Nc3",
+      "g6",
+      "Nf3",
+      "Bg7",
+      "Be2",
+      "O-O",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "Tus peones de e4 y d4 tienen el centro, defendidos, y ya enrocaste. Sacas tu alfil de c1 a e3, que cuida d4, y juegas h3 para que su alfil no se instale en g4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B22",
+      "name": "Sicilian Defense: Alapin Variation",
+      "pgn": "1. e4 c5 2. c3"
+     },
+     "continuacion": {
+      "desde": 3,
+      "fuente": [
+       "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): tras 2.c3, 2...d6 es 16.1 % en 1000–1400; 3.d4 cxd4 (79.1 %), 4.cxd4 Cf6 (38.8 %), 5.Cc3 g6 (7 de 13), 6.Cf3 (4 de 7) Ag7 (4 de 4)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-alapin.md, ids D-…): 3.d4, 4.cxd4, 5.Cc3 y 8.0-0, la mejor; 6.Cf3 a 0.23 de la mejor (la de las partidas y la de la página: primero el caballo de g1); 7.Ae2 a 0.03; 7...0-0, la mejor de negras"
+      ]
+     }
     }
    ]
   },
@@ -4235,6 +4317,94 @@
       "fuente": [
        "Wikibooks, 1.e4 d5 2.exd5 Cf6 (Richter: 5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0)",
        "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.c4 la mejor; 6.Cc3 a 0.26 de la mejor (la de Wikibooks); 7.Ae2 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-jaque-e5",
+     "clave": "escandinava/curso-jaque-e5",
+     "familia": "La dama da jaque (3...De5+ o 3...De6+)",
+     "nombre": "Jaque de la dama en e5 (4.Ae2 Ag4 5.d4 De6 6.f3)",
+     "nombreIngles": "Scandinavian Defense: Mieses-Kotroc Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qe5+",
+      "Be2",
+      "Bg4",
+      "d4",
+      "Qe6",
+      "f3",
+      "Bf5",
+      "g4",
+      "Bg6",
+      "f4"
+     ],
+     "lado": "blancas",
+     "plan": "Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Mieses-Kotroc Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5"
+     },
+     "continuacion": {
+      "desde": 4,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De5+ \"4. Be2 and White has developed another piece\")",
+       "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De5+ es 32.6 % y 15.6 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Ag4 es la más jugada (21.9 % y 35.1 %); tras 5.d4, 5...De6 (30 de 53 en 1000–1400)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.f3, 7.g4 y 8.f4, cada una la mejor; 6...Af5 empata con 6...Ah5, la mejor de negras; 7...Ag6, la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-jaque-e6",
+     "clave": "escandinava/curso-jaque-e6",
+     "familia": "La dama da jaque (3...De5+ o 3...De6+)",
+     "nombre": "Jaque de la dama en e6 (4.Ae2 Cc6 5.d4 Cb4)",
+     "nombreIngles": "Scandinavian Defense: Mieses-Kotroc Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qe6+",
+      "Be2",
+      "Nc6",
+      "d4",
+      "Nb4",
+      "Nf3",
+      "Nf6",
+      "O-O",
+      "c6",
+      "Re1"
+     ],
+     "lado": "blancas",
+     "plan": "Sacaste tus piezas y enrocaste con un peón de ventaja en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Mieses-Kotroc Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5"
+     },
+     "continuacion": {
+      "desde": 4,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De6+ \"4. Be2 and White has developed another piece\")",
+       "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De6+ es 19.6 % y 20.0 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %); tras 5.d4, 5...Dg6, 5...Cb4 y 5...Cf6 empatan (5, 4 y 4 partidas) y el motor escoge 5...Cb4",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.Cf3 y 7.0-0, cada una la mejor; 8.Te1 a 0.05 de la mejor; 5...Cb4 la mejor de negras; 6...Cf6 a 0.03 y 7...c6 a 0.16 de la mejor"
       ]
      }
     }

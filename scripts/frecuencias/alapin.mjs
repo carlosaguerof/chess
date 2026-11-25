@@ -20,12 +20,15 @@ const HASTA_FORMA = 12
 
 /** Los nombres de las formas, como en el mapa. */
 const NOMBRE = { aislado: 'El aislado', cadena: 'La cadena', centro: 'Los dos peones del centro', gambito: 'El gambito (la excepción)' }
-/** Las formas con lecciones (la regla del paso 1). Los dos peones del centro no tiene lección, y el gambito es una excepción. */
-const FORMAS = ['aislado', 'cadena']
+/**
+ * Las formas con lecciones (la regla del paso 1). Los dos peones del centro tiene lección desde el 2026-11-25 (D1 A de
+ * Carlos: "agregarles lección"); el gambito es una excepción.
+ */
+const FORMAS = ['aislado', 'cadena', 'centro']
 /** La transposición que decide la lección base de El aislado: tras 4...d5, con 5.exd5 Dxd5 6.Cf3 llegas al Cambio Central. */
 const TRANSPOSICION = 'e4 c5 c3 Nc6 d4 cxd4 cxd4 d5'
 const CAMBIO_CENTRAL_TRAS_CF3 = 'e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3'
-/** Las jugadas frecuentes del rival sin lección (la tabla del mapa). */
+/** Las jugadas frecuentes del rival de la tabla del mapa (2...Cc6 y 2...d6 tienen lección desde el 2026-11-25). */
 const RIVAL = { Nc6: '2...Cc6', d6: '2...d6', e6: '2...e6' }
 
 /** Las jugadas de Carlos en cada posición del libro (una sola por posición: si dos lecciones juegan distinto, se detiene). */
@@ -51,7 +54,8 @@ const jug = (seq) => {
  * - 'cadena': lo avanzaste a e5;
  * - 'gambito': lo cambiaste en d5 (el peón de d7) y el rival no retomó en d5 en su jugada siguiente;
  * - 'aislado': lo cambiaste en d5, el rival retomó con una pieza y tienes un peón en d4;
- * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro);
+ * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro), o ese peón ya avanzó de d4 a d5, que es la
+ *   regla de su página contra un caballo en c6 (desde el 2026-11-25, con su lección: antes eso contaba como 'otra');
  * - 'otra': lo demás (incluido lo que todavía no se decide).
  */
 export function forma(seq) {
@@ -70,7 +74,8 @@ export function forma(seq) {
     return 'otra'
   }
   const e4 = c.get('e4')
-  if (e4?.type === 'p' && e4.color === 'w' && peonD4) return 'centro'
+  const d4d5 = ms.some((x) => x.color === 'w' && x.piece === 'p' && x.from === 'd4' && x.to === 'd5') && c.get('d5')?.type === 'p' && c.get('d5')?.color === 'w'
+  if (e4?.type === 'p' && e4.color === 'w' && (peonD4 || d4d5)) return 'centro'
   return 'otra'
 }
 
@@ -200,12 +205,11 @@ export default function medir(datos) {
   const formas = Object.fromEntries(FORMAS.map((f) => [NOMBRE[f], {}]))
   const otras = {
     '1.e4 c5: las partidas que llegan a la raíz del curso (pct: de todas las de la banda)': {},
-    [NOMBRE.centro]: {},
     [NOMBRE.gambito]: {},
     '2...Cc6 3.d4 cxd4 4.cxd4 d5: con 5.exd5 Dxd5 6.Cf3 llega al Cambio Central': {},
     ...Object.fromEntries(Object.values(RIVAL).map((r) => [r, {}])),
   }
-  const claveTransp = Object.keys(otras)[3]
+  const claveTransp = Object.keys(otras)[2]
 
   for (const banda of BANDAS) {
     const A = arbol(datos.bandas[banda])
@@ -224,7 +228,7 @@ export default function medir(datos) {
 
     const { f, visita } = recorrido(A, LP)
     for (const c of FORMAS) formas[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
-    for (const c of ['centro', 'gambito']) otras[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
+    for (const c of ['gambito']) otras[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
     otras[claveTransp][banda] = celda(visita.get(TRANSPOSICION) ?? 0, A.n(TRANSPOSICION))
 
     const den = A.n(raiz) - A.fin(raiz)

@@ -42,6 +42,30 @@
    },
    "frecuencia": 4.33
   },
+  "centro-cc6": {
+   "forma": "Los dos peones del centro",
+   "600-1000": {
+    "pct": 43.8,
+    "n": 14
+   },
+   "1000-1400": {
+    "pct": 42.2,
+    "n": 234
+   },
+   "frecuencia": 42.24
+  },
+  "centro-d6": {
+   "forma": "Los dos peones del centro",
+   "600-1000": {
+    "pct": 9.4,
+    "n": 3
+   },
+   "1000-1400": {
+    "pct": 16.1,
+    "n": 89
+   },
+   "frecuencia": 16.06
+  },
   "moderna": {
    "forma": "El aislado",
    "600-1000": {
@@ -61,10 +85,10 @@
     "n": 0
    },
    "1000-1400": {
-    "pct": 0.7,
+    "pct": 1.1,
     "n": 4
    },
-   "frecuencia": 0.72
+   "frecuencia": 1.06
   },
   "g6": {
    "forma": "El aislado",
@@ -108,8 +132,18 @@
     "n": 7
    },
    "1000-1400": {
-    "pct": 13.4,
-    "n": 25
+    "pct": 14.6,
+    "n": 22
+   }
+  },
+  "Los dos peones del centro": {
+   "600-1000": {
+    "pct": 71.9,
+    "n": 14
+   },
+   "1000-1400": {
+    "pct": 63.8,
+    "n": 227
    }
   }
  },
@@ -122,16 +156,6 @@
    "1000-1400": {
     "pct": 5.2,
     "n": 13988
-   }
-  },
-  "Los dos peones del centro": {
-   "600-1000": {
-    "pct": 71.9,
-    "n": 14
-   },
-   "1000-1400": {
-    "pct": 55,
-    "n": 222
    }
   },
   "El gambito (la excepción)": {
@@ -150,7 +174,7 @@
     "n": 0
    },
    "1000-1400": {
-    "pct": 5,
+    "pct": 5.1,
     "n": 19
    }
   },

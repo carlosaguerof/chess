@@ -42,5 +42,17 @@
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bd2 c6 Nd5 Qxd5 | porque | 0": "explica",
   "e4 d5 exd5 Qxd5 Nc3 Qc6 Bb5 | porque | 0": "explica",
   "e4 d5 exd5 Qxd5 Nc3 Qd8 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 Qxd4 Qxb7 | porque | 0": "explica",
-  "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2 c6 Nd5 cxd5 Bxa5 | porque | 0": "explica"
+  "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2 c6 Nd5 cxd5 Bxa5 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 | porque | 1": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | porque | 1": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | prepara | 0": "linea",
+  "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 | prepara | 0": "linea",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | porque | 0": "explica",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | prepara | 0": "linea",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O c6 Re1 | porque | 0": "plan"
 }

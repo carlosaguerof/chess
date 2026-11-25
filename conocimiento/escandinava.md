@@ -173,3 +173,23 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: Echaste al caballo con c4 y enrocaste. El alfil de g7 mira a d4: mantenlo defendido.
 - Fuente: B01 · Scandinavian Defense: Richter Variation
 - Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Cf6 (Richter: 5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.c4 la mejor; 6.Cc3 a 0.26 de la mejor (la de Wikibooks); 7.Ae2 la mejor.
+
+## La dama da jaque (3...De5+ o 3...De6+)
+
+### Jaque de la dama en e5 (4.Ae2 Ag4 5.d4 De6 6.f3)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 De5+ 4.Ae2 Ag4 5.d4 De6 6.f3 Af5 7.g4 Ag6 8.f4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.
+- Fuente: B01 · Scandinavian Defense: Mieses-Kotroc Variation
+- Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De5+ "4. Be2 and White has developed another piece"); partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De5+ es 32.6 % y 15.6 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Ag4 es la más jugada (21.9 % y 35.1 %); tras 5.d4, 5...De6 (30 de 53 en 1000–1400); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.f3, 7.g4 y 8.f4, cada una la mejor; 6...Af5 empata con 6...Ah5, la mejor de negras; 7...Ag6, la mejor.
+
+### Jaque de la dama en e6 (4.Ae2 Cc6 5.d4 Cb4)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 De6+ 4.Ae2 Cc6 5.d4 Cb4 6.Cf3 Cf6 7.0-0 c6 8.Te1**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Sacaste tus piezas y enrocaste con un peón de ventaja en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.
+- Fuente: B01 · Scandinavian Defense: Mieses-Kotroc Variation
+- Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De6+ "4. Be2 and White has developed another piece"); partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De6+ es 19.6 % y 20.0 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %); tras 5.d4, 5...Dg6, 5...Cb4 y 5...Cf6 empatan (5, 4 y 4 partidas) y el motor escoge 5...Cb4; motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.Cf3 y 7.0-0, cada una la mejor; 8.Te1 a 0.05 de la mejor; 5...Cb4 la mejor de negras; 6...Cf6 a 0.03 y 7...c6 a 0.16 de la mejor.
