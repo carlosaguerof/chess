@@ -1,9 +1,9 @@
 {
   "id": "caro-kann-estructuras:b",
   "de": "caro-kann:b",
-  "nombre": "Caro-Kann por estructuras",
+  "nombre": "Defensa Caro-Kann",
   "version": "2026-11-01",
-  "nota": "Las mismas jugadas del curso de la Caro-Kann con otra organización, para que Carlos los compare: primero el mapa, después una lección por estructura, después las que más salen, y lo demás como opcional. Este archivo trae solo lo que cambia: las explicaciones de cada jugada, los planes, las fuentes y el glosario salen de caro-kann.json (src/curso/capas.ts). 'fuente' es de la base interna: en la app no se cita nada. Regla: specs/cursos.md §6.",
+  "nota": "Las mismas jugadas del curso de la Caro-Kann con otra organización (Carlos la eligió el 2026-11-25 y es la única Caro-Kann que se ve): primero el mapa, después una lección por estructura, después las que más salen, y lo demás como opcional. Este archivo trae solo lo que cambia: las explicaciones de cada jugada, los planes, las fuentes y el glosario salen de caro-kann.json (src/curso/capas.ts). 'fuente' es de la base interna: en la app no se cita nada. Regla: specs/cursos.md §6.",
   "fuentes": {
     "AJEDREZ": "se comprueba con chess.js sobre las líneas del curso: tests/unit/curso-estructuras.test.ts"
   },
@@ -151,7 +151,7 @@
           "id": "cambio",
           "estructura": "Blancas cambia en d5",
           "frase": "Estás en el Cambio: tu objetivo es atacar los peones de blancas en el lado de dama.",
-          "planTuyo": [["Después, adelanta ...b5 y ...b4:", "Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:"]],
+          "planTuyo": [["Después, adelanta ...b5 y ...b4:", "Después, con una torre en b8, adelanta ...b5 y ...b4, cuidando de no regalar el peón:"]],
           "pasosDelPlan": [
             { "antesDe": "Después adelantas ...b5 y ...b4", "paso": { "frase": "...Tab8: pones una torre en b8, para defender tu peón cuando avance.", "jugadas": ["...Rab8"] } },
             ["Después adelantas ...b5 y ...b4: es el ataque de minorías.", "Después, con una torre en b8, adelantas ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías."]

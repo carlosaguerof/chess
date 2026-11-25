@@ -6,7 +6,7 @@ import { jugar } from '../e2e/_util.ts'
  * de leer, "Ver paso a paso", y Practicar sin texto de tu jugada, con la explicación después de jugarla.
  */
 test('La idea: coordenadas en el tablero y "Ver paso a paso"', async ({ page }) => {
-  const r = await page.goto('./#/curso/caro-kann%3Ab/leer/idea')
+  const r = await page.goto('./#/curso/caro-kann-estructuras%3Ab/leer/idea')
   expect(r?.status()).toBe(200)
   const tablero = page.getByTestId('tablero-leer')
   await expect(tablero.locator('coords.files coord')).toHaveCount(8)
@@ -22,8 +22,8 @@ test('La idea: coordenadas en el tablero y "Ver paso a paso"', async ({ page }) 
 
 test('Practicar: en tu turno solo la jugada del rival; la explicación, después de jugar', async ({ page }, info) => {
   await page.goto('./#/')
-  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'practicar', ply: 5, fecha: Date.now() } })))
-  await page.goto('./#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
+  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'practicar', ply: 5, fecha: Date.now() } })))
+  await page.goto('./#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
   const leccion = page.getByTestId('leccion-curso')
   await expect(leccion).toHaveAttribute('data-momento', 'tuTurno')
   await expect(leccion).toHaveAttribute('data-vuelta', 'practicar')
@@ -39,8 +39,8 @@ test('Practicar: en tu turno solo la jugada del rival; la explicación, después
 /** Abre una jugada mía de una línea de la Caro-Kann, en su turno. */
 async function abrir(page: import('@playwright/test').Page, linea: string, vuelta: 'aprender' | 'practicar', ply: number) {
   await page.goto('./#/')
-  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
-  await page.goto('./#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
+  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
+  await page.goto('./#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(linea))
   await page.reload()
   await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'tuTurno')
 }
@@ -101,7 +101,7 @@ test('"Ver qué pasaría" (2026-10-30): en la Tal, después de 4...h5, dentro de
 })
 
 test('El tablero de arriba de la página del curso lleva coordenadas (2026-10-30)', async ({ page }) => {
-  await page.goto('./#/curso/caro-kann%3Ab')
+  await page.goto('./#/curso/caro-kann-estructuras%3Ab')
   const tablero = page.getByTestId('pagina-curso').getByTestId('tablero-mini')
   await expect(tablero.locator('coords.files coord')).toHaveCount(8)
   await expect(tablero.locator('coords.ranks coord')).toHaveCount(8)

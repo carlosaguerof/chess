@@ -1,4 +1,4 @@
-# El inventario de "Ver qué pasa"
+# El inventario de "Ver qué pasaría"
 
 > Generado con `node scripts/ver-inventario.ts francesa:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Avance contra la Francesa»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 

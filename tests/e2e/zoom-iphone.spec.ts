@@ -136,7 +136,7 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
   })
 
   test('la lección nueva (C7): con las dos pistas, la Respuesta o un error, Pista, Respuesta y Atrás siguen a la vista sin desplazar', async ({ page }, info) => {
-    const c = cursoNuevo('caro-kann:b')!
+    const c = cursoNuevo('caro-kann-estructuras:b')!
     const l = lineaPorId(c, 'v:clasica')!
     const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
     // se toca con el dedo sin que Playwright desplace la página: si un botón no se ve, la prueba lo dice
@@ -162,7 +162,7 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
       // se ve completa, o al menos sus dos primeros renglones
       expect(Math.min(m.abajo, m.cajaAbajo) - m.arriba, `${cuando}: se ve`).toBeGreaterThanOrEqual(Math.min(m.abajo - m.arriba, 40) - 1)
     }
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(l.id))
     await toca('empezar-vuelta')
     await momento('tuTurno')
     await toca('pista')
@@ -184,8 +184,8 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     // Desde las correcciones (C2), la Respuesta de Practicar es solo la flecha, y después de jugar llega la explicación
     for (const [linea, ply] of [['v:panov', 7], ['v:avance-short', 11]] as const) {
       const lp = lineaPorId(c, linea)!
-      await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'practicar', ply, fecha: Date.now() } })), [linea, ply] as const)
-      await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(linea))
+      await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'practicar', ply, fecha: Date.now() } })), [linea, ply] as const)
+      await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(linea))
       await momento('tuTurno')
       await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-ply', String(ply))
       await toca('pista')
@@ -205,11 +205,11 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
 
   test('la lección nueva (C9): el texto que pasa debajo del botón no se asoma a su lado, y al deslizar se lee completo', async ({ page }, info) => {
     // las capturas de C9: en el plan de la Tal, el renglón de "El de blancas" se veía cortado a la derecha de "Ahora, Practicar"
-    const c = cursoNuevo('caro-kann:b')!
+    const c = cursoNuevo('caro-kann-estructuras:b')!
     const l = lineaPorId(c, 'v:avance-tal')!
     const uci = enUci(l.jugadas)
     const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(l.id))
     await page.getByTestId('empezar-vuelta').click()
     for (const ply of misJugadas(l)) {
       await momento('tuTurno')
@@ -255,11 +255,11 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
   ])
     test(`la lección nueva (C9): debajo del botón tampoco se asoma nada, en ${p.nombre} (${p.ancho}×${p.alto})`, async ({ page }, info) => {
       await page.setViewportSize({ width: p.ancho, height: p.alto })
-      const l = lineaPorId(cursoNuevo('caro-kann:b')!, 'v:avance-van-der-wiel')!
+      const l = lineaPorId(cursoNuevo('caro-kann-estructuras:b')!, 'v:avance-van-der-wiel')!
       const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
       await page.goto('/')
-      await page.evaluate((linea) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply: 5, fecha: Date.now() } })), l.id)
-      await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+      await page.evaluate((linea) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply: 5, fecha: Date.now() } })), l.id)
+      await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(l.id))
       await momento('tuTurno')
       await jugar(page, info, enUci(l.jugadas)[5]!)
       await momento('leer')
@@ -292,11 +292,11 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
 
   test('la lección nueva (C3): la Clásica, la variante más larga, en sus dos vueltas, y la página del curso', async ({ page }, info) => {
     test.setTimeout(150_000)
-    const c = cursoNuevo('caro-kann:b')!
+    const c = cursoNuevo('caro-kann-estructuras:b')!
     const l = lineaPorId(c, 'v:clasica')!
     const uci = enUci(l.jugadas)
     const momento = (m: string) => expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', m, { timeout: 10_000 })
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(l.id))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(l.id))
     for (const vuelta of ['aprender', 'practicar']) {
       await page.getByTestId('empezar-vuelta').click()
       for (let ply = l.desde; ply < uci.length; ply++) {
@@ -317,7 +317,7 @@ test.describe('El zoom en el iPhone: la página nunca se ensancha ni cambia de e
     }
     await momento('fin')
     await cabe(page, 'el resumen')
-    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
     await expect(page.getByTestId('pagina-curso')).toBeVisible()
     await cabe(page, 'la página del curso')
   })

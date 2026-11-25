@@ -22,8 +22,8 @@ const CON_CAPTURA = [
 ]
 const CUANDO = process.env.CAPTURAS === 'antes' ? 'antes' : 'despues'
 
-const CURSO = cursoNuevo('caro-kann:b')!
-const ESTRUCTURAS = cursoNuevo('caro-kann-estructuras:b')!
+// una sola Caro-Kann (2026-11-25): la de estructuras; el curso de antes ya no se ve
+const CURSO = cursoNuevo('caro-kann-estructuras:b')!
 // los cursos del Avance (2026-11-25): sus obligatorias; el nombre más largo es el de la línea principal de la Francesa
 const AVANCES = [cursoNuevo('caro-kann:w')!, cursoNuevo('francesa:w')!]
 const clave = (c: typeof CURSO) => `ajedrez.v1.curso:${c.id}`
@@ -76,13 +76,10 @@ const medir = (page: Page) =>
   })
 
 test.describe('El botón "Seguir" de la página del curso, con jerarquía', () => {
-  for (const { curso, variantes } of [
-    { curso: CURSO, variantes: CURSO.variantes },
-    { curso: ESTRUCTURAS, variantes: obligatorias(ESTRUCTURAS) },
-    ...AVANCES.map((c) => ({ curso: c, variantes: obligatorias(c) })),
-  ])
+  // "Seguir" solo pasa por las obligatorias: una opcional a medias no sale en el botón
+  for (const { curso, variantes } of [{ curso: CURSO, variantes: obligatorias(CURSO) }, ...AVANCES.map((c) => ({ curso: c, variantes: obligatorias(c) }))])
     test(`${curso.nombre}: con cada una de las ${variantes.length} variantes en curso, "Seguir" grande y el nombre chico en un renglón, a 360, 375, 402 y 430`, async ({ page }) => {
-    expect(variantes).toHaveLength(curso === CURSO ? 16 : curso === ESTRUCTURAS ? 8 : obligatorias(curso).length)
+    expect(variantes).toHaveLength(curso === CURSO ? 8 : curso.id === 'caro-kann:w' ? 2 : 3)
     // la página se abre ya en cada ancho, como en el teléfono: si se achica la ventana con la página abierta, el tablero
     // tarda un momento en ajustarse y la medida ve una página más ancha que no existe
     for (const { ancho, alto } of ANCHOS) {
@@ -110,7 +107,7 @@ test.describe('El botón "Seguir" de la página del curso, con jerarquía', () =
     }
   })
 
-  test('"Empezar" y "Repasar el curso" se quedan como estaban: una sola palabra grande, también en el curso por estructuras', async ({ page }) => {
+  test('"Empezar" y "Repasar el curso" se quedan como estaban: una sola palabra grande', async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 740 })
     const comoEstaba = async (texto: string) => {
       await expect(boton(page)).toHaveText(texto)
@@ -119,20 +116,16 @@ test.describe('El botón "Seguir" de la página del curso, con jerarquía', () =
     }
     await conAvance(page, {})
     await comoEstaba('Empezar')
-    await conAvance(page, { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, terminadas: CURSO.variantes.map((v) => v.id) })
-    await comoEstaba('Repasar el curso')
-    await conAvance(page, {}, ESTRUCTURAS)
-    await comoEstaba('Empezar')
-    await conAvance(page, { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, terminadas: obligatorias(ESTRUCTURAS).map((v) => v.id) }, ESTRUCTURAS)
+    await conAvance(page, { piezas: { idea: 1, estructura: 1, errores: 1, repaso: 1 }, terminadas: obligatorias(CURSO).map((v) => v.id) })
     await comoEstaba('Repasar el curso')
   })
 
   test('capturas de la página del curso con la Van der Wiel en curso, a 402×874 y 360×740', async ({ page }, info) => {
     for (const { ancho, alto } of CON_CAPTURA) {
       await page.setViewportSize({ width: ancho, height: alto })
-      // como en la captura de Carlos: 2 de 16 variantes y la Van der Wiel a medias
-      await conAvance(page, { piezas: { idea: 1, estructura: 1 }, terminadas: ['avance-short', 'avance-c3'], enCurso: 'avance-van-der-wiel' })
-      await expect(page.getByTestId('avance')).toHaveText('2 de 16 variantes')
+      // como en la captura de Carlos: dos variantes hechas y la Van der Wiel a medias (hoy, en el curso por estructuras)
+      await conAvance(page, { piezas: { idea: 1, estructura: 1 }, terminadas: ['avance-short', 'cambio'], enCurso: 'avance-van-der-wiel' })
+      await expect(page.getByTestId('avance')).toHaveText('2 de 8 variantes')
       await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/boton-seguir-${CUANDO}-${ancho}x${alto}.png`, scale: 'css' })
     }
   })

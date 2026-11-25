@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
-import { CURSOS_NUEVOS, jugadasDeVariante, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { CURSOS_NUEVOS, cursoNuevo, esLeccionOpcional, jugadasDeVariante, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, soloObligatorias } from '../../src/curso/datos.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
 import { palabras, posicion } from '../../src/curso/textos.ts'
@@ -214,21 +214,40 @@ describe('Los cursos del Avance · lo guardado, el Repaso y Refuerza', () => {
     }
   })
 
-  it('el Repaso solo trae lo obligatorio de estos cursos', () => {
+  it('el Repaso solo trae lo obligatorio de estos cursos: las opcionales van marcadas (el filtro común de main)', () => {
     for (const c of [CK, FR]) {
       const curso = cursos().find((x) => x.id === c.id)!
-      expect(curso.lecciones.map((l) => l.id.split('/').pop())).toEqual(obligatorias(c).map((v) => v.base))
+      expect(curso.lecciones.filter((l) => !l.opcional).map((l) => l.id.split('/').pop())).toEqual(obligatorias(c).map((v) => v.base))
+      expect(curso.lecciones.filter((l) => l.opcional).map((l) => l.id.split('/').pop())).toEqual(opcionales(c).map((v) => v.base))
     }
   })
 
-  it('Refuerza solo recorre las líneas obligatorias de estos cursos; los demás cursos, como siempre', () => {
-    const rep = repertorioCompleto()
+  it('Refuerza solo recorre las líneas obligatorias de estos cursos (soloObligatorias); los demás cursos, como siempre', () => {
+    const rep = soloObligatorias(repertorioCompleto())
     for (const c of [CK, FR]) {
       const lineas = rep.lineas.filter((l) => l.apertura === c.apertura && l.color === c.color)
       expect(lineas.map((l) => l.claveBase).sort()).toEqual(obligatorias(c).map((v) => `${c.apertura}/${v.base}`).sort())
       for (const v of obligatorias(c)) expect(lineas.find((l) => l.claveBase === `${c.apertura}/${v.base}`)!.jugadas).toEqual(jugadasDeVariante(c, v))
     }
-    // la Caro-Kann con negras no cambia: todas sus variantes de la base
-    expect(rep.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').length).toBeGreaterThan(16)
+    // una apertura sin curso por estructuras no cambia
+    const todas = repertorioCompleto()
+    expect(rep.lineas.filter((l) => l.apertura === 'italiana').length).toBe(todas.lineas.filter((l) => l.apertura === 'italiana').length)
+  })
+
+  it('el filtro distingue por apertura y color: la Caro-Kann con blancas (el Avance) no choca con la de negras', () => {
+    const negras = cursoNuevo('caro-kann-estructuras:b')!
+    // una opcional de la Caro-Kann de negras es opcional con negras, no con blancas
+    for (const v of opcionales(negras)) {
+      expect(esLeccionOpcional('caro-kann', 'b', v.base), v.base).toBe(true)
+      expect(esLeccionOpcional('caro-kann', 'w', v.base), v.base).toBe(false)
+    }
+    // las lecciones del Avance contra la Caro-Kann son obligatorias con blancas
+    for (const v of obligatorias(CK)) expect(esLeccionOpcional('caro-kann', 'w', v.base), v.base).toBe(false)
+    // Refuerza: con blancas, solo las dos del Avance; con negras, solo las obligatorias del curso de negras
+    const rep = soloObligatorias(repertorioCompleto())
+    expect(rep.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'w').map((l) => l.claveBase).sort()).toEqual(obligatorias(CK).map((v) => `caro-kann/${v.base}`).sort())
+    const deNegras = rep.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.claveBase!.split('/')[1])
+    expect(deNegras.length).toBeGreaterThan(0)
+    for (const b of deNegras) expect(negras.variantes.some((v) => v.base === b && !opcionales(negras).includes(v)), b).toBe(true)
   })
 })

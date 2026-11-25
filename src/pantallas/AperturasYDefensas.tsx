@@ -15,6 +15,7 @@ import { navegar } from '../ruta.ts'
 import { useEffect, useState } from 'react'
 import { avanceVariantes, cursoNuevo } from '../curso/datos.ts'
 import { leerAvance } from '../curso/avance.ts'
+import { cursoQueQueda } from '../curso/queda.ts'
 
 /**
  * Nota 1 (L3): "Aperturas y defensas", la sección Aprender. Arriba, "Con blancas" y "Con negras"; cada apertura mía en
@@ -44,9 +45,11 @@ const ultimaDe = (jugadas: string[]): [string, string] | undefined => {
 }
 const orientacion = (c: Curso) => (c.color === 'w' ? 'white' : 'black')
 const aprendidas = (c: Curso, hechas: Record<string, unknown>) => c.lecciones.filter((l) => hechas[l.id]).length
+/** El curso que abre la tarjeta: el mismo o, si dejó de verse, el que queda en su lugar (`curso/queda.ts`). */
+const destino = (c: Curso) => cursoQueQueda(c.id) ?? c.id
 const avance = (c: Curso, hechas: Record<string, unknown>) => {
   // C6: el curso piloto lleva su propio avance (variantes terminadas en sus dos vueltas)
-  const n = cursoNuevo(c.id)
+  const n = cursoNuevo(destino(c))
   if (n) return avanceVariantes(n, leerAvance(n.id))
   return `${aprendidas(c, hechas)} de ${c.lecciones.length} ${c.lecciones.length === 1 ? 'variante aprendida' : 'variantes aprendidas'}`
 }
@@ -70,7 +73,7 @@ function Corazon({ id, favorita }: { id: string; favorita: boolean }) {
 function Tarjeta({ curso, favorita, hechas }: { curso: Curso; favorita: boolean; hechas: Record<string, unknown> }) {
   return (
     <li className={`tarjeta-apertura ${FAVORITAS_PRENDIDAS ? 'con-corazon' : ''}`} data-testid={`tarjeta-${curso.id}`}>
-      <a href={enlaceCurso(curso.id)} className="tarjeta-apertura-enlace">
+      <a href={enlaceCurso(destino(curso))} className="tarjeta-apertura-enlace">
         <strong>{curso.nombre}</strong>
         <TableroMini fen={fenDe(curso.raiz)} orientacion={orientacion(curso)} etiqueta={curso.nombre} />
         <span className="apagado">{avance(curso, hechas)}</span>
