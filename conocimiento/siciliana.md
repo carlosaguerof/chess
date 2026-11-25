@@ -69,7 +69,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Cf6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+ (4.Ab5+ vale casi lo mismo) y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
 
 ## Variante Najdorf
@@ -257,7 +257,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Cf6 4.Da4+ Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo. Da4+ y Db3 ponen tu dama a salvo con amenazas; después sacas tus piezas y enrocas, sin defender el peón a toda costa.
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
 - Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5/3. exd5/3...Nf6 (4.Da4+; su "4. Qa5+" es errata); motor: la línea principal del motor tras 4.Da4+ (4...Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4), cada jugada blanca la mejor, iterations/v4/comprobaciones-alapin.md.
 

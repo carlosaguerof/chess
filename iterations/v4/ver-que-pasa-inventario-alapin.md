@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/ver-inventario.ts siciliana:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Alapin contra la Siciliana»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**52 frases: 3 con "Ver"; 49 sin él** (34 porque explica la jugada que ya está en la línea, sin una alternativa; 11 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 3 porque lo que dice se juega en las jugadas que siguen de la línea; 1 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 1 de las 3 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**51 frases: 3 con "Ver"; 48 sin él** (34 porque explica la jugada que ya está en la línea, sin una alternativa; 11 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 3 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 1 de las 3 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
@@ -45,12 +45,11 @@
 | 7.cxd4 | prepara | Tu caballo de b1 podrá salir ahí atacando a la dama. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8.♘c3 | prepara | Siguen 0-0 y sacar tus demás piezas. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.♕a4+ | porque | Ganas tiempo: el rival responde al jaque y todavía no recupera tu peón. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4.♕a4+ | cuidado | No defiendas el peón a toda costa: lo importante es sacar tus piezas. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 5.♕b3 | porque | Además, tu dama sigue defendiendo tu peón de d5. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.dxe6 | porque | Después del cambio sigues con un peón de más. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.♗c4 | porque | Si el rival cambia los alfiles, retomas con la dama. | lo que dice se juega en las jugadas que siguen de la línea |
 | 8.♕xc4 | prepara | Siguen ♘f3 y el enroque: saca tus piezas antes de pensar en defender el peón. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 3.e5 | porque | Es la regla del mapa: si el caballo ataca tu e4, avanzas, lo echas y ganas espacio. | explica la jugada que ya está en la línea, sin una alternativa |
+| 3.e5 | porque | Es la regla del mapa para tu jugada 3: si el caballo ataca tu e4, avanzas, lo echas y ganas espacio. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3.e5 | prepara | Después pones un peón en d4 y formas una cadena. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Así sostienes e5 con un peón, y tu peón de c3 apoya a este. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.cxd4 | porque | Además, tu caballo de b1 recupera la casilla c3. | explica la jugada que ya está en la línea, sin una alternativa |
