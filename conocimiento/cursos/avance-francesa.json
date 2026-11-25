@@ -549,7 +549,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 4...cxd4 en 7.5 % (600–1000, n 3) y 6.5 % (1000–1400, n 65) de las partidas con 1.e4 e6",
       "plan": {
-        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tus piezas. Tu caballo de c3 no lo defiende: si negras suma un atacante, suma tú un defensor o echa al atacante; contra la dama en b6, tu caballo va a a4. El caballo de f5 es el que más presiona d4: con h4, y después g4, lo echas de ahí.",
+        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tus piezas. Tu caballo de c3 no lo defiende: si negras suma un atacante, suma tú un defensor o echa al atacante; contra la dama en b6, tu caballo va a a4. El caballo de f5 es el que más presiona d4: con tu caballo ya en c3, empuja h4, y más adelante g4 lo echa de ahí.",
         "rival": "Negras suma piezas contra d4, como su dama en b6.",
         "marcas": [],
         "marcasDe": {
@@ -601,9 +601,13 @@
               ]
             },
             {
-              "frase": "Con h4, y después g4, lo echas de ahí.",
+              "frase": "Por ejemplo: ...Ad7, h4, ...Ae7, h5, ...h6 y g4 lo echa de f5.",
               "jugadas": [
+                "...Bd7",
                 "h4",
+                "...Be7",
+                "h5",
+                "...h6",
                 "g4"
               ]
             },
@@ -630,7 +634,7 @@
       "frecuencia": 4,
       "fuenteFrecuencia": "partidas de lichess (CC0): 5...Cge7 en 3.7 % de las partidas con 1.e4 e6 (1000–1400, n 22); en 600–1000, sin partidas",
       "plan": {
-        "tuyo": "Estás en la cadena entera: c3 sigue detrás de d4. Con el peón de c3 y tus dos caballos, d4 tiene defensores de sobra: tu alfil de f1 puede ir a d3, frente al caballo de f5, y después enrocas. Antes de cada jugada, cuenta atacantes y defensores de d4.",
+        "tuyo": "Estás en la cadena entera: c3 sigue detrás de d4. Con el peón de c3 y tus caballos en f3 y c2, d4 tiene defensores de sobra: tu alfil de f1 puede ir a d3, frente al caballo de f5, y después enrocas. Si negras cambia en d4, retomas con el peón de c. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras puede cambiar en d4 o atacar tu peón de e5 con ...f6.",
         "marcas": [],
         "marcasDe": {
@@ -704,11 +708,11 @@
       "estructura": "Negras empuja a c4",
       "intro": "Estás en la cadena entera, pero con ...c4 negras la cierra: tu objetivo es desarrollarte con calma. Negras suma su dama contra d4 y b2.",
       "idea": "Contra la dama en b6, a3 prepara b4; si negras cierra con ...c4, d4 ya no tiene un peón encima y te desarrollas.",
-      "regla": "Con la dama de negras en b6, no saques todavía el alfil de c1.",
+      "regla": "Con la dama de negras en b6, tu alfil de c1 no sale en la jugada 6: se come tu peón de b2.",
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 5...Db6 en 9.3 % (600–1000, n 3) y 15.7 % (1000–1400, n 100); lo que sigue a 6.a3 no se puede medir (5 partidas)",
       "plan": {
-        "tuyo": "Estás en la cadena cerrada: ningún peón de negras ataca d4. Termina de desarrollarte con h3 y Te1, y juega en el lado de rey, hacia donde apunta tu cadena.",
+        "tuyo": "Estás en la cadena cerrada: ningún peón de negras ataca d4. Con tu alfil en e2 y tu rey enrocado, sigue con h3 y Te1, y juega en el lado de rey, hacia donde apunta tu cadena.",
         "rival": "Negras lleva su caballo de g8 por e7 a f5.",
         "marcas": [],
         "pasoAPaso": {
@@ -751,7 +755,7 @@
       "estructura": "Negras cambia en d4",
       "intro": "Estás en la cadena entera, pero negras cambia en d4 y pasas a la base sola: tu objetivo es sumar defensores de d4 sin regalar un peón. El caballo de negras va a f5 por h6.",
       "idea": "Con b4, tu alfil de c1 ya no cuida b2 y puede defender d4 desde b2.",
-      "regla": "Con la dama de negras en b6, no tomes en h6: se come tu peón de b2.",
+      "regla": "En tu jugada 7, con la dama de negras en b6, no tomes en h6: se come tu peón de b2.",
       "frecuencia": 1,
       "fuenteFrecuencia": "partidas de lichess (CC0): 0 de 5 partidas con 6.a3 en 1000–1400; sin dato",
       "plan": {
@@ -893,7 +897,7 @@
       "frecuencia": 2,
       "fuenteFrecuencia": "partidas de lichess (CC0): 4...Db6 5.Cf3 Ad7 en 0.7 % (1000–1400, n 5); 4...Db6 sale en 6.4 %, pero la mayoría sigue con ...Cc6",
       "plan": {
-        "tuyo": "Estás en la cadena entera: negras ya cambió su alfil encerrado y tú sigues con más espacio. Saca tu caballo de b1 y tu alfil de c1, contando los defensores de d4.",
+        "tuyo": "Estás en la cadena entera: negras ya cambió su alfil encerrado y tú sigues con más espacio. Si negras cambia en d4, retomas con el peón de c; si ofrece cambiar damas con ...Da6, tu dama vuelve a d1. Después sacas tu caballo de b1 a c3, contando los defensores de d4.",
         "rival": "Negras cambia en d4 y saca sus caballos contra d4.",
         "marcas": [],
         "pasoAPaso": {
@@ -2496,6 +2500,7 @@
       ],
       "hace": "Cambias los alfiles con jaque.",
       "porque": "Así negras tiene que retomar enseguida y tú ya puedes enrocar.",
+      "cuidado": "Si negras tapa con ...c6, tienes una pieza de más y tu alfil sigue atacado: retíralo a a4.",
       "describe": {
         "porque": [
           [
@@ -2503,12 +2508,57 @@
           ]
         ]
       },
+      "ver": {
+        "cuidado": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 6.Axb5+.",
+                "fuente": [
+                  "MOTOR",
+                  "AJEDREZ"
+                ],
+                "motor": [
+                  "M-fr-bs-c6"
+                ]
+              },
+              {
+                "frase": "6...c6: negras tapa el jaque en vez de retomar; tu alfil sigue atacado y tienes una pieza de más.",
+                "jugadas": [
+                  "c6"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "AJEDREZ"
+                ],
+                "motor": [
+                  "M-fr-bs-c6"
+                ]
+              },
+              {
+                "frase": "7.Aa4: tu alfil se va, y te quedas con la pieza de más.",
+                "jugadas": [
+                  "Ba4"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "AJEDREZ"
+                ],
+                "motor": [
+                  "M-fr-bs-c6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
       "fuente": [
         "WP-FR",
         "MOTOR"
       ],
       "motor": [
-        "M-fr-bs-6axb5"
+        "M-fr-bs-6axb5",
+        "M-fr-bs-c6"
       ]
     },
     "e4 e6 d4 d5 e5 Bd7 Nf3 a6 c3 Bb5 Bxb5+ axb5 O-O": {

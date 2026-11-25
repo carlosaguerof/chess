@@ -459,7 +459,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 3...Af5 en 34.7 % (600–1000, n 59 de 170 con 3.e5) y 52.5 % (1000–1400, n 1225 de 2336)",
       "plan": {
-        "tuyo": "Estás en la cadena entera, pero negras puede cambiar en d4 en cualquier momento: retomas con el peón de c y pasas a la base sola. Mientras, h3 le pregunta al alfil de g4. Antes de cada jugada, cuenta atacantes y defensores de d4.",
+        "tuyo": "Estás en la cadena entera, pero negras puede cambiar en d4 en cualquier momento: retomas con el peón de c y pasas a la base sola. Ya enrocado y con tu caballo en d2, h3 le pregunta al alfil de g4. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras cambia en d4 y saca su caballo de g8 a e7.",
         "marcas": [],
         "pasoAPaso": {

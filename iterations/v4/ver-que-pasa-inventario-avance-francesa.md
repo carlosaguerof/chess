@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/ver-inventario.ts francesa:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Avance contra la Francesa»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**47 frases: 7 con "Ver"; 40 sin él** (21 porque explica la jugada que ya está en la línea, sin una alternativa; 8 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 11 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 2 de las 7 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**48 frases: 8 con "Ver"; 40 sin él** (21 porque explica la jugada que ya está en la línea, sin una alternativa; 8 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 11 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 2 de las 8 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
@@ -15,6 +15,7 @@
 | 6.a3 | prepara | Si negras no cierra con ...c4 y saca su caballo a e7, ♗e2 todavía no: tras ...cxd4 y ...♘f5, tres piezas atacarían d4 y solo dos lo defenderían. | 6...♘ge7 7.♗e2 7...cxd4 8.cxd4 8...♘f5 | solo Aprender |
 | 6.a3 | cuidado | No saques todavía el alfil de c1: la dama de negras se comería tu peón de b2 y después tu torre. | 6.♗e3 6...♕xb2 7.dxc5 7...♕xa1 | Aprender y Practicar |
 | 7.b4 | cuidado | No tomes el caballo de h6 con tu alfil: la dama de negras se come tu peón de b2 y negras recupera la pieza. | 7.♗xh6 7...♕xb2 8.♘bd2 8...gxh6 | Aprender y Practicar |
+| 6.♗xb5+ | cuidado | Si negras tapa con ...c6, tienes una pieza de más y tu alfil sigue atacado: retíralo a a4. | 6...c6 7.♗a4 | Aprender y Practicar |
 
 ## Sin "Ver"
 
