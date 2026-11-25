@@ -149,14 +149,33 @@ export function misJugadas(l: Pick<LineaCurso, 'jugadas' | 'desde' | 'lado'>): n
   return r
 }
 
+/** Los cursos de una apertura y color que dividen sus lecciones en obligatorias y opcionales (los que traen `secciones`). */
+const conSecciones = (apertura: string, color: string): DatosCurso[] => Object.values(CURSOS_NUEVOS).filter((c) => c.secciones && c.apertura === apertura && c.color === color)
+
 /**
- * El repertorio de Refuerza: de un curso que se ve y tiene opcionales, solo las líneas de sus lecciones obligatorias
- * (Carlos, pendientes de la Caro-Kann, n.º 8, "Su orden", punto 2). Lo demás no cambia, y la guía en la partida y los
- * bots siguen con el repertorio completo. El registro no se toca: lo fallado en una opcional se queda guardado.
+ * ¿Es una lección opcional? La lección de la variante `base` de la base, en una apertura y color, es opcional si está en
+ * la sección opcional de su curso, sea cual sea el curso (`specs/cursos.md` §6). Es la única condición: el Repaso
+ * (`cursos()` marca `opcional`) y Refuerza (`soloObligatorias`) la usan, y los cursos nuevos también.
  */
-export function sinOpcionales(rep: Repertorio): Repertorio {
-  const visibles = Object.values(CURSOS_NUEVOS).filter((c) => !cursoQueQueda(c.id) && c.secciones?.some((s) => s.opcional))
-  if (visibles.length === 0) return rep
-  const deCurso = new Map(visibles.map((c) => [`${c.apertura}:${c.color}`, new Set(obligatorias(c).map((v) => `${c.color}:${c.apertura}/${v.base}`))]))
-  return { ...rep, lineas: rep.lineas.filter((l) => deCurso.get(`${l.apertura}:${l.color}`)?.has(l.id) ?? true) }
+export function esLeccionOpcional(apertura: string, color: string, base: string): boolean {
+  return conSecciones(apertura, color).some((c) => opcionales(c).some((v) => v.base === base))
+}
+
+/**
+ * El repertorio de Refuerza: en una apertura con un curso con `secciones`, solo las líneas de sus lecciones obligatorias
+ * (Carlos, pendientes de la Caro-Kann, n.º 8, "Su orden", punto 2). Eso quita las opcionales y también las variantes de
+ * la base que no son lección del curso (en la Caro-Kann, 37 jugadas: 23 de opcionales y 14 de Karpov, Maróczy, 3.♘d2 y
+ * otras). Una jugada que una opcional comparte con una obligatoria sigue saliendo. Las demás aperturas no cambian, y la
+ * guía en la partida y los bots siguen con el repertorio completo. El registro no se toca.
+ */
+export function soloObligatorias(rep: Repertorio): Repertorio {
+  return {
+    ...rep,
+    lineas: rep.lineas.filter((l) => {
+      const cs = conSecciones(l.apertura, l.color)
+      if (cs.length === 0) return true
+      const base = l.id.slice(l.id.indexOf('/') + 1)
+      return cs.some((c) => c.variantes.some((v) => v.base === base)) && !esLeccionOpcional(l.apertura, l.color, base)
+    }),
+  }
 }

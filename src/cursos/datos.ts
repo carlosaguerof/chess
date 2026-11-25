@@ -1,7 +1,7 @@
 import { BASE } from '../base/base.ts'
 import { cursoActivo } from '../aprender/interruptores.ts'
 import { cursosDeLaBase, type Curso, type Leccion } from './modelo.ts'
-import { cursoNuevo, esOpcional, leccionesDe, leccionIdDe } from '../curso/datos.ts'
+import { cursoNuevo, esLeccionOpcional, leccionesDe, leccionIdDe } from '../curso/datos.ts'
 import { cursoQueQueda } from '../curso/queda.ts'
 
 let todos: Curso[] | null = null
@@ -19,26 +19,23 @@ export function cursos(): Curso[] {
     .filter((c) => cursoActivo(c.id))
     .map((c) => {
       const n = cursoNuevo(c.id)
-      return n ? { ...c, lecciones: conElPlanDelQueQueda(c.id, leccionesDe(n)) } : c
+      const lecciones = n ? conElPlanDelQueQueda(c.id, leccionesDe(n)) : c.lecciones
+      // las opcionales van marcadas: no salen en el Repaso (`esLeccionOpcional`, la misma condición de Refuerza)
+      return { ...c, lecciones: lecciones.map((l) => (esLeccionOpcional(c.apertura, c.color, l.id.slice(l.id.lastIndexOf('/') + 1)) ? { ...l, opcional: true } : l)) }
     })
   return todos
 }
 
 /**
  * Si el curso dejó de verse, sus lecciones (las fichas de Repaso de esas líneas) muestran el plan del curso que queda:
- * es el que Carlos lee en la lección, con sus correcciones (el Cambio, con la torre en b8). Las que ahí son opcionales
- * van marcadas: no salen en el Repaso. El orden y los ids no cambian: "Practicar esta línea" cuenta las lecciones en ese
- * orden.
+ * es el que Carlos lee en la lección, con sus correcciones (el Cambio, con la torre en b8). El orden y los ids no
+ * cambian: "Practicar esta línea" cuenta las lecciones en ese orden.
  */
 function conElPlanDelQueQueda(id: string, lecciones: Leccion[]): Leccion[] {
   const queda = cursoNuevo(cursoQueQueda(id) ?? '')
   if (!queda) return lecciones
-  const deQueda = new Map(queda.variantes.map((v) => [leccionIdDe(queda, v), v]))
-  return lecciones.map((l) => {
-    const v = deQueda.get(l.id)
-    if (!v) return l
-    return { ...l, plan: v.plan.tuyo, ...(esOpcional(queda, v.id) ? { opcional: true } : {}) }
-  })
+  const planes = new Map(queda.variantes.map((v) => [leccionIdDe(queda, v), v.plan.tuyo]))
+  return lecciones.map((l) => ({ ...l, plan: planes.get(l.id) ?? l.plan }))
 }
 
 export function cursoPorId(id: string): Curso | undefined {

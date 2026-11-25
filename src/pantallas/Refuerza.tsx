@@ -3,7 +3,7 @@ import { Texto } from '../componentes/Notacion.tsx'
 import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import { repertorioCompleto } from '../aprender/favoritas.ts'
-import { sinOpcionales } from '../curso/datos.ts'
+import { soloObligatorias } from '../curso/datos.ts'
 import type { Repertorio } from '../repertorio/modelo.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { jugadasFalladas, textoConteo, nombreDeJugada, lineaCompleta, type JugadaARepasar } from '../registro/refuerza.ts'
@@ -26,7 +26,7 @@ const POR_RONDA = 10
 
 /** "Refuerza lo que fallas" (nota 1): solo las jugadas que he fallado, de la que más fallo a la que menos. */
 export function Refuerza() {
-  const rep = useMemo(() => sinOpcionales(repertorioCompleto()), [])
+  const rep = useMemo(() => soloObligatorias(repertorioCompleto()), [])
   const [ronda, setRonda] = useState<JugadaARepasar[] | null>(null)
   const [vuelta, setVuelta] = useState(0)
   const orden = useMemo(() => jugadasFalladas(rep, leerRegistro()), [rep, vuelta, ronda]) // eslint-disable-line react-hooks/exhaustive-deps

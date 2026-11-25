@@ -22,7 +22,7 @@ export const COMO_FUNCIONA_REPASO: Explicacion = {
   enlace: 'Ver cómo funciona el Repaso de hoy',
   pasos: [
     'Va por lección: cada variante que aprendes es una lección.',
-    'Una lección entra al repaso cuando la terminas por primera vez.',
+    'Una lección entra al repaso cuando la terminas por primera vez; las opcionales de un curso, no.',
     'Si la contestas sin ayuda, vuelve cada vez más tarde: a los 1, 3, 7, 14 y 30 días.',
     'Si fallas o pides Pista o Respuesta, vuelve mañana.',
     'Si te atrasas, te espera. El siguiente plazo cuenta desde el día en que la repasas.',
@@ -37,7 +37,7 @@ export const COMO_FUNCIONA_REFUERZA: Explicacion = {
   titulo: 'Cómo funciona Refuerza',
   enlace: 'Ver cómo funciona Refuerza',
   pasos: [
-    'Cada jugada que fallas se guarda: en los cursos, en el repaso, en las partidas con la guía y aquí mismo.',
+    'Cada jugada que fallas se guarda: en los cursos, en el repaso, en las partidas con la guía y aquí mismo. De un curso con lecciones opcionales, aquí solo salen las de sus obligatorias.',
     'Pedir Pista o Respuesta también cuenta como fallo.',
     'Aquí salen primero las que más fallas, con cuántas veces las has fallado.',
     'Practicas cada jugada desde su posición: el tablero queda justo antes de ella.',

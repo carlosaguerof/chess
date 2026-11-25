@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { caminoQueQueda, CURSOS_NUEVOS, grupoDeLinea, sinOpcionales, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { caminoQueQueda, CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, soloObligatorias, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -14,7 +14,7 @@ import { cursoActivo } from '../../src/aprender/interruptores.ts'
 import { lineasDe as lineasDeFavorita, repertorioCompleto } from '../../src/aprender/favoritas.ts'
 import type { AvanceCurso } from '../../src/curso/avance.ts'
 import { cursoQueQueda } from '../../src/curso/queda.ts'
-import { jugadasFalladas } from '../../src/registro/refuerza.ts'
+import { jugadasDeMiRepertorio, jugadasFalladas } from '../../src/registro/refuerza.ts'
 import { fenCorto } from '../../src/registro/registro.ts'
 import type { CapaCurso, LineaCurso, PaginaLeer } from '../../src/curso/tipos.ts'
 
@@ -580,7 +580,7 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
 
   it('Refuerza: de la Caro-Kann, solo las líneas de las 8 obligatorias; lo demás y la guía, igual', () => {
     const todo = repertorioCompleto()
-    const rep = sinOpcionales(todo)
+    const rep = soloObligatorias(todo)
     const ck = (r: typeof todo) => r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.id)
     expect(ck(rep).sort()).toEqual(obligatorias(nuevo).map((v) => `b:caro-kann/${v.base}`).sort())
     expect(rep.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b'))).toEqual(todo.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b')))
@@ -589,10 +589,50 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
     expect(repertorioCompleto().lineas).toHaveLength(todo.lineas.length)
   })
 
+  it('una sola condición: esLeccionOpcional marca en el Repaso y filtra en Refuerza las mismas 8', () => {
+    for (const v of nuevo.variantes) expect(esLeccionOpcional('caro-kann', 'b', v.base), v.id).toBe(opcionales(nuevo).includes(v))
+    const marcadas = caroKann().lecciones.filter((l) => l.opcional).map((l) => l.id.slice(l.id.lastIndexOf('/') + 1)).sort()
+    expect(marcadas).toEqual(opcionales(nuevo).map((v) => v.base).sort())
+    const fuera = repertorioCompleto().lineas.filter((l) => !soloObligatorias(repertorioCompleto()).lineas.includes(l)).map((l) => l.id.slice(l.id.indexOf('/') + 1))
+    for (const b of marcadas) expect(fuera, b).toContain(b)
+    // ningún otro curso tiene opcionales hoy
+    expect(cursos().filter((c) => c.id !== 'caro-kann:b').flatMap((c) => c.lecciones).filter((l) => l.opcional)).toEqual([])
+  })
+
+  it('Refuerza deja de mostrar 37 jugadas de la Caro-Kann: 23 de opcionales y 14 de líneas de la base que no son lección', () => {
+    const todas = jugadasDeMiRepertorio(repertorioCompleto(), [])
+    const quedan = new Set(jugadasDeMiRepertorio(soloObligatorias(repertorioCompleto()), []).map((j) => `${j.fen}|${j.esperada}`))
+    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`))
+    expect(fuera).toHaveLength(37)
+    const enOpcional = (j: (typeof todas)[number]) => opcionales(nuevo).some((v) => {
+      const ch = new Chess()
+      return jugadasDeVariante(nuevo, v).some((s) => {
+        const ok = ch.fen() === j.fen && s === j.esperada
+        ch.move(s)
+        return ok
+      })
+    })
+    expect(fuera.filter(enOpcional)).toHaveLength(23)
+  })
+
+  it('un curso nuevo con su propio id y secciones usa la misma condición', () => {
+    const it = repertorioCompleto().lineas.find((l) => l.apertura === 'italiana' && l.color === 'w')!
+    const base = it.id.slice(it.id.indexOf('/') + 1)
+    const v = { ...nuevo.variantes[0]!, id: 'prueba', base }
+    CURSOS_NUEVOS['prueba:w'] = { ...nuevo, id: 'prueba:w', apertura: 'italiana', color: 'w', fichasDe: undefined, variantes: [v], secciones: [{ id: 'opcional', titulo: 'Opcional', opcional: true, variantes: ['prueba'] }] }
+    try {
+      expect(esLeccionOpcional('italiana', 'w', base)).toBe(true)
+      expect(soloObligatorias(repertorioCompleto()).lineas.some((l) => l.id === it.id)).toBe(false)
+    } finally {
+      delete CURSOS_NUEVOS['prueba:w']
+    }
+    expect(esLeccionOpcional('italiana', 'w', base)).toBe(false)
+  })
+
   it('Refuerza: un fallo en una jugada que solo está en una opcional no sale; uno en una obligatoria, sí', () => {
     const soloTal = fallo(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'], 'h5')
     const deLaBase = fallo(['e4', 'c6', 'd4', 'd5', 'e5'], 'Bf5')
-    const rep = sinOpcionales(repertorioCompleto())
+    const rep = soloObligatorias(repertorioCompleto())
     expect(jugadasFalladas(repertorioCompleto(), [soloTal]).map((j) => j.esperada), 'antes salía').toEqual(['h5'])
     expect(jugadasFalladas(rep, [soloTal])).toEqual([])
     expect(jugadasFalladas(rep, [soloTal, deLaBase]).map((j) => j.esperada)).toEqual(['Bf5'])
