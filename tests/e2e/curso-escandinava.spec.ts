@@ -152,6 +152,23 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     await revisar(page.getByTestId('tablero').first(), 'la lección')
   })
 
+  test('al final de Aprender, el plan del rival dice "El de negras:" (con blancas, el rival es negras)', async ({ page }, info) => {
+    const l = lineaPorId(C, 'v:valenciana')!
+    const ply = Math.max(...misJugadas(l))
+    await page.goto('/#/')
+    await page.evaluate(([clave, linea, ply]) => localStorage.setItem(clave as string, JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply, fecha: Date.now() } })), [CLAVE, l.id, ply] as const)
+    await page.goto(urlDe(l.id))
+    await page.reload()
+    await momento(page, 'tuTurno')
+    await jugar(page, info, uci(l.jugadas, ply))
+    if ((await leccion(page).getAttribute('data-momento')) === 'leer') await page.getByTestId('siguiente').click()
+    await momento(page, 'plan')
+    const narracion = page.getByTestId('narracion')
+    await expect(narracion).toContainText('El de negras:')
+    await expect(narracion).toContainText(mostrarTexto(l.variante!.plan.rival, 'figuras'))
+    await expect(narracion).not.toContainText('El de blancas:')
+  })
+
   test('las obligatorias y opcionales del curso son las de la tabla', async () => {
     expect(obligatorias(C).map((v) => v.id)).toEqual(['clasica', 'valenciana', 'gipslis', 'lasker'])
     expect(opcionales(C).map((v) => v.id)).toEqual(['bronstein', 'schiller-pytel', 'marshall', 'richter'])
