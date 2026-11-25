@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
 import { CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, soloObligatorias, troncoDelCurso } from '../../src/curso/datos.ts'
@@ -27,14 +28,31 @@ const variantes = lineasDe(c).filter((l) => l.tipo === 'variante')
 const CERRADO = 'Centro cerrado'
 const IDEAL = 'Centro ideal'
 const ABIERTO = 'Centro abierto'
-/** La tabla del mapa (`iterations/v4/mapa-italiana.md`): sección, lección, forma y su frecuencia en las dos bandas. */
-const TABLA: [string, string, boolean, [string, string | undefined, number, number][]][] = [
-  ['La base', 'base', false, [['dos-caballos-d3', CERRADO, 41.7, 36.2], ['la-bourdonnais', IDEAL, 6.5, 6.2], ['anti-higado-frito', ABIERTO, 6.4, 18.7]]],
-  ['Las que más te van a salir', 'frecuentes', false, [['principal', CERRADO, 17.0, 13.8], ['paris', ABIERTO, 7.0, 5.4], ['blackburne-kostic', IDEAL, 1.9, 3.8]]],
-  ['Opcional', 'opcional', true, [['hungara', undefined, 0.6, 1.3], ['rousseau', undefined, 0.6, 1.7]]],
+/** La tabla del mapa (`iterations/v4/mapa-italiana.md`): sección, lección y forma. Los números, de `FRECUENCIAS`. */
+const TABLA: [string, string, boolean, [string, string | undefined][]][] = [
+  ['La base', 'base', false, [['dos-caballos-d3', CERRADO], ['la-bourdonnais', IDEAL], ['anti-higado-frito', ABIERTO]]],
+  ['Las que más te van a salir', 'frecuentes', false, [['principal', CERRADO], ['paris', ABIERTO], ['blackburne-kostic', IDEAL]]],
+  ['Opcional', 'opcional', true, [['hungara', undefined], ['rousseau', undefined]]],
 ]
-/** Las formas por cualquier camino, en las dos bandas (el mismo archivo). */
-const FORMAS: Record<string, [number, number]> = { [CERRADO]: [54.7, 42.2], [ABIERTO]: [7.5, 18.0], [IDEAL]: [3.0, 7.3] }
+
+/**
+ * Las frecuencias del curso (partidas reales de lichess, CC0), como las deja `node scripts/frecuencias-cursos.mjs
+ * italiana:w` con el método del mapa (`scripts/frecuencias/italiana.mjs`; la forma del archivo, en
+ * `conocimiento/frecuencias/README.md`). Antes estaban escritas aquí a mano.
+ */
+type Banda = { pct: number | null; n: number }
+type Frecuencias = {
+  curso: string
+  partidas: Record<string, number>
+  lecciones: Record<string, { forma: string | null } & Record<string, Banda>>
+  formas: Record<string, Record<string, Banda>>
+  otras?: Record<string, Record<string, Banda>>
+}
+const FRECUENCIAS = JSON.parse(readFileSync('conocimiento/frecuencias/italiana.json', 'utf8')) as Frecuencias
+const BANDAS = ['600-1000', '1000-1400'] as const
+/** El porcentaje de las dos bandas; en la Italiana hay datos en todas (la prueba de abajo lo comprueba). */
+const dosBandas = (x: Record<string, Banda>): [number, number] => [x[BANDAS[0]]!.pct ?? NaN, x[BANDAS[1]]!.pct ?? NaN]
+const FORMAS: Record<string, [number, number]> = Object.fromEntries(Object.entries(FRECUENCIAS.formas).map(([f, x]) => [f, dosBandas(x)]))
 
 const jugadas = (l: LineaCurso): Move[] => {
   const ch = new Chess()
@@ -128,11 +146,35 @@ describe('La Italiana por estructuras · el curso', () => {
     expect(mapa).toContain('¿qué pasó con el peón de e5 de negras?')
   })
 
+  it('las frecuencias del repo son las de este curso: una fila por lección, sin lecciones de más, con datos en las dos bandas', () => {
+    expect(FRECUENCIAS.curso).toBe('italiana:w')
+    // cada variante del curso tiene su fila, y el archivo no trae lecciones que el curso no tiene
+    expect(Object.keys(FRECUENCIAS.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+    // la forma que midió el script (toda la línea) es la etiqueta del curso; la Húngara y la Rousseau, fuera del mapa
+    for (const v of c.variantes) expect(FRECUENCIAS.lecciones[v.id]!.forma, v.id).toBe(v.estructura ?? null)
+    expect(Object.keys(FRECUENCIAS.formas).sort()).toEqual([ABIERTO, CERRADO, IDEAL])
+    for (const b of BANDAS) {
+      const partidas = FRECUENCIAS.partidas[b]!
+      expect(partidas, b).toBeGreaterThan(0)
+      // "sin datos" (null) no es 0 %: en la Italiana todas las lecciones y formas tienen partidas reales en las dos bandas
+      for (const [id, x] of [...Object.entries(FRECUENCIAS.lecciones), ...Object.entries(FRECUENCIAS.formas)]) {
+        expect(x[b]!.pct, `${id} ${b}`).toEqual(expect.any(Number))
+        expect(x[b]!.pct!, `${id} ${b}`).toBeGreaterThan(0)
+        expect(x[b]!.pct!, `${id} ${b}`).toBeLessThanOrEqual(100)
+        expect(x[b]!.n, `${id} ${b}`).toBeGreaterThan(0)
+        expect(x[b]!.n, `${id} ${b}`).toBeLessThanOrEqual(partidas)
+      }
+    }
+  })
+
   it('obligatorio y opcional siguen la regla (specs/cursos.md §6) con los números del mapa', () => {
     // paso 1: cada forma pasa el 5 % en alguna banda, y la lección de La base de cada forma es su más jugada en alguna
     // banda (en el Abierto, 3...h6 en 1000–1400: tras 4.d4 negras cambia en d4 más seguido que en París; el gate del mapa)
     for (const [forma, [a, b]] of Object.entries(FORMAS)) expect(Math.max(a, b), forma).toBeGreaterThanOrEqual(5)
-    const filas = TABLA.flatMap(([, id, , ls]) => ls.map(([l, f, a, b]) => ({ seccion: id, l, f, a, b })))
+    const filas = TABLA.flatMap(([, id, , ls]) => ls.map(([l, f]) => {
+      const [a, b] = dosBandas(FRECUENCIAS.lecciones[l]!)
+      return { seccion: id, l, f, a, b }
+    }))
     for (const forma of Object.keys(FORMAS)) {
       const de = filas.filter((x) => x.f === forma)
       const base = de.find((x) => x.seccion === 'base')!

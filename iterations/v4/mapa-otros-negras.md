@@ -53,6 +53,8 @@ La Bird va por 3.e3, la mejor de blancas según el motor (−0.17) y la segunda 
 | Sin ...d5 (sobre todo 1.e3 e5) | 21.6 % | 13.0 % | — |
 | Sin datos | 43.0 % | 39.8 % | — |
 
+*(Cierre de los cursos, 2026-11-25: con la línea de hoy de la Húngara, que enseña 3...Cf6 desde la revisión final de la rama, el Centro libre da 32.7 % y "Sin datos" 40.8 % en 1000–1400; la tabla de arriba se midió con 3...Ag4. No cambia ninguna sección. Los números de hoy: `conocimiento/frecuencias/otros-negras.json`.)*
+
 "Sin ...d5" es lo que jugaron las negras de la muestra, no el rival: para quien siempre contesta ...d5, el Centro libre es mayor que lo que dice la tabla.
 
 **Las lecciones:**

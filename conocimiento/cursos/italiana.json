@@ -724,7 +724,7 @@
       },
       "regla": "En tu jugada 4, si su caballo de f6 ataca tu e4, d3. Con su alfil en c5, nunca eches con h3 a un caballo en g4: antes de enrocar, d4; con tu torre en e1, regrésala a f1.",
       "frecuencia": 5,
-      "fuenteFrecuencia": "partidas reales: 41.7 % (600–1000) y 36.2 % (1000–1400) de las partidas que llegan a 3.Ac4 siguen con 3...Cf6 (iterations/v4/mapa-italiana.md)"
+      "fuenteFrecuencia": "partidas reales: 41.6 % (600–1000) y 36.2 % (1000–1400) de las partidas que llegan a 3.Ac4 siguen con 3...Cf6 (conocimiento/frecuencias/italiana.json)"
     },
     {
       "id": "la-bourdonnais",

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
 import { CURSOS_NUEVOS, esOpcional, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, soloObligatorias, textoMio } from '../../src/curso/datos.ts'
@@ -151,47 +152,61 @@ describe('La Eslava · el curso', () => {
 
 /**
  * La tabla de obligatorio y opcional contra los datos (`iterations/v4/mapa-eslava.md`): partidas Rapid de lichess,
- * septiembre de 2026, con la Eslava como raíz (las partidas con 1.d4 d5 2.c4). `null` es "sin datos" (menos de 3 partidas
- * por jugada), no cero. Una banda con menos de 10 partidas no decide: pesa la otra (nota del orchestrator, 2026-11-25).
+ * septiembre de 2026, con la Eslava como raíz (las partidas con 1.d4 d5 2.c4). Los números salen de
+ * `conocimiento/frecuencias/eslava.json` (`node scripts/frecuencias-cursos.mjs eslava:b`, con el método del mapa en
+ * `scripts/frecuencias/eslava.mjs`; la forma del archivo, en `conocimiento/frecuencias/README.md`). Antes estaban escritos
+ * aquí a mano. `pct: null` es "sin datos" (menos de 3 partidas por jugada), no cero. Una banda con menos de 10 partidas no
+ * decide: pesa la otra (nota del orchestrator, 2026-11-25).
  */
-const ESTRUCTURAS: Record<string, [number | null, number | null]> = {
-  // [600–1000, 1000–1400]
-  [ALEKHINE]: [25.9, 31.3],
-  [TENSION]: [7.8, 17.8],
-  [CAMBIO]: [9.6, 7.8],
-  [CHECA]: [null, null],
+const BANDAS = ['600-1000', '1000-1400'] as const
+type Celda = { pct: number | null; n: number }
+type Fila = Record<(typeof BANDAS)[number], Celda>
+const F = JSON.parse(readFileSync(new URL('../../conocimiento/frecuencias/eslava.json', import.meta.url), 'utf8')) as {
+  curso: string
+  lecciones: Record<string, Fila & { forma: string | null }>
+  formas: Record<string, Fila>
+  otras: Record<string, Fila>
 }
-const LECCIONES: Record<string, [number, number, number, number]> = {
-  // [% 600–1000, n, % 1000–1400, n]
-  checa: [0, 0, 0, 0],
-  'tranquila-schallopp': [0, 0, 2.2, 9],
-  cambio: [14.4, 13, 12.3, 135],
-  cc3: [35.6, 32, 47.4, 520],
-  'checa-clasica': [0, 0, 0, 0],
-  'alekhine-e3': [0, 0, 0, 0],
-  'checa-carlsbad': [0, 0, 0, 0],
-  'cambio-trifunovic': [0, 0, 0, 0],
-  'moderna-g3': [0, 0, 1.99, 8],
-  geller: [0, 0, 0, 0],
-  diemer: [3.3, 3, 1.0, 11],
-}
+/** La regla de las partidas reales en una banda: 2 % o más, con 10 partidas o más (n ≥ 10). */
+const cuenta = (x: Celda) => x.pct !== null && x.pct >= 2 && x.n >= 10
+/** La mayor de las dos bandas; "sin datos" queda debajo de cualquier porcentaje. */
+const max = (x: Fila) => Math.max(...BANDAS.map((b) => x[b].pct ?? -1))
 /** El gate del mapa (nota 2): la Checa cubre la posición donde decides tomar (4.Cc3 dxc4), y 5.a4 es la mejor del motor. */
 const POR_EL_GATE = ['checa']
+const GATE = 'La posición de 4.Cc3, donde tomas en c4 (el gate de la Checa)'
 
 describe('La Eslava · obligatorio y opcional, contra los datos', () => {
+  it('el archivo de frecuencias es de este curso: una fila por cada lección, con su forma, y ninguna de más', () => {
+    expect(F.curso).toBe('eslava:b')
+    expect(Object.keys(F.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+    for (const v of c.variantes) expect(F.lecciones[v.id]!.forma, v.id).toBe(v.estructura ?? null)
+    expect(Object.keys(F.formas).sort()).toEqual([TENSION, CAMBIO, ALEKHINE, CHECA].sort())
+    // "sin datos" no es 0 %: un pct null va con n 0, y un pct con partidas
+    for (const fila of [...Object.values(F.lecciones), ...Object.values(F.formas), ...Object.values(F.otras)])
+      for (const b of BANDAS) expect(fila[b].pct === null, JSON.stringify(fila)).toBe(fila[b].n === 0)
+  })
+
   it('la regla de §6, con sus cortes de 5 % y 2 %, da las obligatorias del curso', () => {
     const r = new Set<string>(POR_EL_GATE)
     // 1. comprender: la lección más jugada de cada forma con 5 % o más en alguna banda
-    for (const [forma, bandas] of Object.entries(ESTRUCTURAS)) {
-      if (!bandas.some((x) => x !== null && x >= 5)) continue
+    for (const [forma, fila] of Object.entries(F.formas)) {
+      if (max(fila) < 5) continue
       const grupo = c.variantes.filter((v) => v.estructura === forma)
-      const jugada = (id: string) => Math.max(LECCIONES[id]![0], LECCIONES[id]![2])
-      r.add(grupo.sort((a, b) => jugada(b.id) - jugada(a.id))[0]!.id)
+      r.add(grupo.sort((a, b) => max(F.lecciones[b.id]!) - max(F.lecciones[a.id]!))[0]!.id)
     }
     // 2. partidas reales: 2 % o más en una banda con 10 partidas o más
-    for (const [id, [p1, n1, p2, n2]] of Object.entries(LECCIONES)) if ((p1 >= 2 && n1 >= 10) || (p2 >= 2 && n2 >= 10)) r.add(id)
+    for (const [id, l] of Object.entries(F.lecciones)) if (BANDAS.some((b) => cuenta(l[b]))) r.add(id)
     expect(obligatorias(c).map((v) => v.id).sort()).toEqual([...r].sort())
-    expect(Object.keys(LECCIONES).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+  })
+
+  it('el gate: la Checa no tiene datos (ni la lección ni su forma), pero la posición donde tomas sale en 5 % o más', () => {
+    for (const b of BANDAS) {
+      expect(F.lecciones.checa![b].pct, b).toBeNull()
+      expect(F.formas[CHECA]![b].pct, b).toBeNull()
+    }
+    expect(max(F.otras[GATE]!)).toBeGreaterThanOrEqual(5)
+    // sin el gate, la regla la dejaría opcional
+    expect(BANDAS.some((b) => cuenta(F.lecciones.checa![b]))).toBe(false)
   })
 })
 

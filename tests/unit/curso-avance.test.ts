@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
 import { CURSOS_NUEVOS, cursoNuevo, esLeccionOpcional, jugadasDeVariante, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, soloObligatorias } from '../../src/curso/datos.ts'
@@ -44,20 +45,48 @@ function formaDe(l: LineaCurso): string[] {
   return r
 }
 
-/** La tabla del MAPA (`iterations/v4/mapa-avance-*.md`): forma y porcentaje de cada lección en 600–1000 y 1000–1400. */
-const TABLA: Record<string, { forma: string; seccion: string; pct: [number | null, number | null] }> = {
-  'caro-kann:w/af5': { forma: ENTERA, seccion: 'base', pct: [null, null] }, // tu jugada: se mide la respuesta, no tu cuarta
-  'caro-kann:w/c5': { forma: SOLA, seccion: 'base', pct: [21.8, 29.5] },
-  'francesa:w/cambio-d4': { forma: SOLA, seccion: 'base', pct: [7.5, 6.5] },
-  'francesa:w/cge7': { forma: ENTERA, seccion: 'base', pct: [0, 3.7] },
-  'francesa:w/principal': { forma: CERRADA, seccion: 'frecuentes', pct: [9.3, 10.8] },
-  'francesa:w/lputian': { forma: SOLA, seccion: 'opcional', pct: [0, 0] },
-  'francesa:w/euwe': { forma: SOLA, seccion: 'opcional', pct: [0, 1.7] },
-  'francesa:w/wade': { forma: ENTERA, seccion: 'opcional', pct: [0, 0.7] },
-  'francesa:w/cambio-alfil': { forma: ENTERA, seccion: 'opcional', pct: [0, 0.9] },
+/**
+ * Los números de la regla de obligatorio y opcional, medidos en partidas de lichess (CC0): `conocimiento/frecuencias/
+ * avance-caro-kann.json` y `avance-francesa.json`, que rehace `node scripts/frecuencias-cursos.mjs caro-kann:w francesa:w`
+ * con el método de los mapas (`scripts/frecuencias/avance-*.mjs`; la forma del archivo, en
+ * `conocimiento/frecuencias/README.md`). Antes estaban escritos aquí a mano.
+ */
+type Banda = { pct: number | null; n: number }
+type Frecuencias = {
+  curso: string
+  partidas: Record<string, number>
+  lecciones: Record<string, { forma: string | null } & Record<string, Banda>>
+  formas: Record<string, Record<string, Banda>>
+  otras?: Record<string, Record<string, Banda>>
 }
-/** Las formas que salen en 5 % o más de las partidas del curso, en alguna banda (formas.mjs, media jugada 14). */
-const FORMAS_5: Record<string, string[]> = { 'caro-kann:w': [ENTERA, SOLA], 'francesa:w': [ENTERA, SOLA] }
+const FRECUENCIAS: Record<string, Frecuencias> = {
+  'caro-kann:w': JSON.parse(readFileSync('conocimiento/frecuencias/avance-caro-kann.json', 'utf8')),
+  'francesa:w': JSON.parse(readFileSync('conocimiento/frecuencias/avance-francesa.json', 'utf8')),
+}
+const BANDAS = ['600-1000', '1000-1400'] as const
+const dosBandas = (x: Record<string, Banda>): [number | null, number | null] => [x[BANDAS[0]]!.pct, x[BANDAS[1]]!.pct]
+
+/** La tabla del MAPA (`iterations/v4/mapa-avance-*.md`): forma y sección de cada lección. Sus números, de `FRECUENCIAS`. */
+const TABLA: Record<string, { forma: string; seccion: string }> = {
+  'caro-kann:w/af5': { forma: ENTERA, seccion: 'base' },
+  'caro-kann:w/c5': { forma: SOLA, seccion: 'base' },
+  'francesa:w/cambio-d4': { forma: SOLA, seccion: 'base' },
+  'francesa:w/cge7': { forma: ENTERA, seccion: 'base' },
+  'francesa:w/principal': { forma: CERRADA, seccion: 'frecuentes' },
+  'francesa:w/lputian': { forma: SOLA, seccion: 'opcional' },
+  'francesa:w/euwe': { forma: SOLA, seccion: 'opcional' },
+  'francesa:w/wade': { forma: ENTERA, seccion: 'opcional' },
+  'francesa:w/cambio-alfil': { forma: ENTERA, seccion: 'opcional' },
+}
+/** Las formas del curso que salen en 5 % o más de tus partidas, en alguna banda (media jugada 14): de los datos. */
+const formas5 = (id: string) => Object.entries(FRECUENCIAS[id]!.formas).filter(([, x]) => BANDAS.some((b) => (x[b]!.pct ?? 0) >= 5)).map(([f]) => f).sort()
+/** Lo que dicen los mapas: contra las dos, la cadena entera y la base sola (la cadena cerrada sale en 3.4 %). */
+const FORMAS_5: Record<string, string[]> = { 'caro-kann:w': [ENTERA, SOLA].sort(), 'francesa:w': [ENTERA, SOLA].sort() }
+/** Las respuestas frecuentes sin lección que van en la página del mapa (`specs/cursos.md` §6, "Los cursos del Avance…"). */
+const SIN_LECCION: Record<string, string[]> = {
+  'caro-kann:w': ['3...e6', '3...f6', '3...Cd7'],
+  'francesa:w': ['2...Dh4', '2...Cf6', '2...d6', '2...Cc6', '2...c5', '2...c6', '3...Cc6'],
+}
 
 describe('Los cursos del Avance · las lecciones y su mapa', () => {
   it('cada curso es el de su tarjeta, con blancas, y lleva sus secciones en el orden de la tabla', () => {
@@ -82,15 +111,41 @@ describe('Los cursos del Avance · las lecciones y su mapa', () => {
       }
   })
 
+  it('los números de cada curso vienen de su archivo de frecuencias: una fila por lección del curso, ni una más, y cada forma', () => {
+    for (const c of [CK, FR]) {
+      const fr = FRECUENCIAS[c.id]!
+      expect(fr.curso).toBe(c.id)
+      // cada variante del curso tiene su fila, con su forma, y el archivo no trae lecciones que no existen
+      expect(Object.keys(fr.lecciones).sort(), c.id).toEqual(c.variantes.map((v) => v.id).sort())
+      for (const v of c.variantes) expect(fr.lecciones[v.id]!.forma, v.id).toBe(v.estructura)
+      // las formas del archivo son las del curso
+      expect(Object.keys(fr.formas).sort(), c.id).toEqual([...new Set(c.variantes.map((v) => v.estructura!))].sort())
+      for (const b of BANDAS) {
+        expect(fr.partidas[b], `${c.id} ${b}`).toBeGreaterThan(0)
+        for (const [id, x] of [...Object.entries(fr.lecciones), ...Object.entries(fr.formas), ...Object.entries(fr.otras ?? {})]) {
+          const y = x[b]!
+          expect(Number.isInteger(y.n) && y.n >= 0, `${c.id} ${id} ${b}`).toBe(true)
+          if (y.pct !== null) expect(y.pct >= 0 && y.pct <= 100, `${c.id} ${id} ${b}`).toBe(true)
+        }
+      }
+      // las formas de 5 % o más, medidas, son las que dice el mapa
+      expect(formas5(c.id), c.id).toEqual(FORMAS_5[c.id])
+      // las respuestas sin lección del mapa son, en los datos, las de 5 % o más de tus partidas en alguna banda
+      const sinLeccion = Object.entries(fr.otras ?? {}).filter(([k]) => k.startsWith('Sin lección · '))
+      expect(sinLeccion.map(([k]) => k.slice('Sin lección · '.length)).sort(), c.id).toEqual([...SIN_LECCION[c.id]!].sort())
+      for (const [k, x] of sinLeccion) expect(BANDAS.some((b) => (x[b]!.pct ?? 0) >= 5), k).toBe(true)
+    }
+  })
+
   it('la regla de obligatorio y opcional, con los números medidos: la más jugada de cada forma de 5 % o más, y la que sola llega a 2 %', () => {
     for (const c of [CK, FR]) {
-      const filas = c.variantes.map((v) => ({ v, ...TABLA[`${c.id}/${v.id}`]! }))
+      const filas = c.variantes.map((v) => ({ v, ...TABLA[`${c.id}/${v.id}`]!, pct: dosBandas(FRECUENCIAS[c.id]!.lecciones[v.id]!) }))
       const max = (p: [number | null, number | null]) => Math.max(p[0] ?? 0, p[1] ?? 0)
       for (const f of filas) {
         const deSuForma = filas.filter((x) => x.forma === f.forma)
-        // contra la Caro-Kann la lección de 3...Af5 se separa por tu cuarta jugada: es la de su forma (nota 3 del 2026-11-25)
-        const laMasJugada = f.pct[0] === null || deSuForma.every((x) => x === f || x.pct[0] === null || max(x.pct) <= max(f.pct))
-        const porForma = FORMAS_5[c.id]!.includes(f.forma) && laMasJugada
+        // una lección sin datos en sus dos bandas no le gana a ninguna de su forma ni pierde contra ellas
+        const laMasJugada = f.pct.every((p) => p === null) || deSuForma.every((x) => x === f || x.pct.every((p) => p === null) || max(x.pct) <= max(f.pct))
+        const porForma = formas5(c.id).includes(f.forma) && laMasJugada
         const porFrecuencia = max(f.pct) >= 2
         expect(f.seccion !== 'opcional', `${c.id} ${f.v.id}`).toBe(porForma || porFrecuencia)
         // "La base": una lección por forma; "Las que más te van a salir": por frecuencia

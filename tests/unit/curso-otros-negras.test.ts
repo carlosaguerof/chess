@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
 import { CURSOS_NUEVOS, leccionIdDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
@@ -95,30 +96,46 @@ describe('...c6 + ...d5 · el curso', () => {
   })
 })
 
-/** La tabla de obligatorio y opcional contra los datos (`iterations/v4/mapa-otros-negras.md`). */
-const ESTRUCTURAS: Record<string, [number, number]> = { [CENTRO]: [27.9, 33.8], [ANGLO]: [2.8, 7.2], [ESLAVA]: [1.6, 3.9] }
-const LECCIONES: Record<string, [number, number, number, number]> = {
-  'reti-bogoljubow': [0.8, 29, 1.6, 179],
-  'otras-hungara': [6.5, 700, 8.0, 2197],
-  'inglesa-caro-kann': [1.9, 6, 5.9, 74],
-  'reti-fianchetto': [3.8, 137, 4.0, 447],
-  'larsen-clasica': [3.8, 410, 6.7, 1831],
-  'otras-bird': [5.8, 623, 6.2, 1687],
-  'inglesa-anglo-eslava-g3': [0, 0, 0.3, 4],
-  'inglesa-gurevich': [0, 0, 0.3, 4],
+/**
+ * La tabla de obligatorio y opcional contra los datos (`iterations/v4/mapa-otros-negras.md`). Los números salen de
+ * `conocimiento/frecuencias/otros-negras.json` (`node scripts/frecuencias-cursos.mjs otros-negras:b`, con el método del
+ * mapa en `scripts/frecuencias/otros-negras.mjs`; la forma del archivo, en `conocimiento/frecuencias/README.md`). Antes
+ * estaban escritos aquí a mano. `pct: null` es "sin datos" (menos de 3 partidas por jugada), no cero.
+ */
+const BANDAS = ['600-1000', '1000-1400'] as const
+type Celda = { pct: number | null; n: number }
+type Fila = Record<(typeof BANDAS)[number], Celda>
+const F = JSON.parse(readFileSync(new URL('../../conocimiento/frecuencias/otros-negras.json', import.meta.url), 'utf8')) as {
+  curso: string
+  lecciones: Record<string, Fila & { forma: string }>
+  formas: Record<string, Fila>
+  otras: Record<string, Fila>
 }
+/** La mayor de las dos bandas; "sin datos" queda debajo de cualquier porcentaje. */
+const max = (x: Fila) => Math.max(...BANDAS.map((b) => x[b].pct ?? -1))
+/** La regla de las partidas reales en una banda: 2 % o más, con 10 partidas o más (n ≥ 10). */
+const cuenta = (x: Celda) => x.pct !== null && x.pct >= 2 && x.n >= 10
 
 describe('...c6 + ...d5 · obligatorio y opcional, contra los datos', () => {
+  it('el archivo de frecuencias es de este curso: una fila por cada lección, con su forma, y ninguna de más', () => {
+    expect(F.curso).toBe('otros-negras:b')
+    expect(Object.keys(F.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+    for (const v of c.variantes) expect(F.lecciones[v.id]!.forma, v.id).toBe(v.estructura)
+    expect(Object.keys(F.formas).sort()).toEqual([CENTRO, ANGLO, ESLAVA].sort())
+    // "sin datos" no es 0 %: un pct null va con n 0, y un pct con partidas
+    for (const fila of [...Object.values(F.lecciones), ...Object.values(F.formas), ...Object.values(F.otras)])
+      for (const b of BANDAS) expect(fila[b].pct === null, JSON.stringify(fila)).toBe(fila[b].n === 0)
+  })
+
   it('la regla de §6 da las seis obligatorias, y La base es la lección más jugada de cada forma con 5 % o más', () => {
     const base = new Set<string>()
-    for (const [forma, bandas] of Object.entries(ESTRUCTURAS)) {
-      if (!bandas.some((x) => x >= 5)) continue
-      const jugada = (id: string) => Math.max(LECCIONES[id]![0], LECCIONES[id]![2])
-      base.add(c.variantes.filter((v) => v.estructura === forma).sort((a, b) => jugada(b.id) - jugada(a.id))[0]!.id)
+    for (const [forma, fila] of Object.entries(F.formas)) {
+      if (max(fila) < 5) continue
+      base.add(c.variantes.filter((v) => v.estructura === forma).sort((a, b) => max(F.lecciones[b.id]!) - max(F.lecciones[a.id]!))[0]!.id)
     }
     expect([...base].sort()).toEqual(c.secciones![0]!.variantes.slice().sort())
     const r = new Set(base)
-    for (const [id, [p1, n1, p2, n2]] of Object.entries(LECCIONES)) if ((p1 >= 2 && n1 >= 10) || (p2 >= 2 && n2 >= 10)) r.add(id)
+    for (const [id, l] of Object.entries(F.lecciones)) if (BANDAS.some((b) => cuenta(l[b]))) r.add(id)
     expect([...r].sort()).toEqual(obligatorias(c).map((v) => v.id).sort())
   })
 })

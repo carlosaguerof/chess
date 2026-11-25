@@ -5,6 +5,18 @@ import { LECCIONES_ALAPIN, pasarAlapin } from '../../src/aprender/migracion.ts'
 import { repertorioCompleto } from '../../src/aprender/favoritas.ts'
 import { cursos } from '../../src/cursos/datos.ts'
 import { BASE } from '../../src/base/base.ts'
+import { readFileSync } from 'node:fs'
+
+/** Las frecuencias del curso (`conocimiento/frecuencias/README.md`): por banda, el porcentaje (null: sin datos) y las partidas. */
+const BANDAS = ['600-1000', '1000-1400'] as const
+type Celda = { pct: number | null; n: number }
+type Fila = Record<(typeof BANDAS)[number], Celda>
+const F = JSON.parse(readFileSync(new URL('../../conocimiento/frecuencias/alapin.json', import.meta.url), 'utf8')) as {
+  curso: string
+  lecciones: Record<string, Fila & { forma: string; frecuencia: number | null }>
+  formas: Record<string, Fila>
+  otras: Record<string, Fila>
+}
 
 /**
  * Lo propio del curso de la Alapin contra la Siciliana, por estructuras (2026-11-25; `specs/cursos.md` §6 y su apartado de
@@ -108,34 +120,62 @@ describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
 })
 
 describe('La Alapin · obligatorio y opcional (§6, con las partidas de este curso)', () => {
-  // `iterations/v4/mapa-alapin.md`: lichess 1000–1400 y 600–1000, siguiendo las jugadas del mapa
-  const FORMAS = { aislado: [12.3, null], cadena: [13.4, 21.9] } as const
-  const LECCIONES: Record<string, { forma: keyof typeof FORMAS | 'gambito'; pct: (number | null)[] }> = {
-    'cambio-central': { forma: 'aislado', pct: [2.95, null] },
-    'cf6-d4': { forma: 'cadena', pct: [4.33, 21.88] },
-    moderna: { forma: 'aislado', pct: [null, null] },
-    cc6: { forma: 'aislado', pct: [0.72, null] },
-    g6: { forma: 'aislado', pct: [null, null] },
-    gambito: { forma: 'gambito', pct: [null, null] },
-  }
-  const max = (xs: readonly (number | null)[]) => Math.max(...xs.map((x) => x ?? 0))
+  // Los números salen de `conocimiento/frecuencias/alapin.json` (`node scripts/frecuencias-cursos.mjs siciliana:w`, con el
+  // método del mapa, `iterations/v4/mapa-alapin.md`): lichess 600–1000 y 1000–1400, siguiendo las jugadas del mapa.
+  const max = (x: Fila) => Math.max(...BANDAS.map((b) => x[b].pct ?? 0))
+  const FORMA_DE: Record<string, string> = { aislado: 'El aislado', cadena: 'La cadena', gambito: 'El gambito (la excepción)' }
+  const SIN_LECCION = 'Los dos peones del centro'
+  const TRANSPOSICION = '2...Cc6 3.d4 cxd4 4.cxd4 d5: con 5.exd5 Dxd5 6.Cf3 llega al Cambio Central'
+
+  it('el archivo de frecuencias es de este curso: una fila por cada lección, y ninguna de más', () => {
+    expect(F.curso).toBe('siciliana:w')
+    expect(Object.keys(F.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+    for (const v of c.variantes) expect(F.lecciones[v.id]!.forma, v.id).toBe(FORMA_DE[entrada(jugadasDeVariante(c, v))])
+    expect(Object.keys(F.formas).sort()).toEqual(['El aislado', 'La cadena'])
+    // "sin datos" no es 0 %: un pct null va con n 0, y un pct con partidas
+    for (const fila of [...Object.values(F.lecciones), ...Object.values(F.formas), ...Object.values(F.otras)])
+      for (const b of BANDAS) expect(fila[b].pct === null, JSON.stringify(fila)).toBe(fila[b].n === 0)
+  })
 
   it('la regla de la Caro-Kann, con los mismos cortes: la más jugada de cada forma de 5 % o más, y toda lección de 2 % o más', () => {
-    const paso1 = Object.entries(FORMAS).filter(([, p]) => max(p) >= 5).map(([f]) => Object.entries(LECCIONES).filter(([, l]) => l.forma === f).sort((a, b) => max(b[1].pct) - max(a[1].pct))[0]![0])
-    const paso2 = Object.entries(LECCIONES).filter(([id, l]) => max(l.pct) >= 2 && !paso1.includes(id)).map(([id]) => id)
+    const L = Object.entries(F.lecciones)
+    const paso1 = Object.entries(F.formas).filter(([, p]) => max(p) >= 5).map(([f]) => L.filter(([, l]) => l.forma === f).sort((a, b) => max(b[1]) - max(a[1]))[0]![0])
+    const paso2 = L.filter(([id, l]) => max(l) >= 2 && !paso1.includes(id)).map(([id]) => id)
     expect(paso1).toEqual(['cambio-central', 'cf6-d4'])
     expect(paso2).toEqual([])
     expect(obligatorias(c).map((v) => v.id)).toEqual([...paso1, ...paso2])
     expect(opcionales(c).map((v) => v.id)).toEqual(['moderna', 'cc6', 'g6', 'gambito'])
     expect(c.secciones!.map((s) => s.id)).toEqual(['base', 'opcional'])
     expect(c.secciones!.find((s) => s.id === 'opcional')!.nota).toBe('No cuentan para terminar el curso.')
+    // lo que más te va a salir no tiene lección (el mapa), y el gambito, la excepción, no tiene datos
+    expect(max(F.otras[SIN_LECCION]!)).toBeGreaterThanOrEqual(5)
+    expect(L.some(([, l]) => l.forma === SIN_LECCION)).toBe(false)
+    expect(BANDAS.map((b) => F.otras['El gambito (la excepción)']![b].pct)).toEqual([null, null])
   })
 
   it('la frecuencia de cada lección es la de la tabla, y dice de dónde sale', () => {
+    const t = (x: Celda) => `${x.pct!.toFixed(1)} %`
     for (const v of c.variantes) {
-      expect(v.frecuencia, v.id).toBe(LECCIONES[v.id]!.pct[0] ?? 0)
+      const l = F.lecciones[v.id]!
+      // la del curso es la de 1000–1400 con dos decimales; sin datos, 0
+      expect(v.frecuencia, v.id).toBe(l.frecuencia ?? 0)
+      expect(l.frecuencia === null, v.id).toBe(l['1000-1400'].pct === null)
+      if (l.frecuencia !== null) expect(Math.abs(l.frecuencia - l['1000-1400'].pct!), v.id).toBeLessThanOrEqual(0.05 + 1e-9)
       expect(v.fuenteFrecuencia, v.id).toContain('lichess')
+      // los números que cita el texto son los del archivo
+      const alta = l['1000-1400']
+      const baja = l['600-1000']
+      if (alta.pct !== null) expect(v.fuenteFrecuencia, v.id).toContain(`1000–1400: ${t(alta)} de las partidas del curso (n ${alta.n})`)
+      if (baja.pct !== null) expect(v.fuenteFrecuencia, v.id).toContain(`600–1000: ${t(baja)} (n ${baja.n})`)
+      if (BANDAS.every((b) => l[b].pct === null)) expect(v.fuenteFrecuencia, v.id).toContain('sin datos en las dos bandas (n 0)')
     }
+    const cc = c.variantes.find((v) => v.id === 'cambio-central')!.fuenteFrecuencia
+    const tr = F.otras[TRANSPOSICION]!['1000-1400']
+    expect(cc).toContain(`(${t(tr)}, n ${tr.n})`)
+    expect(cc).toContain(`El aislado, ${t(F.formas['El aislado']!['1000-1400'])}`)
+    const cf6 = c.variantes.find((v) => v.id === 'cf6-d4')!.fuenteFrecuencia
+    expect(cf6).toContain(`600–1000: ${t(F.lecciones['cf6-d4']!['600-1000'])} (n ${F.lecciones['cf6-d4']!['600-1000'].n})`)
+    expect(cf6).toContain(`la única de La cadena (${t(F.formas['La cadena']!['1000-1400'])} y ${t(F.formas['La cadena']!['600-1000'])})`)
   })
 
   it('las opcionales no salen en el Repaso ni en Refuerza: el filtro común (nota 6)', () => {
