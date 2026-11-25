@@ -1,6 +1,17 @@
-# Aprendizajes de la vuelta 4 (los siete cursos, por estructuras, 2026-11-25)
+# Lo aprendido en la v4 (2026-11-25)
 
-Cada aprendizaje, con su porqué y dónde quedó la regla. Cada curso, bajo su título.
+## Los cursos del Avance contra la Caro-Kann y contra la Francesa (`feat/curso-avance`)
+
+1. **Cuando las lecciones de un curso se separan por tu jugada, el formato no aplica tal cual.** Contra la Caro-Kann, 6 de 7 lecciones eran tu cuarta jugada (4.c3, 4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2): "una lección por respuesta del rival" y "una sola jugada tuya por posición" no se pueden cumplir a la vez. Gana la segunda (`specs/cursos.md` §1): una jugada tuya, y las demás en "buenas". El curso queda con 2 lecciones. → `specs/cursos.md` §6, "Los cursos del Avance".
+2. **Un plan se prueba donde se lee y donde su señal aparece, no solo al final de su lección.** "Con h4 y después g4 lo echas" era cierto al final de la lección y perdía 1.5 peones una jugada antes; "h3 le pregunta al alfil" perdía d4 en la otra lección; "Cc3" perdía d4 si ...Db6 ya estaba en el tablero. Las frases que fallaron dicen ahora dónde valen ("ya enrocado y con tu caballo en d2", "en la jugada 6"). → `specs/cursos.md` §6.
+3. **Las jugadas naturales del rival en otro orden cambian el veredicto.** Las tres fallas de la nota 11 (Cc3 con ...Db6, h4 con ...Db6, h3 con ...Cb3) solo aparecieron al poner en el tablero una jugada que el rival suele hacer, antes de la que marca la lección. → `specs/cursos.md` §6.
+4. **Sin partidas, el libro no siempre tiene la posición.** Wikibooks no tiene página de ninguna de las 15 posiciones sin partidas de estos dos cursos; la "respuesta del libro" fueron las líneas de la base, que salen de Wikibooks y Wikipedia, y coincidieron con la lección en las 15. La API de Wikibooks contesta con una pausa de varios segundos entre consultas; sin ella, corta.
+5. **"Tus partidas" son las que juegas tú.** Para medir cuánto sale una respuesta del rival, solo cuentan las proporciones de sus jugadas: dividir entre todas las partidas de 1.e4 c6 hacía ver 2...d5 en 36 % cuando sale en 94 % de las tuyas (en las demás, blancas no jugó 2.d4).
+6. **La frecuencia de una lección, en su posición.** La línea principal de la Francesa decía 15.7 % (sumaba transposiciones); en la posición que la define, 5...Db6 sale en 47 % de las partidas que llegan a 5.Cf3 y es 10.8 % de tus partidas. No cambió de sección, pero el número de antes no se podía comprobar.
+7. **Con blancas, lo que adelanta tu jugada se escribe sin número.** "Tu alfil va a e2" o "Cbd2" no llevaban el "7." que buscaba Practicar para ocultarlo; `jugadasEscritas` busca ahora las jugadas de pieza sin número, y las de peón sin número van en `describe`. Y el plan del rival decía "El de blancas:" aunque el rival era negras. → `specs/cursos.md` §6.
+8. **"La base de la cadena" con c3 detrás.** En c3-d4-e5 el peón de atrás es c3, pero el que ataca negras es d4. El curso dice ahora "tus peones de d4 y e5 forman la cadena, y su base es d4; c3 la sostiene desde atrás", como el glosario. Lo vio el primer pase adversarial, no las pruebas.
+9. **Una marca nueva pasa primero por las reglas de dibujo.** La L del caballo g8→e7 se doblaba sobre el rey y e7→f5 sobre f7 (R6), y una A2 repetía otra (R3): esas frases llevan ahora la casilla clave (A6), no la ruta.
+10. **El candado de pruebas se toma y se suelta en el mismo paso.** Un comando con `mkdir candado && … ; rmdir candado` quitó el candado de otra sesión cuando el `mkdir` falló (el `;` corre igual). Se repuso en un segundo. Va `mkdir candado && (…; rmdir candado)`, o se espera el candado en un paso aparte.
 
 ## La Alapin contra la Siciliana
 

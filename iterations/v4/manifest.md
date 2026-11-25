@@ -9,3 +9,5 @@
 | Curso | Rama | Mapa | Estado |
 |---|---|---|---|
 | Alapin contra la Siciliana | `feat/curso-alapin` | `iterations/v4/mapa-alapin.md` | Lista para revisar: pruebas de la Air en verde; falta la corrida completa en GitHub (403) |
+| Avance contra la Caro-Kann (`caro-kann:w`) | `feat/curso-avance` | `mapa-avance-caro-kann.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
+| Avance contra la Francesa (`francesa:w`) | `feat/curso-avance` | `mapa-avance-francesa.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
