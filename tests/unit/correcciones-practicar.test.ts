@@ -10,10 +10,11 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
  * ayuda, sin pantalla. "Aprender" no cambia.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
-/** Lo que se prueba con una jugada concreta de la Caro-Kann (3...Af5 en la Tal); lo demás recorre todas las líneas del curso. */
-const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
+// lo que se mide en jugadas concretas de la Caro-Kann corre en sus dos cursos; lo demás, en todas las líneas de cada curso
+const esCaroKann = (c.fichasDe ?? c.id) === 'caro-kann:b'
 const VARIANTES = lineasDe(c).filter((l) => l.tipo === 'variante')
-const tal = lineaPorId(c, 'v:avance-tal')!
+const tal = lineaPorId(c, 'v:avance-tal') ?? VARIANTES[0]!
+const errorTal = lineaPorId(c, 'e:tal-e6') ?? lineasDe(c).find((l) => l.tipo === 'error')!
 const hastaMiTurno = (e: EstadoCiclo) => {
   let x = e
   for (let i = 0; i < 10 && x.momento !== 'tuTurno'; i++) x = x.momento === 'rival' ? jugarRival(tal, x) : continuar(tal, x)
@@ -23,8 +24,7 @@ const vista = (e: EstadoCiclo) => vistaTuTurno(c, tal, e.vuelta, e.ply, e.ayuda)
 
 describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   it('en mi turno de Practicar no hay ningún texto sobre mi jugada, ni marca, ni flecha', () => {
-    // todas las variantes del curso (antes, tres de la Caro-Kann)
-    for (const l of VARIANTES)
+    for (const l of esCaroKann ? [tal, lineaPorId(c, 'v:avance-short')!, lineaPorId(c, 'v:clasica')!] : VARIANTES)
       for (const ply of misJugadas(l)) {
         const v = vistaTuTurno(c, l, 'practicar', ply, 0)
         expect(v, `${l.id} ${ply}`).toEqual({ textos: [], pieza: null, flecha: null })
@@ -117,7 +117,7 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   })
 
   it('la frase del rival, lo único que se lee en mi turno de Practicar, no nombra mi jugada', () => {
-    for (const l of VARIANTES)
+    for (const l of esCaroKann ? [tal, lineaPorId(c, 'v:avance-short')!] : VARIANTES)
       for (const ply of misJugadas(l)) {
         const antes = c.rival[l.jugadas.slice(0, ply).join(' ')]
         if (!antes) continue

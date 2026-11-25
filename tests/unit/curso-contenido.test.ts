@@ -11,8 +11,8 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
  * Practicar no delata la jugada.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
-/** Lo que es propio de la Caro-Kann (sus 16 variantes, su página del Avance) se revisa solo en ella; lo demás, en todo curso. */
-const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
+// lo propio de la Caro-Kann (sus 16 lecciones, su página del Avance) se prueba en sus dos cursos; lo demás, en todos
+const esCaroKann = (c.fichasDe ?? c.id) === 'caro-kann:b'
 const lineas = lineasDe(c)
 const variantes = lineas.filter((l) => l.tipo === 'variante')
 const fenCorto = (f: string) => f.split(' ').slice(0, 4).join(' ')
@@ -46,8 +46,8 @@ describe('C4 · el curso de la Caro-Kann', () => {
     expect(c.piezas.errores.lista.length).toBeGreaterThanOrEqual(2)
     expect(c.piezas.errores.lista.length).toBeLessThanOrEqual(4)
     expect(c.piezas.repaso.paginas.length).toBeGreaterThan(0)
-    // la Caro-Kann trae 16; un curso nuevo cuenta las suyas en su propia prueba (`tests/unit/curso-italiana.test.ts`)
-    expect(c.variantes.length).toBeGreaterThanOrEqual(esCaroKann ? 10 : 1)
+    // un curso por estructuras puede tener pocas lecciones: tus otras jugadas van en `buenas` (el Avance contra la Caro-Kann, 2)
+    expect(c.variantes.length).toBeGreaterThanOrEqual(esCaroKann ? 10 : 2)
     const f = c.variantes.map((v) => v.frecuencia)
     // un curso con secciones sigue el orden de sus secciones (`tests/unit/curso-estructuras.test.ts`)
     if (!c.secciones) expect([...f].sort((a, b) => b - a)).toEqual(f)
@@ -57,10 +57,10 @@ describe('C4 · el curso de la Caro-Kann', () => {
 
   it('primero los errores tuyos y luego los del rival', () => {
     const de = c.piezas.errores.lista.map((e) => e.de)
-    // el curso de la Caro-Kann por estructuras solo trae errores tuyos
-    const soloTuyos = c.secciones && esCaroKann
-    expect(soloTuyos ? de.length : de.indexOf('rival')).toBeGreaterThan(de.lastIndexOf('tuyo'))
-    if (soloTuyos) expect(de).not.toContain('rival')
+    // los cursos por estructuras de la Caro-Kann y del Avance solo traen errores tuyos; la Italiana trae uno del rival, al final
+    const primerRival = de.indexOf('rival')
+    expect(primerRival === -1 ? de.length : primerRival).toBeGreaterThan(de.lastIndexOf('tuyo'))
+    if (c.secciones && c.apertura !== 'italiana') expect(de).not.toContain('rival')
   })
 
   it('cada jugada de cada línea es legal, y las de las variantes están en la base', () => {
@@ -74,7 +74,7 @@ describe('C4 · el curso de la Caro-Kann', () => {
         expect(jugadasDeLaBaseEn(ch.fen()).has(s), `${l.id}: ${s} no está en la base`).toBe(true)
         ch.move(s)
       })
-      // y la variante de la base es de la apertura del curso, con el color del curso
+      // y la variante de la base es de la apertura del curso, del lado con que juegas
       const v = BASE.aperturas.find((a) => a.id === c.apertura)!.variantes.find((x) => x.id === l.variante!.base)!
       expect(v.lado === (c.color === 'b' ? 'negras' : 'blancas') || v.lado === 'ambos', l.id).toBe(true)
     }

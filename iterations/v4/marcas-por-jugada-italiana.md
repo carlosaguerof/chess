@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 30 de 83.** Más 29 frases del plan y del paso a paso.
+**Jugadas con marcas: 30 de 83.** Más 33 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -121,5 +121,9 @@
 | ver de e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1, cuidado 0, paso 4 | 8...Cxf2: el caballo se come tu peón y ataca tu dama de d1. | flecha f2→d1 (A4, roja) |
 | ver de e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1, cuidado 0, paso 2 | 7...Cg4: el caballo salta contra f2, que también mira el alfil de c5. | flecha g4→f2 (A4, roja); flecha c5→f2 (A4, roja) |
 | ver de e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1, cuidado 0, paso 4 | 8...Cxf2: el caballo se come tu peón y ataca tu dama de d1. | flecha f2→d1 (A4, roja) |
+| ver de e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3, cuidado 0, paso 2 | 7...Df6: su dama ataca d4, junto con su caballo de c6 y su alfil de b6. | flecha f6→d4 (A4, roja); flecha b6→d4 (A4, roja) |
+| ver de e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3, cuidado 0, paso 3 | 8.Ae3: tu alfil protege d4. Tres piezas lo atacan y tres lo defienden: tu caballo, tu alfil y tu dama. | flecha d1→d4 (A2, verde) |
+| ver de e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4, cuidado 0, paso 4 | 6...Df6: su dama amenaza mate en f2, con su alfil de c5. | flecha f6→f2 (A4, roja); flecha c5→f2 (A4, roja) |
 | ver de e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4, cuidado 0, paso 3 | 4...Dg5: la dama ataca tu caballo de e5 y tu peón de g2. | flecha g5→e5 (A4, roja); flecha g5→g2 (A4, roja) |
+| ver de e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4, cuidado 1, paso 2 | 4...Dg5: su dama ataca tu peón de g2. | flecha g5→g2 (A4, roja) |
 | ver de e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4, errores Nxe5, paso 3 | 4...Dg5: la dama ataca tu caballo de e5 y tu peón de g2. | flecha g5→e5 (A4, roja); flecha g5→g2 (A4, roja) |

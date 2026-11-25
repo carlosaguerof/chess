@@ -8,4 +8,6 @@
 
 | Curso | Rama | Mapa | Estado |
 |---|---|---|---|
+| Avance contra la Caro-Kann (`caro-kann:w`) | `feat/curso-avance` | `mapa-avance-caro-kann.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
+| Avance contra la Francesa (`francesa:w`) | `feat/curso-avance` | `mapa-avance-francesa.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
 | Italiana | `feat/curso-italiana` | `iterations/v4/mapa-italiana.md` | Lista para revisión: 8 lecciones (6 obligatorias, 2 opcionales); pruebas en la Air en Chromium; falta la corrida completa en GitHub (403) |
