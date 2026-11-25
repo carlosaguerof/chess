@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { CURSOS_NUEVOS, grupoDeLinea, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { caminoQueQueda, CURSOS_NUEVOS, grupoDeLinea, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -13,6 +13,7 @@ import { dia, paraHoy, sumarDias } from '../../src/repaso/repaso.ts'
 import { cursoActivo } from '../../src/aprender/interruptores.ts'
 import { lineasDe as lineasDeFavorita, repertorioCompleto } from '../../src/aprender/favoritas.ts'
 import type { AvanceCurso } from '../../src/curso/avance.ts'
+import { cursoQueQueda } from '../../src/curso/queda.ts'
 import type { CapaCurso, LineaCurso, PaginaLeer } from '../../src/curso/tipos.ts'
 
 /**
@@ -62,9 +63,10 @@ function estructuraDe(l: LineaCurso): string[] {
 }
 
 describe('El curso por estructuras · la capa', () => {
-  it('se llama como dijo Carlos y sale del curso actual', () => {
+  it('se llama "Defensa Caro-Kann", como la de antes, y sale del curso actual (su id no cambia)', () => {
     expect(nuevo.id).toBe('caro-kann-estructuras:b')
-    expect(nuevo.nombre).toBe('Caro-Kann por estructuras')
+    expect(nuevo.nombre).toBe('Defensa Caro-Kann')
+    expect(nuevo.nombre).toBe(actual.nombre)
     expect(nuevo.fichasDe).toBe('caro-kann:b')
   })
 
@@ -399,11 +401,12 @@ describe('El curso por estructuras · una sola ficha de Repaso por línea', () =
     }
   })
 
-  it('la tarjeta va justo después de la del curso actual, y no trae lecciones: ninguna línea sale dos veces', () => {
+  it('una sola tarjeta de la Caro-Kann: la de antes, con sus lecciones, abre el curso por estructuras; ninguna línea sale dos veces', () => {
     const lista = cursos()
-    const i = lista.findIndex((c) => c.id === 'caro-kann:b')
-    expect(lista[i + 1]).toMatchObject({ id: 'caro-kann-estructuras:b', nombre: 'Caro-Kann por estructuras', color: 'b', lecciones: [] })
-    expect(lista[i + 1]!.raiz).toEqual(lista[i]!.raiz)
+    expect(lista.filter((c) => c.apertura === 'caro-kann' && c.color === 'b').map((c) => c.id)).toEqual(['caro-kann:b'])
+    expect(lista.some((c) => c.id === 'caro-kann-estructuras:b')).toBe(false)
+    expect(cursoQueQueda('caro-kann:b')).toBe('caro-kann-estructuras:b')
+    expect(lista.find((c) => c.id === 'caro-kann:b')!.lecciones.map((l) => l.id)).toEqual(leccionesDe(actual).map((l) => l.id))
     const ids = lista.flatMap((c) => c.lecciones).map((l) => l.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
@@ -445,5 +448,94 @@ describe('El curso por estructuras · el Respaldo', () => {
     cargarRespaldo(importar(archivo))
     expect(JSON.parse(memoria.get('ajedrez.v1.curso:caro-kann:b')!)).toEqual(uno)
     expect(JSON.parse(memoria.get('ajedrez.v1.curso:caro-kann-estructuras:b')!)).toEqual(dos)
+  })
+})
+
+describe('Una sola Caro-Kann · la dirección del curso de antes', () => {
+  const N = '/curso/caro-kann-estructuras%3Ab'
+  const partes = (camino: string) => camino.split('/').filter(Boolean)
+  it('lleva a lo mismo en el curso que queda: la página, cada línea, cada pieza de leer y Errores y trampas', () => {
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab'))).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann:b'))).toBe(N)
+    for (const l of lineasDe(nuevo)) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/linea/${encodeURIComponent(l.id)}`)), l.id).toBe(`${N}/linea/${encodeURIComponent(l.id)}`)
+    for (const p of ['idea', 'estructura', 'repaso']) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/leer/${p}`))).toBe(`${N}/leer/${p}`)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/errores'))).toBe(`${N}/errores`)
+  })
+
+  it('"#/leccion/caro-kann:b/<n>" (Practicar esta línea, el resumen de una lección) abre esa misma línea', () => {
+    actual.variantes.forEach((v, i) => expect(caminoQueQueda(partes(`/leccion/caro-kann%3Ab/${i}`)), v.id).toBe(`${N}/linea/${encodeURIComponent(`v:${v.id}`)}`))
+    actual.variantes.forEach((v, i) => expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/${i}`)), v.id).toBe(`${N}/linea/${encodeURIComponent(`v:${v.id}`)}`))
+  })
+
+  it('lo que no existe en el que queda lleva a su página, nunca a una vacía', () => {
+    const quitados = actual.piezas.errores.lista.filter((e) => !nuevo.piezas.errores.lista.some((x) => x.id === e.id))
+    expect(quitados.length).toBeGreaterThan(0)
+    for (const e of quitados) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/linea/${encodeURIComponent(`e:${e.id}`)}`)), e.id).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/linea/v%3Ano-existe'))).toBe(N)
+    expect(caminoQueQueda(partes('/leccion/caro-kann%3Ab/99'))).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/leer/otra'))).toBe(N)
+  })
+
+  it('las demás direcciones no cambian', () => {
+    for (const c of ['/', '/cursos/negras', '/curso/caro-kann-estructuras%3Ab', '/curso/eslava%3Ab', '/leccion/eslava%3Ab/0', '/curso/caro-kann%3Aw', '/repaso']) expect(caminoQueQueda(partes(c)), c).toBeUndefined()
+  })
+})
+
+describe('Una sola Caro-Kann · el avance de antes cuenta', () => {
+  let memoria: Map<string, string>
+  beforeEach(() => {
+    memoria = instalarLocalStorage()
+    ;(globalThis as unknown as { window: EventTarget }).window = new EventTarget()
+  })
+  const ANTES = 'ajedrez.v1.curso:caro-kann:b'
+  const QUEDA = 'ajedrez.v1.curso:caro-kann-estructuras:b'
+
+  it('una lección terminada en el de antes sale hecha en el que queda; las piezas de leer, los «¿Y si…?» y dónde me quedé, no', async () => {
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    const antes = { piezas: { idea: 1, estructura: 2, errores: 3, repaso: 4 }, variantes: { cambio: { aprendida: 5, terminada: 6 }, fantasia: { aprendida: 7 } }, errores: { 'tal-e6': 8, 'cambio-dc7': 9 }, enCurso: { linea: 'v:clasica', vuelta: 'practicar', ply: 5, fecha: 10 } }
+    memoria.set(ANTES, JSON.stringify(antes))
+    const a = leerAvance('caro-kann-estructuras:b')
+    expect(a.variantes).toEqual({ cambio: { aprendida: 5, terminada: 6 }, fantasia: { aprendida: 7 } })
+    expect(a.piezas).toEqual({})
+    expect(a.errores).toEqual({})
+    expect(a.enCurso).toBeUndefined()
+    // "1 de 8" en la tarjeta y en la página, y "Seguir" se salta lo hecho
+    expect(pasosDelCurso(nuevo, { ...a, piezas: { idea: 1, estructura: 1 } }).find((p) => p.id === 'v:cambio')!.hecho).toBe(true)
+    expect(siguientePaso(nuevo, { ...a, piezas: { idea: 1, estructura: 1 } })!.id).toBe('v:avance-short')
+    // el de antes no cambia, y el que queda no guardó nada
+    expect(JSON.parse(memoria.get(ANTES)!)).toEqual(antes)
+    expect(memoria.has(QUEDA)).toBe(false)
+    // al de antes no le llega nada del que queda
+    memoria.set(QUEDA, JSON.stringify({ piezas: {}, variantes: { panov: { terminada: 11 } }, errores: {} }))
+    expect(leerAvance('caro-kann:b').variantes).toEqual(antes.variantes)
+  })
+
+  it('lo del que queda gana, y se junta campo por campo', async () => {
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: {}, variantes: { cambio: { aprendida: 1, terminada: 2 }, clasica: { aprendida: 3, terminada: 4 } }, errores: {} }))
+    memoria.set(QUEDA, JSON.stringify({ piezas: { idea: 5 }, variantes: { cambio: { aprendida: 6 }, panov: { terminada: 7 } }, errores: {} }))
+    const a = leerAvance('caro-kann-estructuras:b')
+    expect(a.variantes).toEqual({ cambio: { aprendida: 6, terminada: 2 }, clasica: { aprendida: 3, terminada: 4 }, panov: { terminada: 7 } })
+    expect(a.piezas).toEqual({ idea: 5 })
+  })
+
+  it('al terminar algo en el que queda, se guarda solo lo suyo: nada del de antes se copia', async () => {
+    const { leerAvance, marcarVariante, marcarPieza } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: {}, variantes: { cambio: { aprendida: 1, terminada: 2 } }, errores: {} }))
+    marcarVariante('caro-kann-estructuras:b', 'clasica', 'terminada', 3)
+    marcarPieza('caro-kann-estructuras:b', 'idea', 4)
+    expect(JSON.parse(memoria.get(QUEDA)!)).toEqual({ piezas: { idea: 4 }, variantes: { clasica: { terminada: 3 } }, errores: {} })
+    expect(leerAvance('caro-kann-estructuras:b').variantes).toEqual({ cambio: { aprendida: 1, terminada: 2 }, clasica: { terminada: 3 } })
+  })
+
+  it('un Respaldo viejo, con solo el avance de antes, sigue sirviendo', async () => {
+    const { textoDelRespaldo, cargarRespaldo } = await import('../../src/estado/respaldo.ts')
+    const { importar } = await import('../../src/repertorio/edicion.ts')
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: { idea: 1 }, variantes: { 'avance-short': { aprendida: 1, terminada: 2 } }, errores: {} }))
+    const archivo = textoDelRespaldo()
+    memoria.clear()
+    cargarRespaldo(importar(archivo))
+    expect(leerAvance('caro-kann-estructuras:b').variantes).toEqual({ 'avance-short': { aprendida: 1, terminada: 2 } })
   })
 })

@@ -5,13 +5,15 @@ import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
 import { componerCurso } from './capas.ts'
+import { cursoQueQueda } from './queda.ts'
 import type { CapaCurso, DatosCurso, JugadaMia, JugadaRival, LineaCurso, VarianteCurso } from './tipos.ts'
 
 const caroKannCurso = caroKann as unknown as DatosCurso
 
 /**
- * Los cursos del escalón 1 (diseño §3): hoy el piloto de la Caro-Kann (con negras) y, para compararlo, las mismas
- * jugadas organizadas por estructuras (`specs/cursos.md` §6). Los demás cursos siguen con la lección de antes
+ * Los cursos del escalón 1 (diseño §3): la Caro-Kann (con negras), organizada por estructuras (`specs/cursos.md` §6).
+ * El piloto de antes sigue aquí, sin verse: es la base de la capa y sus lecciones son las fichas de Repaso de esas
+ * líneas; su dirección lleva al que queda (`queda.ts`). Los demás cursos siguen con la lección de antes
  * (`pantallas/Leccion.tsx`).
  */
 export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
@@ -21,8 +23,32 @@ export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
 
 export const cursoNuevo = (id: string): DatosCurso | undefined => CURSOS_NUEVOS[id]
 
-/** Los cursos que salen de este (en Aprender, cada tarjeta va justo después de la de su curso de origen). */
-export const cursosQueSalenDe = (id: string): DatosCurso[] => Object.values(CURSOS_NUEVOS).filter((c) => c.fichasDe === id)
+/**
+ * La dirección de un curso que dejó de verse, en el curso que queda (`queda.ts`): "#/curso/<antes>/…" y
+ * "#/leccion/<antes>/<n>" llevan a lo mismo en el que queda (la misma línea, la misma pieza de leer, Errores y
+ * trampas, o su página), nunca a una página vacía. Para las demás direcciones, `undefined`.
+ */
+export function caminoQueQueda(partes: string[]): string | undefined {
+  const [primera, segunda, ...resto] = partes
+  if ((primera !== 'curso' && primera !== 'leccion') || !segunda) return undefined
+  const id = decodeURIComponent(segunda)
+  const queda = cursoQueQueda(id)
+  const nuevo = queda ? cursoNuevo(queda) : undefined
+  if (!queda || !nuevo) return undefined
+  const pagina = `/curso/${encodeURIComponent(queda)}`
+  const linea = (lid: string) => (lineaPorId(nuevo, lid) ? `${pagina}/linea/${encodeURIComponent(lid)}` : pagina)
+  // "#/leccion/<curso>/<n>" y "#/curso/<curso>/<n>" cuentan las variantes del curso de antes
+  const porNumero = (n: string | undefined) => {
+    const v = cursoNuevo(id)?.variantes[Number(n ?? 0)]
+    return v ? linea(`v:${v.id}`) : pagina
+  }
+  if (primera === 'leccion') return porNumero(resto[0])
+  if (resto[0] === 'linea' && resto[1]) return linea(decodeURIComponent(resto[1]))
+  if (resto[0] === 'leer' && ['idea', 'estructura', 'repaso'].includes(resto[1] ?? '')) return `${pagina}/leer/${resto[1]}`
+  if (resto[0] === 'errores') return `${pagina}/errores`
+  if (resto[0] !== undefined && /^\d+$/.test(resto[0])) return porNumero(resto[0])
+  return pagina
+}
 
 const seccionOpcionalDe = (c: DatosCurso, id: string) => c.secciones?.find((s) => s.opcional && s.variantes.includes(id))
 
