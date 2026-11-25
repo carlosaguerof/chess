@@ -143,7 +143,7 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 - **Aprender, en tu turno:** solo las de la frase del rival (rojas). "Te toca", nada. La Pista, nada; la Otra pista ilumina la pieza; la Respuesta suma la A1. (Si prendo "Flechas de la siguiente jugada" en Ajustes, apagado de entrada, también la A1: es una ayuda que pedí.)
 - **Practicar y los «¿Y si…?», en tu turno:** nada. La Otra pista ilumina la pieza; la Respuesta es la A1.
 - **Después de tu jugada:** las de su explicación, frase por frase. En Practicar también las de "qué hace", y nunca las de una frase que no se muestra porque adelanta una jugada. Ninguna que apunte a una jugada tuya que viene (`marcaAdelanta`).
-- **El plan:** las de "Tu plan" y "El de blancas" (la línea ya terminó).
+- **El plan:** las de "Tu plan" y "El de blancas" (con blancas, "El de negras": el rival; la línea ya terminó).
 - **El paso a paso:** las de cada frase, medidas después de que el tablero hace su jugada; se acumulan mientras la frase siga con lo mismo (el paso trae marcas de su mismo lado: "Desarrollas tu alfil por g7" y "Y tu otro alfil por f5"), hasta que el tablero vuelve a mover; un paso sin marcas deja el tablero limpio (`marcasDelPaso`). Ahí no se pide ninguna jugada: R7 (adelantar) no aplica. El tablero de la página de leer queda limpio.
 - El error sigue con la flecha roja de lo que jugaste; la buena de otra línea, en verde.
 
@@ -276,6 +276,16 @@ En la Caro-Kann da 8 obligatorias (Avance 4.Cf3, Cambio, Clásica, Dos Caballos;
 - **El Repaso muestra el plan del que queda.** Sus fichas son las lecciones del curso de antes (mismos ids, mismo orden, para "Practicar esta línea"), pero el plan es el del que queda, con sus correcciones. **Al retirar un curso** se buscan todas las pantallas que leen sus datos, no solo sus rutas, y en `tests/` toda dirección y clave de avance suya (`iterations/v3/learning.md` n.º 103 a 105).
 - **Cómo se comprueba:** `tests/unit/curso-estructuras.test.ts` ("Una sola Caro-Kann") y `tests/e2e/curso-por-estructuras.spec.ts`. En la página publicada, `tests/publicado/ajustes-app.spec.ts` y `tests/publicado/curso-caro-kann.spec.ts`.
 
+### La Alapin contra la Siciliana (`siciliana:w`, 2026-11-25)
+
+El curso completo en `conocimiento/cursos/alapin.json` (no es una capa); el mapa, su tabla y lo que decidió su gate, en `iterations/v4/mapa-alapin.md`; las comprobaciones, en `iterations/v4/comprobaciones-alapin.md`; lo propio del curso, en `tests/unit/curso-alapin.test.ts` y `tests/e2e/curso-alapin.spec.ts`.
+
+- **Los nombres y las etiquetas, con blancas:** el nombre de una lección se ve en Practicar antes de tu jugada, así que no dice una forma que defines tú ("2...Cf6: Smith-Morra Rehusado", no "La cadena"); las etiquetas de la página dicen lo que hizo el rival ("El rival retoma en d5 con la dama").
+- **El mapa:** ¿qué pasó con tu peón de e4? El aislado (lo cambiaste en d5 y el rival retomó con la dama), La cadena (lo avanzaste a e5) y Los dos peones del centro (sigue en e4, con d4 al lado), que es lo que más sale y no tiene lección: está en el mapa y en su propia página, con su plan. El gambito (3...Cf6) no es una forma: es la excepción de "lo cambiaste", una línea de jugadas casi únicas, opcional.
+- **La regla para la jugada 3** se dice como lo que es: para la jugada 3, donde se midió. Más adelante, con los dos peones del centro, primero se atiende lo que ataque e4: contra un peón en d5, con su peón en e6 se avanza a e5 y si no se cambia en d5 (sacar antes el caballo de g1 pierde e4); contra un caballo, con el caballo de dama del rival ya en c6, d5 contra él (salvo con tu alfil en d3 y su peón en e6, donde d5 se pierde); si no, se defiende e4 con una pieza, que no pierde nada (tras 2...d6, avanzar a e5 cuesta un peón).
+- **6 lecciones de 8 variantes:** el Ataque Stoltz y la Heidenfeld se separaban de 4.d4 por una jugada tuya (4.Cf3) y quedaron como `buenas`; lo guardado de ellas se muda a la de 4.d4 (`LECCIONES_ALAPIN` en `src/aprender/migracion.ts`). Las variantes con continuación se llaman `alapin-curso-*`: así siguen dentro del prefijo `alapin` del repertorio y Refuerza las ve.
+- **2 obligatorias y 4 opcionales,** con los cortes de la Caro-Kann. Con 32 partidas en 600–1000, los datos no dan un salto: la lección base de El aislado (el Cambio Central) se justifica por la transposición desde 2...Cc6, que llega a su posición en el 5.0 % de las Alapin de 1000–1400.
+- **El tablero de arriba de la página** es lo que comparten todas las líneas (`troncoDelCurso`): 1.e4 c5 2.c3.
 
 **Para todos los cursos nuevos por estructuras (lo que dejó la Italiana, 2026-11-25):**
 - **Una sola jugada tuya por posición.** Una variante de la base que se separa de las demás por una jugada tuya no es lección: va en `buenas` de la jugada de la lección (§1). Si dos lecciones llegan al mismo tablero, enseñan la misma jugada (lo mide `tests/unit/curso-italiana.test.ts`).

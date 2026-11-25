@@ -5,7 +5,7 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import './estilos.css'
 import { App } from './App.tsx'
-import { migrarAlCursoAvance, migrarAlCursoCaroKann, migrarAlCursoEscandinava, migrarAlCursoEslava, migrarAlCursoItaliana, migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
+import { migrarAlCursoAlapin, migrarAlCursoAvance, migrarAlCursoCaroKann, migrarAlCursoEscandinava, migrarAlCursoEslava, migrarAlCursoItaliana, migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
 
 // Nota 1: lo guardado pasa al modelo de favoritas (una sola vez)
 migrarAlModeloDeFavoritas()
@@ -14,6 +14,7 @@ migrarAlCursoItaliana()
 migrarAlCursoEslava()
 migrarAlCursoAvance()
 migrarAlCursoEscandinava()
+migrarAlCursoAlapin()
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>

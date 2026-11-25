@@ -45,7 +45,7 @@
         "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nc6 5. Nf3"
       },
       "lado": "blancas",
-      "plan": "Sigue con Ae2 y 0-0. Si Negras cambia en d4, recaptura cxd4 y saca Cc3 ganando tiempo sobre la D. Si clava con ...Ag4, responde h3 y Ae3.",
+      "plan": "Sigue con Cf3 y Ae2. Si negras clava tu caballo con ...Ag4, primero rompe la clavada con Ae2 (h3 de inmediato pierde un peón). Si negras cambia en d4, retoma con el peón: con tu caballo de f3 defendiendo d4, Cc3 ataca la dama.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -73,7 +73,7 @@
         "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 cxd4 5. cxd4 Nc6 6. Nf3 Bg4"
       },
       "lado": "blancas",
-      "plan": "Lo mejor es 7.Cc3 de inmediato, que gana tiempo contra la dama; 7.Ae2 también sirve. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.",
+      "plan": "Contra la clavada de ...Ag4, primero rompe la clavada con 7.Ae2; después Cc3 ataca la dama y enrocas. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ le quita el defensor con jaque y tu dama gana la suya.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -115,7 +115,7 @@
         "pgn": "1. e4 c5 2. c3 d5 3. exd5 Nf6"
       },
       "lado": "blancas",
-      "plan": "Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+ (4.Ab5+ vale casi lo mismo) y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.",
+      "plan": "Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -326,6 +326,133 @@
       },
       "lado": "negras",
       "plan": "Aceptas el peón y desarrollas con cuidado: ...Cf6, ...a6 y ...Ae7. Si Blancas pone la D en e2 y enroca corto, ojo a la trampa ...Cg4 y ...Cd4, con amenaza de ...Dh2 mate.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-cambio-central",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen, Cambio Central (7.Ae2 e6 8.Cc3)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange",
+        "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 cxd4 5. cxd4 Nc6 6. Nf3 Bg4"
+      },
+      "continuacion": {
+        "jugadas": "Be2 e6 Nc3",
+        "fuente": [
+          "J. Hartmann, \"The Alapin\", Chess Life Kids, feb. 2024 (7.Ae2 y la trampa 7...Axf3 8.Axf3 Dxd4 9.Axc6+; solo la idea)",
+          "motor: 7.Ae2 a 0.28 de 7.Cc3, que deshace el aislado (7...Axf3 8.gxf3 Dxd4); 8.Cc3 empata con 8.0-0 (+0.22), iterations/v4/comprobaciones-alapin.md"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Juegas con el peón aislado en d4: tu caballo sale a c3 atacando a la dama, enrocas y no te apresuras a cambiar piezas. Si negras cambia en f3 y toma en d4 con la dama, Axc6+ le quita el defensor con jaque y tu dama gana la suya.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-moderna",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen, Línea Moderna (hasta 10.cxd4)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line",
+        "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nf6 5. Nf3 Bg4"
+      },
+      "continuacion": {
+        "jugadas": "Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4",
+        "fuente": [
+          "Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5 (3.exd5 Dxd5 4.d4)",
+          "J. Hartmann, \"The Alapin\", Chess Life Kids, feb. 2024 (6.Ae2 e6 7.h3 Ah5 8.0-0 Cc6 9.Ae3; solo la idea)",
+          "motor: cada jugada blanca a 0.08 o menos de la mejor, iterations/v4/comprobaciones-alapin.md"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Rompes la clavada con Ae2, le preguntas al alfil con h3 y enrocas; Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-cc6",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen con 4...Cc6 (5...Cf6 6.Ae3)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Barmen Defense",
+        "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nc6 5. Nf3"
+      },
+      "continuacion": {
+        "jugadas": "Nf6 Be3 cxd4 cxd4 e6 Nc3",
+        "fuente": [
+          "motor: la línea principal del motor tras 5.Cf3 (5...Cf6 6.Ae3 cxd4 7.cxd4 e6 8.Cc3), cada jugada blanca a 0.07 o menos de la mejor, iterations/v4/comprobaciones-alapin.md"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama: juegas con el peón aislado, sacas tus piezas y enrocas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-g6",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Defensa Barmen con 4...g6 (6.Ae2)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Barmen Defense",
+        "pgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 g6 5. Nf3"
+      },
+      "continuacion": {
+        "jugadas": "Bg7 Be2 cxd4 cxd4 Nf6 Nc3",
+        "fuente": [
+          "motor: 5...Ag7 y 6...cxd4 son la mejor de negras; 6.Ae2 a 0.06 de la mejor, 7.cxd4 a 0.05 y 8.Cc3 la mejor, iterations/v4/comprobaciones-alapin.md",
+          "plan de la base (alapin-d5-g6): Ae2 y 0-0; si negras cambia en d4 y recapturas con el peón, Cc3 gana tiempo"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Desarrollas con Ae2 y, cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama. Juegas con el peón aislado: sacas tus piezas y enrocas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-gambito",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: Gambito Anti-Alapin (4.Da4+ Ad7 5.Db3)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Anti-Alapin Gambit",
+        "pgn": "1. e4 c5 2. c3 d5 3. exd5 Nf6"
+      },
+      "continuacion": {
+        "jugadas": "Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4",
+        "fuente": [
+          "Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5/3. exd5/3...Nf6 (4.Da4+; su \"4. Qa5+\" es errata)",
+          "motor: la línea principal del motor tras 4.Da4+ (4...Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4); cada jugada blanca, la mejor o a la par (6.dxe6 y 6.Dxb7 casi empatan; a profundidad 25, 6.dxe6 +0.45), iterations/v4/comprobaciones-alapin.md"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "alapin-curso-cf6-d4",
+      "familia": "Variante Alapin",
+      "nombre": "Variante Alapin: 2...Cf6 3.e5 Cd5 4.d4 (hasta 8.Ab5)",
+      "fila": {
+        "eco": "B22",
+        "name": "Sicilian Defense: Alapin Variation, Smith-Morra Declined",
+        "pgn": "1. e4 c5 2. c3 Nf6 3. e5 Nd5 4. d4 cxd4"
+      },
+      "continuacion": {
+        "jugadas": "cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5",
+        "fuente": [
+          "Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...Nf6/3. e5/3...Nd5 (4.d4 cxd4 5.cxd4)",
+          "J. Hartmann, \"The Alapin\", Chess Life Kids, feb. 2024 (6.Cf3 Cc6 7.Ac4; solo la idea)",
+          "motor: 8.Ab5 es la mejor; 6.Cf3 a 0.20 de 6.Ac4, iterations/v4/comprobaciones-alapin.md"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Sostienes la cadena e5-d4 con piezas: Cf3, Ac4 y Ab5, que clava al caballo que ataca e5. Si negras cambia en e5, retomas con el caballo y te queda el peón de d4 solo.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     }

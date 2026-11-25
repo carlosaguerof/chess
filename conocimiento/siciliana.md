@@ -29,7 +29,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cc6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sigue con Ae2 y 0-0. Si Negras cambia en d4, recaptura cxd4 y saca Cc3 ganando tiempo sobre la D. Si clava con ...Ag4, responde h3 y Ae3.
+- Plan *(redactado por la IA)*: Sigue con Cf3 y Ae2. Si negras clava tu caballo con ...Ag4, primero rompe la clavada con Ae2 (h3 de inmediato pierde un peón). Si negras cambia en d4, retoma con el peón: con tu caballo de f3 defendiendo d4, Cc3 ataca la dama.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
 
 ### Variante Alapin: Ataque Stoltz
@@ -45,7 +45,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Lo mejor es 7.Cc3 de inmediato, que gana tiempo contra la dama; 7.Ae2 también sirve. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.
+- Plan *(redactado por la IA)*: Contra la clavada de ...Ag4, primero rompe la clavada con 7.Ae2; después Cc3 ataca la dama y enrocas. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ le quita el defensor con jaque y tu dama gana la suya.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
 
 ### Variante Alapin: Defensa Barmen con 4...g6
@@ -69,7 +69,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Cf6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+ (4.Ab5+ vale casi lo mismo) y seguir desarrollando (Cf3, 0-0, d4 o c4); no hace falta defender el peón de d5 a toda costa.
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
 
 ## Variante Najdorf
@@ -213,3 +213,59 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Aceptas el peón y desarrollas con cuidado: ...Cf6, ...a6 y ...Ae7. Si Blancas pone la D en e2 y enroca corto, ojo a la trampa ...Cg4 y ...Cd4, con amenaza de ...Dh2 mate.
 - Fuente: B21 · Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation
+
+## Variante Alapin
+
+### Variante Alapin: Defensa Barmen, Cambio Central (7.Ae2 e6 8.Cc3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4 7.Ae2 e6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Juegas con el peón aislado en d4: tu caballo sale a c3 atacando a la dama, enrocas y no te apresuras a cambiar piezas. Si negras cambia en f3 y toma en d4 con la dama, Axc6+ le quita el defensor con jaque y tu dama gana la suya.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
+- Sigue la fila de la fuente desde la media jugada 13 con teoría de: J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (7.Ae2 y la trampa 7...Axf3 8.Axf3 Dxd4 9.Axc6+; solo la idea); motor: 7.Ae2 a 0.28 de 7.Cc3, que deshace el aislado (7...Axf3 8.gxf3 Dxd4); 8.Cc3 empata con 8.0-0 (+0.22), iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen, Línea Moderna (hasta 10.cxd4)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cf6 5.Cf3 Ag4 6.Ae2 e6 7.h3 Ah5 8.0-0 Cc6 9.Ae3 cxd4 10.cxd4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Rompes la clavada con Ae2, le preguntas al alfil con h3 y enrocas; Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line
+- Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5 (3.exd5 Dxd5 4.d4); J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (6.Ae2 e6 7.h3 Ah5 8.0-0 Cc6 9.Ae3; solo la idea); motor: cada jugada blanca a 0.08 o menos de la mejor, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen con 4...Cc6 (5...Cf6 6.Ae3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cc6 5.Cf3 Cf6 6.Ae3 cxd4 7.cxd4 e6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama: juegas con el peón aislado, sacas tus piezas y enrocas.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: motor: la línea principal del motor tras 5.Cf3 (5...Cf6 6.Ae3 cxd4 7.cxd4 e6 8.Cc3), cada jugada blanca a 0.07 o menos de la mejor, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen con 4...g6 (6.Ae2)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 g6 5.Cf3 Ag7 6.Ae2 cxd4 7.cxd4 Cf6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Desarrollas con Ae2 y, cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama. Juegas con el peón aislado: sacas tus piezas y enrocas.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: motor: 5...Ag7 y 6...cxd4 son la mejor de negras; 6.Ae2 a 0.06 de la mejor, 7.cxd4 a 0.05 y 8.Cc3 la mejor, iterations/v4/comprobaciones-alapin.md; plan de la base (alapin-d5-g6): Ae2 y 0-0; si negras cambia en d4 y recapturas con el peón, Cc3 gana tiempo.
+
+### Variante Alapin: Gambito Anti-Alapin (4.Da4+ Ad7 5.Db3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Cf6 4.Da4+ Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo rápido. Lo mejor es 4.Da4+; después Db3 contra b7 y, si negras ataca tu peón de d5 con ...e6, tomas otro peón con dxe6. Sigues con un peón de más y sacas tus piezas.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5/3. exd5/3...Nf6 (4.Da4+; su "4. Qa5+" es errata); motor: la línea principal del motor tras 4.Da4+ (4...Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4); cada jugada blanca, la mejor o a la par (6.dxe6 y 6.Dxb7 casi empatan; a profundidad 25, 6.dxe6 +0.45), iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: 2...Cf6 3.e5 Cd5 4.d4 (hasta 8.Ab5)
+
+**1.e4 c5 2.c3 Cf6 3.e5 Cd5 4.d4 cxd4 5.cxd4 d6 6.Cf3 Cc6 7.Ac4 Cb6 8.Ab5**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Sostienes la cadena e5-d4 con piezas: Cf3, Ac4 y Ab5, que clava al caballo que ataca e5. Si negras cambia en e5, retomas con el caballo y te queda el peón de d4 solo.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Smith-Morra Declined
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...Nf6/3. e5/3...Nd5 (4.d4 cxd4 5.cxd4); J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (6.Cf3 Cc6 7.Ac4; solo la idea); motor: 8.Ab5 es la mejor; 6.Cf3 a 0.20 de 6.Ac4, iterations/v4/comprobaciones-alapin.md.

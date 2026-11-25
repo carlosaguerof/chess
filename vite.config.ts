@@ -33,7 +33,8 @@ export default defineConfig({
       // la Caro-Kann (sus jugadas), y lo propio de estos cursos está en tests/unit/curso-avance.test.ts
       // la Eslava y Otras aperturas de blancas (2026-11-25): igual; lo propio, en tests/unit/curso-eslava.test.ts y
       // curso-otros-negras.test.ts
-      ...['caro-kann:w', 'francesa:w', 'eslava:b', 'otros-negras:b'].map((curso) => ({
+      // la Alapin contra la Siciliana (2026-11-25): igual; lo propio, en tests/unit/curso-alapin.test.ts
+      ...['caro-kann:w', 'francesa:w', 'eslava:b', 'otros-negras:b', 'siciliana:w'].map((curso) => ({
         extends: true as const,
         test: {
           name: `curso ${curso}`,

@@ -53,6 +53,7 @@ export const ARCHIVOS_VER: Record<string, { inventario: string; sinVer: string; 
   'eslava:b': { inventario: 'iterations/v4/ver-que-pasa-inventario-eslava.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-eslava.json', comprobaciones: 'iterations/v4/comprobaciones-eslava.md' },
   'otros-negras:b': { inventario: 'iterations/v4/ver-que-pasa-inventario-otros-negras.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-otros-negras.json', comprobaciones: 'iterations/v4/comprobaciones-otros-negras.md' },
   'francesa:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-avance-francesa.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-avance-francesa.json', comprobaciones: 'iterations/v4/comprobaciones-avance-francesa.md' },
+  'siciliana:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-alapin.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-alapin.json', comprobaciones: 'iterations/v4/comprobaciones-alapin.md' },
   'italiana:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-italiana.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-italiana.json', comprobaciones: 'iterations/v4/comprobaciones-italiana.md' },
   'escandinava:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-escandinava.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-escandinava.json', comprobaciones: 'iterations/v4/comprobaciones-escandinava.md' },
 }

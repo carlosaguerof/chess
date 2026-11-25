@@ -30,7 +30,7 @@ const VARIANTES = lineasDe(c).filter((l) => l.tipo === 'variante')
 const esCaroKann = (c.fichasDe ?? c.id) === 'caro-kann:b'
 const itCaroKann = it.runIf(esCaroKann)
 /** La lista de qué jugadas llevan marcas, al día (`scripts/marcas-por-jugada.ts`). */
-const LISTA_DE_MARCAS: Record<string, string> = { 'eslava:b': 'iterations/v4/marcas-por-jugada-eslava.md', 'otros-negras:b': 'iterations/v4/marcas-por-jugada-otros-negras.md', 'caro-kann:w': 'iterations/v4/marcas-por-jugada-avance-caro-kann.md', 'francesa:w': 'iterations/v4/marcas-por-jugada-avance-francesa.md', 'italiana:w': 'iterations/v4/marcas-por-jugada-italiana.md', 'escandinava:w': 'iterations/v4/marcas-por-jugada-escandinava.md' }
+const LISTA_DE_MARCAS: Record<string, string> = { 'eslava:b': 'iterations/v4/marcas-por-jugada-eslava.md', 'otros-negras:b': 'iterations/v4/marcas-por-jugada-otros-negras.md', 'caro-kann:w': 'iterations/v4/marcas-por-jugada-avance-caro-kann.md', 'francesa:w': 'iterations/v4/marcas-por-jugada-avance-francesa.md', 'italiana:w': 'iterations/v4/marcas-por-jugada-italiana.md', 'escandinava:w': 'iterations/v4/marcas-por-jugada-escandinava.md', 'siciliana:w': 'iterations/v4/marcas-por-jugada-alapin.md' }
 
 // las casillas escritas en una frase: "f6", "Af5" (f5), "cxd5" (d5), "d4-e5"
 const casillasEscritas = (frase: string) => new Set([...frase.matchAll(/(?<![a-z])(?:[RDTAC]?[a-h]?x?)([a-h][1-8])(?![0-9])/g)].map((m) => m[1]!))
