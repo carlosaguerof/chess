@@ -49,7 +49,8 @@ test.describe('El curso de la Alapin', () => {
   test('en Aprender, la tarjeta de la Alapin abre el curso nuevo: "0 de 2 variantes" y su tablero desde 1.e4 c5 2.c3', async ({ page }) => {
     await page.goto('/#/cursos')
     const tarjeta = page.getByTestId('tarjeta-siciliana:w')
-    await expect(tarjeta).toContainText('Alapin contra la Siciliana')
+    // la tarjeta conserva su nombre de antes (`nombreCurso`): con blancas, "Contra la Siciliana"
+    await expect(tarjeta).toContainText('Contra la Siciliana')
     await expect(tarjeta).toContainText('0 de 2 variantes')
     await tarjeta.click()
     await expect(page).toHaveURL(/#\/curso\/siciliana%3Aw$/)
@@ -79,8 +80,14 @@ test.describe('El curso de la Alapin', () => {
 
   test('La estructura: El mapa, El aislado, La cadena y Los dos peones del centro', async ({ page }) => {
     await page.goto(`${URL}/leer/estructura`)
-    for (const p of C.piezas.estructura.paginas) await expect(page.getByText(p.subtitulo!, { exact: true }).first(), p.subtitulo).toBeVisible()
-    await expect(page.getByText('El gambito', { exact: true })).toHaveCount(0)
+    const n = C.piezas.estructura.paginas.length
+    expect(n).toBe(4)
+    for (let i = 1; i <= n; i++) {
+      await expect(page.getByTestId('pagina-n-de-m')).toHaveText(`${i} de ${n}`)
+      await expect(page.getByTestId('pieza-estructura')).toContainText(C.piezas.estructura.paginas[i - 1]!.subtitulo!)
+      await expect(page.getByTestId('pieza-estructura')).not.toContainText('El gambito')
+      if (i < n) await page.getByTestId('pagina-siguiente').click()
+    }
   })
 
   test('La base, 2...Cf6: Aprender hasta el plan (el del rival, "El de negras") y Practicar hasta el resumen', async ({ page }, info) => {

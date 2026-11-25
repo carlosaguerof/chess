@@ -29,7 +29,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cc6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sigue con Ae2 y 0-0. Si Negras cambia en d4, recaptura cxd4 y saca Cc3 ganando tiempo sobre la D. Si clava con ...Ag4, responde h3 y Ae3.
+- Plan *(redactado por la IA)*: Sigue con Cf3 y Ae2. Si negras clava tu caballo con ...Ag4, primero rompe la clavada con Ae2 (h3 de inmediato pierde un peón). Si negras cambia en d4, retoma con el peón: con tu caballo de f3 defendiendo d4, Cc3 ataca la dama.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
 
 ### Variante Alapin: Ataque Stoltz
@@ -45,7 +45,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Lo mejor es 7.Cc3 de inmediato, que gana tiempo contra la dama; 7.Ae2 también sirve. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.
+- Plan *(redactado por la IA)*: Contra la clavada de ...Ag4, primero rompe la clavada con 7.Ae2; después Cc3 ataca la dama y enrocas. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
 
 ### Variante Alapin: Defensa Barmen con 4...g6

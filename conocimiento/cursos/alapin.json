@@ -236,7 +236,7 @@
      "subtitulo": "El aislado",
      "texto": [
       "Tu peón: d4, sin peones propios en las columnas c ni e. Es un peón aislado. El rival ya no tiene peones en las columnas c ni d.",
-      "Tu plan: primero el caballo de g1 a f3, que defiende d4; si sacas antes un alfil o el otro caballo, la dama del rival se come tu peón de g2 o el de d4. Si te clavan ese caballo, primero rompes la clavada con el alfil.",
+      "Tu plan: primero el caballo de g1 a f3, que defiende d4; si sacas antes el alfil de f1 o el otro caballo, la dama del rival se come tu peón de g2 o el de d4. Si te clavan ese caballo, primero rompes la clavada con el alfil.",
       "Cuando el rival cambia en d4, retomas con el peón de c3, y el caballo de b1 sale a c3 atacando a la dama. Después enrocas y no te apresuras a cambiar piezas: con muchas piezas en el tablero, el aislado te da espacio y juego.",
       "El del rival: bloquear tu peón con una pieza en d5 y cambiar piezas, porque con pocas el aislado se vuelve débil. La casilla clave es d5.",
       "Con 2...Cc6 3.d4 cxd4 4.cxd4 d5 5.exd5 Dxd5 6.Cf3 llegas a la misma posición del Cambio Central."
@@ -333,7 +333,8 @@
      "subtitulo": "Los dos peones del centro",
      "texto": [
       "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6, 2...e6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3.",
-      "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas. Pero si un caballo del rival ataca tu peón de e4, primero lo defiendes con una pieza (Cc3, o Ad3 si c3 está ocupado): no lo avances, que en algunas posiciones pierdes un peón.",
+      "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
+      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado). Tras 2...d6, avanzar a e5 te cuesta un peón.",
       "Si después el rival lo ataca con un peón en d5: con su peón ya en e6, lo avanzas, como en tu Avance contra la Francesa; si no, lo cambias. Este curso no trae lección para estas jugadas."
      ],
      "tablero": {
@@ -361,7 +362,10 @@
         "frase": "Primero tu caballo de g1 sale a f3 y defiende d4; después, el de b1 a c3, y enrocas."
        },
        {
-        "frase": "Si un caballo del rival ataca tu peón de e4, lo defiendes con una pieza: no lo avanzas."
+        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas d4 contra él."
+       },
+       {
+        "frase": "Si su caballo de dama no ha salido, defiendes e4 con una pieza."
        },
        {
         "frase": "Si un peón del rival lo ataca desde d5: con su peón en e6, avanzas a e5; si no, cambias en d5."
@@ -527,7 +531,7 @@
      ],
      "texto": [
       "La idea: con 2.c3 preparas d4, y lo que haces con tu peón de e4 depende de quién lo ataque.",
-      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, a un caballo que ataque tu e4 no lo echas: lo defiendes con una pieza."
+      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama ya en c6, avanzas d4 contra él; si no, defiendes e4 con una pieza."
      ],
      "fuente": [
       "WB-2c3",
@@ -595,7 +599,7 @@
         "frase": "Con el peón aislado, no te apresures a cambiar piezas."
        },
        {
-        "frase": "Con los dos peones del centro, a un caballo que ataque tu e4 lo defiendes con una pieza."
+        "frase": "Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama en c6, avanzas d4; si no, defiendes e4."
        }
       ]
      }

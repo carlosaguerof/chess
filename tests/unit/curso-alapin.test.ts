@@ -101,7 +101,8 @@ describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
     expect(c.mias['e4 c5 c3 d5 exd5']!.hace).toContain('para tu jugada 3')
     expect(c.mias['e4 c5 c3 Nf6 e5']!.porque).toContain('para tu jugada 3')
     // y con los dos peones del centro, a un caballo que ataque e4 no se le echa
-    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('no lo avances')
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Si ya salió a c6, avanzas tu peón de d4 contra él')
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Tras 2...d6, avanzar a e5 te cuesta un peón')
   })
 })
 
