@@ -63,15 +63,20 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     const vs = (ids: string[]) => ids.map((id) => `paso-v:${id}`)
     expect(orden).toEqual(['paso-idea', 'paso-estructura', 'seccion-base', ...vs(['clasica', 'valenciana', 'gipslis']), 'seccion-frecuentes', ...vs(['lasker']), 'paso-errores', 'paso-repaso', 'seccion-opcional', ...vs(['bronstein', 'schiller-pytel', 'marshall', 'richter'])])
     await expect(page.getByTestId('seccion-opcional')).toContainText('No cuentan para terminar el curso.')
-    for (const v of C.variantes) await expect(page.getByTestId(`paso-v:${v.id}`).getByTestId('estructura-leccion'), v.id).toHaveText(v.estructura!)
+    for (const v of C.variantes) {
+      const e = page.getByTestId(`paso-v:${v.id}`).getByTestId('estructura-leccion')
+      // la dama en d6 queda fuera del mapa: sus dos lecciones van sin etiqueta
+      if (v.estructura) await expect(e, v.id).toHaveText(v.estructura)
+      else await expect(e, v.id).toHaveCount(0)
+    }
     // el tablero de arriba, desde el lado de blancas, con lo que comparten todas las líneas: 1.e4 d5 2.exd5
     await expect(page.getByTestId('pagina-curso').locator('.pagina-apertura-tablero [data-fen]').first()).toHaveAttribute('data-fen', /^rnbqkbnr\/ppp1pppp\/8\/3P4\/8\/8\/PPPP1PPP\/RNBQKBNR/)
   })
 
   test('El mapa y una página por forma, con su paso a paso', async ({ page }) => {
     await page.goto(`${URL_CURSO}/leer/estructura`)
-    await expect(page.getByTestId('pieza-estructura')).toContainText('¿dónde quedó la pieza que lo recuperó?')
-    for (const t of ['El mapa', 'La clavada', 'La dama al frente', 'La dama en casa', 'El centro grande']) await expect(page.getByTestId('pieza-estructura'), t).toContainText(t)
+    await expect(page.getByTestId('pieza-estructura')).toContainText('¿a dónde se fue la dama cuando la atacaste?')
+    for (const t of ['El mapa', 'La clavada', 'La dama en casa', 'El jaque', 'El centro grande']) await expect(page.getByTestId('pieza-estructura'), t).toContainText(t)
   })
 
   for (const [id, cual] of [['clasica', 'Variante 1 de 4'], ['lasker', 'Variante 4 de 4'], ['bronstein', 'Opcional 1 de 4']] as const)
