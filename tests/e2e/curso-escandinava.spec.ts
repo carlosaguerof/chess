@@ -89,6 +89,22 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     }
   })
 
+  test('una excepción de La dama en casa abre su «Ver qué pasaría» y juega su línea', async ({ page }) => {
+    await page.goto(`${URL_CURSO}/leer/estructura`)
+    await page.getByTestId('pagina-siguiente').click()
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('pieza-estructura')).toContainText('La dama en casa')
+    const vers = page.getByTestId('texto-pieza').getByTestId('ver-que-pasa')
+    await expect(vers).toHaveCount(4)
+    await vers.nth(1).click()
+    const ventana = page.getByTestId('paso-a-paso')
+    await expect(ventana).toBeVisible()
+    await expect(ventana).toHaveAttribute('data-paso', '1')
+    await expect(ventana).toContainText('le preguntas al alfil')
+    await page.keyboard.press('Escape')
+    await expect(ventana).toBeHidden()
+  })
+
   for (const [id, cual] of [['clasica', 'Variante 1 de 4'], ['lasker', 'Variante 4 de 4'], ['bronstein', 'Opcional 1 de 4']] as const)
     test(`${id}: Aprender y Practicar, con su número arriba ("${cual}")`, async ({ page }, info) => {
       const l = lineaPorId(C, `v:${id}`)!

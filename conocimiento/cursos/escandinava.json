@@ -230,8 +230,144 @@
      "subtitulo": "La clavada",
      "texto": [
       "La dama de negras está en a5. Cuando juegas d4, tu caballo de c3 queda clavado: si se moviera, la dama daría jaque a tu rey.",
-      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5. Si cambia en f3, retomas con la dama, y si después saca su caballo a c6, Ab5 lo clava.",
-      "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3."
+      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Si su alfil clava tu caballo de f3 desde g4, h3, y si cambia en f3, retomas con la dama.",
+      "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3.",
+      "Si en su cuarta jugada negras saca ...Cc6, d5 lo echa.",
+      "Excepción: si ya hay un caballo de negras en c6, contra ...Ag4 juegas d5, no h3. Con h3, negras cambia en f3, enroca largo y tu peón de d4 queda atacado dos veces, sin defensa.",
+      "Si cambia en f3 y después saca su caballo a c6, Ab5 lo clava contra su rey."
+     ],
+     "ver": [
+      null,
+      null,
+      null,
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qa5",
+        "d4",
+        "Nc6"
+       ],
+       "pasos": [
+        {
+         "frase": "5.d5: tu peón ataca al caballo de c6.",
+         "jugadas": [
+          "d5"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "d5",
+           "a": "c6",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "5...Cd8: el caballo vuelve atrás, y tú ganaste espacio.",
+         "jugadas": [
+          "Nd8"
+         ]
+        }
+       ]
+      },
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qa5",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "Nc6",
+        "Bd2",
+        "Bg4"
+       ],
+       "pasos": [
+        {
+         "frase": "7.h3: le preguntas al alfil.",
+         "jugadas": [
+          "h3"
+         ]
+        },
+        {
+         "frase": "7...Axf3 8.Dxf3: negras cambia, y tu caballo ya no defiende d4.",
+         "jugadas": [
+          "Bxf3",
+          "Qxf3"
+         ]
+        },
+        {
+         "frase": "8...0-0-0: su torre y su caballo atacan tu peón de d4, y ninguna pieza tuya lo defiende.",
+         "jugadas": [
+          "O-O-O"
+         ],
+         "marcas": [
+          {
+           "tipo": "A4",
+           "de": "d8",
+           "a": "d4",
+           "color": "rojo"
+          },
+          {
+           "tipo": "A4",
+           "de": "c6",
+           "a": "d4",
+           "color": "rojo"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qa5",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "Bg4",
+        "h3",
+        "Bxf3",
+        "Qxf3",
+        "Nc6"
+       ],
+       "pasos": [
+        {
+         "frase": "8.Ab5: tu alfil clava al caballo de c6 contra su rey.",
+         "jugadas": [
+          "Bb5"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "b5",
+           "a": "c6",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "8...0-0-0 9.Axc6 bxc6 10.Dxc6: te comes un peón y abres el lado de su rey.",
+         "jugadas": [
+          "O-O-O",
+          "Bxc6",
+          "bxc6",
+          "Qxc6"
+         ]
+        }
+       ]
+      }
      ],
      "tablero": {
       "jugadas": [
@@ -311,7 +447,186 @@
      "subtitulo": "La dama en casa",
      "texto": [
       "La dama de negras volvió a d8. Está segura, pero negras ya la movió dos veces y tú ya sacaste un caballo.",
-      "Tu plan: ocupas el centro con d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6 (ahí, d5) o con tu alfil en c4 y ...c6 jugado (ahí, Ae2). Si cambia en f3, retomas con una pieza, no con un peón, y si después saca su caballo a c6, Ab5 lo clava."
+      "Tu plan: ocupas el centro con d4, sacas tus piezas y enrocas. Si su alfil clava tu caballo de f3 desde g4, h3, y si cambia en f3, retomas con una pieza, no con un peón.",
+      "Si en su cuarta jugada negras saca ...Cc6, d5 lo echa.",
+      "Excepción: si ya hay un caballo de negras en c6, contra ...Ag4 juegas d5, no h3. Con h3, negras cambia en f3 y su caballo se come tu peón de d4.",
+      "Otra excepción: con tu alfil en c4 y su peón en c6, contra ...Ag4 juegas Ae2, no h3. Con h3, negras cambia en f3 y su dama se come tu peón de d4.",
+      "Si cambia en f3 y después saca su caballo a c6, Ab5 lo clava contra su rey."
+     ],
+     "ver": [
+      null,
+      null,
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qd8",
+        "d4",
+        "Nc6"
+       ],
+       "pasos": [
+        {
+         "frase": "5.d5: tu peón ataca al caballo de c6.",
+         "jugadas": [
+          "d5"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "d5",
+           "a": "c6",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "5...Cb8: el caballo vuelve a su casilla, y tú ganaste espacio.",
+         "jugadas": [
+          "Nb8"
+         ]
+        }
+       ]
+      },
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qd8",
+        "d4",
+        "Nc6",
+        "Nf3",
+        "Bg4"
+       ],
+       "pasos": [
+        {
+         "frase": "6.h3: le preguntas al alfil.",
+         "jugadas": [
+          "h3"
+         ]
+        },
+        {
+         "frase": "6...Axf3 7.Dxf3: negras cambia, y tu caballo ya no defiende d4.",
+         "jugadas": [
+          "Bxf3",
+          "Qxf3"
+         ]
+        },
+        {
+         "frase": "7...Cxd4: su caballo se come tu peón y ataca a tu dama.",
+         "jugadas": [
+          "Nxd4"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "d4",
+           "a": "f3",
+           "color": "verde"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qd8",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "c6",
+        "Bc4",
+        "Bg4"
+       ],
+       "pasos": [
+        {
+         "frase": "7.h3: le preguntas al alfil.",
+         "jugadas": [
+          "h3"
+         ]
+        },
+        {
+         "frase": "7...Axf3 8.Dxf3: negras cambia, y tu caballo ya no defiende d4.",
+         "jugadas": [
+          "Bxf3",
+          "Qxf3"
+         ]
+        },
+        {
+         "frase": "8...Dxd4: su dama se come tu peón y ataca a tu alfil de c4.",
+         "jugadas": [
+          "Qxd4"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "d4",
+           "a": "c4",
+           "color": "verde"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qd8",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "Bg4",
+        "h3",
+        "Bxf3",
+        "Qxf3",
+        "Nc6"
+       ],
+       "pasos": [
+        {
+         "frase": "8.Ab5: tu alfil clava al caballo de c6 contra su rey.",
+         "jugadas": [
+          "Bb5"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "b5",
+           "a": "c6",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "8...Tb8 9.d5: tu peón ataca al caballo, que no se puede mover sin dejar a su rey en jaque.",
+         "jugadas": [
+          "Rb8",
+          "d5"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "d5",
+           "a": "c6",
+           "color": "verde"
+          }
+         ]
+        }
+       ]
+      }
      ],
      "tablero": {
       "jugadas": [
@@ -376,7 +691,76 @@
      "texto": [
       "La dama de negras da jaque en e5 o en e6. Lo tapas con tu alfil de f1: Ae2.",
       "Después sigues sacando piezas sin regalar nada. Con la dama en e5, la vuelves a atacar: contra ...Ag4, d4; contra lo demás, Cf3. Con la dama en e6: contra ...Cc6, d4, que amenaza d5 contra la dama y el caballo; contra lo demás, Cf3.",
+      "Si la dama se va a g5 o a g6 y ataca tu peón de g2, Cf3: si se lo come, Tg1 la echa y sacas tus piezas con tiempo.",
       "Si la dama se va a c6, Ab5 la clava contra su rey y la ganas. Cuando la dama se vaya, mira a dónde fue y sigue el mapa."
+     ],
+     "ver": [
+      null,
+      null,
+      {
+       "inicio": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qe5+",
+        "Be2",
+        "Qg5"
+       ],
+       "pasos": [
+        {
+         "frase": "5.Cf3: sacas tu caballo y atacas a la dama, aunque tu peón de g2 quede sin defensa.",
+         "jugadas": [
+          "Nf3"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "f3",
+           "a": "g5",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "5...Dxg2: la dama se come el peón.",
+         "jugadas": [
+          "Qxg2"
+         ]
+        },
+        {
+         "frase": "6.Tg1: tu torre la ataca, ya en la columna abierta.",
+         "jugadas": [
+          "Rg1"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "g1",
+           "a": "g2",
+           "color": "verde"
+          }
+         ]
+        },
+        {
+         "frase": "6...Dh3 7.Tg3: la dama huye y la vuelves a atacar. Cada ataque es un tiempo.",
+         "jugadas": [
+          "Qh3",
+          "Rg3"
+         ],
+         "marcas": [
+          {
+           "tipo": "A2",
+           "de": "g3",
+           "a": "h3",
+           "color": "verde"
+          }
+         ]
+        }
+       ]
+      },
+      null
      ],
      "tablero": {
       "jugadas": [
@@ -653,7 +1037,7 @@
      ],
      "texto": [
       "La pregunta: ¿a dónde se fue la dama cuando la atacaste? Si negras recuperó con el caballo, es el centro grande. La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Saca tus piezas; si una puede atacar a la dama sin costarte nada, mejor: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, con tu caballo en f3, tu alfil en c4 y ningún alfil de negras en b4. 3) Con la dama en a5 o en d8, contra ...Ag4 y con tu caballo en f3, h3, salvo con un caballo de negras en c6: ahí, d5. Si cambia en f3, retomas con una pieza; si después saca su caballo a c6, Ab5."
+      "Tres reglas: 1) Saca tus piezas; si una puede atacar a la dama sin costarte nada, mejor: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3. 3) Si su alfil clava tu caballo de f3 desde g4, h3. Las excepciones de las reglas 2 y 3, cada una con su «Ver qué pasaría», están en las páginas de la clavada y de la dama en casa."
      ],
      "fuente": [
       "WB-3Cc3",
@@ -954,7 +1338,7 @@
      "ilustrativo": true
     }
    },
-   "regla": "Contra ...Ag4, h3, salvo con un caballo de negras en c6 (ahí, d5) o con tu alfil en c4 y ...c6 jugado (ahí, Ae2). Si cambia en f3, retoma con una pieza.",
+   "regla": "Si su alfil clava tu caballo de f3 desde g4, h3. Las excepciones, en la página de la dama en casa.",
    "frecuencia": 3,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 1.8 % en 5...Ag4; la dama en casa, 19.9 % (iterations/v4/mapa-escandinava.md)"
   },
@@ -1075,7 +1459,7 @@
      "ilustrativo": true
     }
    },
-   "regla": "Contra ...Ag4, h3, salvo con un caballo de negras en c6: ahí, d5. Si cambia en f3, retoma con la dama, y contra ...Cc6, Ab5.",
+   "regla": "Si su alfil clava tu caballo de f3 desde g4, h3. Las excepciones, en la página de la clavada.",
    "frecuencia": 3,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.2 % en 5...Ag4 (iterations/v4/mapa-escandinava.md)"
   },
@@ -1881,7 +2265,7 @@
     "a3"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Así preparas el enroque: entre tu rey y tu torre de h1 solo queda tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
    "marcasDe": {
     "hace": [
      [
@@ -2140,7 +2524,7 @@
    "pregunta": "El alfil de g4 clava tu caballo. ¿Qué haces?",
    "pista": "Puedes obligar al alfil a decidir si se cambia o se retira.",
    "hace": "Atacas al alfil con el peón de h: tiene que decidir.",
-   "porque": "Contra el alfil en g4, el motor la ve como la mejor por mucho: el alfil tiene que cambiarse por tu caballo o retirarse.",
+   "porque": "El alfil tiene que decidir: si se cambia por tu caballo, te quedas con los dos alfiles; si se retira, pierde tiempo.",
    "fuente": [
     "HAR",
     "MOTOR"
@@ -2218,7 +2602,7 @@
     "Bc4"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Así preparas el enroque: entre tu rey y tu torre de h1 solo queda tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
    "marcasDe": {
     "hace": [
      [
@@ -2413,7 +2797,7 @@
     "Bc4"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Así preparas el enroque: entre tu rey y tu torre de h1 solo queda tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
    "marcasDe": {
     "hace": [
      [
@@ -2447,7 +2831,7 @@
    "pregunta": "El alfil de g4 clava tu caballo. ¿Qué haces?",
    "pista": "Puedes obligar al alfil a decidir si se cambia o se retira.",
    "hace": "Atacas al alfil con el peón de h: tiene que decidir.",
-   "porque": "Contra el alfil en g4, el motor la ve como la mejor por mucho: el alfil tiene que cambiarse por tu caballo o retirarse.",
+   "porque": "El alfil tiene que decidir: si se cambia por tu caballo, te quedas con los dos alfiles; si se retira, pierde tiempo.",
    "fuente": [
     "WB-3Dd8",
     "HAR",

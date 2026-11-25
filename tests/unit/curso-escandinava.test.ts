@@ -56,12 +56,13 @@ function formaDe(l: Pick<LineaCurso, 'jugadas'>): string | undefined {
 
 /**
  * La tabla de obligatorio y opcional (iterations/v4/mapa-escandinava.md): las partidas de lichess (CC0, septiembre de
- * 2026, Rapid) de 1.e4 d5, en las dos bandas; `null` es "sin datos" (ninguna secuencia con 3 partidas o más).
+ * 2026, Rapid) de 1.e4 d5, en las dos bandas; `null` es "sin datos" (ninguna secuencia con 3 partidas o más). Cada
+ * lección, en la posición que la define en la base (la Valenciana en 5...Ag4, no toda la dama en casa).
  */
 const FORMAS: Record<string, [number | null, number | null]> = { [CLAVADA]: [14.2, 24.8], [CASA]: [13.2, 19.9], [GRANDE]: [null, 7.2], 'la dama en d6 (fuera del mapa)': [2.9, 2.5] }
 const LECCIONES: Record<string, [number | null, number | null]> = {
-  clasica: [null, 2.5], valenciana: [13.2, 19.9], gipslis: [null, 3.0], lasker: [null, 2.2],
-  bronstein: [null, 0.8], 'schiller-pytel': [null, 0.2], marshall: [null, null], richter: [null, null],
+  clasica: [null, 2.3], valenciana: [null, 1.8], gipslis: [null, 3.0], lasker: [null, 2.2],
+  bronstein: [null, 0.2], 'schiller-pytel': [null, 0.2], marshall: [null, null], richter: [null, null],
 }
 const max = (x: [number | null, number | null]) => Math.max(x[0] ?? 0, x[1] ?? 0)
 
@@ -213,6 +214,51 @@ describe('El curso de la Escandinava · el mapa (chess.js)', () => {
   })
 })
 
+describe('El curso de la Escandinava · las excepciones, cada una con su «Ver qué pasaría» (revisión final)', () => {
+  const pagina = (t: string) => c.piezas.estructura.paginas.find((p) => p.subtitulo === t)!
+  const tras = (jugadas: string[]) => {
+    const ch = new Chess()
+    for (const s of jugadas) ch.move(s)
+    return ch
+  }
+  const lineaDe = (v: { inicio: string[]; pasos: { jugadas?: string[] }[] }) => [...v.inicio, ...v.pasos.flatMap((p) => (p.jugadas ?? []).map((j) => j.replace(/^\.\.\./, '')))]
+
+  it('cada página trae un "ver" por párrafo; cada excepción, el suyo; su línea es legal y la ventana la arma', () => {
+    for (const p of c.piezas.estructura.paginas) {
+      if (!p.ver) continue
+      expect(p.ver, p.subtitulo).toHaveLength(p.texto.length)
+      p.texto.forEach((t, k) => {
+        if (/^(Otra )?[Ee]xcepción/.test(t)) expect(p.ver![k], t).toBeTruthy()
+      })
+      for (const v of p.ver.filter((x) => x !== null)) {
+        expect(() => tras(lineaDe(v!)), p.subtitulo).not.toThrow()
+        expect(fotosDePasos({ pasos: v!.pasos }, v!.inicio)).toHaveLength(v!.pasos.length)
+      }
+    }
+    expect(['La clavada', 'La dama en casa', 'El jaque'].map((t) => pagina(t).ver!.filter(Boolean).length)).toEqual([3, 4, 1])
+  })
+
+  it('lo que dicen las ventanas se cumple en el tablero', () => {
+    // la clavada: tras 8...0-0-0, la torre y el caballo atacan d4 y nadie lo defiende
+    const cl = tras(lineaDe(pagina('La clavada').ver![4]!))
+    expect(cl.attackers('d4', 'b').sort()).toEqual(['c6', 'd8'])
+    expect(cl.attackers('d4', 'w')).toEqual([])
+    // la dama en casa: el caballo de d4 ataca a la dama; la dama de d4 ataca al alfil de c4
+    expect(tras(lineaDe(pagina('La dama en casa').ver![3]!)).attackers('f3', 'b')).toContain('d4')
+    expect(tras(lineaDe(pagina('La dama en casa').ver![4]!)).attackers('c4', 'b')).toContain('d4')
+    // Ab5 clava: el caballo de c6 no se puede mover (con el peón en d5 atacándolo)
+    expect(tras(lineaDe(pagina('La dama en casa').ver![5]!)).moves({ square: 'c6' })).toEqual([])
+    // el jaque: tras 7.Tg3, la torre ataca a la dama de h3
+    expect(tras(lineaDe(pagina('El jaque').ver![2]!)).attackers('h3', 'w')).toContain('g3')
+  })
+
+  it('las reglas del Repaso y de las lecciones son cortas: la idea en una frase; las excepciones, en la página de su forma', () => {
+    const repaso = c.piezas.repaso.paginas.flatMap((p) => p.texto).join(' ')
+    expect(repaso).toContain('Las excepciones de las reglas 2 y 3')
+    for (const v of c.variantes) expect((v.regla ?? '').split(/(?<=\.) /).length, v.id).toBeLessThanOrEqual(2)
+  })
+})
+
 describe('El curso de la Escandinava · obligatorio y opcional', () => {
   it('la regla de §6 con los datos de este curso da la tabla: por forma, 5 % o más; por lección, 2 % o más', () => {
     const porForma = Object.entries(FORMAS).filter(([, x]) => max(x) >= 5).map(([f]) => f)
@@ -222,9 +268,14 @@ describe('El curso de la Escandinava · obligatorio y opcional', () => {
     expect(new Set(base)).toEqual(new Set(c.secciones![0]!.variantes))
     expect(frecuentes).toEqual(c.secciones![1]!.variantes)
     expect(c.variantes.filter((v) => esOpcional(c, v.id)).map((v) => v.id)).toEqual(c.variantes.map((v) => v.id).filter((id) => !base.includes(id) && !frecuentes.includes(id)))
-    // los cortes caen en saltos: las formas, 7.2 y después 2.9; las lecciones, 2.2 y después 0.8
+    // las formas: el corte cae en un salto (7.2 y después 2.9)
     expect(Object.values(FORMAS).map(max).filter((x) => x < 5)).toEqual([2.9])
-    expect(Object.values(LECCIONES).map(max).filter((x) => x < 2).sort((a, b) => b - a)[0]).toBe(0.8)
+    // las lecciones: las obligatorias van de 3.0 a 1.8 (la Valenciana, debajo del 2 %, entra por ser la lección de su
+    // entrada); las opcionales, 0.2 o sin datos
+    const de = (ids: string[]) => ids.map((id) => max(LECCIONES[id]!))
+    expect(Math.min(...de(obligatorias(c).map((v) => v.id)))).toBe(1.8)
+    expect(Math.max(...de(c.variantes.filter((v) => esOpcional(c, v.id)).map((v) => v.id)))).toBe(0.2)
+    expect(max(LECCIONES.valenciana!)).toBeLessThan(2)
   })
 })
 

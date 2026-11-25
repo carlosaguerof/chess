@@ -8,7 +8,7 @@
 - **Cuatro entradas en el mapa, cada una con su señal y su jugada:**
   - **La clavada:** la dama fue a a5. Con d4, tu caballo de c3 queda clavado: antes de moverlo, Ad2. El salto Cd5 destapa a tu alfil de d2 contra la dama, con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4 (si llega a b4, primero a3). Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5.
   - **La dama en casa:** la dama volvió a d8. Ya no hay a quién atacar: d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6 (ahí, d5) o con tu alfil en c4 y ...c6 jugado (ahí, Ae2). Si cambia en f3, retomas con una pieza, y si después saca su caballo a c6, Ab5 lo clava (pase adversarial 3).
-  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y sigues sacando piezas sin regalar nada: con la dama en e5 la vuelves a atacar, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 (amenaza d5) y contra lo demás Cf3. Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** (notas 1 y 7).
+  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y sigues sacando piezas sin regalar nada: con la dama en e5 la vuelves a atacar, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 (amenaza d5) y contra lo demás Cf3. Si se va a g5 o g6 contra tu peón de g2, Cf3: si se lo come, Tg1 la echa (revisión final; 8.6 % de las partidas del curso en 600–1000). Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** (notas 1 y 7).
   - **El centro grande:** negras no recuperó con la dama sino con el caballo (2...Cf6 3.d4 Cxd5). d4 y Cf3; después c4 echa al caballo y te quedas con c4 y d4 (si su alfil sale a f5, primero Ad3 y lo cambias). Mantén d4 defendido; con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa.
 - **La dama en d6 queda fuera del mapa:** sale en 2.9 % y 2.5 % (menos del 5 %, como las formas chicas de la Caro-Kann). Sus dos lecciones son opcionales y van sin etiqueta.
 - **8 lecciones: 4 obligatorias y 4 opcionales.** La base: Clásica (la clavada), Valenciana (la dama en casa), Gipslis (el centro grande). Las que más te van a salir: Lasker. Opcional: Bronstein y Schiller-Pytel (fuera del mapa), Marshall y Richter.
@@ -135,6 +135,7 @@ Con 10 % o más de las partidas que llegan a su posición y 2 % o más de las de
 |---|---|---|---|---|
 | 3...De5+ | 32.6 % (n 386) / 15.6 % (n 1025) | 27.9 % / 12.5 % | **El jaque** (entrada propia, sin lección) | Tabla F-… de las comprobaciones: la frase, medida en las 6 respuestas más jugadas tras 4.Ae2 |
 | 3...De6+ | 19.6 % (n 232) / 20.0 % (n 1310) | 16.8 % / 15.9 % | **El jaque** | Ídem, en 5 respuestas, más 4...Dc6 5.Ab5 (+6.26) |
+| 3...De5+ 4.Ae2 Dg5 y 3...De6+ 4.Ae2 Dg6 | 20.3 % (51 de 251) y 17.7 % (25 de 141), en 600–1000 | 8.6 % en 600–1000 | **El jaque**: Cf3, aunque g2 quede sin defensa; si ...Dxg2, Tg1 (las dos, las mejores) | motor F-g5 y F-g6 (revisión final) |
 | 3...Da5 4.d4 c6 | 36.4 % (1000–1400, n 177) | 9.0 % | **La clavada**: Ad2 (la mejor). Tras 5.Ad2, lo más jugado es 5...Dc7 (62 %): la dama sale de a5 y ya no hay clavada; sigues sacando piezas (6.Cf3 la mejor, 6.Ac4 a 0.08). Con 5.Cf3 Cf6 6.Ac4 Af5 7.Ad2 e6 llega a la posición de la Clásica (el orden de Wikipedia) | partidas; motor G-a5-c6, G2-a5-c6-dc7 |
 | 3...Da5 4.d4 Af5 | 10.5 % (n 51) | 2.6 % | **La clavada**: Ad2 (+0.71, a 0.08 de la mejor) | motor G2-a5-af5 |
 | 3...Da5 4.d4 Cc6 | 25.5 % (600–1000) | 3.6 % | **La clavada**: d5 echa al caballo (la mejor) | motor G-cd5-cc6 |
@@ -172,6 +173,12 @@ El evaluator midió las reglas con otra jugada natural del rival ya en el tabler
 2. **"Si un caballo va a c6, d5" del centro grande perdía un peón una jugada antes del final de la Gipslis.** Ahora: "con tu caballo en c3".
 3. **Cd5 y h3 daban por hecho tu Cf3.** Ahora lo dicen.
 4. Lo demás: el plan de la Valenciana sin "o a f4" y con Ab5 contra ...Cc6; cada lección medida en su posición de la base; las dos jugadas que faltaban en la tabla de la nota 1 (3...Da5 4.d4 Af5 y 3...Dd8 4.d4 Cc6); los planes de dos variantes de antes de la base (la Clásica y la Bronstein) alineados con el curso; "la vuelves a atacar" solo con la dama en e5; y qué sigue tras 4...c6 5.Ad2 Dc7.
+
+## La revisión final de la rama
+
+- **Las reglas, cortas.** La regla de cada forma dice su idea en una frase ("si su alfil clava tu caballo de f3 desde g4, h3"); cada excepción va en su párrafo de la página de su forma, con su «Ver qué pasaría», que juega lo que pasa si no la sigues. El Repaso dice las tres reglas y dónde están sus excepciones. Ninguna regla escrita regala material: la que se queda corta remite a su excepción.
+- **El jaque, con ...Dg5 y ...Dg6:** lo segundo más común dentro del jaque ya tiene qué jugar.
+- **Las lecciones, en la posición que las define** (arriba): la prueba usa ahora estos números.
 
 ## Para Carlos, al final
 
