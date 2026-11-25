@@ -38,10 +38,11 @@ function formaDe(l: LineaCurso): string[] {
 }
 
 describe('...c6 + ...d5 · el curso', () => {
-  it('es la tarjeta de "...c6 + ...d5" con negras', () => {
+  it('es la tarjeta de "Otras aperturas de blancas" con negras, y la página dice el mismo nombre', () => {
     expect(MIS_APERTURAS).toContain('otros-negras:b')
     expect(c.id).toBe('otros-negras:b')
-    expect(c.nombre).toBe('...c6 + ...d5 contra lo demás')
+    expect(c.nombre).toBe(cursos().find((x) => x.id === 'otros-negras:b')!.nombre)
+    expect(c.nombre).toBe('Otras aperturas de blancas')
     expect(c.color).toBe('b')
   })
 

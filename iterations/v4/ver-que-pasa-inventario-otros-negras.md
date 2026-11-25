@@ -1,6 +1,6 @@
 # El inventario de "Ver qué pasa"
 
-> Generado con `node scripts/ver-inventario.ts otros-negras:b`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «...c6 + ...d5 contra lo demás»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
+> Generado con `node scripts/ver-inventario.ts otros-negras:b`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Otras aperturas de blancas»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
 **43 frases: 2 con "Ver"; 41 sin él** (32 porque explica la jugada que ya está en la línea, sin una alternativa; 5 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 3 porque lo que dice se juega en las jugadas que siguen de la línea; 1 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 0 de las 2 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 

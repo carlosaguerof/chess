@@ -2,7 +2,7 @@
  "id": "otros-negras:b",
  "apertura": "otros-negras",
  "color": "b",
- "nombre": "...c6 + ...d5 contra lo demás",
+ "nombre": "Otras aperturas de blancas",
  "version": "2026-11-25",
  "nota": "El curso de \"...c6 + ...d5 contra lo demás\" por estructuras (specs/cursos.md §6): primero el mapa, después una lección por estructura, las que más salen y lo demás como opcional. Los textos los escribió la corrida con palabras propias y las ideas de las fuentes de \"fuentes\"; ninguno es traducción. En la app no se cita nada: \"fuente\" y \"motor\" son de la base interna.",
  "secciones": [
@@ -120,7 +120,7 @@
      "texto": [
       "Pongas o no ...c6, tu peón va a d5. La pregunta que ordena este curso: ¿qué peón de blancas ataca tu peón de d5?",
       "Hay tres respuestas. Ninguno: el Centro libre. El de c, sin un peón en d4: la Anglo-Eslava. El de c, con su peón de d en d4: ya es la Eslava, y su mapa te dice qué hacer.",
-      "Contra 1.e3, o contra 1.Cf3 d5 2.d4, si contestas ...d5, casi siempre llegas al Centro libre. Y 1.c4 c6 2.d4 d5 es la misma posición que la Eslava."
+      "Si contestas 1.e3 con ...d5, casi siempre llegas al Centro libre, y también tras 1.Cf3 d5 2.d4. Y 1.c4 c6 2.d4 d5 es la misma posición que la Eslava."
      ],
      "tablero": {
       "jugadas": [
@@ -184,7 +184,7 @@
      "subtitulo": "El Centro libre",
      "texto": [
       "Ningún peón de blancas ataca tu peón de d5: ni el de c ni el de e. Blancas juega con piezas: un alfil en la diagonal larga (g3 y Ag2, o b3 y Ab2), o el peón de f.",
-      "Tu plan son principios generales: sacas tus piezas a casillas activas (tu alfil de c8 a f5 o g4, antes de ...e6), enrocas, y si blancas juega lento con d3, agrandas tu centro con ...e5.",
+      "Tu plan son principios generales: sacas tus piezas a casillas activas (tu alfil de c8 a f5 o g4, antes de ...e6), enrocas. Contra 1.g3 con d3, como en la Húngara, agrandas tu centro con ...e5 cuando tu caballo de d7 lo apoya.",
       "Contra 1.f4 d5 2.Cf3 Cf6 3.g3, la jugada más común, sigue siendo el Centro libre, pero ahí el motor prefiere sacar tu alfil de f8 por g7: ...g6 y ...Ag7."
      ],
      "tablero": {
@@ -211,7 +211,7 @@
         "frase": "Ningún peón de blancas ataca tu peón de d5: ni el de c ni el de e."
        },
        {
-        "frase": "Si blancas juega lento con d3, agrandas tu centro con ...e5.",
+        "frase": "En la Húngara, contra d3, agrandas tu centro con ...e5.",
         "jugadas": [
          "d3",
          "...e5"
@@ -373,7 +373,7 @@
      ],
      "texto": [
       "La pregunta: ¿qué peón de blancas ataca tu peón de d5? La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Primero tu peón a d5, y ...c6 cuando un peón o un alfil lo ataca o lo va a atacar. 2) Tu alfil de c8 sale antes de ...e6; si el caballo de blancas ya está en c3, primero ...e6. 3) Si blancas juega lento con d3, agranda tu centro con ...e5."
+      "Tres reglas: 1) Primero tu peón a d5, y ...c6 cuando un peón o un alfil lo ataca o lo va a atacar. 2) Tu alfil de c8 sale antes de ...e6; si el caballo de blancas ya está en c3, primero ...e6. 3) Contra 1.g3 y d3, como en la Húngara, agranda tu centro con ...e5."
      ],
      "fuente": [
       "WP-Reti",

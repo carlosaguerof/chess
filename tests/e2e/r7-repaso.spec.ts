@@ -7,8 +7,9 @@ import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { cursos } from '../../src/cursos/datos.ts'
 import { captura, jugar, tocar } from './_util.ts'
 
-// dos líneas de la Eslava (la Caro-Kann tiene su curso nuevo; su Repaso se prueba abajo, con una variante nueva)
-const curso = cursosDe(BASE, repertorioInicial(BASE)).find((c) => c.id === 'eslava:b')!
+// dos líneas de "Otras defensas contra 1.e4", con la lección de antes (la Caro-Kann y la Eslava tienen su curso nuevo; el
+// Repaso de la Caro-Kann se prueba abajo, con una variante nueva)
+const curso = cursosDe(BASE, repertorioInicial(BASE)).find((c) => c.id === 'otros-1e4:w')!
 const [A, B] = [curso.lecciones[0]!, curso.lecciones[1]!]
 const HOY = new Date('2026-11-02T10:00:00')
 const MANANA = new Date('2026-11-03T10:00:00')
@@ -26,10 +27,10 @@ async function contestar(page: Page, info: TestInfo, l: Leccion, fallar = false)
     if ((ply % 2 === 0 ? 'w' : 'b') !== l.color) continue
     await expect(page.getByTestId('lista-jugadas').getByTestId('jugada')).toHaveCount(ply, { timeout: 10_000 })
     await expect(page.getByTestId('instruccion')).toContainText('¿Qué harías?')
-    if (fallar && ply === 1) {
+    if (fallar && ply === (l.color === 'w' ? 2 : 1)) {
       // la lección no acepta la jugada: el tablero no cambia, solo el aviso
-      await tocar(page, info, 'a7')
-      await tocar(page, info, 'a6')
+      await tocar(page, info, l.color === 'w' ? 'a2' : 'a7')
+      await tocar(page, info, l.color === 'w' ? 'a3' : 'a6')
       await expect(page.getByTestId('aviso-leccion')).toHaveAttribute('data-resultado', 'incorrecta')
     }
     await jugar(page, info, uci(l.jugadas, ply))
@@ -41,7 +42,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   test.setTimeout(120_000)
   await page.clock.setFixedTime(HOY)
   await page.goto('/')
-  // dos líneas de la Eslava que aprendí ayer
+  // dos líneas que aprendí ayer
   const ayer = HOY.getTime() - 86_400_000
   await page.evaluate(([a, b, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f }, [b]: { fecha: f } })), [A.id, B.id, ayer] as const)
   await page.reload()
@@ -59,7 +60,7 @@ test('R7 · el repaso de hoy: la que contesto bien sale de la lista; un día des
   // el reloj avanza dos minutos entre una línea y otra (como de verdad)
   await page.clock.setFixedTime(new Date(HOY.getTime() + 2 * 60_000))
   await page.getByTestId('siguiente-repaso').click()
-  // B: con un error → vuelve mañana (fallar 1...d5 repasando B no regresa a A)
+  // B: con un error → vuelve mañana (fallar 2.d4 repasando B no regresa a A)
   await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(B.nombre, 'figuras'))
   await contestar(page, info, B, true)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve mañana')
