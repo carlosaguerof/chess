@@ -333,7 +333,7 @@
      "subtitulo": "Los dos peones del centro",
      "texto": [
       "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6, 2...e6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3.",
-      "Tu plan: sacas tus caballos (el de b1 ya tiene libre c3; el de g1, a f3) y enrocas. Si un caballo del rival ataca tu peón de e4, lo defiendes con una pieza (Cc3, o Ad3 si c3 está ocupado): no lo avances, que en algunas posiciones pierdes un peón.",
+      "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas. Pero si un caballo del rival ataca tu peón de e4, primero lo defiendes con una pieza (Cc3, o Ad3 si c3 está ocupado): no lo avances, que en algunas posiciones pierdes un peón.",
       "Si después el rival lo ataca con un peón en d5: con su peón ya en e6, lo avanzas, como en tu Avance contra la Francesa; si no, lo cambias. Este curso no trae lección para estas jugadas."
      ],
      "tablero": {
@@ -358,7 +358,7 @@
         "frase": "El rival ya no tiene peón en la columna c."
        },
        {
-        "frase": "Sacas tus caballos a c3 y f3, y enrocas."
+        "frase": "Primero tu caballo de g1 sale a f3 y defiende d4; después, el de b1 a c3, y enrocas."
        },
        {
         "frase": "Si un caballo del rival ataca tu peón de e4, lo defiendes con una pieza: no lo avanzas."

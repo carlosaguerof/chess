@@ -62,6 +62,21 @@ Stockfish 19 lite de un hilo (el del repo), profundidad 18 (16 para las amenazas
 | P-cf6 | Al final de 2...Cf6: si negras cambia en e5, 9.Cxe5 (no 9.dxe5) | `node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene: 9.Cxe5 +0.08; 9.dxe5 pierde 83 |
 | P-gam | Al final del Gambito sigues con un peón de más, y Cf3 y 0-0 siguen | `node linea.mjs "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w (FIN)` | Se sostiene |
 | V-cf6-dxe5 | "Ver": 8...dxe5 9.Cxe5 deja el peón de d4 sin peones al lado | `node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene (chess.js: sin peones blancos en c ni e) |
+| C-d6-nf6 | Los dos peones: contra 2...d6 3.d4 Cf6, defender e4 con 4.Ad3 | `—` | Se sostiene: la mejor (+0.57) |
+| C-d6-nf6-e5 | Ahí, avanzar a e5 pierde | `—` | Se sostiene: pierde 129 |
+| C-d6x-nf6 | Con 3...cxd4 4.cxd4 Cf6, defender con 5.Cc3 | `—` | Se sostiene: la mejor (+0.92) |
+| C-d6x-nf6-e5 | Ahí, 5.e5 pierde un peón y el enroque | `—` | Se sostiene: pierde 206 |
+| C-nc6x-nf6-e5 | Con 2...Cc6 … 4...Cf6, 5.e5 pierde | `—` | Se sostiene: pierde 232 (5.Cc3 +0.45) |
+| C-e6x-nf6-e5 | Con 2...e6 … 4...Cf6, 5.e5 pierde | `—` | Se sostiene: pierde 54 (5.Cc3, la mejor) |
+| C-nc6x-e6 | Los dos peones: Cf3 y Cc3 contra ...e6 | `—` | Se sostiene: +0.37 y +0.35 |
+| C-nc6x-g6-nf3 | Contra ...g6, Cf3 primero no pierde material | `—` | Se sostiene: +0.86 (pierde 119 contra 5.d5) |
+| N-c-nc6-qb6-nc3 | Con ...Db6, 5.Cc3 pierde el peón de d4 | `—` | Se sostiene: pierde 223 (5...Dxd4) |
+| N-c-nc6-qb6-nf3 | Con ...Db6, 5.Cf3 defiende d4 | `—` | Se sostiene: +1.52 |
+| I-qxd5-be2 | El aislado: el alfil antes que Cf3 deja que la dama tome g2 | `—` | Se sostiene: pierde 124 |
+| I-cc-nc6-be2 | Tras 5...Cc6, el alfil antes que Cf3 deja que la dama tome d4 | `—` | Se sostiene: pierde 110 |
+| N-mod-cxd4-bg4-be2 | La clavada sin ...Cc6: 7.Ae2 no pierde material | `—` | Se sostiene: +0.30 (7.Cc3 +1.00) |
+| N-cc-nf6-nf3-bg4-be2 | La clavada sin ...Cc6 (5...Cf6): 7.Ae2 no pierde material | `—` | Se sostiene: +0.27 (7.Cc3 +0.90) |
+| G-e6-nf3 | El gambito: tras 5...e6, sacar piezas (6.Cf3) pierde | `—` | Se sostiene: pierde 208; 6.dxe6 y 6.Dxb7 sirven |
 
 ## Las salidas, tal cual
 
