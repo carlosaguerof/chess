@@ -1,4 +1,4 @@
-# Comprobaciones con el motor del curso de "...c6 + ...d5 contra lo demás" (2026-11-25)
+# Comprobaciones con el motor del curso de "Otras aperturas de blancas" (...c6 + ...d5 contra lo demás) (2026-11-25)
 
 Cada afirmación del curso que el motor puede medir ("es la mejor", "pierde", "gana", "es un error", "evita"), con su comando y lo que contestó. El motor: Stockfish 19 lite de un hilo (el de la app), profundidad 18; las amenazas ("si el rival jugara otra vez"), profundidad 16. Las evaluaciones van desde blancas: + es mejor para blancas; "pierde N" son centipeones contra la mejor. Diferencias de menos de 0.2 no distinguen jugadas.
 

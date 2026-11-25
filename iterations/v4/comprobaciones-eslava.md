@@ -126,6 +126,8 @@ Cada id aparece en el campo `motor` del texto que lo afirma, en `conocimiento/cu
 | G-cc3-bf5 | `node motor.mjs jugada "d4 d5 c4 c6 Nf3 Nf6 Nc3" "Bf5" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.29  dxc4 a4 Bf5 e3 e6 Bxc4 Bb4 O-O · Bf5: +0.62  Bf5 cxd5 Nxd5 Nd2 Nxc3 bxc3 e5 e4 · pierde 33 centipeones contra la mejor | ver el texto que lo cita (campo `motor`) |
 | G-e3-bf5 | `node motor.mjs jugada "d4 d5 c4 c6 Nf3 Nf6 e3" "Bf5" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.28  Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Qb3 · Bf5: +0.31  Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Bd2 · pierde 3 centipeones contra la mejor | ver el texto que lo cita (campo `motor`) |
 | G-e3-dxc4 | `node motor.mjs jugada "d4 d5 c4 c6 Nf3 Nf6 e3" "dxc4" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.28  Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Qb3 · dxc4: +0.88  dxc4 Bxc4 c5 O-O e6 Qe2 cxd4 Rd1 · pierde 60 centipeones contra la mejor | ver el texto que lo cita (campo `motor`) |
+| M-ca-bb4-bb5 | `node motor.mjs jugada "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Bb5" Bb4` | Bb4 +0.13, la mejor +0.27: es la mejor (pierde −14). | Se sostiene: "Saca tu alfil de f8 a b4". |
+| M-ca-bb4-be2 | `node motor.mjs jugada "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Be2" Bb4` | Bb4 +0.10, la mejor +0.07: pierde 3. Contra 8.Db3, `jugada "… e3 e6 Qb3" Bb4`: +0.03, es la mejor (−6). | Se sostiene. |
 | V-2e6 | chess.js: `new Chess()` con 1.d4 d5 2.c4 e6 y `moves({ square: "c8" })` | El alfil de c8 solo tiene d7 (con 2...c6, en cambio, tiene d7, e6, f5, g4 y h3). La prueba: tests/unit/curso-eslava.test.ts | Se sostiene: "solo le queda d7". |
 
 ## Lo que sostiene el mapa y los planes
@@ -164,7 +166,8 @@ Los ids que cita el mapa (`iterations/v4/mapa-eslava.md` y el MAPA de la corrida
 | H-e3nc3-bf5 | `node motor.mjs jugada "d4 d5 c4 c6 e3 Nf6 Nc3" "Bf5" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.28  Nbd7 Nf3 e6 Bd3 dxc4 Bxc4 b5 Bd3 · Bf5: +0.36  Bf5 cxd5 cxd5 Qb3 Bc8 Nf3 Nc6 Bd2 · pierde 8 centipeones contra la mejor |
 | H-e3nc3-e6 | `node motor.mjs jugada "d4 d5 c4 c6 e3 Nf6 Nc3" "e6" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.28  Nbd7 Nf3 e6 Bd3 dxc4 Bxc4 b5 Bd3 · e6: +0.30  e6 Nf3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 · pierde 2 centipeones contra la mejor |
 | M-tr-bf5-db3 | `node motor.mjs mejores "d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 cxd5 cxd5 Qb3" --n 4` | +0.28 Nc6 (entrega b7: Qxb7 Bd7) · +0.38 Bc8 · +0.41 e6 · +0.48 Qd7. ...Db6 no está entre las 4: con su caballo en c3, lo sencillo es ...e6 antes del alfil (página de la Tensión). |
-| M-tr-bf5-db3-c8 | `node motor.mjs jugada "d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 cxd5 cxd5 Qb3" Bc8` | Bc8 +0.31, la mejor +0.23 (Nc6): pierde 8. "Tu alfil tendría que volver a c8". |
+| M-tr-bf5-db3-c8 | `node motor.mjs jugada "d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 cxd5 cxd5 Qb3" Bc8` | Bc8 +0.31, la mejor +0.23 (Nc6, que entrega b7): pierde 8. "O tu alfil vuelve a c8 a cuidarlo, o entregas ese peón". |
+| M-ca-bb4-sin-cc6 | `node motor.mjs jugada "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 e6 Qb3" Bb4` | Bb4 +6.36 contra Nc6 −0.10: pierde 646 (la dama se come el alfil). Medida del pase 2: por eso ...Ab4 lleva "con tu caballo en c6". |
 | M-cc3-e3-b4 | `node motor.mjs jugada "d4 d5 c4 c6 Nc3 dxc4 e3 b5 a4" b4` | b4 +0.34, la mejor +0.29: pierde 5 (plan de la base, `cc3`). |
 | M-cc3-e3-df3 | `node motor.mjs jugada "d4 d5 c4 c6 Nc3 dxc4 e3 b5 a4 e6 axb5 cxb5" Qf3` | Qf3 +3.99: gana la torre de a8 (plan de la base, `cc3`). |
 | M-clavada-db3 | `node motor.mjs mejores "d4 d5 c4 c6 Nf3 Nf6 e3 Bg4 Qb3" --n 4` | +0.20 Qb6 · +0.34 Qc7 · +0.55 Nbd7 · +0.72 Qc8 (plan de la base, `tranquila-clavada`). |

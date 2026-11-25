@@ -33,7 +33,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.cxd5 cxd5 4.Cc3 Cf6 5.Cf3 Cc6 6.Af4 Af5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.
+- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con tu caballo en c6 y ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.
 - Fuente: D14 · Slav Defense: Exchange Variation, Symmetrical Line
 
 ## Variante 3.Cc3
@@ -133,7 +133,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.e4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Toma con 3...dxe4 y te quedas con un peón de más. No te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.
+- Plan *(redactado por la IA)*: Toma con 3...dxe4. Blancas puede recuperar el peón, así que no te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.
 - Fuente: D10 · Slav Defense: Diemer Gambit
 
 ## Variante Checa
@@ -216,7 +216,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.cxd5 cxd5 4.Cc3 Cf6 5.Cf3 Cc6 6.Af4 Af5 7.e3 e6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con ...e6 ya jugado, si Db3 ataca b7, ...Ab4.
+- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con tu caballo en c6 y ...e6 ya jugado, si Db3 ataca b7, ...Ab4.
 - Fuente: D14 · Slav Defense: Exchange Variation, Symmetrical Line
 - Sigue la fila de la fuente desde la media jugada 13 con teoría de: Wikibooks, 3.cxd5 cxd5 (tabla: 4.Nc3 Nf6 5.Nf3 Nc6 6.Bf4 Bf5); motor: 7.e3 es la mejor de blancas y 7...e6 la mejor de negras.
 
@@ -227,6 +227,6 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.e4 dxe4 4.Cc3 e5 5.Ae3 exd4 6.Dxd4 Dxd4 7.Axd4 Cf6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tomas el peón de e4 y contestas en el centro con ...e5. Las damas se cambian y quedas con un peón de más; desarrolla ...Cf6, ...Af5 y enroca.
+- Plan *(redactado por la IA)*: Tomas el peón de e4 y contestas en el centro con ...e5. Las damas se cambian: blancas puede recuperar el peón, pero tu posición queda un poco mejor; desarrolla ...Cf6, ...Af5 y enroca.
 - Fuente: D10 · Slav Defense: Diemer Gambit
 - Sigue la fila de la fuente desde la media jugada 6 con teoría de: motor: 3...dxe4, 4...e5, 5...exd4, 6...Dxd4 y 7...Cf6 son las mejores o a 3 de la mejor; 5.Ae3 y 6.Dxd4 las mejores de blancas.

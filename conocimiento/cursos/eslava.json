@@ -155,7 +155,7 @@
      "texto": [
       "Después de 1.d4 d5 2.c4 c6, el peón de c4 de blancas ataca tu peón de d5, y tú lo defiendes con el de c6. De ahí sale la pregunta que ordena este curso: ¿qué pasó con el peón de c4?",
       "Hay cuatro respuestas. Sigue en c4: la Tensión. Blancas lo cambió en d5: el Cambio. Lo tomaste y lo defiendes con ...b5: la Pelea del lado de dama. Lo tomaste, pero blancas alcanzó a jugar a4: la Checa.",
-      "Son tres preguntas en fila. ¿Blancas cambió en d5? Si no: ¿ya jugó e3? Con e3, su alfil de f1 recuperaría c4 de una vez, así que no tomas: sacas tu alfil de c8 a f5, o primero ...e6 si su caballo ya está en c3. Sin e3, tomas en c4 (contra g3, también sirve sacar tu alfil a g4). Y si tomaste: ¿alcanzó blancas a jugar a4?",
+      "Son tres preguntas en fila. ¿Blancas cambió en d5? Si no: ¿ya jugó e3? Con e3, su alfil de f1 recuperaría c4 de una vez, así que no tomas: sacas tu alfil de c8 a f5, o primero ...e6 si su caballo ya está en c3. Sin e3 (ni Cbd2, que también recupera c4 de una vez), tomas en c4 (contra g3, también sirve sacar tu alfil a g4). Y si tomaste: ¿alcanzó blancas a jugar a4?",
       "Es la misma pregunta de la Caro-Kann, con el peón de c en lugar del de e. Lo que une a todo el curso: con ...c6 defiendes d5 sin encerrar a tu alfil de c8. Si blancas empuja 3.c5, su peón deja de atacar d5: no es ninguna de las cuatro, y ...e5 golpea su centro."
      ],
      "tablero": {
@@ -256,7 +256,7 @@
      "subtitulo": "La Tensión",
      "texto": [
       "Tus peones: c6, d5 y e6. Los de blancas: c4, d4 y e3. Tu peón de d5 y el de c4 se atacan, y nadie los cambia todavía.",
-      "Llegas aquí cuando blancas juega e3 antes de que tomes en c4: por ejemplo, 3.Cf3 Cf6 4.e3, o 3.e3. Tu plan: el caballo a f6 cuida d5 y tu alfil de c8 sale a f5 antes de ...e6. Si el caballo de blancas ya está en c3, lo más sencillo es primero ...e6: con tu alfil en f5, cxd5 cxd5 y Db3 atacan b7, y para cuidarlo tu alfil tendría que volver a c8. Si la dama blanca va a b3 antes de cambiar en d5, la tuya se le pone enfrente en b6.",
+      "Llegas aquí cuando blancas juega e3 antes de que tomes en c4: por ejemplo, 3.Cf3 Cf6 4.e3, o 3.e3. Tu plan: el caballo a f6 cuida d5 y tu alfil de c8 sale a f5 antes de ...e6. Si el caballo de blancas ya está en c3, lo más sencillo es primero ...e6: con tu alfil en f5, cxd5 cxd5 y Db3 atacan b7: o tu alfil vuelve a c8 a cuidarlo, o entregas ese peón. Si la dama blanca va a b3 antes de cambiar en d5, la tuya se le pone enfrente en b6.",
       "Contra 4.g3 también sirve: tu alfil sale a g4. Puede terminar en otra forma: si blancas cambia en d5 y retomas con tu peón de c, vas al Cambio."
      ],
      "tablero": {
@@ -300,7 +300,7 @@
      "subtitulo": "El Cambio",
      "texto": [
       "Tus peones: d5 y e6. Los de blancas: d4 y e3. Es simétrico: ninguno tiene peón en la columna c, que queda abierta.",
-      "Tu plan: sacas tus piezas como blancas, mirando sus amenazas, y tus torres pelean por la columna c. Si la dama blanca va a b3 contra b7: con tu peón ya en e6, tu alfil de f8 se pone en medio, en b4; antes de ...e6, tu caballo de c6 la ataca desde a5."
+      "Tu plan: sacas tus piezas igual que blancas, mirando sus amenazas, y tus torres pelean por la columna c. Si la dama blanca va a b3 contra b7: con tu caballo en c6 y tu peón ya en e6, tu alfil de f8 se pone en medio, en b4; antes de ...e6, tu caballo de c6 la ataca desde a5."
      ],
      "tablero": {
       "fen": "4k3/pp3ppp/4p3/3p4/3P4/4P3/PP3PPP/4K3 w - - 0 1",
@@ -470,7 +470,7 @@
      "desde": 9,
      "lado": "w",
      "intro": "En la Checa, blancas jugó 5.a4 y tú defendiste el peón de c4 con 5...b5. Juegas con blancas: castiga el error.",
-     "final": "Perdiste el peón de b, y tu peón de c4 sigue solo. Con a4 ya jugado, no defiendas c4: saca tu alfil a f5.",
+     "final": "Perdiste el peón de b, y tu peón de c4 sigue solo. Con a4 ya jugado y tu caballo en f6, no defiendas c4: saca tu alfil a f5.",
      "fuente": [
       "WP-Slav",
       "INV",
@@ -542,7 +542,7 @@
      ],
      "texto": [
       "La pregunta: ¿qué pasó con el peón de c4? La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) ¿Blancas ya jugó e3? Con e3 y tu caballo en f6, saca tu alfil (o ...e6 primero, si su caballo ya está en c3); sin e3, toma en c4 (contra g3, también sirve ...Ag4). 2) Si tomaste y blancas no jugó a4, defiende c4 con ...b5; si ya lo jugó y tu caballo está en f6, saca el alfil a f5. 3) Contra la dama en b3: si blancas no cambió en d5, ...Db6; en el Cambio, con ...e6 ya jugado, ...Ab4."
+      "Tres reglas: 1) ¿Blancas ya jugó e3? Con e3 y tu caballo en f6, saca tu alfil (o ...e6 primero, si su caballo ya está en c3); sin e3 ni Cbd2, toma en c4 (contra g3, también sirve ...Ag4). 2) Si tomaste y blancas no jugó a4, defiende c4 con ...b5; si ya lo jugó y tu caballo está en f6, saca el alfil a f5. 3) Contra la dama en b3: si blancas no cambió en d5, ...Db6; en el Cambio, con tu caballo en c6 y ...e6 ya jugado, ...Ab4."
      ],
      "fuente": [
       "WP-Slav",
@@ -700,7 +700,7 @@
    "nombre": "Checa: 5.a4",
    "desde": 0,
    "intro": "Estás en la Checa: tu objetivo es sacar tus piezas rápido mientras blancas gasta jugadas en sus peones. Empiezas desde la primera jugada: blancas abre con 1.d4.",
-   "idea": "Con a4 jugado, no defiendes c4: tu alfil sale a f5, porque tu peón de c4 cuida b3.",
+   "idea": "Con a4 jugado y tu caballo en f6, no defiendes c4: tu alfil sale a f5, porque tu peón de c4 cuida b3.",
    "plan": {
     "tuyo": "Saca tu caballo de b8 a d7. Después, la ruptura ...c5 abre el centro.",
     "rival": "Blancas quiere empujar e4 para ganar espacio y echar a tu alfil.",
@@ -772,10 +772,10 @@
      ]
     }
    },
-   "regla": "Con a4 jugado, no juegues ...b5: saca el alfil a f5.",
+   "regla": "Con a4 jugado y tu caballo en f6, no juegues ...b5: saca el alfil a f5.",
    "frecuencia": 1,
    "fuenteFrecuencia": "sin datos de 5.a4 (menos de 3 partidas); la posición de 4.Cc3, donde tomas, sale en 14.8 % y 6.7 % de la Eslava (n 6 y 27): MAPA, gate",
-   "estructura": "Tomas en c4, pero blancas ya jugó a4"
+   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
   },
   {
    "id": "tranquila-schallopp",
@@ -864,9 +864,9 @@
    "nombre": "Cambio: 3.cxd5",
    "desde": 4,
    "intro": "Estás en el Cambio: tu objetivo es sacar tus piezas sin copiar a ciegas a blancas. Blancas cambia de una vez con 3.cxd5.",
-   "idea": "En la posición simétrica sacas tus piezas como blancas, pero mirando sus amenazas: contra Db3, ...Ab4.",
+   "idea": "En la posición simétrica sacas tus piezas igual que blancas, pero mirando sus amenazas: aquí, contra Db3, ...Ab4.",
    "plan": {
-    "tuyo": "Saca tu alfil de f8 a e7 y enroca. Después, tus torres pelean por la columna c, que está abierta.",
+    "tuyo": "Saca tu alfil de f8 a b4, donde clava al caballo de c3, y enroca. Después, tus torres pelean por la columna c, que está abierta.",
     "rival": "Blancas busca Db3 contra b7, o Ab5 y Ce5 contra tu caballo de c6.",
     "marcas": [],
     "fuente": [
@@ -877,7 +877,9 @@
     ],
     "motor": [
      "E-fin-ca",
-     "E-ca-8db3"
+     "E-ca-8db3",
+     "M-ca-bb4-bb5",
+     "M-ca-bb4-be2"
     ],
     "pasoAPaso": {
      "ilustrativo": true,
@@ -886,9 +888,9 @@
        "frase": "Tu plan: sacar tu alfil de f8 y enrocar."
       },
       {
-       "frase": "...Ae7: tu alfil de f8 sale a e7.",
+       "frase": "...Ab4: tu alfil de f8 sale a b4 y clava al caballo de c3.",
        "jugadas": [
-        "...Be7"
+        "...Bb4"
        ]
       },
       {
@@ -904,17 +906,9 @@
        ]
       },
       {
-       "frase": "Blancas busca Db3 contra b7.",
+       "frase": "Blancas puede jugar Db3, pero tu alfil de b4 ya le tapa el camino a b7.",
        "jugadas": [
         "Qb3"
-       ],
-       "marcas": [
-        {
-         "tipo": "A4",
-         "de": "b3",
-         "a": "b7",
-         "color": "rojo"
-        }
        ]
       }
      ]
@@ -925,7 +919,7 @@
        {
         "tipo": "A3",
         "de": "f8",
-        "a": "e7",
+        "a": "b4",
         "color": "verde",
         "punteada": true
        }
@@ -951,7 +945,7 @@
      ]
     }
    },
-   "regla": "Si la dama blanca va a b3, tápala con el alfil en b4.",
+   "regla": "Aquí, con tu caballo en c6 y ...e6 jugado, si la dama blanca va a b3, tápala con el alfil en b4.",
    "frecuencia": 4,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 600–1000 14.4 %, 1000–1400 12.3 % de la Eslava",
    "estructura": "Blancas cambia en d5"
@@ -965,7 +959,7 @@
    "idea": "Sin a4 a tiempo, ...b5 sostiene el peón de c4, y ...b4 echa al caballo de c3.",
    "plan": {
     "tuyo": "Saca tus piezas: ...e6, ...Cf6 y tu alfil de f8. Tus peones de b4 y c4 te dan espacio en el lado de dama.",
-    "rival": "Blancas tiene más piezas afuera, y su dama de c2 va por tu peón de c4.",
+    "rival": "Blancas tiene el centro, y su dama de c2 va por tu peón de c4.",
     "marcas": [],
     "fuente": [
      "WB-3Cc3dxc4",
@@ -1086,7 +1080,7 @@
    "regla": "Contra g4, retira el alfil sin dejar solo al caballo.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4, pero blancas ya jugó a4"
+   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
   },
   {
    "id": "alekhine-e3",
@@ -1218,7 +1212,7 @@
    "regla": "Desafía al caballo de e5 y prepara ...e5.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4, pero blancas ya jugó a4"
+   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
   },
   {
    "id": "cambio-trifunovic",
@@ -1259,7 +1253,7 @@
      ]
     }
    },
-   "regla": "Contra Db3, ...Ab4.",
+   "regla": "Aquí, con tu caballo en c6 y ...e6 jugado, contra Db3, ...Ab4.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
    "estructura": "Blancas cambia en d5"
@@ -1375,9 +1369,9 @@
    "nombre": "Gambito Diemer: 3.e4",
    "desde": 4,
    "intro": "Esta línea queda fuera del mapa: blancas ofrece su peón de e en lugar de pelear con el de c4. Blancas juega 3.e4.",
-   "idea": "Tomas el peón, contestas con ...e5 y cambias las damas con un peón de más.",
+   "idea": "Tomas el peón, contestas con ...e5 y cambias las damas: blancas puede recuperar el peón, pero tu posición queda un poco mejor.",
    "plan": {
-    "tuyo": "Saca tu alfil a f5 para cuidar tu peón de e4, y tu caballo de b8 a d7.",
+    "tuyo": "Saca tu alfil a f5 y tu caballo de b8 a d7.",
     "rival": "Blancas atacará tu peón de e4 con sus caballos.",
     "marcas": [],
     "fuente": [
@@ -2698,7 +2692,7 @@
    ]
   },
   "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4 Bb4": {
-   "pregunta": "Termina de sacar tus piezas menores: ¿qué alfil te falta, y a dónde lo llevas con más fuerza?",
+   "pregunta": "Termina de sacar tus alfiles: ¿qué alfil te falta, y a dónde lo llevas con más fuerza?",
    "pista": "Saca el alfil que falta a una casilla donde moleste a una pieza de blancas.",
    "buenas": [
     "Nbd7",
@@ -2789,8 +2783,8 @@
    ]
   },
   "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4 Bb4 O-O O-O": {
-   "pregunta": "Tus piezas menores ya salieron. ¿Qué te falta para poner a salvo a tu rey?",
-   "pista": "Tu rey todavía está en el centro.",
+   "pregunta": "Tus dos alfiles ya salieron. ¿Qué haces ahora?",
+   "pista": "Piensa en la seguridad de tu rey.",
    "buenas": [
     "h6",
     "Nbd7",
@@ -3083,7 +3077,7 @@
     "e6"
    ],
    "hace": "Sacas tu alfil y atacas al caballo de f3.",
-   "porque": "Sale antes de ...e6, que lo dejaría encerrado.",
+   "porque": "Tu alfil sale antes de ...e6, que lo dejaría encerrado.",
    "fuente": [
     "BASE",
     "MOTOR"
@@ -3331,7 +3325,7 @@
    "pista": "Con el peón que lo encierra.",
    "hace": "Abres tu alfil de f8.",
    "porque": "Tu alfil de c8 ya salió: este peón ya no lo encierra.",
-   "cuidado": "Si la dama blanca va a b3 contra b7, tu alfil de f8 se pone en medio, en b4.",
+   "cuidado": "Si la dama blanca va a b3 contra b7, tu alfil de f8 la tapa en b4, defendido por tu caballo.",
    "marcasDe": {
     "cuidado": [
      [
@@ -3656,7 +3650,7 @@
     "Qd6"
    ],
    "hace": "Retiras tu dama a una casilla desde donde cuida tu peón de b4.",
-   "porque": "Tienes dos peones de más, pero blancas tiene más piezas afuera: ahora te toca sacar las tuyas.",
+   "porque": "Tienes dos peones de más, pero blancas tiene el centro y le toca mover: ahora te toca sacar tus piezas.",
    "marcasDe": {
     "hace": [
      [
@@ -3710,7 +3704,7 @@
    ]
   },
   "d4 d5 c4 c6 e4 dxe4 Nc3 e5 Be3 exd4": {
-   "pregunta": "¿Qué haces con tu peón de e5 frente al de d4?",
+   "pregunta": "Blancas defendió d4 con su alfil. ¿Qué haces en el centro?",
    "pista": "Mira la tensión entre tu peón de e5 y el de d4.",
    "buenas": [
     "Na6",
@@ -3729,9 +3723,9 @@
   },
   "d4 d5 c4 c6 e4 dxe4 Nc3 e5 Be3 exd4 Qxd4 Qxd4": {
    "pregunta": "Las damas están frente a frente en la columna d. ¿Qué haces?",
-   "pista": "Con un peón de más, te conviene simplificar.",
+   "pista": "Piensa si te conviene que sigan las damas.",
    "hace": "Cambias las damas.",
-   "porque": "Con un peón de más, cada cambio de piezas te acerca a un final mejor para ti.",
+   "porque": "Sin damas, blancas tiene menos con qué atacar, y tu posición queda un poco mejor.",
    "fuente": [
     "MOTOR"
    ],
@@ -3749,7 +3743,7 @@
     "f5"
    ],
    "hace": "Sacas tu caballo y defiendes tu peón de e4.",
-   "porque": "Sigues con un peón de más y con tus piezas listas para salir.",
+   "porque": "Defiendes tu peón de e4 mientras sacas una pieza, y tu posición queda un poco mejor.",
    "fuente": [
     "MOTOR"
    ],
@@ -3840,7 +3834,7 @@
   },
   "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Bb5 Bb4 Ne5 Ne4 Nxc6 bxc6 Bxc6+": {
    "pregunta": "¿Cómo atacas al rey y a la torre de negras con una sola jugada?",
-   "pista": "Tu alfil puede dar jaque y atacar otra pieza a la vez.",
+   "pista": "Busca una jugada que ataque dos piezas a la vez.",
    "hace": "Tu alfil da jaque y ataca la torre de a8.",
    "marcasDe": {
     "hace": [
@@ -3864,6 +3858,10 @@
   }
  },
  "glosario": [
+  {
+   "termino": "Ataque doble",
+   "definicion": "Una jugada que ataca dos piezas o peones a la vez: el rival solo puede salvar uno."
+  },
   {
    "termino": "Centro",
    "definicion": "Las casillas d4, e4, d5 y e5."
@@ -3889,6 +3887,10 @@
    "definicion": "La forma que dejan los peones en el tablero."
   },
   {
+   "termino": "Final",
+   "definicion": "La última parte de la partida, con pocas piezas en el tablero."
+  },
+  {
    "termino": "Fianchetto",
    "definicion": "Sacar el alfil por g7 o b7 (g2 o b2 con blancas), a la diagonal larga."
   },
@@ -3901,12 +3903,20 @@
    "definicion": "Las dos mitades del tablero: de la columna a a la d, el lado de dama; de la e a la h, el lado de rey."
   },
   {
+   "termino": "Pieza menor",
+   "definicion": "Un alfil o un caballo."
+  },
+  {
    "termino": "Pareja de alfiles",
    "definicion": "Tener los dos alfiles cuando el rival ya cambió uno; es fuerte cuando la posición se abre."
   },
   {
    "termino": "Ruptura",
    "definicion": "Empujar un peón para abrir el centro o romper los peones del rival."
+  },
+  {
+   "termino": "Simplificar",
+   "definicion": "Cambiar piezas para que la partida quede más sencilla."
   },
   {
    "termino": "Simétrica",

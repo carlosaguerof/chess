@@ -3285,7 +3285,7 @@
       "Bf5"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con tu caballo en c6 y ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3604,7 +3604,7 @@
       "e4"
      ],
      "lado": "negras",
-     "plan": "Toma con 3...dxe4 y te quedas con un peón de más. No te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.",
+     "plan": "Toma con 3...dxe4. Blancas puede recuperar el peón, así que no te aferres a él: desarrolla rápido (...Cf6, ...e5 o ...Af5) y enroca. Si blancas lo recupera, tu posición es cómoda.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3943,7 +3943,7 @@
       "e6"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con ...e6 ya jugado, si Db3 ataca b7, ...Ab4.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con tu caballo en c6 y ...e6 ya jugado, si Db3 ataca b7, ...Ab4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3985,7 +3985,7 @@
       "Nf6"
      ],
      "lado": "negras",
-     "plan": "Tomas el peón de e4 y contestas en el centro con ...e5. Las damas se cambian y quedas con un peón de más; desarrolla ...Cf6, ...Af5 y enroca.",
+     "plan": "Tomas el peón de e4 y contestas en el centro con ...e5. Las damas se cambian: blancas puede recuperar el peón, pero tu posición queda un poco mejor; desarrolla ...Cf6, ...Af5 y enroca.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
