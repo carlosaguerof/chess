@@ -336,7 +336,7 @@ describe('El curso por estructuras · los textos', () => {
   it('el Cambio pide la torre en b8 en su plan y en su paso a paso, sin tocar lo demás, y sus marcas se quedan', () => {
     const v = nuevo.variantes.find((x) => x.id === 'cambio')!
     const hoy = actual.variantes.find((x) => x.id === 'cambio')!
-    expect(v.plan.tuyo).toBe(hoy.plan.tuyo.replace('Después, adelanta ...b5 y ...b4:', 'Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:'))
+    expect(v.plan.tuyo).toBe(hoy.plan.tuyo.replace('Después, adelanta ...b5 y ...b4:', 'Después, con una torre en b8, adelanta ...b5 y ...b4, cuidando de no regalar el peón:'))
     // un paso nuevo enseña la torre en el tablero; los demás conservan sus jugadas y sus marcas
     const pasos = v.plan.pasoAPaso!.pasos
     const i = pasos.findIndex((x) => x.jugadas?.[0] === '...Rab8')

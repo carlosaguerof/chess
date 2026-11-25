@@ -151,7 +151,7 @@
           "id": "cambio",
           "estructura": "Blancas cambia en d5",
           "frase": "Estás en el Cambio: tu objetivo es atacar los peones de blancas en el lado de dama.",
-          "planTuyo": [["Después, adelanta ...b5 y ...b4:", "Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:"]],
+          "planTuyo": [["Después, adelanta ...b5 y ...b4:", "Después, con una torre en b8, adelanta ...b5 y ...b4, cuidando de no regalar el peón:"]],
           "pasosDelPlan": [
             { "antesDe": "Después adelantas ...b5 y ...b4", "paso": { "frase": "...Tab8: pones una torre en b8, para defender tu peón cuando avance.", "jugadas": ["...Rab8"] } },
             ["Después adelantas ...b5 y ...b4: es el ataque de minorías.", "Después, con una torre en b8, adelantas ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías."]
