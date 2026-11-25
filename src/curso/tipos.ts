@@ -95,7 +95,18 @@ export interface PaginaLeer {
   linea?: string[]
   /** "Ver paso a paso" (correcciones, C3) */
   pasoAPaso?: PasoAPaso
+  /**
+   * "Ver qué pasaría" de cada párrafo, en el orden de `texto` (`null` si no lleva): una regla o una excepción que se lee
+   * y no se ve. La ventana sale de la posición tras `inicio` y juega sus pasos (la Escandinava, 2026-11-25).
+   */
+  ver?: (VerDePagina | null)[]
   fuente: string[]
+}
+
+export interface VerDePagina {
+  /** las jugadas desde 1.e4 hasta la posición de la que habla la frase */
+  inicio: string[]
+  pasos: PasoLeer[]
 }
 
 export interface PiezaLeer {

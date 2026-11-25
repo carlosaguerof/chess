@@ -39,6 +39,9 @@ const CURSO = ESTRUCTURAS
 /** la introducción más larga del curso por estructuras: la frase nueva le suma alto */
 const MAS_LARGA = [...cursoNuevo(ESTRUCTURAS)!.variantes].sort((a, b) => palabras(b.intro) - palabras(a.intro))[0]!
 const CLASICA = lineaPorId(cursoNuevo(CURSO)!, 'v:clasica')!
+/** la captura contra la Escandinava: su introducción más larga, y el momento más alto de su clave (8.Cd5, con sus dos «Ver qué pasaría») */
+const ESCANDINAVA = 'escandinava:w'
+const MAS_LARGA_ESC = [...cursoNuevo(ESCANDINAVA)!.variantes].sort((a, b) => palabras(b.intro) - palabras(a.intro))[0]!
 const UCI = enUci(CLASICA.jugadas)
 /** 10...e6, la última jugada mía: la línea ya es la más larga del curso */
 const ULTIMA = CLASICA.jugadas.length - 1
@@ -82,7 +85,7 @@ async function cabe(page: Page, info: TestInfo, cuando: string, aLaVista: string
     [aLaVista, texto] as const,
   )
   const pantalla = `${m.pantalla}x${m.ventana}`
-  if (CON_CAPTURA.includes(pantalla) && !info.title.startsWith(ESTRUCTURAS)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
+  if (CON_CAPTURA.includes(pantalla) && !info.title.startsWith(ESTRUCTURAS) && !info.title.startsWith(ESCANDINAVA)) await page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/leccion-${CUANDO}-${pantalla}-${cuando}.png`, scale: 'css' })
   expect.soft(m.pagina, `${cuando}: sin scroll de la página`).toBeLessThanOrEqual(m.ventana)
   expect.soft(m.fuera, `${cuando}: completos dentro de la ventana`).toEqual([])
   expect.soft(Math.round(m.texto), `${cuando}: la narración`).toBeGreaterThanOrEqual(140)
@@ -101,6 +104,22 @@ for (const p of PANTALLAS) {
       await momento(page, 'intro')
       await expect(page.getByTestId('narracion')).toContainText(mostrarTexto(MAS_LARGA.intro, 'figuras'))
       await cabe(page, info, '0-introduccion', [...BOTONES, 'empezar-vuelta'], 'narracion')
+    })
+
+    test(`${ESCANDINAVA}: la introducción más larga y la explicación de 8.Cd5 (con sus dos «Ver qué pasaría»), sin scroll de la página`, async ({ page }, info) => {
+      await page.goto(URL(ESCANDINAVA, `v:${MAS_LARGA_ESC.id}`))
+      await momento(page, 'intro')
+      await expect(page.getByTestId('narracion')).toContainText(mostrarTexto(MAS_LARGA_ESC.intro, 'figuras'))
+      await cabe(page, info, 'esc-0-introduccion', [...BOTONES, 'empezar-vuelta'], 'narracion')
+      const l = lineaPorId(cursoNuevo(ESCANDINAVA)!, 'v:clasica')!
+      const ply = l.jugadas.length - 1
+      await page.evaluate(([clave, linea, ply]) => localStorage.setItem(clave as string, JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply, fecha: Date.now() } })), [`ajedrez.v1.curso:${ESCANDINAVA}`, l.id, ply] as const)
+      await page.goto(URL(ESCANDINAVA, l.id))
+      await page.reload()
+      await momento(page, 'tuTurno')
+      await jugar(page, info, enUci(l.jugadas)[ply]!)
+      await momento(page, 'leer')
+      await cabe(page, info, 'esc-1-explicacion', [...BOTONES, 'siguiente'], 'narracion')
     })
 
     for (const curso of [ESTRUCTURAS])

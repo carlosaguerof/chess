@@ -237,3 +237,45 @@ export function migrarAlCursoAvance(): void {
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarAvance(repaso))
   guardar('modelo-avance', 1)
 }
+
+/**
+ * La captura contra la Escandinava (2026-11-25) pasa al curso por estructuras. Cada lección vieja tiene su lección nueva
+ * de la misma línea (la misma fila de la base, ahora con su continuación): lo que llevaba en el Repaso de hoy se muda
+ * ahí, como en la Caro-Kann. La Grünfeld y la Transposición Panov no son lecciones del curso nuevo (se separan de otra
+ * por una jugada mía; nota 2 del orchestrator): lo suyo se queda guardado y deja de salir. El avance del curso nuevo
+ * empieza en cero.
+ */
+export const LECCIONES_ESCANDINAVA: Record<string, string> = {
+  'da5-clasica': 'curso-clasica',
+  'da5-lasker': 'curso-lasker',
+  'dd6-bronstein': 'curso-bronstein',
+  'dd6-schiller-pytel': 'curso-schiller-pytel',
+  'dd8-valenciana': 'curso-valenciana',
+  'moderna-marshall': 'curso-marshall',
+  'moderna-gipslis': 'curso-gipslis',
+  'moderna-richter': 'curso-richter',
+}
+
+/** Muda lo de cada lección vieja de la Escandinava a su lección nueva (si la nueva aún no tiene nada). */
+export function pasarEscandinava<T>(r: Record<string, T>): Record<string, T> {
+  const nuevo = { ...r }
+  const prefijo = 'escandinava:w/w:escandinava/'
+  for (const [viejo, nueva] of Object.entries(LECCIONES_ESCANDINAVA)) {
+    const v = r[prefijo + viejo]
+    if (v !== undefined && !(prefijo + nueva in nuevo)) {
+      nuevo[prefijo + nueva] = v
+      delete nuevo[prefijo + viejo]
+    }
+  }
+  return nuevo
+}
+
+/** Corre una sola vez al abrir la app. */
+export function migrarAlCursoEscandinava(): void {
+  if (leer<number>('modelo-escandinava', 0) >= 1) return
+  const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
+  const repaso = leer<Record<string, unknown>>('repaso', {})
+  if (progreso && typeof progreso === 'object') guardar('progreso', pasarEscandinava(progreso))
+  if (repaso && typeof repaso === 'object') guardar('repaso', pasarEscandinava(repaso))
+  guardar('modelo-escandinava', 1)
+}

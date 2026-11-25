@@ -3,7 +3,7 @@ import { Texto } from '../componentes/Notacion.tsx'
 import { Chess } from 'chess.js'
 import type { Key } from 'chessground/types'
 import { TableroMini } from '../componentes/TableroMini.tsx'
-import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
+import { BotonPasoAPaso, BotonVerQuePasa } from '../componentes/PasoAPaso.tsx'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
 import { avanceVariantes, cursoNuevo, lineasDe, obligatorias, opcionales, troncoDelCurso } from '../curso/datos.ts'
@@ -193,9 +193,17 @@ export function PiezaDeLeer({ id, pieza }: { id: string; pieza: PiezaLeerId }) {
       {/* correcciones, C3: el texto se queda, y además se puede ver paso a paso en el tablero */}
       {pag.pasoAPaso && <BotonPasoAPaso key={i} titulo={pag.subtitulo ?? p.titulo} pa={pag.pasoAPaso} orientacion={c.color === 'w' ? 'white' : 'black'} clase="ver-paso-a-paso" />}
       <div className="texto-pieza" data-testid="texto-pieza">
-        {pag.texto.map((t, k) => (
-          <p key={k}><Texto t={t} /></p>
-        ))}
+        {pag.texto.map((t, k) => {
+          // una regla o una excepción que se lee y no se ve trae su "Ver qué pasaría", en el renglón, después de su frase
+          const v = pag.ver?.[k]
+          return (
+            <p key={k}>
+              <Texto t={t} />
+              {v && '\u2002'}
+              {v && <BotonVerQuePasa key={`${i}-${k}`} ver={{ titulo: t, pa: { pasos: v.pasos }, inicio: v.inicio }} orientacion={c.color === 'w' ? 'white' : 'black'} />}
+            </p>
+          )
+        })}
       </div>
       <div className="pasos-pieza">
         {p.paginas.length > 1 && (
