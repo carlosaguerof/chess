@@ -91,13 +91,9 @@ export function grupoDeLinea(c: DatosCurso, l: LineaCurso): LineaCurso[] {
   return lineasDe(c).filter((x) => x.tipo === 'variante' && esOpcional(c, x.variante!.id) === opcional)
 }
 
-/**
- * Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual.
- * Con `soloObligatorias`, las opcionales no entran: no salen en el Repaso ni en Refuerza (orden de Carlos, 2026-11-25);
- * lo guardado de antes de esas líneas se queda en el teléfono y deja de salir.
- */
-export function leccionesDe(c: DatosCurso, { soloObligatorias = false } = {}): Leccion[] {
-  return c.variantes.filter((v) => !soloObligatorias || !esOpcional(c, v.id)).map((v) => {
+/** Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual. */
+export function leccionesDe(c: DatosCurso): Leccion[] {
+  return c.variantes.map((v) => {
     const b = BASE.aperturas.find((x) => x.id === c.apertura)!.variantes.find((x) => x.id === v.base)!
     return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco }
   })

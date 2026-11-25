@@ -11,6 +11,7 @@ import { todosLosVer, tramosDe, verAdelanta, verDelError, verDespues, type VerDe
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { frasesDelCurso, listaDelInventario, llaveDe, RAZONES, sinVer } from '../../scripts/ver-inventario.ts'
+import { archivosDe } from '../../scripts/archivos-del-curso.ts'
 import type { LineaCurso } from '../../src/curso/tipos.ts'
 
 /**
@@ -19,6 +20,8 @@ import type { LineaCurso } from '../../src/curso/tipos.ts'
  * `iterations/v3/comprobaciones-del-curso.md`; aquí, las que se miden con chess.js.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
+/** Los conteos, la huella y los ejemplos son de la Caro-Kann; las reglas de "Ver qué pasaría" se revisan en todo curso. */
+const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
 const TODOS = todosLosVer(c)
 const VARIANTES = lineasDe(c).filter((l) => l.tipo === 'variante')
 const linea = (id: string) => lineaPorId(c, id)!
@@ -42,7 +45,8 @@ function jugadasHechas(fen: string, jugadas: string[]) {
 
 describe('"Ver qué pasaría" · los datos', () => {
   it('cada línea es legal (chess.js): se juegan las jugadas de los dos lados, sin saltarse el turno', () => {
-    expect(TODOS).toHaveLength(43)
+    if (esCaroKann) expect(TODOS).toHaveLength(43)
+    expect(TODOS.length).toBeGreaterThan(0)
     for (const v of TODOS) {
       expect(() => fotos(v), donde(v)).not.toThrow()
       expect(v.ver.pasos.length, donde(v)).toBeGreaterThanOrEqual(2)
@@ -88,7 +92,7 @@ describe('"Ver qué pasaría" · los datos', () => {
   })
 
   it('cada frase corta, en la notación de las guías, sin símbolos, con su fuente y su motor (y ese id está en las comprobaciones)', () => {
-    const comprobaciones = readFileSync('iterations/v3/comprobaciones-del-curso.md', 'utf8')
+    const comprobaciones = readFileSync(archivosDe(c).comprobaciones, 'utf8')
     for (const v of TODOS) {
       const vistas = new Set<string>()
       for (const p of v.ver.pasos) {
@@ -110,7 +114,7 @@ describe('"Ver qué pasaría" · los datos', () => {
     const frases = frasesDelCurso(c)
     const llaves = new Set(frases.map((x) => x.llave))
     const conVer = new Set(TODOS.map((v) => llaveDe(v.clave, v.campo, v.i)))
-    const razones = sinVer()
+    const razones = sinVer(c)
     // cada línea, con una frase que existe, y una línea por frase
     expect(conVer.size).toBe(TODOS.length)
     for (const k of conVer) expect(llaves.has(k), k).toBe(true)
@@ -126,12 +130,12 @@ describe('"Ver qué pasaría" · los datos', () => {
     // ninguna consecuencia se cayó con el motor
     expect(Object.values(razones)).not.toContain('no-se-sostiene')
     // la Francesa sí es una alternativa, con su consecuencia: va con "Ver", solo en Aprender
-    expect(TODOS.some((v) => v.frase.startsWith('A diferencia de la Francesa'))).toBe(true)
+    if (esCaroKann) expect(TODOS.some((v) => v.frase.startsWith('A diferencia de la Francesa'))).toBe(true)
     // y la lista está al día
-    expect(readFileSync('iterations/v3/ver-que-pasa-inventario.md', 'utf8')).toBe(listaDelInventario(c))
+    expect(readFileSync(archivosDe(c).inventario, 'utf8')).toBe(listaDelInventario(c))
   })
 
-  it('tiene la línea de la Tal que Carlos no veía: 4...e6 5.g4 ...Ae4 6.f3 ...Ag6 7.h5, igual que el «¿Y si…?», y juega la pérdida', () => {
+  it.runIf(esCaroKann)('tiene la línea de la Tal que Carlos no veía: 4...e6 5.g4 ...Ae4 6.f3 ...Ag6 7.h5, igual que el «¿Y si…?», y juega la pérdida', () => {
     const v = TODOS.find((x) => x.frase.startsWith('Con ...e6 en vez de ...h5'))!
     expect(v.ver.antes).toBe(true)
     expect(v.inicio).toEqual(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'])
@@ -140,7 +144,8 @@ describe('"Ver qué pasaría" · los datos', () => {
   })
 })
 
-describe('"Ver qué pasaría" · las consecuencias que se miden en el tablero (chess.js)', () => {
+// las de la Italiana, en `tests/unit/curso-italiana.test.ts`
+describe.runIf(esCaroKann)('"Ver qué pasaría" · las consecuencias que se miden en el tablero (chess.js)', () => {
   const final = (frase: string) => new Chess(fotos(TODOS.find((v) => v.frase === frase)!).at(-1)!.fen)
   /** La posición del paso cuya frase empieza con `inicio`. */
   const enPaso = (frase: string, inicio: string) => {
@@ -252,8 +257,8 @@ describe('"Ver qué pasaría" · en la lección', () => {
           for (const j of hechasMias(l, error)) expect(pedidas(l, ply), `${l.id} ${ply} ${san}: ${j}`).not.toContain(j)
         }
       }
-    expect(revisadas).toBeGreaterThan(20)
-    expect(ocultas).toBeGreaterThan(3)
+    expect(revisadas).toBeGreaterThan(esCaroKann ? 20 : 1)
+    if (esCaroKann) expect(ocultas).toBeGreaterThan(3)
   })
 
   it('sale solo con las frases que se muestran: lo que Practicar oculta no trae "Ver"', () => {
@@ -262,13 +267,14 @@ describe('"Ver qué pasaría" · en la lección', () => {
         const visibles = frasesDespues(c, l, 'practicar', ply).map((f) => f.texto)
         for (const v of verDespues(c, l, 'practicar', ply)) expect(visibles, `${l.id} ${ply}`).toContain(v.titulo)
       }
+    if (!esCaroKann) return
     // el caso de Carlos, en la Tal: la frase de ...e6 no se muestra en Practicar, y por eso no hay botón
     const tal = linea('v:avance-tal')
     expect(verDespues(c, tal, 'aprender', 7)[0]?.titulo).toContain('Con ...e6 en vez de ...h5')
     expect(verDespues(c, tal, 'practicar', 7)).toEqual([])
   })
 
-  it('en Practicar no va si la línea contiene una jugada que la línea me va a pedir, aunque la frase se muestre; en Aprender sí va', () => {
+  it.runIf(esCaroKann)('en Practicar no va si la línea contiene una jugada que la línea me va a pedir, aunque la frase se muestre; en Aprender sí va', () => {
     // el de 6...e6 sin atender h4: ...e6 viene en la Clásica. El de 6...Cf6, no
     const cl = linea('v:clasica')
     expect(verDelError(c, cl, 'aprender', 11, 'e6')).not.toBeNull()
@@ -291,6 +297,11 @@ describe('"Ver qué pasaría" · en la lección', () => {
   })
 
   it('un momento con dos frases: dos botones, y cada uno abre su ventana, con su frase de título y desde su propia posición', () => {
+    // cada ventana se puede recorrer completa, en cada momento de cada variante
+    for (const l of VARIANTES)
+      for (const ply of misJugadas(l))
+        for (const vuelta of ['aprender', 'practicar'] as const) for (const v of verDespues(c, l, vuelta, ply)) expect(() => fotosDePasos(v.pa, v.inicio), `${l.id} ${ply} ${vuelta}`).not.toThrow()
+    if (!esCaroKann) return
     const conDos = new Set(VARIANTES.flatMap((l) => misJugadas(l).filter((ply) => verDespues(c, l, 'aprender', ply).length >= 2).map((ply) => l.jugadas.slice(0, ply + 1).join(' '))))
     expect(conDos.size).toBe(5)
     // dos líneas distintas, cada una en su ventana
@@ -317,7 +328,7 @@ describe('"Ver qué pasaría" · en la lección', () => {
         for (const vuelta of ['aprender', 'practicar'] as const) for (const v of verDespues(c, l, vuelta, ply)) expect(() => fotosDePasos(v.pa, v.inicio), `${l.id} ${ply} ${vuelta}`).not.toThrow()
   })
 
-  it('una equivocada sin explicación del curso, o sin "Ver", no trae botón', () => {
+  it.runIf(esCaroKann)('una equivocada sin explicación del curso, o sin "Ver", no trae botón', () => {
     const tal = linea('v:avance-tal')
     expect(verDelError(c, tal, 'aprender', 7, 'a6')).toBeNull()
     expect(verDelError(c, tal, 'aprender', 7, 'h6')!.titulo).toContain('Con ...h6 tu alfil tendría h7')
@@ -371,6 +382,7 @@ describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-
         const texto = porQueNo(c, l, ply, san, vuelta)
         expect(tramosDe(texto, ver ? [ver] : []), `${donde} ${san}`).toEqual([{ texto, ver }])
       }
+    if (!esCaroKann) return
     // la frase de la Dc7 del Cambio, la única a media explicación (una vez por vuelta)
     expect(aMedias).toBe(2)
     const [dama, b7] = verDespues(c, linea('v:cambio'), 'aprender', 13)
@@ -405,6 +417,7 @@ describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-
     // cambia a propósito (una frase o una línea nueva), se vuelve a sacar; si no, algo dejó de salir o salió de más.
     // Sacada otra vez el 2026-10-31: las mismas 35 filas, y solo cambió el texto de dos frases ("En e4, el caballo de c3
     // tomaría tu alfil." y "No saques todavía el alfil a f5: con 5.Ab5+ quedas claramente peor.")
+    if (!esCaroKann) return
     expect({ despues, errores }).toEqual({ despues: 23, errores: 12 })
     expect(createHash('sha256').update(filas.sort().join('\n')).digest('hex')).toBe('4a275d993543884cdb869030211a3faa1ef8de7086d9ce1994edc3009615d791')
   })

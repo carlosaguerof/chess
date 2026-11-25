@@ -18,7 +18,7 @@ export function cursos(): Curso[] {
       // un curso que sale de otro no es una apertura de la base: su tarjeta va justo después de la del curso de origen.
       // Va sin lecciones: las fichas de esas líneas son las del curso de origen, y así ninguna sale dos veces en el
       // Repaso, en el inicio ni en "Practicar esta línea" (`specs/cursos.md` §6)
-      return [n ? { ...c, lecciones: leccionesDe(n, { soloObligatorias: true }) } : c, ...cursosQueSalenDe(c.id).map((x) => ({ ...c, id: x.id, nombre: x.nombre, lecciones: [] }))]
+      return [n ? { ...c, lecciones: leccionesDe(n) } : c, ...cursosQueSalenDe(c.id).map((x) => ({ ...c, id: x.id, nombre: x.nombre, lecciones: [] }))]
     })
   return todos
 }

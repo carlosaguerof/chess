@@ -11,6 +11,7 @@ import { posicion } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
 import { CapaMarcas } from '../../src/componentes/CapaMarcas.tsx'
 import { ligadas, listaDeMarcas, type Ligada } from '../../scripts/marcas-por-jugada.ts'
+import { archivosDe } from '../../scripts/archivos-del-curso.ts'
 import type { DatosCurso, LineaCurso, Marca } from '../../src/curso/tipos.ts'
 
 /**
@@ -21,6 +22,8 @@ import type { DatosCurso, LineaCurso, Marca } from '../../src/curso/tipos.ts'
  * además su prueba en Playwright.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
+/** Los ejemplos de las reglas y sus conteos son de la Caro-Kann; las reglas mismas (R1 a R8) se revisan en todo curso. */
+const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
 const TODAS = ligadas(c)
 const flechas = (ms: Marca[]) => ms.filter((m) => m.de && m.a)
 const casillas = (ms: Marca[]) => ms.filter((m) => m.en)
@@ -244,6 +247,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
 
   it('R1 · cada marca nace de su frase: toda casilla marcada está escrita en ella, y toda flecha sale de una pieza que la frase nombra (el caso d6: no se marca)', () => {
     expect(TODAS.flatMap(revisarR1)).toEqual([])
+    if (!esCaroKann) return
     // el dibujo de Carlos: en la frase de 3.e5, f6 sí y d6 no
     const e5 = TODAS.find((x) => x.donde === 'rival «e4 c6 d4 d5 e5» frase 1')!
     expect(e5.marcas.map((m) => m.en ?? m.a)).toEqual(['f6', 'f6'])
@@ -285,14 +289,15 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(TODAS.flatMap(revisarR4)).toEqual([])
     // hay A7, de uno y de dos pasos
     const a7 = TODAS.filter((x) => x.marcas.some((m) => m.tipo === 'A7'))
-    expect(a7.length).toBeGreaterThanOrEqual(10)
+    expect(a7.length).toBeGreaterThanOrEqual(esCaroKann ? 10 : 1)
     expect(a7.some((x) => x.marcas.some((m) => pasoAnterior(x, m)))).toBe(true)
   })
 
   it('R4 · las A3 de "Siguen…" se juegan en su orden, la segunda con la primera hecha (...c5 y ...Cc6, con el peón todavía en c6)', () => {
     const siguen = TODAS.filter((x) => x.donde.startsWith('mía') && /\b[Ss]iguen\b/.test(x.frase) && x.marcas.some((m) => m.tipo === 'A3'))
-    expect(siguen.length).toBeGreaterThanOrEqual(5)
+    expect(siguen.length).toBeGreaterThanOrEqual(esCaroKann ? 5 : 1)
     expect(siguen.flatMap(revisarOrdenA3)).toEqual([])
+    if (!esCaroKann) return
     // y lo atrapa: al revés, ...Cc6 no se puede con el peón en c6
     const tal = siguen.find((x) => x.frase === 'Siguen ...c5 y ...Cc6 contra d4.')!
     expect(revisarOrdenA3({ ...tal, marcas: [...tal.marcas].reverse() })).toEqual([expect.stringContaining('b8→c6 no se puede jugar en ese orden')])
@@ -426,7 +431,8 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
       })
       revisados++
     }
-    expect(revisados).toBeGreaterThan(40)
+    expect(revisados).toBeGreaterThan(esCaroKann ? 40 : 10)
+    if (!esCaroKann) return
     // los dos casos del pase: la ruta del caballo de la Clásica (7.♘f3) y el plan de 4.c3
     const clasica = porMomento().get('tuTurno:e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7')!
     const [ida, vuelta] = puntosDeFlechas(flechas(clasica.marcas) as { de: string; a: string }[], 'black', (c) => !!new Chess(clasica.fen).get(c as Square))
@@ -438,7 +444,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
   })
 
-  it('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasaría"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
+  it.runIf(esCaroKann)('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasaría"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
     const tablero = (l: LineaCurso, ply: number) => posicion(l.jugadas, ply + 1)
     const rutasDe = (id: string, ply: number) => {
       const l = lineaPorId(c, id)!
@@ -496,6 +502,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
         }
       }
     expect(revisadas).toBeGreaterThan(10)
+    if (!esCaroKann) return
     // el caso de Carlos: la Van der Wiel, en Practicar, después de 3...Af5, ya no marca ...e6 (es su siguiente jugada)
     const vdw = lineaPorId(c, 'v:avance-van-der-wiel')!
     expect(marcasDelMomento(c, vdw, despuesDe(vdw, 'practicar', 5))).toEqual([])
@@ -526,6 +533,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
         }
       }
     expect(jugadas).toBe(VARIANTES.reduce((n, l) => n + misJugadas(l).length, 0))
+    if (!esCaroKann) return
     // el caso de Carlos: después de 3...Af5 en la Van der Wiel, ni "Después vas a jugar ...e6" ni lo demás que lo nombra
     const vdw = lineaPorId(c, 'v:avance-van-der-wiel')!
     expect(explicacionDespues(c, vdw, 'practicar', 5)).toEqual(['Sacas tu alfil de casillas blancas fuera de la cadena de peones.'])
@@ -543,11 +551,22 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(revisarR8(TODAS)).toEqual([])
     // la A5 sí, aunque la pieza esté pegada (se cumple en dos jugadas)
     expect(TODAS.some((x) => x.marcas.some((m) => m.tipo === 'A5'))).toBe(true)
-    expect(readFileSync(c.secciones ? 'iterations/v3/marcas-por-jugada-estructuras.md' : 'iterations/v3/marcas-por-jugada.md', 'utf8')).toBe(listaDeMarcas(c))
+    expect(readFileSync(archivosDe(c).marcas, 'utf8')).toBe(listaDeMarcas(c))
   })
 
   it('el paso a paso acumula las marcas mientras la frase sigue con lo mismo, hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
     const idea = c.piezas.idea.paginas[0]!.pasoAPaso!
+    // los ejemplos, en la Caro-Kann; la regla general (abajo), en todo curso
+    if (esCaroKann) ejemplosDelPasoAPaso(idea)
+    // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
+    for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
+      pa.pasos.forEach((p, i) => {
+        const lados = new Set((p.marcas ?? []).map((m) => m.color))
+        for (const m of marcasDelPaso(pa, i)) expect(lados.has(m.color), `«${p.frase}»: ${JSON.stringify(m)}`).toBe(true)
+      })
+  })
+
+  function ejemplosDelPasoAPaso(idea: NonNullable<DatosCurso['piezas']['idea']['paginas'][number]['pasoAPaso']>) {
     expect(marcasDelPaso(idea, 1)).toEqual([{ tipo: 'A3', de: 'd7', a: 'd5', color: 'verde', punteada: true }])
     expect(marcasDelPaso(idea, 2)).toEqual([])
     // "Desarrollas tu alfil por g7" y "Y tu otro alfil por f5": sigue con lo mismo, se acumulan
@@ -560,15 +579,9 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     // ni las del otro lado: en el plan del Cambio, la casilla e5 del rival no lleva la verde de ...b5
     const casillaE5 = plan('cambio').pasos.findIndex((p) => p.frase.startsWith('Blancas busca la casilla e5'))
     expect(marcasDelPaso(plan('cambio'), casillaE5)).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
-    // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
-    for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
-      pa.pasos.forEach((p, i) => {
-        const lados = new Set((p.marcas ?? []).map((m) => m.color))
-        for (const m of marcasDelPaso(pa, i)) expect(lados.has(m.color), `«${p.frase}»: ${JSON.stringify(m)}`).toBe(true)
-      })
-  })
+  }
 
-  it('las reglas atrapan errores metidos a propósito: una A1 en "Te toca", una A4 pegada y una A7 ilegal', () => {
+  it.runIf(esCaroKann)('las reglas atrapan errores metidos a propósito: una A1 en "Te toca", una A4 pegada y una A7 ilegal', () => {
     const malo = structuredClone(c) as DatosCurso
     malo.mias['e4 c6 d4 d5 e5 Bf5']!.marcasDe = { hace: [[{ tipo: 'A1', de: 'c8', a: 'f5', color: 'verde' }]] }
     malo.rival['e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6 Nf3 Nd7 h5']!.marcas = [[{ tipo: 'A4', de: 'h5', a: 'g6', color: 'rojo' }]]
@@ -583,7 +596,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
   })
 })
 
-describe('Las marcas · los ejemplos de referencia (§4 de las reglas v1.3)', () => {
+describe.runIf(esCaroKann)('Las marcas · los ejemplos de referencia (§4 de las reglas v1.3)', () => {
   const linea = (id: string) => lineaPorId(c, id)!
   /** Lo que se ve en Aprender en mi turno de la jugada `ply` (las de la frase del rival de antes). */
   const antesDe = (id: string, ply: number) => sinTipo(marcasDelMomento(c, linea(id), enTurno(linea(id), 'aprender', ply)))

@@ -633,13 +633,6 @@
                 "a": "b3",
                 "color": "verde",
                 "punteada": true
-              },
-              {
-                "tipo": "A3",
-                "de": "b1",
-                "a": "d2",
-                "color": "verde",
-                "punteada": true
               }
             ],
             [
@@ -747,6 +740,7 @@
         "marcas": [],
         "marcasDe": {
           "tuyo": [
+            [],
             [
               {
                 "tipo": "A3",
@@ -876,15 +870,7 @@
         "marcas": [],
         "marcasDe": {
           "tuyo": [
-            [
-              {
-                "tipo": "A3",
-                "de": "b1",
-                "a": "d2",
-                "color": "verde",
-                "punteada": true
-              }
-            ],
+            [],
             [
               {
                 "tipo": "A3",
@@ -1085,13 +1071,6 @@
               }
             ],
             [
-              {
-                "tipo": "A7",
-                "de": "d6",
-                "a": "d5",
-                "color": "rojo",
-                "punteada": true
-              },
               {
                 "tipo": "A3",
                 "de": "e4",
@@ -1688,16 +1667,6 @@
     },
     "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7": {
       "texto": "Blancas ataca tu dama y tu torre de h8 con el caballo.",
-      "marcas": [
-        [
-          {
-            "tipo": "A4",
-            "de": "f7",
-            "a": "h8",
-            "color": "rojo"
-          }
-        ]
-      ],
       "fuente": [
         "WB-3Cd4",
         "WP-BK"
@@ -1741,6 +1710,12 @@
       "porque": "Ocupa el centro y abre camino a tu dama y a tu alfil de f1.",
       "fuente": [
         "WB-1e4"
+      ],
+      "buenas": [
+        "d4",
+        "Nf3",
+        "e3",
+        "c4"
       ]
     },
     "e4 e5 Nf3": {
@@ -1780,6 +1755,10 @@
       },
       "fuente": [
         "WB-1e5"
+      ],
+      "buenas": [
+        "Nc3",
+        "Bc4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4": {
@@ -1815,6 +1794,11 @@
       ],
       "motor": [
         "M-3ac4"
+      ],
+      "buenas": [
+        "d4",
+        "Bb5",
+        "Nc3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3": {
@@ -1966,6 +1950,11 @@
         "X-2cd3-amenaza",
         "M-2cd3-d3",
         "D-4d5-c3"
+      ],
+      "buenas": [
+        "d4",
+        "Ng5",
+        "Qe2"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3": {
@@ -1974,25 +1963,18 @@
       "hace": "Preparas d4: tu peón de c3 lo apoyará cuando llegue.",
       "porque": "Llegas al esquema lento del Giuoco Pianissimo: d4 queda para cuando esté preparado.",
       "prepara": "Tu caballo de b1 saldrá por d2, porque c3 ya está ocupada.",
-      "marcasDe": {
-        "prepara": [
-          [
-            {
-              "tipo": "A3",
-              "de": "b1",
-              "a": "d2",
-              "color": "verde",
-              "punteada": true
-            }
-          ]
-        ]
-      },
       "fuente": [
         "WB-4d3",
         "WB-5d3"
       ],
       "motor": [
         "K-2cd3-a"
+      ],
+      "buenas": [
+        "Nbd2",
+        "O-O",
+        "a4",
+        "h3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O": {
@@ -2008,6 +1990,12 @@
       ],
       "motor": [
         "K-2cd3-c"
+      ],
+      "buenas": [
+        "Nbd2",
+        "h3",
+        "a4",
+        "b4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1": {
@@ -2086,7 +2074,7 @@
                 ]
               },
               {
-                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama.",
+                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama de d1.",
                 "jugadas": [
                   "Nxf2"
                 ],
@@ -2188,6 +2176,12 @@
       "motor": [
         "K-2cd3-re1",
         "R-ng4-h3"
+      ],
+      "buenas": [
+        "b4",
+        "Nbd2",
+        "h3",
+        "a4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3": {
@@ -2217,6 +2211,12 @@
       "motor": [
         "X-4c3-amen",
         "M-4c3"
+      ],
+      "buenas": [
+        "a4",
+        "d3",
+        "O-O",
+        "h3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3": {
@@ -2232,6 +2232,10 @@
       "motor": [
         "X-4nf6-e4",
         "R-5d3"
+      ],
+      "buenas": [
+        "b4",
+        "d4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O": {
@@ -2246,6 +2250,12 @@
       ],
       "motor": [
         "M-6oo"
+      ],
+      "buenas": [
+        "Nbd2",
+        "h3",
+        "a4",
+        "b4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1": {
@@ -2324,7 +2334,7 @@
                 ]
               },
               {
-                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama.",
+                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama de d1.",
                 "jugadas": [
                   "Nxf2"
                 ],
@@ -2427,6 +2437,12 @@
       "motor": [
         "M-7te1",
         "R-ng4-h3"
+      ],
+      "buenas": [
+        "b4",
+        "Nbd2",
+        "h3",
+        "a4"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3": {
@@ -2452,6 +2468,12 @@
       ],
       "motor": [
         "M-8ab3"
+      ],
+      "buenas": [
+        "h3",
+        "a4",
+        "b4",
+        "Nbd2"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 h3": {
@@ -2463,13 +2485,6 @@
       "marcasDe": {
         "prepara": [
           [
-            {
-              "tipo": "A3",
-              "de": "b1",
-              "a": "d2",
-              "color": "verde",
-              "punteada": true
-            },
             {
               "tipo": "A3",
               "de": "d3",
@@ -2488,6 +2503,11 @@
       "motor": [
         "X-cerr-ng4",
         "M-9h3"
+      ],
+      "buenas": [
+        "Nbd2",
+        "a4",
+        "a3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4": {
@@ -2555,6 +2575,12 @@
       "motor": [
         "F-bour",
         "D-bour-df6"
+      ],
+      "buenas": [
+        "Bb5",
+        "Be3",
+        "Nc3",
+        "d5"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3 Nf6 d5": {
@@ -2641,6 +2667,10 @@
         "K-bour-d",
         "B2",
         "B3"
+      ],
+      "buenas": [
+        "O-O",
+        "Qd3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 d6 d4": {
@@ -2663,6 +2693,12 @@
       ],
       "motor": [
         "K-paris-a"
+      ],
+      "buenas": [
+        "c3",
+        "O-O",
+        "Nc3",
+        "h3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4": {
@@ -2723,6 +2759,9 @@
       "motor": [
         "K-paris-b",
         "D-paris-nxd4"
+      ],
+      "buenas": [
+        "O-O"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3": {
@@ -2747,6 +2786,10 @@
       ],
       "motor": [
         "K-paris-d"
+      ],
+      "buenas": [
+        "O-O",
+        "Nxc6"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 O-O": {
@@ -2760,6 +2803,12 @@
       "motor": [
         "K-paris-f",
         "X-abie-fin"
+      ],
+      "buenas": [
+        "Nxc6",
+        "Bf4",
+        "a4",
+        "h3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 h6 d4": {
@@ -2775,6 +2824,9 @@
       "motor": [
         "K-h6-a",
         "R-h6-c3"
+      ],
+      "buenas": [
+        "O-O"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4": {
@@ -2837,6 +2889,9 @@
         "P-h6-nxd4",
         "D-h6-bc5",
         "D-h6-df6-cxc6"
+      ],
+      "buenas": [
+        "O-O"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4 Nf6 Nc3": {
@@ -3131,6 +3186,9 @@
         "K-bk-0",
         "X-trap-bk",
         "D-bk-dg5"
+      ],
+      "buenas": [
+        "O-O"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O": {
@@ -3170,6 +3228,10 @@
       "motor": [
         "K-bk-b",
         "D-bk-h5-h3"
+      ],
+      "buenas": [
+        "d3",
+        "Qe2"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6 c3": {
@@ -3241,6 +3303,10 @@
       ],
       "motor": [
         "R-d4-ae7"
+      ],
+      "buenas": [
+        "O-O",
+        "Nc3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3": {
@@ -3257,6 +3323,10 @@
       "motor": [
         "M-hung-c3",
         "D-hung-ca5-ae2"
+      ],
+      "buenas": [
+        "Nxd4",
+        "O-O"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5": {
@@ -3312,6 +3382,9 @@
       ],
       "motor": [
         "K-rous-b"
+      ],
+      "buenas": [
+        "Ng5"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 Ng5 Qxg5": {
@@ -3364,18 +3437,6 @@
       "pista": "Toma el peón que defendía su enroque: ahora amenazas su torre.",
       "hace": "Tomas el peón de g2 y atacas la torre de h1.",
       "porque": "Tu dama entra en el lado del rey de blancas.",
-      "marcasDe": {
-        "hace": [
-          [
-            {
-              "tipo": "A2",
-              "de": "g2",
-              "a": "h1",
-              "color": "verde"
-            }
-          ]
-        ]
-      },
       "fuente": [
         "WB-3Cd4",
         "WP-BK"

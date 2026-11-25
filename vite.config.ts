@@ -20,6 +20,15 @@ export default defineConfig({
           env: { CURSO: 'caro-kann-estructuras:b' },
         },
       },
+      // y sobre la Italiana por estructuras (2026-11-25)
+      {
+        extends: true,
+        test: {
+          name: 'curso de la Italiana',
+          include: ['curso-contenido', 'curso-ciclo', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          env: { CURSO: 'italiana:w' },
+        },
+      },
     ],
   },
 })

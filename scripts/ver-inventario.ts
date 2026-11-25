@@ -2,6 +2,7 @@
 // su "Ver" o con el porqué no lo lleva.
 //
 //   node scripts/ver-inventario.ts > iterations/v3/ver-que-pasa-inventario.md
+//   node scripts/ver-inventario.ts italiana:w > iterations/v4/ver-que-pasa-inventario-italiana.md (dónde va cada curso: `archivos-del-curso.ts`)
 //
 // Por qué no: `iterations/v3/ver-que-pasa-sin-ver.json`, frase por frase, con una de las razones de `RAZONES`. La prueba
 // `tests/unit/ver-que-pasa.test.ts` revisa que cada frase esté de un lado o del otro, y que esta lista esté al día.
@@ -11,6 +12,7 @@ import { mostrarTexto } from '../src/ajedrez/mostrar.ts'
 import { frasesDe, jugadaEs } from '../src/curso/textos.ts'
 import { todosLosVer, verAdelanta, verDelError, verDespues } from '../src/curso/ver.ts'
 import type { DatosCurso, VerQuePasa } from '../src/curso/tipos.ts'
+import { archivosDe } from './archivos-del-curso.ts'
 
 /** Por qué una frase no lleva "Ver". */
 export const RAZONES = {
@@ -42,7 +44,8 @@ export function frasesDelCurso(c: DatosCurso): FraseInventario[] {
   return r
 }
 
-export const sinVer = (): Record<string, Razon> => JSON.parse(readFileSync('iterations/v3/ver-que-pasa-sin-ver.json', 'utf8')) as Record<string, Razon>
+/** Las frases sin "Ver" de un curso, con su razón (la Caro-Kann, en `iterations/v3/`; los demás, en `iterations/v4/`). */
+export const sinVer = (c: Pick<DatosCurso, 'id' | 'apertura' | 'color' | 'secciones'> = CURSOS_NUEVOS['caro-kann:b']!): Record<string, Razon> => JSON.parse(readFileSync(archivosDe(c).sinVer, 'utf8')) as Record<string, Razon>
 
 /** La línea de un "Ver", en un renglón: "4...e6 5.g4 ♗e4 6.f3 ♗g6 7.h5". */
 function lineaDe(ver: VerQuePasa, inicio: string[]): string {
@@ -77,7 +80,7 @@ function dondeSale(c: DatosCurso, v: ReturnType<typeof todosLosVer>[number]): st
 export function listaDelInventario(c: DatosCurso): string {
   const frases = frasesDelCurso(c)
   const vers = todosLosVer(c)
-  const razones = sinVer()
+  const razones = sinVer(c)
   const conVer = new Map(vers.map((v) => [llaveDe(v.clave, v.campo, v.i), v]))
   const nombre = (x: FraseInventario) => {
     const n = x.clave.split(' ').length - 1
@@ -90,7 +93,7 @@ export function listaDelInventario(c: DatosCurso): string {
   return [
     '# El inventario de "Ver qué pasa"',
     '',
-    '> Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.',
+    '> Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso ' + (c.apertura === 'caro-kann' && c.color === 'b' ? 'de la Caro-Kann' : `«${c.nombre}»`) + ': con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.',
     '',
     `**${frases.length} frases: ${vers.length} con "Ver"; ${frases.length - vers.length} sin él** (${conteo}). ${adelantan.length} de las ${vers.length} contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.`,
     '',
@@ -112,4 +115,4 @@ export function listaDelInventario(c: DatosCurso): string {
   ].join('\n')
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDelInventario(CURSOS_NUEVOS['caro-kann:b']!))
+if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDelInventario(CURSOS_NUEVOS[process.argv[2] ?? 'caro-kann:b']!))

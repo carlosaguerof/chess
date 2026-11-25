@@ -1,6 +1,7 @@
 // Las marcas del curso, frase por frase (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3, 2026-10-30).
 //
 //   node scripts/marcas-por-jugada.ts > iterations/v3/marcas-por-jugada.md
+//   node scripts/marcas-por-jugada.ts italiana:w > iterations/v4/marcas-por-jugada-italiana.md (dónde va cada curso: `archivos-del-curso.ts`)
 //
 // Junta cada frase que lleva marcas con la posición donde se miden, y lista qué jugadas llevan marcas y cuáles no,
 // para revisar que solo se marque lo que no se ve solo (R8). La prueba `tests/unit/correcciones-marcas.test.ts` usa lo mismo.
@@ -137,7 +138,7 @@ export function listaDeMarcas(c: DatosCurso): string {
     }
   const otras = todas.filter((x) => !x.donde.includes('«'))
   return [
-    '# Las marcas del curso de la Caro-Kann, jugada por jugada',
+    `# Las marcas del curso ${c.apertura === 'caro-kann' && c.color === 'b' ? 'de la Caro-Kann' : `«${c.nombre}»`}, jugada por jugada`,
     '',
     '> Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.',
     '',
