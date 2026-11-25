@@ -22,7 +22,9 @@ export default defineConfig({
       },
       // los cursos del Avance (2026-11-25): las mismas pruebas de contenido, sin relajarse; el ciclo de la lección es el de
       // la Caro-Kann (sus jugadas), y lo propio de estos cursos está en tests/unit/curso-avance.test.ts
-      ...['caro-kann:w', 'francesa:w'].map((curso) => ({
+      // la Eslava y Otras aperturas de blancas (2026-11-25): igual; lo propio, en tests/unit/curso-eslava.test.ts y
+      // curso-otros-negras.test.ts
+      ...['caro-kann:w', 'francesa:w', 'eslava:b', 'otros-negras:b'].map((curso) => ({
         extends: true as const,
         test: {
           name: `curso ${curso}`,

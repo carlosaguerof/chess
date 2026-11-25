@@ -13,6 +13,17 @@
 9. **Una marca nueva pasa primero por las reglas de dibujo.** La L del caballo g8→e7 se doblaba sobre el rey y e7→f5 sobre f7 (R6), y una A2 repetía otra (R3): esas frases llevan ahora la casilla clave (A6), no la ruta.
 10. **El candado de pruebas se toma y se suelta en el mismo paso.** Un comando con `mkdir candado && … ; rmdir candado` quitó el candado de otra sesión cuando el `mkdir` falló (el `;` corre igual). Se repuso en un segundo. Va `mkdir candado && (…; rmdir candado)`, o se espera el candado en un paso aparte.
 
+## La Eslava y "...c6 + ...d5 contra lo demás" (`feat/curso-eslava`)
+
+1. **"0 %" no es lo mismo que "sin datos".** La Checa salía opcional con 0 % porque, tras 4.Cc3 dxc4, ninguna jugada de blancas tenía 3 partidas. La posición donde el mapa te pide tomar en c4 sale en 6.7 % a 14.8 % de tus Eslavas, y ninguna obligatoria la cubría. Fue al gate y entró a La base. En `specs/cursos.md` §6, «La Eslava y Otras aperturas de blancas».
+2. **El reparto de las estructuras inflaba las formas.** Dividía solo entre las jugadas con 3 partidas o más. Con el denominador corregido (todas las partidas que siguen, y "sin datos" aparte), el Peón de más pasó de 37 % a 26 % y la Eslava dentro de "...c6 + ...d5" de 7.5 % a 3.9 %: dejó de entrar por estructura. En `specs/cursos.md` §6, «La Eslava y Otras aperturas de blancas».
+3. **Un mapa que solo clasifica no sirve para jugar.** La primera versión de la Eslava decía qué forma era, no qué hacer. La revisión pidió la señal que decide: "¿ya jugó e3?". Con e3, tomar en c4 pierde 60; sin e3, sacar el alfil pierde de 33 a 65. Quedó como tres preguntas en fila. En `specs/cursos.md` §6, «La Eslava y Otras aperturas de blancas».
+4. **Las reglas se rompen en sus bordes.** "...Db6 contra Db3" pierde 122 sin ...e6; "saca el alfil si ya jugó a4" pierde 143 sin el caballo en f6; "el alfil antes de ...e6" deja b7 sin defensa si el caballo blanco ya está en c3. Cada regla lleva escrita su condición y se mide donde aparece su señal, con la frase como está escrita (notas 6 y 9 del orchestrator). El plan de la base de la Tranquila tenía el mismo hueco: también se corrigió.
+5. **Un nombre de forma igual al de una lección confunde** ("la Alekhine"): la forma pasó a "la Pelea del lado de dama". Probé "Pelea por c4" y la prueba lo rechazó: nombraba la casilla de tu jugada.
+6. **"...c6 + ...d5" no siempre lleva ...c6.** Contra la Larsen y la Bird el motor prefiere otras jugadas; el curso dice "pones tu peón en d5" y lo explica en "Lo que tu guía decía distinto". Lo más común no es "transponer a estructuras conocidas" sino el Centro libre.
+7. **Las pruebas de contenido ya corren sobre cualquier curso** (`CURSO=<id>`), con los archivos de cada curso en `iterations/v4/` (`ARCHIVOS_VER` y `LISTA_DE_MARCAS`, que trajo el Avance). Lo que solo valía para la Caro-Kann (sus ejemplos, sus conteos) se salta en los demás sin relajar nada; la Caro-Kann pasa igual que antes.
+8. **En la Air hay varios workers a la vez:** el servidor de pruebas del 5174 puede ser el de otra copia, y `reuseExistingServer` probaría su app. Corrí Playwright con una configuración local en otro puerto (sin subirla).
+
 ## Contra la Escandinava (`escandinava:w`)
 
 1. **La pregunta del mapa no tiene que ser de peones.** En la Escandinava, los peones del centro casi no cambian entre líneas; lo que cambia el plan es a dónde se fue la dama cuando la atacaste. La prueba de una pregunta: que cada respuesta diga qué jugar. → `specs/cursos.md` §6, «La captura contra la Escandinava».

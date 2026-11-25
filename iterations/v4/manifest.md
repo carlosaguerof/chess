@@ -10,4 +10,5 @@
 |---|---|---|---|
 | Avance contra la Caro-Kann (`caro-kann:w`) | `feat/curso-avance` | `mapa-avance-caro-kann.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
 | Avance contra la Francesa (`francesa:w`) | `feat/curso-avance` | `mapa-avance-francesa.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
+| Defensa Eslava y ...c6 + ...d5 contra lo demás | `feat/curso-eslava` | `mapa-eslava.md`, `mapa-otros-negras.md` | Lista en su rama; falta la corrida completa en GitHub |
 | Contra la Escandinava (`escandinava:w`) | `feat/curso-escandinava` | `iterations/v4/mapa-escandinava.md` | Listo para revisar: `npm test` y Playwright en Chromium en la Air; falta la corrida completa en GitHub (403); sin publicar |
