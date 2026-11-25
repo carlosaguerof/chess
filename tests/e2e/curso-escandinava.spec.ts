@@ -76,7 +76,17 @@ test.describe('El curso de la captura contra la Escandinava', () => {
   test('El mapa y una página por forma, con su paso a paso', async ({ page }) => {
     await page.goto(`${URL_CURSO}/leer/estructura`)
     await expect(page.getByTestId('pieza-estructura')).toContainText('¿a dónde se fue la dama cuando la atacaste?')
-    for (const t of ['El mapa', 'La clavada', 'La dama en casa', 'El jaque', 'El centro grande']) await expect(page.getByTestId('pieza-estructura'), t).toContainText(t)
+    const titulos = ['El mapa', 'La clavada', 'La dama en casa', 'El jaque', 'El centro grande']
+    for (const [i, t] of titulos.entries()) {
+      await expect(page.getByTestId('pagina-n-de-m')).toHaveText(`${i + 1} de ${titulos.length}`)
+      await expect(page.getByTestId('pieza-estructura'), t).toContainText(t)
+      // cada página, con su paso a paso
+      await page.getByTestId('ver-paso-a-paso').click()
+      await expect(page.getByTestId('paso-a-paso'), t).toBeVisible()
+      await page.keyboard.press('Escape')
+      await expect(page.getByTestId('paso-a-paso')).toBeHidden()
+      if (i < titulos.length - 1) await page.getByTestId('pagina-siguiente').click()
+    }
   })
 
   for (const [id, cual] of [['clasica', 'Variante 1 de 4'], ['lasker', 'Variante 4 de 4'], ['bronstein', 'Opcional 1 de 4']] as const)
