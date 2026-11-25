@@ -27,11 +27,11 @@
 | 7.♗d2 | porque | Y si el caballo salta, tu alfil de d2 queda atacando a la dama de a5. | lo que dice se juega en las jugadas que siguen de la línea |
 | 6.h3 | porque | Contra el alfil en g4, el motor la ve como la mejor por mucho: el alfil tiene que cambiarse por tu caballo o retirarse. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♕xf3 | porque | Te quedas con los dos alfiles, y tu dama ataca el peón de b7, que nadie defiende. | explica la jugada que ya está en la línea, sin una alternativa |
-| 8.♗d2 | porque | Y si el caballo salta, tu alfil de d2 ataca a la dama de a5. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 8.♗d2 | porque | Sin la clavada, tu caballo vuelve a ser una pieza libre. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8.♗d2 | prepara | Ya puedes enrocar largo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Aquí tu caballo no queda clavado. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.♘f3 | porque | Así preparas el enroque: entre tu rey y tu torre de h1 solo queda tu alfil de f1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 6.g3 | porque | Contra la dama en d6, este esquema funciona bien según los maestros, y el motor la ve como la mejor aquí. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6.g3 | porque | Contra la dama en d6, este plan funciona bien según los maestros, y el motor la ve como la mejor aquí. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.g3 | prepara | Tu alfil de f1 tendrá la diagonal larga. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♗f4 | porque | Es otro tiempo ganado: la dama tiene que moverse de nuevo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8.♗g2 | porque | Con el alfil afuera, ya puedes enrocar corto. | dice qué sigue (un plan), no qué pasaría con otra cosa |

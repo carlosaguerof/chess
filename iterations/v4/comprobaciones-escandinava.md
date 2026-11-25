@@ -143,8 +143,13 @@ Stockfish 19 lite, un hilo, profundidad 18, con la Air muy cargada. `jugada "<ju
 | G2-richter | "Contra ...Ag4, h3; si un caballo va a c6, d5" (con Cc3) | `RICH Nc6` · `RICH Bg4` · `RICH Bg4 h3 Bxf3 Bxf3 Nc6` | d5 · h3 · d5 | d5 la mejor (+0.98) · h3 la mejor (+0.90) · d5 +0.34, a 17 | Se sostiene |
 | G2-marshall-af5 | "Si su alfil sale a f5, primero Ad3 y lo cambias" | `e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bf5` | c4 · Ad3 | Ad3 +0.68 (la mejor, Ad3 +0.75) · c4 −0.01, pierde 76 (...Cb4) | Se sostiene |
 | G2-lasker-plan | Plan de la Lasker: 0-0-0 y Ac4 (sin "la torre defiende d4": el alfil de d2 tapa la columna; pase 2) | `… Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 c6 Bd2 Nbd7` · `… O-O-O e6` | 0-0-0 · Ac4 | +0.96 (g4 +0.80) · +0.95 (Rb1 +0.90) | Se sostiene |
+| P3-d8-c6-ac4 | Con la dama en d8: "h3, salvo … con tu alfil en c4 y ...c6 jugado (ahí, Ae2)" (pase adversarial 3) | `mejores "… Qd8 d4 Nf6 Nf3 c6 Bc4 Bg4" --n 3` | +3.87 Ce5 · +3.48 Axf7+ · +0.34 Ae2; h3 −0.20, pierde 413 (Axf3 Dxf3 Dxd4: con ...c6 no hay Dxb7, y d4 cae con tiempo contra el alfil de c4) | Ae2 no pierde material; Ce5 es una táctica que el curso no enseña |
+| P3-d8-ac4-sin-c6 | (sin ...c6, h3 sigue sirviendo) | `mejores "… Qd8 d4 Nf6 Bc4 Bg4 Nf3 e6" --n 3` | +0.74 h3, la mejor | Por eso la excepción dice "y ...c6 jugado" |
+| P3-a5-c6-ac4 | (con la dama en a5, h3 sigue sirviendo) | `mejores "… Qa5 d4 Nf6 Nf3 c6 Bc4 Bg4" --n 3` | +0.86 h3, la mejor | La excepción es solo de la dama en d8 |
+| P3-ae2-retoma | "Si cambia en f3, retomas con una pieza, no con un peón" (con tu alfil en e2, Dxf3 no es legal) | `mejores "… Qd8 d4 Nf6 Nf3 c6 Be2 Bg4" --n 3` · `mejores "… Be2 Bg4 h3 Bxf3" --n 3` | h3 la mejor (+0.52) · Axf3 la mejor (+0.56; gxf3 +0.00) | Se sostiene |
+| P3-lasker-cc6 | "Si después saca su caballo a c6, Ab5 lo clava" (la Lasker, una jugada antes del final: 7...Cc6 en vez de 7...c6) | `mejores "… Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 Nc6" --n 3` | +2.40 Ab5, la mejor · Ad2 −0.04 (pierde 225: 8...0-0-0 y d4 cae) | Se sostiene; la idea de la Lasker y La clavada lo dicen |
 
-Las salidas, completas: `lote11a.out`, `lote11b.out`, `lote11c.out` y `lote12.out` en la carpeta de trabajo de la corrida (fuera de este repo).
+Las salidas, completas: `lote11a.out`, `lote11b.out`, `lote11c.out`, `lote12.out` y `lote13.out` en la carpeta de trabajo de la corrida (fuera de este repo).
 
 ## Los planes de la base, también los de las variantes que no son lección (nota 12)
 
