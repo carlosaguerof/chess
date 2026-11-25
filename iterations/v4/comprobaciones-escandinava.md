@@ -23,8 +23,8 @@ Cada id aparece en el campo `motor` del texto que lo afirma, en `conocimiento/cu
 | M-7ad2 | 7.Ad2 la mejor; buenas: 0-0, a3, Ch4, De2 | `node motor.mjs mejores "… Bf5 Bc4 e6" --n 5` | +0.36 Bd2 · +0.35 O-O · +0.31 a3 · +0.27 Nh4 · +0.17 Qe2 | Se sostiene |
 | M-7ad2-amenaza | Con 7.Ad2, si el caballo salta (Cd5), tu alfil ataca a la dama: si fuera tu turno otra vez, Cd5 gana | `node motor.mjs amenaza "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2" --prof 16` | Si blancas jugara otra vez: Nd5 Qxd5 Bxd5 (+5.06) | Se sostiene |
 | M-8cd5 | 8.Cd5 la mejor; buena: Ce4 (también destapa al alfil) | `node motor.mjs mejores "… Bc4 e6 Bd2 c6" --n 5` | +0.69 Nd5 · +0.57 Ne4 · +0.46 Nh4 | Se sostiene |
-| M-8cd5-cxd5 | Si negras toma el caballo con el peón, 9.Axa5 se come la dama | `node motor.mjs jugada "… Bd2 c6 Nd5" "cxd5"` · `mejores "… Nd5 cxd5" --n 3` | cxd5 pierde 460 (+5.05) · +4.37 Bxa5 | Se sostiene |
-| M-8cd5-dxd5 | Si la dama toma el caballo, 9.Axd5 se come la dama | `node motor.mjs mejores "… Bd2 c6 Nd5" --n 4` | +0.71 Qd8 · +4.53 Qxd2+ · +4.67 Qxd5 Bxd5 · +4.95 cxd5 | Se sostiene |
+| M-8cd5-cxd5 | Si negras toma el caballo con el peón, 9.Axa5 se come la dama | `node motor.mjs jugada "… Bd2 c6 Nd5" "cxd5"` · `mejores "… Nd5 cxd5" --n 3` | cxd5 pierde 460 (+5.05) · +4.37 Bxa5; sigue 9...dxc4 (+3.96): ganas la dama por un caballo y un alfil | Se sostiene (el pase 1 corrigió "por un caballo") |
+| M-8cd5-dxd5 | Si la dama toma el caballo, 9.Axd5 se come la dama | `node motor.mjs mejores "… Bd2 c6 Nd5" --n 4` | +0.71 Qd8 · +4.53 Qxd2+ · +4.67 Qxd5 Bxd5 cxd5 · +4.95 cxd5: la dama por un caballo y un alfil | Se sostiene (el pase 1 corrigió "por un caballo") |
 | M-6h3-a5 | Contra ...Ag4 (dama en a5), 6.h3 la mejor por mucho | `node motor.mjs mejores "… Qa5 d4 Nf6 Nf3 Bg4" --n 5` | +0.97 h3 · +0.50 Bd2 · +0.41 Be2 | Se sostiene |
 | M-6h3-a5-b | Tras 6.h3, negras cambia en f3 (la mejor) | `node motor.mjs mejores "… Bg4 h3" --n 5` | +0.97 Bxf3 · +1.16 Bh5 · +1.20 Bf5 | Se sostiene |
 | M-7dxf3-a5 | Retomas con la dama, no con el peón | `node motor.mjs mejores "… Bg4 h3 Bxf3" --n 4` | +0.96 Qxf3 · −0.73 gxf3 | Se sostiene |
