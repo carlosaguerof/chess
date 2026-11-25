@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js'
 import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'json' }
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
+import alapin from '../../conocimiento/cursos/alapin.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
@@ -17,6 +18,8 @@ const caroKannCurso = caroKann as unknown as DatosCurso
 export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'caro-kann:b': caroKannCurso,
   'caro-kann-estructuras:b': componerCurso(caroKannCurso, caroKannEstructuras as unknown as CapaCurso),
+  // la Alapin contra la Siciliana, por estructuras (2026-11-25): un archivo completo, con sus secciones
+  'siciliana:w': alapin as unknown as DatosCurso,
 }
 
 export const cursoNuevo = (id: string): DatosCurso | undefined => CURSOS_NUEVOS[id]
@@ -47,6 +50,17 @@ export function jugadasDeVariante(c: DatosCurso, v: VarianteCurso): string[] {
   const b = a?.variantes.find((x) => x.id === v.base)
   if (!b) throw new Error(`curso ${c.id}: la variante ${v.id} apunta a ${v.base}, que no está en la base`)
   return b.jugadas
+}
+
+/**
+ * Lo que comparten todas las líneas del curso, desde 1.e4: la posición del tablero de arriba de su página (1.e4 c6 en
+ * la Caro-Kann; 1.e4 e6 2.d4 d5 3.e5 en el Avance contra la Francesa).
+ */
+export function troncoDelCurso(c: DatosCurso): string[] {
+  const ls = c.variantes.map((v) => jugadasDeVariante(c, v))
+  const t: string[] = []
+  for (let i = 0; ls.length && ls.every((l) => l[i] !== undefined && l[i] === ls[0]![i]); i++) t.push(ls[0]![i]!)
+  return t
 }
 
 /**

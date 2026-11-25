@@ -91,3 +91,48 @@ export function migrarAlCursoCaroKann(): void {
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarCaroKann(repaso))
   guardar('modelo-caro-kann', 1)
 }
+
+/**
+ * El curso de la Alapin contra la Siciliana (2026-11-25) pasa a la lección nueva por estructuras. Cada lección vieja tiene
+ * su lección nueva de la misma línea (la misma fila de la base, ahora con su continuación): lo que llevaba en el Repaso de
+ * hoy y en el avance se muda ahí, como en la Caro-Kann. El Ataque Stoltz y la Heidenfeld se separaban de 4.d4 por una
+ * jugada mía (4.Cf3) y ya no son lecciones (`specs/cursos.md` §1, nota 2 del 2026-11-25): lo suyo va a la de la misma
+ * respuesta del rival (2...Cf6 3.e5 Cd5), como 3...c5 en la Caro-Kann; si esa ya tiene algo, se queda como estaba,
+ * guardado en el teléfono y en el Respaldo. Si la lección nueva es opcional, lo mudado se queda guardado y no sale en el
+ * Repaso (lo decide el filtro común de las opcionales). El avance del curso nuevo empieza en cero.
+ */
+export const LECCIONES_ALAPIN: Record<string, string> = {
+  'alapin-d5-cambio-central': 'alapin-curso-cambio-central',
+  'alapin-cf6-d4': 'alapin-curso-cf6-d4',
+  'alapin-d5-moderna': 'alapin-curso-moderna',
+  'alapin-d5-cc6': 'alapin-curso-cc6',
+  'alapin-d5-g6': 'alapin-curso-g6',
+  'alapin-gambito-anti-alapin': 'alapin-curso-gambito',
+  // las de una jugada mía distinta (4.Cf3) van a la lección de la misma respuesta del rival
+  'alapin-cf6-stoltz': 'alapin-curso-cf6-d4',
+  'alapin-cf6-heidenfeld': 'alapin-curso-cf6-d4',
+}
+
+/** Muda lo de cada lección vieja de la Alapin a su lección nueva (si la nueva aún no tiene nada). */
+export function pasarAlapin<T>(r: Record<string, T>): Record<string, T> {
+  const nuevo = { ...r }
+  const prefijo = 'siciliana:w/w:siciliana/'
+  for (const [viejo, nueva] of Object.entries(LECCIONES_ALAPIN)) {
+    const v = r[prefijo + viejo]
+    if (v !== undefined && !(prefijo + nueva in nuevo)) {
+      nuevo[prefijo + nueva] = v
+      delete nuevo[prefijo + viejo]
+    }
+  }
+  return nuevo
+}
+
+/** Corre una sola vez al abrir la app. */
+export function migrarAlCursoAlapin(): void {
+  if (leer<number>('modelo-alapin', 0) >= 1) return
+  const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
+  const repaso = leer<Record<string, unknown>>('repaso', {})
+  if (progreso && typeof progreso === 'object') guardar('progreso', pasarAlapin(progreso))
+  if (repaso && typeof repaso === 'object') guardar('repaso', pasarAlapin(repaso))
+  guardar('modelo-alapin', 1)
+}

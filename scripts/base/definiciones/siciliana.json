@@ -330,7 +330,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-cambio-central",
+      "id": "alapin-curso-cambio-central",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: Defensa Barmen, Cambio Central (7.Ae2 e6 8.Cc3)",
       "fila": {
@@ -351,7 +351,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-moderna",
+      "id": "alapin-curso-moderna",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: Defensa Barmen, Línea Moderna (hasta 10.cxd4)",
       "fila": {
@@ -373,7 +373,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-cc6",
+      "id": "alapin-curso-cc6",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: Defensa Barmen con 4...Cc6 (5...Cf6 6.Ae3)",
       "fila": {
@@ -393,7 +393,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-g6",
+      "id": "alapin-curso-g6",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: Defensa Barmen con 4...g6 (6.Ae2)",
       "fila": {
@@ -414,7 +414,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-gambito",
+      "id": "alapin-curso-gambito",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: Gambito Anti-Alapin (4.Da4+ Ad7 5.Db3)",
       "fila": {
@@ -435,7 +435,7 @@
       "fuenteFrecuencia": null
     },
     {
-      "id": "curso-alapin-cf6-d4",
+      "id": "alapin-curso-cf6-d4",
       "familia": "Variante Alapin",
       "nombre": "Variante Alapin: 2...Cf6 3.e5 Cd5 4.d4 (hasta 8.Ab5)",
       "fila": {

@@ -1178,8 +1178,8 @@
      }
     },
     {
-     "id": "curso-alapin-cambio-central",
-     "clave": "siciliana/curso-alapin-cambio-central",
+     "id": "alapin-curso-cambio-central",
+     "clave": "siciliana/alapin-curso-cambio-central",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: Defensa Barmen, Cambio Central (7.Ae2 e6 8.Cc3)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange",
@@ -1221,8 +1221,8 @@
      }
     },
     {
-     "id": "curso-alapin-moderna",
-     "clave": "siciliana/curso-alapin-moderna",
+     "id": "alapin-curso-moderna",
+     "clave": "siciliana/alapin-curso-moderna",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: Defensa Barmen, Línea Moderna (hasta 10.cxd4)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line",
@@ -1269,8 +1269,8 @@
      }
     },
     {
-     "id": "curso-alapin-cc6",
-     "clave": "siciliana/curso-alapin-cc6",
+     "id": "alapin-curso-cc6",
+     "clave": "siciliana/alapin-curso-cc6",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: Defensa Barmen con 4...Cc6 (5...Cf6 6.Ae3)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Barmen Defense",
@@ -1311,8 +1311,8 @@
      }
     },
     {
-     "id": "curso-alapin-g6",
-     "clave": "siciliana/curso-alapin-g6",
+     "id": "alapin-curso-g6",
+     "clave": "siciliana/alapin-curso-g6",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: Defensa Barmen con 4...g6 (6.Ae2)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Barmen Defense",
@@ -1354,8 +1354,8 @@
      }
     },
     {
-     "id": "curso-alapin-gambito",
-     "clave": "siciliana/curso-alapin-gambito",
+     "id": "alapin-curso-gambito",
+     "clave": "siciliana/alapin-curso-gambito",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: Gambito Anti-Alapin (4.Da4+ Ad7 5.Db3)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Anti-Alapin Gambit",
@@ -1397,8 +1397,8 @@
      }
     },
     {
-     "id": "curso-alapin-cf6-d4",
-     "clave": "siciliana/curso-alapin-cf6-d4",
+     "id": "alapin-curso-cf6-d4",
+     "clave": "siciliana/alapin-curso-cf6-d4",
      "familia": "Variante Alapin",
      "nombre": "Variante Alapin: 2...Cf6 3.e5 Cd5 4.d4 (hasta 8.Ab5)",
      "nombreIngles": "Sicilian Defense: Alapin Variation, Smith-Morra Declined",

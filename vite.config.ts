@@ -20,6 +20,16 @@ export default defineConfig({
           env: { CURSO: 'caro-kann-estructuras:b' },
         },
       },
+      // la Alapin contra la Siciliana, por estructuras (2026-11-25): las mismas pruebas de contenido, sin relajarse; el
+      // ciclo de la lección es el de la Caro-Kann (sus jugadas), y lo propio del curso está en tests/unit/curso-alapin.test.ts
+      {
+        extends: true,
+        test: {
+          name: 'curso alapin',
+          include: ['curso-contenido', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          env: { CURSO: 'siciliana:w' },
+        },
+      },
     ],
   },
 })
