@@ -19,7 +19,7 @@ npx playwright install webkit chromium
 npm run dev                     # http://localhost:5174
 npm run build                   # tsc -b + vite build
 npm test                        # Vitest (lógica)
-npm run e2e                     # Playwright: perfil iphone (WebKit 390×844) y escritorio (Chromium 1440×900)
+npm run e2e                     # Playwright: perfil iphone (WebKit 390×844) y escritorio (Chromium 1440×900); fuera de CI, cada copia levanta su propio servidor en su puerto (5200–5899, `playwright.config.ts`)
 npm run casa                    # construye y sirve en la red de la casa, puerto 4173
 ```
 Las capturas de Playwright van a `iterations/v2/capturas/pruebas/<perfil>/` (las de la v1 se quedan en `iterations/v1/capturas/`). Las de antes y después de cada pantalla: `CAPTURAS=despues npx playwright test --grep @capturas`.
