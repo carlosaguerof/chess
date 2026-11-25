@@ -1,6 +1,8 @@
 import { Chess } from 'chess.js'
 import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'json' }
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
+import eslava from '../../conocimiento/cursos/eslava.json' with { type: 'json' }
+import otrosNegras from '../../conocimiento/cursos/otros-negras.json' with { type: 'json' }
 import avanceCaroKann from '../../conocimiento/cursos/avance-caro-kann.json' with { type: 'json' }
 import avanceFrancesa from '../../conocimiento/cursos/avance-francesa.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
@@ -22,6 +24,10 @@ const caroKannCurso = caroKann as unknown as DatosCurso
 export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'caro-kann:b': caroKannCurso,
   'caro-kann-estructuras:b': componerCurso(caroKannCurso, caroKannEstructuras as unknown as CapaCurso),
+  // la Eslava, por estructuras (2026-11-25): un solo archivo, con sus secciones (specs/cursos.md §6)
+  'eslava:b': eslava as unknown as DatosCurso,
+  // ...c6 + ...d5 contra lo demás, por estructuras (2026-11-25)
+  'otros-negras:b': otrosNegras as unknown as DatosCurso,
   // los cursos por estructuras (2026-11-25): un archivo completo cada uno, con sus secciones
   'caro-kann:w': avanceCaroKann as unknown as DatosCurso,
   'francesa:w': avanceFrancesa as unknown as DatosCurso,
@@ -173,6 +179,15 @@ const conSecciones = (apertura: string, color: string): DatosCurso[] => Object.v
  * la sección opcional de su curso, sea cual sea el curso (`specs/cursos.md` §6). Es la única condición: el Repaso
  * (`cursos()` marca `opcional`) y Refuerza (`soloObligatorias`) la usan, y los cursos nuevos también.
  */
+/**
+ * ¿Esta variante de la base es lección de algún curso (obligatoria u opcional)? La guía en partida la usa para desempatar:
+ * con la misma frecuencia, gana la línea que el curso enseña (orchestrator, 2026-11-25: contra 1.g3 salía el plan de otra
+ * variante porque era la primera de la lista).
+ */
+export function esLeccionDeCurso(apertura: string, color: string, base: string): boolean {
+  return Object.values(CURSOS_NUEVOS).some((c) => c.apertura === apertura && c.color === color && c.variantes.some((v) => v.base === base))
+}
+
 export function esLeccionOpcional(apertura: string, color: string, base: string): boolean {
   return conSecciones(apertura, color).some((c) => opcionales(c).some((v) => v.base === base))
 }

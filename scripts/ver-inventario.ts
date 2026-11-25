@@ -49,6 +49,8 @@ export function frasesDelCurso(c: DatosCurso): FraseInventario[] {
 export const ARCHIVOS_VER: Record<string, { inventario: string; sinVer: string; comprobaciones: string }> = {
   'caro-kann:b': { inventario: 'iterations/v3/ver-que-pasa-inventario.md', sinVer: 'iterations/v3/ver-que-pasa-sin-ver.json', comprobaciones: 'iterations/v3/comprobaciones-del-curso.md' },
   'caro-kann:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-avance-caro-kann.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-avance-caro-kann.json', comprobaciones: 'iterations/v4/comprobaciones-avance-caro-kann.md' },
+  'eslava:b': { inventario: 'iterations/v4/ver-que-pasa-inventario-eslava.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-eslava.json', comprobaciones: 'iterations/v4/comprobaciones-eslava.md' },
+  'otros-negras:b': { inventario: 'iterations/v4/ver-que-pasa-inventario-otros-negras.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-otros-negras.json', comprobaciones: 'iterations/v4/comprobaciones-otros-negras.md' },
   'francesa:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-avance-francesa.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-avance-francesa.json', comprobaciones: 'iterations/v4/comprobaciones-avance-francesa.md' },
 }
 export const archivosVer = (c: DatosCurso) => ARCHIVOS_VER[c.fichasDe ?? c.id]!

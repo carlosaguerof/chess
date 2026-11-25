@@ -2,7 +2,7 @@
 
 > Decidido por Carlos el 2026-10-29 (diseño del escalón 1, aprobado con el piloto de la Caro-Kann). Esta página es la regla para hacer los otros siete cursos igual que el piloto. Lo que cambie cuando Carlos pruebe el piloto en el iPhone se anota aquí antes de la segunda corrida.
 >
-> **Las correcciones del piloto (2026-10-29, `iterations/v3/feedback.md`)** ya están aquí: las coordenadas en todos los tableros del curso (§1), Practicar sin ayudas que no pediste (§2), "Ver paso a paso" (§2.1), las marcas en el tablero (§2.2, reglas v1.3 del 2026-10-30, que reemplazan a la v1.1) y "Ver qué pasaría" (§2.3, 2026-10-30). Por ahora solo las tiene la Caro-Kann (Nota 1 de Carlos): los otros siete cursos salen así cuando se hagan.
+> **Las correcciones del piloto (2026-10-29, `iterations/v3/feedback.md`)** ya están aquí: las coordenadas en todos los tableros del curso (§1), Practicar sin ayudas que no pediste (§2), "Ver paso a paso" (§2.1), las marcas en el tablero (§2.2, reglas v1.3 del 2026-10-30, que reemplazan a la v1.1) y "Ver qué pasaría" (§2.3, 2026-10-30). Las tienen la Caro-Kann, la Eslava y Otras aperturas de blancas (Nota 1 de Carlos): los demás cursos salen así cuando se hagan.
 
 ## Para qué
 
@@ -77,7 +77,7 @@ Datos: `pasoAPaso` en cada página (`PaginaLeer`) y en cada plan (`PlanVariante`
 
 ## 2.2 Las marcas en el tablero (reglas v1.3, Carlos, 2026-10-30; antes v1.1, del 2026-10-29)
 
-> La v1.3 manda sobre la v1.1. Carlos probó las marcas en su iPhone y definió el criterio de fondo con la torre. La fuente: `00_corridas/chess/2026-10-29_REGLAS_marcas.md` (cada versión, en git). Por ahora solo las tiene la Caro-Kann; los otros siete cursos salen así.
+> La v1.3 manda sobre la v1.1. Carlos probó las marcas en su iPhone y definió el criterio de fondo con la torre. La fuente: `00_corridas/chess/2026-10-29_REGLAS_marcas.md` (cada versión, en git). Las tienen la Caro-Kann, la Eslava y Otras aperturas de blancas; los demás cursos salen así.
 
 **Para qué:** que cada sesión, en cada curso, ponga las mismas marcas sin depender del gusto. Cada marca sale **de lo que afirma su frase** y se comprueba con un programa.
 
@@ -226,7 +226,7 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 
 ## 6. El curso por estructuras (Carlos, 2026-11-01; elegido el 2026-11-25)
 
-> **El formato de los cursos (Carlos, 2026-11-25).** Carlos comparó los dos cursos de la Caro-Kann y eligió este: los otros siete cursos se hacen así. Hoy solo lo usa la Caro-Kann (`caro-kann-estructuras:b`). Lo que esta sección dice de la Caro-Kann (el mapa, sus cuatro estructuras, sus cortes) es de la Caro-Kann: cada curso nuevo arma su propio mapa con sus fuentes y mide sus propias partidas.
+> **El formato de los cursos (Carlos, 2026-11-25).** Carlos comparó los dos cursos de la Caro-Kann y eligió este: los otros siete cursos se hacen así. Hoy lo usan la Caro-Kann (`caro-kann-estructuras:b`), la Eslava (`eslava:b`) y Otras aperturas de blancas (`otros-negras:b`). Lo que esta sección dice de la Caro-Kann (el mapa, sus cuatro estructuras, sus cortes) es de la Caro-Kann: cada curso nuevo arma su propio mapa con sus fuentes y mide sus propias partidas.
 >
 > **Una sola Caro-Kann (Carlos, 2026-11-25).** En Aprender queda una tarjeta, "Defensa Caro-Kann", con este curso adentro; ver "El curso que queda", al final de esta sección.
 
@@ -288,3 +288,18 @@ Los cursos `caro-kann:w` y `francesa:w`, con blancas (`conocimiento/cursos/avanc
 - **Cómo se probó cada plan y cada regla** (lo que vale para todos los cursos): al final de su lección y contra las dos respuestas más jugadas en cada posición de la lección donde mueve el rival, con 3 partidas o más; sin partidas, contra las dos mejores del motor y contra la del libro. Cada jugada que nombra una regla se mide en cada posición donde aparece su señal, también con las jugadas naturales del rival ya en el tablero y una jugada antes del final de cada lección. **Si falla en una posición, la frase dice dónde vale** ("ya enrocado y con tu caballo en d2", "en la jugada 6", "con tu caballo ya en c3 y sin la dama de negras en b6") en vez de presentarse como regla general. Así cambiaron tres jugadas: en el 3...c5 de la Caro-Kann el caballo de b1 va a d2, no a c3 (con ...Db6 ya jugada, Cc3 pierde d4); en la base sola de la Francesa, con la dama en b6, primero Ca4 y después h4; en la cadena cerrada, contra ...Cb3, Cxb3.
 - **La frecuencia de cada lección** se mide en la posición que la define en la base (la jugada del rival que le da nombre, entre las partidas que llegan ahí); para la regla de obligatorio y opcional se usa su parte de tus partidas del curso. Las dos están en `fuenteFrecuencia`.
 - **Cómo se comprueba:** `tests/unit/curso-avance.test.ts` (las formas con chess.js en toda la línea, las secciones, la regla de obligatorio, una sola jugada por posición, las introducciones, la migración, el Repaso y Refuerza, y que el filtro no confunde la Caro-Kann con blancas con la de negras) y `tests/e2e/curso-avance.spec.ts` (tarjetas, página en orden, una lección por sección en sus dos vueltas, tableros con coordenadas, cada plan con su paso a paso y la lección en cinco pantallas). "Seguir" con sus nombres, en `tests/e2e/boton-seguir.spec.ts`.
+
+### La Eslava y Otras aperturas de blancas (2026-11-25)
+
+Sus mapas y sus tablas: `iterations/v4/mapa-eslava.md` y `mapa-otros-negras.md`. Lo que esta corrida aprendió y vale para cualquier curso:
+
+- **Una banda con menos de 10 partidas no decide (n ≥ 10).** El 2 % de una lección cuenta solo en la banda donde esa lección tiene 10 partidas o más; con menos, pesa la otra banda (lo dijo el orchestrator: "si una n es chica, pesa más la otra banda"). En la Eslava, el Diemer (3.3 %, n 3, en 600–1000) queda opcional por eso: en 1000–1400 tiene 1.0 % (n 11). Las pruebas propias lo comprueban (`tests/unit/curso-eslava.test.ts`, `curso-otros-negras.test.ts`).
+- **"0 %" puede ser "sin datos".** Cuando las partidas se acaban antes de la jugada que decide (en la Eslava, tras 4.Cc3 dxc4 ninguna jugada de blancas tiene 3 partidas), la lección no sale "0 %": sale "sin datos", y va al gate. Si la posición donde el mapa te pide algo sale en 5 % o más y ninguna obligatoria la cubre, la lección que la cubre con la jugada más probable entra a La base (en la Eslava, la Checa).
+- **El reparto de las estructuras va entre todas las partidas que siguen** (n menos las que se acaban ahí), no solo entre las jugadas con 3 partidas o más; lo que va por jugadas con menos de 3 queda "sin datos". Si no, las formas salen infladas.
+- **El mapa dice qué jugar, no solo cómo se llama la forma.** Si la forma depende de una jugada tuya (tomar en c4 o no), el mapa da la señal del tablero que decide ("¿ya jugó e3?") y se ordena como preguntas en fila. Cada regla lleva su condición escrita donde la necesita ("con ...e6 ya jugado", "con tu caballo ya en f6") y se mide en la posición donde aparece su señal, con la frase como está escrita.
+- **El nombre de una forma no es el nombre de una lección** (la forma "Pelea del lado de dama"; la lección, "Alekhine").
+- **Una lección que termina una jugada antes de cambiar de forma** dice "Pero si blancas…" en su introducción, cuando esa jugada está entre las mejores del rival (la Réti con 2.g3 y la Gurevich: c4 o d4 llevan a la Eslava).
+- **La guía en partida enseña lo mismo que el curso:** con empate de frecuencia, gana la línea que es lección de un curso; si las dos lo son, la que llegó por el mismo orden de jugadas (`src/guia/guia.ts`, prueba en `tests/unit/guia.test.ts`). Y los planes de la base de todas las variantes de la apertura, también las que no son lección, dicen lo mismo que el curso: la guía los muestra.
+- **La etiqueta de una forma no escribe tu jugada** ("Tomas en c4 y lo defiendes", no "…con ...b5"): dice la forma, no lo que vas a jugar.
+- **Una sola jugada tuya por posición, también entre lecciones distintas y entre cursos:** si dos lecciones llegan a la misma posición por otro orden, enseñan la misma jugada (`tests/unit/una-jugada-por-posicion.test.ts`, sobre todos los cursos de `CURSOS_NUEVOS`). En Otras aperturas de blancas, la Húngara (1.g3 d5 2.Ag2 c6 3.Cf3) y la Réti con 2.g3 llegaban a la misma posición con 3...Ag4 y 3...Cf6: las dos enseñan ahora 3...Cf6.
+- **Las pruebas de contenido corren sobre cualquier curso** con `CURSO=<id>` (`vite.config.ts`, un proyecto por curso); los archivos de iteración de cada curso están en `ARCHIVOS_VER` (`scripts/ver-inventario.ts`) y `LISTA_DE_MARCAS` (`tests/unit/correcciones-marcas.test.ts`). Lo que solo vale para la Caro-Kann (sus ejemplos, sus conteos) se salta en los demás, sin relajar nada.

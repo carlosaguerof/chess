@@ -10,3 +10,4 @@
 |---|---|---|---|
 | Avance contra la Caro-Kann (`caro-kann:w`) | `feat/curso-avance` | `mapa-avance-caro-kann.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
 | Avance contra la Francesa (`francesa:w`) | `feat/curso-avance` | `mapa-avance-francesa.md` | listo en la rama, sin integrar; falta la corrida completa en GitHub |
+| Defensa Eslava y ...c6 + ...d5 contra lo demás | `feat/curso-eslava` | `mapa-eslava.md`, `mapa-otros-negras.md` | Lista en su rama; falta la corrida completa en GitHub |
