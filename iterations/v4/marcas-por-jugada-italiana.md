@@ -103,7 +103,7 @@
 | plan principal rival frase 1 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
 | plan paris tuyo frase 1 | Saca tu último alfil a f4 y lleva una torre a e1. | flecha c1→f4 (A3, verde, punteada); flecha f1→e1 (A3, verde, punteada) |
 | plan paris tuyo frase 2 | Si negras cambia caballos en d4, retomas con la dama. | flecha d1→d4 (A3, verde, punteada) |
-| plan blackburne-kostic tuyo frase 1 | Saca tu caballo a c3 para cuidar e4 y d4. | flecha b1→c3 (A3, verde, punteada) |
+| plan blackburne-kostic tuyo frase 1 | Saca tu caballo a c3 para cuidar e4. | flecha b1→c3 (A3, verde, punteada) |
 | plan blackburne-kostic tuyo frase 2 | Si negras golpea con ...d5, tomas en d5. | flecha e4→d5 (A3, verde, punteada) |
 | plan blackburne-kostic rival frase 1 | Negras quiere golpear tus peones del centro con ...d5. | flecha d6→d5 (A7, roja, punteada) |
 | plan hungara rival frase 1 | Negras sostiene su caballo con ...f5. | flecha f7→f5 (A7, roja, punteada) |
