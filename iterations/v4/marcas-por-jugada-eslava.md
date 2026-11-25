@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 31 de 108.** Más 22 frases del plan y del paso a paso.
+**Jugadas con marcas: 31 de 108.** Más 21 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -129,7 +129,6 @@
 | plan cc3 rival frase 1 | Blancas tiene el centro, y su dama de c2 va por tu peón de c4. | flecha c2→c4 (A4, roja) |
 | plan alekhine-e3 tuyo frase 1 | Saca tu caballo de b8 a d7 y tu alfil de f8 a e7, y enroca. | flecha f8→e7 (A3, verde, punteada) |
 | plan checa-carlsbad tuyo frase 1 | Si blancas cambia en e5, retomas con tu caballo de d7. | flecha d7→e5 (A2, verde) |
-| plan geller tuyo frase 1 | Sostén tu peón de b5 con ...a6, saca tus piezas (...Cd7 y ...Ae7) y enroca. | flecha a7→a6 (A3, verde, punteada) |
 | plan diemer tuyo frase 1 | Saca tu alfil a f5 y tu caballo de b8 a d7. | flecha c8→f5 (A3, verde, punteada) |
 | idea 1, paso 7 | Tu caballo de f6 ya cuida d5, y tu alfil quedó afuera antes de ...e6. | flecha f6→d5 (A2, verde) |
 | repaso 2, paso 2 | Si sale antes, 3.Cf3 Af5, blancas cambia, 4.cxd5 cxd5, y 5.Db3 ataca b7 y d5. | flecha b3→b7 (A4, roja); flecha b3→d5 (A4, roja) |

@@ -407,11 +407,11 @@
          "Bg2",
          "c6",
          "Nf3",
-         "Bg4",
+         "Nf6",
          "O-O",
-         "Nd7",
+         "Bg4",
          "d3",
-         "Ngf6"
+         "Nbd7"
         ],
         "jugadas": [
          "Nbd2",
@@ -1133,13 +1133,16 @@
     "PARTIDAS"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O": {
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O": {
    "texto": "Blancas pone su rey a salvo con el enroque.",
    "fuente": [
     "MOTOR"
+   ],
+   "motor": [
+    "O-hu2-w4"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O Nd7 d3": {
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O Bg4 d3": {
    "texto": "Blancas juega 5.d3: prepara e4 con calma.",
    "fuente": [
     "WB-1Cf3d5",
@@ -1157,10 +1160,10 @@
     ]
    ],
    "motor": [
-    "O-hu-w5"
+    "O-hu2-d3"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O Nd7 d3 Ngf6 Nbd2": {
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O Bg4 d3 Nbd7 Nbd2": {
    "texto": "Blancas saca su otro caballo a d2: también apoya e4.",
    "fuente": [
     "MOTOR"
@@ -1176,7 +1179,7 @@
     ]
    ],
    "motor": [
-    "O-hu-w6"
+    "O-hu2-w6"
    ]
   },
   "c4": {
@@ -1545,6 +1548,13 @@
    "hace": "Sacas tu alfil de casillas blancas antes de cerrar el centro.",
    "porque": "Con su peón en b3, la dama blanca ya no puede ir ahí contra b7: tu alfil sale sin dejar nada colgando.",
    "prepara": "Después cierras con ...e6 sin encerrarlo.",
+   "describe": {
+    "hace": [
+     [
+      "e6"
+     ]
+    ]
+   },
    "fuente": [
     "WP-Reti",
     "INV",
@@ -1855,12 +1865,49 @@
     "O-hu-2"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4": {
-   "pregunta": "Blancas sacó su caballo. ¿Qué pieza sacas tú, antes de mover tus peones centrales?",
+  "g3 d5 Bg2 c6 Nf3 Nf6": {
+   "pregunta": "¿Qué pieza sacas para vigilar el centro?",
+   "pista": "Saca una pieza del lado de rey.",
+   "buenas": [
+    "g6",
+    "Bf5",
+    "a5",
+    "Bg4"
+   ],
+   "hace": "Sacas tu caballo de g8.",
+   "porque": "Tu caballo de f6 vigila e4 y apoya d5.",
+   "marcasDe": {
+    "porque": [
+     [
+      {
+       "tipo": "A2",
+       "de": "f6",
+       "a": "e4",
+       "color": "verde"
+      },
+      {
+       "tipo": "A2",
+       "de": "f6",
+       "a": "d5",
+       "color": "verde"
+      }
+     ]
+    ]
+   },
+   "fuente": [
+    "WB-1Cf3d5",
+    "MOTOR"
+   ],
+   "motor": [
+    "B-60",
+    "O-rf-3"
+   ]
+  },
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O Bg4": {
+   "pregunta": "¿Qué pieza sacas antes de mover tus peones centrales?",
    "pista": "La que se quedaría encerrada si movieras antes tus peones centrales.",
    "buenas": [
     "g6",
-    "Nf6",
     "Bf5",
     "a5"
    ],
@@ -1878,18 +1925,18 @@
     "MOTOR"
    ],
    "motor": [
-    "B-60",
-    "O-hu-3"
+    "B-200",
+    "B-200"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O Nd7": {
-   "pregunta": "¿Qué caballo sacas primero?",
-   "pista": "Saca el caballo del lado de dama.",
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O Bg4 d3 Nbd7": {
+   "pregunta": "Blancas juega con calma. ¿Qué pieza te falta sacar?",
+   "pista": "Una pieza del lado de dama que todavía no salió.",
    "buenas": [
-    "Nf6",
     "e6",
     "Bh5",
-    "g6"
+    "a5",
+    "h6"
    ],
    "hace": "Sacas tu caballo de b8.",
    "porque": "Tu caballo, desde d7, apoya el avance de tu peón de e.",
@@ -1905,41 +1952,11 @@
     "MOTOR"
    ],
    "motor": [
-    "B-61",
-    "O-hu-4"
+    "B-201",
+    "B-201"
    ]
   },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O Nd7 d3 Ngf6": {
-   "pregunta": "Blancas juega con calma. ¿Qué pieza te falta sacar?",
-   "pista": "El otro caballo.",
-   "buenas": [
-    "a5",
-    "e6"
-   ],
-   "hace": "Sacas tu otro caballo, el de g8.",
-   "porque": "Tu caballo de f6 vigila e4, donde blancas quiere empujar su peón.",
-   "marcasDe": {
-    "porque": [
-     [
-      {
-       "tipo": "A2",
-       "de": "f6",
-       "a": "e4",
-       "color": "verde"
-      }
-     ]
-    ]
-   },
-   "fuente": [
-    "WB-1Cf3d5",
-    "MOTOR"
-   ],
-   "motor": [
-    "B-62",
-    "O-hu-5d3"
-   ]
-  },
-  "g3 d5 Bg2 c6 Nf3 Bg4 O-O Nd7 d3 Ngf6 Nbd2 e5": {
+  "g3 d5 Bg2 c6 Nf3 Nf6 O-O Bg4 d3 Nbd7 Nbd2 e5": {
    "clave": true,
    "pregunta": "Blancas jugó lento, con d3. ¿Cómo agrandas tu centro?",
    "pista": "Tus piezas ya apoyan un peón más en el centro.",
@@ -1970,8 +1987,8 @@
     "MOTOR"
    ],
    "motor": [
-    "B-63",
-    "O-hu-6",
+    "B-202",
+    "B-202",
     "O-fin-hu"
    ]
   },

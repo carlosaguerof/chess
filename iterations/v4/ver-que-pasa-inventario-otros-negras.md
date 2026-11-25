@@ -30,9 +30,9 @@
 | 5...e6 | porque | Tu alfil de c8 ya salió, y tus peones de c6, d5 y e6 forman un centro firme. | explica la jugada que ya está en la línea, sin una alternativa |
 | 1...d5 | porque | Así tienes el centro, y blancas tendrá que reaccionar para no quedarse sin él. | explica la jugada que ya está en la línea, sin una alternativa |
 | 2...c6 | porque | Tu peón de d5 queda apoyado y le tapa la diagonal al alfil de g2. | explica la jugada que ya está en la línea, sin una alternativa |
-| 3...♗g4 | porque | Tu alfil sale antes de mover tus peones centrales, que podrían encerrarlo. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4...♘d7 | porque | Tu caballo, desde d7, apoya el avance de tu peón de e. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 5...♘gf6 | porque | Tu caballo de f6 vigila e4, donde blancas quiere empujar su peón. | explica la jugada que ya está en la línea, sin una alternativa |
+| 3...♘f6 | porque | Tu caballo de f6 vigila e4 y apoya d5. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4...♗g4 | porque | Tu alfil sale antes de mover tus peones centrales, que podrían encerrarlo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 5...♘bd7 | porque | Tu caballo, desde d7, apoya el avance de tu peón de e. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6...e5 | porque | Contra d3, tienes el centro con dos peones, d5 y e5, y tu caballo de d7 apoya el de e5. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...e5 | prepara | Después sacas tu alfil de f8 y enrocas. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 1...c6 | porque | Si después blancas cambia en d5, retomarás con un peón y seguirás en el centro. | lo que dice se juega en las jugadas que siguen de la línea |

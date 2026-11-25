@@ -153,10 +153,9 @@
     {
      "subtitulo": "El mapa",
      "texto": [
-      "Después de 1.d4 d5 2.c4 c6, el peón de c4 de blancas ataca tu peón de d5, y tú lo defiendes con el de c6. De ahí sale la pregunta que ordena este curso: ¿qué pasó con el peón de c4?",
-      "Hay cuatro respuestas. Sigue en c4: la Tensión. Blancas lo cambió en d5: el Cambio. Lo tomaste y lo defiendes con ...b5: la Pelea del lado de dama. Lo tomaste, pero blancas alcanzó a jugar a4: la Checa.",
-      "Son tres preguntas en fila. ¿Blancas cambió en d5? Si no: ¿ya jugó e3? Con e3, su alfil de f1 recuperaría c4 de una vez, así que no tomas: sacas tu alfil de c8 a f5, o primero ...e6 si su caballo ya está en c3. Sin e3 (ni Cbd2, que también recupera c4 de una vez), tomas en c4 (contra g3, también sirve sacar tu alfil a g4). Y si tomaste: ¿alcanzó blancas a jugar a4?",
-      "Es la misma pregunta de la Caro-Kann, con el peón de c en lugar del de e. Lo que une a todo el curso: con ...c6 defiendes d5 sin encerrar a tu alfil de c8. Si blancas empuja 3.c5, su peón deja de atacar d5: no es ninguna de las cuatro, y ...e5 golpea su centro."
+      "Después de 1.d4 d5 2.c4 c6, la pregunta que ordena este curso es: ¿qué pasó con el peón de c4 de blancas?",
+      "Son tres preguntas en fila. ¿Blancas cambió en d5? Es el Cambio. Si no, ¿ya jugó e3? Con e3, no tomas: tu alfil sale a f5, y es la Tensión. Sin e3 (ni Cbd2), tomas en c4; si blancas ya sacó su caballo a f3, primero el tuyo a f6. Y si tomaste, ¿alcanzó a jugar a4? Sí: la Checa. No: lo defiendes, y es la Pelea del lado de dama.",
+      "Cada forma tiene su página con los detalles. Si blancas empuja 3.c5, su peón deja de atacar d5: ...e5 golpea su centro."
      ],
      "tablero": {
       "jugadas": [
@@ -542,7 +541,7 @@
      ],
      "texto": [
       "La pregunta: ¿qué pasó con el peón de c4? La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) ¿Blancas ya jugó e3? Con e3 y tu caballo en f6, saca tu alfil (o ...e6 primero, si su caballo ya está en c3); sin e3 ni Cbd2, toma en c4 (contra g3, también sirve ...Ag4). 2) Si tomaste, blancas no jugó a4 y su alfil no va a g2, defiende c4 con ...b5; si ya lo jugó y tu caballo está en f6, saca el alfil a f5. 3) Contra la dama en b3: si blancas no cambió en d5, ...Db6; en el Cambio, con tu caballo en c6 y ...e6 ya jugado, ...Ab4."
+      "Tres reglas: 1) ¿Blancas ya jugó e3? Con e3 y tu caballo en f6, saca tu alfil (o ...e6 primero, si su caballo ya está en c3); sin e3 ni Cbd2, toma en c4 (contra 3.Cf3, primero ...Cf6). 2) Si tomaste, blancas no jugó a4 y su alfil no va a g2, defiende c4 con ...b5; si ya lo jugó y tu caballo está en f6, saca el alfil a f5. 3) Contra la dama en b3: si blancas no cambió en d5, ...Db6; en el Cambio, con tu caballo en c6 y ...e6 ya jugado, ...Ab4."
      ],
      "fuente": [
       "WP-Slav",
@@ -775,7 +774,7 @@
    "regla": "Con a4 jugado y tu caballo en f6, no juegues ...b5: saca el alfil a f5.",
    "frecuencia": 1,
    "fuenteFrecuencia": "sin datos de 5.a4 (menos de 3 partidas); la posición de 4.Cc3, donde tomas, sale en 14.8 % y 6.7 % de la Eslava (n 6 y 27): MAPA, gate",
-   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
+   "estructura": "Blancas juega a4 contra tu peón de c4"
   },
   {
    "id": "tranquila-schallopp",
@@ -1082,7 +1081,7 @@
    "regla": "Contra g4, retira el alfil sin dejar solo al caballo.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
+   "estructura": "Blancas juega a4 contra tu peón de c4"
   },
   {
    "id": "alekhine-e3",
@@ -1214,7 +1213,7 @@
    "regla": "Desafía al caballo de e5 y prepara ...e5.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4, pero blancas alcanza a jugar a4"
+   "estructura": "Blancas juega a4 contra tu peón de c4"
   },
   {
    "id": "cambio-trifunovic",
@@ -1312,7 +1311,7 @@
    "intro": "Estás en la Pelea del lado de dama: tu objetivo es que blancas gaste jugadas mientras tú sacas tus piezas. Blancas saca sus dos caballos y después juega 5.e4.",
    "idea": "Contra e4 y e5, ...b5 sostiene c4 y tu caballo se va al centro, a d5.",
    "plan": {
-    "tuyo": "Sostén tu peón de b5 con ...a6, saca tus piezas (...Cd7 y ...Ae7) y enroca.",
+    "tuyo": "Si blancas cambia en b5, primero ...Cxc3: cambias su caballo, y después retomas en b5 con tu peón de c. Saca tus piezas (...Cd7 y ...Ae7) y enroca.",
     "rival": "Blancas va a atacar en el lado de rey con sus piezas.",
     "marcas": [],
     "fuente": [
@@ -1320,15 +1319,25 @@
      "MOTOR"
     ],
     "motor": [
-     "E-ge-w8"
+     "E-ge-w8",
+     "O-ge-axb5",
+     "O-ge-a6"
     ],
     "pasoAPaso": {
      "ilustrativo": true,
      "pasos": [
       {
-       "frase": "...a6: sostienes tu peón de b5.",
+       "frase": "Si blancas cambia, axb5, primero ...Cxc3: cambias su caballo.",
        "jugadas": [
-        "...a6"
+        "axb5",
+        "...Nxc3"
+       ]
+      },
+      {
+       "frase": "Blancas retoma, bxc3, y tú también: ...cxb5.",
+       "jugadas": [
+        "bxc3",
+        "...cxb5"
        ]
       },
       {
@@ -1344,19 +1353,6 @@
         "...O-O"
        ]
       }
-     ]
-    },
-    "marcasDe": {
-     "tuyo": [
-      [
-       {
-        "tipo": "A3",
-        "de": "a7",
-        "a": "a6",
-        "color": "verde",
-        "punteada": true
-       }
-      ]
      ]
     }
    },
@@ -2241,6 +2237,13 @@
        "a": "d5",
        "color": "verde"
       }
+     ]
+    ]
+   },
+   "describe": {
+    "hace": [
+     [
+      "e6"
      ]
     ]
    },

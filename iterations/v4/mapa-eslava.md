@@ -61,7 +61,7 @@ Tronco: 1.d4 d5 2.c4 c6. La primera (la Checa) empieza desde 1.d4. Las líneas q
 | Otra (3.c5) | 4.4 % | 2.9 % |
 | Fuera del mapa: 3.e4 | 3.3 % | 1.0 % |
 
-En 600–1000 hay 90 partidas con 2...c6: pesa más la otra banda. Las formas con datos pasan del 5 % en 1000–1400, y el corte cae en un salto (de 7.8 % a 2.9 %).
+En 600–1000 hay 90 partidas con 2...c6: pesa más la otra banda. Para las lecciones, una banda con menos de 10 partidas no decide (n ≥ 10): por eso el Diemer (3.3 %, n 3, en 600–1000) queda opcional; en 1000–1400 tiene 1.0 % (n 11). Las formas con datos pasan del 5 % en 1000–1400, y el corte cae en un salto (de 7.8 % a 2.9 %).
 
 **Las lecciones** (de las partidas del curso):
 

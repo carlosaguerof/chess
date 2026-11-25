@@ -21,11 +21,11 @@
 | 2.Ag2 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha g2→d5 (A4, roja) |
 | 2...c6 | Húngara: 1.g3 | tuya | sí | mía porque frase 1: flecha g2→d5 (A4, roja) |
 | 3.Cf3 | Húngara: 1.g3 | del rival | no |  |
-| 3...Ag4 | Húngara: 1.g3 | tuya | no |  |
+| 3...Cf6 | Húngara: 1.g3 | tuya | sí | mía porque frase 1: flecha f6→e4 (A2, verde); flecha f6→d5 (A2, verde) |
 | 4.0-0 | Húngara: 1.g3 | del rival | no |  |
-| 4...Cd7 | Húngara: 1.g3 | tuya | no |  |
+| 4...Ag4 | Húngara: 1.g3 | tuya | no |  |
 | 5.d3 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha e2→e4 (A7, roja, punteada) |
-| 5...Cgf6 | Húngara: 1.g3 | tuya | sí | mía porque frase 1: flecha f6→e4 (A2, verde) |
+| 5...Cbd7 | Húngara: 1.g3 | tuya | no |  |
 | 6.Cbd2 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha d2→e4 (A4, roja) |
 | 6...e5 | Húngara: 1.g3 | tuya | sí | mía porque frase 1: flecha d7→e5 (A2, verde) |
 | 1.c4 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |

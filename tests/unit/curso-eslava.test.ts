@@ -32,7 +32,7 @@ const jugadas = (l: LineaCurso): Move[] => {
 const TENSION = 'Nadie cambia peones'
 const CAMBIO = 'Blancas cambia en d5'
 const ALEKHINE = 'Tomas en c4 y lo defiendes'
-const CHECA = 'Tomas en c4, pero blancas alcanza a jugar a4'
+const CHECA = 'Blancas juega a4 contra tu peón de c4'
 
 /** Qué forma dicen las jugadas de una línea, mirando toda la línea (como `curso-estructuras.test.ts`). */
 function formaDe(l: LineaCurso): string[] {

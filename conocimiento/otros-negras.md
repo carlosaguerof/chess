@@ -124,14 +124,14 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Apertura Húngara (1.g3)
 
-### Apertura Húngara: Formación Eslava (3.Cf3 Ag4 4.0-0 Cd7 5.d3 Cgf6 6.Cbd2 e5)
+### Apertura Húngara: Formación Eslava (3.Cf3 Cf6 4.0-0 Ag4 5.d3 Cbd7 6.Cbd2 e5)
 
-**1.g3 d5 2.Ag2 c6 3.Cf3 Ag4 4.0-0 Cd7 5.d3 Cgf6 6.Cbd2 e5**
+**1.g3 d5 2.Ag2 c6 3.Cf3 Cf6 4.0-0 Ag4 5.d3 Cbd7 6.Cbd2 e5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: El peón de d5, apoyado por ...c6, tapa la diagonal larga del alfil de g2. El alfil sale a g4; contra d3, ...e5 te da más centro. Sigue ...Ad6 o ...Ae7 y 0-0.
 - Fuente: A00 · Hungarian Opening: Slav Formation
-- Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.Nf3 d5 (tabla: contra d3, ...Nbd7 y ...e5); partidas de lichess: 3.Cf3 es la más común tras 2...c6; motor: cada jugada de negras, la mejor o a 3 de la mejor; 5.d3 y 6.Cbd2 a 10 o menos de la mejor de blancas.
+- Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.Nf3 d5 (tabla: contra d3, ...Nbd7 y ...e5); partidas de lichess: 3.Cf3 es la más común tras 2...c6; motor: cada jugada de negras a 12 o menos de la mejor (3...Cf6 como en la Réti con 2.g3, la misma posición); 5.d3 a 5 y 6.Cbd2 empata con la mejor de blancas.
 
 ## Apertura Bird (1.f4)
 

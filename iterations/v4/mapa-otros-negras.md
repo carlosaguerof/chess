@@ -28,7 +28,7 @@
 | Sección | Lección | Línea | Forma |
 |---|---|---|---|
 | La base | `reti-bogoljubow` | 1.Cf3 d5 2.c4 c6 3.b3 Af5 4.Ab2 e6 5.e3 Cf6 | Anglo-Eslava |
-| La base | `otras-hungara` | 1.g3 d5 2.Ag2 c6 3.Cf3 Ag4 4.0-0 Cd7 5.d3 Cgf6 6.Cbd2 e5 | Centro libre |
+| La base | `otras-hungara` | 1.g3 d5 2.Ag2 c6 3.Cf3 Cf6 4.0-0 Ag4 5.d3 Cbd7 6.Cbd2 e5 | Centro libre (3...Cf6, como la Réti con 2.g3: es la misma posición) |
 | Las que más te van a salir | `inglesa-caro-kann` | 1.c4 c6 2.Cc3 d5 3.cxd5 cxd5 4.d4 Cf6 5.Af4 Cc6 | Eslava (llega al Cambio de la Eslava) |
 | Las que más te van a salir | `reti-fianchetto` | 1.Cf3 d5 2.g3 c6 3.Ag2 Cf6 4.0-0 Ag4 5.d4 e6 | Centro libre ("Pero si blancas juega c4 después, ya es la Eslava": c4 entre las mejores, +0.22) |
 | Las que más te van a salir | `larsen-clasica` | 1.b3 d5 2.Ab2 Cf6 3.e3 Af5 4.Cf3 e6 5.Ae2 h6 | Centro libre |
@@ -68,7 +68,7 @@ La Bird va por 3.e3, la mejor de blancas según el motor (−0.17) y la segunda 
 | `inglesa-anglo-eslava-g3` | 0.0 % | 0 | 0.3 % | 4 | Opcional |
 | `inglesa-gurevich` | 0.0 % | 0 | 0.3 % | 4 | Opcional |
 
-El corte de 2 % cae en un salto en 1000–1400 (de 4.0 % a 1.6 %). La Eslava (la forma) no llega al 5 %, pero su lección entra por frecuencia (5.9 %, n 74).
+El corte de 2 % cae en un salto en 1000–1400 (de 4.0 % a 1.6 %). Una banda con menos de 10 partidas no decide (n ≥ 10): pesa la otra. La Eslava (la forma) no llega al 5 %, pero su lección entra por frecuencia (5.9 %, n 74).
 
 ## Cada plan, probado donde se usa
 

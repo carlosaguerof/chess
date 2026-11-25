@@ -117,10 +117,14 @@ describe('T9 · la guía en una partida real', () => {
     // la Húngara: la base trae otras-hungara (plan sin ...e5) y curso-otras-hungara (la lección), con la misma frecuencia
     const g3 = ayudaEnMiTurno(negras, ['g3'])
     expect(g3.plan).toContain('contra d3, ...e5')
-    // tras 3.Cf3 la posición es también la de la Réti con 2.g3 (otra lección, ...Cf6): gana la del mismo orden, ...Ag4
-    expect(ayudaEnMiTurno(negras, ['g3', 'd5', 'Bg2', 'c6', 'Nf3']).respuesta).toMatch(/^3\.\.\.Ag4/)
-    // por el orden de la Réti, la Réti
-    expect(ayudaEnMiTurno(negras, ['Nf3', 'd5', 'g3', 'c6', 'Bg2']).respuesta).toMatch(/^3\.\.\.Cf6/)
+    // tras 3.Cf3 la posición es también la de la Réti con 2.g3 (otra lección): las dos enseñan 3...Cf6
+    // (tests/unit/una-jugada-por-posicion.test.ts), y el plan y el nombre son los de la línea que vino por el mismo orden
+    const porG3 = ayudaEnMiTurno(negras, ['g3', 'd5', 'Bg2', 'c6', 'Nf3'])
+    const porCf3 = ayudaEnMiTurno(negras, ['Nf3', 'd5', 'g3', 'c6', 'Bg2'])
+    expect(porG3.respuesta).toMatch(/^3\.\.\.Cf6/)
+    expect(porCf3.respuesta).toMatch(/^3\.\.\.Cf6/)
+    // y después, la jugada siguiente de las dos también coincide
+    expect(ayudaEnMiTurno(negras, ['g3', 'd5', 'Bg2', 'c6', 'Nf3', 'Nf6', 'O-O']).respuesta).toMatch(/^4\.\.\.Ag4/)
   })
 
   it('pase 2: la Pista de una línea que termina no dice jugadas; la Respuesta da el plan completo', () => {

@@ -128,6 +128,8 @@ Cada id aparece en el campo `motor` del texto que lo afirma, en `conocimiento/cu
 | G-e3-dxc4 | `node motor.mjs jugada "d4 d5 c4 c6 Nf3 Nf6 e3" "dxc4" --prof 18` | Mueven: negras · profundidad 18 · mejor: +0.28  Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Qb3 · dxc4: +0.88  dxc4 Bxc4 c5 O-O e6 Qe2 cxd4 Rd1 · pierde 60 centipeones contra la mejor | ver el texto que lo cita (campo `motor`) |
 | M-ca-bb4-bb5 | `node motor.mjs jugada "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Bb5" Bb4` | Bb4 +0.13, la mejor +0.27: es la mejor (pierde −14). | Se sostiene: "Saca tu alfil de f8 a b4". |
 | M-ca-bb4-be2 | `node motor.mjs jugada "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Be2" Bb4` | Bb4 +0.10, la mejor +0.07: pierde 3. Contra 8.Db3, `jugada "… e3 e6 Qb3" Bb4`: +0.03, es la mejor (−6). | Se sostiene. |
+| O-ge-a6 | `node motor.mjs jugada "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e4 b5 e5 Nd5 a4 e6 axb5" "a6" --prof 18` | Mueven: negras · profundidad 18 · mejor: -0.61  Nxc3 bxc3 cxb5 Ng5 Bb7 Qg4 h6 Ne4 · a6: +1.81  a6 Bxc4 Be7 O-O O-O Qc2 cxb5 Nxd5 · pierde 242 centipeones contra la mejor | ver el texto que lo cita (campo `motor`) |
+| O-ge-axb5 | `node motor.mjs mejores "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e4 b5 e5 Nd5 a4 e6 axb5" --prof 18 --n 3` | Mueven: negras · profundidad 18 · -0.98  Nxc3 bxc3 cxb5 Ng5 Bb7 Qh5 g6 Qh3 · -0.14  Bb4 Bd2 Bxc3 bxc3 cxb5 Ng5 Qe7 Be2 · +0.47  Nb6 Be2 cxb5 Nxb5 Bb7 O-O Be7 Bg5 | ver el texto que lo cita (campo `motor`) |
 | V-2e6 | chess.js: `new Chess()` con 1.d4 d5 2.c4 e6 y `moves({ square: "c8" })` | El alfil de c8 solo tiene d7 (con 2...c6, en cambio, tiene d7, e6, f5, g4 y h3). La prueba: tests/unit/curso-eslava.test.ts | Se sostiene: "solo le queda d7". |
 
 ## Lo que sostiene el mapa y los planes

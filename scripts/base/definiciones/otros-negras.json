@@ -206,18 +206,18 @@
     {
       "id": "curso-otras-hungara",
       "familia": "Apertura Húngara (1.g3)",
-      "nombre": "Apertura Húngara: Formación Eslava (3.Cf3 Ag4 4.0-0 Cd7 5.d3 Cgf6 6.Cbd2 e5)",
+      "nombre": "Apertura Húngara: Formación Eslava (3.Cf3 Cf6 4.0-0 Ag4 5.d3 Cbd7 6.Cbd2 e5)",
       "fila": {
         "eco": "A00",
         "name": "Hungarian Opening: Slav Formation",
         "pgn": "1. g3 d5 2. Bg2 c6"
       },
       "continuacion": {
-        "jugadas": "Nf3 Bg4 O-O Nd7 d3 Ngf6 Nbd2 e5",
+        "jugadas": "Nf3 Nf6 O-O Bg4 d3 Nbd7 Nbd2 e5",
         "fuente": [
           "Wikibooks, 1.Nf3 d5 (tabla: contra d3, ...Nbd7 y ...e5)",
           "partidas de lichess: 3.Cf3 es la más común tras 2...c6",
-          "motor: cada jugada de negras, la mejor o a 3 de la mejor; 5.d3 y 6.Cbd2 a 10 o menos de la mejor de blancas"
+          "motor: cada jugada de negras a 12 o menos de la mejor (3...Cf6 como en la Réti con 2.g3, la misma posición); 5.d3 a 5 y 6.Cbd2 empata con la mejor de blancas"
         ]
       },
       "lado": "negras",

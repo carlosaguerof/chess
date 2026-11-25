@@ -105,6 +105,7 @@
 "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2PP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -|e7e6":{"mejor":"e7e6","cpMejor":-24,"cpJugada":-24,"perdida":0,"profundidad":18},
 "rn1qkb1r/pp2pppp/2p2n2/3p4/2PP2b1/5NP1/PP2PPBP/RNBQK2R b KQkq -|e7e6":{"mejor":"e7e6","cpMejor":-11,"cpJugada":-11,"perdida":0,"profundidad":18},
 "rn1qkb1r/pp2pppp/2p2n2/3p4/3P2b1/5NP1/PPP1PPBP/RNBQ1RK1 b kq -|e7e6":{"mejor":"b8d7","cpMejor":-21,"cpJugada":-30,"perdida":9,"profundidad":18},
+"rn1qkb1r/pp2pppp/2p2n2/3p4/6b1/3P1NP1/PPP1PPBP/RNBQ1RK1 b kq -|b8d7":{"mejor":"b8d7","cpMejor":-17,"cpJugada":-17,"perdida":0,"profundidad":18},
 "rn1qkb1r/pp2pppp/2p2n2/4Nb2/P1pP4/2N5/1P2PPPP/R1BQKB1R b KQkq -|b8d7":{"mejor":"e7e6","cpMejor":-33,"cpJugada":-41,"perdida":8,"profundidad":18},
 "rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N1PN2/1P3PPP/R1BQKB1R b KQkq -|e7e6":{"mejor":"e7e6","cpMejor":-25,"cpJugada":-25,"perdida":0,"profundidad":18},
 "rn1qkb1r/pp3ppp/2p1pn2/3p1b2/2P5/3P1NP1/PP2PPBP/RNBQ1RK1 b kq -|d5c4":{"mejor":"d5c4","cpMejor":2,"cpJugada":2,"perdida":0,"profundidad":18},

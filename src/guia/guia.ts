@@ -178,7 +178,6 @@ export interface Ayuda {
 
 const PRINCIPIOS = 'Fuera de teoría: aquí ya no hay una línea de tu apertura. Plan de principios: desarrolla tus piezas, controla el centro y enroca.'
 
-/** Pista y Respuesta en mi turno: de mi repertorio; si no, de la base; si no, fuera de teoría. */
 /** ¿La línea es lección de un curso? (`esLeccionDeCurso`, con la variante de la base que dice su id: "b:otros-negras/curso-otras-hungara"). */
 const esLeccion = (l: LineaRepertorio) => esLeccionDeCurso(l.apertura, l.color, l.id.slice(l.id.indexOf('/') + 1))
 
@@ -196,6 +195,7 @@ function siguientesConLeccionPrimero(ctx: Contexto, historia: string[]) {
 /** ¿La línea llegó a esta posición por las mismas jugadas de la partida (y no por transposición)? */
 const mismoOrden = (l: LineaRepertorio, historia: string[]) => historia.every((s, i) => l.jugadas[i] === s)
 
+/** Pista y Respuesta en mi turno: de mi repertorio; si no, de la base; si no, fuera de teoría. */
 export function ayudaEnMiTurno(ctx: Contexto, historia: string[]): Ayuda {
   const ply = historia.length
   const deRep = siguientesConLeccionPrimero(ctx, historia)
