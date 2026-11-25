@@ -4,6 +4,7 @@ import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras
 import eslava from '../../conocimiento/cursos/eslava.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
+import type { Repertorio } from '../repertorio/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
 import { componerCurso } from './capas.ts'
 import type { CapaCurso, DatosCurso, JugadaMia, JugadaRival, LineaCurso, VarianteCurso } from './tipos.ts'
@@ -92,11 +93,31 @@ export function grupoDeLinea(c: DatosCurso, l: LineaCurso): LineaCurso[] {
 }
 
 /** Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual. */
+/**
+ * Las lecciones del Repaso: las variantes que cuentan para terminar el curso. Las opcionales no salen en el Repaso ni en
+ * Refuerza (orden de Carlos, 2026-11-25); lo guardado de ellas no se borra: queda en el teléfono y en el Respaldo.
+ */
 export function leccionesDe(c: DatosCurso): Leccion[] {
-  return c.variantes.map((v) => {
+  return obligatorias(c).map((v) => {
     const b = BASE.aperturas.find((x) => x.id === c.apertura)!.variantes.find((x) => x.id === v.base)!
     return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco }
   })
+}
+
+/**
+ * Lo que repasa Refuerza: en un curso con `secciones`, solo las líneas de sus lecciones obligatorias (las opcionales no
+ * salen en el Repaso ni en Refuerza: orden de Carlos, 2026-11-25). Una jugada que una opcional comparte con una obligatoria
+ * sigue saliendo, porque es la misma jugada. Los cursos sin `secciones` no cambian.
+ */
+export function soloObligatorias(rep: Repertorio): Repertorio {
+  return {
+    ...rep,
+    lineas: rep.lineas.filter((l) => {
+      const c = CURSOS_NUEVOS[`${l.apertura}:${l.color}`]
+      if (!c?.secciones) return true
+      return obligatorias(c).some((v) => l.claveBase === `${c.apertura}/${v.base}`)
+    }),
+  }
 }
 
 const clave = (jugadas: string[], hasta: number) => jugadas.slice(0, hasta).join(' ')
