@@ -230,7 +230,7 @@
      "subtitulo": "La clavada",
      "texto": [
       "La dama de negras está en a5. Cuando juegas d4, tu caballo de c3 queda clavado: si se moviera, la dama daría jaque a tu rey.",
-      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Contra ...Ag4, h3. Contra ...Cc6, d5 echa al caballo.",
+      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Contra ...Ag4, h3. Si en su cuarta jugada negras saca ...Cc6, d5 echa al caballo.",
       "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu alfil en c4 apoyándolo, y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3."
      ],
      "tablero": {
@@ -442,7 +442,7 @@
      "subtitulo": "El centro grande",
      "texto": [
       "Negras recupera el peón con el caballo. Tu peón del centro es d4; después le sumas uno en c4, y negras ya no tiene peón en la columna d.",
-      "Tu plan: d4 y Cf3; después c4 echa al caballo de d5, y tus peones de c4 y d4 quedan juntos, dominando el centro. Negras presiona d4 con sus piezas: mantenlo defendido. Si un caballo de negras va a c6, d5 lo echa."
+      "Tu plan: d4 y Cf3; después c4 echa al caballo de d5, y tus peones de c4 y d4 quedan juntos, dominando el centro. Negras presiona d4 con sus piezas: mantenlo defendido. Con tus piezas fuera y tu rey enrocado, si un caballo de negras va a c6, d5 lo echa."
      ],
      "tablero": {
       "jugadas": [
