@@ -280,8 +280,10 @@ test.describe('Nota 1 · "cómo funciona" con ⓘ en Repaso de hoy y en Refuerza
   })
 
   test('en el Repaso de hoy, con una línea que toca: el ⓘ va arriba de la lección', async ({ page }, info) => {
+    // una obligatoria de la Caro-Kann ("avance-short", el id de antes, la migración lo pasa a la avance-c3, que es opcional
+    // y ya no sale en el Repaso: specs/cursos.md §6)
     await page.addInitScript((fecha) => {
-      if (!localStorage.getItem('ajedrez.v1.progreso')) localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'caro-kann:b/b:caro-kann/avance-short': { fecha } }))
+      if (!localStorage.getItem('ajedrez.v1.progreso')) localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'caro-kann:b/b:caro-kann/curso-avance-short': { fecha } }))
     }, Date.now() - 3 * 86_400_000)
     await page.goto('/#/repaso')
     await expect(page.getByTestId('leccion-pantalla')).toBeVisible()

@@ -284,6 +284,41 @@ test.describe('El curso por estructuras', () => {
     await expect(page.getByTestId('nombre-linea')).toHaveText(new RegExp(`^(${escapar(mostrarTexto(v.nombre, 'figuras'))}|${escapar(mostrarTexto(w.nombre, 'figuras'))})$`))
   })
 
+  test('las opcionales no salen en el Repaso ni en Refuerza; lo guardado se queda', async ({ page }) => {
+    await page.clock.setFixedTime(MANANA)
+    const id = (v: string) => leccionIdDe(ACTUAL, ACTUAL.variantes.find((x) => x.id === v)!)
+    const ayer = HOY.getTime()
+    const fen = (camino: string[]) => {
+      const ch = new Chess()
+      for (const s of camino) ch.move(s)
+      return ch.fen().split(' ').slice(0, 4).join(' ')
+    }
+    const fallo = (camino: string[], esperada: string) => ({ fen: fen(camino), esperada, resultado: 'fallo', lugar: 'curso', fecha: ayer, linea: 'x', camino })
+    // como lo dejó el curso de antes: la Tal (opcional) y el Cambio (obligatoria) aprendidas, y un fallo solo de la Tal
+    const progreso = { [id('avance-tal')]: { fecha: ayer }, [id('cambio')]: { fecha: ayer } }
+    const registro = [fallo(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'], 'h5')]
+    await page.goto('/#/')
+    await page.evaluate(([p, r]) => {
+      localStorage.setItem('ajedrez.v1.progreso', p)
+      localStorage.setItem('ajedrez.v1.registro', r)
+    }, [JSON.stringify(progreso), JSON.stringify(registro)] as const)
+    await page.reload()
+    await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
+    await expect(page.getByTestId('ir-refuerza')).toHaveAttribute('data-n', '0')
+    await page.goto('/#/repaso')
+    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(ACTUAL.variantes.find((x) => x.id === 'cambio')!.nombre, 'figuras'))
+    await page.goto('/#/refuerza')
+    await expect(page.getByTestId('refuerza-vacia')).toBeVisible()
+    // un fallo en una obligatoria sí sale
+    await page.evaluate((r) => localStorage.setItem('ajedrez.v1.registro', r), JSON.stringify([...registro, fallo(['e4', 'c6', 'd4', 'd5', 'e5'], 'Bf5')]))
+    await page.goto('/#/')
+    await page.reload()
+    await expect(page.getByTestId('ir-refuerza')).toHaveAttribute('data-n', '1')
+    // nada se borró
+    expect(Object.keys(await leido(page, 'ajedrez.v1.progreso')).sort()).toEqual(Object.keys(progreso).sort())
+    expect(await leido(page, 'ajedrez.v1.registro')).toHaveLength(2)
+  })
+
   test('una opcional no entra al Repaso', async ({ page }, info) => {
     test.setTimeout(120_000)
     await page.clock.setFixedTime(HOY)

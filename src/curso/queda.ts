@@ -3,7 +3,8 @@
  * la de estructuras; `specs/cursos.md` §6). El de antes sigue en el repo: sus datos son la base de la capa, sus
  * lecciones siguen siendo las fichas de Repaso de esas líneas, y lo que llevaba guardado no se toca. En Aprender, su
  * tarjeta abre el que queda; su dirección lleva al que queda; y una lección que terminé en él sale hecha en el que queda
- * (`leerAvance`). Para regresar a las dos tarjetas basta con quitarlo de aquí.
+ * (`leerAvance`). Para regresar a las dos tarjetas: quitarlo de aquí y regresar la segunda tarjeta en `cursos()`
+ * (`src/cursos/datos.ts`, que hoy no la agrega).
  */
 export const CURSO_QUE_QUEDA: Record<string, string> = {
   'caro-kann:b': 'caro-kann-estructuras:b',

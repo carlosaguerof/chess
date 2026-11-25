@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { caminoQueQueda, CURSOS_NUEVOS, grupoDeLinea, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { caminoQueQueda, CURSOS_NUEVOS, grupoDeLinea, sinOpcionales, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -14,6 +14,8 @@ import { cursoActivo } from '../../src/aprender/interruptores.ts'
 import { lineasDe as lineasDeFavorita, repertorioCompleto } from '../../src/aprender/favoritas.ts'
 import type { AvanceCurso } from '../../src/curso/avance.ts'
 import { cursoQueQueda } from '../../src/curso/queda.ts'
+import { jugadasFalladas } from '../../src/registro/refuerza.ts'
+import { fenCorto } from '../../src/registro/registro.ts'
 import type { CapaCurso, LineaCurso, PaginaLeer } from '../../src/curso/tipos.ts'
 
 /**
@@ -546,3 +548,54 @@ describe('Una sola Caro-Kann · el avance de antes cuenta', () => {
     expect(leerAvance('caro-kann-estructuras:b').variantes).toEqual({ 'avance-short': { aprendida: 1, terminada: 2 } })
   })
 })
+
+describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refuerza', () => {
+  const caroKann = () => cursos().find((c) => c.id === 'caro-kann:b')!
+  const fen = (camino: string[]) => {
+    const ch = new Chess()
+    for (const s of camino) ch.move(s)
+    return fenCorto(ch.fen())
+  }
+  const fallo = (camino: string[], esperada: string) => ({ fen: fen(camino), esperada, resultado: 'fallo' as const, lugar: 'curso' as const, fecha: 1, linea: 'x', camino })
+
+  it('en cursos(), las 16 lecciones siguen (mismo orden e ids) y las 8 opcionales van marcadas', () => {
+    const ls = caroKann().lecciones
+    expect(ls).toHaveLength(16)
+    const marcadas = ls.filter((l) => l.opcional).map((l) => l.id).sort()
+    expect(marcadas).toEqual(opcionales(nuevo).map((v) => leccionIdDe(nuevo, v)).sort())
+  })
+
+  it('el Repaso no saca una opcional, aunque tenga su ficha guardada; una obligatoria, sí', () => {
+    const ls = cursos().flatMap((c) => c.lecciones)
+    const tal = leccionIdDe(nuevo, nuevo.variantes.find((v) => v.id === 'avance-tal')!)
+    const cambio = leccionIdDe(nuevo, nuevo.variantes.find((v) => v.id === 'cambio')!)
+    const ayer = new Date(`${sumarDias(dia(), -1)}T12:00:00`).getTime()
+    const hechas = { [tal]: { fecha: ayer }, [cambio]: { fecha: ayer } }
+    const fichas = { [tal]: { escalon: 2, proxima: dia() } }
+    expect(paraHoy(fichas, hechas, ls, dia()).map((l) => l.id)).toEqual([cambio])
+    // nada se borra: la ficha y lo aprendido siguen ahí
+    expect(fichas[tal]).toEqual({ escalon: 2, proxima: dia() })
+    expect(Object.keys(hechas)).toContain(tal)
+  })
+
+  it('Refuerza: de la Caro-Kann, solo las líneas de las 8 obligatorias; lo demás y la guía, igual', () => {
+    const todo = repertorioCompleto()
+    const rep = sinOpcionales(todo)
+    const ck = (r: typeof todo) => r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.id)
+    expect(ck(rep).sort()).toEqual(obligatorias(nuevo).map((v) => `b:caro-kann/${v.base}`).sort())
+    expect(rep.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b'))).toEqual(todo.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b')))
+    // la guía y los bots siguen con todo
+    expect(ck(todo).length).toBeGreaterThan(ck(rep).length)
+    expect(repertorioCompleto().lineas).toHaveLength(todo.lineas.length)
+  })
+
+  it('Refuerza: un fallo en una jugada que solo está en una opcional no sale; uno en una obligatoria, sí', () => {
+    const soloTal = fallo(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'], 'h5')
+    const deLaBase = fallo(['e4', 'c6', 'd4', 'd5', 'e5'], 'Bf5')
+    const rep = sinOpcionales(repertorioCompleto())
+    expect(jugadasFalladas(repertorioCompleto(), [soloTal]).map((j) => j.esperada), 'antes salía').toEqual(['h5'])
+    expect(jugadasFalladas(rep, [soloTal])).toEqual([])
+    expect(jugadasFalladas(rep, [soloTal, deLaBase]).map((j) => j.esperada)).toEqual(['Bf5'])
+  })
+})
+

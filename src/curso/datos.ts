@@ -6,6 +6,7 @@ import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
 import { componerCurso } from './capas.ts'
 import { cursoQueQueda } from './queda.ts'
+import type { Repertorio } from '../repertorio/modelo.ts'
 import type { CapaCurso, DatosCurso, JugadaMia, JugadaRival, LineaCurso, VarianteCurso } from './tipos.ts'
 
 const caroKannCurso = caroKann as unknown as DatosCurso
@@ -146,4 +147,16 @@ export function misJugadas(l: Pick<LineaCurso, 'jugadas' | 'desde' | 'lado'>): n
   const r: number[] = []
   for (let i = l.desde; i < l.jugadas.length; i++) if ((i % 2 === 0 ? 'w' : 'b') === l.lado) r.push(i)
   return r
+}
+
+/**
+ * El repertorio de Refuerza: de un curso que se ve y tiene opcionales, solo las líneas de sus lecciones obligatorias
+ * (Carlos, pendientes de la Caro-Kann, n.º 8, "Su orden", punto 2). Lo demás no cambia, y la guía en la partida y los
+ * bots siguen con el repertorio completo. El registro no se toca: lo fallado en una opcional se queda guardado.
+ */
+export function sinOpcionales(rep: Repertorio): Repertorio {
+  const visibles = Object.values(CURSOS_NUEVOS).filter((c) => !cursoQueQueda(c.id) && c.secciones?.some((s) => s.opcional))
+  if (visibles.length === 0) return rep
+  const deCurso = new Map(visibles.map((c) => [`${c.apertura}:${c.color}`, new Set(obligatorias(c).map((v) => `${c.color}:${c.apertura}/${v.base}`))]))
+  return { ...rep, lineas: rep.lineas.filter((l) => deCurso.get(`${l.apertura}:${l.color}`)?.has(l.id) ?? true) }
 }

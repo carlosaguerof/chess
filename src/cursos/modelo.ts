@@ -17,6 +17,11 @@ export interface Leccion {
   jugadas: string[]
   ingles?: string
   eco?: string
+  /**
+   * Una lección opcional del curso que se ve (`specs/cursos.md` §6): no sale en el Repaso. Su ficha guardada no se
+   * borra, solo deja de salir (Carlos, pendientes de la Caro-Kann, n.º 8, "Su orden", punto 2).
+   */
+  opcional?: boolean
 }
 
 export interface Curso {
