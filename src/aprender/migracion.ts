@@ -94,27 +94,22 @@ export function migrarAlCursoCaroKann(): void {
 
 /**
  * Los cursos del Avance (2026-11-25), contra la Caro-Kann y contra la Francesa, pasan a la lección nueva por estructuras.
- * Cada lección vieja tiene su lección nueva de la misma línea (la misma fila de la base, ahora con su continuación):
- * lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. El avance del curso nuevo empieza en cero.
+ * Cada lección vieja que sigue siendo obligatoria tiene su lección nueva de la misma línea (la misma fila de la base, ahora
+ * con su continuación): lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. Las de tus otras cuartas
+ * jugadas contra la Caro-Kann (4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2) ya no son lecciones (`specs/cursos.md` §1, nota 3 del
+ * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. El avance del curso nuevo
+ * empieza en cero.
  */
 export const LECCIONES_AVANCE: Record<string, Record<string, string>> = {
   'caro-kann:w/w:caro-kann/': {
     'avance-short': 'avance-curso-short',
-    'avance-short-cf3': 'avance-curso-short-cf3',
-    'avance-van-der-wiel': 'avance-curso-van-der-wiel',
-    'avance-tal': 'avance-curso-tal',
-    'avance-bayoneta': 'avance-curso-bayoneta',
-    'avance-bronstein': 'avance-curso-bronstein',
     'avance-botvinnik-carls': 'avance-curso-botvinnik-carls',
   },
+  // las que pasan a opcionales (Lputian, Euwe, Wade y 3...Ad7) no se mudan: una opcional no sale en el Repaso (nota 6)
   'francesa:w/w:francesa/': {
     'avance-c3': 'curso-avance-c3',
     paulsen: 'curso-paulsen',
     'principal-a3': 'curso-principal-a3',
-    lputian: 'curso-lputian',
-    euwe: 'curso-euwe',
-    wade: 'curso-wade',
-    'cambio-de-alfil': 'curso-cambio-de-alfil',
   },
 }
 

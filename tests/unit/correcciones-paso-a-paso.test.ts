@@ -27,7 +27,9 @@ const escrita = (frase: string, sanEs: string) => new RegExp(`(^|[^A-Za-zÁÉÍ�
 describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('La idea, las dos páginas de La estructura, las dos del Repaso y los 16 planes traen su paso a paso', () => {
     // en el curso por estructuras, La estructura trae cinco páginas: El mapa, las cuatro estructuras
-    expect(TODOS).toHaveLength(1 + (c.secciones ? 5 : 2) + 2 + 16)
+    if ((c.fichasDe ?? c.id) === 'caro-kann:b') expect(TODOS).toHaveLength(1 + (c.secciones ? 5 : 2) + 2 + 16)
+    // en los demás cursos: cada página de leer y cada plan
+    else expect(TODOS).toHaveLength(c.piezas.idea.paginas.length + c.piezas.estructura.paginas.length + c.piezas.repaso.paginas.length + c.variantes.length)
     for (const t of TODOS) expect(t.pa?.pasos.length ?? 0, t.nombre).toBeGreaterThanOrEqual(3)
   })
 

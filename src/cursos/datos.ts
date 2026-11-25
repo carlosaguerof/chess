@@ -1,7 +1,7 @@
 import { BASE } from '../base/base.ts'
 import { cursoActivo } from '../aprender/interruptores.ts'
 import { cursosDeLaBase, type Curso } from './modelo.ts'
-import { cursoNuevo, cursosQueSalenDe, leccionesDe } from '../curso/datos.ts'
+import { cursoNuevo, cursosQueSalenDe, esOpcional, leccionesDe } from '../curso/datos.ts'
 
 let todos: Curso[] | null = null
 
@@ -18,7 +18,9 @@ export function cursos(): Curso[] {
       // un curso que sale de otro no es una apertura de la base: su tarjeta va justo después de la del curso de origen.
       // Va sin lecciones: las fichas de esas líneas son las del curso de origen, y así ninguna sale dos veces en el
       // Repaso, en el inicio ni en "Practicar esta línea" (`specs/cursos.md` §6)
-      return [n ? { ...c, lecciones: leccionesDe(n) } : c, ...cursosQueSalenDe(c.id).map((x) => ({ ...c, id: x.id, nombre: x.nombre, lecciones: [] }))]
+      // una opcional no sale en el Repaso (nota 6 del 2026-11-25: "que solo lo obligatorio salga en Repaso y Refuerza")
+      const lecciones = n ? leccionesDe(n).filter((_, i) => !esOpcional(n, n.variantes[i]!.id)) : []
+      return [n ? { ...c, lecciones } : c, ...cursosQueSalenDe(c.id).map((x) => ({ ...c, id: x.id, nombre: x.nombre, lecciones: [] }))]
     })
   return todos
 }

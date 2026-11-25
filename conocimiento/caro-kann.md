@@ -352,7 +352,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Sostienes la cadena d4-e5 con c3 y te desarrollas con Cf3, Ae2 y 0-0, el mismo esquema que contra la Francesa. Si negras cambia en d4, retomas con el peón de c.
 - Fuente: B12 · Caro-Kann Defense: Advance, Short Variation
-- Sigue la fila de la fuente desde la media jugada 10 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43).
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena); motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43).
 
 ### Variante del Avance: Defensa Botvinnik-Carls (4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0)
 
@@ -361,49 +361,4 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Negras golpea d4 de inmediato con 3...c5. Lo sostienes con c3 y Cf3; si cambia en d4, retomas con el peón de c y defiendes d4 con piezas.
 - Fuente: B12 · Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense
-- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Investigación del porqué §3.5 (el esqueleto c3, Cf3, Ae2, 0-0); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp.
-
-### Variante del Avance: Short (4.Cf3 e6 5.Ae2 Cd7 6.0-0 Ae7 7.c3)
-
-**1.e4 c6 2.d4 d5 3.e5 Af5 4.Cf3 e6 5.Ae2 Cd7 6.0-0 Ae7 7.c3**
-
-- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Desarrollas con Cf3, Ae2 y 0-0 y pones c3 detrás de d4: llegas a la cadena entera por otro orden.
-- Fuente: B12 · Caro-Kann Defense: Advance Variation, Short Variation
-- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 3...Af5 4.Cf3 (4...e6, 5.Ae2); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ae2 la mejor (+0.27), 6.0-0 la mejor (+0.48), 6...Ae7 la mejor, 7.c3 a 1 cp.
-
-### Variante del Avance: Ataque Van der Wiel (7...h5 8.Cf4 Ah7 9.Cxh5 Cc6 10.dxc5)
-
-**1.e4 c6 2.d4 d5 3.e5 Af5 4.Cc3 e6 5.g4 Ag6 6.Cge2 c5 7.h4 h5 8.Cf4 Ah7 9.Cxh5 Cc6 10.dxc5 Axc5**
-
-- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Persigues al alfil de f5 con g4 y h4. Contra 7...h5, el caballo va a f4 y se come el peón de h5.
-- Fuente: B12 · Caro-Kann Defense: Advance Variation, Van der Wiel Attack
-- Sigue la fila de la fuente desde la media jugada 14 con teoría de: Wikibooks, 3...Af5 (7.h4 amenaza h5; la defensa 7...h5); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 8.Cf4 la mejor (+0.07; las demás −0.68 o peor), 9.Cxh5 la mejor, 10.dxc5 la mejor (−0.01).
-
-### Variante del Avance: Variante Tal (4...h5 5.Ad3 Axd3 6.Dxd3 e6 7.Cf3 Da5+ 8.Cbd2)
-
-**1.e4 c6 2.d4 d5 3.e5 Af5 4.h4 h5 5.Ad3 Axd3 6.Dxd3 e6 7.Cf3 Da5+ 8.Cbd2**
-
-- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Empujas h4 contra el alfil de f5; negras frena con ...h5 y cambias los alfiles con Ad3. Después, Cf3 y el desarrollo.
-- Fuente: B12 · Caro-Kann Defense: Advance Variation, Tal Variation
-- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 3...Af5 4.h4 (4...h5 5.Ad3); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ad3 a 3 cp de la mejor, 7.Cf3 la mejor (+0.31), 7...Da5+ la mejor, 8.Cbd2 la mejor (+0.44).
-
-### Variante del Avance: Ataque Bayoneta (4...Ae4 5.f3 Ag6 6.h4 h5 7.Ce2 e6 8.Cf4 Ah7 9.Cxh5)
-
-**1.e4 c6 2.d4 d5 3.e5 Af5 4.g4 Ae4 5.f3 Ag6 6.h4 h5 7.Ce2 e6 8.Cf4 Ah7 9.Cxh5**
-
-- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Echas al alfil con g4 y f3, y con h4 y el caballo por e2 y f4 vas contra el peón de h5.
-- Fuente: B12 · Caro-Kann Defense: Advance Variation, Bayonet Attack
-- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 3...Af5 4.g4 (4...Ae4 5.f3 Ag6); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.h4 a 4 cp de la mejor, 7.Ce2 la mejor, 8.Cf4 la mejor (+0.08), 9.Cxh5 la mejor (+0.12).
-
-### Variante del Avance: Variante Bronstein (4...e6 5.Cg3 Ag6 6.c3 c5 7.Ad3 Cc6 8.0-0)
-
-**1.e4 c6 2.d4 d5 3.e5 Af5 4.Ce2 e6 5.Cg3 Ag6 6.c3 c5 7.Ad3 Cc6 8.0-0**
-
-- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El caballo va por e2 a g3 contra el alfil; después c3, Ad3 y 0-0 para sostener d4.
-- Fuente: B12 · Caro-Kann Defense: Advance Variation, Bronstein Variation
-- Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 3...Af5 (4.Ce2 y Cg3 contra el alfil); motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.c3 a 9 cp de la mejor, 7.Ad3 la mejor (+0.03), 8.0-0 la mejor.
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, 3...c5 (contra ...c5, retomar en d4 con un peón); motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp.
