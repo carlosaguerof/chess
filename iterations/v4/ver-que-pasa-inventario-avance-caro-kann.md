@@ -9,7 +9,7 @@
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
 | 6.♘f3 | porque | No cambies en c5: el alfil de negras retoma sacando una pieza y tu peón de e5 se queda sin su base. | 6.dxc5 6...♗xc5 | Aprender y Practicar |
-| 8.♘bd2 | porque | Si negras cambia en f3, este caballo retoma y d4 queda bien defendido. | 8...♗xf3 9.♘xf3 | Aprender y Practicar |
+| 8.♘bd2 | porque | Tapa a tu dama un momento, pero si negras cambia en f3, este caballo retoma y d4 queda bien defendido. | 8...♗xf3 9.♘xf3 | Aprender y Practicar |
 | 5.♘f3 | porque | No saques el alfil a d3: taparía a tu dama, y negras cambiaría en d4 para ganarte el peón. | 5.♗d3 5...cxd4 6.cxd4 6...♘xd4 | solo Aprender |
 | 7.♗e2 | porque | No lo saques a d3: taparía a tu dama, y negras cambiaría en f3 para comerse d4. | 7.♗d3 7...♗xf3 8.♕xf3 8...♘xd4 | Aprender y Practicar |
 

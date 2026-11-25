@@ -21,7 +21,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e6 2.d4 d5 3.e5 c5 4.c3 Cc6 5.Cf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La posición base del Avance: negras presiona d4 con ...c5 y ...Cc6, y tú lo defiendes con c3 y Cf3. Si su caballo va por e7 a f5, suma un defensor antes de enrocar (tu caballo de b1 por a3 a c2); si negras suma ...Db6, a3 y b4 te dan espacio en el flanco de dama.
+- Plan *(redactado por la IA)*: La posición base del Avance: negras presiona d4 con ...c5 y ...Cc6, y tú lo defiendes con c3 y Cf3. Si su caballo va por e7 a f5, suma un defensor antes de enrocar (tu caballo de b1 por a3 a c2); si negras suma ...Db6, a3 prepara b4 para ganar espacio en el flanco de dama (si negras cierra con ...c4, b4 todavía no: lo captura al paso).
 - Fuente: C02 · French Defense: Advance Variation, Paulsen Attack
 
 ### Variante del Avance: línea principal
@@ -37,7 +37,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e6 2.d4 d5 3.e5 c5 4.c3 Cc6 5.Cf3 Db6 6.a3 Ch6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: ...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.
+- Plan *(redactado por la IA)*: ...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2. Contra el caballo de f5: si negras ya jugó ...Ae7, tu alfil va a d3; si no, échalo con g4. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.
 - Fuente: C02 · French Defense: Advance Variation, Lputian Variation
 
 ### Variante del Avance: Variante Euwe
@@ -96,7 +96,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e6 2.d4 d5 3.e5 c5 4.c3 Cc6 5.Cf3 Db6 6.a3 Ch6 7.b4 cxd4 8.cxd4 Cf5 9.Ab2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con b4 y Ab2 defiendes d4 sin dejar colgado el peón de b2. No tomes el caballo de h6 con el alfil: ...Dxb2.
+- Plan *(redactado por la IA)*: Con b4 y Ab2 defiendes d4 sin dejar colgado el peón de b2. En la jugada 7, no tomes el caballo de h6 con el alfil: ...Dxb2.
 - Fuente: C02 · French Defense: Advance Variation, Lputian Variation
 - Sigue la fila de la fuente desde la media jugada 13 con teoría de: Wikibooks, 5...Db6 6.a3 (b4 libera al alfil de c1); motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-francesa.md): 7.b4 a 15 cp de la mejor, 7...cxd4 y 8...Cf5 las de su línea, 9.Ab2 la mejor (+0.26).
 

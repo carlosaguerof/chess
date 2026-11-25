@@ -137,7 +137,7 @@ test.describe('Los cursos del Avance', () => {
       await vuelta(page, info, l, 'plan')
       await expect(page.getByTestId('narracion')).toContainText(mostrarTexto(l.variante!.plan.tuyo, 'figuras').split('. ')[0]!)
       // juegas con blancas: el plan del rival es "El de negras:" (nunca "El de blancas:")
-      await expect(page.getByTestId('narracion')).toContainText(`El de negras:${mostrarTexto(l.variante!.plan.rival, 'figuras').split('. ')[0]!}`)
+      await expect(page.getByTestId('narracion')).toContainText(`El de negras: ${mostrarTexto(l.variante!.plan.rival, 'figuras').split('. ')[0]!}`)
       await expect(page.getByTestId('narracion')).not.toContainText('El de blancas:')
       await page.getByTestId('a-practicar').click()
       await momento(page, 'intro')

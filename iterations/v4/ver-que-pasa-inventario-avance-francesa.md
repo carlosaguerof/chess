@@ -11,10 +11,10 @@
 | 4.c3 | prepara | Si cambiaras tú en c5, soltarías tu centro: el alfil de negras retoma y tu peón de e5 se queda sin su base. | 4.dxc5 4...♗xc5 | Aprender y Practicar |
 | 5.cxd4 | porque | Si retomaras con la dama, el caballo de negras la atacaría desde c6 y negras ganaría un tiempo. | 5.♕xd4 5...♘c6 | Aprender y Practicar |
 | 8.♘c3 | cuidado | Si la dama de negras va a b6, d4 tendrá tres atacantes y dos defensores: échala con tu caballo desde a4. | 8...♕b6 9.♘a4 9...♕d8 | Aprender y Practicar |
-| 5.♘f3 | porque | No saques el alfil a d3: taparía a tu dama, y negras cambiaría en d4 para ganarte el peón. | 5.♗d3 5...cxd4 6.cxd4 6...♘xd4 | Aprender; en Practicar, solo en 5...♘ge7 (Paulsen), 5...♕b6 6.a3 (línea principal) |
+| 5.♘f3 | porque | No saques el alfil a d3: taparía a tu dama, y negras cambiaría en d4 para ganarte el peón. | 5.♗d3 5...cxd4 6.cxd4 6...♘xd4 | Aprender; en Practicar, solo en 5...♘ge7 (Paulsen), 5...♕b6 (línea principal) |
 | 6.a3 | prepara | Si negras no cierra con ...c4 y saca su caballo a e7, ♗e2 todavía no: tras ...cxd4 y ...♘f5, tres piezas atacarían d4 y solo dos lo defenderían. | 6...♘ge7 7.♗e2 7...cxd4 8.cxd4 8...♘f5 | solo Aprender |
 | 6.a3 | cuidado | No saques todavía el alfil de c1: la dama de negras se comería tu peón de b2 y después tu torre. | 6.♗e3 6...♕xb2 7.dxc5 7...♕xa1 | Aprender y Practicar |
-| 7.b4 | cuidado | No tomes el caballo de h6 con tu alfil: la dama de negras se come tu peón de b2 y negras recupera la pieza. | 7.♗xh6 7...♕xb2 8.♘bd2 8...gxh6 | Aprender y Practicar |
+| 7.b4 | cuidado | En vez de b4, no tomes el caballo de h6 con tu alfil: la dama de negras se comería tu peón de b2 y recuperaría la pieza. | 7.♗xh6 7...♕xb2 8.♘bd2 8...gxh6 | Aprender y Practicar |
 | 6.♗xb5+ | cuidado | Si negras tapa con ...c6, tienes una pieza de más y tu alfil sigue atacado: retíralo a a4. | 6...c6 7.♗a4 | Aprender y Practicar |
 
 ## Sin "Ver"
@@ -42,7 +42,7 @@
 | 8.♗e2 | porque | Desde e2 no estorba a ninguna pieza tuya. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8.♗e2 | prepara | Ya puedes poner tu rey a salvo. | lo que dice se juega en las jugadas que siguen de la línea |
 | 9.0-0 | porque | Ningún peón de negras ataca d4, y tu peón de c3 y tu caballo de f3 lo defienden contra la dama de b6: puedes enrocar. | explica la jugada que ya está en la línea, sin una alternativa |
-| 7.b4 | porque | Tu alfil de c1 ya no tiene que cuidar el peón de b2: ahora está en b4, defendido por tus peones de a3 y c3. | explica la jugada que ya está en la línea, sin una alternativa |
+| 7.b4 | porque | Tu alfil de c1 ya no tiene que cuidar b2: tu peón está ahora en b4, defendido por tus peones de a3 y c3. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.b4 | prepara | Tu alfil podrá salir a defender d4 desde b2. | lo que dice se juega en las jugadas que siguen de la línea |
 | 8.cxd4 | porque | Ahora estás en la base sola: ningún peón defiende d4, y lo sostienen tus piezas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 9.♗b2 | porque | Ahora son tres defensores, el alfil, el caballo de f3 y tu dama, contra tres atacantes. | explica la jugada que ya está en la línea, sin una alternativa |
@@ -55,7 +55,7 @@
 | 6.♗e2 | porque | Si negras lo cambia, retomas y sigues desarrollándote. | lo que dice se juega en las jugadas que siguen de la línea |
 | 6.♗e2 | prepara | Ya puedes poner tu rey a salvo. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.0-0 | porque | Si negras cambia en e2, retomas con la dama sin perder tiempo. | lo que dice se juega en las jugadas que siguen de la línea |
-| 8.♕xe2 | porque | Negras cambió su alfil encerrado, pero tú conservas la cadena c3-d4-e5 y más espacio. | explica la jugada que ya está en la línea, sin una alternativa |
+| 8.♕xe2 | porque | Negras cambió su alfil encerrado, pero tú conservas tu cadena y más espacio. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8.♕xe2 | prepara | Siguen tu caballo de b1 y tu alfil de c1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.c3 | porque | Cuando negras golpee con ...c5, ya tienes un peón para retomar en d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.♗xb5+ | porque | Así negras tiene que retomar enseguida y tú ya puedes enrocar. | lo que dice se juega en las jugadas que siguen de la línea |

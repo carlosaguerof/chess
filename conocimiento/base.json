@@ -2564,7 +2564,7 @@
       "Nf3"
      ],
      "lado": "blancas",
-     "plan": "La posición base del Avance: negras presiona d4 con ...c5 y ...Cc6, y tú lo defiendes con c3 y Cf3. Si su caballo va por e7 a f5, suma un defensor antes de enrocar (tu caballo de b1 por a3 a c2); si negras suma ...Db6, a3 y b4 te dan espacio en el flanco de dama.",
+     "plan": "La posición base del Avance: negras presiona d4 con ...c5 y ...Cc6, y tú lo defiendes con c3 y Cf3. Si su caballo va por e7 a f5, suma un defensor antes de enrocar (tu caballo de b1 por a3 a c2); si negras suma ...Db6, a3 prepara b4 para ganar espacio en el flanco de dama (si negras cierra con ...c4, b4 todavía no: lo captura al paso).",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2629,7 +2629,7 @@
       "Nh6"
      ],
      "lado": "blancas",
-     "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2, lleva el alfil a d3 para vigilar f5 y enroca. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.",
+     "plan": "...Ch6 quiere ir a f5 para atacar d4 una vez más. Refuerza d4 con b4 y Ab2. Contra el caballo de f5: si negras ya jugó ...Ae7, tu alfil va a d3; si no, échalo con g4. No tomes el caballo con 7.Axh6: tras 7...Dxb2 negras se come tu peón de b2 y recupera la pieza.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2886,7 +2886,7 @@
       "Bb2"
      ],
      "lado": "blancas",
-     "plan": "Con b4 y Ab2 defiendes d4 sin dejar colgado el peón de b2. No tomes el caballo de h6 con el alfil: ...Dxb2.",
+     "plan": "Con b4 y Ab2 defiendes d4 sin dejar colgado el peón de b2. En la jugada 7, no tomes el caballo de h6 con el alfil: ...Dxb2.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
