@@ -50,7 +50,7 @@ const TABLA: Record<string, { forma: string; seccion: string; pct: [number | nul
   'caro-kann:w/c5': { forma: SOLA, seccion: 'base', pct: [21.8, 29.5] },
   'francesa:w/cambio-d4': { forma: SOLA, seccion: 'base', pct: [7.5, 6.5] },
   'francesa:w/cge7': { forma: ENTERA, seccion: 'base', pct: [0, 3.7] },
-  'francesa:w/principal': { forma: CERRADA, seccion: 'frecuentes', pct: [9.3, 15.7] },
+  'francesa:w/principal': { forma: CERRADA, seccion: 'frecuentes', pct: [9.3, 10.8] },
   'francesa:w/lputian': { forma: SOLA, seccion: 'opcional', pct: [0, 0] },
   'francesa:w/euwe': { forma: SOLA, seccion: 'opcional', pct: [0, 1.7] },
   'francesa:w/wade': { forma: ENTERA, seccion: 'opcional', pct: [0, 0.7] },

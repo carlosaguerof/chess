@@ -458,7 +458,7 @@
       "idea": "Negras saca su alfil antes de ...e6; tú sostienes d4 con el esqueleto de siempre y cuentas atacantes y defensores.",
       "regla": "El mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0, contando antes los defensores de d4.",
       "frecuencia": 5,
-      "fuenteFrecuencia": "partidas de lichess (CC0): 3...Af5 en 34.7 % (600–1000, n 59 de 170 con 3.e5) y 52.5 % (1000–1400, n 1225 de 2336)",
+      "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 3...Af5 tras 3.e5 sale en 34.7 % de las partidas que llegan ahí en 600–1000 (59 de 170) y en 52.4 % en 1000–1400 (1225 de 2336)",
       "plan": {
         "tuyo": "Estás en la cadena entera, pero negras puede cambiar en d4 en cualquier momento: retomas con el peón de c y pasas a la base sola. Ya enrocado y con tu caballo en d2, h3 le pregunta al alfil de g4. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras cambia en d4 y saca su caballo de g8 a e7.",
@@ -503,7 +503,7 @@
       "idea": "Contra ...c5, c3 como contra la Francesa; cuando negras cambia y clava tu caballo, el alfil de e2 quita la clavada.",
       "regla": "Contra la clavada del alfil de g4, tu alfil va a e2, no a d3.",
       "frecuencia": 5,
-      "fuenteFrecuencia": "partidas de lichess (CC0): 3...c5 en 21.8 % (600–1000, n 37 de 170 con 3.e5) y 29.5 % (1000–1400, n 689 de 2336)",
+      "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 3...c5 tras 3.e5 sale en 21.8 % de las partidas que llegan ahí en 600–1000 (37 de 170) y en 29.5 % en 1000–1400 (689 de 2336)",
       "plan": {
         "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tu caballo de f3 y tu dama. Sigue el caballo de b1 a d2: si negras cambia en f3, retomas con él y d4 sigue defendido. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras lleva el caballo de g8 por e7 a f5, contra d4.",
