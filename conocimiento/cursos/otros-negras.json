@@ -119,7 +119,7 @@
      "subtitulo": "El mapa",
      "texto": [
       "Pongas o no ...c6, tu peón va a d5. La pregunta que ordena este curso: ¿qué peón de blancas ataca tu peón de d5?",
-      "En este curso, tres respuestas. Ninguno: el Centro libre. El de c, sin un peón en d4: la Anglo-Eslava. El de c, con su peón de d en d4: ya es la Eslava, y su mapa te dice qué hacer. Si blancas lleva su peón de e a e4 contra tu peón de d5, es otra cosa, que este curso no cubre.",
+      "En este curso, tres respuestas. Ninguno: el Centro libre. El de c, sin un peón en d4: la Anglo-Eslava. El de c, con su peón de d en d4: ya es la Eslava, y su mapa te dice qué hacer. Si blancas lleva su peón de e a e4 contra tu peón de d5, es otra cosa, que este curso no cubre, salvo en la Húngara, donde ya tienes ...e5.",
       "Si contestas 1.e3 con ...d5, casi siempre llegas al Centro libre, y también tras 1.Cf3 d5 2.d4. Y 1.c4 c6 2.d4 d5 es la misma posición que la Eslava."
      ],
      "tablero": {
@@ -531,8 +531,8 @@
    "base": "curso-otras-hungara",
    "nombre": "Húngara: 1.g3",
    "desde": 0,
-   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas a casillas activas. Pero si blancas juega e4, mira el plan de esta lección.",
-   "idea": "Contra el juego lento de blancas, con d3, ...e5 te da un centro de dos peones.",
+   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas. Pero si blancas juega e4, mira el plan de esta lección.",
+   "idea": "Aquí, contra d3 y con tu caballo en d7, ...e5 te da un centro de dos peones.",
    "plan": {
     "tuyo": "Saca tu alfil de f8 a d6 y enroca. Si blancas empuja e4, cambias en e4 y te queda tu peón de e5 en el centro.",
     "rival": "Blancas busca e4 para pelear por el centro.",
@@ -615,7 +615,7 @@
    "idea": "Con 2.Cc3 d5 3.cxd5 cxd5 4.d4 llegas al Cambio de la Eslava: sigues su plan.",
    "plan": {
     "tuyo": "Saca tu alfil de c8 a f5, después ...e6 y tu alfil de f8, y enroca: es el plan del Cambio de la Eslava.",
-    "rival": "Blancas busca Db3 contra b7: con ...e6 ya jugado, tu alfil de f8 se pone en b4.",
+    "rival": "Blancas busca Db3 contra b7: si llega antes de ...e6, ...Ca5 echa a la dama; con ...e6 ya jugado, tu alfil de f8 se pone en b4.",
     "marcas": [],
     "fuente": [
      "WP-Slav",
@@ -683,11 +683,11 @@
    "base": "reti-fianchetto",
    "nombre": "Réti: 2.g3",
    "desde": 0,
-   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas a casillas activas. Pero si blancas juega c4 después, ya es la Eslava.",
+   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas. Pero si, con su peón en d4, blancas juega c4, ya es la Eslava.",
    "idea": "Aquí, tu peón de c6 apoya d5 y tu alfil sale a g4 antes de ...e6.",
    "plan": {
     "tuyo": "Saca tu caballo de b8 a d7 y tu alfil de f8 a e7, y enroca.",
-    "rival": "Blancas puede jugar c4: entonces ya es la Eslava, y su mapa te dice qué hacer. Si blancas lleva su peón de e a e4 contra tu peón de d5, es otra cosa, que este curso no cubre.",
+    "rival": "Blancas puede jugar c4: entonces ya es la Eslava, y su mapa te dice qué hacer. Si blancas lleva su peón de e a e4 contra tu peón de d5, es otra cosa, que este curso no cubre, salvo en la Húngara, donde ya tienes ...e5.",
     "marcas": [],
     "fuente": [
      "WB-1Cf3d5",
@@ -760,7 +760,7 @@
    "base": "curso-larsen-clasica",
    "nombre": "Larsen: 1.b3",
    "desde": 0,
-   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas a casillas activas. Pero si blancas juega c4, ya es la Anglo-Eslava.",
+   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas. Pero si blancas juega c4, ya es la Anglo-Eslava.",
    "idea": "Tu alfil sale a f5 antes de ...e6, y ...h6 le guarda la casilla h7.",
    "plan": {
     "tuyo": "Saca tu alfil de f8 a d6 y tu caballo de b8 a d7, y enroca. Si blancas ataca tu centro con c4, ...c6 sostiene d5.",
@@ -837,8 +837,8 @@
    "base": "curso-otras-bird",
    "nombre": "Bird: 1.f4",
    "desde": 0,
-   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas a casillas activas. Pero si blancas juega c4, ya es la Anglo-Eslava.",
-   "idea": "Contra 1.f4, tu peón de d5 vigila e4 y tu alfil sale a f5 antes de ...e6.",
+   "intro": "Estás en el Centro libre: blancas no lleva su peón de c ni el de e contra tu centro, y tu objetivo es sacar tus piezas. Pero si blancas juega c4, ya es la Anglo-Eslava.",
+   "idea": "Aquí, con e3, tu peón de d5 vigila e4 y tu alfil sale a f5 antes de ...e6.",
    "plan": {
     "tuyo": "Enroca, y después ...c5 o ...h6.",
     "rival": "Blancas busca e4.",
@@ -971,7 +971,7 @@
    "nombre": "Inglesa: 2.Cf3 d5 3.e3",
    "desde": 0,
    "intro": "Estás en la Anglo-Eslava: el peón de c de blancas presiona sin un peón en d4, y tu objetivo es sacar tus piezas sin dejar débil b7. Pero si blancas pone su peón en d4, ya es la Eslava.",
-   "idea": "Con el caballo blanco en c3, ...e6 va antes de tu alfil.",
+   "idea": "Con el caballo blanco en c3, lo más sencillo es ...e6 antes de tu alfil.",
    "plan": {
     "tuyo": "Enroca y saca tu caballo de b8 a d7.",
     "rival": "Blancas puede poner su peón en d4: entonces ya es la Eslava.",
@@ -1575,8 +1575,8 @@
    ]
   },
   "Nf3 d5 c4 c6 b3 Bf5 Bb2 e6 e3 Nf6": {
-   "pregunta": "¿Qué pieza menor te falta sacar del lado de rey?",
-   "pista": "Un caballo que vigile el centro.",
+   "pregunta": "El alfil de b2 mira tu peón de g7. ¿Qué pieza sacas que lo cuide y te deje enrocar?",
+   "pista": "Una pieza que se ponga en medio de esa diagonal.",
    "buenas": [
     "h6",
     "Nd7",
@@ -1584,7 +1584,11 @@
     "a6"
    ],
    "hace": "Sacas tu caballo de g8.",
-   "porque": "Tu caballo de f6 vigila e4 y apoya d5, y te deja enrocar pronto.",
+   "porque": "Tu caballo de f6 tapa la diagonal del alfil de b2 hacia g7, vigila e4 y apoya d5.",
+   "errores": {
+    "Bd6": "Tu peón de g7 se queda sin defensa: el alfil de b2 se lo come y después ataca tu torre de h8.",
+    "Be7": "Tu peón de g7 se queda sin defensa: el alfil de b2 se lo come y después ataca tu torre de h8."
+   },
    "marcasDe": {
     "porque": [
      [
@@ -1603,13 +1607,93 @@
      ]
     ]
    },
+   "verErrores": {
+    "Bd6": {
+     "antes": true,
+     "pasos": [
+      {
+       "frase": "Esta es la posición después de 5.e3.",
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-bd6"
+       ]
+      },
+      {
+       "frase": "5...Ad6: sacas tu alfil de f8.",
+       "jugadas": [
+        "Bd6"
+       ],
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-bd6"
+       ]
+      },
+      {
+       "frase": "6.Axg7: el alfil de b2 se come tu peón de g7 y ataca tu torre de h8.",
+       "jugadas": [
+        "Bxg7"
+       ],
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-bd6"
+       ]
+      }
+     ]
+    },
+    "Be7": {
+     "antes": true,
+     "pasos": [
+      {
+       "frase": "Esta es la posición después de 5.e3.",
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-be7"
+       ]
+      },
+      {
+       "frase": "5...Ae7: sacas tu alfil de f8.",
+       "jugadas": [
+        "Be7"
+       ],
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-be7"
+       ]
+      },
+      {
+       "frase": "6.Axg7: el alfil de b2 se come tu peón de g7 y ataca tu torre de h8.",
+       "jugadas": [
+        "Bxg7"
+       ],
+       "fuente": [
+        "MOTOR"
+       ],
+       "motor": [
+        "M-bo-be7"
+       ]
+      }
+     ]
+    }
+   },
    "fuente": [
     "BASE",
     "MOTOR"
    ],
    "motor": [
     "B-57",
-    "O-bo-5b"
+    "O-bo-5b",
+    "M-bo-bd6",
+    "M-bo-be7"
    ]
   },
   "Nf3 d5 g3 c6": {
@@ -1782,6 +1866,13 @@
    ],
    "hace": "Sacas tu alfil y atacas al caballo de f3.",
    "porque": "Tu alfil sale antes de mover tus peones centrales, que podrían encerrarlo.",
+   "describe": {
+    "porque": [
+     [
+      "e5"
+     ]
+    ]
+   },
    "fuente": [
     "WB-1Cf3d5",
     "MOTOR"
@@ -1962,6 +2053,13 @@
    ],
    "hace": "Defiendes d5 con tu caballo de g8.",
    "porque": "Es el Cambio de la Eslava: sigues con su plan, sacando tus piezas igual que blancas.",
+   "describe": {
+    "porque": [
+     [
+      "Nc6"
+     ]
+    ]
+   },
    "fuente": [
     "WP-Slav",
     "MOTOR"
@@ -2567,7 +2665,7 @@
         ]
        },
        {
-        "frase": "6...Ac8: para cuidar b7, tu alfil vuelve a casa. Perdiste dos jugadas.",
+        "frase": "6...Ac8: para cuidar b7, tu alfil vuelve a casa: gastó dos jugadas.",
         "jugadas": [
          "Bc8"
         ],
@@ -2714,6 +2812,10 @@
   {
    "termino": "Ruptura",
    "definicion": "Empujar un peón para abrir el centro o romper los peones del rival."
+  },
+  {
+   "termino": "Tensión",
+   "definicion": "Dos peones que se atacan y ninguno ha capturado todavía."
   },
   {
    "termino": "Tiempo",

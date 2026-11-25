@@ -2,7 +2,7 @@
 
 *Other White openings* · ECO A00–A14, D02 · se juega con negras
 
-> Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 y ...c6, saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios. *(redactado por la IA)*
+> Contra aperturas que no empiezan con 1.e4 ni 1.d4 no necesitas memorizar mucho: juega ...d5 (y ...c6 cuando un peón lo ataca), saca tu alfil de c8 a f5 o g4, sigue con ...e6 y ...Cf6 y enroca. Contra 1.c4 y 1.Cf3 sueles llegar a la Eslava (si blancas juega d4) o a estructuras parecidas; contra 1.b3, 1.g3 y 1.f4 no: ahí juegas con principios. *(redactado por la IA)*
 
 Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/chess-openings`, CC0) y están validadas con el motor: ninguna jugada del lado que aprendes pierde más de 1 peón contra la mejor (Stockfish 19 lite, profundidad 18). Los planes los redactó la IA.
 
@@ -21,7 +21,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.c4 c6 2.Cf3 d5 3.g3 Cf6 4.Ag2 Af5 5.0-0 e6 6.d3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, también ...Db6, no ...e6, que deja caer b7.
+- Plan *(redactado por la IA)*: Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Sin caballo blanco en c3 y con tu caballo en f6: si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, también ...Db6, no ...e6, que deja caer b7.
 - Fuente: A11 · Réti Opening: Anglo-Slav Variation, with g3
 
 ### Apertura Réti: Variante Anglo-Eslava, Sistema Gurevich
@@ -29,7 +29,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.c4 c6 2.Cf3 d5 3.e3 Cf6 4.Cc3 e6 5.b3 Ad6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Con su caballo en c3, ...e6 va antes del alfil: si tu alfil saliera a f5, cxd5 y Db3 lo harían volver a c8. Si blancas pone su peón en d4, ya es la Eslava.
+- Plan *(redactado por la IA)*: Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Con su caballo en c3, lo más sencillo es ...e6 antes del alfil: si tu alfil saliera a f5, cxd5 y Db3 lo harían volver a c8. Si blancas pone su peón en d4, ya es la Eslava.
 - Fuente: A11 · Réti Opening: Anglo-Slav Variation, Gurevich System
 
 ## Apertura Réti (1.Cf3)
@@ -39,7 +39,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.Cf3 d5 2.c4 c6 3.b3 Af5 4.Ab2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El mismo esquema: ...c6 sostiene d5 y el alfil sale a f5 antes de cerrar con ...e6. Sigue ...e6, ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.
+- Plan *(redactado por la IA)*: Contra 2.c4, ...c6 sostiene d5 y, con b3 jugado, el alfil sale a f5 antes de cerrar con ...e6. Sigue ...e6, ...Cf6, ...Cbd7, ...Ad6 o ...Ae7 y 0-0.
 - Fuente: A12 · Réti Opening: Anglo-Slav Variation, Bogoljubow Variation
 
 ### Juego de Peón de Dama: Variante Simétrica, Pseudo-Catalana
@@ -57,7 +57,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.b3 d5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 o g4; luego ...e6, ...c6 y enroca. Con un centro de peones firme y tus piezas fuera, no necesitas más teoría.
+- Plan *(redactado por la IA)*: Toma el centro con ...d5, desarrolla ...Cf6 y saca el alfil a f5 o g4; luego ...e6, ...h6 y enroca; ...c6 si blancas juega c4. Con un centro de peones firme y tus piezas fuera, no necesitas más teoría.
 - Fuente: A01 · Nimzo-Larsen Attack: Classical Variation
 
 ## Apertura Húngara (1.g3)
@@ -87,7 +87,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.c4 c6 2.Cc3 d5 3.cxd5 cxd5 4.d4 Cf6 5.Af4 Cc6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 1...c6 prepara ...d5 con apoyo. Con 2.Cc3 d5 3.cxd5 cxd5 4.d4 llegas al Cambio de la Eslava: desarrolla con ...Cf6, ...Cc6, ...Af5 o ...Ag4, ...e6 y 0-0.
+- Plan *(redactado por la IA)*: 1...c6 prepara ...d5 con apoyo. Con 2.Cc3 d5 3.cxd5 cxd5 4.d4 llegas al Cambio de la Eslava: desarrolla con ...Cf6, ...Cc6, ...Af5 o ...Ag4, ...e6 y 0-0. Si Db3 llega antes de ...e6, ...Ca5 echa a la dama.
 - Fuente: A11 · English Opening: Caro-Kann Defensive System
 - Sigue la fila de la fuente desde la media jugada 3 con teoría de: partidas de lichess (1000–1400): 2.Cc3 es la más común tras 1.c4 c6, y luego 3.cxd5 y 4.d4; motor: 2...d5 y 3...cxd5 las mejores, 4...Cf6 a 11, 5.Af4 la mejor de blancas y 5...Cc6 la mejor.
 

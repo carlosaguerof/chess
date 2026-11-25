@@ -88,8 +88,10 @@ describe('...c6 + ...d5 · el curso', () => {
     }
   })
 
-  it('las dos que acaban una jugada antes de cambiar de forma lo dicen ("Pero si blancas…")', () => {
-    for (const id of ['reti-fianchetto', 'inglesa-gurevich']) expect(linea(id).variante!.intro, id).toMatch(/Pero si blancas .* ya es la Eslava\./)
+  it('las que acaban cuando blancas puede cambiar de forma lo dicen ("Pero si…")', () => {
+    for (const id of ['reti-fianchetto', 'inglesa-gurevich']) expect(linea(id).variante!.intro, id).toMatch(/Pero si.* ya es la Eslava\./)
+    for (const id of ['larsen-clasica', 'otras-bird']) expect(linea(id).variante!.intro, id).toMatch(/Pero si blancas juega c4, ya es la Anglo-Eslava\./)
+    expect(linea('otras-hungara').variante!.intro).toMatch(/Pero si blancas juega e4/)
   })
 })
 
