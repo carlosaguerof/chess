@@ -6,7 +6,7 @@ import { TableroMini } from '../componentes/TableroMini.tsx'
 import { BotonPasoAPaso } from '../componentes/PasoAPaso.tsx'
 import { IconoAtras } from '../componentes/Iconos.tsx'
 import { navegar } from '../ruta.ts'
-import { avanceVariantes, cursoNuevo, lineasDe, obligatorias, opcionales } from '../curso/datos.ts'
+import { avanceVariantes, cursoNuevo, lineasDe, obligatorias, opcionales, troncoDelCurso } from '../curso/datos.ts'
 import type { DatosCurso, PaginaLeer, SeccionCurso, TableroLeer, VarianteCurso } from '../curso/tipos.ts'
 import { marcarPieza, useAvance, type AvanceCurso, type PiezaLeerId } from '../curso/avance.ts'
 import { formas, lineaHasta } from '../curso/textos.ts'
@@ -100,7 +100,7 @@ export function CursoPagina({ id }: { id: string }) {
       </a>
       <div className="pagina-apertura-tablero">
         {/* con coordenadas, como los tableros de leer: todo tablero del curso las lleva (punto 1 del feedback; 2026-10-30) */}
-        <TableroMini fen={fenDe(['e4', 'c6'])} orientacion={c.color === 'w' ? 'white' : 'black'} etiqueta={c.nombre} coordenadas />
+        <TableroMini fen={fenDe(troncoDelCurso(c))} orientacion={c.color === 'w' ? 'white' : 'black'} etiqueta={c.nombre} coordenadas />
       </div>
       <div>
         <h1>{c.nombre}</h1>

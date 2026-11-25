@@ -50,6 +50,17 @@ export function jugadasDeVariante(c: DatosCurso, v: VarianteCurso): string[] {
 }
 
 /**
+ * Lo que comparten todas las líneas del curso, desde 1.e4: la posición del tablero de arriba de su página (1.e4 c6 en
+ * la Caro-Kann; 1.e4 e6 2.d4 d5 3.e5 en el Avance contra la Francesa).
+ */
+export function troncoDelCurso(c: DatosCurso): string[] {
+  const ls = c.variantes.map((v) => jugadasDeVariante(c, v))
+  const t: string[] = []
+  for (let i = 0; ls.length && ls.every((l) => l[i] !== undefined && l[i] === ls[0]![i]); i++) t.push(ls[0]![i]!)
+  return t
+}
+
+/**
  * El id de lección de una variante, como los de antes: "caro-kann:b/b:caro-kann/curso-avance-short". Un curso que sale
  * de otro usa el del curso de origen: la misma línea tiene una sola ficha de Repaso.
  */
