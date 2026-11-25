@@ -213,3 +213,59 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Aceptas el peón y desarrollas con cuidado: ...Cf6, ...a6 y ...Ae7. Si Blancas pone la D en e2 y enroca corto, ojo a la trampa ...Cg4 y ...Cd4, con amenaza de ...Dh2 mate.
 - Fuente: B21 · Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation
+
+## Variante Alapin
+
+### Variante Alapin: Defensa Barmen, Cambio Central (7.Ae2 e6 8.Cc3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4 7.Ae2 e6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Juegas con el peón aislado en d4: tu caballo sale a c3 atacando a la dama, enrocas y no te apresuras a cambiar piezas. Si negras cambia en f3 y toma en d4 con la dama, Axc6+ descubre el ataque de tu dama sobre la suya.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
+- Sigue la fila de la fuente desde la media jugada 13 con teoría de: J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (7.Ae2 y la trampa 7...Axf3 8.Axf3 Dxd4 9.Axc6+; solo la idea); motor: 7.Ae2 a 0.28 de 7.Cc3, que deshace el aislado (7...Axf3 8.gxf3 Dxd4); 8.Cc3 empata con 8.0-0 (+0.22), iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen, Línea Moderna (hasta 10.cxd4)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cf6 5.Cf3 Ag4 6.Ae2 e6 7.h3 Ah5 8.0-0 Cc6 9.Ae3 cxd4 10.cxd4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Rompes la clavada con Ae2, le preguntas al alfil con h3 y enrocas; Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line
+- Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5 (3.exd5 Dxd5 4.d4); J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (6.Ae2 e6 7.h3 Ah5 8.0-0 Cc6 9.Ae3; solo la idea); motor: cada jugada blanca a 0.08 o menos de la mejor, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen con 4...Cc6 (5...Cf6 6.Ae3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 Cc6 5.Cf3 Cf6 6.Ae3 cxd4 7.cxd4 e6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Ae3 cuida d4. Cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama: juegas con el peón aislado, sacas tus piezas y enrocas.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: motor: la línea principal del motor tras 5.Cf3 (5...Cf6 6.Ae3 cxd4 7.cxd4 e6 8.Cc3), cada jugada blanca a 0.07 o menos de la mejor, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: Defensa Barmen con 4...g6 (6.Ae2)
+
+**1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 g6 5.Cf3 Ag7 6.Ae2 cxd4 7.cxd4 Cf6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Desarrollas con Ae2 y, cuando negras cambia en d4, retomas con el peón y Cc3 ataca la dama. Juegas con el peón aislado: sacas tus piezas y enrocas.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: motor: 5...Ag7 y 6...cxd4 son la mejor de negras; 6.Ae2 a 0.06 de la mejor, 7.cxd4 a 0.05 y 8.Cc3 la mejor, iterations/v4/comprobaciones-alapin.md; plan de la base (alapin-d5-g6): Ae2 y 0-0; si negras cambia en d4 y recapturas con el peón, Cc3 gana tiempo.
+
+### Variante Alapin: Gambito Anti-Alapin (4.Da4+ Ad7 5.Db3)
+
+**1.e4 c5 2.c3 d5 3.exd5 Cf6 4.Da4+ Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Negras da un peón a cambio de desarrollo. Da4+ y Db3 ponen tu dama a salvo con amenazas; después sacas tus piezas y enrocas, sin defender el peón a toda costa.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Anti-Alapin Gambit
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...d5/3. exd5/3...Nf6 (4.Da4+; su "4. Qa5+" es errata); motor: la línea principal del motor tras 4.Da4+ (4...Ad7 5.Db3 e6 6.dxe6 Axe6 7.Ac4 Axc4 8.Dxc4), cada jugada blanca la mejor, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: 2...Cf6 3.e5 Cd5 4.d4 (hasta 8.Ab5)
+
+**1.e4 c5 2.c3 Cf6 3.e5 Cd5 4.d4 cxd4 5.cxd4 d6 6.Cf3 Cc6 7.Ac4 Cb6 8.Ab5**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Sostienes la cadena e5-d4 con piezas: Cf3, Ac4 y Ab5, que clava al caballo que ataca e5. Si negras cambia en e5, retomas con el caballo y te queda el peón de d4 solo.
+- Fuente: B22 · Sicilian Defense: Alapin Variation, Smith-Morra Declined
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...Nf6/3. e5/3...Nd5 (4.d4 cxd4 5.cxd4); J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (6.Cf3 Cc6 7.Ac4; solo la idea); motor: 8.Ab5 es la mejor; 6.Cf3 a 0.20 de 6.Ac4, iterations/v4/comprobaciones-alapin.md.
