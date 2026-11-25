@@ -20,6 +20,15 @@ export default defineConfig({
           env: { CURSO: 'caro-kann-estructuras:b' },
         },
       },
+      // y sobre la Italiana por estructuras (2026-11-25)
+      {
+        extends: true,
+        test: {
+          name: 'curso de la Italiana',
+          include: ['curso-contenido', 'curso-ciclo', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          env: { CURSO: 'italiana:w' },
+        },
+      },
       // los cursos del Avance (2026-11-25): las mismas pruebas de contenido, sin relajarse; el ciclo de la lección es el de
       // la Caro-Kann (sus jugadas), y lo propio de estos cursos está en tests/unit/curso-avance.test.ts
       // la Eslava y Otras aperturas de blancas (2026-11-25): igual; lo propio, en tests/unit/curso-eslava.test.ts y

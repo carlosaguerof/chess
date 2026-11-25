@@ -12,9 +12,9 @@ import type { EntradaRegistro } from '../../src/registro/registro.ts'
 
 /** C3: el ciclo de la lección nueva, sin pantalla; y el registro sigue alimentando Refuerza y el Repaso de hoy. */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
-// el ciclo se prueba con la Tal de la Caro-Kann; en los demás cursos, con su propia línea (tests/unit/curso-<curso>.test.ts)
-const CK = (c.fichasDe ?? c.id) === 'caro-kann:b'
-const tal = lineaPorId(CK ? c : CURSOS_NUEVOS['caro-kann:b']!, 'v:avance-tal')!
+/** Estas pruebas recorren líneas y jugadas de la Caro-Kann; un curso nuevo prueba lo mismo con las suyas (`curso-italiana.test.ts`). */
+const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
+const tal = lineaPorId(c, 'v:avance-tal')!
 const mov = (san: string, e: EstadoCiclo) => {
   const m = posicion(tal.jugadas, e.ply).move(san)
   return { san: m.san, desde: m.from, hasta: m.to }
@@ -26,7 +26,7 @@ const hastaMiTurno = (e: EstadoCiclo) => {
   return x
 }
 
-describe.runIf(CK)('C3 · el ciclo de la lección nueva', () => {
+describe.runIf(esCaroKann)('C3 · el ciclo de la lección nueva', () => {
   it('empieza con la introducción; la máquina juega lo del rival; me toca con "Jugada 1 de 4"', () => {
     let e = empezar(tal)
     expect(e.momento).toBe('intro')
@@ -143,7 +143,7 @@ describe.runIf(CK)('C3 · el ciclo de la lección nueva', () => {
   })
 })
 
-describe.runIf(CK)('C3 · el registro sigue alimentando Refuerza y el Repaso de hoy', () => {
+describe.runIf(esCaroKann)('C3 · el registro sigue alimentando Refuerza y el Repaso de hoy', () => {
   it('un fallo en Practicar entra al registro y sale en Refuerza', () => {
     let e = hastaMiTurno(empezar(tal, 'practicar'))
     e = intentar(tal, e, mov('e6', e)).estado // fallo

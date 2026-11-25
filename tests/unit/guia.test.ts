@@ -11,6 +11,14 @@ const base = JSON.parse(readFileSync('conocimiento/base.json', 'utf8')) as Base
 const validacion = JSON.parse(readFileSync('conocimiento/validacion-motor.json', 'utf8')) as Record<string, { mejor: string }>
 const rep = repertorioInicial(base)
 const blancas: Contexto = { base, rep, color: 'w' }
+/**
+ * Las líneas de la Italiana sin las continuaciones de su curso (`curso-…`, 2026-11-25): ahí 3...d6, 3...h6, 3...Cd4 y
+ * 3...f5 terminan en la jugada del rival, el caso que prueban los dos "callejones" de abajo. Con el curso, esas líneas
+ * siguen (4.d4, 4.Cxd4), y ya no son callejones.
+ */
+const repSinCurso = { ...rep, lineas: rep.lineas.filter((l) => !l.claveBase?.startsWith('italiana/curso-')) }
+const baseSinCurso = { ...base, aperturas: base.aperturas.map((a) => ({ ...a, variantes: a.variantes.filter((v) => !v.clave.startsWith('italiana/curso-')) })) }
+const blancasSinCurso: Contexto = { base: baseSinCurso, rep: repSinCurso, color: 'w' }
 const negras: Contexto = { base, rep, color: 'b' }
 
 describe('T9 · la guía en una partida real', () => {
@@ -80,7 +88,7 @@ describe('T9 · la guía en una partida real', () => {
   })
 
   it('pase 1: si mi línea termina en la jugada del rival, la ayuda da su plan (no "fuera de teoría")', () => {
-    const a = ayudaEnMiTurno(blancas, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'd6'])
+    const a = ayudaEnMiTurno(blancasSinCurso, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'd6'])
     expect(a.origen).toBe('fin-de-linea')
     expect(a.respuesta).toContain('termina aquí')
     expect(a.respuesta).toContain('Defensa París')
@@ -89,9 +97,11 @@ describe('T9 · la guía en una partida real', () => {
   it('pase 1: "Que juegue mis líneas" evita las respuestas donde mi línea se acaba', () => {
     const azar = azarConSemilla(7)
     const vistas = new Set<string>()
-    for (let i = 0; i < 300; i++) vistas.add(jugadaDeMisLineas(rep, 'w', ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4'], azar)!)
+    for (let i = 0; i < 300; i++) vistas.add(jugadaDeMisLineas(repSinCurso, 'w', ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4'], azar)!)
     for (const callejon of ['d6', 'h6', 'Nd4', 'f5']) expect(vistas.has(callejon), callejon).toBe(false)
     expect(vistas.has('Bc5') && vistas.has('Nf6')).toBe(true)
+    // con las continuaciones del curso, esas respuestas ya tienen línea, y la ayuda sigue la del curso
+    expect(ayudaEnMiTurno(blancas, ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'd6']).origen).toBe('repertorio')
   })
 
   it('pase 1: la Pista no dice la jugada aunque el nombre de la variante la traiga entre paréntesis', () => {

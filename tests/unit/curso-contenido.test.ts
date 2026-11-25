@@ -57,10 +57,11 @@ describe('C4 · el curso de la Caro-Kann', () => {
 
   it('primero los errores tuyos y luego los del rival', () => {
     const de = c.piezas.errores.lista.map((e) => e.de)
-    // la capa por estructuras de la Caro-Kann solo trae errores tuyos (así lo escogió su corrida); un curso nuevo puede traer
-    // también los del rival, primero los tuyos y después los del rival (specs/cursos.md §1, pieza 5; la Escandinava)
-    expect(de.includes('rival') ? de.indexOf('rival') : de.length).toBeGreaterThan(de.lastIndexOf('tuyo'))
-    if (c.secciones && c.fichasDe) expect(de).not.toContain('rival')
+    // los cursos por estructuras de la Caro-Kann y del Avance solo traen errores tuyos; la Italiana y la Escandinava traen
+    // también del rival, al final
+    const primerRival = de.indexOf('rival')
+    expect(primerRival === -1 ? de.length : primerRival).toBeGreaterThan(de.lastIndexOf('tuyo'))
+    if (c.secciones && !['italiana', 'escandinava'].includes(c.apertura)) expect(de).not.toContain('rival')
   })
 
   it('cada jugada de cada línea es legal, y las de las variantes están en la base', () => {

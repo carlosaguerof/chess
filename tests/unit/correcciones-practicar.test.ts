@@ -103,9 +103,12 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   })
 
   it('un «¿Y si…?» no es Practicar: sigue preguntando por la meta', () => {
-    const ply = misJugadas(errorTal)[0]!
-    const m = textoMio(c, errorTal.jugadas, ply)!
-    expect(vistaTuTurno(c, errorTal, 'aprender', ply, 0).textos).toEqual([{ tipo: 'pregunta', texto: m.pregunta }])
+    // cada «¿Y si…?» del curso (antes, el de la Tal)
+    for (const error of lineasDe(c).filter((l) => l.tipo === 'error')) {
+      const ply = misJugadas(error)[0]!
+      const m = textoMio(c, error.jugadas, ply)!
+      expect(vistaTuTurno(c, error, 'aprender', ply, 0).textos, error.id).toEqual([{ tipo: 'pregunta', texto: m.pregunta }])
+    }
   })
 
   it('la introducción de Practicar ya no promete preguntar por la meta, y no nombra jugadas', () => {

@@ -1,6 +1,7 @@
 // Las marcas del curso, frase por frase (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3, 2026-10-30).
 //
 //   node scripts/marcas-por-jugada.ts > iterations/v3/marcas-por-jugada.md
+//   node scripts/marcas-por-jugada.ts italiana:w > iterations/v4/marcas-por-jugada-italiana.md (dónde va cada curso: `LISTA_DE_MARCAS`, en `tests/unit/correcciones-marcas.test.ts`)
 //
 // Junta cada frase que lleva marcas con la posición donde se miden, y lista qué jugadas llevan marcas y cuáles no,
 // para revisar que solo se marque lo que no se ve solo (R8). La prueba `tests/unit/correcciones-marcas.test.ts` usa lo mismo.
