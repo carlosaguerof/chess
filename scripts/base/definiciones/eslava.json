@@ -157,7 +157,7 @@
         "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. e4 b5 6. e5"
       },
       "lado": "negras",
-      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea aguda: prioriza desarrollar y enrocar.",
+      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea con mucha pelea: prioriza desarrollar y enrocar.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -269,7 +269,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea aguda: termina tu desarrollo y enroca.",
+      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: termina tu desarrollo y enroca.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },

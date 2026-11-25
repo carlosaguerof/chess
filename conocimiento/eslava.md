@@ -113,7 +113,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.e4 b5 6.e5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea aguda: prioriza desarrollar y enrocar.
+- Plan *(redactado por la IA)*: Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea con mucha pelea: prioriza desarrollar y enrocar.
 - Fuente: D15 · Slav Defense: Geller Gambit
 
 ## Semieslava
@@ -172,7 +172,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.e4 b5 6.e5 Cd5 7.a4 e6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea aguda: termina tu desarrollo y enroca.
+- Plan *(redactado por la IA)*: Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: termina tu desarrollo y enroca.
 - Fuente: D15 · Slav Defense: Geller Gambit
 - Sigue la fila de la fuente desde la media jugada 12 con teoría de: Wikipedia, Slav Defense (5.e4 b5 6.e5 Nd5 7.a4 e6); motor: 6...Cd5 y 7...e6 son las mejores.
 

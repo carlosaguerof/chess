@@ -21,7 +21,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.c4 c6 2.Cf3 d5 3.g3 Cf6 4.Ag2 Af5 5.0-0 e6 6.d3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, ...Cc6 o ...Db6, no ...e6, que deja caer b7.
+- Plan *(redactado por la IA)*: Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, también ...Db6, no ...e6, que deja caer b7.
 - Fuente: A11 · Réti Opening: Anglo-Slav Variation, with g3
 
 ### Apertura Réti: Variante Anglo-Eslava, Sistema Gurevich
@@ -29,7 +29,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.c4 c6 2.Cf3 d5 3.e3 Cf6 4.Cc3 e6 5.b3 Ad6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Después busca la ruptura ...e5.
+- Plan *(redactado por la IA)*: Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Con su caballo en c3, ...e6 va antes del alfil: si tu alfil saliera a f5, cxd5 y Db3 lo harían volver a c8. Si blancas pone su peón en d4, ya es la Eslava.
 - Fuente: A11 · Réti Opening: Anglo-Slav Variation, Gurevich System
 
 ## Apertura Réti (1.Cf3)
@@ -77,7 +77,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.f4 d5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.
+- Plan *(redactado por la IA)*: 1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Contra 2.Cf3 Cf6 3.g3, el motor prefiere ...g6 y ...Ag7. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.
 - Fuente: A03 · Bird Opening: Dutch Variation
 
 ## Apertura Inglesa (1.c4)

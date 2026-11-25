@@ -3549,7 +3549,7 @@
       "e5"
      ],
      "lado": "negras",
-     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea aguda: prioriza desarrollar y enrocar.",
+     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, el caballo va al centro con ...Cd5; sigue con ...e6 y ...Ab7. Es una línea con mucha pelea: prioriza desarrollar y enrocar.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3775,7 +3775,7 @@
       "e6"
      ],
      "lado": "negras",
-     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea aguda: termina tu desarrollo y enroca.",
+     "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: termina tu desarrollo y enroca.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4057,7 +4057,7 @@
       "d3"
      ],
      "lado": "negras",
-     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, ...Cc6 o ...Db6, no ...e6, que deja caer b7.",
+     "plan": "Contra el fianchetto (g3 y Ag2), el alfil sale a f5 antes de ...e6, como en la Eslava. Sigue ...Ae7 o ...Ad6, ...Cbd7 y 0-0; ...h6 le da al alfil una casilla de retirada en h7. Si Db3 ataca b7, contesta ...Db6; y si antes cambia cxd5 cxd5, también ...Db6, no ...e6, que deja caer b7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4088,7 +4088,7 @@
       "Bd6"
      ],
      "lado": "negras",
-     "plan": "Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Después busca la ruptura ...e5.",
+     "plan": "Contra el esquema tranquilo con e3 y b3, levanta un centro firme tipo Semieslava: ...Cf6, ...e6, ...Ad6, ...Cbd7 y 0-0. Con su caballo en c3, ...e6 va antes del alfil: si tu alfil saliera a f5, cxd5 y Db3 lo harían volver a c8. Si blancas pone su peón en d4, ya es la Eslava.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4218,7 +4218,7 @@
       "d5"
      ],
      "lado": "negras",
-     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
+     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a g4 o f5 y luego ...e6 y 0-0. Contra 2.Cf3 Cf6 3.g3, el motor prefiere ...g6 y ...Ag7. Si blancas juega 2.c4 y tomas ...dxc4, no defiendas el peón con ...b5: tras a4, ...c6 y axb5, la dama de f3 ataca tu torre de a8.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
