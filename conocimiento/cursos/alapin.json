@@ -50,9 +50,9 @@
    "paginas": [
     {
      "texto": [
-      "Cuando el rival contesta a 1.e4 con 1...c5, la Defensa Siciliana, juegas 2.c3. Con ese peón preparas d4: si el rival cambia en d4, retomas con otro peón y sigues con un peón en el centro.",
-      "El precio: tu caballo de b1 ya no puede salir a c3. Por eso las dos respuestas principales del rival, 2...d5 y 2...Cf6, atacan tu peón de e4 enseguida. Si no lo atacan, juegas d4 y tienes los dos peones del centro.",
-      "Vas a aprender qué hacer con tu peón de e4 en cada caso, y el plan que sigue."
+      "Contra 1...c5, la Defensa Siciliana, juegas 2.c3. Con ese peón preparas d4: si el rival cambia en d4, retomas con otro peón y sigues con un peón en el centro.",
+      "El precio: tu caballo de b1 ya no puede salir a c3. Por eso las dos respuestas principales del rival, 2...d5 y 2...Cf6, atacan enseguida tu peón de e4. Si no lo atacan, juegas d4 y tienes los dos peones del centro.",
+      "Vas a aprender qué hacer con tu peón de e4 en cada caso, y su plan."
      ],
      "tablero": {
       "jugadas": [
@@ -332,7 +332,7 @@
     {
      "subtitulo": "Los dos peones del centro",
      "texto": [
-      "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6, 2...e6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3.",
+      "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3. Contra 2...e6, lo común es 3...d5, y ahí avanzas: La cadena.",
       "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
       "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado). Tras 2...d6, avanzar a e5 te cuesta un peón.",
       "Si después el rival lo ataca con un peón en d5: con su peón ya en e6, lo avanzas, como en tu Avance contra la Francesa; si no, lo cambias. Este curso no trae lección para estas jugadas."
@@ -362,7 +362,7 @@
         "frase": "Primero tu caballo de g1 sale a f3 y defiende d4; después, el de b1 a c3, y enrocas."
        },
        {
-        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas d4 contra él."
+        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5."
        },
        {
         "frase": "Si su caballo de dama no ha salido, defiendes e4 con una pieza."
@@ -396,7 +396,7 @@
      ],
      "desde": 5,
      "lado": "b",
-     "intro": "Contra 2...d5 defendiste tu peón con 3.d4, en vez de cambiarlo. Ahora juegas con negras: castiga el error.",
+     "intro": "Contra 2...d5 jugaste 3.d4 en vez de cambiar en d5. Ahora juegas con negras: castiga el error.",
      "final": "Blancas recupera un peón, pero su rey ya no puede enrocar. Por eso, contra 2...d5, cambias primero: 3.exd5.",
      "fuente": [
       "WB-2d5",
@@ -495,7 +495,7 @@
      "desde": 16,
      "lado": "w",
      "intro": "Después de 7...Axf3 8.Axf3, la dama del rival se comió tu peón de d4 con 8...Dxd4. Castígala.",
-     "final": "Ganaste la dama por un alfil: tu alfil dio jaque y destapó el ataque de tu dama.",
+     "final": "Ganaste la dama por un alfil: tu alfil le quitó con jaque el defensor a su dama.",
      "fuente": [
       "HART",
       "MOTOR"
@@ -531,7 +531,7 @@
      ],
      "texto": [
       "La idea: con 2.c3 preparas d4, y lo que haces con tu peón de e4 depende de quién lo ataque.",
-      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama ya en c6, avanzas d4 contra él; si no, defiendes e4 con una pieza."
+      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama ya en c6, avanzas tu peón de d4 a d5 contra él; si no, defiendes e4 con una pieza."
      ],
      "fuente": [
       "WB-2c3",
@@ -599,7 +599,7 @@
         "frase": "Con el peón aislado, no te apresures a cambiar piezas."
        },
        {
-        "frase": "Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama en c6, avanzas d4; si no, defiendes e4."
+        "frase": "Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama en c6, avanzas a d5; si no, defiendes e4."
        }
       ]
      }
@@ -707,7 +707,7 @@
   {
    "id": "cf6-d4",
    "base": "alapin-curso-cf6-d4",
-   "nombre": "2...Cf6: 3.e5 Cd5 4.d4",
+   "nombre": "2...Cf6: 3...Cd5 y 4...cxd4",
    "desde": 3,
    "intro": "Estás en La cadena: tu objetivo es sostener tus peones del centro con piezas, pero el rival la ataca por delante y puede deshacerla. El rival ataca tu peón de e4 con el caballo.",
    "idea": "Contra el caballo que ataca tu e4, avanzas con 3.e5; después sostienes la cadena con piezas.",
@@ -1077,7 +1077,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5": {
-   "texto": "El alfil se retira a h5 y sigue clavando tu caballo de f3.",
+   "texto": "El alfil se retira a h5 y sigue atacando tu caballo de f3.",
    "fuente": [
     "HART"
    ],
@@ -1272,7 +1272,7 @@
    ]
   },
   "e4 c5 c3 Nf6": {
-   "texto": "El rival ataca tu peón de e4 con el caballo, y no puedes defenderlo con otro caballo en c3.",
+   "texto": "El rival ataca tu peón de e4 con el caballo, y no puedes defenderlo con un caballo en c3.",
    "fuente": [
     "WB-2c3",
     "WB-2Cf6"
@@ -1400,6 +1400,13 @@
    "pista": "El peón que está delante de tu rey puede avanzar dos casillas.",
    "hace": "Ocupas el centro con el peón del rey y abres camino a tu alfil de f1 y a tu dama.",
    "porque": "Es tu primera jugada en todos tus cursos con blancas.",
+   "describe": {
+    "hace": [
+     [
+      "Be2"
+     ]
+    ]
+   },
    "fuente": [
     "WB-1e4"
    ],
@@ -1416,7 +1423,7 @@
    "pista": "Un peón de al lado puede apoyar esa casilla desde atrás.",
    "hace": "Preparas d4: si el rival cambia en d4, retomas con este peón y sigues con un peón en el centro.",
    "porque": "Así evitas la Siciliana abierta, la de más teoría.",
-   "cuidado": "El precio: tu caballo de b1 pierde su mejor casilla, c3.",
+   "cuidado": "Tu caballo de b1 pierde su mejor casilla, c3.",
    "describe": {
     "hace": [
      [
@@ -1444,8 +1451,8 @@
    "pregunta": "Un peón ataca el tuyo de e4 y no tienes caballo en c3 para defenderlo. ¿Qué haces con tu peón?",
    "pista": "Si lo cambias primero, el rival no gana nada.",
    "hace": "Cambias tu peón de e4 por el de d5. Es la regla del mapa para tu jugada 3: si un peón ataca tu e4, lo cambias.",
-   "porque": "Así el rival tiene que recuperar su peón, y casi siempre lo hace con la dama.",
-   "prepara": "Después pones un peón en d4: tu centro será ese peón.",
+   "porque": "Así el que tiene que recuperar un peón es el rival.",
+   "prepara": "Si lo recupera con la dama, pones un peón en d4: tu centro será ese peón.",
    "describe": {
     "prepara": [
      [
@@ -1464,12 +1471,17 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4": {
-   "pregunta": "Tu peón de e ya no está. ¿Qué peón pones en el centro, apoyado por el de c3?",
-   "pista": "El peón de la dama puede avanzar dos casillas, con el de c3 detrás.",
+   "pregunta": "Tu peón de e ya no está. ¿Cómo vuelves a tener un peón en el centro?",
+   "pista": "Un peón en el centro con otro peón detrás que lo apoye.",
    "hace": "Ocupas el centro y abres la diagonal de tu alfil de c1.",
    "porque": "Tu peón de c3 lo apoya: si el rival cambia, retomas con un peón.",
    "cuidado": "Tu centro ya no es de dos peones: es este solo.",
    "describe": {
+    "hace": [
+     [
+      "Be3"
+     ]
+    ],
     "porque": [
      [
       "cxd4"
@@ -1489,12 +1501,17 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4": {
-   "pregunta": "El rival cambió en el centro. ¿Con qué retomas para que tu caballo de b1 recupere su mejor casilla?",
-   "pista": "Retoma con el peón que tenías preparado para eso.",
+   "pregunta": "El rival cambió en el centro. ¿Con qué retomas?",
+   "pista": "Piensa qué casilla le hace falta a tu caballo de b1.",
    "hace": "Retomas con el peón de c3: tu peón de d4 queda aislado, sin peones al lado.",
    "porque": "Así c3 queda libre para tu caballo.",
    "prepara": "Cuando tu caballo de g1 defienda d4, el de b1 saldrá a c3 contra la dama.",
    "describe": {
+    "porque": [
+     [
+      "Nc3"
+     ]
+    ],
     "prepara": [
      [
       "Nf3",
@@ -1589,7 +1606,7 @@
         ]
        },
        {
-        "frase": "Perdiste el peón: tu dama no puede tomar a la suya en d4, protegida por su caballo de c6.",
+        "frase": "Perdiste el peón: si tu dama toma la suya en d4, su caballo de c6 retoma y sigues con un peón menos.",
         "marcas": [
          {
           "tipo": "A4",
@@ -1618,8 +1635,8 @@
   "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2": {
    "pregunta": "Tu caballo está clavado contra la dama. ¿Qué pieza pones en medio para que deje de estarlo?",
    "pista": "El alfil de f1 puede ponerse detrás del caballo.",
-   "hace": "Pones tu alfil entre el caballo y la dama: la clavada ya no amenaza a tu dama.",
-   "prepara": "Si el rival cambia en f3 y su dama toma en d4, Axc6+ descubre el ataque de tu dama sobre la suya.",
+   "hace": "Pones tu alfil entre el caballo y la dama: rompes la clavada.",
+   "prepara": "Si cambia en f3, retomas con el alfil, y si su dama toma d4, Axc6+ le quita el defensor con jaque: ganas su dama.",
    "fuente": [
     "HART",
     "MOTOR"
@@ -1686,7 +1703,7 @@
         ]
        },
        {
-        "frase": "9.Axc6+: tu alfil toma el caballo con jaque y destapa el ataque de tu dama de d1 sobre la de d4.",
+        "frase": "9.Axc6+: tu alfil toma con jaque el caballo que defendía a su dama de d4, que tu dama de d1 ataca.",
         "jugadas": [
          "Bxc6+"
         ],
@@ -1779,7 +1796,7 @@
    "pregunta": "¿Qué pieza sacas para desarrollarte y defender tu peón de d4?",
    "pista": "Un caballo en su casilla natural defiende d4.",
    "hace": "Sacas el caballo de g1: defiendes d4 y miras e5.",
-   "porque": "Desarrollas una pieza y cuidas tu centro antes de que el rival lo ataque.",
+   "porque": "Desarrollas una pieza y cuidas tu peón de d4, que ya atacan su peón de c5 y su dama.",
    "marcasDe": {
     "hace": [
      [
@@ -1832,7 +1849,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3": {
-   "pregunta": "El alfil del rival sigue clavando tu caballo. ¿Qué peón le pregunta qué quiere hacer?",
+   "pregunta": "El alfil del rival sigue encima de tu caballo de f3. ¿Cómo lo obligas a decidir ya si se retira o se cambia?",
    "pista": "Un peón del lado del rey puede atacar al alfil.",
    "hace": "Atacas al alfil con un peón: tiene que retirarse o cambiarse por tu caballo.",
    "porque": "Así el alfil tiene que decidir ya, antes de que termines de desarrollarte.",
@@ -1851,7 +1868,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O": {
-   "pregunta": "Tu alfil de f1 ya salió. ¿Qué haces para poner a salvo a tu rey?",
+   "pregunta": "Tu alfil de f1 ya salió. ¿Qué te falta para que tu rey esté seguro?",
    "pista": "Tu rey y tu torre pueden moverse en la misma jugada.",
    "hace": "Enrocas: tu rey queda a salvo y tu torre se acerca al centro.",
    "porque": "Antes de que se abra el juego, tu rey tiene que estar a salvo.",
@@ -1888,8 +1905,8 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4": {
-   "pregunta": "El rival cambió en d4. ¿Con qué retomas para que tu caballo de b1 recupere su mejor casilla?",
-   "pista": "Retoma con el peón que tenías preparado para eso.",
+   "pregunta": "El rival cambió en d4. ¿Con qué retomas?",
+   "pista": "Piensa qué casilla le hace falta a tu caballo de b1.",
    "hace": "Retomas con el peón de c3: tu peón de d4 queda aislado, sin peones al lado.",
    "porque": "Así la casilla c3 queda libre para tu caballo.",
    "prepara": "Sigue tu caballo de b1 a c3, atacando a la dama.",
@@ -1962,12 +1979,17 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4": {
-   "pregunta": "El rival cambió en d4. ¿Con qué retomas para que tu caballo de b1 recupere su mejor casilla?",
-   "pista": "Retoma con el peón que tenías preparado para eso.",
+   "pregunta": "El rival cambió en d4. ¿Con qué retomas?",
+   "pista": "Piensa qué casilla le hace falta a tu caballo de b1.",
    "hace": "Retomas con el peón de c3: tu peón de d4 queda aislado, sin peones al lado.",
    "porque": "Así la casilla c3 queda libre para tu caballo.",
    "prepara": "Tu caballo de b1 podrá salir ahí atacando a la dama.",
    "describe": {
+    "porque": [
+     [
+      "Nc3"
+     ]
+    ],
     "prepara": [
      [
       "Nc3"
@@ -2069,12 +2091,17 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4": {
-   "pregunta": "El rival cambió en d4. ¿Con qué retomas para que tu caballo de b1 recupere su mejor casilla?",
-   "pista": "Retoma con el peón que tenías preparado para eso.",
+   "pregunta": "El rival cambió en d4. ¿Con qué retomas?",
+   "pista": "Piensa qué casilla le hace falta a tu caballo de b1.",
    "hace": "Retomas con el peón de c3: tu peón de d4 queda aislado, sin peones al lado.",
    "porque": "Así la casilla c3 queda libre para tu caballo.",
    "prepara": "Tu caballo de b1 podrá salir ahí atacando a la dama.",
    "describe": {
+    "porque": [
+     [
+      "Nc3"
+     ]
+    ],
     "prepara": [
      [
       "Nc3"
@@ -2142,7 +2169,7 @@
    "pregunta": "Tu dama está atacada. ¿A dónde la llevas para que, además, ataque el peón de b7?",
    "pista": "Busca una casilla desde la que tu dama mire hacia b7.",
    "hace": "Pones tu dama a salvo y atacas el peón de b7.",
-   "porque": "Además, tu dama sigue defendiendo tu peón de d5.",
+   "porque": "Además, ahora tu dama defiende tu peón de d5.",
    "marcasDe": {
     "hace": [
      [
@@ -2187,7 +2214,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4": {
-   "pregunta": "Tu dama está atacada por el alfil. ¿Qué pieza pones en medio, y de paso te desarrollas?",
+   "pregunta": "Tu dama está atacada por el alfil. ¿Cómo la proteges sin moverla, y de paso te desarrollas?",
    "pista": "Tu alfil de f1 puede cortar la diagonal entre el alfil del rival y tu dama.",
    "hace": "Pones tu alfil entre el del rival y tu dama, y sacas una pieza más.",
    "porque": "Si el rival cambia los alfiles, retomas con la dama.",
@@ -2209,7 +2236,7 @@
    "pregunta": "El rival cambió los alfiles. ¿Con qué retomas?",
    "pista": "La pieza que estaba detrás de tu alfil.",
    "hace": "Retomas con la dama: sigues con un peón de más.",
-   "prepara": "Siguen Cf3 y el enroque: saca tus piezas antes de pensar en defender el peón.",
+   "prepara": "Siguen Cf3 y el enroque: saca tus piezas antes de pensar en defender tu peón de más.",
    "marcasDe": {
     "prepara": [
      [
@@ -2257,8 +2284,8 @@
    ]
   },
   "e4 c5 c3 Nf6 e5 Nd5 d4": {
-   "pregunta": "Tu peón de e5 está solo. ¿Qué peón pones detrás para apoyarlo y formar una cadena?",
-   "pista": "El peón de la dama puede apoyar al de e5 desde atrás.",
+   "pregunta": "Tu peón de e5 está solo en el centro. ¿Cómo le das apoyo?",
+   "pista": "Un peón protege en diagonal, hacia adelante.",
    "hace": "Pones un peón detrás del de e5: los dos forman una cadena en diagonal.",
    "porque": "Así sostienes e5 con un peón, y tu peón de c3 apoya a este.",
    "fuente": [
@@ -2343,7 +2370,7 @@
   },
   "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5": {
    "clave": true,
-   "pregunta": "Tu alfil está atacado. ¿A dónde lo llevas para que, además, clave al caballo que ataca tu peón de e5?",
+   "pregunta": "Tu alfil está atacado. ¿Cómo lo salvas y, de paso, frenas al caballo que ataca tu peón de e5?",
    "pista": "Busca una casilla desde la que tu alfil mire al caballo de c6 y, detrás, al rey.",
    "hace": "Apartas el alfil y clavas al caballo de c6 contra el rey: no se puede mover.",
    "porque": "Ese caballo atacaba tu peón de e5; clavado, ya no puede tomarlo.",
@@ -2449,7 +2476,7 @@
   },
   "e4 c5 c3 d5 d4 dxe4 dxc5 Qxd1+": {
    "pregunta": "Las damas están frente a frente. ¿Qué haces?",
-   "pista": "Si cambias damas con jaque, el rey blanco tiene que retomar.",
+   "pista": "Mira qué pasa con el rey blanco si se van las damas del tablero.",
    "hace": "Cambias damas con jaque.",
    "porque": "Blancas tiene que retomar con el rey, y ya no podrá enrocar.",
    "fuente": [
@@ -2526,7 +2553,7 @@
   "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4 Bxc6+": {
    "clave": true,
    "pregunta": "Las damas se atacan, pero la del rival está defendida por su caballo. ¿Cómo le quitas ese defensor sin darle tiempo?",
-   "pista": "Una captura con jaque no le deja responder a tu amenaza.",
+   "pista": "Si primero tiene que atender a su rey, no podrá salvar a su dama.",
    "hace": "Tomas el caballo de c6 con jaque: el rival tiene que atender a su rey.",
    "porque": "Y su dama de d4 se queda sin defensa frente a la tuya.",
    "marcasDe": {
@@ -2590,8 +2617,8 @@
    "definicion": "Entregar un peón a cambio de desarrollo o ataque."
   },
   {
-   "termino": "Jaque descubierto",
-   "definicion": "Una pieza se aparta y deja atacar a otra que estaba detrás; aquí, tu alfil da jaque y destapa el ataque de tu dama."
+   "termino": "Quitar el defensor",
+   "definicion": "Capturar la pieza que protege a otra, para después ganar la que quedó sin defensa."
   },
   {
    "termino": "Peón aislado",
@@ -2599,7 +2626,15 @@
   },
   {
    "termino": "Siciliana abierta",
-   "definicion": "La Siciliana en que blancas juega Cf3 y d4 y retoma en d4 con el caballo; es la de más teoría."
+   "definicion": "La Siciliana en que juegas Cf3 y d4 y retomas en d4 con el caballo; es la de más teoría."
+  },
+  {
+   "termino": "Punta de una cadena",
+   "definicion": "El peón de adelante de una cadena: el rival lo ataca de frente, con un peón."
+  },
+  {
+   "termino": "Teoría",
+   "definicion": "Las jugadas que los libros recomiendan en una apertura."
   },
   {
    "termino": "Tiempo",

@@ -45,7 +45,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra la clavada de ...Ag4, primero rompe la clavada con 7.Ae2; después Cc3 ataca la dama y enrocas. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ descubre el ataque de tu dama y gana la suya.
+- Plan *(redactado por la IA)*: Contra la clavada de ...Ag4, primero rompe la clavada con 7.Ae2; después Cc3 ataca la dama y enrocas. Juegas con un peón aislado en d4: a cambio tienes piezas activas. Si tras 7.Ae2 Axf3 8.Axf3 negras toma 8...Dxd4, 9.Axc6+ le quita el defensor con jaque y tu dama gana la suya.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
 
 ### Variante Alapin: Defensa Barmen con 4...g6
@@ -221,7 +221,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 c5 2.c3 d5 3.exd5 Dxd5 4.d4 cxd4 5.cxd4 Cc6 6.Cf3 Ag4 7.Ae2 e6 8.Cc3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Juegas con el peón aislado en d4: tu caballo sale a c3 atacando a la dama, enrocas y no te apresuras a cambiar piezas. Si negras cambia en f3 y toma en d4 con la dama, Axc6+ descubre el ataque de tu dama sobre la suya.
+- Plan *(redactado por la IA)*: Juegas con el peón aislado en d4: tu caballo sale a c3 atacando a la dama, enrocas y no te apresuras a cambiar piezas. Si negras cambia en f3 y toma en d4 con la dama, Axc6+ le quita el defensor con jaque y tu dama gana la suya.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange
 - Sigue la fila de la fuente desde la media jugada 13 con teoría de: J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (7.Ae2 y la trampa 7...Axf3 8.Axf3 Dxd4 9.Axc6+; solo la idea); motor: 7.Ae2 a 0.28 de 7.Cc3, que deshace el aislado (7...Axf3 8.gxf3 Dxd4); 8.Cc3 empata con 8.0-0 (+0.22), iterations/v4/comprobaciones-alapin.md.
 

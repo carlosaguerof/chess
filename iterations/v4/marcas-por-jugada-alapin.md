@@ -21,18 +21,18 @@
 | 7.Ae2 | 2...d5: 4...cxd4 (Cambio Central) | tuya | no |  |
 | 7...e6 | 2...d5: 4...cxd4 (Cambio Central) | del rival | no |  |
 | 8.Cc3 | 2...d5: 4...cxd4 (Cambio Central) | tuya | sí | mía hace frase 1: flecha c3→d5 (A2, verde) |
-| 2...Cf6 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 3.e5 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | no |  |
-| 3...Cd5 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | no |  |
-| 4.d4 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | no |  |
-| 4...cxd4 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | no |  |
-| 5.cxd4 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | no |  |
-| 5...d6 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | no |  |
-| 6.Cf3 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde) |
-| 6...Cc6 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja) |
-| 7.Ac4 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | no |  |
-| 7...Cb6 | 2...Cf6: 3.e5 Cd5 4.d4 | del rival | sí | rival frase 1: flecha b6→c4 (A4, roja) |
-| 8.Ab5 | 2...Cf6: 3.e5 Cd5 4.d4 | tuya | sí | mía cuidado frase 1: flecha f3→e5 (A3, verde, punteada) |
+| 2...Cf6 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 3.e5 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | no |  |
+| 3...Cd5 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | no |  |
+| 4.d4 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | no |  |
+| 4...cxd4 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | no |  |
+| 5.cxd4 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | no |  |
+| 5...d6 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | no |  |
+| 6.Cf3 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde) |
+| 6...Cc6 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja) |
+| 7.Ac4 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | no |  |
+| 7...Cb6 | 2...Cf6: 3...Cd5 y 4...cxd4 | del rival | sí | rival frase 1: flecha b6→c4 (A4, roja) |
+| 8.Ab5 | 2...Cf6: 3...Cd5 y 4...cxd4 | tuya | sí | mía cuidado frase 1: flecha f3→e5 (A3, verde, punteada) |
 | 4...Cf6 | 2...d5: 4...Cf6 (Línea Moderna) | del rival | no |  |
 | 5.Cf3 | 2...d5: 4...Cf6 (Línea Moderna) | tuya | sí | mía hace frase 1: flecha f3→d4 (A2, verde); flecha f3→e5 (A2, verde) |
 | 5...Ag4 | 2...d5: 4...Cf6 (Línea Moderna) | del rival | no |  |
@@ -97,5 +97,5 @@
 | repaso 1, paso 5 | 6...Ag4 7.Ae2 e6 8.Cc3: ahora sí, tu otro caballo ataca a la dama de d5. | flecha c3→d5 (A2, verde) |
 | plan cf6-d4 paso a paso, paso 3 | Si el rival cambia en e5, retomas con el caballo. | flecha f3→e5 (A3, verde, punteada) |
 | plan moderna paso a paso, paso 1 | Tu plan: Cc3, tu caballo de b1 ataca a la dama de d5. | flecha c3→d5 (A2, verde) |
-| ver de e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3, porque 0, paso 4 | Perdiste el peón: tu dama no puede tomar a la suya en d4, protegida por su caballo de c6. | flecha c6→d4 (A4, roja) |
-| ver de e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2, prepara 0, paso 5 | 9.Axc6+: tu alfil toma el caballo con jaque y destapa el ataque de tu dama de d1 sobre la de d4. | flecha d1→d4 (A2, verde) |
+| ver de e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3, porque 0, paso 4 | Perdiste el peón: si tu dama toma la suya en d4, su caballo de c6 retoma y sigues con un peón menos. | flecha c6→d4 (A4, roja) |
+| ver de e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2, prepara 0, paso 5 | 9.Axc6+: tu alfil toma con jaque el caballo que defendía a su dama de d4, que tu dama de d1 ataca. | flecha d1→d4 (A2, verde) |
