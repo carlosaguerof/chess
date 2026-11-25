@@ -1,6 +1,6 @@
 # Las comprobaciones con el motor del curso de la Alapin (2026-11-25)
 
-Stockfish 19 lite de un hilo (el del repo), profundidad 18 (16 para las amenazas y para `planes-todos`). Evaluaciones desde blancas. Cada comando se repite desde el repo con `scripts/motor-comprobar.ts` (modos `mejores`, `jugada`, `amenaza`, `linea` y `plan`), el mismo Stockfish de la app. Las salidas de abajo son las de la corrida (con la Air cargada, una corrida por posición: a otra profundidad o en otra máquina las cifras pueden moverse unos centipeones). Cada id es el que cita el curso en su campo `motor`.
+Stockfish 19 lite de un hilo (el del repo), profundidad 18 (16 para las amenazas y para la tabla del plan en cada posición). Evaluaciones desde blancas. Cada comando se repite desde el repo con `scripts/motor-comprobar.ts` (modos `mejores`, `jugada`, `amenaza`, `linea` y `plan`), el mismo Stockfish de la app. Las salidas de abajo son las de la corrida (con la Air cargada, una corrida por posición: a otra profundidad o en otra máquina las cifras pueden moverse unos centipeones). Cada id es el que cita el curso en su campo `motor`.
 
 | id | Afirmación | Comando | Resultado |
 |---|---|---|---|
@@ -276,19 +276,16 @@ Mueven: blancas · profundidad 18
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
 
 ```
-LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.e5: +0.18 (pierde 0) | top: e5 +0.18 · d3 -0.07 · Qc2 -0.15 · Qa4 -0.25 · Bd3 -0.26
-4.d4: +0.25 (pierde 0) | top: d4 +0.25 · Bc4 +0.12 · Nf3 +0.11 · Na3 -0.12 · Bb5 -0.13
-5.cxd4: +0.12 (pierde 0) | top: cxd4 +0.12 · Nf3 +0.06 · Bc4 -0.01 · Qxd4 -0.10 · Be2 -0.18
-6.Nf3: +0.00 (pierde 20) | top: Bc4 +0.20 · Nf3 +0.00 · exd6 -0.07 · Qb3 -0.07 · Bb5+ -0.15
-7.Bc4: +0.06 (pierde 0) | top: Bc4 +0.06 · Nc3 -0.03 · Bd2 -0.06 · Qb3 -0.12 · exd6 -0.13
-8.Bb5: +0.03 (pierde 0) | top: Bb5 +0.03 · Bb3 -0.02 · Bd3 -0.28 · Be2 -0.31 · b3 -0.32
-FIN (mueven negras):
-      +0.10 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O e6 Nc3
-      +0.16 Bd7 Nc3 dxe5 dxe5 g6 O-O Bg7 Re1
-      +0.35 e6 Qe2 a6 Bg5 Qc7 Bxc6+ bxc6 O-O
+Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  e5: +0.18 (pierde 0) | e5 +0.18 · d3 -0.07 · Qc2 -0.15 · Qa4 -0.25 · Bd3 -0.26
+  d4: +0.25 (pierde 0) | d4 +0.25 · Bc4 +0.12 · Nf3 +0.11 · Na3 -0.12 · Bb5 -0.13
+  cxd4: +0.12 (pierde 0) | cxd4 +0.12 · Nf3 +0.06 · Bc4 -0.01 · Qxd4 -0.10 · Be2 -0.18
+  Nf3: +0.00 (pierde 20) | Bc4 +0.20 · Nf3 +0.00 · exd6 -0.07 · Qb3 -0.07 · Bb5+ -0.15
+  Bc4: +0.06 (pierde 0) | Bc4 +0.06 · Nc3 -0.03 · Bd2 -0.06 · Qb3 -0.12 · exd6 -0.13
+  Bb5: +0.03 (pierde 0) | Bb5 +0.03 · Bb3 -0.02 · Bd3 -0.28 · Be2 -0.31 · b3 -0.32
+  FIN: +0.10 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O · +0.16 Bd7 Nc3 dxe5 dxe5 g6 O-O · +0.35 e6 Qe2 a6 Bg5 Qc7 Bxc6+
 ```
 
 ### M-d4
@@ -296,18 +293,15 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.cxd4: +0.32 (pierde 0) | top: cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
-6.Nf3: +0.28 (pierde 0) | top: Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
-7.Nc3: +0.63 (pierde 0) | top: Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
-FIN (mueven negras):
-      +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 O-O-O Nxd4
-      +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 Ne5 Bg2
-      +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5 Qxd5 Be2
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  cxd4: +0.32 (pierde 0) | cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
+  Nf3: +0.28 (pierde 0) | Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
+  Nc3: +0.63 (pierde 0) | Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
+  FIN: +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 · +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 · +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5
 ```
 
 ### M-cc-cxd4
@@ -315,18 +309,15 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.cxd4: +0.32 (pierde 0) | top: cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
-6.Nf3: +0.28 (pierde 0) | top: Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
-7.Nc3: +0.63 (pierde 0) | top: Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
-FIN (mueven negras):
-      +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 O-O-O Nxd4
-      +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 Ne5 Bg2
-      +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5 Qxd5 Be2
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  cxd4: +0.32 (pierde 0) | cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
+  Nf3: +0.28 (pierde 0) | Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
+  Nc3: +0.63 (pierde 0) | Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
+  FIN: +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 · +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 · +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5
 ```
 
 ### L-cc
@@ -334,18 +325,15 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.cxd4: +0.32 (pierde 0) | top: cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
-6.Nf3: +0.28 (pierde 0) | top: Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
-7.Nc3: +0.63 (pierde 0) | top: Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
-FIN (mueven negras):
-      +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 O-O-O Nxd4
-      +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 Ne5 Bg2
-      +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5 Qxd5 Be2
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  cxd4: +0.32 (pierde 0) | cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
+  Nf3: +0.28 (pierde 0) | Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
+  Nc3: +0.63 (pierde 0) | Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
+  FIN: +0.34 Bxf3 gxf3 Qxd4 Qxd4 Nxd4 Nb5 · +1.97 Qh5 d5 Bxf3 gxf3 O-O-O Qa4 · +2.71 Qa5 d5 Rd8 Bd2 Rxd5 Nxd5
 ```
 
 ### L-cc-be2
@@ -353,19 +341,16 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.cxd4: +0.32 (pierde 0) | top: cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
-6.Nf3: +0.28 (pierde 0) | top: Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
-7.Be2: +0.35 (pierde 28) | top: Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
-8.Nc3: +0.22 (pierde 0) | top: O-O +0.22 · Nc3 +0.22 · Be3 +0.08 · a3 +0.01 · Bf4 -0.06
-FIN (mueven negras):
-      +0.21 Qa5 h3 Bxf3 Bxf3 Bb4 O-O Nf6 Bd2
-      +0.30 Bb4 O-O Qa5 Ne4 Nf6 Nxf6+ gxf6 h3
-      +0.37 Qd7 O-O Rd8 Be3 Bd6 Ne5 Bxe5 dxe5
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  cxd4: +0.32 (pierde 0) | cxd4 +0.32 · Nf3 +0.23 · Ne2 +0.10 · Qxd4 -0.07 · Be3 -0.09
+  Nf3: +0.28 (pierde 0) | Nf3 +0.28 · Ne2 +0.23 · Be3 -0.09 · Na3 -0.31 · Nc3 -0.38
+  Be2: +0.35 (pierde 28) | Nc3 +0.63 · Be2 +0.35 · Be3 -0.12 · Nbd2 -0.18 · Bd3 -0.64
+  Nc3: +0.22 (pierde 0) | O-O +0.22 · Nc3 +0.22 · Be3 +0.08 · a3 +0.01 · Bf4 -0.06
+  FIN: +0.21 Qa5 h3 Bxf3 Bxf3 Bb4 O-O · +0.30 Bb4 O-O Qa5 Ne4 Nf6 Nxf6+ · +0.37 Qd7 O-O Rd8 Be3 Bd6 Ne5
 ```
 
 ### L-mod
@@ -373,21 +358,18 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.Nf3: +0.24 (pierde 0) | top: Nf3 +0.24 · dxc5 +0.10 · Na3 +0.08 · Be3 -0.07 · Ne2 -0.14
-6.Be2: +0.27 (pierde 8) | top: Nbd2 +0.35 · dxc5 +0.28 · Be2 +0.27 · Be3 +0.10 · Bb5+ -0.09
-7.h3: +0.17 (pierde 1) | top: O-O +0.18 · h3 +0.17 · Be3 +0.16 · Na3 +0.10 · Qa4+ +0.00
-8.O-O: +0.13 (pierde 7) | top: Be3 +0.20 · Na3 +0.16 · c4 +0.14 · O-O +0.13 · a3 +0.05
-9.Be3: +0.16 (pierde 0) | top: Be3 +0.16 · Bf4 +0.11 · Re1 +0.08 · Na3 +0.03 · Qa4 +0.00
-10.cxd4: +0.07 (pierde 3) | top: Nxd4 +0.10 · cxd4 +0.07 · Bxd4 -0.15 · Bc1 -0.64 · Bf4 -0.95
-FIN (mueven negras):
-      +0.10 Be7 Nc3 Qd6 Qb3 O-O Rfd1 Rfd8 Rac1
-      +0.19 Qa5 Nc3 Bd6 Qb3 Qb4 g4 Bg6 Ne5
-      +0.21 Bd6 Nc3 Qa5 Qb3 Qb4 g4 Bg6 Ne5
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  Nf3: +0.24 (pierde 0) | Nf3 +0.24 · dxc5 +0.10 · Na3 +0.08 · Be3 -0.07 · Ne2 -0.14
+  Be2: +0.27 (pierde 8) | Nbd2 +0.35 · dxc5 +0.28 · Be2 +0.27 · Be3 +0.10 · Bb5+ -0.09
+  h3: +0.17 (pierde 1) | O-O +0.18 · h3 +0.17 · Be3 +0.16 · Na3 +0.10 · Qa4+ +0.00
+  O-O: +0.13 (pierde 7) | Be3 +0.20 · Na3 +0.16 · c4 +0.14 · O-O +0.13 · a3 +0.05
+  Be3: +0.16 (pierde 0) | Be3 +0.16 · Bf4 +0.11 · Re1 +0.08 · Na3 +0.03 · Qa4 +0.00
+  cxd4: +0.07 (pierde 3) | Nxd4 +0.10 · cxd4 +0.07 · Bxd4 -0.15 · Bc1 -0.64 · Bf4 -0.95
+  FIN: +0.10 Be7 Nc3 Qd6 Qb3 O-O Rfd1 · +0.19 Qa5 Nc3 Bd6 Qb3 Qb4 g4 · +0.21 Bd6 Nc3 Qa5 Qb3 Qb4 g4
 ```
 
 ### L-cc6
@@ -395,19 +377,16 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.Nf3: +0.31 (pierde 0) | top: Nf3 +0.31 · dxc5 +0.28 · Be3 -0.09 · Ne2 -0.13 · Na3 -0.18
-6.Be3: +0.16 (pierde 7) | top: dxc5 +0.23 · Be2 +0.21 · Be3 +0.16 · h3 -0.06 · Nbd2 -0.14
-7.cxd4: +0.27 (pierde 0) | top: cxd4 +0.27 · Nxd4 -0.28 · Bxd4 -0.34 · Bd2 -2.27 · Bg5 -2.41
-8.Nc3: +0.22 (pierde 0) | top: Nc3 +0.22 · a3 +0.20 · Bd3 +0.18 · Be2 +0.15 · Qd2 +0.04
-FIN (mueven negras):
-      +0.26 Qd6 Bc4 Be7 O-O O-O Re1 Rd8 Qe2
-      +0.27 Qa5 a3 Bd6 Bd3 O-O O-O Qh5 h3
-      +0.28 Bb4 Bd3 e5 Be2 exd4 Nxd4 O-O O-O
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  Nf3: +0.31 (pierde 0) | Nf3 +0.31 · dxc5 +0.28 · Be3 -0.09 · Ne2 -0.13 · Na3 -0.18
+  Be3: +0.16 (pierde 7) | dxc5 +0.23 · Be2 +0.21 · Be3 +0.16 · h3 -0.06 · Nbd2 -0.14
+  cxd4: +0.27 (pierde 0) | cxd4 +0.27 · Nxd4 -0.28 · Bxd4 -0.34 · Bd2 -2.27 · Bg5 -2.41
+  Nc3: +0.22 (pierde 0) | Nc3 +0.22 · a3 +0.20 · Bd3 +0.18 · Be2 +0.15 · Qd2 +0.04
+  FIN: +0.26 Qd6 Bc4 Be7 O-O O-O Re1 · +0.27 Qa5 a3 Bd6 Bd3 O-O O-O · +0.28 Bb4 Bd3 e5 Be2 exd4 Nxd4
 ```
 
 ### L-g6
@@ -415,19 +394,16 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.d4: +0.33 (pierde 0) | top: d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
-5.Nf3: +0.29 (pierde 0) | top: Nf3 +0.29 · Be2 +0.24 · dxc5 +0.22 · Na3 +0.13 · Be3 +0.10
-6.Be2: +0.17 (pierde 6) | top: Nbd2 +0.23 · Na3 +0.22 · Be2 +0.17 · Be3 +0.14 · dxc5 +0.10
-7.cxd4: +0.20 (pierde 5) | top: Na3 +0.25 · cxd4 +0.20 · O-O +0.18 · Be3 -0.09 · a4 -0.34
-8.Nc3: +0.11 (pierde 0) | top: Nc3 +0.11 · O-O +0.11 · Be3 -0.13 · h3 -0.17 · Bf4 -0.19
-FIN (mueven negras):
-      +0.09 Qd6 Qb3 O-O O-O Qb6 Qxb6 axb6 Rd1
-      +0.11 Qa5 O-O O-O Qb3 Qb6 Qxb6 axb6 Rd1
-      +0.16 Qd8 Qb3 O-O O-O Qb6 Qxb6 axb6 Rd1
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  d4: +0.33 (pierde 0) | d4 +0.33 · Nf3 +0.24 · Na3 +0.20 · d3 -0.15 · Bb5+ -0.25
+  Nf3: +0.29 (pierde 0) | Nf3 +0.29 · Be2 +0.24 · dxc5 +0.22 · Na3 +0.13 · Be3 +0.10
+  Be2: +0.17 (pierde 6) | Nbd2 +0.23 · Na3 +0.22 · Be2 +0.17 · Be3 +0.14 · dxc5 +0.10
+  cxd4: +0.20 (pierde 5) | Na3 +0.25 · cxd4 +0.20 · O-O +0.18 · Be3 -0.09 · a4 -0.34
+  Nc3: +0.11 (pierde 0) | Nc3 +0.11 · O-O +0.11 · Be3 -0.13 · h3 -0.17 · Bf4 -0.19
+  FIN: +0.09 Qd6 Qb3 O-O O-O Qb6 Qxb6 · +0.11 Qa5 O-O O-O Qb3 Qb6 Qxb6 · +0.16 Qd8 Qb3 O-O O-O Qb6 Qxb6
 ```
 
 ### L-gam
@@ -435,19 +411,16 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.Qa4+: +0.56 (pierde 0) | top: Qa4+ +0.56 · Bb5+ +0.27 · Nf3 +0.21 · d4 +0.18 · Bc4 +0.12
-5.Qb3: +0.41 (pierde 0) | top: Qb3 +0.41 · Bb5 -0.37 · Qd1 -0.38 · Qc4 -0.40 · Qc2 -0.52
-6.dxe6: +0.45 (pierde 0) | top: dxe6 +0.45 · Qxb7 -0.01 · c4 -0.23 · d4 -0.74 · Nf3 -0.80
-7.Bc4: +0.55 (pierde 0) | top: Bc4 +0.55 · Qxb7 +0.00 · Qd1 -0.08 · Qc2 -0.32 · Qa4+ -0.38
-8.Qxc4: +0.34 (pierde 0) | top: Qxc4 +0.34 · Qxb7 -7.37 · Qa4+ -7.81 · d4 -7.87 · Qd1 -7.94
-FIN (mueven negras):
-      +0.42 Bd6 Nf3 O-O O-O Nc6 d3 Qd7 Nbd2
-      +0.45 Nc6 Nf3 Be7 d4 cxd4 cxd4 Qd5 Qxd5
-      +0.48 Be7 Nf3 Nc6 d4 cxd4 cxd4 Qd5 Qxd5
+Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  Qa4+: +0.56 (pierde 0) | Qa4+ +0.56 · Bb5+ +0.27 · Nf3 +0.21 · d4 +0.18 · Bc4 +0.12
+  Qb3: +0.41 (pierde 0) | Qb3 +0.41 · Bb5 -0.37 · Qd1 -0.38 · Qc4 -0.40 · Qc2 -0.52
+  dxe6: +0.45 (pierde 0) | dxe6 +0.45 · Qxb7 -0.01 · c4 -0.23 · d4 -0.74 · Nf3 -0.80
+  Bc4: +0.55 (pierde 0) | Bc4 +0.55 · Qxb7 +0.00 · Qd1 -0.08 · Qc2 -0.32 · Qa4+ -0.38
+  Qxc4: +0.34 (pierde 0) | Qxc4 +0.34 · Qxb7 -7.37 · Qa4+ -7.81 · d4 -7.87 · Qd1 -7.94
+  FIN: +0.42 Bd6 Nf3 O-O O-O Nc6 d3 · +0.45 Nc6 Nf3 Be7 d4 cxd4 cxd4 · +0.48 Be7 Nf3 Nc6 d4 cxd4 cxd4
 ```
 
 ### L-cf6
@@ -455,19 +428,16 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
 
 ```
-LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.e5: +0.18 (pierde 0) | top: e5 +0.18 · d3 -0.07 · Qc2 -0.15 · Qa4 -0.25 · Bd3 -0.26
-4.d4: +0.25 (pierde 0) | top: d4 +0.25 · Bc4 +0.12 · Nf3 +0.11 · Na3 -0.12 · Bb5 -0.13
-5.cxd4: +0.12 (pierde 0) | top: cxd4 +0.12 · Nf3 +0.06 · Bc4 -0.01 · Qxd4 -0.10 · Be2 -0.18
-6.Nf3: +0.00 (pierde 20) | top: Bc4 +0.20 · Nf3 +0.00 · exd6 -0.07 · Qb3 -0.07 · Bb5+ -0.15
-7.Bc4: +0.06 (pierde 0) | top: Bc4 +0.06 · Nc3 -0.03 · Bd2 -0.06 · Qb3 -0.12 · exd6 -0.13
-8.Bb5: +0.03 (pierde 0) | top: Bb5 +0.03 · Bb3 -0.02 · Bd3 -0.28 · Be2 -0.31 · b3 -0.32
-FIN (mueven negras):
-      +0.10 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O e6 Nc3
-      +0.16 Bd7 Nc3 dxe5 dxe5 g6 O-O Bg7 Re1
-      +0.35 e6 Qe2 a6 Bg5 Qc7 Bxc6+ bxc6 O-O
+Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  e5: +0.18 (pierde 0) | e5 +0.18 · d3 -0.07 · Qc2 -0.15 · Qa4 -0.25 · Bd3 -0.26
+  d4: +0.25 (pierde 0) | d4 +0.25 · Bc4 +0.12 · Nf3 +0.11 · Na3 -0.12 · Bb5 -0.13
+  cxd4: +0.12 (pierde 0) | cxd4 +0.12 · Nf3 +0.06 · Bc4 -0.01 · Qxd4 -0.10 · Be2 -0.18
+  Nf3: +0.00 (pierde 20) | Bc4 +0.20 · Nf3 +0.00 · exd6 -0.07 · Qb3 -0.07 · Bb5+ -0.15
+  Bc4: +0.06 (pierde 0) | Bc4 +0.06 · Nc3 -0.03 · Bd2 -0.06 · Qb3 -0.12 · exd6 -0.13
+  Bb5: +0.03 (pierde 0) | Bb5 +0.03 · Bb3 -0.02 · Bd3 -0.28 · Be2 -0.31 · b3 -0.32
+  FIN: +0.10 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O · +0.16 Bd7 Nc3 dxe5 dxe5 g6 O-O · +0.35 e6 Qe2 a6 Bg5 Qc7 Bxc6+
 ```
 
 ### F-gam
@@ -825,19 +795,18 @@ Mueven: blancas · profundidad 18
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" "O-O Ne5 Be3 h3"`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3
-PLAN O-O Ne5 Be3 h3
-Rival (3 mejores): Qa5 +0.21 · Bb4 +0.30 · Qd7 +0.37
-— tras Qa5: mejor +0.25 O-O Nf6 h3 Bxf3 Bxf3 Be7
-    O-O: +0.27 (pierde -2) O-O Nf6 h3 Bxf3 Bxf3 Rd8
-    Ne5: -0.68 (pierde 93) Ne5 Bxe2 Kxe2 Qa6+ Ke1 Rd8
-    Be3: +0.07 (pierde 18) Be3 Bb4 O-O Nge7 Qb3 Rd8
-    h3: +0.25 (pierde 0) h3 Bxf3 Bxf3 Rd8 O-O Nf6
-— tras Bb4: mejor +0.25 O-O Qa5 Ne4 Nf6 Nxf6+ gxf6
-    O-O: +0.25 (pierde 0) O-O Qa5 h3 Bxf3 Bxf3 Nge7
-    Ne5: -5.97 (pierde 622) Ne5 Bxe2 Qb3 Qxg2 Nxc6 Bh5
-    Be3: +0.10 (pierde 15) Be3 Nge7 O-O Qa5 Qb3 O-O
-    h3: -0.10 (pierde 35) h3 Bxf3 Bxf3 Qc4 Qb3 Qxb3
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3 · mueven negras · profundidad 18
+  el rival: Qa5 +0.21 · Bb4 +0.30 · Qd7 +0.37
+  tras Qa5: mejor +0.25 O-O
+    O-O: +0.27 (pierde -2)
+    Ne5: -0.68 (pierde 93)
+    Be3: +0.07 (pierde 18)
+    h3: +0.25 (pierde 0)
+  tras Bb4: mejor +0.25 O-O
+    O-O: +0.25 (pierde 0)
+    Ne5: -5.97 (pierde 622)
+    Be3: +0.10 (pierde 15)
+    h3: -0.10 (pierde 35)
 ```
 
 ### P-mod
@@ -845,15 +814,14 @@ Rival (3 mejores): Qa5 +0.21 · Bb4 +0.30 · Qd7 +0.37
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" "Nc3 Ne5"`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4
-PLAN Nc3 Ne5
-Rival (3 mejores): Be7 +0.10 · Qa5 +0.19 · Bd6 +0.21
-— tras Be7: mejor +0.10 Nc3 Qd6 Qb3 O-O Rfd1 Rfd8
-    Nc3: +0.11 (pierde -1) Nc3 Qd6 Qb3 O-O Rfd1 Rfd8
-    Ne5: -0.68 (pierde 78) Ne5 Bxe2 Qxe2 Nxe5 Nc3 Nf3+
-— tras Qa5: mejor +0.24 Qb3 Qb4 Nc3 Bd6 g4 Bg6
-    Nc3: +0.15 (pierde 9) Nc3 Bb4 Qb3 O-O Rac1 Rfd8
-    Ne5: -0.16 (pierde 40) Ne5 Bxe2 Qxe2 Nxe5 Bd2 Nf3+
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4 · mueven negras · profundidad 18
+  el rival: Be7 +0.10 · Qa5 +0.19 · Bd6 +0.21
+  tras Be7: mejor +0.10 Nc3
+    Nc3: +0.11 (pierde -1)
+    Ne5: -0.68 (pierde 78)
+  tras Qa5: mejor +0.24 Qb3
+    Nc3: +0.15 (pierde 9)
+    Ne5: -0.16 (pierde 40)
 ```
 
 ### P-cc6
@@ -861,21 +829,20 @@ Rival (3 mejores): Be7 +0.10 · Qa5 +0.19 · Bd6 +0.21
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" "O-O-O Be2 Bd3 Bc4 Ne5"`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3
-PLAN O-O-O Be2 Bd3 Bc4 Ne5
-Rival (3 mejores): Qd6 +0.26 · Qa5 +0.27 · Bb4 +0.28
-— tras Qd6: mejor +0.45 Bd3 Be7 O-O O-O Rc1 b6
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3 · mueven negras · profundidad 18
+  el rival: Qd6 +0.26 · Qa5 +0.27 · Bb4 +0.28
+  tras Qd6: mejor +0.45 Bd3
     O-O-O: ilegal aquí
-    Be2: +0.06 (pierde 39) Be2 Be7 Rc1 O-O O-O b6
-    Bd3: +0.37 (pierde 8) Bd3 g6 Ne4 Nxe4 Bxe4 Bg7
-    Bc4: +0.22 (pierde 23) Bc4 Be7 Rc1 a6 O-O O-O
-    Ne5: -0.10 (pierde 55) Ne5 Nxe5 dxe5 Qxe5 Bb5+ Bd7
-— tras Qa5: mejor +0.26 a3 Bd6 Bd3 O-O O-O Qh5
+    Be2: +0.06 (pierde 39)
+    Bd3: +0.37 (pierde 8)
+    Bc4: +0.22 (pierde 23)
+    Ne5: -0.10 (pierde 55)
+  tras Qa5: mejor +0.26 a3
     O-O-O: ilegal aquí
-    Be2: +0.15 (pierde 11) Be2 Bd6 O-O O-O Re1 h6
-    Bd3: +0.15 (pierde 11) Bd3 Nb4 Bc4 Bd6 O-O O-O
-    Bc4: +0.31 (pierde -5) Bc4 Bb4 Rc1 O-O O-O Rd8
-    Ne5: -0.54 (pierde 80) Ne5 Bb4 Rc1 Bxc3+ bxc3 Nxe5
+    Be2: +0.15 (pierde 11)
+    Bd3: +0.15 (pierde 11)
+    Bc4: +0.31 (pierde -5)
+    Ne5: -0.54 (pierde 80)
 ```
 
 ### P-g6
@@ -883,17 +850,16 @@ Rival (3 mejores): Qd6 +0.26 · Qa5 +0.27 · Bb4 +0.28
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" "O-O Be3 Ne5"`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3
-PLAN O-O Be3 Ne5
-Rival (3 mejores): Qd6 +0.09 · Qa5 +0.11 · Qd8 +0.16
-— tras Qd6: mejor +0.13 O-O O-O Qb3 Na6 Bc4 Nc7
-    O-O: +0.24 (pierde -11) O-O O-O Qb3 b6 Nb5 Qd8
-    Be3: -0.01 (pierde 14) Be3 O-O O-O Be6 Qd2 Rd8
-    Ne5: -0.10 (pierde 23) Ne5 Nc6 Nxc6 bxc6 Be3 Be6
-— tras Qa5: mejor +0.07 O-O O-O Qb3 Qb6 Qxb6 axb6
-    O-O: +0.20 (pierde -13) O-O O-O Ne5 Nc6 Nc4 Qc7
-    Be3: -0.10 (pierde 17) Be3 Nc6 O-O O-O Qb3 Ng4
-    Ne5: +0.28 (pierde -21) Ne5 O-O O-O Nc6 Nc4 Qf5
+Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3 · mueven negras · profundidad 18
+  el rival: Qd6 +0.09 · Qa5 +0.11 · Qd8 +0.16
+  tras Qd6: mejor +0.13 O-O
+    O-O: +0.24 (pierde -11)
+    Be3: -0.01 (pierde 14)
+    Ne5: -0.10 (pierde 23)
+  tras Qa5: mejor +0.07 O-O
+    O-O: +0.20 (pierde -13)
+    Be3: -0.10 (pierde 17)
+    Ne5: +0.28 (pierde -21)
 ```
 
 ### P-cf6
@@ -901,21 +867,20 @@ Rival (3 mejores): Qd6 +0.09 · Qa5 +0.11 · Qd8 +0.16
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
 
 ```
-LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5
-PLAN Nxe5 dxe5 O-O Nc3 exd6
-Rival (3 mejores): dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
-— tras dxe5: mejor +0.06 Nxe5 Bd7 Bxc6 Bxc6 Nxc6 bxc6
-    Nxe5: +0.08 (pierde -2) Nxe5 Bd7 Nc3 Nxe5 dxe5 Bxb5
-    dxe5: -0.77 (pierde 83) dxe5 Qxd1+ Kxd1 g6 Nc3 Bg7
-    O-O: -0.25 (pierde 31) O-O exd4 Nxd4 Bd7 Nc3 Nxd4
-    Nc3: -0.27 (pierde 33) Nc3 exd4 Nxd4 Bd7 O-O Nxd4
+Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 · mueven negras · profundidad 18
+  el rival: dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
+  tras dxe5: mejor +0.06 Nxe5
+    Nxe5: +0.08 (pierde -2)
+    dxe5: -0.77 (pierde 83)
+    O-O: -0.25 (pierde 31)
+    Nc3: -0.27 (pierde 33)
     exd6: ilegal aquí
-— tras Bd7: mejor +0.33 Nc3 dxe5 dxe5 g6 O-O Bg7
+  tras Bd7: mejor +0.33 Nc3
     Nxe5: ilegal aquí
     dxe5: ilegal aquí
-    O-O: +0.04 (pierde 29) O-O Nxe5 Nxe5 dxe5 Bxd7+ Qxd7
-    Nc3: +0.29 (pierde 4) Nc3 dxe5 dxe5 g6 Qe2 Bg7
-    exd6: +0.17 (pierde 16) exd6 e6 Bg5 f6 Bd2 Bxd6
+    O-O: +0.04 (pierde 29)
+    Nc3: +0.29 (pierde 4)
+    exd6: +0.17 (pierde 16)
 ```
 
 ### P-gam
@@ -923,19 +888,16 @@ Rival (3 mejores): dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
 `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w`
 
 ```
-LÍNEA e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 (lado w, prof 18)
-1.e4: +0.32 (pierde 0) | top: e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
-2.c3: +0.17 (pierde 21) | top: Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
-3.exd5: +0.33 (pierde 0) | top: exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
-4.Qa4+: +0.56 (pierde 0) | top: Qa4+ +0.56 · Bb5+ +0.27 · Nf3 +0.21 · d4 +0.18 · Bc4 +0.12
-5.Qb3: +0.41 (pierde 0) | top: Qb3 +0.41 · Bb5 -0.37 · Qd1 -0.38 · Qc4 -0.40 · Qc2 -0.52
-6.dxe6: +0.45 (pierde 0) | top: dxe6 +0.45 · Qxb7 -0.01 · c4 -0.23 · d4 -0.74 · Nf3 -0.80
-7.Bc4: +0.55 (pierde 0) | top: Bc4 +0.55 · Qxb7 +0.00 · Qd1 -0.08 · Qc2 -0.32 · Qa4+ -0.38
-8.Qxc4: +0.34 (pierde 0) | top: Qxc4 +0.34 · Qxb7 -7.37 · Qa4+ -7.81 · d4 -7.87 · Qd1 -7.94
-FIN (mueven negras):
-      +0.42 Bd6 Nf3 O-O O-O Nc6 d3 Qd7 Nbd2
-      +0.45 Nc6 Nf3 Be7 d4 cxd4 cxd4 Qd5 Qxd5
-      +0.48 Be7 Nf3 Nc6 d4 cxd4 cxd4 Qd5 Qxd5
+Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 · mueven negras · profundidad 18
+  e4: +0.32 (pierde 0) | e4 +0.32 · d4 +0.23 · Nf3 +0.22 · e3 +0.13 · c4 +0.12
+  c3: +0.17 (pierde 21) | Nf3 +0.38 · Nc3 +0.30 · Ne2 +0.28 · c3 +0.17 · d4 +0.12
+  exd5: +0.33 (pierde 0) | exd5 +0.33 · Bb5+ -0.02 · d3 -0.08 · e5 -0.13 · Na3 -0.17
+  Qa4+: +0.56 (pierde 0) | Qa4+ +0.56 · Bb5+ +0.27 · Nf3 +0.21 · d4 +0.18 · Bc4 +0.12
+  Qb3: +0.41 (pierde 0) | Qb3 +0.41 · Bb5 -0.37 · Qd1 -0.38 · Qc4 -0.40 · Qc2 -0.52
+  dxe6: +0.45 (pierde 0) | dxe6 +0.45 · Qxb7 -0.01 · c4 -0.23 · d4 -0.74 · Nf3 -0.80
+  Bc4: +0.55 (pierde 0) | Bc4 +0.55 · Qxb7 +0.00 · Qd1 -0.08 · Qc2 -0.32 · Qa4+ -0.38
+  Qxc4: +0.34 (pierde 0) | Qxc4 +0.34 · Qxb7 -7.37 · Qa4+ -7.81 · d4 -7.87 · Qd1 -7.94
+  FIN: +0.42 Bd6 Nf3 O-O O-O Nc6 d3 · +0.45 Nc6 Nf3 Be7 d4 cxd4 cxd4 · +0.48 Be7 Nf3 Nc6 d4 cxd4 cxd4
 ```
 
 ### V-cf6-dxe5
@@ -943,21 +905,20 @@ FIN (mueven negras):
 `node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
 
 ```
-LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5
-PLAN Nxe5 dxe5 O-O Nc3 exd6
-Rival (3 mejores): dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
-— tras dxe5: mejor +0.06 Nxe5 Bd7 Bxc6 Bxc6 Nxc6 bxc6
-    Nxe5: +0.08 (pierde -2) Nxe5 Bd7 Nc3 Nxe5 dxe5 Bxb5
-    dxe5: -0.77 (pierde 83) dxe5 Qxd1+ Kxd1 g6 Nc3 Bg7
-    O-O: -0.25 (pierde 31) O-O exd4 Nxd4 Bd7 Nc3 Nxd4
-    Nc3: -0.27 (pierde 33) Nc3 exd4 Nxd4 Bd7 O-O Nxd4
+Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 · mueven negras · profundidad 18
+  el rival: dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
+  tras dxe5: mejor +0.06 Nxe5
+    Nxe5: +0.08 (pierde -2)
+    dxe5: -0.77 (pierde 83)
+    O-O: -0.25 (pierde 31)
+    Nc3: -0.27 (pierde 33)
     exd6: ilegal aquí
-— tras Bd7: mejor +0.33 Nc3 dxe5 dxe5 g6 O-O Bg7
+  tras Bd7: mejor +0.33 Nc3
     Nxe5: ilegal aquí
     dxe5: ilegal aquí
-    O-O: +0.04 (pierde 29) O-O Nxe5 Nxe5 dxe5 Bxd7+ Qxd7
-    Nc3: +0.29 (pierde 4) Nc3 dxe5 dxe5 g6 Qe2 Bg7
-    exd6: +0.17 (pierde 16) exd6 e6 Bg5 f6 Bd2 Bxd6
+    O-O: +0.04 (pierde 29)
+    Nc3: +0.29 (pierde 4)
+    exd6: +0.17 (pierde 16)
 ```
 
 ### C-d6-nf6

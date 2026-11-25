@@ -357,7 +357,7 @@
         "frase": "Si lo ataca un peón desde d5: con su peón en e6, avanzas a e5; si no, cambias en d5."
        },
        {
-        "frase": "Si lo ataca un caballo y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5.",
+        "frase": "Si lo ataca un caballo y su caballo de dama salió a c6, avanzas tu peón a d5, salvo con tu alfil en d3 y su peón en e6.",
         "marcas": [
          {
           "tipo": "A3",
@@ -535,7 +535,8 @@
      ],
      "texto": [
       "La idea: con 2.c3 preparas d4, y lo que haces con tu peón de e4 depende de quién lo ataque.",
-      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, primero atiendes tu e4: contra un peón en d5, avanzas con su peón en e6, o cambias; contra un caballo, d5 si su caballo de dama está en c6, o lo defiendes."
+      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama.",
+      "3) Con los dos peones del centro, primero atiendes tu e4: contra un peón en d5, avanzas con su peón en e6, o cambias; contra un caballo, d5 si su caballo de dama está en c6 (no con tu alfil en d3 y su peón en e6), o lo defiendes."
      ],
      "fuente": [
       "WB-2c3",
@@ -604,6 +605,9 @@
        },
        {
         "frase": "Con los dos peones del centro, primero atiendes lo que ataque tu e4; después, tus caballos."
+       },
+       {
+        "frase": "Contra un caballo, d5 si su caballo de dama está en c6, salvo con tu alfil en d3 y su peón en e6."
        }
       ]
      }

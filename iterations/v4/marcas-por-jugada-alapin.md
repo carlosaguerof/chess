@@ -90,7 +90,7 @@
 | plan moderna tuyo frase 1 | Tu caballo de b1 sale a c3 atacando a la dama. | flecha b1→c3 (A3, verde, punteada) |
 | idea 1, paso 7 | O con el caballo, que también ataca e4: 2...Cf6. | flecha f6→e4 (A4, roja) |
 | estructura 2, paso 5 | El rival quiere bloquearlo con una pieza en d5 y cambiar piezas. | casilla d5 (A6, roja) |
-| estructura 4, paso 5 | Si lo ataca un caballo y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5. | flecha d4→d5 (A3, verde, punteada) |
+| estructura 4, paso 5 | Si lo ataca un caballo y su caballo de dama salió a c6, avanzas tu peón a d5, salvo con tu alfil en d3 y su peón en e6. | flecha d4→d5 (A3, verde, punteada) |
 | repaso 1, paso 4 | 5...Cc6 6.Cf3: primero el caballo de g1, que defiende d4. | flecha f3→d4 (A2, verde) |
 | repaso 1, paso 5 | 6...Ag4 7.Ae2 e6 8.Cc3: ahora sí, tu otro caballo ataca a la dama de d5. | flecha c3→d5 (A2, verde) |
 | plan moderna paso a paso, paso 1 | Tu plan: Cc3, tu caballo de b1 ataca a la dama de d5. | flecha c3→d5 (A2, verde) |
