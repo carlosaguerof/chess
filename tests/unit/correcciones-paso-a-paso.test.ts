@@ -11,6 +11,7 @@ import type { PasoAPaso } from '../../src/curso/tipos.ts'
  * el repaso. La prueba sobre los datos: cada paso es una frase, y cada paso que habla de una jugada trae esa jugada.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
+const esCaroKann = c.apertura === 'caro-kann' && c.color === 'b'
 
 /** Todos los paso a paso del curso, con su salida. */
 const TODOS: { nombre: string; pa: PasoAPaso; inicio: string[] }[] = [
@@ -96,7 +97,11 @@ describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('La idea arranca de la posición inicial y llega a la del tablero de la página (1.e4 c6 2.d4 d5)', () => {
     const fotos = fotosDePasos(c.piezas.idea.paginas[0]!.pasoAPaso!)
     const pagina = new Chess()
-    for (const s of c.piezas.idea.paginas[0]!.tablero!.jugadas!) pagina.move(s)
-    expect(fotos[3]!.fen).toBe(pagina.fen())
+    const jugadas = c.piezas.idea.paginas[0]!.tablero!.jugadas!
+    for (const s of jugadas) pagina.move(s)
+    // en la Caro-Kann, el paso 4 (1.e4 c6 2.d4 d5); en los demás cursos, algún paso llega al tablero de la página (la Italiana
+    // juega una jugada por paso; los del Avance, a veces dos)
+    if (esCaroKann) expect(fotos[3]!.fen).toBe(pagina.fen())
+    else expect(fotos.map((f) => f.fen)).toContain(pagina.fen())
   })
 })

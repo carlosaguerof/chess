@@ -145,6 +145,7 @@ describe('"Ver qué pasaría" · los datos', () => {
   })
 })
 
+// las de la Italiana, en `tests/unit/curso-italiana.test.ts`
 describe.runIf(esCaroKann)('"Ver qué pasaría" · las consecuencias que se miden en el tablero (chess.js)', () => {
   const final = (frase: string) => new Chess(fotos(TODOS.find((v) => v.frase === frase)!).at(-1)!.fen)
   /** La posición del paso cuya frase empieza con `inicio`. */
@@ -268,6 +269,7 @@ describe('"Ver qué pasaría" · en la lección', () => {
         const visibles = frasesDespues(c, l, 'practicar', ply).map((f) => f.texto)
         for (const v of verDespues(c, l, 'practicar', ply)) expect(visibles, `${l.id} ${ply}`).toContain(v.titulo)
       }
+    if (!esCaroKann) return
     // el caso de Carlos, en la Tal: la frase de ...e6 no se muestra en Practicar, y por eso no hay botón
     if (!esCaroKann) return
     const tal = linea('v:avance-tal')
@@ -297,7 +299,12 @@ describe('"Ver qué pasaría" · en la lección', () => {
     expect(verAdelanta(short, 10, v.inicio, { pasos: [...v.ver.pasos, { frase: 'Y luego ...Db6.' }] })).toEqual(['Qb6'])
   })
 
-  itCaroKann('un momento con dos frases: dos botones, y cada uno abre su ventana, con su frase de título y desde su propia posición', () => {
+  it('un momento con dos frases: dos botones, y cada uno abre su ventana, con su frase de título y desde su propia posición', () => {
+    // cada ventana se puede recorrer completa, en cada momento de cada variante
+    for (const l of VARIANTES)
+      for (const ply of misJugadas(l))
+        for (const vuelta of ['aprender', 'practicar'] as const) for (const v of verDespues(c, l, vuelta, ply)) expect(() => fotosDePasos(v.pa, v.inicio), `${l.id} ${ply} ${vuelta}`).not.toThrow()
+    if (!esCaroKann) return
     const conDos = new Set(VARIANTES.flatMap((l) => misJugadas(l).filter((ply) => verDespues(c, l, 'aprender', ply).length >= 2).map((ply) => l.jugadas.slice(0, ply + 1).join(' '))))
     expect(conDos.size).toBe(5)
     // dos líneas distintas, cada una en su ventana
@@ -378,6 +385,7 @@ describe('"Ver qué pasaría" · cada botón, junto a su frase (Carlos, 2026-10-
         const texto = porQueNo(c, l, ply, san, vuelta)
         expect(tramosDe(texto, ver ? [ver] : []), `${donde} ${san}`).toEqual([{ texto, ver }])
       }
+    if (!esCaroKann) return
     // la frase de la Dc7 del Cambio, la única a media explicación (una vez por vuelta)
     if (!esCaroKann) return
     expect(aMedias).toBe(2)

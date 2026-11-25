@@ -233,7 +233,9 @@ describe('Los cursos del Avance · lo guardado, el Repaso y Refuerza', () => {
     }
     // una apertura sin curso por estructuras no cambia
     const todas = repertorioCompleto()
-    expect(rep.lineas.filter((l) => l.apertura === 'italiana').length).toBe(todas.lineas.filter((l) => l.apertura === 'italiana').length)
+    // (la Italiana ya tiene su curso por estructuras, con opcionales: el ejemplo es la Siciliana)
+    expect(todas.lineas.filter((l) => l.apertura === 'siciliana').length).toBeGreaterThan(0)
+    expect(rep.lineas.filter((l) => l.apertura === 'siciliana').length).toBe(todas.lineas.filter((l) => l.apertura === 'siciliana').length)
   })
 
   it('el filtro distingue por apertura y color: la Caro-Kann con blancas (el Avance) no choca con la de negras', () => {

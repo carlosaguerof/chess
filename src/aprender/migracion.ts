@@ -93,6 +93,38 @@ export function migrarAlCursoCaroKann(): void {
 }
 
 /**
+ * El curso de la Italiana por estructuras (2026-11-25, `specs/cursos.md` §6): siete lecciones cambian de línea de la base
+ * (una variante `curso-…` con su continuación), y su id cambia con ella. Lo que ya llevaba en el Repaso y el avance de
+ * la lección vieja pasa a la nueva de la misma respuesta, como en la Caro-Kann: se muda, no se copia. La línea principal del
+ * Giuoco Pianissimo conserva su id. Las otras cinco de antes (6.Cbd2, el Canal y las tres de 4.Cg5) son otra jugada tuya, no
+ * una lección (nota 3 del orchestrator, `specs/cursos.md` §1): lo suyo se queda guardado en el teléfono y en el Respaldo, y
+ * deja de salir.
+ */
+export const LECCIONES_ITALIANA: Record<string, string> = {
+  'dos-caballos-d3': 'curso-dos-caballos-d3',
+  'clasica-la-bourdonnais': 'curso-la-bourdonnais',
+  paris: 'curso-paris',
+  'anti-higado-frito': 'curso-anti-higado-frito',
+  hungara: 'curso-hungara',
+  'blackburne-kostic': 'curso-blackburne-kostic',
+  rousseau: 'curso-rousseau',
+}
+
+/** Muda lo de cada lección vieja de la Italiana a su lección nueva (si la nueva aún no tiene nada). */
+export function pasarItaliana<T>(r: Record<string, T>): Record<string, T> {
+  const nuevo = { ...r }
+  const prefijo = 'italiana:w/w:italiana/'
+  for (const [viejo, nueva] of Object.entries(LECCIONES_ITALIANA)) {
+    const v = r[prefijo + viejo]
+    if (v !== undefined && !(prefijo + nueva in nuevo)) {
+      nuevo[prefijo + nueva] = v
+      delete nuevo[prefijo + viejo]
+    }
+  }
+  return nuevo
+}
+
+/**
  * La Eslava y "...c6 + ...d5 contra lo demás" pasaron al curso por estructuras (2026-11-25, `specs/cursos.md` §6). Como
  * en la Caro-Kann, lo que ya llevaba en el Repaso y el avance de cada lección vieja se muda a la lección nueva de la misma
  * respuesta del rival (no se copia: no cuenta dos veces). Las dos de una jugada mía distinta en la misma posición (la
@@ -184,6 +216,16 @@ export function pasarAvance<T>(r: Record<string, T>): Record<string, T> {
       }
     }
   return nuevo
+}
+
+/** Corre una sola vez al abrir la app. */
+export function migrarAlCursoItaliana(): void {
+  if (leer<number>('modelo-italiana', 0) >= 1) return
+  const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
+  const repaso = leer<Record<string, unknown>>('repaso', {})
+  if (progreso && typeof progreso === 'object') guardar('progreso', pasarItaliana(progreso))
+  if (repaso && typeof repaso === 'object') guardar('repaso', pasarItaliana(repaso))
+  guardar('modelo-italiana', 1)
 }
 
 /** Corre una sola vez al abrir la app. */
