@@ -1,4 +1,4 @@
-# El inventario de "Ver qué pasa"
+# El inventario de "Ver qué pasaría"
 
 > Generado con `node scripts/ver-inventario.ts eslava:b`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Defensa Eslava»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
@@ -36,7 +36,7 @@
 | 4...dxc4 | porque | Blancas todavía no jugó e3: recuperar el peón le va a costar jugadas, y mientras tanto sacas tus piezas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...♗f5 | porque | Tu peón de c4 cuida b3, así que la dama blanca no puede ir ahí contra b7. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...e6 | porque | Tu alfil de c8 ya está afuera: este peón ya no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
-| 6...e6 | prepara | Tu alfil de f8 podrá salir a b4, la casilla que a4 dejó sin vigilancia. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 6...e6 | prepara | Tu alfil de f8 podrá salir a b4: después de a4, ningún peón de blancas puede vigilar esa casilla. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 7...♗b4 | prepara | Y ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8...0-0 | porque | Blancas recuperó el peón y tú sacaste tus piezas: la partida queda pareja. | explica la jugada que ya está en la línea, sin una alternativa |
 | 9...♘e4 | porque | Desde e4 tu caballo ataca al de c3, que ya estaba atacado por tu alfil de b4. | explica la jugada que ya está en la línea, sin una alternativa |
@@ -47,15 +47,15 @@
 | 5...b5 | porque | Sin a4, nada lo impide, y su alfil de f1 ya no recupera el peón. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...b5 | prepara | Si blancas lo ataca con a4, tu peón sigue adelante y echa a su caballo de c3. | lo que dice se juega en las jugadas que siguen de la línea |
 | 6...b4 | porque | El caballo tiene que irse, y blancas pierde tiempo. | explica la jugada que ya está en la línea, sin una alternativa |
-| 7...e6 | porque | Tu caballo de a2 quedó lejos del centro, y tú sigues sacando piezas. | explica la jugada que ya está en la línea, sin una alternativa |
+| 7...e6 | porque | El caballo de blancas quedó en a2, lejos del centro, y tú sigues sacando piezas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8...♗b7 | porque | Cuando tu peón de c6 avance, ese alfil mirará toda la diagonal larga. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5...b5 | porque | Su alfil de f1 ya no puede recuperarlo sin perderse. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♘d5 | porque | Ahí ningún peón de blancas lo puede atacar. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7...e6 | porque | El caballo se queda en el centro, y tu alfil de f8 ya puede salir. | explica la jugada que ya está en la línea, sin una alternativa |
-| 7...e6 | prepara | Es una línea aguda: termina de sacar tus piezas y enroca. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 7...e6 | prepara | Es una línea con mucha pelea: termina de sacar tus piezas y enroca. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...♗g4 | porque | Sale antes de ...e6, que lo dejaría encerrado. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...e6 | porque | Tu alfil de c8 ya está afuera, y tus peones de c6, d5 y e6 forman un centro firme. | explica la jugada que ya está en la línea, sin una alternativa |
-| 6...♗e7 | porque | Con tus piezas menores afuera, ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 6...♗e7 | porque | Con tu alfil de f8 afuera, ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...cxd5 | porque | Sigues con un peón en d5, y la posición queda simétrica: los peones de los dos lados son iguales. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5...♘c6 | porque | Tu caballo vigila d4 y e5, y deja libre a tu alfil de c8. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♗f5 | porque | Es la idea de siempre: tu caballo de f6 cuida d5, y el alfil sale antes de que ...e6 lo encierre. | explica la jugada que ya está en la línea, sin una alternativa |

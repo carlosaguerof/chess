@@ -136,6 +136,7 @@ describe('...c6 + ...d5 · lo guardado y el Repaso', () => {
 
   it('en el Repaso salen solo las seis obligatorias', () => {
     const cu = cursos().find((x) => x.id === 'otros-negras:b')!
-    expect(cu.lecciones.map((l) => l.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
+    expect(cu.lecciones.filter((l) => !l.opcional).map((l) => l.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
+    expect(cu.lecciones.filter((l) => l.opcional).map((l) => l.id)).toEqual(opcionales(c).map((v) => leccionIdDe(c, v)))
   })
 })

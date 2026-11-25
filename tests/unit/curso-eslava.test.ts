@@ -216,8 +216,10 @@ describe('La Eslava · lo guardado, el Repaso y Refuerza', () => {
 
   it('las opcionales no salen en el Repaso ni en Refuerza; las obligatorias, sí (orden de Carlos, 2026-11-25)', () => {
     const ck = cursos().find((x) => x.id === 'eslava:b')!
-    expect(ck.lecciones.map((l) => l.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
-    expect(leccionesDe(c)).toHaveLength(4)
+    // las opcionales van marcadas (`esLeccionOpcional`, de main): el Repaso no las saca
+    expect(ck.lecciones.filter((l) => !l.opcional).map((l) => l.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
+    expect(ck.lecciones.filter((l) => l.opcional)).toHaveLength(7)
+    expect(leccionesDe(c)).toHaveLength(11)
     // Refuerza: un fallo en una jugada que solo tiene una opcional no sale; uno en una obligatoria, sí
     const enLinea = (id: string, ply: number) => {
       const l = linea(id)

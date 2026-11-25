@@ -44,7 +44,8 @@ test.describe('ajustes de la app', () => {
     await captura(page, info, 'ajustes-aprender-blancas')
     await page.getByTestId('pestana-negras').click()
     await expect(page.getByTestId('pestana-negras')).toHaveAttribute('aria-selected', 'true')
-    expect(await ids()).toEqual(['tarjeta-caro-kann:b', 'tarjeta-caro-kann-estructuras:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
+    // una sola Caro-Kann (2026-11-25): su tarjeta abre el curso por estructuras
+    expect(await ids()).toEqual(['tarjeta-caro-kann:b', 'tarjeta-eslava:b', 'tarjeta-otros-negras:b'])
     await sinFavoritas()
     // las populares apagadas no se abren ni por su dirección
     for (const id of ['londres:w', 'gambito-dama:w', 'siciliana:b', 'escandinava:b', 'gambito-dama-declinado:b']) {
@@ -279,8 +280,10 @@ test.describe('Nota 1 · "cómo funciona" con ⓘ en Repaso de hoy y en Refuerza
   })
 
   test('en el Repaso de hoy, con una línea que toca: el ⓘ va arriba de la lección', async ({ page }, info) => {
+    // una obligatoria de la Caro-Kann ("avance-short", el id de antes, la migración lo pasa a la avance-c3, que es opcional
+    // y ya no sale en el Repaso: specs/cursos.md §6)
     await page.addInitScript((fecha) => {
-      if (!localStorage.getItem('ajedrez.v1.progreso')) localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'caro-kann:b/b:caro-kann/avance-short': { fecha } }))
+      if (!localStorage.getItem('ajedrez.v1.progreso')) localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ 'caro-kann:b/b:caro-kann/curso-avance-short': { fecha } }))
     }, Date.now() - 3 * 86_400_000)
     await page.goto('/#/repaso')
     await expect(page.getByTestId('leccion-pantalla')).toBeVisible()
