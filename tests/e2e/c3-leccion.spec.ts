@@ -5,7 +5,7 @@ import { jugar, tocar } from './_util.ts'
  * C3 (curso de la Caro-Kann): la lección nueva, punto por punto del diseño §4, en los dos perfiles. Se usa la Variante
  * Tal (4.h4), la más corta del Avance: 3...Af5 4.h4 h5 5.Ad3 Axd3 6.Dxd3 e6.
  */
-const TAL = '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal')
+const TAL = '/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal')
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const narracion = (page: Page) => page.getByTestId('narracion')
@@ -34,8 +34,8 @@ async function aprenderTal(page: Page, info: TestInfo) {
 test.describe('C3 · la lección nueva', () => {
   test('el ciclo: intro, rival solo, espera de "Siguiente" cuando hay que leer, el error que se queda, Atrás, el plan, Practicar con su explicación y el resumen', async ({ page }, info) => {
     await page.goto(TAL)
-    // "Variante N de M" y la introducción, en el espacio fijo de los mensajes
-    await expect(page.getByTestId('cual-variante')).toHaveText('Variante 4 de 16')
+    // "Variante N de M" y la introducción, en el espacio fijo de los mensajes (en el curso por estructuras, la Tal es opcional)
+    await expect(page.getByTestId('cual-variante')).toHaveText('Opcional 2 de 8')
     await momento(page, 'intro')
     await expect(narracion(page)).toContainText('4.h4')
     const caja = await narracion(page).boundingBox()
@@ -130,7 +130,8 @@ test.describe('C3 · la lección nueva', () => {
     // el avance quedó guardado: la variante, terminada
     await page.getByTestId('salida-curso').click()
     await expect(page.getByTestId('paso-v:avance-tal')).toHaveAttribute('data-estado', 'hecha')
-    await expect(page.getByTestId('avance')).toHaveText('1 de 16 variantes')
+    // la Tal es opcional en el curso por estructuras: se marca hecha, pero no cuenta en "N de 8"
+    await expect(page.getByTestId('avance')).toHaveText('0 de 8 variantes')
   })
 
   test('la ayuda en tres escalones (Pista, Otra pista con la pieza, Respuesta con la flecha) y cuenta en el resumen', async ({ page }, info) => {
@@ -196,9 +197,10 @@ test.describe('C3 · la lección nueva', () => {
     await momento(page, 'tuTurno')
     await expect(leccion(page)).toHaveAttribute('data-ply', '7')
     await expect(leccion(page)).toHaveAttribute('data-vuelta', 'aprender')
-    await page.goto('/#/curso/caro-kann%3Ab')
-    await expect(page.getByTestId('empezar-curso')).toContainText('Seguir')
-    await expect(page.getByTestId('seguir-nombre')).toHaveText('Avance: 4.h4 (Tal)')
+    // en el curso por estructuras la Tal es opcional: a medias, no cambia el botón grande (specs/cursos.md §6). "Seguir"
+    // con una obligatoria a medias: tests/e2e/curso-por-estructuras.spec.ts y tests/e2e/boton-seguir.spec.ts
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
+    await expect(page.getByTestId('empezar-curso')).toHaveText('Empezar')
     await expect(page.getByTestId('paso-v:avance-tal')).toHaveAttribute('data-estado', 'pendiente')
   })
 
@@ -234,7 +236,7 @@ test.describe('C3 · la lección nueva', () => {
   test('las flechas de la siguiente jugada se prenden en Ajustes (solo en Aprender)', async ({ page }) => {
     // en 6...e6 de la Tal (no es jugada clave y la frase del rival no lleva marcas), el tablero está limpio
     const en6e6 = async () => {
-      await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'aprender', ply: 11, fecha: Date.now() } })))
+      await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'aprender', ply: 11, fecha: Date.now() } })))
       await page.goto(TAL)
       await page.reload()
       await momento(page, 'tuTurno')
@@ -252,10 +254,10 @@ test.describe('C3 · la lección nueva', () => {
   })
 
   test('Errores y trampas: castigo el error yo, con la pieza que castiga', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/errores')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/errores')
     await page.getByTestId('error-tal-e6').click()
     await momento(page, 'intro')
-    await expect(page.getByTestId('cual-variante')).toHaveText('¿Y si…? 1 de 4')
+    await expect(page.getByTestId('cual-variante')).toHaveText('¿Y si…? 1 de 2')
     await page.getByTestId('empezar-vuelta').click()
     // la máquina juega el error (4...e6) y yo juego con blancas: g4, f3 y h5
     for (const j of ['g2g4', 'f2f3', 'h4h5']) {
@@ -265,7 +267,7 @@ test.describe('C3 · la lección nueva', () => {
     await momento(page, 'fin')
     await expect(page.getByTestId('resumen-idea')).toContainText('gana una pieza')
     await page.getByTestId('salida-curso').click()
-    await page.goto('/#/curso/caro-kann%3Ab/errores')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/errores')
     await expect(page.getByTestId('error-tal-e6')).toContainText('Hecho')
   })
 })
