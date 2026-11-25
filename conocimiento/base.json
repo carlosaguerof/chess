@@ -2413,6 +2413,312 @@
        "motor: 4...g6 es la mejor (−0.68)"
       ]
      }
+    },
+    {
+     "id": "avance-curso-short",
+     "clave": "caro-kann/avance-curso-short",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Short (4.c3 e6 5.Ae2 c5 6.Cf3 Cc6 7.0-0 Ag4 8.Cbd2)",
+     "nombreIngles": "Caro-Kann Defense: Advance, Short Variation",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "c3",
+      "e6",
+      "Be2",
+      "c5",
+      "Nf3",
+      "Nc6",
+      "O-O",
+      "Bg4",
+      "Nbd2"
+     ],
+     "lado": "blancas",
+     "plan": "Sostienes la cadena d4-e5 con c3 y te desarrollas con Cf3, Ae2 y 0-0, el mismo esquema que contra la Francesa. Si negras cambia en d4, retomas con el peón de c.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance, Short Variation",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. c3 e6 5. Be2"
+     },
+     "continuacion": {
+      "desde": 9,
+      "fuente": [
+       "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43)"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-botvinnik-carls",
+     "clave": "caro-kann/avance-curso-botvinnik-carls",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Defensa Botvinnik-Carls (4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "cxd4",
+      "cxd4",
+      "Bg4",
+      "Be2",
+      "e6",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "Negras golpea d4 de inmediato con 3...c5. Lo sostienes con c3 y Cf3; si cambia en d4, retomas con el peón de c y defiendes d4 con piezas.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 c5"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Investigación del porqué §3.5 (el esqueleto c3, Cf3, Ae2, 0-0)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-short-cf3",
+     "clave": "caro-kann/avance-curso-short-cf3",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Short (4.Cf3 e6 5.Ae2 Cd7 6.0-0 Ae7 7.c3)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Short Variation",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "Nf3",
+      "e6",
+      "Be2",
+      "Nd7",
+      "O-O",
+      "Be7",
+      "c3"
+     ],
+     "lado": "blancas",
+     "plan": "Desarrollas con Cf3, Ae2 y 0-0 y pones c3 detrás de d4: llegas a la cadena entera por otro orden.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Short Variation",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 3...Af5 4.Cf3 (4...e6, 5.Ae2)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ae2 la mejor (+0.27), 6.0-0 la mejor (+0.48), 6...Ae7 la mejor, 7.c3 a 1 cp"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-van-der-wiel",
+     "clave": "caro-kann/avance-curso-van-der-wiel",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Ataque Van der Wiel (7...h5 8.Cf4 Ah7 9.Cxh5 Cc6 10.dxc5)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "Nc3",
+      "e6",
+      "g4",
+      "Bg6",
+      "Nge2",
+      "c5",
+      "h4",
+      "h5",
+      "Nf4",
+      "Bh7",
+      "Nxh5",
+      "Nc6",
+      "dxc5",
+      "Bxc5"
+     ],
+     "lado": "blancas",
+     "plan": "Persigues al alfil de f5 con g4 y h4. Contra 7...h5, el caballo va a f4 y se come el peón de h5.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nc3 e6 5. g4 Bg6 6. Nge2 c5 7. h4"
+     },
+     "continuacion": {
+      "desde": 13,
+      "fuente": [
+       "Wikibooks, 3...Af5 (7.h4 amenaza h5; la defensa 7...h5)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 8.Cf4 la mejor (+0.07; las demás −0.68 o peor), 9.Cxh5 la mejor, 10.dxc5 la mejor (−0.01)"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-tal",
+     "clave": "caro-kann/avance-curso-tal",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Variante Tal (4...h5 5.Ad3 Axd3 6.Dxd3 e6 7.Cf3 Da5+ 8.Cbd2)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Tal Variation",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "h4",
+      "h5",
+      "Bd3",
+      "Bxd3",
+      "Qxd3",
+      "e6",
+      "Nf3",
+      "Qa5+",
+      "Nbd2"
+     ],
+     "lado": "blancas",
+     "plan": "Empujas h4 contra el alfil de f5; negras frena con ...h5 y cambias los alfiles con Ad3. Después, Cf3 y el desarrollo.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Tal Variation",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. h4"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 3...Af5 4.h4 (4...h5 5.Ad3)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ad3 a 3 cp de la mejor, 7.Cf3 la mejor (+0.31), 7...Da5+ la mejor, 8.Cbd2 la mejor (+0.44)"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-bayoneta",
+     "clave": "caro-kann/avance-curso-bayoneta",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Ataque Bayoneta (4...Ae4 5.f3 Ag6 6.h4 h5 7.Ce2 e6 8.Cf4 Ah7 9.Cxh5)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Bayonet Attack",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "g4",
+      "Be4",
+      "f3",
+      "Bg6",
+      "h4",
+      "h5",
+      "Ne2",
+      "e6",
+      "Nf4",
+      "Bh7",
+      "Nxh5"
+     ],
+     "lado": "blancas",
+     "plan": "Echas al alfil con g4 y f3, y con h4 y el caballo por e2 y f4 vas contra el peón de h5.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Bayonet Attack",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. g4"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 3...Af5 4.g4 (4...Ae4 5.f3 Ag6)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.h4 a 4 cp de la mejor, 7.Ce2 la mejor, 8.Cf4 la mejor (+0.08), 9.Cxh5 la mejor (+0.12)"
+      ]
+     }
+    },
+    {
+     "id": "avance-curso-bronstein",
+     "clave": "caro-kann/avance-curso-bronstein",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Variante Bronstein (4...e6 5.Cg3 Ag6 6.c3 c5 7.Ad3 Cc6 8.0-0)",
+     "nombreIngles": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+     "eco": "B12",
+     "jugadas": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "Ne2",
+      "e6",
+      "Ng3",
+      "Bg6",
+      "c3",
+      "c5",
+      "Bd3",
+      "Nc6",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "El caballo va por e2 a g3 contra el alfil; después c3, Ad3 y 0-0 para sostener d4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B12",
+      "name": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+      "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Ne2"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 3...Af5 (4.Ce2 y Cg3 contra el alfil)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.c3 a 9 cp de la mejor, 7.Ad3 la mejor (+0.03), 8.0-0 la mejor"
+      ]
+     }
     }
    ]
   },
@@ -2641,6 +2947,311 @@
       "eco": "C02",
       "name": "French Defense: Advance Variation, Extended Bishop Swap",
       "pgn": "1. e4 e6 2. d4 d5 3. e5 Bd7"
+     }
+    },
+    {
+     "id": "curso-avance-c3",
+     "clave": "francesa/curso-avance-c3",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: 3...c5 4.c3 cxd4 5.cxd4 Cc6 6.Cf3 Cge7 7.Ca3 Cf5 8.Cc2",
+     "nombreIngles": "French Defense: Advance Variation",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "cxd4",
+      "cxd4",
+      "Nc6",
+      "Nf3",
+      "Nge7",
+      "Na3",
+      "Nf5",
+      "Nc2"
+     ],
+     "lado": "blancas",
+     "plan": "Negras cambia en d4 y retomas con el peón de c: ningún peón defiende d4. Lo sostienes con piezas: Cf3 y el caballo por a3 a c2.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 1.e4 e6 2.d4 d5 3.e5 c5 (4...cxd4 5.cxd4)",
+       "Investigación del porqué §3.4 (Ca3-c2 contra ...Cf5)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5...Cc6 a 3 cp de la mejor, 6.Cf3 a 4 cp, 6...Cge7 la mejor, 7.Ca3 mejor que 7.a3 en su propia búsqueda (+0.61), 8.Cc2 la mejor (+0.46)"
+      ]
+     }
+    },
+    {
+     "id": "curso-paulsen",
+     "clave": "francesa/curso-paulsen",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Ataque Paulsen (5...Cge7 6.Ca3 Cf5 7.Cc2)",
+     "nombreIngles": "French Defense: Advance Variation, Paulsen Attack",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "Nge7",
+      "Na3",
+      "Nf5",
+      "Nc2"
+     ],
+     "lado": "blancas",
+     "plan": "Negras lleva el caballo a f5 contra d4. Tu caballo va por a3 a c2 para sumar otro defensor, con c3 todavía detrás de d4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Paulsen Attack",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3"
+     },
+     "continuacion": {
+      "desde": 9,
+      "fuente": [
+       "Investigación del porqué §3.4 (Ca3-c2 contra ...Cf5)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.Ca3 la mejor (+0.35), 6...Cf5 la mejor, 7.Cc2 la mejor (+0.54)"
+      ]
+     }
+    },
+    {
+     "id": "curso-principal-a3",
+     "clave": "francesa/curso-principal-a3",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: línea principal (6...c4 7.Cbd2 Ca5 8.Ae2 Ad7 9.0-0)",
+     "nombreIngles": "French Defense: Advance Variation, Main Line",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "Qb6",
+      "a3",
+      "c4",
+      "Nbd2",
+      "Na5",
+      "Be2",
+      "Bd7",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "Negras cierra con ...c4 y ya nadie ataca d4. Desarrollas con Cbd2, Ae2 y 0-0 sin jugar b4 de inmediato.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Main Line",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3"
+     },
+     "continuacion": {
+      "desde": 11,
+      "fuente": [
+       "Wikibooks, 5...Db6 6.a3 (6...c4)",
+       "Investigación del porqué §3.4 (no 7.b4; 7.Cbd2 o 7.Ae2)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 7.Cbd2 la mejor (+0.32), 8.Ae2 la mejor (+0.40), 9.0-0 a 16 cp de la mejor (9.Tb1)"
+      ]
+     }
+    },
+    {
+     "id": "curso-lputian",
+     "clave": "francesa/curso-lputian",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Variante Lputian (7.b4 cxd4 8.cxd4 Cf5 9.Ab2)",
+     "nombreIngles": "French Defense: Advance Variation, Lputian Variation",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "Qb6",
+      "a3",
+      "Nh6",
+      "b4",
+      "cxd4",
+      "cxd4",
+      "Nf5",
+      "Bb2"
+     ],
+     "lado": "blancas",
+     "plan": "Con b4 y Ab2 defiendes d4 sin dejar colgado el peón de b2. No tomes el caballo de h6 con el alfil: ...Dxb2.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Lputian Variation",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3 Nh6"
+     },
+     "continuacion": {
+      "desde": 12,
+      "fuente": [
+       "Wikibooks, 5...Db6 6.a3 (b4 libera al alfil de c1)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 7.b4 a 15 cp de la mejor, 7...cxd4 y 8...Cf5 las de su línea, 9.Ab2 la mejor (+0.26)"
+      ]
+     }
+    },
+    {
+     "id": "curso-euwe",
+     "clave": "francesa/curso-euwe",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Variante Euwe (6.Ae2 Cge7 7.Ca3 cxd4 8.cxd4 Cf5 9.Cc2)",
+     "nombreIngles": "French Defense: Advance Variation, Euwe Variation",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "Bd7",
+      "Be2",
+      "Nge7",
+      "Na3",
+      "cxd4",
+      "cxd4",
+      "Nf5",
+      "Nc2"
+     ],
+     "lado": "blancas",
+     "plan": "Negras saca el alfil a d7 antes de decidir. Desarrollas con Ae2 y, cuando cambia en d4, sostienes d4 con el caballo por a3 a c2.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Euwe Variation",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Bd7"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Investigación del porqué §3.4 (Ca3-c2 en la tabla de la Euwe de Wikibooks)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.Ae2 la mejor (+0.38), 7.Ca3 a 18 cp de la mejor (7.0-0), 7...cxd4 la mejor, 9.Cc2 la de su línea"
+      ]
+     }
+    },
+    {
+     "id": "curso-wade",
+     "clave": "francesa/curso-wade",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Variante Wade (6.Ae2 Ab5 7.0-0 Axe2 8.Dxe2)",
+     "nombreIngles": "French Defense: Advance Variation, Wade Variation",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Qb6",
+      "Nf3",
+      "Bd7",
+      "Be2",
+      "Bb5",
+      "O-O",
+      "Bxe2",
+      "Qxe2"
+     ],
+     "lado": "blancas",
+     "plan": "Negras cambia su alfil encerrado. Lo dejas: Ae2, 0-0 y retomas con la dama; tú conservas más espacio y la cadena.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Wade Variation",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Qb6 5. Nf3 Bd7"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikipedia, French Defence (negras cambia su alfil malo con ...Ad7 y ...Ab5)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.Ae2 a 9 cp de la mejor (6.a3), 7.0-0 la mejor (+0.35), 8.Dxe2 la única"
+      ]
+     }
+    },
+    {
+     "id": "curso-cambio-de-alfil",
+     "clave": "francesa/curso-cambio-de-alfil",
+     "familia": "Variante del Avance",
+     "nombre": "Variante del Avance: Cambio de Alfil Extendido (4.Cf3 a6 5.c3 Ab5 6.Axb5+ axb5 7.0-0)",
+     "nombreIngles": "French Defense: Advance Variation, Extended Bishop Swap",
+     "eco": "C02",
+     "jugadas": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "Bd7",
+      "Nf3",
+      "a6",
+      "c3",
+      "Bb5",
+      "Bxb5+",
+      "axb5",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "Negras busca cambiar su alfil encerrado con ...a6 y ...Ab5. Cambias, enrocas y sigues con c3 detrás de d4.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C02",
+      "name": "French Defense: Advance Variation, Extended Bishop Swap",
+      "pgn": "1. e4 e6 2. d4 d5 3. e5 Bd7"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikipedia, French Defence (cambiar el alfil malo)",
+       "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 4.Cf3 a 10 cp de la mejor (4.c3), 4...a6 a 12 cp de la mejor de negras, 5.c3 a 2 cp, 6.Axb5+ a 10 cp, 7.0-0 a 6 cp"
+      ]
      }
     }
    ]

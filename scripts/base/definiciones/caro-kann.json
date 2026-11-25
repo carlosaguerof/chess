@@ -593,6 +593,153 @@
       "plan": "Tienes un peón de más y la dama blanca tiene que moverse otra vez. Desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.",
       "frecuencia": null,
       "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-short",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Short (4.c3 e6 5.Ae2 c5 6.Cf3 Cc6 7.0-0 Ag4 8.Cbd2)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance, Short Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. c3 e6 5. Be2"
+      },
+      "continuacion": {
+        "jugadas": "c5 Nf3 Nc6 O-O Bg4 Nbd2",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43)"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Sostienes la cadena d4-e5 con c3 y te desarrollas con Cf3, Ae2 y 0-0, el mismo esquema que contra la Francesa. Si negras cambia en d4, retomas con el peón de c.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-botvinnik-carls",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Defensa Botvinnik-Carls (4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 c5"
+      },
+      "continuacion": {
+        "jugadas": "c3 Nc6 Nf3 cxd4 cxd4 Bg4 Be2 e6 O-O",
+        "fuente": [
+          "Investigación del porqué §3.5 (el esqueleto c3, Cf3, Ae2, 0-0)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Negras golpea d4 de inmediato con 3...c5. Lo sostienes con c3 y Cf3; si cambia en d4, retomas con el peón de c y defiendes d4 con piezas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-short-cf3",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Short (4.Cf3 e6 5.Ae2 Cd7 6.0-0 Ae7 7.c3)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Short Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3"
+      },
+      "continuacion": {
+        "jugadas": "e6 Be2 Nd7 O-O Be7 c3",
+        "fuente": [
+          "Wikibooks, 3...Af5 4.Cf3 (4...e6, 5.Ae2)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ae2 la mejor (+0.27), 6.0-0 la mejor (+0.48), 6...Ae7 la mejor, 7.c3 a 1 cp"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Desarrollas con Cf3, Ae2 y 0-0 y pones c3 detrás de d4: llegas a la cadena entera por otro orden.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-van-der-wiel",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Ataque Van der Wiel (7...h5 8.Cf4 Ah7 9.Cxh5 Cc6 10.dxc5)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nc3 e6 5. g4 Bg6 6. Nge2 c5 7. h4"
+      },
+      "continuacion": {
+        "jugadas": "h5 Nf4 Bh7 Nxh5 Nc6 dxc5 Bxc5",
+        "fuente": [
+          "Wikibooks, 3...Af5 (7.h4 amenaza h5; la defensa 7...h5)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 8.Cf4 la mejor (+0.07; las demás −0.68 o peor), 9.Cxh5 la mejor, 10.dxc5 la mejor (−0.01)"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Persigues al alfil de f5 con g4 y h4. Contra 7...h5, el caballo va a f4 y se come el peón de h5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-tal",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Variante Tal (4...h5 5.Ad3 Axd3 6.Dxd3 e6 7.Cf3 Da5+ 8.Cbd2)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Tal Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. h4"
+      },
+      "continuacion": {
+        "jugadas": "h5 Bd3 Bxd3 Qxd3 e6 Nf3 Qa5+ Nbd2",
+        "fuente": [
+          "Wikibooks, 3...Af5 4.h4 (4...h5 5.Ad3)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 5.Ad3 a 3 cp de la mejor, 7.Cf3 la mejor (+0.31), 7...Da5+ la mejor, 8.Cbd2 la mejor (+0.44)"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Empujas h4 contra el alfil de f5; negras frena con ...h5 y cambias los alfiles con Ad3. Después, Cf3 y el desarrollo.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-bayoneta",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Ataque Bayoneta (4...Ae4 5.f3 Ag6 6.h4 h5 7.Ce2 e6 8.Cf4 Ah7 9.Cxh5)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Bayonet Attack",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. g4"
+      },
+      "continuacion": {
+        "jugadas": "Be4 f3 Bg6 h4 h5 Ne2 e6 Nf4 Bh7 Nxh5",
+        "fuente": [
+          "Wikibooks, 3...Af5 4.g4 (4...Ae4 5.f3 Ag6)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.h4 a 4 cp de la mejor, 7.Ce2 la mejor, 8.Cf4 la mejor (+0.08), 9.Cxh5 la mejor (+0.12)"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Echas al alfil con g4 y f3, y con h4 y el caballo por e2 y f4 vas contra el peón de h5.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-bronstein",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Variante Bronstein (4...e6 5.Cg3 Ag6 6.c3 c5 7.Ad3 Cc6 8.0-0)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Ne2"
+      },
+      "continuacion": {
+        "jugadas": "e6 Ng3 Bg6 c3 c5 Bd3 Nc6 O-O",
+        "fuente": [
+          "Wikibooks, 3...Af5 (4.Ce2 y Cg3 contra el alfil)",
+          "motor (Stockfish 19 lite, prof. 18; salidas en 00_corridas/_local/chess/curso-avance/explora1-3.md): 6.c3 a 9 cp de la mejor, 7.Ad3 la mejor (+0.03), 8.0-0 la mejor"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "El caballo va por e2 a g3 contra el alfil; después c3, Ad3 y 0-0 para sostener d4.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
     }
   ]
 }
