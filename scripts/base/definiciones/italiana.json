@@ -31,7 +31,7 @@
         "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. Nbd2 O-O 7. O-O"
       },
       "lado": "blancas",
-      "plan": "El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Sin prisa: d4 llega cuando tus piezas estén listas.",
+      "plan": "El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Si su caballo salta a g4 con tu torre en e1, regrésala a f1 (o a e2): echarlo con h3 pierde material. Sin prisa: d4 llega cuando tus piezas estén listas.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -115,7 +115,7 @@
         "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 Bc5 5. Bxf7+"
       },
       "lado": "blancas",
-      "plan": "4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.",
+      "plan": "4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. 5.Cxf7 también es buena para el motor, pero lleva a complicaciones muy filosas.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -157,7 +157,7 @@
         "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7 4. d4 exd4 5. c3 Nf6 6. e5 Ne4"
       },
       "lado": "blancas",
-      "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.",
+      "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que moverse (a e4 o a h5) y tú desarrollas con ventaja de espacio. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -289,7 +289,7 @@
         ]
       },
       "lado": "blancas",
-      "plan": "Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro va a e4 y 7.Ad5 lo ataca otra vez. Desarrolla y enroca con más espacio.",
+      "plan": "Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro tiene que moverse, y si va a e4, 7.Ad5 lo ataca otra vez. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero. Desarrolla y enroca con más espacio.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },

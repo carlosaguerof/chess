@@ -21,7 +21,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ac5 4.c3 Cf6 5.d3 d6 6.Cbd2 0-0 7.0-0**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Sin prisa: d4 llega cuando tus piezas estén listas.
+- Plan *(redactado por la IA)*: El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Si su caballo salta a g4 con tu torre en e1, regrésala a f1 (o a e2): echarlo con h3 pierde material. Sin prisa: d4 llega cuando tus piezas estén listas.
 - Fuente: C54 · Italian Game: Classical Variation, Giuoco Pianissimo
 
 ### Variante Clásica: Variante La Bourdonnais
@@ -71,7 +71,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.Cg5 Ac5 5.Axf7+**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. Evita 5.Cxf7, que lleva a complicaciones muy filosas.
+- Plan *(redactado por la IA)*: 4...Ac5 ignora la amenaza sobre f7 y prepara ...Axf2+. Lo más simple: 5.Axf7+ Re7 y retiras el alfil (6.Ac4, Ab3 o Ad5). Ganas un peón y el rey negro ya no puede enrocar. 5.Cxf7 también es buena para el motor, pero lleva a complicaciones muy filosas.
 - Fuente: C57 · Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line
 
 ## Defensa París
@@ -101,7 +101,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7 4.d4 exd4 5.c3 Cf6 6.e5 Ce4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que irse a e4 y tú desarrollas con ventaja de espacio.
+- Plan *(redactado por la IA)*: Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que moverse (a e4 o a h5) y tú desarrollas con ventaja de espacio. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero.
 - Fuente: C50 · Italian Game: Hungarian Defense, Tartakower Variation
 
 ## Gambito Blackburne-Kostić
@@ -175,7 +175,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ae7 4.d4 exd4 5.c3 Cf6 6.e5 Ce4 7.Ad5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro va a e4 y 7.Ad5 lo ataca otra vez. Desarrolla y enroca con más espacio.
+- Plan *(redactado por la IA)*: Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro tiene que moverse, y si va a e4, 7.Ad5 lo ataca otra vez. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero. Desarrolla y enroca con más espacio.
 - Fuente: C50 · Italian Game: Hungarian Defense, Tartakower Variation
 - Sigue la fila de la fuente desde la media jugada 13 con teoría de: motor: 7.Ad5 es la mejor (+0.58; 7.cxd4 da +0.06).
 
