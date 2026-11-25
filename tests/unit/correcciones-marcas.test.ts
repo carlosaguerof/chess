@@ -448,6 +448,35 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(rutasC3[caballo]![1]).toEqual(centro('f4', 'black'))
   })
 
+  it('R6 · en todo curso, una L no se lee junto con otra flecha: no llega en línea con la flecha recta que sale de su casilla, ni dobla donde sale otra flecha (salvo de la misma pieza)', () => {
+    let ls = 0
+    for (const [g, v] of porMomento()) {
+      const tablero = new Chess(v.fen)
+      const fs = flechas(v.marcas) as { de: string; a: string }[]
+      const rutas = puntosDeFlechas(fs, 'black', (x) => !!tablero.get(x as Square))
+      rutas.forEach((r, i) => {
+        if (r.length < 3) return
+        ls++
+        const f = fs[i]!
+        const [, esquina, fin] = r as [[number, number], [number, number], [number, number]]
+        for (const [j, otra] of fs.entries()) {
+          if (j === i || otra.de === f.de) continue
+          // ni encima de donde sale otra
+          expect(centro(otra.de, 'black').join(), `${g}: la L ${f.de}→${f.a} dobla donde sale ${otra.de}→${otra.a}`).not.toBe(esquina.join())
+          // ni en línea con la recta que sale de su casilla de llegada ("...c5 y ...Cc6" se leía como una sola línea)
+          if (otra.de !== f.a || rutas[j]!.length !== 2) continue
+          const [o0, o1] = rutas[j]! as [[number, number], [number, number]]
+          const dx = Math.sign(fin[0] - esquina[0])
+          const dy = Math.sign(fin[1] - esquina[1])
+          const ox = Math.sign(o1[0] - o0[0])
+          const oy = Math.sign(o1[1] - o0[1])
+          expect(dx === ox && dy === oy, `${g}: la L ${f.de}→${f.a} llega en línea con ${otra.de}→${otra.a}`).toBe(false)
+        }
+      })
+    }
+    expect(ls).toBeGreaterThan(0)
+  })
+
   itCaroKann('R6 · y una L no se lee junto con la otra flecha del plan (pase visual de "Ver qué pasaría"): ni en línea con la que sale de su casilla, ni encima de donde sale otra', () => {
     const tablero = (l: LineaCurso, ply: number) => posicion(l.jugadas, ply + 1)
     const rutasDe = (id: string, ply: number) => {
@@ -565,12 +594,14 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
     expect(readFileSync(lista, 'utf8')).toBe(listaDeMarcas(c))
   })
 
-  itCaroKann('el paso a paso acumula las marcas mientras la frase sigue con lo mismo, hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
+  // la regla general corre en todo curso; los ejemplos, en la Caro-Kann (antes se saltaba entera en los demás: cierre de los cursos, §3.6)
+  it('el paso a paso acumula las marcas mientras la frase sigue con lo mismo, hasta que el tablero vuelve a mover; cada frase, después de su jugada', () => {
     const idea = c.piezas.idea.paginas[0]!.pasoAPaso!
-    // los ejemplos, en la Caro-Kann; la regla general (abajo), en todo curso
     if (esCaroKann) ejemplosDelPasoAPaso(idea)
     // en ningún paso se ve una marca de un paso de antes sin que el de ahora traiga marcas de su mismo lado
-    for (const pa of [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso!)), ...c.variantes.map((v) => v.plan.pasoAPaso!)])
+    const todos = [...(['idea', 'estructura', 'repaso'] as const).flatMap((p) => c.piezas[p].paginas.map((pg) => pg.pasoAPaso)), ...c.variantes.map((v) => v.plan.pasoAPaso)]
+    expect(todos.filter(Boolean).length).toBeGreaterThan(c.variantes.length)
+    for (const pa of todos.filter((x): x is NonNullable<typeof x> => !!x))
       pa.pasos.forEach((p, i) => {
         const lados = new Set((p.marcas ?? []).map((m) => m.color))
         for (const m of marcasDelPaso(pa, i)) expect(lados.has(m.color), `«${p.frase}»: ${JSON.stringify(m)}`).toBe(true)

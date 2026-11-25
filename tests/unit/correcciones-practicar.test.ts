@@ -116,6 +116,59 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
     expect(INTRO_PRACTICAR).not.toMatch(/\d\./)
   })
 
+  /**
+   * Las cuatro de arriba que miden la Tal, en cualquier curso (cierre de los cursos, 2026-11-25, §3.6): en la primera
+   * jugada tuya de cada variante, con sus propias piezas y casillas.
+   */
+  it('en cualquier curso: en Practicar, la Pista es la meta; otra vez, la pieza; la Respuesta, solo la flecha', () => {
+    for (const l of VARIANTES) {
+      const ply = misJugadas(l)[0]!
+      const mia = textoMio(c, l.jugadas, ply)!
+      const j = posicion(l.jugadas, ply).move(l.jugadas[ply]!)
+      const pista = [{ tipo: 'pista', texto: `Pista: ${mia.pregunta}` }]
+      expect(vistaTuTurno(c, l, 'practicar', ply, 1), l.id).toEqual({ textos: pista, pieza: null, flecha: null })
+      expect(vistaTuTurno(c, l, 'practicar', ply, 2), l.id).toEqual({ textos: pista, pieza: j.from, flecha: null })
+      expect(vistaTuTurno(c, l, 'practicar', ply, 3), l.id).toEqual({ textos: [], pieza: null, flecha: { de: j.from, a: j.to } })
+    }
+  })
+
+  it('en cualquier curso: después de tu jugada, la explicación de Practicar va en su orden (qué hace → por qué → qué prepara → cuidado) y solo quita frases; la de Aprender, la de siempre', () => {
+    for (const l of VARIANTES)
+      for (const ply of misJugadas(l)) {
+        const m = textoMio(c, l.jugadas, ply)!
+        const todas = [m.hace, ...despues(m)].filter(Boolean) as string[]
+        const vistas = explicacionDespues(c, l, 'practicar', ply)
+        // cada frase que se ve es de la explicación, y en su orden (una subsecuencia)
+        let k = 0
+        for (const vista of vistas) {
+          const f = vista.replace(/^Cuidado: /, '')
+          while (k < todas.length && !todas[k]!.includes(f) && !f.includes(todas[k]!)) k++
+          expect(k < todas.length, `${l.id} ${ply}: «${f}»`).toBe(true)
+          k++
+        }
+        expect(explicacionDespues(c, l, 'aprender', ply), `${l.id} ${ply}`).toEqual(despues(m))
+      }
+  })
+
+  it('en cualquier curso: "Aprender" no cambia: "Te toca" con qué hace; Pista y Otra pista con su texto; la Respuesta con su porqué y su flecha', () => {
+    for (const l of VARIANTES) {
+      const ply = misJugadas(l)[0]!
+      const m = textoMio(c, l.jugadas, ply)!
+      const j = posicion(l.jugadas, ply).move(l.jugadas[ply]!)
+      const [te] = vistaTuTurno(c, l, 'aprender', ply, 0).textos
+      expect(te!.tipo, l.id).toBe('pregunta')
+      expect(te!.jugada, l.id).toMatch(/^Te toca: /)
+      expect(te!.texto, l.id).toBe(m.hace)
+      expect(vistaTuTurno(c, l, 'aprender', ply, 1).textos.map((t) => t.tipo), l.id).toEqual(['pregunta', 'pista'])
+      const otra = vistaTuTurno(c, l, 'aprender', ply, 2)
+      expect(otra.textos.map((t) => t.texto)[2], l.id).toMatch(/^Otra pista: /)
+      expect(otra.pieza, l.id).toBe(j.from)
+      const r = vistaTuTurno(c, l, 'aprender', ply, 3)
+      expect(r.textos[1], l.id).toEqual({ tipo: 'respuesta', jugada: te!.jugada!.replace('Te toca', 'Respuesta'), texto: [m.hace, m.porque].filter(Boolean).join(' ') })
+      expect(r.flecha, l.id).toEqual({ de: j.from, a: j.to })
+    }
+  })
+
   it('la frase del rival, lo único que se lee en mi turno de Practicar, no nombra mi jugada', () => {
     for (const l of esCaroKann ? [tal, lineaPorId(c, 'v:avance-short')!] : VARIANTES)
       for (const ply of misJugadas(l)) {
