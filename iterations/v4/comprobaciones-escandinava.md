@@ -7,6 +7,7 @@ Cada id aparece en el campo `motor` del texto que lo afirma, en `conocimiento/cu
 **Lo que el motor corrigió:**
 - **El plan de la Lasker:** decía "Ac4 y 0-0-0". Contra 8...Db6 (la segunda del motor), 9.Ac4 pierde 74 (9...Dxd4). Ahora dice primero 0-0-0 (la torre defiende d4) y después el alfil (P-lasker-b).
 - **El plan de la Schiller-Pytel:** "g3, Ag2 y 0-0" no se puede contra 7...De6+ (hay que tapar el jaque). Lleva su condición (P-sp-b).
+- **El gate del mapa** (abajo): el alfil a f4 contra la dama en d6, solo con g3 jugado; el salto Cd5 de la Clásica, con su condición completa (ningún alfil de negras en b4); el plan de la Clásica, con las dos retomas en f6; la frase de los jaques, medida como queda escrita; y el "Ce5 cuando se pueda" de la Bronstein se quitó (con el caballo de negras en c6, Ce5 suelta d4).
 - **La Grünfeld y la Transposición Panov** dejaron de ser lecciones (una sola jugada tuya por posición, nota 2 del orchestrator); 6.Ce5 (a 0.11 de 6.Ac4, la mejor del motor) y 3.c4 siguen como buenas jugadas.
 
 | Id | Afirmación del curso | Comando | Resultado del motor | Veredicto |
@@ -78,11 +79,11 @@ Al final de cada lección y contra las dos mejores respuestas del motor (al fina
 
 | Id | Plan | Comando | Resultado | Veredicto |
 |---|---|---|---|---|
-| P-clasica | Cxf6+, De2 y 0-0-0 | `mejores "… Nd5 Qd8"` · `mejores "… Nd5 Qd8 Nxf6+ Qxf6"` | 9.Nxf6+ la mejor (+0.45); 10.Qe2 la mejor (+0.72), sigue O-O-O | Se sostiene |
+| P-clasica | Cxf6+; si retoma con la dama, De2 y 0-0-0 (si retoma con el peón: G-clasica-gxf6) | `mejores "… Nd5 Qd8"` · `mejores "… Nd5 Qd8 Nxf6+ Qxf6"` | 9.Nxf6+ la mejor (+0.45); 10.Qe2 la mejor (+0.72), sigue O-O-O | Se sostiene |
 | P-lasker | 0-0-0 y después Ac4 (contra 8...Cbd7) | `mejores "… c6 Bd2 Nbd7" --n 4` | +1.15 Bc4 · +1.04 O-O-O | Se sostiene |
 | P-lasker-b | Contra 8...Db6: 0-0-0, no Ac4 | `mejores "… c6 Bd2 Qb6" --n 4` · `jugada … "Bc4"` | +1.37 g4 · +1.28 Bf4 · +1.24 O-O-O · Bc4 pierde 74 (Qxd4) | **Corregido:** primero el enroque largo |
 | P-lasker-c | Contra 8...e6: 0-0-0 | `jugada "… c6 Bd2 e6" "O-O-O"` | pierde 25 (+0.95) | Se sostiene |
-| P-bronstein | 0-0 contra 8...e6 | `mejores "… Bg2 e6" --n 4` | +1.19 Qe2 · +1.12 h4 · +1.04 O-O | Se sostiene |
+| P-bronstein | 0-0 contra 8...e6 (el plan ya no dice Ce5) | `mejores "… Bg2 e6" --n 4` | +1.19 Qe2 · +1.12 h4 · +1.04 O-O | Se sostiene |
 | P-bronstein-b | 0-0 contra 8...h6 | `jugada "… Bg2 h6" "O-O"` | pierde 39 (+1.30) | Se sostiene (no pierde material) |
 | P-sp | Contra 7...Dc7: g3, Ag2, 0-0 | `jugada "… Nc4 Qc7" "g3"` | pierde 15 (+0.40) | Se sostiene |
 | P-sp-b | Contra 7...De6+: tapa con Ae2 | `mejores "… Nc4 Qe6+" --n 4` | +0.99 Be2 · +0.34 Ne3 | **Con condición** (g3 no tapa el jaque) |
@@ -99,9 +100,43 @@ Al final de cada lección y contra las dos mejores respuestas del motor (al fina
 | P-señal-d6 | Con la dama en d6 y 4...Cf6: 5.Cf3, y después Cb5 la ataca | `mejores "… Qd6 d4 Nf6" --n 4` | +0.69 Nf3 g6 Nb5 | Se sostiene |
 | P-señal-caballo | Contra 4...Cc6 (23.5 % tras 4.Cf3): c4 | `mejores "… Nxd5 Nf3 Nc6"` | +0.96 Bb5 · +0.94 c4 | Se sostiene |
 
-## Los jaques en e5 y e6 (nota 1 del orchestrator)
+## Lo que corrigió el gate del mapa (revisión del 2026-11-25; notas 7 y 8 del orchestrator)
 
-La frase de El mapa: "Si la dama da jaque en e5 o en e6, lo tapas con tu alfil, Ae2, y sigues sacando piezas con Cf3 y d4: la dama tiene que moverse otra vez."
+Un evaluator independiente midió cada regla del mapa donde se usa, también contra la respuesta del libro y como queda escrita. Estas son las medidas de este curso después de corregir.
+
+| Id | Regla (como queda escrita) | Comando | Resultado | Veredicto |
+|---|---|---|---|---|
+| G-af4 | La dama en d6 quedó fuera del mapa; la regla de la Bronstein: "tu alfil sale a f4 cuando tu peón de g3 lo protege" | `jugada "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6" "Bf4"` · `amenaza "… a6 g3 Nc6 Bf4"` | Sin g3: Bf4 pierde 633 (Dxf4). Con g3: Bxd6 amenaza (+7.54) y Bf4 es la mejor (+1.14) | **Corregido:** el alfil a f4 solo con g3 jugado |
+| G-cd5-ab4 | "El salto Cd5, con tu alfil en c4 y ningún alfil de negras en b4: si llega a b4, primero a3" | `mejores "… Bc4 e6 Bd2 Bb4" --n 4` · `jugada … "Nd5"` | +0.44 a3 (la mejor) · Nd5 pierde 664 (−6.15) | **Corregido:** la condición completa |
+| G-cd5-cc6 | Con la dama en a5, contra ...Cc6, d5 echa al caballo | `jugada "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nc6" "d5"` | +1.61 d5 (la mejor; pierde 9 contra la misma) | Se sostiene |
+| G-a5-e5 | Con la dama en a5, contra ...e5, desarrolla (Cf3) | `mejores "… Qa5 d4 e5" --n 4` | +1.08 Nf3 (la mejor) | Se sostiene |
+| G-a5-c6 | Con la dama en a5, contra ...c6 (36.4 %), Ad2 | `jugada "… Qa5 d4 c6" "Bd2"` | +0.79 Bd2 (la mejor) | Se sostiene |
+| G-clasica-gxf6 | Si negras retoma con el peón, 9...gxf6, enroca corto (no De2) | `mejores "… Nxf6+ gxf6" --n 4` · `jugada … "Qe2"` | +0.81 O-O (la mejor) · Qe2 pierde 63 (Axc2, y ya no hay 0-0-0) | **Corregido:** el plan dice las dos retomas |
+| G-d8-e6 | Con la dama en d8, contra ...e6 (27.4 %), Cf3 | `jugada "… Qd8 d4 e6" "Nf3"` | +0.77 Nf3 (pierde 3) | Se sostiene |
+| G-d8-af5 | Con la dama en d8, contra 4...Af5 (13.7 %): sacas tus piezas (el plan no nombra jugada) | `mejores "… Qd8 d4 Bf5" --n 4` | +1.08 g4 · +0.95 Df3 · +0.72 Ad3 · +0.68 Ac4 | Sin regla nombrada: no se dice nada más |
+
+## Los jaques en e5 y e6 (nota 1 del orchestrator; la frase, medida como queda escrita, nota 8)
+
+La página "El jaque": "Lo tapas con tu alfil de f1: Ae2. Después la vuelves a atacar sin regalar nada. Con la dama en e5: contra ...Ag4, d4; contra lo demás, Cf3. Con la dama en e6: contra ...Cc6, d4; contra lo demás, Cf3. Si la dama se va a c6, Ab5 la clava contra su rey y la ganas."
+
+| Id | Posición (frecuencia en 1000–1400 tras 4.Ae2) | Lo que dice la frase | Comando | Resultado | Veredicto |
+|---|---|---|---|---|---|
+| F-e5-ag4 | 3...De5+ 4.Ae2 Ag4 (35.1 %) | d4 | `jugada "… Qe5 Be2 Bg4" "d4"` · `jugada … "Nf3"` | d4 la mejor (+0.84) · Cf3 pierde 131 (Axf3 y gxf3) | Se sostiene |
+| F-e5-dg5 | 4...Dg5 (15.3 %) | Cf3 | `jugada "… Qe5 Be2 Qg5" "Nf3"` | pierde 21 (+1.54) | Se sostiene |
+| F-e5-cc6 | 4...Cc6 (11.9 %) | Cf3 | `jugada "… Qe5 Be2 Nc6" "Nf3"` · `jugada … "d4"` | Cf3 pierde 10 (+1.55) · d4 pierde 195 (Dxd4) | Se sostiene |
+| F-e5-e6 | 4...e6 (9.6 %) | Cf3 | `jugada "… Qe5 Be2 e6" "Nf3"` | pierde 21 | Se sostiene |
+| F-e5-af5 | 4...Af5 (7.6 %) | Cf3 | `jugada "… Qe5 Be2 Bf5" "Nf3"` | pierde 34 | Se sostiene |
+| F-e5-cf6 | 4...Cf6 (7.6 %) | Cf3 | `jugada "… Qe5 Be2 Nf6" "Nf3"` | pierde 4 | Se sostiene |
+| F-e6-cc6 | 3...De6+ 4.Ae2 Cc6 (26.8 %) | d4 | `jugada "… Qe6 Be2 Nc6" "d4"` · `jugada … "Nf3"` | d4 pierde 5 (+2.37) · Cf3 pierde 111 (sin material) | Se sostiene |
+| F-e6-dg6 | 4...Dg6 (23.4 %) | Cf3 | `jugada "… Qe6 Be2 Qg6" "Nf3"` | la mejor (+1.67) | Se sostiene |
+| F-e6-cf6 | 4...Cf6 (14.2 %) | Cf3 | `jugada "… Qe6 Be2 Nf6" "Nf3"` | pierde 5 | Se sostiene |
+| F-e6-c6 | 4...c6 (6.7 %) | Cf3 | `jugada "… Qe6 Be2 c6" "Nf3"` | la mejor (+1.05) | Se sostiene |
+| F-e6-b6 | 4...b6 (6.0 %) | Cf3 | `jugada "… Qe6 Be2 b6" "Nf3"` | pierde 41 | Se sostiene |
+| F-e6-dc6 | 4...Dc6 (14.2 % en 600–1000) | Ab5 la clava y la ganas | `mejores "… Qe6 Be2 Qc6" --n 3` | +6.26 Bb5 Bd7 Bxc6 | Se sostiene |
+
+## Los jaques: lo que se midió antes del gate
+
+La primera frase, antes del gate, decía "sigues sacando piezas con Cf3 y d4" sin decir cuál: estas son las mejores de cada posición. La frase de hoy, medida tal como queda escrita, está arriba (F-…).
 
 | Id | Posición | Comando | Resultado | Veredicto |
 |---|---|---|---|---|

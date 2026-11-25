@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/ver-inventario.ts escandinava:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Contra la Escandinava»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**51 frases: 3 con "Ver"; 48 sin él** (24 porque explica la jugada que ya está en la línea, sin una alternativa; 9 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 15 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 0 de las 3 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**50 frases: 3 con "Ver"; 47 sin él** (24 porque explica la jugada que ya está en la línea, sin una alternativa; 8 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 15 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 0 de las 3 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
@@ -33,7 +33,6 @@
 | 8.♗d2 | porque | Y si el caballo salta, tu alfil de d2 ataca a la dama de a5. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8.♗d2 | prepara | Ya puedes enrocar largo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Aquí tu caballo no queda clavado. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4.d4 | prepara | Tu alfil de c1 podrá atacar a la dama desde f4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.♘f3 | porque | Así preparas el enroque: entre tu rey y tu torre de h1 solo queda tu alfil de f1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.g3 | porque | Contra la dama en d6, es el plan que mejor funciona; el motor también la ve como la mejor aquí. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.g3 | prepara | Tu alfil de f1 tendrá la diagonal larga. | lo que dice se juega en las jugadas que siguen de la línea |

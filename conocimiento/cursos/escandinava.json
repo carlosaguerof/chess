@@ -61,7 +61,7 @@
      "texto": [
       "Cuando abres con 1.e4 y negras contesta 1...d5, cambias en d5. Negras tiene que recuperar ese peón, y la pieza con la que lo recupera decide tu plan.",
       "Si lo recupera con la dama, la atacas con las piezas que sacas: cada ataque es un tiempo que ganas. Si lo recupera con el caballo, lo echas con un peón y te quedas con el centro.",
-      "No vas a memorizar cada variante: vas a reconocer dónde quedó la pieza que recuperó el peón, y eso te dice qué plan toca."
+      "No vas a memorizar cada variante: vas a fijarte a dónde se fue la dama cuando la atacaste, o si negras recuperó con el caballo, y eso te dice qué plan toca."
      ],
      "tablero": {
       "jugadas": [
@@ -123,7 +123,7 @@
         ]
        },
        {
-        "frase": "Dónde quedó la pieza que recuperó el peón te dice qué plan toca."
+        "frase": "A dónde se fue la dama, o si negras recuperó con el caballo, te dice qué plan toca."
        }
       ]
      }
@@ -136,9 +136,9 @@
     {
      "subtitulo": "El mapa",
      "texto": [
-      "Después de 1.e4 d5 2.exd5, negras quiere recuperar su peón. De ahí sale la pregunta de este curso: ¿dónde quedó la pieza que lo recuperó?",
-      "Cuatro respuestas, cada una con su nombre. La dama en a5: la clavada. La dama en d6: la dama al frente. La dama de vuelta en d8: la dama en casa. El caballo en d5: el centro grande.",
-      "Lo que une a las tres de la dama: cada pieza que sacas, si puede, la ataca. Si la dama da jaque en e5 o en e6, lo tapas con tu alfil, Ae2, y sigues sacando piezas con Cf3 y d4: la dama tiene que moverse otra vez."
+      "Después de 1.e4 d5 2.exd5, negras quiere recuperar su peón. Casi siempre lo hace con la dama, y tu caballo la ataca: 3.Cc3. De ahí sale la pregunta de este curso: ¿a dónde se fue la dama cuando la atacaste?",
+      "Tres respuestas, cada una con su nombre. A a5: la clavada. De vuelta a d8: la dama en casa. A e5 o a e6, con jaque: el jaque. Y si negras recuperó con el caballo, no hay dama que atacar: el centro grande.",
+      "La dama también puede irse a d6, pero casi no sale en tus partidas: sus dos lecciones son opcionales y quedan fuera del mapa. Lo que une a todo lo de la dama: cada pieza que sacas, si puede, la ataca sin quedar colgada."
      ],
      "tablero": {
       "jugadas": [
@@ -151,7 +151,6 @@
       "WB-1d5",
       "WB-3Cc3",
       "WB-3Da5",
-      "WB-3Dd6",
       "WB-3Dd8",
       "WB-2Cf6",
       "WP-ESC",
@@ -170,31 +169,23 @@
         ]
        },
        {
-        "frase": "La pregunta de este curso es dónde quedó la pieza que lo recuperó."
-       },
-       {
-        "frase": "La clavada: 2...Dxd5 3.Cc3 Da5, la dama en a5.",
+        "frase": "Si lo recupera con la dama, 2...Dxd5, tu caballo la ataca: 3.Cc3.",
         "jugadas": [
          "Qxd5",
-         "Nc3",
+         "Nc3"
+        ]
+       },
+       {
+        "frase": "La pregunta de este curso es a dónde se fue la dama."
+       },
+       {
+        "frase": "La clavada: 3...Da5.",
+        "jugadas": [
          "Qa5"
         ]
        },
        {
-        "frase": "La dama al frente: 3...Dd6, la dama en d6.",
-        "reinicio": [
-         "e4",
-         "d5",
-         "exd5",
-         "Qxd5",
-         "Nc3"
-        ],
-        "jugadas": [
-         "Qd6"
-        ]
-       },
-       {
-        "frase": "La dama en casa: 3...Dd8, la dama vuelve a d8.",
+        "frase": "La dama en casa: 3...Dd8.",
         "reinicio": [
          "e4",
          "d5",
@@ -204,6 +195,19 @@
         ],
         "jugadas": [
          "Qd8"
+        ]
+       },
+       {
+        "frase": "El jaque: 3...De5+.",
+        "reinicio": [
+         "e4",
+         "d5",
+         "exd5",
+         "Qxd5",
+         "Nc3"
+        ],
+        "jugadas": [
+         "Qe5+"
         ]
        },
        {
@@ -218,23 +222,6 @@
          "d4",
          "Nxd5"
         ]
-       },
-       {
-        "frase": "Si la dama da jaque, 2...Dxd5 3.Cc3 De5+, lo tapas con tu alfil: 4.Ae2.",
-        "reinicio": [
-         "e4",
-         "d5",
-         "exd5"
-        ],
-        "jugadas": [
-         "Qxd5",
-         "Nc3",
-         "Qe5+",
-         "Be2"
-        ]
-       },
-       {
-        "frase": "Y sigues sacando piezas con Cf3 y d4: la dama tiene que moverse otra vez."
        }
       ]
      }
@@ -243,7 +230,8 @@
      "subtitulo": "La clavada",
      "texto": [
       "La dama de negras está en a5. Cuando juegas d4, tu caballo de c3 queda clavado: si se moviera, la dama daría jaque a tu rey.",
-      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Con tu alfil en c4, el salto Cd5 destapa a tu alfil de d2 contra la dama. Contra ...Ag4, h3."
+      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Contra ...Ag4, h3. Contra ...Cc6, d5 echa al caballo.",
+      "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu alfil en c4 apoyándolo, y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3."
      ],
      "tablero": {
       "jugadas": [
@@ -320,92 +308,6 @@
      }
     },
     {
-     "subtitulo": "La dama al frente",
-     "texto": [
-      "La dama de negras está en d6, en el centro. Ahí tus piezas la pueden volver a atacar: tu alfil desde f4, o un caballo desde b5 o c4. Por eso negras suele jugar ...a6 o ...c6, que le quitan b5 a tu caballo.",
-      "Tu plan: la atacas con las piezas que vas sacando, sacas tu alfil de f1 por g3 y Ag2, y enrocas."
-     ],
-     "tablero": {
-      "jugadas": [
-       "e4",
-       "d5",
-       "exd5",
-       "Qxd5",
-       "Nc3",
-       "Qd6",
-       "d4"
-      ]
-     },
-     "fuente": [
-      "WP-ESC",
-      "WB-3Cc3",
-      "WB-3Dd6",
-      "MOTOR",
-      "AJEDREZ"
-     ],
-     "pasoAPaso": {
-      "fen": "rnb1kbnr/ppp1pppp/3q4/8/3P4/2N5/PPP2PPP/R1BQKBNR b KQkq - 0 4",
-      "ilustrativo": true,
-      "pasos": [
-       {
-        "frase": "La dama de negras está en d6, en el centro."
-       },
-       {
-        "frase": "Tu alfil de c1 puede atacar a la dama de d6 desde f4: Af4.",
-        "jugadas": [
-         "Bf4"
-        ],
-        "marcas": [
-         {
-          "tipo": "A2",
-          "de": "f4",
-          "a": "d6",
-          "color": "verde"
-         }
-        ]
-       },
-       {
-        "frase": "Y tu caballo de c3 la podría atacar desde b5.",
-        "marcas": [
-         {
-          "tipo": "A3",
-          "de": "c3",
-          "a": "b5",
-          "color": "verde",
-          "punteada": true
-         }
-        ]
-       },
-       {
-        "frase": "Por eso negras suele jugar ...a6: le quita b5 a tu caballo.",
-        "jugadas": [
-         "...a6"
-        ],
-        "marcas": [
-         {
-          "tipo": "A5",
-          "en": "b5",
-          "color": "rojo"
-         },
-         {
-          "tipo": "A5",
-          "de": "c3",
-          "a": "b5",
-          "color": "rojo"
-         }
-        ]
-       },
-       {
-        "frase": "Tu alfil de f1 sale por la diagonal larga: g3 y Ag2.",
-        "jugadas": [
-         "g3",
-         "Bg2"
-        ]
-       }
-      ]
-     }
-    },
-    {
      "subtitulo": "La dama en casa",
      "texto": [
       "La dama de negras volvió a d8. Está segura, pero negras ya la movió dos veces y tú ya sacaste un caballo.",
@@ -465,6 +367,73 @@
           "color": "verde"
          }
         ]
+       }
+      ]
+     }
+    },
+    {
+     "subtitulo": "El jaque",
+     "texto": [
+      "La dama de negras da jaque en e5 o en e6. Lo tapas con tu alfil de f1: Ae2.",
+      "Después la vuelves a atacar sin regalar nada. Con la dama en e5: contra ...Ag4, d4; contra lo demás, Cf3. Con la dama en e6: contra ...Cc6, d4; contra lo demás, Cf3.",
+      "Si la dama se va a c6, Ab5 la clava contra su rey y la ganas. Cuando la dama se vaya, mira a dónde fue y sigue el mapa."
+     ],
+     "tablero": {
+      "jugadas": [
+       "e4",
+       "d5",
+       "exd5",
+       "Qxd5",
+       "Nc3",
+       "Qe5+"
+      ]
+     },
+     "fuente": [
+      "WB-3Cc3",
+      "WP-ESC",
+      "MOTOR",
+      "FREC",
+      "AJEDREZ"
+     ],
+     "pasoAPaso": {
+      "fen": "rnb1kbnr/ppp1pppp/8/4q3/8/2N5/PPPP1PPP/R1BQKBNR w KQkq - 2 4",
+      "pasos": [
+       {
+        "frase": "La dama de negras da jaque a tu rey de e1 desde e5.",
+        "marcas": [
+         {
+          "tipo": "A4",
+          "de": "e5",
+          "a": "e1",
+          "color": "rojo"
+         }
+        ]
+       },
+       {
+        "frase": "Lo tapas con tu alfil: 4.Ae2.",
+        "jugadas": [
+         "Be2"
+        ]
+       },
+       {
+        "frase": "Si negras saca su alfil, 4...Ag4, vuelves a atacar a la dama con el peón: 5.d4.",
+        "jugadas": [
+         "Bg4",
+         "d4"
+        ]
+       },
+       {
+        "frase": "Si en cambio saca su caballo, 4...Cc6, la atacas con tu caballo: 5.Cf3.",
+        "reinicio": [
+         "Be2"
+        ],
+        "jugadas": [
+         "Nc6",
+         "Nf3"
+        ]
+       },
+       {
+        "frase": "Cuando la dama se vaya, mira a dónde fue y sigue el mapa."
        }
       ]
      }
@@ -683,8 +652,8 @@
       "Nd5"
      ],
      "texto": [
-      "La pregunta: ¿dónde quedó la pieza que recuperó el peón de d5? La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Saca piezas que ataquen a la dama: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, solo con tu alfil en c4. 3) Contra ...Ag4, h3; si negras cambia en f3, retoma con la dama."
+      "La pregunta: ¿a dónde se fue la dama cuando la atacaste? Si negras recuperó con el caballo, es el centro grande. La respuesta te dice qué plan toca.",
+      "Tres reglas: 1) Saca piezas que ataquen a la dama sin quedar colgadas: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, con tu alfil en c4 y ningún alfil de negras en b4. 3) Con la dama en a5 o en d8, contra ...Ag4, h3; si negras cambia en f3, retoma con la dama."
      ],
      "fuente": [
       "WB-3Cc3",
@@ -738,7 +707,7 @@
         ]
        },
        {
-        "frase": "Contra ...Ag4, h3: 5...Ag4 6.h3.",
+        "frase": "Con la dama en d8, contra ...Ag4, h3: 5...Ag4 6.h3.",
         "reinicio": [
          "e4",
          "d5",
@@ -833,8 +802,8 @@
    "intro": "Estás en la clavada: la dama de negras se va a a5, y tu objetivo es sacar tus piezas sin que esa clavada te frene. Negras saca después su alfil a f5.",
    "idea": "Ad2 libera a tu caballo de la clavada y deja listo un ataque descubierto: Cd5, con tu alfil de c4 apoyándolo.",
    "plan": {
-    "tuyo": "Tu caballo cambia en f6 con jaque, Cxf6+, y tu dama sale a e2. Después enrocas largo, con tus piezas más activas que las de negras.",
-    "rival": "Negras retira su dama a d8 y retoma en f6 con la dama.",
+    "tuyo": "La dama de negras tiene que volver a d8, y ahí ya no clava. Cambias en f6 con jaque, Cxf6+. Si negras retoma con la dama, tu dama sale a e2 y enrocas largo; si retoma con el peón, enrocas corto.",
+    "rival": "Negras retira su dama a d8 y retoma en f6, con la dama o con el peón.",
     "marcas": [],
     "fuente": [
      "WB-3Da5",
@@ -842,6 +811,7 @@
     ],
     "marcasDe": {
      "tuyo": [
+      [],
       [
        {
         "tipo": "A3",
@@ -849,7 +819,9 @@
         "a": "f6",
         "color": "verde",
         "punteada": true
-       },
+       }
+      ],
+      [
        {
         "tipo": "A3",
         "de": "d1",
@@ -887,11 +859,22 @@
        "jugadas": [
         "O-O-O"
        ]
+      },
+      {
+       "frase": "Si negras retoma con el peón, 9...gxf6, enrocas corto: 10.0-0.",
+       "reinicio": [
+        "Qd8",
+        "Nxf6+"
+       ],
+       "jugadas": [
+        "gxf6",
+        "O-O"
+       ]
       }
      ]
     }
    },
-   "regla": "Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, solo con tu alfil en c4.",
+   "regla": "Con la dama en a5, Ad2 antes de mover tu caballo de c3. El salto Cd5, con tu alfil en c4 y ningún alfil de negras en b4.",
    "frecuencia": 3,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.5 % (iterations/v4/mapa-escandinava.md)"
   },
@@ -1092,31 +1075,16 @@
    "base": "curso-bronstein",
    "nombre": "La dama en d6: Bronstein (5...a6)",
    "desde": 3,
-   "estructura": "La dama al frente",
-   "intro": "Estás en la dama al frente: la dama de negras se va a d6, y tu objetivo es seguir ganando tiempos contra ella. Negras juega después ...a6 para cuidarla.",
-   "idea": "Contra la dama en d6: g3, Ag2 y enroque, y cada vez que puedas, una pieza que salga atacando a la dama.",
+   "intro": "Esta lección queda fuera del mapa: la dama de negras se va a d6, una casilla que casi no sale en tus partidas. Negras juega después ...a6 para cuidarla.",
+   "idea": "Primero el peón de g y después el alfil a f4: así el alfil ataca a la dama protegido.",
    "plan": {
-    "tuyo": "Enroca corto. Tienes más piezas afuera que negras, y tu caballo de f3 puede saltar a e5.",
+    "tuyo": "Enroca corto. Tienes más piezas afuera que negras.",
     "rival": "Negras saca su peón de e y su alfil de f8, y enroca.",
     "marcas": [],
     "fuente": [
      "WP-ESC",
      "MOTOR"
     ],
-    "marcasDe": {
-     "tuyo": [
-      [],
-      [
-       {
-        "tipo": "A3",
-        "de": "f3",
-        "a": "e5",
-        "color": "verde",
-        "punteada": true
-       }
-      ]
-     ]
-    },
     "pasoAPaso": {
      "pasos": [
       {
@@ -1132,22 +1100,13 @@
        ]
       },
       {
-       "frase": "Tu caballo de f3 puede saltar a e5.",
-       "marcas": [
-        {
-         "tipo": "A3",
-         "de": "f3",
-         "a": "e5",
-         "color": "verde",
-         "punteada": true
-        }
-       ]
+       "frase": "Tienes más piezas afuera que negras."
       }
      ],
      "ilustrativo": true
     }
    },
-   "regla": "Contra la dama en d6: g3, Ag2 y enroque, atacándola cuando puedas.",
+   "regla": "Contra la dama en d6, tu alfil sale a f4 cuando tu peón de g3 lo protege.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 0.8 % (iterations/v4/mapa-escandinava.md)"
   },
@@ -1156,8 +1115,7 @@
    "base": "curso-schiller-pytel",
    "nombre": "La dama en d6: Schiller-Pytel (4...c6)",
    "desde": 3,
-   "estructura": "La dama al frente",
-   "intro": "Estás en la dama al frente: la dama de negras se va a d6, y tu objetivo es seguir ganando tiempos contra ella. Aquí negras la cuida con ...c6.",
+   "intro": "Esta lección queda fuera del mapa: la dama de negras se va a d6, una casilla que casi no sale en tus partidas. Aquí negras la cuida con ...c6.",
    "idea": "Tu caballo salta al centro y después a c4: cada salto ataca a la dama otra vez.",
    "plan": {
     "tuyo": "Si la dama va a c7, sacas tu alfil por g3 y Ag2 y enrocas. Si da jaque en e6, lo tapas con tu alfil de f1 y enrocas.",
@@ -2181,14 +2139,6 @@
    ],
    "hace": "Ocupas el centro con un peón y le abres paso a tu alfil de c1.",
    "porque": "Aquí tu caballo no queda clavado.",
-   "prepara": "Tu alfil de c1 podrá atacar a la dama desde f4.",
-   "describe": {
-    "prepara": [
-     [
-      "Bf4"
-     ]
-    ]
-   },
    "fuente": [
     "WB-3Dd6",
     "WP-ESC"

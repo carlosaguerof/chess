@@ -101,7 +101,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Af5 6.Ac4 e6 7.Ad2 c6 8.Cd5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tu dama tiene que irse: Cd5 la atacó con el alfil de d2. Sigue con Cxf6+, De2 y el enroque; la dama negra ya no clava a tu caballo.
+- Plan *(redactado por la IA)*: Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve si ningún alfil de negras está en b4.
 - Fuente: B01 · Scandinavian Defense: Classical Variation
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Scandinavian Defense (la línea principal: 6.Ac4 Af5 7.Ad2 e6); Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 (7.Ad2 e6 8.Cd5 Dd8); J. Hartmann, "Beat The Scandi!", Chess Life Kids, dic. 2023 (6.Ac4 e6 7.Ad2 c6; solo la idea); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.Ac4 a 0.11 de la mejor; 6...e6 a 0.07; 7.Ad2 la mejor; 7...c6 a 0.17; 8.Cd5 la mejor.
 
@@ -110,7 +110,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6 8.Ad2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0 o Ac4 y el enroque.
+- Plan *(redactado por la IA)*: Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con la torre en d1 defendiendo d4, y después Ac4.
 - Fuente: B01 · Scandinavian Defense: Lasker Variation
 - Sigue la fila de la fuente desde la media jugada 12 con teoría de: motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6...Axf3 la mejor; 7.Dxf3 la mejor; 7...c6 la mejor; 8.Ad2 la mejor; Wikibooks, 3...Da5 (Ad2 libera d2 para que el caballo se mueva con tiempo sobre la dama).
 
@@ -121,7 +121,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 Cf6 5.Cf3 a6 6.g3 Cc6 7.Af4 Dd8 8.Ag2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Af4 echó a la dama otra vez. Sigue 0-0 y, cuando se pueda, Ce5.
+- Plan *(redactado por la IA)*: Con g3 primero, Af4 echó a la dama otra vez sin quedar colgado. Sigue 0-0.
 - Fuente: B01 · Scandinavian Defense: Bronstein Variation
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.g3 la mejor; 6...Cc6 la mejor; 7.Af4 la mejor; 7...Dd8 la mejor; 8.Ag2 la mejor.
 
@@ -130,7 +130,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 c6 5.Cf3 Cf6 6.Ce5 Cbd7 7.Cc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El caballo saltó a e5 y después a c4, donde ataca a la dama de d6 otra vez. Sigue tu desarrollo: Af4 o g3 y Ag2, y el enroque.
+- Plan *(redactado por la IA)*: El caballo saltó a e5 y a c4, donde ataca a la dama de d6 otra vez. Si la dama va a c7, sigue g3, Ag2 y 0-0; si da jaque en e6, tapa con Ae2 y enroca. Sin g3, Af4 dejaría el alfil colgado.
 - Fuente: B01 · Scandinavian Defense: Schiller-Pytel Variation
 - Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5); Wikibooks, 3.Cc3 (negras tiene que jugar ...c6 o ...a6 para que Cb5 no eche a la dama); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.Cf3 a 0.12 de la mejor; 5...Cf6 la mejor; 6.Ce5 a 0.03; 6...Cbd7 la mejor; 7.Cc4 la mejor.
 

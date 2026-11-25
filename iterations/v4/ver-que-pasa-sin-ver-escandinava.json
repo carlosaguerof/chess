@@ -16,7 +16,6 @@
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 c6 Bd2 | porque | 0": "plan",
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 c6 Bd2 | prepara | 0": "plan",
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 | porque | 0": "explica",
-  "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 | prepara | 0": "plan",
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 | porque | 0": "plan",
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 a6 g3 | porque | 0": "explica",
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 a6 g3 | prepara | 0": "linea",

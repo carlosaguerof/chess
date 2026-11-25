@@ -2982,7 +2982,7 @@
       "Nd5"
      ],
      "lado": "blancas",
-     "plan": "Tu dama tiene que irse: Cd5 la atacó con el alfil de d2. Sigue con Cxf6+, De2 y el enroque; la dama negra ya no clava a tu caballo.",
+     "plan": "Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve si ningún alfil de negras está en b4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3027,7 +3027,7 @@
       "Bd2"
      ],
      "lado": "blancas",
-     "plan": "Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0 o Ac4 y el enroque.",
+     "plan": "Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con la torre en d1 defendiendo d4, y después Ac4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3070,7 +3070,7 @@
       "Bg2"
      ],
      "lado": "blancas",
-     "plan": "Af4 echó a la dama otra vez. Sigue 0-0 y, cuando se pueda, Ce5.",
+     "plan": "Con g3 primero, Af4 echó a la dama otra vez sin quedar colgado. Sigue 0-0.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3111,7 +3111,7 @@
       "Nc4"
      ],
      "lado": "blancas",
-     "plan": "El caballo saltó a e5 y después a c4, donde ataca a la dama de d6 otra vez. Sigue tu desarrollo: Af4 o g3 y Ag2, y el enroque.",
+     "plan": "El caballo saltó a e5 y a c4, donde ataca a la dama de d6 otra vez. Si la dama va a c7, sigue g3, Ag2 y 0-0; si da jaque en e6, tapa con Ae2 y enroca. Sin g3, Af4 dejaría el alfil colgado.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

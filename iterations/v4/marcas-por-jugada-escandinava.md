@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 33 de 81.** Más 20 frases del plan y del paso a paso.
+**Jugadas con marcas: 33 de 81.** Más 17 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -92,23 +92,20 @@
 
 | Dónde | Frase | Marcas |
 |---|---|---|
-| plan clasica tuyo frase 1 | Tu caballo cambia en f6 con jaque, Cxf6+, y tu dama sale a e2. | flecha d5→f6 (A3, verde, punteada); flecha d1→e2 (A3, verde, punteada) |
+| plan clasica tuyo frase 2 | Cambias en f6 con jaque, Cxf6+. | flecha d5→f6 (A3, verde, punteada) |
+| plan clasica tuyo frase 3 | Si negras retoma con la dama, tu dama sale a e2 y enrocas largo; si retoma con el peón, enrocas corto. | flecha d1→e2 (A3, verde, punteada) |
 | plan valenciana tuyo frase 1 | Saca tu alfil de c1 a e3 o a f4, y enroca largo. | flecha c1→e3 (A3, verde, punteada) |
 | plan valenciana tuyo frase 2 | Si negras deja b7 sin cuidar, tu dama se lo come. | flecha f3→b7 (A2, verde) |
 | plan gipslis tuyo frase 1 | Empuja d5: ganas espacio y echas al caballo de c6. | flecha d4→d5 (A3, verde, punteada) |
 | plan lasker tuyo frase 2 | Después sacas tu alfil de f1 a c4, con tus dos alfiles mirando a todo el tablero. | flecha f1→c4 (A3, verde, punteada) |
-| plan bronstein tuyo frase 2 | Tienes más piezas afuera que negras, y tu caballo de f3 puede saltar a e5. | flecha f3→e5 (A3, verde, punteada) |
 | plan marshall tuyo frase 1 | Saca tu caballo de b1 a c3 y tu alfil de c1 a f4. | flecha b1→c3 (A3, verde, punteada); flecha c1→f4 (A3, verde, punteada) |
 | plan richter rival frase 1 | Negras presiona d4 con su alfil de g7, con ...Ag4 contra tu caballo de f3 y con ...Cc6. | flecha g7→d4 (A4, roja) |
 | idea 1, paso 3 | Si lo recupera con la dama, 2...Dxd5, tu caballo la ataca: 3.Cc3. | flecha c3→d5 (A2, verde) |
 | estructura 2, paso 1 | La dama de a5 mira a tu caballo de c3. | flecha a5→c3 (A4, roja) |
 | estructura 2, paso 4 | Con tu otro alfil en c4, Ac4, el caballo puede saltar a d5. | flecha c3→d5 (A3, verde, punteada) |
 | estructura 2, paso 5 | Cd5: tu alfil de d2 queda atacando a la dama de a5. | flecha d2→a5 (A2, verde) |
-| estructura 3, paso 2 | Tu alfil de c1 puede atacar a la dama de d6 desde f4: Af4. | flecha f4→d6 (A2, verde) |
-| estructura 3, paso 3 | Y tu caballo de c3 la podría atacar desde b5. | flecha c3→b5 (A3, verde, punteada) |
-| estructura 3, paso 4 | Por eso negras suele jugar ...a6: le quita b5 a tu caballo. | casilla b5 (A5, roja); flecha c3→b5 (A5, roja) |
-| estructura 4, paso 5 | Tu dama queda mirando a b7. | flecha f3→b7 (A2, verde) |
+| estructura 3, paso 5 | Tu dama queda mirando a b7. | flecha f3→b7 (A2, verde) |
+| estructura 4, paso 1 | La dama de negras da jaque a tu rey de e1 desde e5. | flecha e5→e1 (A4, roja) |
 | repaso 1, paso 4 | 7...c6 8.Cd5: tu alfil de d2 ataca a la dama de a5. | flecha d2→a5 (A2, verde) |
 | repaso 2, paso 2 | Si la dama va a a5, 3...Da5 4.d4 clava tu caballo de c3. | flecha a5→c3 (A4, roja) |
-| plan bronstein paso a paso, paso 3 | Tu caballo de f3 puede saltar a e5. | flecha f3→e5 (A3, verde, punteada) |
 | plan richter paso a paso, paso 1 | El alfil de g7 mira a tu peón de d4: tu dama y tu caballo de f3 lo defienden. | flecha g7→d4 (A4, roja) |

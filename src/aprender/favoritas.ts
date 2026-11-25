@@ -5,7 +5,6 @@ import type { Base } from '../base/tipos.ts'
 import { lineaDeVariante, type LineaRepertorio, type Repertorio } from '../repertorio/modelo.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { cursoActivo, FAVORITAS_PRENDIDAS, MIS_APERTURAS } from './interruptores.ts'
-import { CURSOS_NUEVOS, obligatorias } from '../curso/datos.ts'
 
 /**
  * Nota 1 (L3): "Aperturas y defensas". Mis favoritas son aperturas de la base con el color con que las juego
@@ -69,23 +68,10 @@ export function repertorioDeFavoritas(favoritas: string[] = leerFavoritas(), bas
   return rep
 }
 
-const completos = new Map<Base, Repertorio>()
-
-/**
- * Todos mis cursos de la base con los dos colores, como si todos fueran favoritos (para lo ya practicado: Refuerza y el
- * contador del inicio). En un curso por estructuras, solo sus lecciones obligatorias (Carlos: "que solo lo obligatorio
- * salga en Repaso y Refuerza"; nota 6 del 2026-11-25): las demás líneas de esa apertura y ese color, las opcionales y
- * las que dejaron de ser lecciones, no salen; lo guardado de ellas no se borra.
- */
+/** Todos mis cursos de la base con los dos colores, como si todos fueran favoritos (para lo ya practicado). */
 export function repertorioCompleto(base: Base = BASE): Repertorio {
-  if (completos.has(base)) return completos.get(base)!
   const ids = base.aperturas.flatMap((a) => (['w', 'b'] as ColorCorto[]).map((c) => `${a.id}:${c}`)).filter(cursoActivo)
-  const rep = repertorioDeFavoritas(ids, base)
-  const soloObligatorias = new Map<string, Set<string>>()
-  for (const c of Object.values(CURSOS_NUEVOS)) if (c.secciones && !c.fichasDe) soloObligatorias.set(`${c.apertura}:${c.color}`, new Set(obligatorias(c).map((v) => `${c.apertura}/${v.base}`)))
-  const r: Repertorio = { ...rep, lineas: rep.lineas.filter((l) => soloObligatorias.get(`${l.apertura}:${l.color}`)?.has(l.claveBase ?? '') ?? true) }
-  completos.set(base, r)
-  return r
+  return repertorioDeFavoritas(ids, base)
 }
 
 /** Mi repertorio al día (cambia cuando pongo o quito una favorita). */
