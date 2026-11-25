@@ -42,7 +42,18 @@ export function frasesDelCurso(c: DatosCurso): FraseInventario[] {
   return r
 }
 
-export const sinVer = (): Record<string, Razon> => JSON.parse(readFileSync('iterations/v3/ver-que-pasa-sin-ver.json', 'utf8')) as Record<string, Razon>
+/**
+ * Los archivos de cada curso: el inventario, las razones de cada frase sin "Ver" y las comprobaciones del motor. Los
+ * dos de la Caro-Kann comparten los suyos (la capa trae las mismas frases).
+ */
+export const ARCHIVOS_VER: Record<string, { inventario: string; sinVer: string; comprobaciones: string }> = {
+  'caro-kann:b': { inventario: 'iterations/v3/ver-que-pasa-inventario.md', sinVer: 'iterations/v3/ver-que-pasa-sin-ver.json', comprobaciones: 'iterations/v3/comprobaciones-del-curso.md' },
+  'caro-kann:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-avance-caro-kann.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-avance-caro-kann.json', comprobaciones: 'iterations/v4/comprobaciones-avance-caro-kann.md' },
+  'francesa:w': { inventario: 'iterations/v4/ver-que-pasa-inventario-avance-francesa.md', sinVer: 'iterations/v4/ver-que-pasa-sin-ver-avance-francesa.json', comprobaciones: 'iterations/v4/comprobaciones-avance-francesa.md' },
+}
+export const archivosVer = (c: DatosCurso) => ARCHIVOS_VER[c.fichasDe ?? c.id]!
+
+export const sinVer = (c: DatosCurso = CURSOS_NUEVOS['caro-kann:b']!): Record<string, Razon> => JSON.parse(readFileSync(archivosVer(c).sinVer, 'utf8')) as Record<string, Razon>
 
 /** La línea de un "Ver", en un renglón: "4...e6 5.g4 ♗e4 6.f3 ♗g6 7.h5". */
 function lineaDe(ver: VerQuePasa, inicio: string[]): string {
@@ -77,7 +88,7 @@ function dondeSale(c: DatosCurso, v: ReturnType<typeof todosLosVer>[number]): st
 export function listaDelInventario(c: DatosCurso): string {
   const frases = frasesDelCurso(c)
   const vers = todosLosVer(c)
-  const razones = sinVer()
+  const razones = sinVer(c)
   const conVer = new Map(vers.map((v) => [llaveDe(v.clave, v.campo, v.i), v]))
   const nombre = (x: FraseInventario) => {
     const n = x.clave.split(' ').length - 1
@@ -90,7 +101,9 @@ export function listaDelInventario(c: DatosCurso): string {
   return [
     '# El inventario de "Ver qué pasa"',
     '',
-    '> Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.',
+    (c.fichasDe ?? c.id) === 'caro-kann:b'
+      ? '> Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.'
+      : `> Generado con \`node scripts/ver-inventario.ts ${c.id}\`. La prueba \`tests/unit/ver-que-pasa.test.ts\` revisa que esté al día. Cada frase de \`porque\`, \`prepara\`, \`cuidado\` y \`errores\` del curso «${c.nombre}»: con su "Ver" o con el porqué no lo lleva. \`hace\` no entra: es "Te toca", antes de jugar. La regla: \`specs/cursos.md\` §2.3.`,
     '',
     `**${frases.length} frases: ${vers.length} con "Ver"; ${frases.length - vers.length} sin él** (${conteo}). ${adelantan.length} de las ${vers.length} contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.`,
     '',
@@ -112,4 +125,5 @@ export function listaDelInventario(c: DatosCurso): string {
   ].join('\n')
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDelInventario(CURSOS_NUEVOS['caro-kann:b']!))
+// node scripts/ver-inventario.ts [curso] (por omisión, la Caro-Kann)
+if (import.meta.url === `file://${process.argv[1]}`) process.stdout.write(listaDelInventario(CURSOS_NUEVOS[process.argv[2] ?? 'caro-kann:b']!))
