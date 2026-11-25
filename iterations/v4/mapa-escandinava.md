@@ -8,10 +8,10 @@
 - **Cuatro entradas en el mapa, cada una con su señal y su jugada:**
   - **La clavada:** la dama fue a a5. Con d4, tu caballo de c3 queda clavado: antes de moverlo, Ad2. El salto Cd5 destapa a tu alfil de d2 contra la dama, con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4 (si llega a b4, primero a3). Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5.
   - **La dama en casa:** la dama volvió a d8. Ya no hay a quién atacar: d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6 (ahí, d5) o con su peón en c6 (ahí, primero Ae3, que defiende d4). Si cambia en f3, retomas con una pieza, y si después saca su caballo a c6, Ab5 lo clava (pase adversarial 3).
-  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y sigues sacando piezas sin regalar nada: con la dama en e5 la vuelves a atacar, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 (amenaza d5) y contra lo demás Cf3. Si se va a g5 o g6 contra tu peón de g2, Cf3: si se lo come, Tg1 la echa (revisión final; 8.6 % de las partidas del curso en 600–1000). Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** (notas 1 y 7).
+  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y sigues sacando piezas sin regalar nada: con la dama en e5 la vuelves a atacar, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 (amenaza d5) y contra lo demás Cf3. Si se va a g5 o g6 contra tu peón de g2, Cf3: si se lo come, Tg1 la echa (revisión final; 8.6 % de las partidas del curso en 600–1000). Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** en el mapa del gate (notas 1 y 7); **con dos lecciones desde el 2026-11-25** (D1 A de Carlos), al final de esta página.
   - **El centro grande:** negras no recuperó con la dama sino con el caballo (2...Cf6 3.d4 Cxd5). d4 y Cf3; después c4 echa al caballo y te quedas con c4 y d4 (si su alfil sale a f5, primero Ad3 y lo cambias). Mantén d4 defendido; con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa.
 - **La dama en d6 queda fuera del mapa:** sale en 2.9 % y 2.5 % (menos del 5 %, como las formas chicas de la Caro-Kann). Sus dos lecciones son opcionales y van sin etiqueta.
-- **8 lecciones: 4 obligatorias y 4 opcionales.** La base: Clásica (la clavada), Valenciana (la dama en casa), Gipslis (el centro grande). Las que más te van a salir: Lasker. Opcional: Bronstein y Schiller-Pytel (fuera del mapa), Marshall y Richter.
+- **8 lecciones: 4 obligatorias y 4 opcionales** (la tabla del gate). **Desde el 2026-11-25, 10: 6 obligatorias y 4 opcionales**: La base suma el jaque en e5 (4...Ag4) y Las que más te van a salir, el jaque en e6 (4...Cc6). La base: Clásica (la clavada), Valenciana (la dama en casa), Gipslis (el centro grande). Las que más te van a salir: Lasker. Opcional: Bronstein y Schiller-Pytel (fuera del mapa), Marshall y Richter.
 - **Una sola jugada tuya por posición (nota 2):** la Grünfeld (6.Ce5) y la Transposición Panov (3.c4) se separan por una jugada tuya: no son lecciones, quedan como buena jugada (azul).
 
 ## Las entradas del mapa
@@ -27,7 +27,7 @@
 
 ### La entrada de cada lección
 
-Con chess.js sobre la línea completa (base + continuación) (`tests/unit/curso-escandinava.test.ts`): la primera captura de negras en d5 dice la pieza; si es la dama, su jugada siguiente dice la casilla (a5, la clavada; d8, la dama en casa; d6, fuera del mapa). Cada línea cae en una sola entrada; las dos de d6, en ninguna. El jaque no tiene lección.
+Con chess.js sobre la línea completa (base + continuación) (`tests/unit/curso-escandinava.test.ts`): la primera captura de negras en d5 dice la pieza; si es la dama, su jugada siguiente dice la casilla (a5, la clavada; d8, la dama en casa; d6, fuera del mapa). Cada línea cae en una sola entrada; las dos de d6, en ninguna. El jaque no tenía lección; desde el 2026-11-25 tiene dos (al final de esta página).
 
 | Lección | Línea | Entrada | Dónde termina la dama, y su "pero…" |
 |---|---|---|---|
@@ -182,4 +182,19 @@ El evaluator midió las reglas con otra jugada natural del rival ya en el tabler
 
 ## Para Carlos, al final
 
-- (A) una lección para los jaques (3...De5+ y 3...De6+, lo más jugado en tu nivel), o (B) se quedan como entrada del mapa, sin lección.
+- (A) una lección para los jaques (3...De5+ y 3...De6+, lo más jugado en tu nivel), o (B) se quedan como entrada del mapa, sin lección. **Carlos contestó (A)** (2026-11-25, D1 A): las lecciones, abajo.
+
+## Las lecciones del jaque (2026-11-25; D1 A de Carlos: "agregarles lección")
+
+Carlos, en la sesión "Air - chess": "D1 A." (agregarles lección), "D2 A." (lo que cuenta en el Repaso y en el avance se queda como está) y "D3 A." (tus jugadas alternativas siguen como "buena jugada", sin lección). Las líneas salen de las partidas de este curso (lichess CC0, la misma base del mapa) y, donde ya no hay partidas, de la mejor del motor; cada jugada, con su medida en `iterations/v4/comprobaciones-escandinava.md` (ids `J2-…` y `S-e5-…`, `S-e6-…`).
+
+| Lección | Línea | Por qué esa | Sección |
+|---|---|---|---|
+| El jaque en e5: 4...Ag4 | 1.e4 d5 2.exd5 Dxd5 3.Cc3 De5+ 4.Ae2 Ag4 5.d4 De6 6.f3 Af5 7.g4 Ag6 8.f4 | Tras 4.Ae2, 4...Ag4 es la más jugada en las dos bandas (21.9 % y 35.1 %; la siguiente, 4...Dg5, 20.3 % y 15.3 %). Tras 5.d4, 5...De6 (30 de 53 partidas). 6.f3 es la mejor por mucho (+2.16 contra +1.44, prof. 22): su alfil de g4 solo lo defiende la dama. 6...Af5 empata con 6...Ah5 (llegan a la misma posición tras 7.g4 Ag6). | La base: 6.1 % (n 55) en 600–1000 y 4.4 % (n 228) en 1000–1400, la más jugada de su entrada |
+| El jaque en e6: 4...Cc6 | 1.e4 d5 2.exd5 Dxd5 3.Cc3 De6+ 4.Ae2 Cc6 5.d4 Cb4 6.Cf3 Cf6 7.0-0 c6 8.Te1 | Tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %; la siguiente, 4...Dg6, 17.7 % y 23.4 %). Tras 5.d4, 5...Dg6, 5...Cb4 y 5...Cf6 empatan (5, 4 y 4 partidas): el motor desempata, 5...Cb4. Después, la mejor del motor (a 0.2 o menos). | Las que más te van a salir: 3.6 % (n 30) y 4.3 % (n 223) |
+
+**Cuántas lecciones: una por jaque.** Las dos respuestas más jugadas tras 4.Ae2 son distintas en cada jaque (4...Ag4 contra la dama en e5, 4...Cc6 contra la dama en e6) y cada una enseña otra cosa: contra ...Ag4, d4 vuelve a atacar a la dama y después tus peones echan al alfil; contra ...Cc6, d4 amenaza d5 contra la dama y el caballo. La segunda respuesta de cada jaque, la dama a g5 o a g6 contra tu peón de g2, sí comparte plan en los dos (Cf3; si ...Dxg2, Tg1) y llega a la misma posición tras 6.Tg1 Dh3; se queda en la página del jaque, con su regla y su «Ver qué pasaría», sin lección: es la candidata si Carlos quiere una más (8.6 % y 5.6 % del curso).
+
+**Su lugar, por la regla de §6:** el jaque ya era una entrada de 5 % o más (44.7 % y 28.4 %), así que su lección más jugada es de La base; la otra pasa el 2 % con 10 partidas o más en las dos bandas, y va a Las que más te van a salir. Cada lección se mide en la respuesta del rival a 4.Ae2 que la nombra (como la Valenciana en 5...Ag4, nota 11); su fila de la base es la Mieses-Kotroc (1.e4 d5 2.exd5 Dxd5), que no dice nada del jaque (`NOMBRADA` en `scripts/frecuencias/escandinava.mjs`). Las demás lecciones no cambian de sección ni de números.
+
+**Lo que no cambió:** la página del jaque conserva su regla corta y suma una frase con sus dos lecciones; lo que cuenta en el Repaso y en el avance es lo de antes (D2 A): las dos lecciones nuevas son obligatorias, entran al Repaso y a Refuerza al terminarlas, como cualquier obligatoria, y no tienen lección de antes que mudar.

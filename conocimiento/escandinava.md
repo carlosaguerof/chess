@@ -190,6 +190,6 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 De6+ 4.Ae2 Cc6 5.d4 Cb4 6.Cf3 Cf6 7.0-0 c6 8.Te1**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sacaste tus piezas y enrocaste con un peón de ventaja en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.
+- Plan *(redactado por la IA)*: Sacaste tus piezas y enrocaste; negras va atrasada en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.
 - Fuente: B01 · Scandinavian Defense: Mieses-Kotroc Variation
 - Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De6+ "4. Be2 and White has developed another piece"); partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De6+ es 19.6 % y 20.0 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %); tras 5.d4, 5...Dg6, 5...Cb4 y 5...Cf6 empatan (5, 4 y 4 partidas) y el motor escoge 5...Cb4; motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.Cf3 y 7.0-0, cada una la mejor; 8.Te1 a 0.05 de la mejor; 5...Cb4 la mejor de negras; 6...Cf6 a 0.03 y 7...c6 a 0.16 de la mejor.

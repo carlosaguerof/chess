@@ -10,10 +10,10 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 | Curso | Lecciones obligatorias | Opcionales | La pregunta del mapa |
 |---|---|---|---|
 | Italiana | 6 | 2 | ¿Qué pasó con el peón de e5 de negras? |
-| Alapin contra la Siciliana | 2 | 4 | ¿Qué pasó con mi peón de e4? |
+| Alapin contra la Siciliana | 2 (4 desde las lecciones de lo frecuente) | 4 | ¿Qué pasó con mi peón de e4? |
 | Contra la Caro-Kann (Avance) | 2 | 0 | ¿Qué pasó con d4, la base de mi cadena? |
 | Contra la Francesa (Avance) | 3 | 4 | La misma, con una forma más |
-| Contra la Escandinava | 4 | 4 | ¿A dónde se fue la dama cuando la ataqué con 3.Cc3? |
+| Contra la Escandinava | 4 (6 desde las lecciones de lo frecuente) | 4 | ¿A dónde se fue la dama cuando la ataqué con 3.Cc3? |
 | Defensa Eslava | 4 | 7 | Tres preguntas en fila (¿cambió en d5?, ¿ya jugó e3?, ¿alcanzó a jugar a4?) |
 | Otras aperturas de blancas | 6 | 2 | ¿Qué peón de blancas ataca mi peón de d5? |
 | Defensa Caro-Kann | 8 | 8 | ¿Qué pasó con el peón de e4? |
@@ -38,3 +38,10 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 ## Lo que falta
 
 Probar todo en GitHub (los dos perfiles; la llave de la Air no tiene permiso), publicar, y que yo recorra los siete cursos en el iPhone y conteste sus preguntas.
+
+## Después del cierre: lecciones para lo que más me sale (2026-11-25)
+
+- **Contra la Escandinava, los jaques de la dama ya tienen lección:** "El jaque en e5: 4...♗g4" (en La base) y "El jaque en e6: 4...♘c6" (en Las que más te van a salir). El curso pasa de 4 a 6 obligatorias.
+- **En la Alapin, los dos peones del centro ya tienen lección:** "2...♘c6, con ...e6" (en La base) y "2...d6, con ...g6" (en una sección nueva, Las que más te van a salir). El curso pasa de 2 a 4 obligatorias.
+- **El mapa y las páginas** de esas formas dicen que ya tienen lecciones; sus reglas son las mismas.
+- **Lo guardado no cambia:** lo que ya había hecho sigue contando igual. Las cuatro lecciones nuevas salen pendientes y entran al Repaso y a Refuerza cuando las termine.

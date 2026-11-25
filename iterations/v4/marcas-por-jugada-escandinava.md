@@ -65,7 +65,7 @@
 | 6.Cf3 | El jaque en e6: 4...Cc6 | tuya | sí | mía hace frase 1: flecha f3→d4 (A2, verde) |
 | 6...Cf6 | El jaque en e6: 4...Cc6 | del rival | no |  |
 | 7.0-0 | El jaque en e6: 4...Cc6 | tuya | no |  |
-| 7...c6 | El jaque en e6: 4...Cc6 | del rival | sí | rival frase 1: casilla d5 (A5, roja); flecha c3→d5 (A5, roja) |
+| 7...c6 | El jaque en e6: 4...Cc6 | del rival | sí | rival frase 1: flecha b4→d5 (A7, roja, punteada) |
 | 8.Te1 | El jaque en e6: 4...Cc6 | tuya | no |  |
 | 3...Dd6 | La dama en d6: Bronstein (5...a6) | del rival | no |  |
 | 4.d4 | La dama en d6: Bronstein (5...a6) | tuya | no |  |

@@ -4389,7 +4389,7 @@
       "Re1"
      ],
      "lado": "blancas",
-     "plan": "Sacaste tus piezas y enrocaste con un peón de ventaja en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.",
+     "plan": "Sacaste tus piezas y enrocaste; negras va atrasada en desarrollo. Si su caballo sigue en b4, a3 lo echa; después, tu caballo de f3 salta a e5.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

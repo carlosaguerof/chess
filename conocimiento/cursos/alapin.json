@@ -835,7 +835,7 @@
    "base": "alapin-curso-centro-d6",
    "nombre": "2...d6, con ...g6",
    "desde": 3,
-   "intro": "Estás en Los dos peones del centro: tu objetivo es defender tu peón de e4 con piezas y sacarlas detrás de tu centro. El rival juega 2...d6, sin atacar tu e4.",
+   "intro": "Estás en Los dos peones del centro: tu objetivo es sostener tus peones del centro y sacar tus piezas. El rival juega 2...d6, sin atacar tu e4.",
    "idea": "Contra 2...d6, 3.d4 y retomas en d4 con el peón. Cuando su caballo ataca tu e4, lo defiendes con tu caballo de b1; después sacas tus piezas y enrocas.",
    "plan": {
     "tuyo": "Sacas tu alfil de c1 a e3, que cuida d4, y juegas h3 para que su alfil de c8 no se instale en g4.",
@@ -2889,7 +2889,7 @@
         ]
        },
        {
-        "frase": "7...bxc6: el rival retoma con el peón. Ganaste un caballo por un peón.",
+        "frase": "7...bxc6: el rival retoma con el peón. Ganaste un caballo por dos peones.",
         "jugadas": [
          "bxc6"
         ],
@@ -2939,6 +2939,13 @@
     "WB-2c3",
     "MOTOR"
    ],
+   "describe": {
+    "prepara": [
+     [
+      "Nc3"
+     ]
+    ]
+   },
    "motor": [
     "D-d6-cxd4"
    ]
@@ -3059,7 +3066,7 @@
        ]
       },
       {
-       "frase": "8.Re1: tu rey vuelve a e1.",
+       "frase": "8.Re1: tu rey vuelve a e1 para cuidar f2.",
        "jugadas": [
         "Ke1"
        ],

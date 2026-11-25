@@ -1434,7 +1434,7 @@
    "nombre": "El jaque en e5: 4...Ag4",
    "desde": 3,
    "estructura": "El jaque",
-   "intro": "Estás en el jaque: la dama de negras da jaque desde e5, y tu objetivo es taparlo y seguir sacando piezas sin regalar nada. Aquí negras saca su alfil de c8 contra tu alfil.",
+   "intro": "Estás en el jaque: la dama de negras da jaque desde e5, y tu objetivo es seguir sacando piezas sin regalar nada. Aquí negras saca su alfil de c8.",
    "idea": "Tapas el jaque con Ae2 y vuelves a atacar a la dama con d4. Si su alfil se queda en g4 con la dama como único defensor, tus peones lo echan, y f4 amenaza f5.",
    "plan": {
     "tuyo": "Tu peón de f4 amenaza f5, que atacaría a la vez a la dama y al alfil. Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
@@ -1568,7 +1568,7 @@
    "nombre": "El jaque en e6: 4...Cc6",
    "desde": 3,
    "estructura": "El jaque",
-   "intro": "Estás en el jaque: la dama de negras da jaque desde e6, y tu objetivo es taparlo y seguir sacando piezas sin regalar nada. Aquí negras saca su caballo de b8.",
+   "intro": "Estás en el jaque: la dama de negras da jaque desde e6, y tu objetivo es seguir sacando piezas sin regalar nada. Aquí negras saca su caballo de b8.",
    "idea": "Tapas el jaque con Ae2 y juegas d4, que amenaza d5 contra la dama y el caballo. Después sacas tus piezas, enrocas y llevas tu torre a la columna de la dama.",
    "plan": {
     "tuyo": "Si su caballo sigue en b4, a3 lo echa. Después, tu caballo de f3 salta a e5.",
@@ -2351,7 +2351,7 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6": {
-   "texto": "La dama de negras se va a e6: desde ahí defiende a su alfil de g4 y sigue frente a tu alfil de e2.",
+   "texto": "La dama de negras se va a e6: desde ahí defiende a su alfil de g4 y clava tu alfil de e2 contra tu rey.",
    "marcas": [
     [
      {
@@ -2445,19 +2445,15 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O c6": {
-   "texto": "Negras juega ...c6 y le quita la casilla d5 a tu caballo de c3.",
+   "texto": "Negras juega ...c6: apoya la casilla d5 para su caballo de b4.",
    "marcas": [
     [
      {
-      "tipo": "A5",
-      "en": "d5",
-      "color": "rojo"
-     },
-     {
-      "tipo": "A5",
-      "de": "c3",
+      "tipo": "A7",
+      "de": "b4",
       "a": "d5",
-      "color": "rojo"
+      "color": "rojo",
+      "punteada": true
      }
     ]
    ],
@@ -4083,7 +4079,7 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3": {
-   "pregunta": "Su caballo de b4 mira a tu peón de c2. ¿Qué pieza sacas?",
+   "pregunta": "Su caballo de b4 mira a tu peón de c2, pero tu dama lo cuida. ¿Qué pieza sacas ahora?",
    "pista": "Tu caballo de rey todavía no sale, y desde su casilla defendería tu peón del centro.",
    "hace": "Sacas tu caballo de rey: defiende tu peón de d4.",
    "porque": "Tu peón de c2 está seguro: si el caballo de b4 se lo come, tu dama lo captura.",
