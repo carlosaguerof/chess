@@ -583,7 +583,10 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
     const rep = soloObligatorias(todo)
     const ck = (r: typeof todo) => r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.id)
     expect(ck(rep).sort()).toEqual(obligatorias(nuevo).map((v) => `b:caro-kann/${v.base}`).sort())
-    expect(rep.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b'))).toEqual(todo.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b')))
+    // las aperturas sin un curso con secciones no cambian (los cursos nuevos por estructuras tienen su propia prueba)
+    const conSecciones = new Set(Object.values(CURSOS_NUEVOS).filter((c) => c.secciones).map((c) => `${c.apertura}:${c.color}`))
+    const sinCurso = (l: (typeof todo.lineas)[number]) => !conSecciones.has(`${l.apertura}:${l.color}`)
+    expect(rep.lineas.filter(sinCurso)).toEqual(todo.lineas.filter(sinCurso))
     // la guía y los bots siguen con todo
     expect(ck(todo).length).toBeGreaterThan(ck(rep).length)
     expect(repertorioCompleto().lineas).toHaveLength(todo.lineas.length)
@@ -595,14 +598,15 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
     expect(marcadas).toEqual(opcionales(nuevo).map((v) => v.base).sort())
     const fuera = repertorioCompleto().lineas.filter((l) => !soloObligatorias(repertorioCompleto()).lineas.includes(l)).map((l) => l.id.slice(l.id.indexOf('/') + 1))
     for (const b of marcadas) expect(fuera, b).toContain(b)
-    // ningún otro curso tiene opcionales hoy
-    expect(cursos().filter((c) => c.id !== 'caro-kann:b').flatMap((c) => c.lecciones).filter((l) => l.opcional)).toEqual([])
+    // ningún curso sin secciones tiene opcionales (los cursos nuevos por estructuras declaran las suyas)
+    expect(cursos().filter((c) => c.id !== 'caro-kann:b' && !CURSOS_NUEVOS[c.id]?.secciones).flatMap((c) => c.lecciones).filter((l) => l.opcional)).toEqual([])
   })
 
   it('Refuerza deja de mostrar 37 jugadas de la Caro-Kann: 23 de opcionales y 14 de líneas de la base que no son lección', () => {
     const todas = jugadasDeMiRepertorio(repertorioCompleto(), [])
     const quedan = new Set(jugadasDeMiRepertorio(soloObligatorias(repertorioCompleto()), []).map((j) => `${j.fen}|${j.esperada}`))
-    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`))
+    // las de la Caro-Kann con negras (los cursos nuevos cuentan las suyas en su propia prueba)
+    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`) && j.linea.apertura === 'caro-kann' && j.linea.color === 'b')
     expect(fuera).toHaveLength(37)
     const enOpcional = (j: (typeof todas)[number]) => opcionales(nuevo).some((v) => {
       const ch = new Chess()

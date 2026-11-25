@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
-import { CURSOS_NUEVOS, grupoDeLinea, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, troncoDelCurso } from '../../src/curso/datos.ts'
+import { CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales, soloObligatorias, troncoDelCurso } from '../../src/curso/datos.ts'
 import { continuar, empezar, intentar, jugarRival, reintentar, type EstadoCiclo } from '../../src/curso/ciclo.ts'
 import { posicion } from '../../src/curso/textos.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
 import { todosLosVer } from '../../src/curso/ver.ts'
 import { registrarPasoCurso } from '../../src/registro/eventos.ts'
 import { jugadasFalladas } from '../../src/registro/refuerza.ts'
-import { repertorioDeFavoritas } from '../../src/aprender/favoritas.ts'
+import { repertorioCompleto, repertorioDeFavoritas } from '../../src/aprender/favoritas.ts'
 import { MIS_APERTURAS } from '../../src/aprender/interruptores.ts'
 import { cursos } from '../../src/cursos/datos.ts'
 import { LECCIONES_ITALIANA, pasarItaliana } from '../../src/aprender/migracion.ts'
@@ -195,6 +195,15 @@ describe('La Italiana por estructuras · el ciclo, el registro y lo guardado', (
     expect(it.lecciones.map((l) => l.id).sort()).toEqual(leccionesDe(c).map((l) => l.id).sort())
     expect(new Set(it.lecciones.map((l) => l.jugadas.join(' '))).size).toBe(it.lecciones.length)
     expect(leccionIdDe(c, c.variantes.find((v) => v.id === 'paris')!)).toBe('italiana:w/w:italiana/curso-paris')
+  })
+
+  it('las dos opcionales van marcadas en el Repaso y fuera de Refuerza, con el filtro común (esLeccionOpcional, soloObligatorias)', () => {
+    const it = cursos().find((x) => x.id === 'italiana:w')!
+    expect(it.lecciones.filter((l) => l.opcional).map((l) => l.id).sort()).toEqual(opcionales(c).map((v) => leccionIdDe(c, v)).sort())
+    for (const v of c.variantes) expect(esLeccionOpcional('italiana', 'w', v.base), v.id).toBe(opcionales(c).includes(v))
+    // Refuerza: solo las líneas de las seis obligatorias (ni las opcionales ni las variantes de la base que no son lección)
+    const deLaItaliana = soloObligatorias(repertorioCompleto()).lineas.filter((l) => l.apertura === 'italiana' && l.color === 'w').map((l) => l.id.slice(l.id.indexOf('/') + 1))
+    expect(deLaItaliana.sort()).toEqual(obligatorias(c).map((v) => v.base).sort())
   })
 
   it('lo guardado de las lecciones viejas pasa a la nueva de la misma línea; lo de las cinco que ya no son lección se queda guardado', () => {
