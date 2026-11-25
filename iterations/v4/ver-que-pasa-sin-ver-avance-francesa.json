@@ -38,11 +38,5 @@
   "e4 e6 d4 d5 e5 Bd7 Nf3 a6 c3 Bb5 Bxb5+ | porque | 0": "linea",
   "e4 e6 d4 d5 e5 Bd7 Nf3 a6 c3 Bb5 Bxb5+ axb5 O-O | porque | 0": "explica",
   "e4 e6 d4 d5 e5 c5 c3 Nc6 Bd3 cxd4 | porque | 0": "linea",
-  "e4 e6 d4 d5 e5 | prepara | 1": "plan",
-  "e4 e6 d4 d5 e5 c5 c3 | errores | dxc5": "explica",
-  "e4 e6 d4 d5 e5 c5 c3 cxd4 cxd4 | errores | Qxd4": "explica",
-  "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 | errores | Bd3": "explica",
-  "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3 | errores | Be3": "explica",
-  "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3 c4 Nbd2 | errores | b4": "explica",
-  "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3 Nh6 b4 | errores | Bxh6": "explica"
+  "e4 e6 d4 d5 e5 | prepara | 1": "plan"
 }

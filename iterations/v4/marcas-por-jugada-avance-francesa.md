@@ -78,7 +78,7 @@
 
 | Dónde | Frase | Marcas |
 |---|---|---|
-| plan cambio-d4 tuyo frase 3 | El caballo de f5 es el que más presiona d4: con tu caballo ya en c3 y sin la dama de negras en b6, empuja h4, y más adelante g4 lo echa de ahí. | flecha h2→h4 (A3, verde, punteada); casilla f5 (A6, roja) |
+| plan cambio-d4 tuyo frase 3 | El caballo de f5 ataca d4: con tu caballo ya en c3 y sin la dama de negras en b6, empuja h4, y más adelante g4 lo echa de ahí. | flecha h2→h4 (A3, verde, punteada); flecha f5→d4 (A4, roja) |
 | plan cambio-d4 rival frase 1 | Negras suma piezas contra d4, como su dama en b6. | flecha d8→b6 (A7, roja, punteada) |
 | plan cge7 rival frase 1 | Negras puede cambiar en d4 o atacar tu peón de e5 con ...f6. | flecha f7→f6 (A7, roja, punteada) |
 | plan euwe rival frase 1 | Negras puede atacar tu peón de e5 con ...f6 o sumar la dama con ...Db6. | flecha f7→f6 (A7, roja, punteada); flecha d8→b6 (A7, roja, punteada) |
@@ -86,7 +86,7 @@
 | estructura 3, paso 3 | Con a3 le quitas la casilla b4 a las piezas de negras. | casilla b4 (A6, verde) |
 | estructura 3, paso 4 | La casilla clave es f5: por ahí llega el caballo de negras contra d4. | casilla f5 (A6, roja) |
 | repaso 1, paso 4 | La dama de negras va a b6, 5...Db6: mira b2 antes de mover tu alfil de c1. | flecha b6→b2 (A4, roja) |
-| plan cambio-d4 paso a paso, paso 2 | El caballo de f5 es el que más presiona d4. | flecha f5→d4 (A4, roja) |
+| plan cambio-d4 paso a paso, paso 2 | El caballo de f5 ataca d4. | flecha f5→d4 (A4, roja) |
 | plan cge7 paso a paso, paso 3 | Con defensores de sobra, tu alfil puede ir a d3, contra el caballo de f5: Ad3. | flecha d3→f5 (A2, verde) |
 | plan cge7 paso a paso, paso 5 | Negras también puede atacar tu peón de e5 con ...f6. | flecha f7→f6 (A7, roja, punteada) |
 | plan lputian paso a paso, paso 2 | Tu alfil de b2 y tu dama defienden d4. | flecha b2→d4 (A2, verde); flecha d1→d4 (A2, verde) |

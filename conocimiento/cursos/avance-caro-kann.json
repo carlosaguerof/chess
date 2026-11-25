@@ -37,7 +37,7 @@
         {
           "texto": [
             "Cuando negras contesta 1.e4 con 1...c6 y después 2...d5, juegas 3.e5: cierras el centro y ganas espacio. Tu peón de e5 le quita f6 al caballo de g8.",
-            "Negras golpea la base de tu cadena, d4, con ...c5: de inmediato, o después de sacar su alfil de c8 a f5. Tu trabajo es sostener d4 con el mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0.",
+            "Negras golpea la base de tu cadena, d4, con ...c5: de inmediato, o después de sacar su alfil de c8 a f5. Tu trabajo es sostener d4 con el mismo esquema que contra la Francesa: c3, Cf3, Ae2 y 0-0.",
             "No vas a memorizar cada respuesta. Vas a reconocer qué pasó con d4, y eso te dice qué plan toca."
           ],
           "tablero": {
@@ -102,9 +102,9 @@
           "texto": [
             "Después de 3.e5, negras ataca la base de tu cadena, d4, con su peón de c. De ahí sale la pregunta que ordena este curso: ¿qué pasó con d4?",
             "Hay dos respuestas, cada una con su nombre. Tu peón de c3 sigue detrás de d4 y nadie ha cambiado: la cadena entera. Negras cambió en d4 y retomaste con el peón de c: la base sola.",
-            "Las dos se juegan con un solo esquema, c3, Cf3, Ae2 y 0-0, y un aviso: cuando ya no hay peón que defienda d4, en la base sola, cuenta sus atacantes y defensores antes de cada jugada. Son las mismas dos formas que contra la Francesa.",
+            "Las dos se juegan con un solo esquema, c3, Cf3, Ae2 y 0-0, y un aviso: antes de cada jugada, cuenta los atacantes y defensores de d4; en la base sola, ningún peón lo defiende. Son las mismas dos formas que contra la Francesa.",
             "Debajo de cada lección dice cuál: «Nadie cambia en d4» es la cadena entera y «Negras cambia en d4», la base sola.",
-            "Si negras juega 3...e6 y encierra su alfil, y después golpea d4 con ...c5, también estás en la cadena entera.",
+            "Si negras juega 3...e6 y encierra su alfil, y después golpea d4 con ...c5 cuando ya pusiste c3, también estás en la cadena entera.",
             "Fuera del mapa, sin lección: contra 3...f6 o 3...Cd7, sigue con c3 y Cf3; si negras cambia en e5, retomas."
           ],
           "tablero": {
@@ -237,7 +237,8 @@
           "subtitulo": "La base sola",
           "texto": [
             "Tus peones: d4 y e5. Los de negras: e6 y d5. Ya no hay peones en la columna c: ningún peón defiende d4.",
-            "El mismo esquema, con un aviso: ningún peón defiende d4, así que cuentas sus atacantes y defensores antes de cada jugada, también antes de enrocar. Lo defienden el caballo de f3 y tu dama. Si el alfil de negras clava tu caballo desde g4, tu alfil va a e2, nunca a d3, donde taparía a tu dama."
+            "El mismo esquema, con un aviso: ningún peón defiende d4, así que cuentas sus atacantes y defensores antes de cada jugada, también antes de enrocar. Lo defienden el caballo de f3 y tu dama. Si el alfil de negras clava tu caballo desde g4, tu alfil va a e2, nunca a d3, donde taparía a tu dama.",
+            "La casilla clave es f5: por ahí llega el caballo de negras contra d4."
           ],
           "tablero": {
             "fen": "4k3/pp3ppp/4p3/3pP3/3P4/8/PP3PPP/4K3 w - - 0 1",
@@ -291,7 +292,7 @@
           "desde": 8,
           "lado": "b",
           "intro": "Contra 3...c5 4.c3 Cc6 sacaste el alfil a d3, como si nada. Ahora juegas con negras: castiga el error.",
-          "final": "Tu alfil tapó a tu dama: d4 se quedó sin defensores y negras ganó un peón. Por eso, primero Cf3.",
+          "final": "Tu alfil tapó a tu dama: d4 se quedó sin defensores y negras ganó un peón. Por eso, primero Cf3, que suma un defensor de d4.",
           "fuente": [
             "WP-CK",
             "MOTOR"
@@ -343,8 +344,8 @@
           "subtitulo": "Lo que te llevas",
           "texto": [
             "La pregunta: ¿qué pasó con d4? La respuesta te dice qué plan toca.",
-            "La idea: con 3.e5 ganas espacio, y sostienes la base de tu cadena, d4, con el mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0. En la cadena entera la sostiene tu peón de c3; en la base sola, tus piezas.",
-            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4, y contra 3...c5, no pongas tu alfil en d3, delante de tu dama. 3) Después de ...cxd4 y cxd4, contra la clavada del alfil en g4, tu alfil va a e2."
+            "La idea: con 3.e5 ganas espacio, y sostienes la base de tu cadena, d4, con el mismo esquema que contra la Francesa: c3, Cf3, Ae2 y 0-0. En la cadena entera la sostiene tu peón de c3; en la base sola, tus piezas.",
+            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4, y contra 3...c5, antes de sacar tu caballo a f3 o contra la clavada del alfil de g4, no pongas tu alfil en d3, delante de tu dama. 3) Después de ...cxd4 y cxd4, contra la clavada del alfil en g4, tu alfil va a e2."
           ],
           "linea": [
             "e4",
@@ -381,7 +382,7 @@
                 ]
               },
               {
-                "frase": "Pones un peón detrás de d4, 4.c3, y negras abre su alfil con 4...e6.",
+                "frase": "Pones un peón detrás de d4, 4.c3, y negras abre su alfil de f8 con 4...e6.",
                 "jugadas": [
                   "c3",
                   "e6"
@@ -409,7 +410,7 @@
           "subtitulo": "Lo que tu guía decía distinto",
           "texto": [
             "«Atacas el flanco de rey con c3-Cf3-Ae2»: esas jugadas sostienen d4 y te desarrollan; no atacan al rey. Las jugadas que van contra el alfil de f5, como g4 o h4, también son buenas, pero no son las de este curso.",
-            "«Mismo plan que contra la Francesa»: el esqueleto sí, y las dos formas del mapa son las mismas. Pero contra 3...Af5 tienes más tiempo para desarrollarte, porque ...c5 llega en la jugada 5, y el alfil de c8 de negras ya salió."
+            "«Mismo plan que contra Caro-Kann», dice tu guía en la Francesa: el esquema sí, y las dos formas del mapa son las mismas. Pero contra 3...Af5 tienes más tiempo para desarrollarte, porque ...c5 llega en la jugada 5, y el alfil de c8 de negras ya salió."
           ],
           "fuente": [
             "WP-CK",
@@ -419,7 +420,7 @@
           "pasoAPaso": {
             "pasos": [
               {
-                "frase": "El esqueleto: 1.e4 c6 2.d4 d5 3.e5 Af5 4.c3.",
+                "frase": "El esquema: 1.e4 c6 2.d4 d5 3.e5 Af5 4.c3.",
                 "jugadas": [
                   "e4",
                   "c6",
@@ -431,7 +432,7 @@
                 ]
               },
               {
-                "frase": "Con 4...e6 5.Ae2 c5 6.Cf3 tus jugadas sostienen d4: no atacan al rey.",
+                "frase": "Con 4...e6 5.Ae2 c5 6.Cf3 te desarrollas y sostienes d4: no atacas al rey.",
                 "jugadas": [
                   "e6",
                   "Be2",
@@ -456,8 +457,8 @@
       "desde": 0,
       "estructura": "Nadie cambia en d4",
       "intro": "Estás en la cadena entera: tu objetivo es sostener d4 mientras te desarrollas; si negras cambia ahí, pasas a la base sola. Empiezas desde la primera jugada.",
-      "idea": "Negras saca su alfil antes de ...e6; tú sostienes d4 con el esqueleto de siempre y cuentas atacantes y defensores.",
-      "regla": "El mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0, contando antes los defensores de d4.",
+      "idea": "Negras saca su alfil antes de ...e6; tú sostienes d4 con el esquema de siempre y cuentas atacantes y defensores.",
+      "regla": "El mismo esquema que contra la Francesa: c3, Cf3, Ae2 y 0-0, contando antes los defensores de d4.",
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 3...Af5 tras 3.e5 sale en 34.7 % de las partidas que llegan ahí en 600–1000 (59 de 170) y en 52.4 % en 1000–1400 (1225 de 2336)",
       "plan": {
@@ -764,7 +765,7 @@
         "g4"
       ],
       "hace": "Pones un peón detrás de d4: desde ahí sostiene la base de tu cadena.",
-      "porque": "Es el mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0.",
+      "porque": "Es el mismo esquema que contra la Francesa: c3, Cf3, Ae2 y 0-0.",
       "prepara": "Si negras golpea d4 y cambia ahí, retomas con el peón de c y tu cadena sigue en pie.",
       "fuente": [
         "WB-CK-3Af5",
@@ -784,7 +785,7 @@
         "Nd2"
       ],
       "hace": "Desarrollas el alfil de f1.",
-      "porque": "Desde e2 no queda frente al alfil de f5: en d3, negras podría cambiarlo por el suyo.",
+      "porque": "Desde e2 tu alfil no queda frente al alfil de f5: en d3, negras podría cambiarlo por el suyo.",
       "prepara": "Después vienen Cf3 y el enroque.",
       "fuente": [
         "WB-CK-5Ae2",
@@ -886,6 +887,63 @@
           }
         ]
       },
+      "verErrores": {
+        "dxc5": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 5...c5.",
+              "fuente": [
+                "WB-CK-3e5",
+                "WP-CK",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-ck-6dxc5"
+              ]
+            },
+            {
+              "frase": "6.dxc5: cambias tu peón de d4 por el de c5.",
+              "jugadas": [
+                "dxc5"
+              ],
+              "fuente": [
+                "WB-CK-3e5",
+                "WP-CK",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-ck-6dxc5"
+              ]
+            },
+            {
+              "frase": "6...Axc5: el alfil de negras retoma y sale a jugar.",
+              "jugadas": [
+                "Bxc5"
+              ],
+              "fuente": [
+                "WB-CK-3e5",
+                "WP-CK",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-ck-6dxc5"
+              ]
+            },
+            {
+              "frase": "Tu peón de e5 se quedó sin la base de su cadena: ya no hay peón tuyo en d4.",
+              "fuente": [
+                "WB-CK-3e5",
+                "WP-CK",
+                "MOTOR"
+              ],
+              "motor": [
+                "M-ck-6dxc5"
+              ]
+            }
+          ]
+        }
+      },
       "fuente": [
         "WB-CK-3e5",
         "WP-CK",
@@ -923,7 +981,7 @@
         "Be3"
       ],
       "hace": "Desarrollas el caballo de b1.",
-      "porque": "Tapa a tu dama un momento, pero si negras cambia en f3, este caballo retoma y d4 queda bien defendido.",
+      "porque": "Tu caballo tapa a tu dama un momento, pero si negras cambia en f3, este caballo retoma y d4 queda bien defendido.",
       "marcasDe": {
         "porque": [
           [
@@ -994,7 +1052,7 @@
       ]
     },
     "e4 c6 d4 d5 e5 c5 c3": {
-      "pregunta": "Negras ya golpea d4 con su peón de c. ¿Cómo lo preparas para que tu cadena aguante?",
+      "pregunta": "Negras ya golpea d4 con su peón de c. ¿Cómo sostienes d4 para que tu cadena aguante si negras cambia ahí?",
       "pista": "Piensa qué pasa con d4 si negras cambia ahí.",
       "buenas": [
         "Nf3",
@@ -1133,6 +1191,85 @@
           }
         ]
       },
+      "verErrores": {
+        "Bd3": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 4...Cc6.",
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-5ad3",
+                "E-ck-5ad3"
+              ]
+            },
+            {
+              "frase": "5.Ad3: tu alfil se pone entre tu dama y d4.",
+              "jugadas": [
+                "Bd3"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-5ad3",
+                "E-ck-5ad3"
+              ]
+            },
+            {
+              "frase": "5...cxd4: negras cambia en d4.",
+              "jugadas": [
+                "cxd4"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-5ad3",
+                "E-ck-5ad3"
+              ]
+            },
+            {
+              "frase": "6.cxd4: retomas con el peón.",
+              "jugadas": [
+                "cxd4"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-5ad3",
+                "E-ck-5ad3"
+              ]
+            },
+            {
+              "frase": "6...Cxd4: el caballo se come tu peón; tu dama ya no lo defendía, porque el alfil la tapa.",
+              "jugadas": [
+                "Nxd4"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-5ad3",
+                "E-ck-5ad3"
+              ]
+            }
+          ]
+        }
+      },
       "fuente": [
         "WP-CK",
         "MOTOR"
@@ -1156,7 +1293,7 @@
       ]
     },
     "e4 c6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bg4 Be2": {
-      "pregunta": "Tu caballo de f3, que defiende d4, está clavado contra tu dama. ¿Cómo quitas la clavada y desarrollas a la vez?",
+      "pregunta": "Tu caballo de f3, que defiende d4, está clavado contra tu dama. ¿Qué haces para que d4 no pierda ese defensor?",
       "pista": "La clavada es contra tu dama.",
       "buenas": [
         "Nbd2",
@@ -1249,6 +1386,85 @@
             ]
           }
         ]
+      },
+      "verErrores": {
+        "Bd3": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 6...Ag4.",
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-7ad3",
+                "E-ck-7ad3"
+              ]
+            },
+            {
+              "frase": "7.Ad3: tu alfil se pone entre tu dama y d4.",
+              "jugadas": [
+                "Bd3"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-7ad3",
+                "E-ck-7ad3"
+              ]
+            },
+            {
+              "frase": "7...Axf3: negras cambia el caballo que defendía d4.",
+              "jugadas": [
+                "Bxf3"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-7ad3",
+                "E-ck-7ad3"
+              ]
+            },
+            {
+              "frase": "8.Dxf3: retomas con la dama.",
+              "jugadas": [
+                "Qxf3"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-7ad3",
+                "E-ck-7ad3"
+              ]
+            },
+            {
+              "frase": "8...Cxd4: el caballo se come tu peón de d4, que ya no tenía defensores.",
+              "jugadas": [
+                "Nxd4"
+              ],
+              "fuente": [
+                "WP-CK",
+                "MOTOR",
+                "AJEDREZ"
+              ],
+              "motor": [
+                "M-ck-7ad3",
+                "E-ck-7ad3"
+              ]
+            }
+          ]
+        }
       },
       "fuente": [
         "WP-CK",
@@ -1350,6 +1566,10 @@
     {
       "termino": "Enroque",
       "definicion": "Mover el rey dos casillas hacia una torre y pasar esa torre al otro lado: 0-0. Pone al rey a salvo."
+    },
+    {
+      "termino": "Esquema",
+      "definicion": "Las mismas jugadas tuyas contra casi todo: aquí, c3, Cf3, Ae2 y 0-0."
     },
     {
       "termino": "Estructura",
