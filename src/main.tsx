@@ -5,16 +5,10 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import './estilos.css'
 import { App } from './App.tsx'
-import { migrarAlCursoAlapin, migrarAlCursoAvance, migrarAlCursoCaroKann, migrarAlCursoEscandinava, migrarAlCursoEslava, migrarAlCursoItaliana, migrarAlModeloDeFavoritas } from './aprender/migracion.ts'
+import { migrarTodo } from './aprender/migracion.ts'
 
-// Nota 1: lo guardado pasa al modelo de favoritas (una sola vez)
-migrarAlModeloDeFavoritas()
-migrarAlCursoCaroKann()
-migrarAlCursoItaliana()
-migrarAlCursoEslava()
-migrarAlCursoAvance()
-migrarAlCursoEscandinava()
-migrarAlCursoAlapin()
+// Nota 1: lo guardado pasa al modelo de favoritas, y lo de las lecciones viejas a las nuevas (cada una, una sola vez)
+migrarTodo()
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>

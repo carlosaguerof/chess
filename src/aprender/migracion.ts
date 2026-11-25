@@ -324,3 +324,36 @@ export function migrarAlCursoAlapin(): void {
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarAlapin(repaso))
   guardar('modelo-alapin', 1)
 }
+
+/**
+ * Todas las mudanzas de lecciones, en el orden en que corren al abrir la app. Cada una es idempotente: una lección vieja
+ * se muda solo si la nueva todavía no tiene nada, así que aplicarlas dos veces no cambia nada, no duplica y no borra.
+ * `importar` (`src/repertorio/edicion.ts`) las aplica a lo que trae un Respaldo: uno hecho antes de una actualización
+ * trae los ids viejos, y la marca de cada migración (`modelo-<curso>`) ya está puesta, así que sin esto esas lecciones
+ * quedaban guardadas pero dejaban de salir en el Repaso (cierre de los cursos, 2026-11-25, §3.1).
+ */
+export function pasarTodas<T>(r: Record<string, T>): Record<string, T> {
+  return pasarAlapin(pasarEscandinava(pasarAvance(pasarEslavaYOtrosNegras(pasarItaliana(pasarCaroKann(r))))))
+}
+
+/** Las tablas de todas las mudanzas: el prefijo del curso y, por lección vieja, su lección nueva. */
+export const TABLAS_DE_MUDANZA: { prefijo: string; tabla: Record<string, string> }[] = [
+  { prefijo: 'caro-kann:b/b:caro-kann/', tabla: LECCIONES_CARO_KANN },
+  { prefijo: 'italiana:w/w:italiana/', tabla: LECCIONES_ITALIANA },
+  { prefijo: 'eslava:b/b:eslava/', tabla: LECCIONES_ESLAVA },
+  { prefijo: 'otros-negras:b/b:otros-negras/', tabla: LECCIONES_OTROS_NEGRAS },
+  ...Object.entries(LECCIONES_AVANCE).map(([prefijo, tabla]) => ({ prefijo, tabla })),
+  { prefijo: 'escandinava:w/w:escandinava/', tabla: LECCIONES_ESCANDINAVA },
+  { prefijo: 'siciliana:w/w:siciliana/', tabla: LECCIONES_ALAPIN },
+]
+
+/** Lo que corre al abrir la app (`main.tsx`): cada migración, una sola vez, en su orden. */
+export function migrarTodo(): void {
+  migrarAlModeloDeFavoritas()
+  migrarAlCursoCaroKann()
+  migrarAlCursoItaliana()
+  migrarAlCursoEslava()
+  migrarAlCursoAvance()
+  migrarAlCursoEscandinava()
+  migrarAlCursoAlapin()
+}
