@@ -24,6 +24,8 @@ const CUANDO = process.env.CAPTURAS === 'antes' ? 'antes' : 'despues'
 
 const CURSO = cursoNuevo('caro-kann:b')!
 const ESTRUCTURAS = cursoNuevo('caro-kann-estructuras:b')!
+// los cursos del Avance (2026-11-25): sus obligatorias; el nombre más largo es el de la línea principal de la Francesa
+const AVANCES = [cursoNuevo('caro-kann:w')!, cursoNuevo('francesa:w')!]
 const clave = (c: typeof CURSO) => `ajedrez.v1.curso:${c.id}`
 const urlDe = (c: typeof CURSO) => `/#/curso/${encodeURIComponent(c.id)}`
 const boton = (page: Page) => page.getByTestId('empezar-curso')
@@ -77,9 +79,10 @@ test.describe('El botón "Seguir" de la página del curso, con jerarquía', () =
   for (const { curso, variantes } of [
     { curso: CURSO, variantes: CURSO.variantes },
     { curso: ESTRUCTURAS, variantes: obligatorias(ESTRUCTURAS) },
+    ...AVANCES.map((c) => ({ curso: c, variantes: obligatorias(c) })),
   ])
     test(`${curso.nombre}: con cada una de las ${variantes.length} variantes en curso, "Seguir" grande y el nombre chico en un renglón, a 360, 375, 402 y 430`, async ({ page }) => {
-    expect(variantes).toHaveLength(curso === CURSO ? 16 : 8)
+    expect(variantes).toHaveLength(curso === CURSO ? 16 : curso === ESTRUCTURAS ? 8 : obligatorias(curso).length)
     // la página se abre ya en cada ancho, como en el teléfono: si se achica la ventana con la página abierta, el tablero
     // tarda un momento en ajustarse y la medida ve una página más ancha que no existe
     for (const { ancho, alto } of ANCHOS) {
