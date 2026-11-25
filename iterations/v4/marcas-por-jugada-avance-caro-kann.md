@@ -6,21 +6,21 @@
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
-| 1.e4 | 3...Af5 4.c3 | tuya | no |  |
-| 1...c6 | 3...Af5 4.c3 | del rival | no |  |
-| 2.d4 | 3...Af5 4.c3 | tuya | no |  |
-| 2...d5 | 3...Af5 4.c3 | del rival | no |  |
-| 3.e5 | 3...Af5 4.c3 | tuya | no |  |
-| 3...Af5 | 3...Af5 4.c3 | del rival | no |  |
-| 4.c3 | 3...Af5 4.c3 | tuya | no |  |
-| 4...e6 | 3...Af5 4.c3 | del rival | no |  |
-| 5.Ae2 | 3...Af5 4.c3 | tuya | no |  |
-| 5...c5 | 3...Af5 4.c3 | del rival | no |  |
-| 6.Cf3 | 3...Af5 4.c3 | tuya | sí | mía hace frase 1: flecha f3→d4 (A2, verde); flecha f3→e5 (A2, verde) |
-| 6...Cc6 | 3...Af5 4.c3 | del rival | sí | rival frase 1: flecha c6→d4 (A4, roja) |
-| 7.0-0 | 3...Af5 4.c3 | tuya | no |  |
-| 7...Ag4 | 3...Af5 4.c3 | del rival | no |  |
-| 8.Cbd2 | 3...Af5 4.c3 | tuya | sí | mía porque frase 1: flecha d2→f3 (A3, verde, punteada) |
+| 1.e4 | 3...Af5 | tuya | no |  |
+| 1...c6 | 3...Af5 | del rival | no |  |
+| 2.d4 | 3...Af5 | tuya | no |  |
+| 2...d5 | 3...Af5 | del rival | no |  |
+| 3.e5 | 3...Af5 | tuya | no |  |
+| 3...Af5 | 3...Af5 | del rival | no |  |
+| 4.c3 | 3...Af5 | tuya | no |  |
+| 4...e6 | 3...Af5 | del rival | no |  |
+| 5.Ae2 | 3...Af5 | tuya | no |  |
+| 5...c5 | 3...Af5 | del rival | no |  |
+| 6.Cf3 | 3...Af5 | tuya | sí | mía hace frase 1: flecha f3→d4 (A2, verde); flecha f3→e5 (A2, verde) |
+| 6...Cc6 | 3...Af5 | del rival | sí | rival frase 1: flecha c6→d4 (A4, roja) |
+| 7.0-0 | 3...Af5 | tuya | no |  |
+| 7...Ag4 | 3...Af5 | del rival | no |  |
+| 8.Cbd2 | 3...Af5 | tuya | sí | mía porque frase 1: flecha d2→f3 (A3, verde, punteada) |
 | 3...c5 | 3...c5 (Botvinnik-Carls) | del rival | no |  |
 | 4.c3 | 3...c5 (Botvinnik-Carls) | tuya | no |  |
 | 4...Cc6 | 3...c5 (Botvinnik-Carls) | del rival | sí | rival frase 1: flecha c6→d4 (A4, roja) |

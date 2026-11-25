@@ -467,7 +467,7 @@
   {
    "id": "reti-bogoljubow",
    "base": "curso-reti-bogoljubow",
-   "nombre": "Réti: 2.c4 c6 3.b3",
+   "nombre": "Réti: 2.c4 y 3.b3",
    "desde": 0,
    "intro": "Estás en la Anglo-Eslava: el peón de c de blancas presiona sin un peón en d4, y tu objetivo es sacar tus piezas sin dejar débil b7. Empiezas desde la primera jugada: blancas abre con 1.Cf3.",
    "idea": "Con el peón blanco en b3, la dama blanca no tiene b3: tu alfil sale a f5 antes de ...e6.",
@@ -610,7 +610,7 @@
   {
    "id": "inglesa-caro-kann",
    "base": "curso-inglesa-caro-kann",
-   "nombre": "Inglesa: 1.c4 c6 2.Cc3",
+   "nombre": "Inglesa: 1.c4 y 2.Cc3",
    "desde": 0,
    "intro": "Estás en la Eslava, por otro camino: blancas juega c4 y d4, como en la Eslava, y tu objetivo es seguir su mapa. Empiezas desde la primera jugada: blancas abre con 1.c4.",
    "idea": "Con 2.Cc3 d5 3.cxd5 cxd5 4.d4 llegas al Cambio de la Eslava: sigues su plan.",
@@ -913,7 +913,7 @@
   {
    "id": "inglesa-anglo-eslava-g3",
    "base": "curso-inglesa-anglo-eslava-g3",
-   "nombre": "Inglesa: 2.Cf3 d5 3.g3",
+   "nombre": "Inglesa: 2.Cf3 y 3.g3",
    "desde": 0,
    "intro": "Estás en la Anglo-Eslava: el peón de c de blancas presiona sin un peón en d4, y tu objetivo es sacar tus piezas sin dejar débil b7. Empiezas desde la primera jugada: blancas abre con 1.c4.",
    "idea": "Aquí tu alfil sale a f5; contra d3, cambias en c4 y cambias las damas.",
@@ -969,7 +969,7 @@
   {
    "id": "inglesa-gurevich",
    "base": "inglesa-gurevich",
-   "nombre": "Inglesa: 2.Cf3 d5 3.e3",
+   "nombre": "Inglesa: 2.Cf3 y 3.e3",
    "desde": 0,
    "intro": "Estás en la Anglo-Eslava: el peón de c de blancas presiona sin un peón en d4, y tu objetivo es sacar tus piezas sin dejar débil b7. Pero si blancas pone su peón en d4, ya es la Eslava.",
    "idea": "Con el caballo blanco en c3, lo más sencillo es ...e6 antes de tu alfil.",

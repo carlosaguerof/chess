@@ -615,7 +615,7 @@
     {
       "id": "dos-caballos-d3",
       "base": "curso-dos-caballos-d3",
-      "nombre": "Dos Caballos: 4.d3",
+      "nombre": "Dos Caballos: 3...Cf6",
       "desde": 0,
       "estructura": "Centro cerrado",
       "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tus piezas salen antes de que se abra el juego. Empiezas desde la primera jugada.",
@@ -729,7 +729,7 @@
     {
       "id": "la-bourdonnais",
       "base": "curso-la-bourdonnais",
-      "nombre": "3...Ac5 4.c3 d6 (La Bourdonnais)",
+      "nombre": "3...Ac5 y 4...d6 (La Bourdonnais)",
       "desde": 5,
       "estructura": "Centro ideal",
       "intro": "Estás en el Centro ideal, que en esta lección dura poco: aquí tus piezas trabajan para sostener el centro. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a c5.",
@@ -867,7 +867,7 @@
     {
       "id": "principal",
       "base": "giuoco-pianissimo-principal",
-      "nombre": "3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)",
+      "nombre": "3...Ac5 y 4...Cf6 (Giuoco Pianissimo)",
       "desde": 5,
       "estructura": "Centro cerrado",
       "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tus piezas salen antes de que se abra el juego. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a c5.",

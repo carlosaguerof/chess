@@ -6,45 +6,45 @@
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
-| 1.e4 | Dos Caballos: 4.d3 | tuya | no |  |
-| 1...e5 | Dos Caballos: 4.d3 | del rival | no |  |
-| 2.Cf3 | Dos Caballos: 4.d3 | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde)<br>mía prepara frase 1: flecha f3→d4 (A2, verde) |
-| 2...Cc6 | Dos Caballos: 4.d3 | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja); flecha c6→d4 (A4, roja) |
-| 3.Ac4 | Dos Caballos: 4.d3 | tuya | sí | mía hace frase 1: flecha c4→f7 (A2, verde) |
-| 3...Cf6 | Dos Caballos: 4.d3 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 4.d3 | Dos Caballos: 4.d3 | tuya | sí | mía prepara frase 1: flecha f3→g5 (A3, verde, punteada) |
-| 4...Ac5 | Dos Caballos: 4.d3 | del rival | sí | rival frase 1: flecha c5→f2 (A4, roja) |
-| 5.c3 | Dos Caballos: 4.d3 | tuya | no |  |
-| 5...d6 | Dos Caballos: 4.d3 | del rival | no |  |
-| 6.0-0 | Dos Caballos: 4.d3 | tuya | no |  |
-| 6...0-0 | Dos Caballos: 4.d3 | del rival | no |  |
-| 7.Te1 | Dos Caballos: 4.d3 | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
-| 3...Ac5 | 3...Ac5 4.c3 d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha d8→g5 (A4, roja); flecha c5→f2 (A4, roja) |
-| 4.c3 | 3...Ac5 4.c3 d6 (La Bourdonnais) | tuya | sí | mía porque frase 1: flecha c6→d4 (A4, roja) |
-| 4...d6 | 3...Ac5 4.c3 d6 (La Bourdonnais) | del rival | no |  |
-| 5.d4 | 3...Ac5 4.c3 d6 (La Bourdonnais) | tuya | no |  |
-| 5...exd4 | 3...Ac5 4.c3 d6 (La Bourdonnais) | del rival | no |  |
-| 6.cxd4 | 3...Ac5 4.c3 d6 (La Bourdonnais) | tuya | no |  |
-| 6...Ab6 | 3...Ac5 4.c3 d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha b6→d4 (A4, roja) |
-| 7.h3 | 3...Ac5 4.c3 d6 (La Bourdonnais) | tuya | sí | mía porque frase 1: flecha c8→g4 (A7, roja, punteada) |
-| 7...Cf6 | 3...Ac5 4.c3 d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 8.d5 | 3...Ac5 4.c3 d6 (La Bourdonnais) | tuya | no |  |
+| 1.e4 | Dos Caballos: 3...Cf6 | tuya | no |  |
+| 1...e5 | Dos Caballos: 3...Cf6 | del rival | no |  |
+| 2.Cf3 | Dos Caballos: 3...Cf6 | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde)<br>mía prepara frase 1: flecha f3→d4 (A2, verde) |
+| 2...Cc6 | Dos Caballos: 3...Cf6 | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja); flecha c6→d4 (A4, roja) |
+| 3.Ac4 | Dos Caballos: 3...Cf6 | tuya | sí | mía hace frase 1: flecha c4→f7 (A2, verde) |
+| 3...Cf6 | Dos Caballos: 3...Cf6 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 4.d3 | Dos Caballos: 3...Cf6 | tuya | sí | mía prepara frase 1: flecha f3→g5 (A3, verde, punteada) |
+| 4...Ac5 | Dos Caballos: 3...Cf6 | del rival | sí | rival frase 1: flecha c5→f2 (A4, roja) |
+| 5.c3 | Dos Caballos: 3...Cf6 | tuya | no |  |
+| 5...d6 | Dos Caballos: 3...Cf6 | del rival | no |  |
+| 6.0-0 | Dos Caballos: 3...Cf6 | tuya | no |  |
+| 6...0-0 | Dos Caballos: 3...Cf6 | del rival | no |  |
+| 7.Te1 | Dos Caballos: 3...Cf6 | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
+| 3...Ac5 | 3...Ac5 y 4...d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha d8→g5 (A4, roja); flecha c5→f2 (A4, roja) |
+| 4.c3 | 3...Ac5 y 4...d6 (La Bourdonnais) | tuya | sí | mía porque frase 1: flecha c6→d4 (A4, roja) |
+| 4...d6 | 3...Ac5 y 4...d6 (La Bourdonnais) | del rival | no |  |
+| 5.d4 | 3...Ac5 y 4...d6 (La Bourdonnais) | tuya | no |  |
+| 5...exd4 | 3...Ac5 y 4...d6 (La Bourdonnais) | del rival | no |  |
+| 6.cxd4 | 3...Ac5 y 4...d6 (La Bourdonnais) | tuya | no |  |
+| 6...Ab6 | 3...Ac5 y 4...d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha b6→d4 (A4, roja) |
+| 7.h3 | 3...Ac5 y 4...d6 (La Bourdonnais) | tuya | sí | mía porque frase 1: flecha c8→g4 (A7, roja, punteada) |
+| 7...Cf6 | 3...Ac5 y 4...d6 (La Bourdonnais) | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 8.d5 | 3...Ac5 y 4...d6 (La Bourdonnais) | tuya | no |  |
 | 3...h6 | 3...h6 | del rival | sí | rival frase 1: casilla g5 (A5, roja); flecha f3→g5 (A5, roja) |
 | 4.d4 | 3...h6 | tuya | no |  |
 | 4...exd4 | 3...h6 | del rival | no |  |
 | 5.Cxd4 | 3...h6 | tuya | no |  |
 | 5...Cf6 | 3...h6 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
 | 6.Cc3 | 3...h6 | tuya | sí | mía hace frase 1: flecha c3→e4 (A2, verde) |
-| 4...Cf6 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 5.d3 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | tuya | no |  |
-| 5...d6 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | del rival | no |  |
-| 6.0-0 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | tuya | no |  |
-| 6...0-0 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | del rival | no |  |
-| 7.Te1 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
-| 7...a6 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha b7→b5 (A7, roja, punteada); flecha b5→c4 (A7, roja, punteada) |
-| 8.Ab3 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha b3→f7 (A2, verde) |
-| 8...Aa7 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha a7→f2 (A4, roja) |
-| 9.h3 | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | tuya | sí | mía prepara frase 1: flecha d3→d4 (A3, verde, punteada) |
+| 4...Cf6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 5.d3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | no |  |
+| 5...d6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | no |  |
+| 6.0-0 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | no |  |
+| 6...0-0 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | no |  |
+| 7.Te1 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
+| 7...a6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha b7→b5 (A7, roja, punteada); flecha b5→c4 (A7, roja, punteada) |
+| 8.Ab3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha b3→f7 (A2, verde) |
+| 8...Aa7 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha a7→f2 (A4, roja) |
+| 9.h3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía prepara frase 1: flecha d3→d4 (A3, verde, punteada) |
 | 3...d6 | 3...d6 (Defensa París) | del rival | no |  |
 | 4.d4 | 3...d6 (Defensa París) | tuya | no |  |
 | 4...exd4 | 3...d6 (Defensa París) | del rival | no |  |

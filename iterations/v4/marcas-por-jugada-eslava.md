@@ -6,22 +6,22 @@
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
-| 1.d4 | Checa: 5.a4 | del rival | no |  |
-| 1...d5 | Checa: 5.a4 | tuya | no |  |
-| 2.c4 | Checa: 5.a4 | del rival | no |  |
-| 2...c6 | Checa: 5.a4 | tuya | no |  |
-| 3.Cf3 | Checa: 5.a4 | del rival | sí | rival frase 1: flecha f3→e5 (A4, roja) |
-| 3...Cf6 | Checa: 5.a4 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
-| 4.Cc3 | Checa: 5.a4 | del rival | no |  |
-| 4...dxc4 | Checa: 5.a4 | tuya | no |  |
-| 5.a4 | Checa: 5.a4 | del rival | sí | rival frase 1: casilla b5 (A5, roja); flecha b7→b5 (A5, roja) |
-| 5...Af5 | Checa: 5.a4 | tuya | no |  |
-| 6.e3 | Checa: 5.a4 | del rival | sí | rival frase 1: flecha f1→c4 (A7, roja, punteada) |
-| 6...e6 | Checa: 5.a4 | tuya | no |  |
-| 7.Axc4 | Checa: 5.a4 | del rival | no |  |
-| 7...Ab4 | Checa: 5.a4 | tuya | no |  |
-| 8.0-0 | Checa: 5.a4 | del rival | no |  |
-| 8...0-0 | Checa: 5.a4 | tuya | no |  |
+| 1.d4 | 5.a4 | del rival | no |  |
+| 1...d5 | 5.a4 | tuya | no |  |
+| 2.c4 | 5.a4 | del rival | no |  |
+| 2...c6 | 5.a4 | tuya | no |  |
+| 3.Cf3 | 5.a4 | del rival | sí | rival frase 1: flecha f3→e5 (A4, roja) |
+| 3...Cf6 | 5.a4 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
+| 4.Cc3 | 5.a4 | del rival | no |  |
+| 4...dxc4 | 5.a4 | tuya | no |  |
+| 5.a4 | 5.a4 | del rival | sí | rival frase 1: casilla b5 (A5, roja); flecha b7→b5 (A5, roja) |
+| 5...Af5 | 5.a4 | tuya | no |  |
+| 6.e3 | 5.a4 | del rival | sí | rival frase 1: flecha f1→c4 (A7, roja, punteada) |
+| 6...e6 | 5.a4 | tuya | no |  |
+| 7.Axc4 | 5.a4 | del rival | no |  |
+| 7...Ab4 | 5.a4 | tuya | no |  |
+| 8.0-0 | 5.a4 | del rival | no |  |
+| 8...0-0 | 5.a4 | tuya | no |  |
 | 4.e3 | Tranquila: 4.e3 | del rival | no |  |
 | 4...Af5 | Tranquila: 4.e3 | tuya | sí | mía porque frase 2: flecha f6→d5 (A2, verde) |
 | 5.Cc3 | Tranquila: 4.e3 | del rival | no |  |
@@ -52,10 +52,10 @@
 | 7...Dxd4 | 3.Cc3 | tuya | no |  |
 | 8.Cf3 | 3.Cc3 | del rival | sí | rival frase 1: flecha f3→d4 (A4, roja) |
 | 8...Db6 | 3.Cc3 | tuya | sí | mía hace frase 1: flecha b6→b4 (A2, verde) |
-| 9.De2 | Checa: 9.De2 (Sämisch) | del rival | sí | rival frase 1: flecha e3→e4 (A7, roja, punteada) |
-| 9...Ce4 | Checa: 9.De2 (Sämisch) | tuya | no |  |
-| 10.g4 | Checa: 9.De2 (Sämisch) | del rival | no |  |
-| 10...Ag6 | Checa: 9.De2 (Sämisch) | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde) |
+| 9.De2 | 5.a4 y 9.De2 (Sämisch) | del rival | sí | rival frase 1: flecha e3→e4 (A7, roja, punteada) |
+| 9...Ce4 | 5.a4 y 9.De2 (Sämisch) | tuya | no |  |
+| 10.g4 | 5.a4 y 9.De2 (Sämisch) | del rival | no |  |
+| 10...Ag6 | 5.a4 y 9.De2 (Sämisch) | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde) |
 | 5.e3 | Alekhine: 5.e3 | del rival | sí | rival frase 1: flecha f1→c4 (A7, roja, punteada) |
 | 5...b5 | Alekhine: 5.e3 | tuya | no |  |
 | 6.a4 | Alekhine: 5.e3 | del rival | no |  |
@@ -64,12 +64,12 @@
 | 7...e6 | Alekhine: 5.e3 | tuya | no |  |
 | 8.Axc4 | Alekhine: 5.e3 | del rival | no |  |
 | 8...Ab7 | Alekhine: 5.e3 | tuya | no |  |
-| 6.Ce5 | Checa: 6.Ce5 (Carlsbad) | del rival | sí | rival frase 1: flecha e5→c4 (A7, roja, punteada) |
-| 6...Cbd7 | Checa: 6.Ce5 (Carlsbad) | tuya | sí | mía porque frase 1: flecha d7→e5 (A2, verde) |
-| 7.Cxc4 | Checa: 6.Ce5 (Carlsbad) | del rival | no |  |
-| 7...Dc7 | Checa: 6.Ce5 (Carlsbad) | tuya | sí | mía hace frase 1: flecha c7→e5 (A2, verde) |
-| 8.g3 | Checa: 6.Ce5 (Carlsbad) | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
-| 8...e5 | Checa: 6.Ce5 (Carlsbad) | tuya | sí | mía porque frase 1: flecha c7→e5 (A2, verde); flecha d7→e5 (A2, verde) |
+| 6.Ce5 | 5.a4 y 6.Ce5 (Carlsbad) | del rival | sí | rival frase 1: flecha e5→c4 (A7, roja, punteada) |
+| 6...Cbd7 | 5.a4 y 6.Ce5 (Carlsbad) | tuya | sí | mía porque frase 1: flecha d7→e5 (A2, verde) |
+| 7.Cxc4 | 5.a4 y 6.Ce5 (Carlsbad) | del rival | no |  |
+| 7...Dc7 | 5.a4 y 6.Ce5 (Carlsbad) | tuya | sí | mía hace frase 1: flecha c7→e5 (A2, verde) |
+| 8.g3 | 5.a4 y 6.Ce5 (Carlsbad) | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
+| 8...e5 | 5.a4 y 6.Ce5 (Carlsbad) | tuya | sí | mía porque frase 1: flecha c7→e5 (A2, verde); flecha d7→e5 (A2, verde) |
 | 4.cxd5 | Cambio por 3.Cf3: 8.Db3 | del rival | no |  |
 | 4...cxd5 | Cambio por 3.Cf3: 8.Db3 | tuya | no |  |
 | 5.Cc3 | Cambio por 3.Cf3: 8.Db3 | del rival | no |  |
