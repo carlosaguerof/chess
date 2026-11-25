@@ -15,9 +15,9 @@ test.describe('T7 · mi repertorio, visible', () => {
     const nombres = await filas.allTextContents()
     const primero = (familia: string) => nombres.findIndex((n) => n.includes(familia))
     expect(primero('Avance')).toBe(0)
-    // la Clásica se llama "3.Cc3" desde el cierre de los cursos (2026-11-25): su nombre no adelanta tu captura en e4
-    expect(primero('Cambio')).toBeLessThan(primero('3.Cc3'))
-    expect(primero('3.Cc3')).toBeLessThan(primero('Dos Caballos'))
+    // la Clásica se llama "3.♘c3" (en figuras, como se ve) desde el cierre de los cursos (2026-11-25): su nombre no adelanta tu captura en e4
+    expect(primero('Cambio')).toBeLessThan(primero('3.♘c3'))
+    expect(primero('3.♘c3')).toBeLessThan(primero('Dos Caballos'))
     // §3: nada de "de tu guía", "en tu repertorio" ni "redactado por la IA" en la vista
     await expect(page.locator('main')).not.toContainText(/de tu guía|en tu repertorio|solo en la base|redactado por la IA/)
     await captura(page, info, 't7-repertorio-negras')
