@@ -29,6 +29,15 @@ export default defineConfig({
           env: { CURSO: 'eslava:b' },
         },
       },
+      // ...c6 + ...d5 contra lo demás, por estructuras (2026-11-25)
+      {
+        extends: true,
+        test: {
+          name: 'curso otros-negras',
+          include: ['curso-contenido', 'curso-ciclo', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          env: { CURSO: 'otros-negras:b' },
+        },
+      },
     ],
   },
 })

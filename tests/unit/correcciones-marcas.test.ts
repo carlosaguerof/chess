@@ -234,7 +234,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
   })
 
   it('hay marcas, y cada una está ligada a una frase que existe', () => {
-    expect(TODAS.length).toBeGreaterThan(50)
+    expect(TODAS.length).toBeGreaterThan(CK ? 50 : 10)
     for (const x of TODAS) {
       expect(x.frase.length, x.donde).toBeGreaterThan(0)
       expect(x.marcas.length, x.donde).toBeGreaterThan(0)
@@ -553,7 +553,7 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
   it('R8 · solo lo que no se ve solo: ninguna A2 ni A4 entre casillas pegadas, salvo A5; y la lista de qué jugadas llevan marcas está al día', () => {
     expect(revisarR8(TODAS)).toEqual([])
     // la A5 sí, aunque la pieza esté pegada (se cumple en dos jugadas)
-    expect(TODAS.some((x) => x.marcas.some((m) => m.tipo === 'A5'))).toBe(true)
+    if (CK) expect(TODAS.some((x) => x.marcas.some((m) => m.tipo === 'A5'))).toBe(true)
     expect(readFileSync(archivosDelCurso(c).marcas, 'utf8')).toBe(listaDeMarcas(c))
   })
 
