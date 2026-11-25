@@ -8,7 +8,7 @@
 
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
-| 6.♘f3 | porque | Va primero este caballo: con el de b1 en c3, la dama del rival tomaría en d4. | 6.♘c3 6...♕xd4 | solo Aprender |
+| 6.♘f3 | porque | Va primero este caballo: si hubieras sacado antes el de b1 a c3, la dama del rival tomaría en d4. | 6.♘c3 6...♕xd4 | solo Aprender |
 | 7.♗e2 | prepara | Si cambia en f3, retomas con el alfil, y si su dama toma d4, ♗xc6+ le quita el defensor con jaque: ganas su dama. | 7...♗xf3 8.♗xf3 8...♕xd4 9.♗xc6+ 9...bxc6 10.♕xd4 | Aprender y Practicar |
 | 8.♗b5 | cuidado | Si el rival cambia en e5, retomas con el caballo: te queda el peón de d4 solo, como en El aislado. | 8...dxe5 9.♘xe5 | Aprender y Practicar |
 
@@ -22,7 +22,7 @@
 | 3.exd5 | porque | Así el que tiene que recuperar un peón es el rival. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3.exd5 | prepara | Si lo recupera con la dama, pones un peón en d4: tu centro será ese peón. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Tu peón de c3 lo apoya: si el rival cambia, retomas con un peón. | lo que dice se juega en las jugadas que siguen de la línea |
-| 4.d4 | cuidado | Tu centro ya no es de dos peones: es este solo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.d4 | cuidado | Tu centro ya no es de dos peones: solo el de d4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.cxd4 | porque | Así c3 queda libre para tu caballo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.cxd4 | prepara | Cuando tu caballo de g1 defienda d4, el de b1 saldrá a c3 contra la dama. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8.♘c3 | porque | Ahora sí: tu caballo de f3 defiende d4. | explica la jugada que ya está en la línea, sin una alternativa |

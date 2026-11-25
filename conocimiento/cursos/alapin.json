@@ -52,7 +52,7 @@
      "texto": [
       "Contra 1...c5, la Defensa Siciliana, juegas 2.c3. Con ese peón preparas d4: si el rival cambia en d4, retomas con otro peón y sigues con un peón en el centro.",
       "El precio: tu caballo de b1 ya no puede salir a c3. Por eso las dos respuestas principales del rival, 2...d5 y 2...Cf6, atacan enseguida tu peón de e4. Si no lo atacan, juegas d4 y tienes los dos peones del centro.",
-      "Vas a aprender qué hacer con tu peón de e4 en cada caso, y su plan."
+      "Vas a aprender qué hacer con tu peón de e4 en cada caso, y el plan que sigue."
      ],
      "tablero": {
       "jugadas": [
@@ -83,15 +83,6 @@
         "frase": "Juegas 2.c3: preparas d4.",
         "jugadas": [
          "c3"
-        ],
-        "marcas": [
-         {
-          "tipo": "A3",
-          "de": "d2",
-          "a": "d4",
-          "color": "verde",
-          "punteada": true
-         }
         ]
        },
        {
@@ -145,7 +136,7 @@
      "subtitulo": "El mapa",
      "texto": [
       "Después de 1.e4 c5 2.c3, la pregunta que ordena este curso es: ¿qué pasó con tu peón de e4?",
-      "Hay tres respuestas. Lo cambiaste en d5 y el rival retomó con la dama: El aislado. Lo avanzaste a e5: La cadena. Sigue en e4, con tu peón de d4 al lado: Los dos peones del centro, la que más te va a salir; no tiene lección, pero sí plan.",
+      "Hay tres respuestas. Lo cambiaste en d5 y el rival retomó con la dama: El aislado (tu peón de d4 queda aislado cuando el rival cambia en d4 y retomas con el peón). Lo avanzaste a e5: La cadena. Sigue en e4, con tu peón de d4 al lado: Los dos peones del centro, la que más te va a salir; no tiene lección, pero sí plan.",
       "Y la regla para tu jugada 3: si un peón ataca tu e4 (2...d5), lo cambias, 3.exd5. Si lo ataca el caballo (2...Cf6), lo avanzas, 3.e5. Si nadie lo ataca (2...Cc6, 2...d6, 2...e6 o 2...g6), juegas 3.d4.",
       "Una excepción: si cambias en d5 y el rival no recupera el peón (3...Cf6), es un gambito. Ahí casi cada jugada tuya es la única buena; está en su lección opcional."
      ],
@@ -186,7 +177,7 @@
         ]
        },
        {
-        "frase": "El aislado: el rival retoma con la dama, 3...Dxd5, y sigues con 4.d4.",
+        "frase": "El aislado: el rival retoma con la dama, 3...Dxd5, y sigues con 4.d4; si cambia en d4, tu peón quedará aislado.",
         "jugadas": [
          "Qxd5",
          "d4"
@@ -289,7 +280,7 @@
      "subtitulo": "La cadena",
      "texto": [
       "Tus peones: d4 y e5, en diagonal. Forman una cadena, y d4 es su base. El rival ya no tiene peón en la columna c.",
-      "Tu plan: sacas tus piezas (Cf3, Ac4) y enrocas, apartando primero la pieza que te ataquen. El rival ataca la punta, e5, con su peón de d: si cambia en e5, retomas con el caballo, y juegas como en El aislado.",
+      "Tu plan: sacas tus piezas (Cf3, Ac4) y enrocas; si te atacan una pieza, primero la apartas. El rival ataca la punta, e5, con su peón de d: si cambia en e5, retomas con el caballo, y juegas como en El aislado.",
       "Con 2...e6 3.d4 d5 4.e5 llegas a la misma posición de tu Avance contra la Francesa, con el peón del rival en d5: ahí sigue el plan de ese curso, no el de esta página."
      ],
      "tablero": {
@@ -334,8 +325,8 @@
      "texto": [
       "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3. Contra 2...e6, lo común es 3...d5, y ahí avanzas: La cadena.",
       "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
-      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado): no pierdes nada. Tras 2...d6, avanzar a e5 te cuesta un peón; con su alfil ya en g7, en cambio, avanzar a e5 es todavía mejor.",
-      "Si después el rival lo ataca con un peón en d5: con su peón ya en e6, lo avanzas, como en tu Avance contra la Francesa; si no, lo cambias. Este curso no trae lección para estas jugadas."
+      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado): no pierdes nada. Tras 2...d6, avanzar a e5 te cuesta un peón.",
+      "Si después el rival lo ataca con un peón en d5 y su peón ya está en e6, lo avanzas, como en tu Avance contra la Francesa. Este curso no trae lección para estas jugadas."
      ],
      "tablero": {
       "fen": "4k3/pp1ppppp/8/8/3PP3/8/PP3PPP/4K3 w - - 0 1",
@@ -362,13 +353,22 @@
         "frase": "Primero tu caballo de g1 sale a f3 y defiende d4; después, el de b1 a c3, y enrocas."
        },
        {
-        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5."
+        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5.",
+        "marcas": [
+         {
+          "tipo": "A3",
+          "de": "d4",
+          "a": "d5",
+          "color": "verde",
+          "punteada": true
+         }
+        ]
        },
        {
         "frase": "Si su caballo de dama no ha salido, defiendes e4 con una pieza."
        },
        {
-        "frase": "Si un peón del rival lo ataca desde d5: con su peón en e6, avanzas a e5; si no, cambias en d5."
+        "frase": "Si un peón del rival lo ataca desde d5 y su peón ya está en e6, avanzas a e5."
        }
       ]
      }
@@ -662,9 +662,9 @@
   {
    "id": "cambio-central",
    "base": "alapin-curso-cambio-central",
-   "nombre": "2...d5: 4...cxd4 (Cambio Central)",
+   "nombre": "2...d5: el Cambio Central",
    "desde": 0,
-   "intro": "Estás en El aislado: tu objetivo es que tus piezas trabajen más rápido que las del rival. Empiezas desde la primera jugada: el rival contesta con 1...c5, la Defensa Siciliana.",
+   "intro": "Estás en El aislado: tu objetivo es sacar tus piezas rápido y a buenas casillas. Empiezas desde la primera jugada: el rival contesta con 1...c5, la Defensa Siciliana.",
    "idea": "Cuando el rival cambia en d4, retomas con el peón y tu caballo de b1 sale a c3 atacando a la dama, con el de g1 ya defendiendo d4.",
    "plan": {
     "tuyo": "Enroca y saca tus demás piezas. Juegas con el peón aislado: con muchas piezas en el tablero te da espacio, así que no te apresures a cambiarlas.",
@@ -702,12 +702,12 @@
    "regla": "Retoma en d4 con el peón; primero Cf3, después Cc3.",
    "frecuencia": 2.95,
    "fuenteFrecuencia": "lichess 1000–1400: 2.9 % de las partidas del curso (n 3), y su posición tras 6.Cf3 llega también desde 2...Cc6 (5.0 %, n 19); El aislado, 12.3 %",
-   "estructura": "Cambias en d5: el aislado"
+   "estructura": "Cambias en d5: El aislado"
   },
   {
    "id": "cf6-d4",
    "base": "alapin-curso-cf6-d4",
-   "nombre": "2...Cf6: 3...Cd5 y 4...cxd4",
+   "nombre": "2...Cf6: La cadena",
    "desde": 3,
    "intro": "Estás en La cadena: tu objetivo es sostener tus peones del centro con piezas, pero el rival la ataca por delante y puede deshacerla. El rival ataca tu peón de e4 con el caballo.",
    "idea": "Contra el caballo que ataca tu e4, avanzas con 3.e5; después sostienes la cadena con piezas.",
@@ -744,14 +744,14 @@
    "regla": "Contra 2...Cf6, avanza: 3.e5. Después, piezas que sostengan e5 y d4.",
    "frecuencia": 4.33,
    "fuenteFrecuencia": "lichess 1000–1400: 4.3 % de las partidas del curso (n 24); 600–1000: 21.9 % (n 7); la única de La cadena (13.4 % y 21.9 %)",
-   "estructura": "Avanzas a e5: la cadena"
+   "estructura": "Avanzas a e5: La cadena"
   },
   {
    "id": "moderna",
    "base": "alapin-curso-moderna",
-   "nombre": "2...d5: 4...Cf6 (Línea Moderna)",
+   "nombre": "2...d5: la Línea Moderna",
    "desde": 3,
-   "intro": "Estás en El aislado: tu objetivo es que tus piezas trabajen más rápido que las del rival. El rival contesta 2...d5 y saca su caballo antes de cambiar en el centro.",
+   "intro": "Estás en El aislado: tu objetivo es sacar tus piezas rápido y a buenas casillas. El rival contesta 2...d5 y saca su caballo antes de cambiar en el centro.",
    "idea": "Contra la clavada, Ae2 y h3; tu alfil de c1 cuida d4, y cuando el rival cambia, retomas con el peón.",
    "plan": {
     "tuyo": "Tu caballo de b1 sale a c3 atacando a la dama. Después sacas tus demás piezas y no te apresuras a cambiarlas: juegas con el peón aislado.",
@@ -807,14 +807,14 @@
    "regla": "Contra ...Ag4, Ae2 y h3; contra el cambio en d4, retoma con el peón.",
    "frecuencia": 0,
    "fuenteFrecuencia": "lichess: sin datos en las dos bandas (n 0)",
-   "estructura": "Cambias en d5: el aislado"
+   "estructura": "Cambias en d5: El aislado"
   },
   {
    "id": "cc6",
    "base": "alapin-curso-cc6",
-   "nombre": "2...d5: 4...Cc6",
+   "nombre": "2...d5, con ...Cc6",
    "desde": 3,
-   "intro": "Estás en El aislado: tu objetivo es que tus piezas trabajen más rápido que las del rival. El rival contesta 2...d5 y saca su caballo de dama antes de cambiar en el centro.",
+   "intro": "Estás en El aislado: tu objetivo es sacar tus piezas rápido y a buenas casillas. El rival contesta 2...d5 y saca su caballo de dama antes de cambiar en el centro.",
    "idea": "Defiendes d4 con piezas; cuando el rival cambia, retomas con el peón y tu caballo de b1 sale a c3 atacando a la dama.",
    "plan": {
     "tuyo": "Saca tu alfil de f1 y enroca. Juegas con el peón aislado: con muchas piezas en el tablero te da espacio, así que no te apresures a cambiarlas.",
@@ -852,14 +852,14 @@
    "regla": "Defiende d4 con piezas; contra el cambio, retoma con el peón.",
    "frecuencia": 0.72,
    "fuenteFrecuencia": "lichess 1000–1400: 0.7 % de las partidas del curso (n 4); 600–1000: sin datos",
-   "estructura": "Cambias en d5: el aislado"
+   "estructura": "Cambias en d5: El aislado"
   },
   {
    "id": "g6",
    "base": "alapin-curso-g6",
-   "nombre": "2...d5: 4...g6",
+   "nombre": "2...d5, con ...g6",
    "desde": 3,
-   "intro": "Estás en El aislado: tu objetivo es que tus piezas trabajen más rápido que las del rival. El rival contesta 2...d5 y prepara sacar su alfil por g7.",
+   "intro": "Estás en El aislado: tu objetivo es sacar tus piezas rápido y a buenas casillas. El rival contesta 2...d5 y prepara sacar su alfil por g7.",
    "idea": "Desarrollas y, cuando el rival cambia en d4, retomas con el peón y tu caballo de b1 sale a c3 atacando a la dama.",
    "plan": {
     "tuyo": "Enroca y saca tus demás piezas. Juegas con el peón aislado: con muchas piezas en el tablero te da espacio, así que no te apresures a cambiarlas.",
@@ -896,12 +896,12 @@
    "regla": "Desarrolla y, contra el cambio en d4, retoma con el peón.",
    "frecuencia": 0,
    "fuenteFrecuencia": "lichess: sin datos en las dos bandas (n 0)",
-   "estructura": "Cambias en d5: el aislado"
+   "estructura": "Cambias en d5: El aislado"
   },
   {
    "id": "gambito",
    "base": "alapin-curso-gambito",
-   "nombre": "2...d5 y 3...Cf6 (Gambito)",
+   "nombre": "2...d5: el Gambito",
    "desde": 3,
    "intro": "Esta lección es la excepción de El aislado: el rival entrega un peón para sacar sus piezas más rápido, y aquí casi cada jugada tuya es la única buena. El rival contesta 2...d5.",
    "idea": "Cuando el rival no recupera el peón, casi cada jugada es la única buena: Da4+, Db3 contra b7 y, si ataca tu peón con ...e6, tomas otro peón.",
@@ -935,20 +935,7 @@
     "fuente": [
      "WB-3Cf6",
      "MOTOR"
-    ],
-    "marcasDe": {
-     "tuyo": [
-      [
-       {
-        "tipo": "A3",
-        "de": "g1",
-        "a": "f3",
-        "color": "verde",
-        "punteada": true
-       }
-      ]
-     ]
-    }
+    ]
    },
    "regla": "Da4+ y Db3; contra ...e6, tomas otro peón.",
    "frecuencia": 0,
@@ -1032,7 +1019,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6": {
-   "texto": "El rival saca su caballo y no tiene prisa por cambiar en d4: ese cambio le daría a tu caballo la casilla c3.",
+   "texto": "El rival saca su caballo y todavía no cambia en d4.",
    "fuente": [
     "WB-2c3",
     "WB-2d5"
@@ -1073,16 +1060,6 @@
    "texto": "El rival saca su otro caballo y suma otro ataque contra tu peón de d4.",
    "fuente": [
     "HART"
-   ],
-   "marcas": [
-    [
-     {
-      "tipo": "A4",
-      "de": "c6",
-      "a": "d4",
-      "color": "rojo"
-     }
-    ]
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4": {
@@ -1097,16 +1074,6 @@
    "fuente": [
     "WB-2d5",
     "LICHESS-CC0"
-   ],
-   "marcas": [
-    [
-     {
-      "tipo": "A4",
-      "de": "c6",
-      "a": "d4",
-      "color": "rojo"
-     }
-    ]
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6": {
@@ -1305,7 +1272,8 @@
       "tipo": "A4",
       "de": "c6",
       "a": "e5",
-      "color": "rojo"
+      "color": "rojo",
+      "por": "c5"
      }
     ]
    ]
@@ -1396,7 +1364,7 @@
   },
   "e4 c5 c3": {
    "clave": true,
-   "pregunta": "Quieres poner un peón en d4 y, si el rival lo cambia, retomar con otro peón. ¿Cuál preparas para eso?",
+   "pregunta": "Quieres poner un peón en d4 y, si el rival lo cambia, retomar con otro peón. ¿Qué peón mueves para prepararlo?",
    "pista": "Un peón de al lado puede apoyar esa casilla desde atrás.",
    "hace": "Preparas d4: si el rival cambia en d4, retomas con este peón y sigues con un peón en el centro.",
    "porque": "Así evitas la Siciliana abierta, la de más teoría.",
@@ -1457,7 +1425,7 @@
    "pista": "Un peón en el centro con otro peón detrás que lo apoye.",
    "hace": "Ocupas el centro y abres la diagonal de tu alfil de c1.",
    "porque": "Tu peón de c3 lo apoya: si el rival cambia, retomas con un peón.",
-   "cuidado": "Tu centro ya no es de dos peones: es este solo.",
+   "cuidado": "Tu centro ya no es de dos peones: solo el de d4.",
    "describe": {
     "hace": [
      [
@@ -1516,7 +1484,7 @@
    "pregunta": "Tu peón de d4 está atacado dos veces. ¿Qué pieza sacas para defenderlo y desarrollarte?",
    "pista": "Un caballo que sale a su casilla natural también mira el centro.",
    "hace": "Sacas el caballo de g1 y defiendes tu peón de d4.",
-   "porque": "Va primero este caballo: con el de b1 en c3, la dama del rival tomaría en d4.",
+   "porque": "Va primero este caballo: si hubieras sacado antes el de b1 a c3, la dama del rival tomaría en d4.",
    "marcasDe": {
     "hace": [
      [
@@ -2219,19 +2187,6 @@
    "pista": "La pieza que estaba detrás de tu alfil.",
    "hace": "Retomas con la dama: sigues con un peón de más.",
    "prepara": "Siguen Cf3 y el enroque: saca tus piezas antes de pensar en defender tu peón de más.",
-   "marcasDe": {
-    "prepara": [
-     [
-      {
-       "tipo": "A3",
-       "de": "g1",
-       "a": "f3",
-       "color": "verde",
-       "punteada": true
-      }
-     ]
-    ]
-   },
    "fuente": [
     "MOTOR",
     "AJEDREZ"
@@ -2586,20 +2541,20 @@
    "definicion": "Entregar un peón a cambio de desarrollo o ataque."
   },
   {
-   "termino": "Quitar el defensor",
-   "definicion": "Capturar la pieza que protege a otra, para después ganar la que quedó sin defensa."
-  },
-  {
    "termino": "Peón aislado",
    "definicion": "Un peón sin peones propios en las columnas de al lado."
   },
   {
-   "termino": "Siciliana abierta",
-   "definicion": "La Siciliana en que sacas el caballo a f3, pones el peón en d4 y retomas en d4 con el caballo; es la de más teoría."
-  },
-  {
    "termino": "Punta de una cadena",
    "definicion": "El peón de adelante de una cadena: el rival lo ataca de frente, con un peón."
+  },
+  {
+   "termino": "Quitar el defensor",
+   "definicion": "Capturar la pieza que protege a otra, para después ganar la que quedó sin defensa."
+  },
+  {
+   "termino": "Siciliana abierta",
+   "definicion": "La Siciliana en que sacas el caballo a f3, pones el peón en d4 y retomas en d4 con el caballo; es la de más teoría."
   },
   {
    "termino": "Teoría",

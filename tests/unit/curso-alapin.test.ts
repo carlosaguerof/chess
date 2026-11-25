@@ -40,7 +40,7 @@ function entrada(js: string[]): 'aislado' | 'cadena' | 'gambito' | 'centro' | 'o
 }
 
 describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
-  const ETIQUETA: Record<string, string> = { aislado: 'Cambias en d5: el aislado', cadena: 'Avanzas a e5: la cadena', gambito: 'Excepción: no recupera el peón (gambito)' }
+  const ETIQUETA: Record<string, string> = { aislado: 'Cambias en d5: El aislado', cadena: 'Avanzas a e5: La cadena', gambito: 'Excepción: no recupera el peón (gambito)' }
 
   it('cada lección cae en una sola entrada, y su etiqueta lo dice', () => {
     const vistas: Record<string, string[]> = {}
