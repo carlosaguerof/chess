@@ -728,16 +728,7 @@
        ]
       },
       {
-       "frase": "Si el rival cambia en e5, retomas con el caballo.",
-       "marcas": [
-        {
-         "tipo": "A3",
-         "de": "f3",
-         "a": "e5",
-         "color": "verde",
-         "punteada": true
-        }
-       ]
+       "frase": "Si el rival cambia en e5, retomas con el caballo."
       },
       {
        "frase": "Entonces te queda el peón de d4 solo, y juegas como en El aislado."
@@ -748,21 +739,7 @@
      "WB-3Cd5",
      "HART",
      "MOTOR"
-    ],
-    "marcasDe": {
-     "tuyo": [
-      [],
-      [
-       {
-        "tipo": "A3",
-        "de": "f3",
-        "a": "e5",
-        "color": "verde",
-        "punteada": true
-       }
-      ]
-     ]
-    }
+    ]
    },
    "regla": "Contra 2...Cf6, avanza: 3.e5. Después, piezas que sostengan e5 y d4.",
    "frecuencia": 4.33,
@@ -2376,19 +2353,6 @@
    "porque": "Ese caballo atacaba tu peón de e5; clavado, ya no puede tomarlo.",
    "prepara": "Siguen 0-0 y sostener tus peones de e5 y d4 con piezas.",
    "cuidado": "Si el rival cambia en e5, retomas con el caballo: te queda el peón de d4 solo, como en El aislado.",
-   "marcasDe": {
-    "cuidado": [
-     [
-      {
-       "tipo": "A3",
-       "de": "f3",
-       "a": "e5",
-       "color": "verde",
-       "punteada": true
-      }
-     ]
-    ]
-   },
    "fuente": [
     "HART",
     "WB-3Cd5",
