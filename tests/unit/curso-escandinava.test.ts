@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
@@ -56,14 +57,28 @@ function formaDe(l: Pick<LineaCurso, 'jugadas'>): string | undefined {
 
 /**
  * La tabla de obligatorio y opcional (iterations/v4/mapa-escandinava.md): las partidas de lichess (CC0, septiembre de
- * 2026, Rapid) de 1.e4 d5, en las dos bandas; `null` es "sin datos" (ninguna secuencia con 3 partidas o más). Cada
- * lección, en la posición que la define en la base (la Valenciana en 5...Ag4, no toda la dama en casa).
+ * 2026, Rapid) de 1.e4 d5, en las dos bandas, como las deja `node scripts/frecuencias-cursos.mjs escandinava:w` con el
+ * método del mapa (`scripts/frecuencias/escandinava.mjs`; la forma del archivo, en `conocimiento/frecuencias/README.md`).
+ * `null` es "sin datos" (ninguna secuencia con 3 partidas o más). Cada lección, en la posición que la define en la base
+ * (la Valenciana en 5...Ag4, no toda la dama en casa). Antes estaban escritas aquí a mano.
  */
-const FORMAS: Record<string, [number | null, number | null]> = { [CLAVADA]: [14.2, 24.8], [CASA]: [13.2, 19.9], [GRANDE]: [null, 7.2], 'la dama en d6 (fuera del mapa)': [2.9, 2.5] }
-const LECCIONES: Record<string, [number | null, number | null]> = {
-  clasica: [null, 2.3], valenciana: [null, 1.8], gipslis: [null, 3.0], lasker: [null, 2.2],
-  bronstein: [null, 0.2], 'schiller-pytel': [null, 0.2], marshall: [null, null], richter: [null, null],
+type Banda = { pct: number | null; n: number }
+type Frecuencias = {
+  curso: string
+  partidas: Record<string, number>
+  lecciones: Record<string, { forma: string | null } & Record<string, Banda>>
+  formas: Record<string, Record<string, Banda>>
+  otras?: Record<string, Record<string, Banda>>
 }
+const FRECUENCIAS = JSON.parse(readFileSync('conocimiento/frecuencias/escandinava.json', 'utf8')) as Frecuencias
+const BANDAS = ['600-1000', '1000-1400'] as const
+/** La entrada de la dama en d6, fuera del mapa: en el archivo, la forma de la Bronstein y la Schiller-Pytel. */
+const D6 = 'La dama en d6 (fuera del mapa)'
+/** El jaque: entrada del mapa sin lección (3...De5+ o 3...De6+). */
+const JAQUE = 'El jaque (3...De5+ o 3...De6+), sin lección'
+const dosBandas = (x: Record<string, Banda>): [number | null, number | null] => [x[BANDAS[0]]!.pct, x[BANDAS[1]]!.pct]
+const FORMAS = Object.fromEntries(Object.entries(FRECUENCIAS.formas).map(([f, x]) => [f, dosBandas(x)]))
+const LECCIONES = Object.fromEntries(Object.entries(FRECUENCIAS.lecciones).map(([id, x]) => [id, dosBandas(x)]))
 const max = (x: [number | null, number | null]) => Math.max(x[0] ?? 0, x[1] ?? 0)
 
 describe('El curso de la Escandinava · las lecciones', () => {
@@ -265,6 +280,39 @@ describe('El curso de la Escandinava · las excepciones, cada una con su «Ver q
 })
 
 describe('El curso de la Escandinava · obligatorio y opcional', () => {
+  it('los números salen de conocimiento/frecuencias/escandinava.json: una fila por lección del curso, ni una de más, con su entrada', () => {
+    expect(FRECUENCIAS.curso).toBe('escandinava:w')
+    expect(Object.keys(FRECUENCIAS.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
+    // la entrada de cada lección, medida en el script con chess.js, es la etiqueta del curso (la dama en d6, sin etiqueta)
+    for (const v of c.variantes) expect(FRECUENCIAS.lecciones[v.id]!.forma, v.id).toBe(v.estructura ?? D6)
+    expect(Object.keys(FRECUENCIAS.formas).sort()).toEqual([...new Set(c.variantes.map((v) => v.estructura ?? D6))].sort())
+    // cada fila trae las dos bandas; "sin datos" es null con n 0, y un número viene de 3 partidas o más
+    const filas = [...Object.values(FRECUENCIAS.lecciones), ...Object.values(FRECUENCIAS.formas), ...Object.values(FRECUENCIAS.otras ?? {})]
+    for (const x of filas)
+      for (const b of BANDAS) {
+        const { pct, n } = x[b]!
+        if (pct === null) expect(n).toBe(0)
+        else expect(n).toBeGreaterThanOrEqual(3)
+      }
+    for (const b of BANDAS) expect(FRECUENCIAS.partidas[b]).toBeGreaterThan(0)
+  })
+
+  it('el número que cita cada lección (su fuente de frecuencia) es el del archivo, en 1000–1400', () => {
+    for (const v of c.variantes) {
+      const x = FRECUENCIAS.lecciones[v.id]![BANDAS[1]]!.pct
+      expect(v.fuenteFrecuencia, v.id).toContain(x === null ? 'sin datos' : `1000–1400: ${x.toFixed(1)} % en `)
+    }
+    // la Valenciana cita también su entrada, la dama en casa
+    expect(c.variantes.find((v) => v.id === 'valenciana')!.fuenteFrecuencia).toContain(`la dama en casa, ${FORMAS[CASA]![1]!.toFixed(1)} %`)
+  })
+
+  it('el jaque es una entrada del mapa sin lección: 5 % o más en las dos bandas, y ninguna lección lo lleva', () => {
+    const jaque = FRECUENCIAS.otras![JAQUE]!
+    for (const b of BANDAS) expect(jaque[b]!.pct!, b).toBeGreaterThanOrEqual(5)
+    expect(c.variantes.filter((v) => v.estructura === 'El jaque')).toEqual([])
+    expect(FORMAS[JAQUE]).toBeUndefined()
+  })
+
   it('la regla de §6 con los datos de este curso da la tabla: por forma, 5 % o más; por lección, 2 % o más', () => {
     const porForma = Object.entries(FORMAS).filter(([, x]) => max(x) >= 5).map(([f]) => f)
     const masJugada = (f: string) => c.variantes.filter((v) => v.estructura === f).sort((a, b) => max(LECCIONES[b.id]!) - max(LECCIONES[a.id]!))[0]!.id

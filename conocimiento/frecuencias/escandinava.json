@@ -1,0 +1,454 @@
+{
+ "curso": "escandinava:w",
+ "fuente": "https://database.lichess.org/ (CC0), lichess_db_standard_rated_2026-09.pgn.zst, primeros 2147483648 bytes comprimidos",
+ "licencia": "CC0 (base abierta de lichess)",
+ "filtro": "Event \"Rated Rapid game\", los dos jugadores con rating lichess en [600,1000) o [1000,1400)",
+ "conteo": {
+  "sha256": "5d42bb4bf49a7bceac83fa07715e22d674f6fed457b0dfb2682384c7b10a65cf",
+  "partidasPorBanda": {
+   "600-1000": 88007,
+   "1000-1400": 268376
+  },
+  "minimo": 3
+ },
+ "script": "scripts/frecuencias/escandinava.mjs",
+ "metodo": "Las partidas del curso: las que llegan a 1.e4 d5 y siguen. En cada posición, una jugada pesa por sus partidas entre las que siguen (n - fin). Las entradas del mapa (`formas`, y en `otras` el jaque y lo que no tiene lección): juegas lo del curso mientras haya respuesta (por posición) y si no, lo que juega la gente; lo del rival pesa por lo que se juega; cada partida se clasifica con su línea en la media jugada 12 (la primera captura de negras en d5 dice la pieza; si es la dama, su jugada siguiente dice la casilla); su `n`, las partidas que llegaron a la jugada que la decide. Cada lección, en la posición que la define en la base (la última jugada de negras de su variante de la base, o la jugada en que se separa de las demás lecciones), por la secuencia exacta: el producto de la parte de cada jugada de negras desde 2...; su `n`, las partidas de esa última jugada. Las jugadas del rival sin lección, igual (del curso) y su parte de las partidas de su posición. `null`: ninguna secuencia de 3 partidas o más llega ahí. Es el método de formas.mjs, lecciones-freq.mjs y consulta.mjs del worker del curso.",
+ "partidas": {
+  "600-1000": 6147,
+  "1000-1400": 18730
+ },
+ "lecciones": {
+  "clasica": {
+   "forma": "La clavada",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.3,
+    "n": 22
+   }
+  },
+  "valenciana": {
+   "forma": "La dama en casa",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 1.8,
+    "n": 23
+   }
+  },
+  "gipslis": {
+   "forma": "El centro grande",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 3,
+    "n": 7
+   }
+  },
+  "lasker": {
+   "forma": "La clavada",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.2,
+    "n": 21
+   }
+  },
+  "bronstein": {
+   "forma": "La dama en d6 (fuera del mapa)",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 0.2,
+    "n": 3
+   }
+  },
+  "schiller-pytel": {
+   "forma": "La dama en d6 (fuera del mapa)",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 0.2,
+    "n": 5
+   }
+  },
+  "marshall": {
+   "forma": "El centro grande",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "richter": {
+   "forma": "El centro grande",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  }
+ },
+ "formas": {
+  "La clavada": {
+   "600-1000": {
+    "pct": 14.2,
+    "n": 197
+   },
+   "1000-1400": {
+    "pct": 24.8,
+    "n": 2040
+   }
+  },
+  "La dama en casa": {
+   "600-1000": {
+    "pct": 13.2,
+    "n": 183
+   },
+   "1000-1400": {
+    "pct": 19.9,
+    "n": 1637
+   }
+  },
+  "El centro grande": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 7.2,
+    "n": 32
+   }
+  },
+  "La dama en d6 (fuera del mapa)": {
+   "600-1000": {
+    "pct": 2.9,
+    "n": 40
+   },
+   "1000-1400": {
+    "pct": 2.5,
+    "n": 203
+   }
+  }
+ },
+ "otras": {
+  "El jaque (3...De5+ o 3...De6+), sin lección": {
+   "600-1000": {
+    "pct": 44.7,
+    "n": 618
+   },
+   "1000-1400": {
+    "pct": 28.4,
+    "n": 2335
+   }
+  },
+  "La dama a e5 o e6 por otro camino (2...Cf6 3.d4 Dxd5 4.Cc3 De6+), sin lección y fuera de la fila del jaque": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 1.3,
+    "n": 5
+   }
+  },
+  "La dama a otra casilla (d4, c6, d7, c5, f5…), sin lección": {
+   "600-1000": {
+    "pct": 10.5,
+    "n": 145
+   },
+   "1000-1400": {
+    "pct": 5.7,
+    "n": 346
+   }
+  },
+  "Nadie recupera todavía (2...c6, 2...e6, 2...e5, y 2...Cf6 sin datos), sin lección": {
+   "600-1000": {
+    "pct": 14.3,
+    "n": 142
+   },
+   "1000-1400": {
+    "pct": 9.4,
+    "n": 608
+   }
+  },
+  "Otra pieza recupera en d5 (el peón), sin lección": {
+   "600-1000": {
+    "pct": 0.2,
+    "n": 3
+   },
+   "1000-1400": {
+    "pct": 0.8,
+    "n": 77
+   }
+  },
+  "3...De5+ · del curso": {
+   "600-1000": {
+    "pct": 27.9,
+    "n": 386
+   },
+   "1000-1400": {
+    "pct": 12.5,
+    "n": 1025
+   }
+  },
+  "3...De5+ · de su posición": {
+   "600-1000": {
+    "pct": 32.6,
+    "n": 386
+   },
+   "1000-1400": {
+    "pct": 15.6,
+    "n": 1025
+   }
+  },
+  "3...De6+ · del curso": {
+   "600-1000": {
+    "pct": 16.8,
+    "n": 232
+   },
+   "1000-1400": {
+    "pct": 15.9,
+    "n": 1310
+   }
+  },
+  "3...De6+ · de su posición": {
+   "600-1000": {
+    "pct": 19.6,
+    "n": 232
+   },
+   "1000-1400": {
+    "pct": 20,
+    "n": 1310
+   }
+  },
+  "3...De5+ 4.Ae2 Dg5 · del curso": {
+   "600-1000": {
+    "pct": 5.7,
+    "n": 51
+   },
+   "1000-1400": {
+    "pct": 1.9,
+    "n": 99
+   }
+  },
+  "3...De5+ 4.Ae2 Dg5 · de su posición": {
+   "600-1000": {
+    "pct": 20.3,
+    "n": 51
+   },
+   "1000-1400": {
+    "pct": 15.3,
+    "n": 99
+   }
+  },
+  "3...De6+ 4.Ae2 Dg6 · del curso": {
+   "600-1000": {
+    "pct": 3,
+    "n": 25
+   },
+   "1000-1400": {
+    "pct": 3.7,
+    "n": 195
+   }
+  },
+  "3...De6+ 4.Ae2 Dg6 · de su posición": {
+   "600-1000": {
+    "pct": 17.7,
+    "n": 25
+   },
+   "1000-1400": {
+    "pct": 23.4,
+    "n": 195
+   }
+  },
+  "3...Da5 4.d4 c6 · del curso": {
+   "600-1000": {
+    "pct": 2.4,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 9,
+    "n": 177
+   }
+  },
+  "3...Da5 4.d4 c6 · de su posición": {
+   "600-1000": {
+    "pct": 17,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 36.4,
+    "n": 177
+   }
+  },
+  "3...Da5 4.d4 Af5 · del curso": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.6,
+    "n": 51
+   }
+  },
+  "3...Da5 4.d4 Af5 · de su posición": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 10.5,
+    "n": 51
+   }
+  },
+  "3...Da5 4.d4 Cc6 · del curso": {
+   "600-1000": {
+    "pct": 3.6,
+    "n": 12
+   },
+   "1000-1400": {
+    "pct": 1.4,
+    "n": 27
+   }
+  },
+  "3...Da5 4.d4 Cc6 · de su posición": {
+   "600-1000": {
+    "pct": 25.5,
+    "n": 12
+   },
+   "1000-1400": {
+    "pct": 5.6,
+    "n": 27
+   }
+  },
+  "3...Da5 4.d4 e5 · del curso": {
+   "600-1000": {
+    "pct": 2.4,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 2.7,
+    "n": 52
+   }
+  },
+  "3...Da5 4.d4 e5 · de su posición": {
+   "600-1000": {
+    "pct": 17,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 10.7,
+    "n": 52
+   }
+  },
+  "3...Dd8 4.d4 Cc6 · del curso": {
+   "600-1000": {
+    "pct": 2.6,
+    "n": 10
+   },
+   "1000-1400": {
+    "pct": 2.1,
+    "n": 48
+   }
+  },
+  "3...Dd8 4.d4 Cc6 · de su posición": {
+   "600-1000": {
+    "pct": 20,
+    "n": 10
+   },
+   "1000-1400": {
+    "pct": 10.8,
+    "n": 48
+   }
+  },
+  "3...Dd8 4.d4 e6 · del curso": {
+   "600-1000": {
+    "pct": 2.1,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 5.5,
+    "n": 122
+   }
+  },
+  "3...Dd8 4.d4 e6 · de su posición": {
+   "600-1000": {
+    "pct": 16,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 27.4,
+    "n": 122
+   }
+  },
+  "3...Dd8 4.d4 Af5 · del curso": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.7,
+    "n": 61
+   }
+  },
+  "3...Dd8 4.d4 Af5 · de su posición": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 13.7,
+    "n": 61
+   }
+  },
+  "2...Cf6 3.d4 Dxd5 · del curso": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.9,
+    "n": 13
+   }
+  },
+  "2...Cf6 3.d4 Dxd5 · de su posición": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 25,
+    "n": 13
+   }
+  },
+  "3...De5+ 4.Ae2 Dg5 y 3...De6+ 4.Ae2 Dg6, juntas · del curso": {
+   "600-1000": {
+    "pct": 8.6,
+    "n": 76
+   },
+   "1000-1400": {
+    "pct": 5.6,
+    "n": 294
+   }
+  }
+ }
+}

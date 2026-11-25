@@ -22,6 +22,11 @@ export interface Leccion {
    * borra, solo deja de salir (Carlos, pendientes de la Caro-Kann, n.º 8, "Su orden", punto 2).
    */
   opcional?: boolean
+  /**
+   * Los nombres que tuvo la lección (cierre de los cursos, 2026-11-25: doce cambiaron para no adelantar tu jugada en
+   * Practicar). El registro guarda el nombre de la línea; el Repaso reconoce también estos (`fichaDe`).
+   */
+  nombresAntes?: string[]
 }
 
 export interface Curso {

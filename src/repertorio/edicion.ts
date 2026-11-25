@@ -1,7 +1,7 @@
 import type { Base } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { lineaDeVariante, repertorioInicial, type LineaRepertorio, type Repertorio } from './modelo.ts'
-import { migrarIds } from '../aprender/migracion.ts'
+import { marcarOtraJugada, migrarIds, pasarTodas } from '../aprender/migracion.ts'
 import { lineasDePgn, ErrorPgn } from './pgn.ts'
 
 /** Agregar a mi repertorio una variante de la base (lo principal de "escoger qué aprendo"). */
@@ -117,15 +117,18 @@ export function importar(texto: string): Respaldo {
   if (r?.app !== 'chess-mis-aperturas' || !(v1 || v2)) {
     throw new ErrorImportar('Ese archivo no es un respaldo de esta app. Escoge el archivo que exportaste desde aquí.')
   }
+  // un Respaldo de antes de una actualización trae los ids viejos: se mudan como al abrir la app (`pasarTodas`)
+  const mudar = <T,>(x: Record<string, T>): Record<string, T> => (x && typeof x === 'object' && !Array.isArray(x) ? pasarTodas(x) : x)
   const progreso = r.progreso ?? {}
   const repaso = r.repaso ?? {}
   return {
     app: 'chess-mis-aperturas',
     version: 2,
     favoritas: v2 ? r.favoritas!.filter((x) => typeof x === 'string') : [],
-    progreso: v1 ? migrarIds(progreso) : progreso,
+    // lo hecho que viene de otra jugada tuya queda marcado, como al abrir la app (`marcarOtraJugada`)
+    progreso: ((p) => (p && typeof p === 'object' && !Array.isArray(p) ? marcarOtraJugada(p, mudar(p)) : p))(v1 ? migrarIds(progreso) : progreso),
     registro: r.registro ?? [],
-    repaso: v1 ? migrarIds(repaso) : repaso,
+    repaso: mudar(v1 ? migrarIds(repaso) : repaso),
     historial: Array.isArray(r.historial) ? r.historial : undefined,
     ajustes: r.ajustes && typeof r.ajustes === 'object' && !Array.isArray(r.ajustes) ? r.ajustes : undefined,
   }

@@ -1,0 +1,244 @@
+{
+ "curso": "otros-negras:b",
+ "fuente": "https://database.lichess.org/ (CC0), lichess_db_standard_rated_2026-09.pgn.zst, primeros 2147483648 bytes comprimidos",
+ "licencia": "CC0 (base abierta de lichess)",
+ "filtro": "Event \"Rated Rapid game\", los dos jugadores con rating lichess en [600,1000) o [1000,1400)",
+ "conteo": {
+  "sha256": "5d42bb4bf49a7bceac83fa07715e22d674f6fed457b0dfb2682384c7b10a65cf",
+  "partidasPorBanda": {
+   "600-1000": 88007,
+   "1000-1400": 268376
+  },
+  "minimo": 3
+ },
+ "script": "scripts/frecuencias/otros-negras.mjs",
+ "metodo": "Las partidas del curso son las de toda primera jugada de blancas que no es 1.e4 ni 1.d4 (`partidas`); todo porcentaje de lección y de forma es de ellas. Una lección se mide en la posición tras la jugada del rival que la separa de las demás (la de 1.c4 con 2.Cc3, en 1.c4 c6 2.Cc3): la probabilidad de llegar ahí (por su FEN, todos los caminos), jugando siempre lo del curso (fuera del curso el camino no se sigue) y el rival lo que se juega entre las partidas que siguen; su `n`, las partidas reales que llegaron. Una forma se mide hasta la media jugada 12: lo del curso mientras haya respuesta y fuera de él lo que juega la gente, el rival lo que se juega, repartido entre todas las partidas que siguen (lo que va por jugadas con menos de 3 partidas queda \"sin datos\"); cada hoja se clasifica por qué peón de blancas ataca tu peón de d5 en todo el camino, y su `n` son las partidas reales de sus hojas (si tu jugada del curso no tiene partidas, las de la posición donde la juegas). Sin partidas (el conteo solo guarda las jugadas con 3 o más), `pct` es null: \"sin datos\", no 0 %; en el mapa, \"0.0 %\" (n 0). Una diferencia con el mapa, por la base: el mapa midió las formas con la Húngara de antes (3...Ag4 tras 1.g3 d5 2.Ag2 c6 3.Cf3); la de hoy juega 3...Cf6 (una sola jugada por posición, como la Réti con 2.g3), y en 1000–1400 el Centro libre baja de 33.8 % a 32.7 % y \"sin datos\" sube de 39.8 % a 40.8 % (con 3...Ag4, este script da los números del mapa). Ninguna sección cambia. Las jugadas sin lección: su parte de su posición; \"llega al Centro libre\", lo que sigue con los dos lados jugando lo que juega la gente, hasta la media jugada 12 (`huecos.mjs`; tras 1.e3, entre los caminos con ...d5).",
+ "partidas": {
+  "600-1000": 10821,
+  "1000-1400": 27365
+ },
+ "lecciones": {
+  "reti-bogoljubow": {
+   "forma": "Blancas ataca d5 con c4, sin d4",
+   "600-1000": {
+    "pct": 0.8,
+    "n": 29
+   },
+   "1000-1400": {
+    "pct": 1.6,
+    "n": 179
+   }
+  },
+  "otras-hungara": {
+   "forma": "Blancas no ataca tu peón de d5",
+   "600-1000": {
+    "pct": 6.5,
+    "n": 700
+   },
+   "1000-1400": {
+    "pct": 8,
+    "n": 2197
+   }
+  },
+  "inglesa-caro-kann": {
+   "forma": "Blancas juega c4 y d4: es la Eslava",
+   "600-1000": {
+    "pct": 1.9,
+    "n": 6
+   },
+   "1000-1400": {
+    "pct": 5.9,
+    "n": 74
+   }
+  },
+  "reti-fianchetto": {
+   "forma": "Blancas no ataca tu peón de d5",
+   "600-1000": {
+    "pct": 3.8,
+    "n": 137
+   },
+   "1000-1400": {
+    "pct": 4,
+    "n": 447
+   }
+  },
+  "larsen-clasica": {
+   "forma": "Blancas no ataca tu peón de d5",
+   "600-1000": {
+    "pct": 3.8,
+    "n": 410
+   },
+   "1000-1400": {
+    "pct": 6.7,
+    "n": 1831
+   }
+  },
+  "otras-bird": {
+   "forma": "Blancas no ataca tu peón de d5",
+   "600-1000": {
+    "pct": 5.8,
+    "n": 623
+   },
+   "1000-1400": {
+    "pct": 6.2,
+    "n": 1687
+   }
+  },
+  "inglesa-anglo-eslava-g3": {
+   "forma": "Blancas ataca d5 con c4, sin d4",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 0.3,
+    "n": 4
+   }
+  },
+  "inglesa-gurevich": {
+   "forma": "Blancas ataca d5 con c4, sin d4",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 0.3,
+    "n": 4
+   }
+  }
+ },
+ "formas": {
+  "Blancas no ataca tu peón de d5": {
+   "600-1000": {
+    "pct": 27.9,
+    "n": 1256
+   },
+   "1000-1400": {
+    "pct": 32.7,
+    "n": 3572
+   }
+  },
+  "Blancas ataca d5 con c4, sin d4": {
+   "600-1000": {
+    "pct": 2.8,
+    "n": 66
+   },
+   "1000-1400": {
+    "pct": 7.2,
+    "n": 158
+   }
+  },
+  "Blancas juega c4 y d4: es la Eslava": {
+   "600-1000": {
+    "pct": 1.6,
+    "n": 24
+   },
+   "1000-1400": {
+    "pct": 3.9,
+    "n": 133
+   }
+  }
+ },
+ "otras": {
+  "Con e4 (sin lección)": {
+   "600-1000": {
+    "pct": 3.1,
+    "n": 186
+   },
+   "1000-1400": {
+    "pct": 2.3,
+    "n": 370
+   }
+  },
+  "Sin ...d5 (sobre todo 1.e3 e5)": {
+   "600-1000": {
+    "pct": 21.6,
+    "n": 2181
+   },
+   "1000-1400": {
+    "pct": 13,
+    "n": 3397
+   }
+  },
+  "Sin datos (jugadas con menos de 3 partidas)": {
+   "600-1000": {
+    "pct": 43,
+    "n": 2820
+   },
+   "1000-1400": {
+    "pct": 40.8,
+    "n": 6245
+   }
+  },
+  "1.e3, de las partidas del curso": {
+   "600-1000": {
+    "pct": 23.6,
+    "n": 2549
+   },
+   "1000-1400": {
+    "pct": 18.8,
+    "n": 5143
+   }
+  },
+  "1.e3: si contestas ...d5, llega al Centro libre (n: las partidas con 1.e3)": {
+   "600-1000": {
+    "pct": 85.8,
+    "n": 2549
+   },
+   "1000-1400": {
+    "pct": 89.6,
+    "n": 5143
+   }
+  },
+  "1.Cf3 d5 2.d4, de las partidas con 1.Cf3 d5": {
+   "600-1000": {
+    "pct": 30.2,
+    "n": 254
+   },
+   "1000-1400": {
+    "pct": 43.4,
+    "n": 1140
+   }
+  },
+  "1.Cf3 d5 2.d4: llega al Centro libre (n: las partidas con 1.Cf3 d5 2.d4)": {
+   "600-1000": {
+    "pct": 95.6,
+    "n": 254
+   },
+   "1000-1400": {
+    "pct": 89.3,
+    "n": 1140
+   }
+  },
+  "1.c4 c6 2.d4, de las partidas con 1.c4 c6": {
+   "600-1000": {
+    "pct": 25,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 20.6,
+    "n": 39
+   }
+  },
+  "1.Cf3 d5 2.e4, de las partidas con 1.Cf3 d5": {
+   "600-1000": {
+    "pct": 11.8,
+    "n": 99
+   },
+   "1000-1400": {
+    "pct": 10.5,
+    "n": 275
+   }
+  },
+  "1.Cf3 d5 2.e4, de las partidas del curso": {
+   "600-1000": {
+    "pct": 2.6,
+    "n": 99
+   },
+   "1000-1400": {
+    "pct": 2.4,
+    "n": 275
+   }
+  }
+ }
+}

@@ -38,7 +38,8 @@ describe('T10 · escoger qué aprendo (editar mi repertorio)', () => {
 
   it('exportar → importar → exportar da exactamente los mismos bytes, con las favoritas, el registro y el avance', () => {
     const favoritas = ['caro-kann:b', 'italiana:w']
-    const progreso = { 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1793190000000 } }
+    // un id de hoy (`avance-short` es de antes del curso piloto: al importar se muda, `pasarTodas`)
+    const progreso = { 'caro-kann:b/b:caro-kann/curso-avance-c3': { fecha: 1793190000000 } }
     const registro = [{ fen: 'x', esperada: 'c6', resultado: 'fallo', lugar: 'curso', fecha: 1793190000001, linea: 'ñandú «acentos» y comillas' }]
     const texto = exportar({ favoritas, progreso, registro })
     const leido = importar(texto)
@@ -60,7 +61,8 @@ describe('T10 · escoger qué aprendo (editar mi repertorio)', () => {
     const leido = importar(viejo)
     expect(leido.version).toBe(2)
     expect(leido.favoritas).toEqual([])
-    expect(leido.progreso).toEqual({ 'caro-kann:b/b:caro-kann/avance-short': { fecha: 1 }, 'siciliana:w/w:siciliana/smith-morra': { fecha: 2 } })
+    // y lo de las lecciones viejas, a la lección nueva de la misma línea, como al abrir la app (cierre de los cursos, §3.1)
+    expect(leido.progreso).toEqual({ 'caro-kann:b/b:caro-kann/curso-avance-c3': { fecha: 1 }, 'siciliana:w/w:siciliana/smith-morra': { fecha: 2 } })
     expect(leido.repaso).toEqual({ 'siciliana:w/w:siciliana/smith-morra': { escalon: 2, proxima: '2026-11-01' } })
   })
 

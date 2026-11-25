@@ -52,22 +52,22 @@
 | 4...e6 | Avance: 4.Ce2 (Bronstein) | tuya | no |  |
 | 5.Cg3 | Avance: 4.Ce2 (Bronstein) | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
 | 5...Ag6 | Avance: 4.Ce2 (Bronstein) | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde)<br>mía cuidado frase 1: flecha h7→h5 (A3, verde, punteada) |
-| 3.Cc3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
-| 3...dxe4 | Clásica: 3.Cc3 | tuya | no |  |
-| 4.Cxe4 | Clásica: 3.Cc3 | del rival | no |  |
-| 4...Af5 | Clásica: 3.Cc3 | tuya | no |  |
-| 5.Cg3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
-| 5...Ag6 | Clásica: 3.Cc3 | tuya | sí | mía porque frase 1: flecha g6→c2 (A2, verde) |
-| 6.h4 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha h4→h5 (A7, roja, punteada) |
-| 6...h6 | Clásica: 3.Cc3 | tuya | no |  |
-| 7.Cf3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha f3→e5 (A7, roja, punteada); flecha e5→g6 (A7, roja, punteada) |
-| 7...Cd7 | Clásica: 3.Cc3 | tuya | sí | mía hace frase 1: flecha d7→e5 (A2, verde) |
-| 8.h5 | Clásica: 3.Cc3 | del rival | no |  |
-| 8...Ah7 | Clásica: 3.Cc3 | tuya | sí | mía cuidado frase 1: flecha g3→f5 (A4, roja) |
-| 9.Ad3 | Clásica: 3.Cc3 | del rival | sí | rival frase 1: flecha d3→h7 (A4, roja) |
-| 9...Axd3 | Clásica: 3.Cc3 | tuya | no |  |
-| 10.Dxd3 | Clásica: 3.Cc3 | del rival | no |  |
-| 10...e6 | Clásica: 3.Cc3 | tuya | sí | mía prepara frase 1: flecha g8→f6 (A3, verde, punteada); flecha d8→c7 (A3, verde, punteada) |
+| 3.Cc3 | 3.Cc3 | del rival | sí | rival frase 1: flecha c3→e4 (A4, roja) |
+| 3...dxe4 | 3.Cc3 | tuya | no |  |
+| 4.Cxe4 | 3.Cc3 | del rival | no |  |
+| 4...Af5 | 3.Cc3 | tuya | no |  |
+| 5.Cg3 | 3.Cc3 | del rival | sí | rival frase 1: flecha g3→f5 (A4, roja) |
+| 5...Ag6 | 3.Cc3 | tuya | sí | mía porque frase 1: flecha g6→c2 (A2, verde) |
+| 6.h4 | 3.Cc3 | del rival | sí | rival frase 1: flecha h4→h5 (A7, roja, punteada) |
+| 6...h6 | 3.Cc3 | tuya | no |  |
+| 7.Cf3 | 3.Cc3 | del rival | sí | rival frase 1: flecha f3→e5 (A7, roja, punteada); flecha e5→g6 (A7, roja, punteada) |
+| 7...Cd7 | 3.Cc3 | tuya | sí | mía hace frase 1: flecha d7→e5 (A2, verde) |
+| 8.h5 | 3.Cc3 | del rival | no |  |
+| 8...Ah7 | 3.Cc3 | tuya | sí | mía cuidado frase 1: flecha g3→f5 (A4, roja) |
+| 9.Ad3 | 3.Cc3 | del rival | sí | rival frase 1: flecha d3→h7 (A4, roja) |
+| 9...Axd3 | 3.Cc3 | tuya | no |  |
+| 10.Dxd3 | 3.Cc3 | del rival | no |  |
+| 10...e6 | 3.Cc3 | tuya | sí | mía prepara frase 1: flecha g8→f6 (A3, verde, punteada); flecha d8→c7 (A3, verde, punteada) |
 | 3.exd5 | Cambio: 3.exd5 | del rival | no |  |
 | 3...cxd5 | Cambio: 3.exd5 | tuya | no |  |
 | 4.Ad3 | Cambio: 3.exd5 | del rival | sí | rival frase 1: casilla f5 (A5, roja); flecha c8→f5 (A5, roja) |

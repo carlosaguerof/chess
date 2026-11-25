@@ -1284,7 +1284,7 @@
     {
       "id": "clasica",
       "base": "curso-clasica",
-      "nombre": "Clásica: 3.Cc3",
+      "nombre": "3.Cc3",
       "desde": 4,
       "intro": "Blancas defiende e4 con 3.Cc3 (3.Cd2 lleva a lo mismo). Es la Variante Clásica.",
       "idea": "Cambias en e4, tu alfil sale a f5 atacando al caballo, y contra h4 juegas ...h6 para que tenga h7.",

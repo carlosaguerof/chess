@@ -13,6 +13,7 @@ import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
 import { componerCurso } from './capas.ts'
 import { cursoQueQueda } from './queda.ts'
+import NOMBRES_PUBLICADOS from './nombres-de-antes.json' with { type: 'json' }
 import type { Repertorio } from '../repertorio/modelo.ts'
 import type { CapaCurso, DatosCurso, JugadaMia, JugadaRival, LineaCurso, VarianteCurso } from './tipos.ts'
 
@@ -134,11 +135,37 @@ export function grupoDeLinea(c: DatosCurso, l: LineaCurso): LineaCurso[] {
   return lineasDe(c).filter((x) => x.tipo === 'variante' && esOpcional(c, x.variante!.id) === opcional)
 }
 
+/**
+ * Los nombres que tuvo cada lección, para que el Repaso siga reconociendo sus fallos (el registro guarda el nombre de la
+ * línea; `fichaDe`). Dos fuentes:
+ * - **lo publicado** (`nombres-de-antes.json`, generado con `node scripts/nombres-publicados.ts` desde el commit de `main`
+ *   del que salió la página publicada): en el teléfono, los siete cursos usaban la lección de antes, con el nombre de la
+ *   variante de la base, y la Caro-Kann su curso piloto. Por cada lección de hoy, los nombres publicados de su misma
+ *   variante y de cada lección vieja que se le muda;
+ * - **lo renombrado en `main`** antes de publicarse (cierre de los cursos, 2026-11-25: en Practicar, el nombre no adelanta
+ *   tu jugada), por curso y variante, para las copias que ya abrieron `main`.
+ */
+export const NOMBRES_DE_ANTES: Record<string, Record<string, string[]>> = {
+  'caro-kann:b': { clasica: ['Clásica: 3.Cc3'] },
+  'caro-kann:w': { af5: ['3...Af5 4.c3'] },
+  'italiana:w': { 'dos-caballos-d3': ['Dos Caballos: 4.d3'], 'la-bourdonnais': ['3...Ac5 4.c3 d6 (La Bourdonnais)'], principal: ['3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)', '3...Ac5 y 4...Cf6 (Giuoco Pianissimo)'] },
+  'eslava:b': { checa: ['Checa: 5.a4'], 'checa-clasica': ['Checa: 9.De2 (Sämisch)'], 'checa-carlsbad': ['Checa: 6.Ce5 (Carlsbad)'], 'alekhine-e3': ['Alekhine: 5.e3'] },
+  'otros-negras:b': { 'reti-bogoljubow': ['Réti: 2.c4 c6 3.b3'], 'inglesa-caro-kann': ['Inglesa: 1.c4 c6 2.Cc3'], 'inglesa-anglo-eslava-g3': ['Inglesa: 2.Cf3 d5 3.g3'], 'inglesa-gurevich': ['Inglesa: 2.Cf3 d5 3.e3'] },
+}
+
+/** Los nombres que tuvo la lección de una variante (los publicados y los de `main`), sin el de hoy; `undefined` si ninguno. */
+export function nombresDeAntes(c: DatosCurso, v: VarianteCurso): string[] | undefined {
+  const publicados = (NOMBRES_PUBLICADOS as Record<string, string[]>)[leccionIdDe(c, v)] ?? []
+  const r = [...new Set([...publicados, ...(NOMBRES_DE_ANTES[c.fichasDe ?? c.id]?.[v.id] ?? [])])].filter((n) => n !== v.nombre)
+  return r.length ? r : undefined
+}
+
 /** Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual. */
 export function leccionesDe(c: DatosCurso): Leccion[] {
   return c.variantes.map((v) => {
     const b = BASE.aperturas.find((x) => x.id === c.apertura)!.variantes.find((x) => x.id === v.base)!
-    return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco }
+    const antes = nombresDeAntes(c, v)
+    return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco, ...(antes ? { nombresAntes: antes } : {}) }
   })
 }
 

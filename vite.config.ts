@@ -34,11 +34,12 @@ export default defineConfig({
       // la Eslava y Otras aperturas de blancas (2026-11-25): igual; lo propio, en tests/unit/curso-eslava.test.ts y
       // curso-otros-negras.test.ts
       // la Alapin contra la Siciliana (2026-11-25): igual; lo propio, en tests/unit/curso-alapin.test.ts
+      // el ciclo de la lección también corre en todos (cierre de los cursos, §3.6): lo de la Tal se salta y lo general corre
       ...['caro-kann:w', 'francesa:w', 'eslava:b', 'otros-negras:b', 'siciliana:w'].map((curso) => ({
         extends: true as const,
         test: {
           name: `curso ${curso}`,
-          include: ['curso-contenido', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          include: ['curso-contenido', 'curso-ciclo', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
           env: { CURSO: curso },
         },
       })),

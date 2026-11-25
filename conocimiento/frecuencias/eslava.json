@@ -1,0 +1,317 @@
+{
+ "curso": "eslava:b",
+ "fuente": "https://database.lichess.org/ (CC0), lichess_db_standard_rated_2026-09.pgn.zst, primeros 2147483648 bytes comprimidos",
+ "licencia": "CC0 (base abierta de lichess)",
+ "filtro": "Event \"Rated Rapid game\", los dos jugadores con rating lichess en [600,1000) o [1000,1400)",
+ "conteo": {
+  "sha256": "5d42bb4bf49a7bceac83fa07715e22d674f6fed457b0dfb2682384c7b10a65cf",
+  "partidasPorBanda": {
+   "600-1000": 88007,
+   "1000-1400": 268376
+  },
+  "minimo": 3
+ },
+ "script": "scripts/frecuencias/eslava.mjs",
+ "metodo": "Las partidas del curso son las que llegan a 1.d4 d5 2.c4 (`partidas`); todo porcentaje de lección y de forma es de ellas. Una lección se mide en la posición tras la jugada del rival que la separa de las demás (si es principio de otra, en su final): la probabilidad de llegar ahí (por su FEN, todos los caminos) desde 1.d4, jugando siempre lo del curso (fuera del curso el camino no se sigue) y el rival lo que se juega entre las partidas que siguen, dividida entre la de llegar a 2.c4; su `n`, las partidas reales que llegaron. Una forma se mide hasta la media jugada 12, desde 2.c4: lo del curso mientras haya respuesta y fuera de él lo que juega la gente, el rival lo que se juega, repartido entre todas las partidas que siguen (lo que va por jugadas con menos de 3 partidas queda \"sin datos\"); cada hoja se clasifica por sus jugadas (las cuatro formas de la prueba) y su `n` son las partidas reales de sus hojas (si tu jugada del curso no tiene partidas, las de la posición donde la juegas). Sin partidas (el conteo solo guarda las jugadas con 3 o más), `pct` es null: \"sin datos\", no 0 %. En el mapa, la Checa sale \"sin datos\" y las demás lecciones sin partidas \"0.0 %\" (n 0); aquí todas son null. Las jugadas sin lección: 3.e3 y 3.c5, de las partidas con 2...c6; 2.Af4, 2.Cc3, 2.e3 y 2.Cf3, lo que sigue con los dos lados jugando lo que juega la gente, hasta la media jugada 12 (`huecos.mjs`).",
+ "partidas": {
+  "600-1000": 1228,
+  "1000-1400": 8405
+ },
+ "lecciones": {
+  "checa": {
+   "forma": "Blancas juega a4 contra tu peón de c4",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "tranquila-schallopp": {
+   "forma": "Nadie cambia peones",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.2,
+    "n": 9
+   }
+  },
+  "cambio": {
+   "forma": "Blancas cambia en d5",
+   "600-1000": {
+    "pct": 14.4,
+    "n": 13
+   },
+   "1000-1400": {
+    "pct": 12.3,
+    "n": 135
+   }
+  },
+  "cc3": {
+   "forma": "Tomas en c4 y lo defiendes",
+   "600-1000": {
+    "pct": 35.6,
+    "n": 32
+   },
+   "1000-1400": {
+    "pct": 47.4,
+    "n": 520
+   }
+  },
+  "checa-clasica": {
+   "forma": "Blancas juega a4 contra tu peón de c4",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "alekhine-e3": {
+   "forma": "Tomas en c4 y lo defiendes",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "checa-carlsbad": {
+   "forma": "Blancas juega a4 contra tu peón de c4",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "cambio-trifunovic": {
+   "forma": "Blancas cambia en d5",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "moderna-g3": {
+   "forma": "Nadie cambia peones",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2,
+    "n": 8
+   }
+  },
+  "geller": {
+   "forma": "Tomas en c4 y lo defiendes",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  },
+  "diemer": {
+   "forma": null,
+   "600-1000": {
+    "pct": 3.3,
+    "n": 3
+   },
+   "1000-1400": {
+    "pct": 1,
+    "n": 11
+   }
+  }
+ },
+ "formas": {
+  "Blancas cambia en d5": {
+   "600-1000": {
+    "pct": 9.6,
+    "n": 3
+   },
+   "1000-1400": {
+    "pct": 7.8,
+    "n": 43
+   }
+  },
+  "Nadie cambia peones": {
+   "600-1000": {
+    "pct": 7.8,
+    "n": 7
+   },
+   "1000-1400": {
+    "pct": 17.8,
+    "n": 147
+   }
+  },
+  "Tomas en c4 y lo defiendes": {
+   "600-1000": {
+    "pct": 25.9,
+    "n": 8
+   },
+   "1000-1400": {
+    "pct": 31.3,
+    "n": 11
+   }
+  },
+  "Blancas juega a4 contra tu peón de c4": {
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": null,
+    "n": 0
+   }
+  }
+ },
+ "otras": {
+  "Tomas en c4, sin decidir": {
+   "600-1000": {
+    "pct": 14.8,
+    "n": 6
+   },
+   "1000-1400": {
+    "pct": 16.2,
+    "n": 37
+   }
+  },
+  "Sin datos (jugadas con menos de 3 partidas)": {
+   "600-1000": {
+    "pct": 34.1,
+    "n": 20
+   },
+   "1000-1400": {
+    "pct": 23,
+    "n": 152
+   }
+  },
+  "Otra (casi todo 3.c5)": {
+   "600-1000": {
+    "pct": 4.4,
+    "n": 4
+   },
+   "1000-1400": {
+    "pct": 2.9,
+    "n": 32
+   }
+  },
+  "Fuera del mapa: 3.e4": {
+   "600-1000": {
+    "pct": 3.3,
+    "n": 3
+   },
+   "1000-1400": {
+    "pct": 1,
+    "n": 5
+   }
+  },
+  "La Eslava (1.d4 d5 2.c4), de las partidas con 1.d4 d5": {
+   "600-1000": {
+    "pct": 13.2,
+    "n": 1228
+   },
+   "1000-1400": {
+    "pct": 24.7,
+    "n": 8405
+   }
+  },
+  "2...c6, de las partidas de la Eslava (las que la juegan de verdad)": {
+   "600-1000": {
+    "pct": 7.4,
+    "n": 90
+   },
+   "1000-1400": {
+    "pct": 13.1,
+    "n": 1098
+   }
+  },
+  "La posición de 4.Cc3, donde tomas en c4 (el gate de la Checa)": {
+   "600-1000": {
+    "pct": 14.8,
+    "n": 6
+   },
+   "1000-1400": {
+    "pct": 6.7,
+    "n": 27
+   }
+  },
+  "3.e3, de las partidas con 2...c6": {
+   "600-1000": {
+    "pct": 15.6,
+    "n": 14
+   },
+   "1000-1400": {
+    "pct": 11.2,
+    "n": 123
+   }
+  },
+  "3.c5, de las partidas con 2...c6": {
+   "600-1000": {
+    "pct": 4.4,
+    "n": 4
+   },
+   "1000-1400": {
+    "pct": 5.5,
+    "n": 60
+   }
+  },
+  "2.Af4: no llega a la Eslava (n: las partidas con 1.d4 d5 2.Af4)": {
+   "600-1000": {
+    "pct": 99.8,
+    "n": 2141
+   },
+   "1000-1400": {
+    "pct": 99.7,
+    "n": 9198
+   }
+  },
+  "2.Cc3: no llega a la Eslava (n: las partidas con 1.d4 d5 2.Cc3)": {
+   "600-1000": {
+    "pct": 100,
+    "n": 1783
+   },
+   "1000-1400": {
+    "pct": 100,
+    "n": 4172
+   }
+  },
+  "2.e3: no llega a la Eslava (n: las partidas con 1.d4 d5 2.e3)": {
+   "600-1000": {
+    "pct": 98.7,
+    "n": 1446
+   },
+   "1000-1400": {
+    "pct": 96.9,
+    "n": 3768
+   }
+  },
+  "2.Cf3: no llega a la Eslava (n: las partidas con 1.d4 d5 2.Cf3)": {
+   "600-1000": {
+    "pct": 100,
+    "n": 1363
+   },
+   "1000-1400": {
+    "pct": 99,
+    "n": 5216
+   }
+  }
+ }
+}

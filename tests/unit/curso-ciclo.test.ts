@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CURSOS_NUEVOS, jugadasDeLaBaseEn, leccionesDe, lineaPorId } from '../../src/curso/datos.ts'
+import { CURSOS_NUEVOS, esOpcional, jugadasDeLaBaseEn, leccionesDe, lineaPorId, lineasDe, misJugadas, textoMio } from '../../src/curso/datos.ts'
 import { atras, continuar, empezar, empezarDeNuevo, intentar, jugarRival, pedirPista, pedirRespuesta, progreso, reintentar, retomar, tropiezos, type EstadoCiclo } from '../../src/curso/ciclo.ts'
 import { posicion, porQueNo } from '../../src/curso/textos.ts'
 import { registrarPasoCurso } from '../../src/registro/eventos.ts'
@@ -188,5 +188,95 @@ describe.runIf(esCaroKann)('C3 · el registro sigue alimentando Refuerza y el Re
     for (const v of viejas) expect(nuevas.has(LECCIONES_CARO_KANN[v] ?? v), v).toBe(true)
     const r = pasarCaroKann({ 'caro-kann:b/b:caro-kann/karpov': { escalon: 3 } })
     expect(r['caro-kann:b/b:caro-kann/curso-clasica']).toEqual({ escalon: 3 })
+  })
+})
+
+/**
+ * Lo mismo, en cualquier curso (cierre de los cursos, 2026-11-25, §3.6): las pruebas de arriba recorren la Tal de la
+ * Caro-Kann y se saltaban en los demás cursos. Estas recorren la primera lección obligatoria del curso de `CURSO`, con
+ * sus propias jugadas: el ciclo, la ayuda, Atrás, el final de cada vuelta, el registro que alimenta Refuerza y el Repaso.
+ */
+describe('El ciclo y el registro, en cualquier curso', () => {
+  const l = lineasDe(c).find((x) => x.tipo === 'variante' && !esOpcional(c, x.variante!.id))!
+  const mias = misJugadas(l)
+  const primera = mias[0]!
+  const jugada = (san: string, e: EstadoCiclo) => {
+    const m = posicion(l.jugadas, e.ply).move(san)
+    return { san: m.san, desde: m.from, hasta: m.to }
+  }
+  const hasta = (e: EstadoCiclo) => {
+    let x = e
+    for (let i = 0; i < 10 && x.momento !== 'tuTurno' && x.momento !== 'fin' && x.momento !== 'plan'; i++) x = x.momento === 'rival' ? jugarRival(l, x) : continuar(l, x)
+    return x
+  }
+  /** Una jugada legal que no es la de la lección ni una buena de otra línea: un error. */
+  const unError = (ply: number) => {
+    const pos = posicion(l.jugadas, ply)
+    const buenas = new Set([...jugadasDeLaBaseEn(pos.fen()), ...(textoMio(c, l.jugadas, ply)?.buenas ?? [])])
+    return { san: pos.moves().find((s) => s !== l.jugadas[ply] && !buenas.has(s))!, buenas }
+  }
+  const apertura = `${c.apertura}:${c.color}`
+
+  it(`${c.id}: empieza con la introducción y llega a tu primera jugada, "Jugada 1 de ${mias.length}"`, () => {
+    let e = empezar(l)
+    expect(e.momento).toBe('intro')
+    e = hasta(continuar(l, e))
+    expect(e.momento).toBe('tuTurno')
+    expect(e.ply).toBe(primera)
+    expect(progreso(l, e)).toEqual({ n: 1, m: mias.length })
+  })
+
+  it(`${c.id}: el error se queda hasta "Reintentar" y cuenta como fallo; la ayuda va por escalones`, () => {
+    const e = hasta(empezar(l))
+    const { san, buenas } = unError(e.ply)
+    const mal = intentar(l, e, jugada(san, e), { buenas })
+    expect(mal.resultado).toBe('error')
+    expect(mal.estado.pasos[e.ply]!.fallos).toBe(1)
+    expect(reintentar(mal.estado).momento).toBe('tuTurno')
+    let a = pedirPista(e)
+    a = pedirPista(a)
+    expect(a.ayuda).toBe(2)
+    a = pedirRespuesta(a)
+    expect(a.ayuda).toBe(3)
+    expect(a.pasos[e.ply]).toEqual({ fallos: 0, pista: true, respuesta: true })
+  })
+
+  it(`${c.id}: Atrás regresa a tu jugada de antes; Aprender termina en el plan y Practicar en el resumen`, () => {
+    let e = hasta(empezar(l))
+    for (const ply of mias) {
+      expect(e.ply).toBe(ply)
+      if (ply === mias[1]) expect(atras(l, e).ply).toBe(primera)
+      e = hasta(intentar(l, e, jugada(l.jugadas[ply]!, e), { esperar: true }).estado)
+    }
+    expect(e.momento).toBe('plan')
+    e = pedirPista(hasta(empezar(l, 'practicar')))
+    for (const ply of mias) e = hasta(intentar(l, e, jugada(l.jugadas[ply]!, e)).estado)
+    expect(e.momento).toBe('fin')
+    expect(tropiezos(e).map((t) => t.ply)).toEqual([primera])
+  })
+
+  it(`${c.id}: un fallo en Practicar entra al registro y sale en Refuerza de su apertura`, () => {
+    let e = hasta(empezar(l, 'practicar'))
+    const { san, buenas } = unError(e.ply)
+    e = reintentar(intentar(l, e, jugada(san, e), { buenas }).estado)
+    const fen = posicion(l.jugadas, e.ply).fen()
+    const r = intentar(l, e, jugada(l.jugadas[e.ply]!, e))
+    const entrada = registrarPasoCurso({ fen, esperada: l.jugadas[e.ply]!, paso: r.estado.pasos[e.ply]!, linea: l.nombre, camino: l.jugadas.slice(0, e.ply) })
+    expect(entrada.resultado).toBe('fallo')
+    expect(jugadasFalladas(repertorioDeFavoritas([apertura]), [entrada]).some((j) => j.esperada === l.jugadas[e.ply])).toBe(true)
+  })
+
+  it(`${c.id}: al terminar una obligatoria, su ficha sale en el Repaso mañana; una opcional, nunca`, () => {
+    const curso = cursos().find((x) => x.id === apertura)!
+    const id = l.leccionId!
+    expect(curso.lecciones.some((x) => x.id === id), id).toBe(true)
+    const hoy = dia()
+    expect(paraHoy({}, { [id]: { fecha: Date.now() } }, curso.lecciones, hoy)).toHaveLength(0)
+    expect(paraHoy({}, { [id]: { fecha: Date.now() } }, curso.lecciones, sumarDias(hoy, 1)).map((x) => x.id)).toEqual([id])
+    const opcional = c.variantes.find((v) => esOpcional(c, v.id))
+    if (!opcional) return
+    const otra = leccionesDe(c).find((x) => x.id.endsWith(`/${opcional.base}`))!
+    expect(lineasDe(c).find((x) => x.variante?.id === opcional.id)!.leccionId).toBeUndefined()
+    expect(paraHoy({}, { [otra.id]: { fecha: Date.now() } }, curso.lecciones, sumarDias(hoy, 1))).toHaveLength(0)
   })
 })

@@ -23,7 +23,7 @@ Partidas Rapid de la base abierta de lichess (CC0), septiembre de 2026, con los 
 
 | Sección | Lección | Forma | 600–1000 | n | 1000–1400 | n |
 |---|---|---|---|---|---|---|
-| La base | Dos Caballos: 4.d3 | Cerrado | 41.7 % | 1763 | 36.2 % | 7258 |
+| La base | Dos Caballos: 4.d3 | Cerrado | 41.6 % | 1763 | 36.2 % | 7258 |
 | La base | 3...Ac5 4.c3 d6 (La Bourdonnais) | Ideal | 6.5 % | 37 | 6.2 % | 281 |
 | La base | 3...h6 | Abierto | 6.4 % | 272 | 18.7 % | 3745 |
 | Las que más te van a salir | 3...Ac5 4.c3 Cf6 (Giuoco Pianissimo) | Cerrado | 17.0 % | 97 | 13.8 % | 625 |
@@ -31,6 +31,8 @@ Partidas Rapid de la base abierta de lichess (CC0), septiembre de 2026, con los 
 | Las que más te van a salir | 3...Cd4 (la trampa) | Ideal | 1.9 % | 82 | 3.8 % | 755 |
 | Opcional | 3...Ae7 (Húngara) | fuera | 0.6 % | 25 ⚠ | 1.3 % | 268 |
 | Opcional | 3...f5 (Rousseau) | fuera | 0.6 % | 27 ⚠ | 1.7 % | 340 |
+
+*(Cierre de los cursos, 2026-11-25: 41.6 % y no 41.7 %: el valor es 41.649 %, que se había redondeado dos veces. Los números de esta tabla, rehechos desde el conteo, en `conocimiento/frecuencias/italiana.json`. Los nombres de las lecciones son los de cuando se hizo el mapa: tres cambiaron, `log.md`.)*
 
 **Las formas, por cualquier camino** (tras la 7.ª jugada de negras, o donde se acaban los datos): Cerrado 54.7 % y 42.2 %; Abierto 7.5 % y 18.0 %; Ideal 3.0 % y 7.3 %. Las tres pasan el 5 % en alguna banda. **Los cortes caen en saltos de los datos:** por forma, de 7.3 a 3.0; por lección, de 3.8 a 1.7 (y de 1.9 a 0.6). La base del Abierto es 3...h6 y no París: París es un poco más jugada en 600–1000 (7.0 contra 6.4), pero tras 4.d4 negras cambia en d4 más seguido contra 3...h6, y en 1000–1400 es la más jugada con mucho; las dos son obligatorias.
 

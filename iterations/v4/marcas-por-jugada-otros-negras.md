@@ -6,16 +6,16 @@
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
-| 1.Cf3 | Réti: 2.c4 c6 3.b3 | del rival | no |  |
-| 1...d5 | Réti: 2.c4 c6 3.b3 | tuya | no |  |
-| 2.c4 | Réti: 2.c4 c6 3.b3 | del rival | no |  |
-| 2...c6 | Réti: 2.c4 c6 3.b3 | tuya | no |  |
-| 3.b3 | Réti: 2.c4 c6 3.b3 | del rival | sí | rival frase 1: flecha c1→b2 (A7, roja, punteada) |
-| 3...Af5 | Réti: 2.c4 c6 3.b3 | tuya | no |  |
-| 4.Ab2 | Réti: 2.c4 c6 3.b3 | del rival | no |  |
-| 4...e6 | Réti: 2.c4 c6 3.b3 | tuya | no |  |
-| 5.e3 | Réti: 2.c4 c6 3.b3 | del rival | no |  |
-| 5...Cf6 | Réti: 2.c4 c6 3.b3 | tuya | sí | mía porque frase 1: flecha f6→e4 (A2, verde); flecha f6→d5 (A2, verde) |
+| 1.Cf3 | Réti: 2.c4 y 3.b3 | del rival | no |  |
+| 1...d5 | Réti: 2.c4 y 3.b3 | tuya | no |  |
+| 2.c4 | Réti: 2.c4 y 3.b3 | del rival | no |  |
+| 2...c6 | Réti: 2.c4 y 3.b3 | tuya | no |  |
+| 3.b3 | Réti: 2.c4 y 3.b3 | del rival | sí | rival frase 1: flecha c1→b2 (A7, roja, punteada) |
+| 3...Af5 | Réti: 2.c4 y 3.b3 | tuya | no |  |
+| 4.Ab2 | Réti: 2.c4 y 3.b3 | del rival | no |  |
+| 4...e6 | Réti: 2.c4 y 3.b3 | tuya | no |  |
+| 5.e3 | Réti: 2.c4 y 3.b3 | del rival | no |  |
+| 5...Cf6 | Réti: 2.c4 y 3.b3 | tuya | sí | mía porque frase 1: flecha f6→e4 (A2, verde); flecha f6→d5 (A2, verde) |
 | 1.g3 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
 | 1...d5 | Húngara: 1.g3 | tuya | no |  |
 | 2.Ag2 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha g2→d5 (A4, roja) |
@@ -28,16 +28,16 @@
 | 5...Cbd7 | Húngara: 1.g3 | tuya | no |  |
 | 6.Cbd2 | Húngara: 1.g3 | del rival | sí | rival frase 1: flecha d2→e4 (A4, roja) |
 | 6...e5 | Húngara: 1.g3 | tuya | sí | mía porque frase 1: flecha d7→e5 (A2, verde) |
-| 1.c4 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |
-| 1...c6 | Inglesa: 1.c4 c6 2.Cc3 | tuya | no |  |
-| 2.Cc3 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |
-| 2...d5 | Inglesa: 1.c4 c6 2.Cc3 | tuya | no |  |
-| 3.cxd5 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |
-| 3...cxd5 | Inglesa: 1.c4 c6 2.Cc3 | tuya | no |  |
-| 4.d4 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |
-| 4...Cf6 | Inglesa: 1.c4 c6 2.Cc3 | tuya | no |  |
-| 5.Af4 | Inglesa: 1.c4 c6 2.Cc3 | del rival | no |  |
-| 5...Cc6 | Inglesa: 1.c4 c6 2.Cc3 | tuya | no |  |
+| 1.c4 | Inglesa: 1.c4 y 2.Cc3 | del rival | no |  |
+| 1...c6 | Inglesa: 1.c4 y 2.Cc3 | tuya | no |  |
+| 2.Cc3 | Inglesa: 1.c4 y 2.Cc3 | del rival | no |  |
+| 2...d5 | Inglesa: 1.c4 y 2.Cc3 | tuya | no |  |
+| 3.cxd5 | Inglesa: 1.c4 y 2.Cc3 | del rival | no |  |
+| 3...cxd5 | Inglesa: 1.c4 y 2.Cc3 | tuya | no |  |
+| 4.d4 | Inglesa: 1.c4 y 2.Cc3 | del rival | no |  |
+| 4...Cf6 | Inglesa: 1.c4 y 2.Cc3 | tuya | no |  |
+| 5.Af4 | Inglesa: 1.c4 y 2.Cc3 | del rival | no |  |
+| 5...Cc6 | Inglesa: 1.c4 y 2.Cc3 | tuya | no |  |
 | 2.g3 | Réti: 2.g3 | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
 | 2...c6 | Réti: 2.g3 | tuya | no |  |
 | 3.Ag2 | Réti: 2.g3 | del rival | no |  |
@@ -66,26 +66,26 @@
 | 4...e6 | Bird: 1.f4 | tuya | no |  |
 | 5.0-0 | Bird: 1.f4 | del rival | no |  |
 | 5...Ae7 | Bird: 1.f4 | tuya | no |  |
-| 2.Cf3 | Inglesa: 2.Cf3 d5 3.g3 | del rival | no |  |
-| 2...d5 | Inglesa: 2.Cf3 d5 3.g3 | tuya | no |  |
-| 3.g3 | Inglesa: 2.Cf3 d5 3.g3 | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
-| 3...Cf6 | Inglesa: 2.Cf3 d5 3.g3 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
-| 4.Ag2 | Inglesa: 2.Cf3 d5 3.g3 | del rival | no |  |
-| 4...Af5 | Inglesa: 2.Cf3 d5 3.g3 | tuya | no |  |
-| 5.0-0 | Inglesa: 2.Cf3 d5 3.g3 | del rival | no |  |
-| 5...e6 | Inglesa: 2.Cf3 d5 3.g3 | tuya | no |  |
-| 6.d3 | Inglesa: 2.Cf3 d5 3.g3 | del rival | sí | rival frase 1: flecha e2→e4 (A7, roja, punteada) |
-| 6...dxc4 | Inglesa: 2.Cf3 d5 3.g3 | tuya | no |  |
-| 7.dxc4 | Inglesa: 2.Cf3 d5 3.g3 | del rival | no |  |
-| 7...Dxd1 | Inglesa: 2.Cf3 d5 3.g3 | tuya | no |  |
-| 8.Txd1 | Inglesa: 2.Cf3 d5 3.g3 | del rival | no |  |
-| 8...Cbd7 | Inglesa: 2.Cf3 d5 3.g3 | tuya | sí | mía porque frase 1: flecha d1→d7 (A4, roja) |
-| 3.e3 | Inglesa: 2.Cf3 d5 3.e3 | del rival | no |  |
-| 3...Cf6 | Inglesa: 2.Cf3 d5 3.e3 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
-| 4.Cc3 | Inglesa: 2.Cf3 d5 3.e3 | del rival | no |  |
-| 4...e6 | Inglesa: 2.Cf3 d5 3.e3 | tuya | no |  |
-| 5.b3 | Inglesa: 2.Cf3 d5 3.e3 | del rival | sí | rival frase 1: flecha c1→b2 (A7, roja, punteada) |
-| 5...Ad6 | Inglesa: 2.Cf3 d5 3.e3 | tuya | no |  |
+| 2.Cf3 | Inglesa: 2.Cf3 y 3.g3 | del rival | no |  |
+| 2...d5 | Inglesa: 2.Cf3 y 3.g3 | tuya | no |  |
+| 3.g3 | Inglesa: 2.Cf3 y 3.g3 | del rival | sí | rival frase 1: flecha f1→g2 (A7, roja, punteada) |
+| 3...Cf6 | Inglesa: 2.Cf3 y 3.g3 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
+| 4.Ag2 | Inglesa: 2.Cf3 y 3.g3 | del rival | no |  |
+| 4...Af5 | Inglesa: 2.Cf3 y 3.g3 | tuya | no |  |
+| 5.0-0 | Inglesa: 2.Cf3 y 3.g3 | del rival | no |  |
+| 5...e6 | Inglesa: 2.Cf3 y 3.g3 | tuya | no |  |
+| 6.d3 | Inglesa: 2.Cf3 y 3.g3 | del rival | sí | rival frase 1: flecha e2→e4 (A7, roja, punteada) |
+| 6...dxc4 | Inglesa: 2.Cf3 y 3.g3 | tuya | no |  |
+| 7.dxc4 | Inglesa: 2.Cf3 y 3.g3 | del rival | no |  |
+| 7...Dxd1 | Inglesa: 2.Cf3 y 3.g3 | tuya | no |  |
+| 8.Txd1 | Inglesa: 2.Cf3 y 3.g3 | del rival | no |  |
+| 8...Cbd7 | Inglesa: 2.Cf3 y 3.g3 | tuya | sí | mía porque frase 1: flecha d1→d7 (A4, roja) |
+| 3.e3 | Inglesa: 2.Cf3 y 3.e3 | del rival | no |  |
+| 3...Cf6 | Inglesa: 2.Cf3 y 3.e3 | tuya | sí | mía porque frase 1: flecha f6→d5 (A2, verde); flecha f6→e4 (A2, verde) |
+| 4.Cc3 | Inglesa: 2.Cf3 y 3.e3 | del rival | no |  |
+| 4...e6 | Inglesa: 2.Cf3 y 3.e3 | tuya | no |  |
+| 5.b3 | Inglesa: 2.Cf3 y 3.e3 | del rival | sí | rival frase 1: flecha c1→b2 (A7, roja, punteada) |
+| 5...Ad6 | Inglesa: 2.Cf3 y 3.e3 | tuya | no |  |
 | 6...e6 | ¿Y si contestas 6.Db3 con 6...e6? | del rival | no |  |
 | 7.Dxb7 | ¿Y si contestas 6.Db3 con 6...e6? | tuya | no |  |
 | 3...b5 | ¿Y si sostienes con ...b5 el peón que tomaste en c4? | del rival | no |  |

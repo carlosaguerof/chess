@@ -1,4 +1,5 @@
 import { guardar, leer } from '../estado/almacen.ts'
+import { BASE } from '../base/base.ts'
 
 /**
  * Nota 1 (L3): lo guardado en el navegador pasa al modelo de favoritas sin errores. El avance de las lecciones (y su
@@ -87,7 +88,7 @@ export function migrarAlCursoCaroKann(): void {
   if (leer<number>('modelo-caro-kann', 0) >= 1) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarCaroKann(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarCaroKann(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarCaroKann(repaso))
   guardar('modelo-caro-kann', 1)
 }
@@ -178,7 +179,7 @@ export function migrarAlCursoEslava(): void {
   if (leer<number>('modelo-eslava', 0) >= 1) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarEslavaYOtrosNegras(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarEslavaYOtrosNegras(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarEslavaYOtrosNegras(repaso))
   guardar('modelo-eslava', 1)
 }
@@ -188,19 +189,24 @@ export function migrarAlCursoEslava(): void {
  * Cada lección vieja que sigue siendo obligatoria tiene su lección nueva de la misma línea (la misma fila de la base, ahora
  * con su continuación): lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. Las de tus otras cuartas
  * jugadas contra la Caro-Kann (4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2) ya no son lecciones (`specs/cursos.md` §1, nota 3 del
- * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. El avance del curso nuevo
- * empieza en cero.
+ * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. Lo hecho en la lección
+ * vieja cuenta en el avance del curso nuevo al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_AVANCE: Record<string, Record<string, string>> = {
   'caro-kann:w/w:caro-kann/': {
     'avance-short': 'avance-curso-short',
     'avance-botvinnik-carls': 'avance-curso-botvinnik-carls',
   },
-  // las que pasan a opcionales (Lputian, Euwe, Wade y 3...Ad7) no se mudan: una opcional no sale en el Repaso (nota 6)
   'francesa:w/w:francesa/': {
     'avance-c3': 'curso-avance-c3',
     paulsen: 'curso-paulsen',
     'principal-a3': 'curso-principal-a3',
+    // las que pasaron a opcionales también se mudan, como en los demás cursos (cierre de los cursos, 2026-11-25): lo hecho
+    // cuenta en su variante nueva (`leerAvance`), y su ficha sigue sin salir en el Repaso, porque es opcional
+    lputian: 'curso-lputian',
+    euwe: 'curso-euwe',
+    wade: 'curso-wade',
+    'cambio-de-alfil': 'curso-cambio-de-alfil',
   },
 }
 
@@ -223,27 +229,29 @@ export function migrarAlCursoItaliana(): void {
   if (leer<number>('modelo-italiana', 0) >= 1) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarItaliana(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarItaliana(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarItaliana(repaso))
   guardar('modelo-italiana', 1)
 }
 
 /** Corre una sola vez al abrir la app. */
 export function migrarAlCursoAvance(): void {
-  if (leer<number>('modelo-avance', 0) >= 1) return
+  // versión 2 (cierre de los cursos, 2026-11-25): la tabla de la Francesa sumó sus cuatro opcionales; una copia que ya corrió
+  // la 1 corre otra vez (las mudanzas son idempotentes: solo mueve lo que falta)
+  if (leer<number>('modelo-avance', 0) >= 2) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarAvance(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarAvance(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarAvance(repaso))
-  guardar('modelo-avance', 1)
+  guardar('modelo-avance', 2)
 }
 
 /**
  * La captura contra la Escandinava (2026-11-25) pasa al curso por estructuras. Cada lección vieja tiene su lección nueva
  * de la misma línea (la misma fila de la base, ahora con su continuación): lo que llevaba en el Repaso de hoy se muda
  * ahí, como en la Caro-Kann. La Grünfeld y la Transposición Panov no son lecciones del curso nuevo (se separan de otra
- * por una jugada mía; nota 2 del orchestrator): lo suyo se queda guardado y deja de salir. El avance del curso nuevo
- * empieza en cero.
+ * por una jugada mía; nota 2 del orchestrator): lo suyo se queda guardado y deja de salir. Lo hecho en la lección
+ * vieja cuenta en el avance del curso nuevo al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_ESCANDINAVA: Record<string, string> = {
   'da5-clasica': 'curso-clasica',
@@ -275,7 +283,7 @@ export function migrarAlCursoEscandinava(): void {
   if (leer<number>('modelo-escandinava', 0) >= 1) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarEscandinava(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarEscandinava(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarEscandinava(repaso))
   guardar('modelo-escandinava', 1)
 }
@@ -287,7 +295,8 @@ export function migrarAlCursoEscandinava(): void {
  * jugada mía (4.Cf3) y ya no son lecciones (`specs/cursos.md` §1, nota 2 del 2026-11-25): lo suyo va a la de la misma
  * respuesta del rival (2...Cf6 3.e5 Cd5), como 3...c5 en la Caro-Kann; si esa ya tiene algo, se queda como estaba,
  * guardado en el teléfono y en el Respaldo. Si la lección nueva es opcional, lo mudado se queda guardado y no sale en el
- * Repaso (lo decide el filtro común de las opcionales). El avance del curso nuevo empieza en cero.
+ * Repaso (lo decide el filtro común de las opcionales). Lo hecho en la lección vieja cuenta en el avance del curso nuevo
+ * al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_ALAPIN: Record<string, string> = {
   'alapin-d5-cambio-central': 'alapin-curso-cambio-central',
@@ -320,7 +329,72 @@ export function migrarAlCursoAlapin(): void {
   if (leer<number>('modelo-alapin', 0) >= 1) return
   const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
   const repaso = leer<Record<string, unknown>>('repaso', {})
-  if (progreso && typeof progreso === 'object') guardar('progreso', pasarAlapin(progreso))
+  if (progreso && typeof progreso === 'object') guardar('progreso', marcarOtraJugada(progreso, pasarAlapin(progreso)))
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarAlapin(repaso))
   guardar('modelo-alapin', 1)
+}
+
+/**
+ * Todas las mudanzas de lecciones, en el orden en que corren al abrir la app. Cada una es idempotente: una lección vieja
+ * se muda solo si la nueva todavía no tiene nada, así que aplicarlas dos veces no cambia nada, no duplica y no borra.
+ * `importar` (`src/repertorio/edicion.ts`) las aplica a lo que trae un Respaldo: uno hecho antes de una actualización
+ * trae los ids viejos, y la marca de cada migración (`modelo-<curso>`) ya está puesta, así que sin esto esas lecciones
+ * quedaban guardadas pero dejaban de salir en el Repaso (cierre de los cursos, 2026-11-25, §3.1).
+ */
+export function pasarTodas<T>(r: Record<string, T>): Record<string, T> {
+  return pasarAlapin(pasarEscandinava(pasarAvance(pasarEslavaYOtrosNegras(pasarItaliana(pasarCaroKann(r))))))
+}
+
+/** Las tablas de todas las mudanzas: el prefijo del curso y, por lección vieja, su lección nueva. */
+export const TABLAS_DE_MUDANZA: { prefijo: string; tabla: Record<string, string> }[] = [
+  { prefijo: 'caro-kann:b/b:caro-kann/', tabla: LECCIONES_CARO_KANN },
+  { prefijo: 'italiana:w/w:italiana/', tabla: LECCIONES_ITALIANA },
+  { prefijo: 'eslava:b/b:eslava/', tabla: LECCIONES_ESLAVA },
+  { prefijo: 'otros-negras:b/b:otros-negras/', tabla: LECCIONES_OTROS_NEGRAS },
+  ...Object.entries(LECCIONES_AVANCE).map(([prefijo, tabla]) => ({ prefijo, tabla })),
+  { prefijo: 'escandinava:w/w:escandinava/', tabla: LECCIONES_ESCANDINAVA },
+  { prefijo: 'siciliana:w/w:siciliana/', tabla: LECCIONES_ALAPIN },
+]
+
+/** Lo que corre al abrir la app (`main.tsx`): cada migración, una sola vez, en su orden. */
+export function migrarTodo(): void {
+  migrarAlModeloDeFavoritas()
+  migrarAlCursoCaroKann()
+  migrarAlCursoItaliana()
+  migrarAlCursoEslava()
+  migrarAlCursoAvance()
+  migrarAlCursoEscandinava()
+  migrarAlCursoAlapin()
+}
+
+/**
+ * ¿La lección vieja es otra jugada tuya, y no la misma línea que la nueva? Es la misma línea si una es el principio de la
+ * otra (la nueva suele ser la vieja con su continuación). La Semieslava (4...e6) y la Clavada (4...Ag4) en la Eslava, y la
+ * Stoltz y la Heidenfeld (4.Cf3) en la Alapin, se mudan a la lección de la misma respuesta del rival, pero son otra
+ * jugada tuya. Si alguna de las dos no está en la base, no se puede saber: cuenta como otra.
+ */
+export function esOtraJugada(prefijo: string, vieja: string, nueva: string): boolean {
+  const apertura = prefijo.slice(prefijo.lastIndexOf(':') + 1, -1)
+  const a = BASE.aperturas.find((x) => x.id === apertura)
+  const v = a?.variantes.find((x) => x.id === vieja)?.jugadas
+  const n = a?.variantes.find((x) => x.id === nueva)?.jugadas
+  if (!v || !n) return true
+  const [corta, larga] = v.length <= n.length ? [v, n] : [n, v]
+  return !corta.every((s, i) => larga[i] === s)
+}
+
+/**
+ * Lo hecho (`progreso`) que se mudó desde una lección de otra jugada tuya queda marcado (`otraJugada`): su ficha del
+ * Repaso se muda igual, pero en el avance del curso nuevo no sale "Hecha" (`leerAvance`), porque esa línea no se estudió
+ * (revisión del cierre de los cursos, 2026-11-25). `antes` es lo de antes de mudar; `despues`, lo mudado.
+ */
+export function marcarOtraJugada<T extends object>(antes: Record<string, T>, despues: Record<string, T>): Record<string, T> {
+  const r = { ...despues }
+  for (const { prefijo, tabla } of TABLAS_DE_MUDANZA)
+    for (const [vieja, nueva] of Object.entries(tabla)) {
+      const v = antes[prefijo + vieja]
+      if (v === undefined || prefijo + nueva in antes || r[prefijo + nueva] !== v || !esOtraJugada(prefijo, vieja, nueva)) continue
+      r[prefijo + nueva] = { ...v, otraJugada: true }
+    }
+  return r
 }

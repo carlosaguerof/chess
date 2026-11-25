@@ -59,7 +59,8 @@ export function fichaDe(e: EstadoRepaso, id: string, hechas: Progreso, registro:
   const pasos = pasosDe(leccion)
   // en un curso (o un repaso) cuenta solo la lección de esa línea: fallar 1...c6 repasando otra línea no la regresa;
   // en Refuerza o con la guía en una partida, la jugada es de todas las líneas que pasan por ahí
-  const cuenta = (r: EntradaRegistro) => r.lugar !== 'curso' || r.linea === leccion.nombre
+  // con el nombre de hoy o con uno de antes (una lección renombrada: lo fallado antes de la actualización sigue contando)
+  const cuenta = (r: EntradaRegistro) => r.lugar !== 'curso' || r.linea === leccion.nombre || (!!r.linea && !!leccion.nombresAntes?.includes(r.linea))
   const fallo = registro.find((r) => r.fecha > desde && r.resultado !== 'acierto' && cuenta(r) && pasos.has(`${r.fen}|${r.esperada}`))
   if (!fallo) return f
   const manana = sumarDias(dia(fallo.fecha), ESCALONES[0])

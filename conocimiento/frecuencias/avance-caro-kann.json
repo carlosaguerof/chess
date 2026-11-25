@@ -1,0 +1,162 @@
+{
+ "curso": "caro-kann:w",
+ "fuente": "https://database.lichess.org/ (CC0), lichess_db_standard_rated_2026-09.pgn.zst, primeros 2147483648 bytes comprimidos",
+ "licencia": "CC0 (base abierta de lichess)",
+ "filtro": "Event \"Rated Rapid game\", los dos jugadores con rating lichess en [600,1000) o [1000,1400)",
+ "conteo": {
+  "sha256": "5d42bb4bf49a7bceac83fa07715e22d674f6fed457b0dfb2682384c7b10a65cf",
+  "partidasPorBanda": {
+   "600-1000": 88007,
+   "1000-1400": 268376
+  },
+  "minimo": 3
+ },
+ "script": "scripts/frecuencias/avance-caro-kann.mjs",
+ "metodo": "Tus partidas: las que llegan a 1.e4 c6, jugando tú lo del curso (2.d4, 3.e5 y lo de sus lecciones). Cada lección, por su parte de tus partidas (el producto de las proporciones de las jugadas del rival, desde 1.e4 c6, hasta la que le da nombre: 3...Af5 o 3...c5), la que usa la regla de obligatorio y opcional; su n, las partidas que llegan a esa jugada. En \"otras\", su medida en la posición que la define (entre las partidas que llegan a 3.e5). Cada forma, a la media jugada 14 desde 1.e4 c6 2.d4 d5: juegas lo del curso mientras haya respuesta y lo que juega la gente fuera de él, y lo del rival pesa por lo que se juega en cada paso; su n, las partidas reales que llegan a esa forma por ese camino. Las respuestas a 2.d4 y a 3.e5 sin lección que salen en 5 % o más de tus partidas en alguna banda van en \"otras\".",
+ "partidas": {
+  "600-1000": 2490,
+  "1000-1400": 13058
+ },
+ "lecciones": {
+  "af5": {
+   "forma": "Nadie cambia en d4",
+   "600-1000": {
+    "pct": 31.6,
+    "n": 59
+   },
+   "1000-1400": {
+    "pct": 49.1,
+    "n": 1225
+   }
+  },
+  "c5": {
+   "forma": "Negras cambia en d4",
+   "600-1000": {
+    "pct": 19.8,
+    "n": 37
+   },
+   "1000-1400": {
+    "pct": 27.6,
+    "n": 689
+   }
+  }
+ },
+ "formas": {
+  "Nadie cambia en d4": {
+   "600-1000": {
+    "pct": 97.1,
+    "n": 74
+   },
+   "1000-1400": {
+    "pct": 84.9,
+    "n": 473
+   }
+  },
+  "Negras cambia en d4": {
+   "600-1000": {
+    "pct": 0,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 10.6,
+    "n": 59
+   }
+  }
+ },
+ "otras": {
+  "af5 · en su posición (3...Af5)": {
+   "600-1000": {
+    "pct": 34.7,
+    "n": 59,
+    "de": 170
+   },
+   "1000-1400": {
+    "pct": 52.4,
+    "n": 1225,
+    "de": 2336
+   }
+  },
+  "c5 · en su posición (3...c5)": {
+   "600-1000": {
+    "pct": 21.8,
+    "n": 37,
+    "de": 170
+   },
+   "1000-1400": {
+    "pct": 29.5,
+    "n": 689,
+    "de": 2336
+   }
+  },
+  "Base de las formas: siguen después de 2...d5": {
+   "600-1000": {
+    "pct": 91.1,
+    "n": 610
+   },
+   "1000-1400": {
+    "pct": 93.7,
+    "n": 4652
+   }
+  },
+  "Forma fuera del curso · Negras empuja a c4": {
+   "600-1000": {
+    "pct": 0,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 0.5,
+    "n": 4
+   }
+  },
+  "Forma fuera del curso · Sin peón en d4": {
+   "600-1000": {
+    "pct": 0,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.4,
+    "n": 21
+   }
+  },
+  "Forma fuera del curso · Sin peón en e5": {
+   "600-1000": {
+    "pct": 2.9,
+    "n": 5
+   },
+   "1000-1400": {
+    "pct": 1.7,
+    "n": 40
+   }
+  },
+  "Sin lección · 3...e6": {
+   "600-1000": {
+    "pct": 16.6,
+    "n": 31
+   },
+   "1000-1400": {
+    "pct": 8.9,
+    "n": 223
+   }
+  },
+  "Sin lección · 3...f6": {
+   "600-1000": {
+    "pct": 7.5,
+    "n": 14
+   },
+   "1000-1400": {
+    "pct": 3.7,
+    "n": 92
+   }
+  },
+  "Sin lección · 3...Cd7": {
+   "600-1000": {
+    "pct": 5.4,
+    "n": 10
+   },
+   "1000-1400": {
+    "pct": 1.4,
+    "n": 35
+   }
+  }
+ }
+}

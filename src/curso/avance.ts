@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { guardar, leer } from '../estado/almacen.ts'
 import type { Vuelta } from './ciclo.ts'
 import { cursosDeAntes } from './queda.ts'
+import { cursoNuevo, leccionIdDe } from './datos.ts'
 
 /**
  * El avance de un curso nuevo, guardado en el teléfono (diseño §4): las piezas leídas, las variantes aprendidas y
@@ -28,16 +29,30 @@ function leerGuardado(cursoId: string): AvanceCurso {
 }
 
 /**
+ * Los cursos que el 2026-11-25 pasaron de la lección de antes (`pantallas/Leccion.tsx`) al curso nuevo. La lección de
+ * antes guardaba una sola cosa por lección, "hecha" (`progreso`, con su fecha); la migración de cada curso ya la mudó al
+ * id de la lección nueva de la misma línea (`src/aprender/migracion.ts`). La Caro-Kann no está: pasó el 2026-10-29 y
+ * ahí se decidió que su avance empezara en cero (C3); su curso piloto ya guarda lo suyo.
+ */
+export const CURSOS_DE_LA_LECCION_DE_ANTES = ['italiana:w', 'siciliana:w', 'caro-kann:w', 'francesa:w', 'eslava:b', 'otros-negras:b', 'escandinava:w'] as const
+
+/**
  * El avance de un curso. Si reemplaza a uno de antes (`queda.ts`), una variante que aprendí o terminé allá sale así
  * aquí: es la misma línea. Se calcula al leer y no se guarda: lo del curso de antes se queda donde estaba, un Respaldo
  * viejo sigue sirviendo y, si el curso de antes regresa, cada uno tiene lo suyo. Las piezas de leer (La idea, La
  * estructura, Errores y trampas con sus «¿Y si…?», Repaso del curso) y dónde me quedé no se pasan: cambiaron
  * (Carlos, 2026-11-25).
+ *
+ * Con la misma regla, en los cursos que vienen de la lección de antes (`CURSOS_DE_LA_LECCION_DE_ANTES`), una lección
+ * que la lección de antes marcó hecha sale terminada en la variante nueva de la misma línea (cierre de los cursos,
+ * 2026-11-25, §3.2): es una marca por variante, así que no cuenta dos veces aunque también la termine aquí. "Aprendida"
+ * no se pone: la lección de antes no la distinguía.
  */
 export function leerAvance(cursoId: string): AvanceCurso {
   const a = leerGuardado(cursoId)
   const antes = cursosDeAntes(cursoId)
-  if (antes.length === 0) return a
+  const deLaLeccionDeAntes = (CURSOS_DE_LA_LECCION_DE_ANTES as readonly string[]).includes(cursoId)
+  if (antes.length === 0 && !deLaLeccionDeAntes) return a
   const variantes = { ...a.variantes }
   for (const id of antes)
     for (const [v, x] of Object.entries(leerGuardado(id).variantes)) {
@@ -45,6 +60,17 @@ export function leerAvance(cursoId: string): AvanceCurso {
       // lo de este curso gana; lo que no tiene, lo pone el de antes
       variantes[v] = { ...x, ...variantes[v] }
     }
+  const c = deLaLeccionDeAntes ? cursoNuevo(cursoId) : undefined
+  if (c) {
+    const hechas = leer<Record<string, { fecha?: number; otraJugada?: boolean } | undefined>>('progreso', {})
+    if (hechas && typeof hechas === 'object')
+      for (const v of c.variantes) {
+        const h = hechas[leccionIdDe(c, v)]
+        // lo que vino de otra jugada tuya no cuenta: esa línea no se estudió (`marcarOtraJugada`)
+        if (!h || h.otraJugada || variantes[v.id]?.terminada) continue
+        variantes[v.id] = { ...variantes[v.id], terminada: typeof h.fecha === 'number' ? h.fecha : 1 }
+      }
+  }
   return { ...a, variantes }
 }
 

@@ -696,7 +696,7 @@
   {
    "id": "checa",
    "base": "curso-checa",
-   "nombre": "Checa: 5.a4",
+   "nombre": "5.a4",
    "desde": 0,
    "intro": "Estás en la Checa: tu objetivo es sacar tus piezas rápido mientras blancas gasta jugadas en sus peones. Empiezas desde la primera jugada: blancas abre con 1.d4.",
    "idea": "Con a4 jugado y tu caballo en f6, no defiendes c4: tu alfil sale a f5, porque tu peón de c4 cuida b3.",
@@ -1040,7 +1040,7 @@
   {
    "id": "checa-clasica",
    "base": "curso-checa-clasica",
-   "nombre": "Checa: 9.De2 (Sämisch)",
+   "nombre": "5.a4 y 9.De2 (Sämisch)",
    "desde": 4,
    "intro": "Estás en la Checa: tu objetivo es sacar tus piezas rápido mientras blancas gasta jugadas en sus peones. Blancas sigue como en la Checa y después juega 9.De2.",
    "idea": "Contra De2 y g4, tu caballo ocupa e4 y tu alfil se retira a g6 sin dejarlo solo.",
@@ -1086,7 +1086,7 @@
   {
    "id": "alekhine-e3",
    "base": "curso-alekhine-e3",
-   "nombre": "Alekhine: 5.e3",
+   "nombre": "5.e3",
    "desde": 4,
    "intro": "Estás en la Pelea del lado de dama: tu objetivo es que blancas gaste jugadas mientras tú sacas tus piezas. Blancas saca sus dos caballos y después juega 5.e3.",
    "idea": "En esta línea, ...b5 defiende c4, y contra a4, ...b4 echa al caballo de c3.",
@@ -1150,7 +1150,7 @@
   {
    "id": "checa-carlsbad",
    "base": "checa-carlsbad",
-   "nombre": "Checa: 6.Ce5 (Carlsbad)",
+   "nombre": "5.a4 y 6.Ce5 (Carlsbad)",
    "desde": 4,
    "intro": "Estás en la Checa: tu objetivo es sacar tus piezas rápido mientras blancas gasta jugadas en sus peones. Blancas saca sus dos caballos y después salta con 6.Ce5.",
    "idea": "Contra Ce5, desafías al caballo con ...Cbd7 y preparas ...e5 con la dama.",

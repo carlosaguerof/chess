@@ -1,0 +1,164 @@
+{
+ "curso": "italiana:w",
+ "fuente": "https://database.lichess.org/ (CC0), lichess_db_standard_rated_2026-09.pgn.zst, primeros 2147483648 bytes comprimidos",
+ "licencia": "CC0 (base abierta de lichess)",
+ "filtro": "Event \"Rated Rapid game\", los dos jugadores con rating lichess en [600,1000) o [1000,1400)",
+ "conteo": {
+  "sha256": "5d42bb4bf49a7bceac83fa07715e22d674f6fed457b0dfb2682384c7b10a65cf",
+  "partidasPorBanda": {
+   "600-1000": 88007,
+   "1000-1400": 268376
+  },
+  "minimo": 3
+ },
+ "script": "scripts/frecuencias/italiana.mjs",
+ "metodo": "Las partidas del curso son las que llegan a 3.Ac4; tú juegas lo del curso (tu jugada de la lección en cada posición, por cualquier orden; fuera de las lecciones, lo que juega la gente) y el rival lo que juega la gente. Una lección se mide en la jugada del rival que la separa de las demás: pct, la probabilidad de llegar a esa posición sumando transposiciones; n, las partidas reales que llegaron jugando lo del curso. Una forma, en las hojas tras la 7.ª jugada de negras o donde se acaban los datos (n: las partidas reales detrás de esas hojas). 4...d5 contra 4.d3, por la línea exacta de la lección. Es el método de estructuras.mjs (con la raíz en 3.Ac4) y sinleccion.mjs del worker del curso. Cada pct se redondea una sola vez: la Dos Caballos en 600–1000 da 41.6 (41.649 %); el mapa dice 41.7 porque redondeó dos veces (41.65, la salida de estructuras.mjs, y luego a un decimal).",
+ "partidas": {
+  "600-1000": 4240,
+  "1000-1400": 20103
+ },
+ "lecciones": {
+  "dos-caballos-d3": {
+   "forma": "Centro cerrado",
+   "600-1000": {
+    "pct": 41.6,
+    "n": 1763
+   },
+   "1000-1400": {
+    "pct": 36.2,
+    "n": 7258
+   }
+  },
+  "la-bourdonnais": {
+   "forma": "Centro ideal",
+   "600-1000": {
+    "pct": 6.5,
+    "n": 37
+   },
+   "1000-1400": {
+    "pct": 6.2,
+    "n": 281
+   }
+  },
+  "anti-higado-frito": {
+   "forma": "Centro abierto",
+   "600-1000": {
+    "pct": 6.4,
+    "n": 272
+   },
+   "1000-1400": {
+    "pct": 18.7,
+    "n": 3745
+   }
+  },
+  "principal": {
+   "forma": "Centro cerrado",
+   "600-1000": {
+    "pct": 17,
+    "n": 97
+   },
+   "1000-1400": {
+    "pct": 13.8,
+    "n": 625
+   }
+  },
+  "paris": {
+   "forma": "Centro abierto",
+   "600-1000": {
+    "pct": 7,
+    "n": 295
+   },
+   "1000-1400": {
+    "pct": 5.4,
+    "n": 1088
+   }
+  },
+  "blackburne-kostic": {
+   "forma": "Centro ideal",
+   "600-1000": {
+    "pct": 1.9,
+    "n": 82
+   },
+   "1000-1400": {
+    "pct": 3.8,
+    "n": 755
+   }
+  },
+  "hungara": {
+   "forma": null,
+   "600-1000": {
+    "pct": 0.6,
+    "n": 25
+   },
+   "1000-1400": {
+    "pct": 1.3,
+    "n": 268
+   }
+  },
+  "rousseau": {
+   "forma": null,
+   "600-1000": {
+    "pct": 0.6,
+    "n": 27
+   },
+   "1000-1400": {
+    "pct": 1.7,
+    "n": 340
+   }
+  }
+ },
+ "formas": {
+  "Centro cerrado": {
+   "600-1000": {
+    "pct": 54.7,
+    "n": 295
+   },
+   "1000-1400": {
+    "pct": 42.2,
+    "n": 1177
+   }
+  },
+  "Centro ideal": {
+   "600-1000": {
+    "pct": 3,
+    "n": 13
+   },
+   "1000-1400": {
+    "pct": 7.3,
+    "n": 205
+   }
+  },
+  "Centro abierto": {
+   "600-1000": {
+    "pct": 7.5,
+    "n": 38
+   },
+   "1000-1400": {
+    "pct": 18,
+    "n": 594
+   }
+  }
+ },
+ "otras": {
+  "4...d5 contra 4.d3 (sin lección, en el mapa)": {
+   "600-1000": {
+    "pct": 7.9,
+    "n": 66
+   },
+   "1000-1400": {
+    "pct": 7.3,
+    "n": 421
+   }
+  },
+  "2...Cc6, de todas las partidas de la banda": {
+   "600-1000": {
+    "pct": 12,
+    "n": 10529
+   },
+   "1000-1400": {
+    "pct": 17,
+    "n": 45608
+   }
+  }
+ }
+}
