@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/ver-inventario.ts escandinava:w`. La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Contra la Escandinava»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**64 frases: 8 con "Ver"; 56 sin él** (29 porque explica la jugada que ya está en la línea, sin una alternativa; 9 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 18 porque lo que dice se juega en las jugadas que siguen de la línea; 0 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 1 de las 8 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**66 frases: 9 con "Ver"; 57 sin él** (29 porque explica la jugada que ya está en la línea, sin una alternativa; 9 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 18 porque lo que dice se juega en las jugadas que siguen de la línea; 1 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 2 de las 9 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
@@ -13,6 +13,7 @@
 | 7.♕xf3 | prepara | Si la dama de negras se come tu peón de d4, tu dama se come b7 y después la torre de a8. | 7...♕xd4 8.♕xb7 8...♕d8 9.♕xa8 | Aprender y Practicar |
 | 5.d4 | cuidado | Si su alfil cambia en e2, retomas con tu caballo de g1: tu peón de d4 sigue atacando a la dama. | 5...♗xe2 6.♘gxe2 | Aprender y Practicar |
 | 5.d4 (si juegas 5.♘f3) | errores | Su alfil cambia en f3 y tu alfil de e2 no puede retomar: está clavado contra tu rey. Te quedas con los peones doblados. | 5.♘f3 5...♗xf3 6.gxf3 | solo Aprender |
+| 6.f3 (si juegas 6.♘f3) | errores | Su alfil se come tu caballo y tu alfil de e2 no puede retomar: sigue clavado por la dama. Te quedas con los peones doblados. | 6.♘f3 6...♗xf3 7.gxf3 | solo Aprender |
 | 8.f4 | porque | Si negras no lo tapa, f5 gana su alfil. | 8...♕b6 9.f5 9...♘c6 10.fxg6 10...hxg6 | Aprender y Practicar |
 | 5.d4 | prepara | Si negras no se cuida, d5 gana una pieza. | 5...♘f6 6.d5 6...♘xd5 7.♘xd5 | Aprender y Practicar |
 | 6.♘f3 | porque | Tu peón de c2 está seguro: si el caballo de b4 se lo come, tu dama lo captura. | 6...♘xc2+ 7.♕xc2 | Aprender y Practicar |
@@ -73,6 +74,7 @@
 | 6.f3 | prepara | Si el alfil se retira, tus peones lo siguen persiguiendo. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.g4 | porque | Mientras su alfil huye, negras no saca piezas nuevas: las suyas siguen en casa. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.♗e2 | porque | El jaque te sirve para desarrollar: tu alfil ya salió, y la dama de negras ya se movió dos veces. | explica la jugada que ya está en la línea, sin una alternativa |
+| 5.d4 (si juegas 5.♘f3) | errores | Sacas una pieza, pero sin amenaza: busca una jugada que obligue a negras a defenderse. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 6.♘f3 | prepara | Ya puedes enrocar. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.0-0 | porque | Con tu rey en e1, tu alfil de e2 estaba clavado por la dama. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.0-0 | prepara | Tu torre puede ir a e1, frente a la dama. | lo que dice se juega en las jugadas que siguen de la línea |

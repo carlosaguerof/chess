@@ -1434,11 +1434,11 @@
    "nombre": "El jaque en e5: 4...Ag4",
    "desde": 3,
    "estructura": "El jaque",
-   "intro": "Estás en el jaque: la dama de negras da jaque desde e5, y tu objetivo es seguir sacando piezas sin regalar nada. Aquí negras saca su alfil de c8.",
+   "intro": "Estás en el jaque: la dama de negras da jaque desde e5, y tu objetivo es ganar tiempos contra sus piezas sin regalar nada. Aquí negras saca su alfil de c8.",
    "idea": "Tapas el jaque con Ae2 y vuelves a atacar a la dama con d4. Si su alfil se queda en g4 con la dama como único defensor, tus peones lo echan, y f4 amenaza f5.",
    "plan": {
     "tuyo": "Tu peón de f4 amenaza f5, que atacaría a la vez a la dama y al alfil. Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
-    "rival": "Negras tapa tu amenaza con su peón de f; sus piezas siguen en casa.",
+    "rival": "Negras tapa tu amenaza con su peón de f; sus caballos y su otro alfil siguen en casa.",
     "marcas": [],
     "marcasDe": {
      "tuyo": [
@@ -1569,7 +1569,7 @@
    "desde": 3,
    "estructura": "El jaque",
    "intro": "Estás en el jaque: la dama de negras da jaque desde e6, y tu objetivo es seguir sacando piezas sin regalar nada. Aquí negras saca su caballo de b8.",
-   "idea": "Tapas el jaque con Ae2 y juegas d4, que amenaza d5 contra la dama y el caballo. Después sacas tus piezas, enrocas y llevas tu torre a la columna de la dama.",
+   "idea": "Tapas el jaque con Ae2 y juegas d4, que amenaza d5 contra la dama y el caballo. Después sacas tus piezas, enrocas y llevas tu torre a la columna e, frente a su dama.",
    "plan": {
     "tuyo": "Si su caballo sigue en b4, a3 lo echa. Después, tu caballo de f3 salta a e5.",
     "rival": "Negras saca su dama de la columna e y lleva su caballo de b4 a d5.",
@@ -1591,17 +1591,6 @@
         "de": "f3",
         "a": "e5",
         "color": "verde",
-        "punteada": true
-       }
-      ]
-     ],
-     "rival": [
-      [
-       {
-        "tipo": "A7",
-        "de": "b4",
-        "a": "d5",
-        "color": "rojo",
         "punteada": true
        }
       ]
@@ -3835,12 +3824,72 @@
      ]
     ]
    },
+   "errores": {
+    "Nf3": "Su alfil se come tu caballo y tu alfil de e2 no puede retomar: sigue clavado por la dama. Te quedas con los peones doblados."
+   },
+   "verErrores": {
+    "Nf3": {
+     "antes": true,
+     "pasos": [
+      {
+       "frase": "Esta es la posición después de 5...De6.",
+       "fuente": [
+        "WB-3Cc3",
+        "MOTOR"
+       ],
+       "motor": [
+        "J2-e5-cf3-6"
+       ]
+      },
+      {
+       "frase": "6.Cf3: sacas tu caballo.",
+       "jugadas": [
+        "Nf3"
+       ],
+       "fuente": [
+        "WB-3Cc3",
+        "MOTOR"
+       ],
+       "motor": [
+        "J2-e5-cf3-6"
+       ]
+      },
+      {
+       "frase": "6...Axf3: su alfil se come tu caballo.",
+       "jugadas": [
+        "Bxf3"
+       ],
+       "fuente": [
+        "WB-3Cc3",
+        "MOTOR"
+       ],
+       "motor": [
+        "J2-e5-cf3-6"
+       ]
+      },
+      {
+       "frase": "7.gxf3: tu alfil de e2 no puede retomar, porque dejaría a tu rey en jaque de la dama de e6. Te quedan los peones doblados en la columna f.",
+       "jugadas": [
+        "gxf3"
+       ],
+       "fuente": [
+        "WB-3Cc3",
+        "MOTOR"
+       ],
+       "motor": [
+        "J2-e5-cf3-6"
+       ]
+      }
+     ]
+    }
+   },
    "fuente": [
     "MOTOR",
     "AJEDREZ"
    ],
    "motor": [
-    "J2-e5-f3"
+    "J2-e5-f3",
+    "J2-e5-cf3-6"
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4": {
@@ -3915,7 +3964,7 @@
         ]
        },
        {
-        "frase": "9...Cc6: negras saca su caballo; su alfil no tiene a dónde ir.",
+        "frase": "9...Cc6: negras saca su caballo; su alfil no tiene casilla segura: en h5 o en f5 lo come tu peón de g4.",
         "jugadas": [
          "Nc6"
         ],
@@ -3985,6 +4034,9 @@
    "pista": "Un peón que avanza dos casillas puede amenazar con seguir avanzando contra la dama y el caballo.",
    "hace": "Ocupas el centro con tu peón de d y amenazas avanzarlo a d5, donde atacaría a la vez a la dama de e6 y al caballo de c6.",
    "prepara": "Si negras no se cuida, d5 gana una pieza.",
+   "errores": {
+    "Nf3": "Sacas una pieza, pero sin amenaza: busca una jugada que obligue a negras a defenderse."
+   },
    "marcasDe": {
     "hace": [
      [
@@ -4075,7 +4127,8 @@
    "motor": [
     "F-e6-cc6",
     "J-e6-cc6",
-    "J2-e6-cf6-d5"
+    "J2-e6-cf6-d5",
+    "J2-e6-cf3-5"
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3": {
@@ -4162,7 +4215,7 @@
    "buenas": [
     "Ne5"
    ],
-   "hace": "Enrocas: tu rey se pone a salvo y sale de la columna de la dama.",
+   "hace": "Enrocas: tu rey se pone a salvo y sale de la columna e.",
    "porque": "Con tu rey en e1, tu alfil de e2 estaba clavado por la dama.",
    "prepara": "Tu torre puede ir a e1, frente a la dama.",
    "describe": {
@@ -4186,7 +4239,7 @@
    "buenas": [
     "Na4"
    ],
-   "hace": "Llevas tu torre a la columna de la dama, con tu alfil de e2 en medio.",
+   "hace": "Llevas tu torre a la columna e, frente a la dama de e6, con tu alfil de e2 en medio.",
    "porque": "Si algún día tu alfil sale de e2, tu torre ataca a la dama de e6.",
    "fuente": [
     "MOTOR",

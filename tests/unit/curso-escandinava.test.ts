@@ -233,6 +233,10 @@ describe('El curso de la Escandinava · el mapa (chess.js)', () => {
     const err = tras([...e5.slice(0, e5.indexOf('d4')), 'Nf3', 'Bxf3'])
     expect(err.moves()).not.toContain('Bxf3')
     expect(err.moves()).toContain('gxf3')
+    // y una jugada después: 6.Cf3 Axf3, con la dama en e6, tampoco deja retomar con el alfil
+    const err6 = tras([...e5.slice(0, e5.indexOf('f3')), 'Nf3', 'Bxf3'])
+    expect(err6.moves()).not.toContain('Bxf3')
+    expect(err6.moves()).toContain('gxf3')
     // 5.d4 amenaza d5 contra la dama de e6 y el caballo de c6
     const conD4 = new Chess(tras(e6.slice(0, e6.indexOf('d4') + 1)).fen().replace(' b ', ' w '))
     conD4.move('d5')

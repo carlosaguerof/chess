@@ -1467,6 +1467,7 @@ Las dos lecciones nuevas: 2...Cc6 3.d4 cxd4 4.cxd4 e6 5.Cf3 Cf6 6.d5 y 2...d6 3.
 |---|---|---|---|---|
 | D-cc6-d4 | Contra 2...Cc6, 3.d4 la mejor; buena: Cf3 | `mejores "e4 c5 c3 Nc6" --n 5` | +0.28 d4 · +0.14 Cf3 · +0.05 Ab5 | Se sostiene |
 | D-cc6-cxd4 | 4.cxd4 la mejor | `mejores "e4 c5 c3 Nc6 d4 cxd4" --n 5` | +0.40 cxd4 · −0.22 Cf3 | Se sostiene |
+| D-cc6-5 | Tras 5.Cf3, la lección sigue 5...Cf6 (3 partidas, como 5...d5): 5...d5 es la mejor del motor, pero con ella la página manda avanzar a e5 y la lección saldría de su forma | `mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3" --n 3` · `jugada "… e6 Nf3" "Nf6"` | +0.51 d5 e5 · +0.87 Cf6 · ...Cf6 a 42 de la mejor | Decisión anotada (`specs/cursos.md` §6, n.º 22) |
 | D-cc6-cf3 | 5.Cf3 a 0.03 de la mejor; buenas: Cc3, d5, a3, Ae3 | `mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --n 5` | +0.45 Cc3 · +0.42 Cf3 · +0.42 d5 · +0.38 a3 · +0.29 Ae3 | Se sostiene |
 | D-cc6-d5 | 6.d5, la regla de la página (con su caballo de dama en c6, d5 contra él), no pierde material; buenas: Cc3 (la mejor), e5, Ad3, Cbd2 | `mejores "… e6 Nf3 Nf6" --n 5` · `mejores "… e6 Nf3 Nf6" --n 4 --prof 22` | +0.83 Cc3 · +0.58 d5 · +0.44 e5 · +0.43 Ad3 · +0.40 Cbd2; a prof. 22, d5 a 49 de Cc3 (+0.43) | Se sostiene: no pierde material; Cc3, en azul (K-nc6x-e6-nf3-nf6-d5) |
 | D-cc6-cxe4 | "Si el caballo de f6 se come tu e4, tú te comes el de c6" (ventana: 6...Cxe4 7.dxc6 bxc6) | `jugada "… Nf6 d5" "Nxe4"` · `mejores "… d5 Nxe4" --n 3` · `mejores "… d5 Nxe4 dxc6" --n 3` | ...Cxe4 pierde 285 · +3.14 dxc6 · tras 7.dxc6: +3.06 bxc6 | Se sostiene |
@@ -1501,6 +1502,6 @@ Las dos lecciones nuevas: 2...Cc6 3.d4 cxd4 4.cxd4 e6 5.Cf3 Cf6 6.d5 y 2...d6 3.
 | S-d6-9-g6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 | g6 | 7 (partidas) | Nf3 | mejor Bb5+ (+0.74) · Nf3: +0.69  Nf3 Bg7 h3 O-O Be2 d5 e5 Ne4 · pierde 5 |
 | S-d6-9-Nc6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 | Nc6 | 3 (partidas) | Nf3 | mejor d5 (+1.28) · Nf3: +0.86  Nf3 d5 e5 Ne4 Bd3 Bf5 Qb3 Nc5 · pierde 42 |
 | S-d6-11-Bg7 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 | Bg7 | 4 (motor) | Be2 | mejor h3 (+0.77) · Be2: +0.78  Be2 Bg4 O-O Nc6 Be3 O-O d5 Bxf3 · pierde -1 |
-| S-d6-11-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 | a6 | motor (motor) | Be2 | mejor h3 (+0.98) · Be2: +1.00  Be2 Bg7 e5 Nfd7 exd6 exd6 Bf4 O-O · pierde -2 |
-| S-d6-13-O-O | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | O-O | motor (motor) | O-O | mejor h3 (+0.68) · O-O: +0.60  O-O Bg4 Be3 Bxf3 Bxf3 Nc6 Ne2 Rc8 · pierde 8 |
-| S-d6-13-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | a6 | motor (motor) | O-O | mejor e5 (+0.91) · O-O: +0.90  O-O O-O h3 b5 e5 dxe5 dxe5 Nfd7 · pierde 1 |
+| S-d6-11-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 | a6 | motor | Be2 | mejor h3 (+0.98) · Be2: +1.00  Be2 Bg7 e5 Nfd7 exd6 exd6 Bf4 O-O · pierde -2 |
+| S-d6-13-O-O | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | O-O | motor | O-O | mejor h3 (+0.68) · O-O: +0.60  O-O Bg4 Be3 Bxf3 Bxf3 Nc6 Ne2 Rc8 · pierde 8 |
+| S-d6-13-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | a6 | motor | O-O | mejor e5 (+0.91) · O-O: +0.90  O-O O-O h3 b5 e5 dxe5 dxe5 Nfd7 · pierde 1 |

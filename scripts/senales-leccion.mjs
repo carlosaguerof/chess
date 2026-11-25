@@ -42,14 +42,12 @@ for (let i = 1; i < L.length; i += 2) {
   const pos = L.slice(0, i)
   const sig = L[i + 1]
   if (!sig) break
-  let resp = jugadas(pos).slice(0, 2).map(([m, n]) => [sanDe(pos, m), `${n}`])
-  let fuente = 'partidas'
+  let resp = jugadas(pos).slice(0, 2).map(([m, n]) => [sanDe(pos, m), `${n} (partidas)`])
   if (resp.length < 2) {
     const out = motor('mejores', pos.join(' '), '--n', '2')
     const mot = [...out.matchAll(/^\s+[+-][\d.]+\s+(\S+)/gm)].map((x) => x[1])
     for (const m of mot) if (!resp.some(([r]) => r === m)) resp.push([m, 'motor'])
     resp = resp.slice(0, 2)
-    fuente = 'motor'
   }
   for (const [r, n] of resp) {
     if (!r) continue
@@ -64,6 +62,6 @@ for (let i = 1; i < L.length; i += 2) {
       const linea = out.match(new RegExp(`${lasuya.replace(/[+]/g, '\\+')}: (.*)`))
       res = `mejor ${mejor?.[2]} (${mejor?.[1]}) · ${lasuya}: ${linea ? linea[1].trim() : '?'} · pierde ${pierde?.[1] ?? 0}`
     }
-    console.log(`| ${id}-${i}-${r} | ${pos.join(' ')} | ${r} | ${n} (${fuente}) | ${sig} | ${res} |`)
+    console.log(`| ${id}-${i}-${r} | ${pos.join(' ')} | ${r} | ${n} | ${sig} | ${res} |`)
   }
 }

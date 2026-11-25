@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 42 de 101.** Más 24 frases del plan y del paso a paso.
+**Jugadas con marcas: 42 de 101.** Más 23 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -123,7 +123,6 @@
 | plan lasker tuyo frase 2 | Después sacas tu alfil de f1 a c4, con tus dos alfiles mirando a todo el tablero. | flecha f1→c4 (A3, verde, punteada) |
 | plan jaque-e6 tuyo frase 1 | Si su caballo sigue en b4, a3 lo echa. | flecha a2→a3 (A3, verde, punteada) |
 | plan jaque-e6 tuyo frase 2 | Después, tu caballo de f3 salta a e5. | flecha f3→e5 (A3, verde, punteada) |
-| plan jaque-e6 rival frase 1 | Negras saca su dama de la columna e y lleva su caballo de b4 a d5. | flecha b4→d5 (A7, roja, punteada) |
 | plan marshall tuyo frase 1 | Saca tu caballo de b1 a c3 y tu alfil de c1 a f4. | flecha b1→c3 (A3, verde, punteada); flecha c1→f4 (A3, verde, punteada) |
 | plan richter rival frase 1 | Negras presiona d4 con su alfil de g7, con ...Ag4 contra tu caballo de f3 y con ...Cc6. | flecha g7→d4 (A4, roja) |
 | idea 1, paso 3 | Si lo recupera con la dama, 2...Dxd5, tu caballo la ataca: 3.Cc3. | flecha c3→d5 (A2, verde) |

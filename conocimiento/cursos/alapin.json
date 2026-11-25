@@ -777,17 +777,6 @@
      "tuyo": [
       [],
       []
-     ],
-     "rival": [
-      [
-       {
-        "tipo": "A7",
-        "de": "f8",
-        "a": "b4",
-        "color": "rojo",
-        "punteada": true
-       }
-      ]
      ]
     },
     "pasoAPaso": {
@@ -3150,7 +3139,7 @@
    ]
   },
   "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2": {
-   "pregunta": "Tus dos caballos ya salieron. ¿Qué pieza sacas para poder enrocar?",
+   "pregunta": "Tus dos caballos ya salieron. ¿Qué haces ahora?",
    "pista": "Un alfil que deje libre el camino entre tu rey y tu torre.",
    "buenas": [
     "Be3",

@@ -54,5 +54,6 @@
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 | prepara | 0": "linea",
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | porque | 0": "explica",
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | prepara | 0": "linea",
-  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O c6 Re1 | porque | 0": "plan"
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O c6 Re1 | porque | 0": "plan",
+  "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 | errores | Nf3": "sin-consecuencia"
 }
