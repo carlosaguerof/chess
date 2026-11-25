@@ -23,7 +23,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.e3 Af5 5.Cc3 e6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.
+- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Con ...e6 ya jugado, si Ch4 persigue tu alfil, retíralo a g6. Si Db3 ataca b7 antes de cambiar en d5, defiéndelo con ...Db6.
 - Fuente: D12 · Slav Defense: Quiet Variation, Schallopp Defense
 
 ## Variante del Cambio
@@ -194,7 +194,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.e3 Af5 5.Cc3 e6 6.Ch4 Ag6 7.Cxg6 hxg6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.
+- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Con ...e6 jugado, si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.
 - Fuente: D12 · Slav Defense: Quiet Variation, Schallopp Defense
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Slav Defense (4...Bf5 5.Nc3 e6 6.Nh4); motor: 6.Ch4 es la mejor de blancas; 6...Ag6 y 7...hxg6 las mejores.
 

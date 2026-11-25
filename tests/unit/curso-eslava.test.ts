@@ -130,7 +130,7 @@ describe('La Eslava · el curso', () => {
   })
 
   it('cada introducción abre con su frase: nombra su forma (o que queda fuera del mapa) y no dice ninguna jugada tuya de la línea', () => {
-    const nombre: Record<string, RegExp> = { [TENSION]: /^Estás en la Tensión/, [CAMBIO]: /^Estás en el Cambio/, [ALEKHINE]: /^Estás en la Alekhine/, [CHECA]: /^Estás en la Checa/ }
+    const nombre: Record<string, RegExp> = { [TENSION]: /^Estás en la Tensión/, [CAMBIO]: /^Estás en el Cambio/, [ALEKHINE]: /^Estás en la Pelea del lado de dama/, [CHECA]: /^Estás en la Checa/ }
     for (const l of VARIANTES) {
       const v = l.variante!
       const frase = frasesDe(v.intro)[0]!

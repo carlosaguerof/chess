@@ -154,8 +154,8 @@
      "subtitulo": "El mapa",
      "texto": [
       "Después de 1.d4 d5 2.c4 c6, el peón de c4 de blancas ataca tu peón de d5, y tú lo defiendes con el de c6. De ahí sale la pregunta que ordena este curso: ¿qué pasó con el peón de c4?",
-      "Hay cuatro respuestas. Sigue en c4: la Tensión. Blancas lo cambió en d5: el Cambio. Lo tomaste y lo defiendes con ...b5: la Alekhine. Lo tomaste, pero blancas ya había jugado a4: la Checa.",
-      "Tomarlo o no lo decides tú, con una señal: si blancas ya jugó e3, su alfil de f1 lo recupera de una vez, así que no lo tomas y sacas tu alfil de c8. Si no jugó e3, lo tomas. Y si lo tomaste, mira si blancas alcanzó a jugar a4.",
+      "Hay cuatro respuestas. Sigue en c4: la Tensión. Blancas lo cambió en d5: el Cambio. Lo tomaste y lo defiendes con ...b5: la Pelea del lado de dama. Lo tomaste, pero blancas ya había jugado a4: la Checa.",
+      "Son tres preguntas en fila. ¿Blancas cambió en d5? Si no: ¿ya jugó e3? Con e3, su alfil de f1 recuperaría c4 de una vez, así que no tomas: sacas tu alfil de c8 a f5, o primero ...e6 si su caballo ya está en c3. Sin e3, tomas en c4. Y si tomaste: ¿alcanzó blancas a jugar a4?",
       "Es la misma pregunta de la Caro-Kann, con el peón de c en lugar del de e. Lo que une a las lecciones de La base: tu peón de c6 defiende d5 sin encerrar a tu alfil de c8. Si blancas empuja 3.c5, su peón deja de atacar d5: no es ninguna de las cuatro, y ...e5 golpea su centro."
      ],
      "tablero": {
@@ -232,7 +232,7 @@
         ]
        },
        {
-        "frase": "La Alekhine: 3.Cc3 dxc4, lo tomas, y como blancas no jugó a4, después de 4.e4 lo defiendes con 4...b5.",
+        "frase": "La Pelea del lado de dama: 3.Cc3 dxc4, lo tomas, y como blancas no jugó a4, después de 4.e4 lo defiendes con 4...b5.",
         "reinicio": [
          "d4",
          "d5",
@@ -256,8 +256,8 @@
      "subtitulo": "La Tensión",
      "texto": [
       "Tus peones: c6, d5 y e6. Los de blancas: c4, d4 y e3. Tu peón de d5 y el de c4 se atacan, y nadie los cambia todavía.",
-      "Llegas aquí cuando blancas juega e3 antes de que tomes en c4: por ejemplo, 3.Cf3 Cf6 4.e3, o 3.e3. Tu plan: el caballo a f6 cuida d5 y tu alfil de c8 sale a f5 antes de ...e6. Con tu peón ya en e6, si la dama blanca va a b3 contra b7, la tuya se le pone enfrente en b6.",
-      "Contra 4.g3 también sirve: tu alfil sale a g4. Puede terminar en otra forma: si blancas cambia en d5, vas al Cambio."
+      "Llegas aquí cuando blancas juega e3 antes de que tomes en c4: por ejemplo, 3.Cf3 Cf6 4.e3, o 3.e3. Tu plan: el caballo a f6 cuida d5 y tu alfil de c8 sale a f5 antes de ...e6. Si el caballo de blancas ya está en c3, primero ...e6: con tu alfil en f5, cxd5 y Db3 dejarían a b7 sin defensa. Si la dama blanca va a b3 antes de cambiar en d5, la tuya se le pone enfrente en b6.",
+      "Contra 4.g3 también sirve: tu alfil sale a g4. Puede terminar en otra forma: si blancas cambia en d5 y retomas con tu peón de c, vas al Cambio."
      ],
      "tablero": {
       "fen": "4k3/pp3ppp/2p1p3/3p4/2PP4/4P3/PP3PPP/4K3 w - - 0 1",
@@ -287,10 +287,10 @@
         "frase": "Con el peón de e3, el alfil de blancas recuperaría c4 de una vez: por eso no lo tomas."
        },
        {
-        "frase": "Si blancas cambia, cxd5, y retomas, ...exd5, vas hacia el Cambio.",
+        "frase": "Si blancas cambia, cxd5, y retomas con tu peón de c, ...cxd5, vas hacia el Cambio.",
         "jugadas": [
          "cxd5",
-         "...exd5"
+         "...cxd5"
         ]
        }
       ]
@@ -335,9 +335,9 @@
      }
     },
     {
-     "subtitulo": "La Alekhine",
+     "subtitulo": "La Pelea del lado de dama",
      "texto": [
-      "Tomaste en c4 y blancas no jugó a4 a tiempo: tu peón de b5 sostiene el de c4. Los de blancas: d4 y e4 en el centro.",
+      "Tomaste en c4 y blancas no jugó a4 a tiempo: tu peón de b5 sostiene el de c4. Los de blancas: d4, y e4 o e3, en el centro.",
       "Tu plan: sostienes el peón mientras blancas gasta jugadas en recuperarlo, y sacas tus piezas. Si blancas ataca tu peón de b5 con a4: después de 3.Cc3 o de 5.e3, ...b4 echa a su caballo de c3; en la Geller, con tu caballo en d5, primero ...e6. A veces blancas recupera el peón, pero su caballo termina lejos del centro."
      ],
      "tablero": {
@@ -542,7 +542,7 @@
      ],
      "texto": [
       "La pregunta: ¿qué pasó con el peón de c4? La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Primero el caballo a f6. Después, si blancas ya jugó e3, saca tu alfil; si no, toma en c4. 2) Si tomaste y blancas no jugó a4, defiende c4 con ...b5; si ya lo jugó, no: saca el alfil a f5. 3) Contra la dama en b3, con tu peón ya en e6: en la Tensión, ...Db6; en el Cambio, ...Ab4."
+      "Tres reglas: 1) Primero el caballo a f6. Después, si blancas ya jugó e3, saca tu alfil (o ...e6 primero, si su caballo ya está en c3); sin e3, toma en c4. 2) Si tomaste y blancas no jugó a4, defiende c4 con ...b5; si ya lo jugó y tu caballo está en f6, saca el alfil a f5. 3) Contra la dama en b3: si blancas no cambió en d5, ...Db6; en el Cambio, con ...e6 ya jugado, ...Ab4."
      ],
      "fuente": [
       "WP-Slav",
@@ -630,7 +630,7 @@
     {
      "subtitulo": "Lo que tu guía decía distinto",
      "texto": [
-      "«Tu alfil de casillas blancas sale a f5»: sí, pero en su momento, con tu caballo en f6 y cuando blancas ya jugó e3, o con tu peón en c4 cuidando b3. Si sale antes, cxd5 y Db3 atacan b7 y d5. Y en la Alekhine tu alfil sale por a6 o b7.",
+      "«Tu alfil de casillas blancas sale a f5»: sí, pero en su momento, con tu caballo en f6 y cuando blancas ya jugó e3, o con tu peón en c4 cuidando b3. Si sale antes, cxd5 y Db3 atacan b7 y d5. Y en la Pelea del lado de dama tu alfil sale por a6 o b7.",
       "«Caro-Kann y Eslava comparten patrón: reduces a la mitad lo que memorizas»: se comparten tus peones de c6 y d5 y la idea del alfil, no las jugadas. Los peones de blancas son otros."
      ],
      "fuente": [
@@ -961,7 +961,7 @@
    "base": "curso-cc3",
    "nombre": "3.Cc3",
    "desde": 4,
-   "intro": "Estás en la Alekhine: tu objetivo es ganarle tiempo a blancas en el lado de dama. Blancas saca su caballo con 3.Cc3, antes que el de g1.",
+   "intro": "Estás en la Pelea del lado de dama: tu objetivo es ganarle tiempo a blancas con tus peones de ese lado. Blancas saca su caballo con 3.Cc3, antes que el de g1.",
    "idea": "Sin a4 a tiempo, ...b5 sostiene el peón de c4, y ...b4 echa al caballo de c3.",
    "plan": {
     "tuyo": "Saca tus piezas: ...e6, ...Cf6 y tu alfil de f8. Tus peones de b4 y c4 te dan espacio en el lado de dama.",
@@ -1093,7 +1093,7 @@
    "base": "curso-alekhine-e3",
    "nombre": "Alekhine: 5.e3",
    "desde": 4,
-   "intro": "Estás en la Alekhine: tu objetivo es ganarle tiempo a blancas en el lado de dama. Blancas saca sus dos caballos y después juega 5.e3.",
+   "intro": "Estás en la Pelea del lado de dama: tu objetivo es ganarle tiempo a blancas con tus peones de ese lado. Blancas saca sus dos caballos y después juega 5.e3.",
    "idea": "Sin a4, ...b5 defiende c4; si a4, ...b4 echa al caballo.",
    "plan": {
     "tuyo": "Saca tu caballo de b8 a d7 y tu alfil de f8 a e7, y enroca.",
@@ -1313,7 +1313,7 @@
    "base": "curso-geller",
    "nombre": "Gambito Geller: 5.e4",
    "desde": 4,
-   "intro": "Estás en la Alekhine: tu objetivo es ganarle tiempo a blancas en el lado de dama. Blancas saca sus dos caballos y después juega 5.e4.",
+   "intro": "Estás en la Pelea del lado de dama: tu objetivo es ganarle tiempo a blancas con tus peones de ese lado. Blancas saca sus dos caballos y después juega 5.e4.",
    "idea": "Contra e4 y e5, ...b5 sostiene c4 y tu caballo se va al centro, a d5.",
    "plan": {
     "tuyo": "Sostén tu peón de b5 con ...a6, saca tus piezas (...Cd7 y ...Ae7) y enroca.",
@@ -2315,7 +2315,7 @@
    ],
    "hace": "Abres tu alfil de f8.",
    "porque": "Tu alfil de c8 ya salió: este peón ya no lo encierra.",
-   "cuidado": "Con tu peón ya en e6, si la dama blanca va a b3 contra b7, tu dama la enfrenta en b6.",
+   "cuidado": "Si la dama blanca va a b3 contra b7 antes de cambiar en d5, tu dama la enfrenta en b6.",
    "marcasDe": {
     "cuidado": [
      [

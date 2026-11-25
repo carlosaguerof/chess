@@ -31,7 +31,7 @@
         "pgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3 Bf5 5. Nc3 e6"
       },
       "lado": "negras",
-      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Si Ch4 persigue tu alfil, retíralo a g6; si Db3 ataca b7, defiéndelo con ...Db6.",
+      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si juegas 4...e6, llegas a la Semieslava, que también es buena, pero con el alfil adentro. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0. Con ...e6 ya jugado, si Ch4 persigue tu alfil, retíralo a g6. Si Db3 ataca b7 antes de cambiar en d5, defiéndelo con ...Db6.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -312,7 +312,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.",
+      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Con ...e6 jugado, si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
