@@ -3,7 +3,7 @@ import { Chess } from 'chess.js'
 import { CURSOS_NUEVOS, lineasDe, misJugadas } from '../../src/curso/datos.ts'
 
 /**
- * Una sola jugada tuya por posición (`specs/cursos.md` §1 y §6.1), también entre lecciones distintas y entre cursos: si
+ * Una sola jugada tuya por posición (`specs/cursos.md` §1 y §6), también entre lecciones distintas y entre cursos: si
  * dos lecciones llegan a la misma posición, por el mismo orden o por otro, te enseñan la misma jugada. Recorre todas las
  * lecciones de todos los cursos de `CURSOS_NUEVOS` (los «¿Y si…?» no: ahí la jugada mala es a propósito). Revisión final de
  * la rama de la Eslava, 2026-11-25: la Húngara y la Réti con 2.g3 enseñaban 3...Ag4 y 3...Cf6 en la misma posición.

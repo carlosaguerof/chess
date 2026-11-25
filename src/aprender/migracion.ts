@@ -150,3 +150,48 @@ export function migrarAlCursoEslava(): void {
   if (repaso && typeof repaso === 'object') guardar('repaso', pasarEslavaYOtrosNegras(repaso))
   guardar('modelo-eslava', 1)
 }
+
+/**
+ * Los cursos del Avance (2026-11-25), contra la Caro-Kann y contra la Francesa, pasan a la lección nueva por estructuras.
+ * Cada lección vieja que sigue siendo obligatoria tiene su lección nueva de la misma línea (la misma fila de la base, ahora
+ * con su continuación): lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. Las de tus otras cuartas
+ * jugadas contra la Caro-Kann (4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2) ya no son lecciones (`specs/cursos.md` §1, nota 3 del
+ * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. El avance del curso nuevo
+ * empieza en cero.
+ */
+export const LECCIONES_AVANCE: Record<string, Record<string, string>> = {
+  'caro-kann:w/w:caro-kann/': {
+    'avance-short': 'avance-curso-short',
+    'avance-botvinnik-carls': 'avance-curso-botvinnik-carls',
+  },
+  // las que pasan a opcionales (Lputian, Euwe, Wade y 3...Ad7) no se mudan: una opcional no sale en el Repaso (nota 6)
+  'francesa:w/w:francesa/': {
+    'avance-c3': 'curso-avance-c3',
+    paulsen: 'curso-paulsen',
+    'principal-a3': 'curso-principal-a3',
+  },
+}
+
+/** Muda lo de cada lección vieja de los dos Avances a su lección nueva (si la nueva aún no tiene nada). */
+export function pasarAvance<T>(r: Record<string, T>): Record<string, T> {
+  const nuevo = { ...r }
+  for (const [prefijo, tabla] of Object.entries(LECCIONES_AVANCE))
+    for (const [viejo, nueva] of Object.entries(tabla)) {
+      const v = r[prefijo + viejo]
+      if (v !== undefined && !(prefijo + nueva in nuevo)) {
+        nuevo[prefijo + nueva] = v
+        delete nuevo[prefijo + viejo]
+      }
+    }
+  return nuevo
+}
+
+/** Corre una sola vez al abrir la app. */
+export function migrarAlCursoAvance(): void {
+  if (leer<number>('modelo-avance', 0) >= 1) return
+  const progreso = leer<Record<string, { fecha: number }>>('progreso', {})
+  const repaso = leer<Record<string, unknown>>('repaso', {})
+  if (progreso && typeof progreso === 'object') guardar('progreso', pasarAvance(progreso))
+  if (repaso && typeof repaso === 'object') guardar('repaso', pasarAvance(repaso))
+  guardar('modelo-avance', 1)
+}

@@ -46,7 +46,11 @@ export function LeccionCurso({ cursoId, lineaId }: { cursoId: string; lineaId: s
   if (!c || !l)
     return (
       <p className="vacio">
-        No encontré esa lección. <a href="#/cursos/negras">Ver mis cursos</a>
+        No encontré esa lección.{' '}
+        {/* a la página del curso si existe (una lección que dejó de existir, de una dirección vieja); si no, a la pestaña de su color */}
+        <a href={c ? `#/curso/${encodeURIComponent(c.id)}` : `#/cursos/${cursoId.endsWith(':w') ? 'blancas' : 'negras'}`} data-testid="leccion-no-encontrada">
+          {c ? 'Ver el curso' : 'Ver mis cursos'}
+        </a>
       </p>
     )
   return <Linea key={l.id} c={c} l={l} />
@@ -221,7 +225,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     mensajes.push({ tipo: 'buena', jugada: jugadaEs(e.intento.san, e.ply), texto: 'Buena jugada, pero esta lección enseña otra línea. Prueba de nuevo.' })
     boton = { texto: 'Reintentar', testid: 'reintentar', accion: () => setE(reintentar(e)) }
   } else if (e.momento === 'plan' && l.variante) {
-    mensajes.push({ tipo: 'info', texto: 'Ya terminó la apertura.' }, { tipo: 'explica', jugada: 'Tu plan:', texto: l.variante.plan.tuyo }, { tipo: 'explica', jugada: 'El de blancas:', texto: l.variante.plan.rival })
+    mensajes.push({ tipo: 'info', texto: 'Ya terminó la apertura.' }, { tipo: 'explica', jugada: 'Tu plan:', texto: l.variante.plan.tuyo }, { tipo: 'explica', jugada: l.lado === 'w' ? 'El de negras:' : 'El de blancas:', texto: l.variante.plan.rival })
     boton = { texto: 'Ahora, Practicar', testid: 'a-practicar', accion: () => setE(empezar(l, 'practicar')) }
   }
 

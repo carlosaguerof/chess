@@ -3,6 +3,8 @@ import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'js
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
 import eslava from '../../conocimiento/cursos/eslava.json' with { type: 'json' }
 import otrosNegras from '../../conocimiento/cursos/otros-negras.json' with { type: 'json' }
+import avanceCaroKann from '../../conocimiento/cursos/avance-caro-kann.json' with { type: 'json' }
+import avanceFrancesa from '../../conocimiento/cursos/avance-francesa.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
@@ -26,6 +28,9 @@ export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'eslava:b': eslava as unknown as DatosCurso,
   // ...c6 + ...d5 contra lo demás, por estructuras (2026-11-25)
   'otros-negras:b': otrosNegras as unknown as DatosCurso,
+  // los cursos por estructuras (2026-11-25): un archivo completo cada uno, con sus secciones
+  'caro-kann:w': avanceCaroKann as unknown as DatosCurso,
+  'francesa:w': avanceFrancesa as unknown as DatosCurso,
 }
 
 export const cursoNuevo = (id: string): DatosCurso | undefined => CURSOS_NUEVOS[id]

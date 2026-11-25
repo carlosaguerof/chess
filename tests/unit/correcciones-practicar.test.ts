@@ -4,19 +4,17 @@ import { continuar, empezar, intentar, jugarRival, pedirPista, pedirRespuesta, t
 import { despues, posicion } from '../../src/curso/textos.ts'
 import { explicacionDespues, INTRO_PRACTICAR, vistaTuTurno } from '../../src/curso/turno.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
-import { esCaroKann } from '../../scripts/archivos-del-curso.ts'
 
 /**
  * Correcciones de la Caro-Kann, C2 (punto 5 del feedback): Practicar sin ayudas que no pediste. Los escalones de
  * ayuda, sin pantalla. "Aprender" no cambia.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
-// los ejemplos de Carlos son de la Caro-Kann: ahí se prueban; lo que recorre todo el curso, en todos (2026-11-25)
-const CK = esCaroKann(c)
-const itCK = it.runIf(CK)
+// lo que se mide en jugadas concretas de la Caro-Kann corre en sus dos cursos; lo demás, en todas las líneas de cada curso
+const esCaroKann = (c.fichasDe ?? c.id) === 'caro-kann:b'
 const VARIANTES = lineasDe(c).filter((l) => l.tipo === 'variante')
-const tal = lineaPorId(CK ? c : CURSOS_NUEVOS['caro-kann:b']!, 'v:avance-tal')!
-const errorTal = lineaPorId(CK ? c : CURSOS_NUEVOS['caro-kann:b']!, 'e:tal-e6')!
+const tal = lineaPorId(c, 'v:avance-tal') ?? VARIANTES[0]!
+const errorTal = lineaPorId(c, 'e:tal-e6') ?? lineasDe(c).find((l) => l.tipo === 'error')!
 const hastaMiTurno = (e: EstadoCiclo) => {
   let x = e
   for (let i = 0; i < 10 && x.momento !== 'tuTurno'; i++) x = x.momento === 'rival' ? jugarRival(tal, x) : continuar(tal, x)
@@ -26,14 +24,14 @@ const vista = (e: EstadoCiclo) => vistaTuTurno(c, tal, e.vuelta, e.ply, e.ayuda)
 
 describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   it('en mi turno de Practicar no hay ningún texto sobre mi jugada, ni marca, ni flecha', () => {
-    for (const l of CK ? [tal, lineaPorId(c, 'v:avance-short')!, lineaPorId(c, 'v:clasica')!] : VARIANTES)
+    for (const l of esCaroKann ? [tal, lineaPorId(c, 'v:avance-short')!, lineaPorId(c, 'v:clasica')!] : VARIANTES)
       for (const ply of misJugadas(l)) {
         const v = vistaTuTurno(c, l, 'practicar', ply, 0)
         expect(v, `${l.id} ${ply}`).toEqual({ textos: [], pieza: null, flecha: null })
       }
   })
 
-  itCK('Pista: la meta en palabras (lo que antes era la pregunta); otra vez: se marca la pieza, sin más texto', () => {
+  it.runIf(esCaroKann)('Pista: la meta en palabras (lo que antes era la pregunta); otra vez: se marca la pieza, sin más texto', () => {
     let e = hastaMiTurno(empezar(tal, 'practicar'))
     const mia = textoMio(c, tal.jugadas, e.ply)!
     e = pedirPista(e)
@@ -47,7 +45,7 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
     expect(JSON.stringify(vista(e))).not.toContain('f5')
   })
 
-  itCK('Respuesta: solo la flecha, sin repetir texto', () => {
+  it.runIf(esCaroKann)('Respuesta: solo la flecha, sin repetir texto', () => {
     let e = hastaMiTurno(empezar(tal, 'practicar'))
     e = pedirRespuesta(e)
     expect(vista(e)).toEqual({ textos: [], pieza: null, flecha: { de: 'c8', a: 'f5' } })
@@ -57,7 +55,7 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
     expect(vista(p)).toEqual({ textos: [], pieza: null, flecha: { de: 'c8', a: 'f5' } })
   })
 
-  itCK('después de mi jugada (correcta, o tras la Respuesta) espera "Siguiente" con la explicación: qué hace, por qué ahora y qué prepara', () => {
+  it.runIf(esCaroKann)('después de mi jugada (correcta, o tras la Respuesta) espera "Siguiente" con la explicación: qué hace, por qué ahora y qué prepara', () => {
     for (const ply of misJugadas(tal)) {
       const m = textoMio(c, tal.jugadas, ply)!
       expect(explicacionDespues(c, tal, 'practicar', ply)[0]).toBe(m.hace)
@@ -84,7 +82,7 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
     expect(continuar(tal, e).momento).toBe('rival')
   })
 
-  itCK('"Aprender" no cambia: "Te toca" con qué hace; Pista, Otra pista con su texto, y la Respuesta con su porqué', () => {
+  it.runIf(esCaroKann)('"Aprender" no cambia: "Te toca" con qué hace; Pista, Otra pista con su texto, y la Respuesta con su porqué', () => {
     let e = hastaMiTurno(empezar(tal, 'aprender'))
     const m = textoMio(c, tal.jugadas, e.ply)!
     expect(vista(e).textos).toEqual([{ tipo: 'pregunta', jugada: 'Te toca: 3...Af5', texto: m.hace }])
@@ -105,11 +103,9 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   })
 
   it('un «¿Y si…?» no es Practicar: sigue preguntando por la meta', () => {
-    for (const e of CK ? [errorTal] : lineasDe(c).filter((l) => l.tipo === 'error')) {
-      const ply = misJugadas(e)[0]!
-      const m = textoMio(c, e.jugadas, ply)!
-      expect(vistaTuTurno(c, e, 'aprender', ply, 0).textos, e.id).toEqual([{ tipo: 'pregunta', texto: m.pregunta }])
-    }
+    const ply = misJugadas(errorTal)[0]!
+    const m = textoMio(c, errorTal.jugadas, ply)!
+    expect(vistaTuTurno(c, errorTal, 'aprender', ply, 0).textos).toEqual([{ tipo: 'pregunta', texto: m.pregunta }])
   })
 
   it('la introducción de Practicar ya no promete preguntar por la meta, y no nombra jugadas', () => {
@@ -118,7 +114,7 @@ describe('Correcciones · C2 · Practicar sin ayudas que no pediste', () => {
   })
 
   it('la frase del rival, lo único que se lee en mi turno de Practicar, no nombra mi jugada', () => {
-    for (const l of CK ? [tal, lineaPorId(c, 'v:avance-short')!] : VARIANTES)
+    for (const l of esCaroKann ? [tal, lineaPorId(c, 'v:avance-short')!] : VARIANTES)
       for (const ply of misJugadas(l)) {
         const antes = c.rival[l.jugadas.slice(0, ply).join(' ')]
         if (!antes) continue

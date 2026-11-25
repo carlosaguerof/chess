@@ -593,6 +593,48 @@
       "plan": "Tienes un peón de más y la dama blanca tiene que moverse otra vez. Desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.",
       "frecuencia": null,
       "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-short",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Short (4.c3 e6 5.Ae2 c5 6.Cf3 Cc6 7.0-0 Ag4 8.Cbd2)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance, Short Variation",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. c3 e6 5. Be2"
+      },
+      "continuacion": {
+        "jugadas": "c5 Nf3 Nc6 O-O Bg4 Nbd2",
+        "fuente": [
+          "Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena)",
+          "motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43)"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Sostienes la cadena d4-e5 con c3 y te desarrollas con Cf3, Ae2 y 0-0, el mismo esquema que contra la Francesa. Si negras cambia en d4, retomas con el peón de c.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
+    },
+    {
+      "id": "avance-curso-botvinnik-carls",
+      "familia": "Variante del Avance",
+      "nombre": "Variante del Avance: Defensa Botvinnik-Carls (4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0)",
+      "fila": {
+        "eco": "B12",
+        "name": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+        "pgn": "1. e4 c6 2. d4 d5 3. e5 c5"
+      },
+      "continuacion": {
+        "jugadas": "c3 Nc6 Nf3 cxd4 cxd4 Bg4 Be2 e6 O-O",
+        "fuente": [
+          "Wikibooks, 3...c5 (contra ...c5, retomar en d4 con un peón)",
+          "motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp"
+        ]
+      },
+      "lado": "blancas",
+      "plan": "Negras golpea d4 de inmediato con 3...c5. Lo sostienes con c3 y Cf3; si cambia en d4, retomas con el peón de c y defiendes d4 con piezas.",
+      "frecuencia": null,
+      "fuenteFrecuencia": null
     }
   ]
 }

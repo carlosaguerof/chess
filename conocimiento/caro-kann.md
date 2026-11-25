@@ -342,3 +342,23 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: Tienes un peón de más y la dama blanca tiene que moverse otra vez. Desarrolla con ...Cf6, ...Ag7 y ...Af5, y enroca.
 - Fuente: B10 · Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit
 - Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikipedia, Caro–Kann Defence (Hillbilly: 4.Dh5); motor: 4...g6 es la mejor (−0.68).
+
+## Variante del Avance
+
+### Variante del Avance: Short (4.c3 e6 5.Ae2 c5 6.Cf3 Cc6 7.0-0 Ag4 8.Cbd2)
+
+**1.e4 c6 2.d4 d5 3.e5 Af5 4.c3 e6 5.Ae2 c5 6.Cf3 Cc6 7.0-0 Ag4 8.Cbd2**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Sostienes la cadena d4-e5 con c3 y te desarrollas con Cf3, Ae2 y 0-0, el mismo esquema que contra la Francesa. Si negras cambia en d4, retomas con el peón de c.
+- Fuente: B12 · Caro-Kann Defense: Advance, Short Variation
+- Sigue la fila de la fuente desde la media jugada 10 con teoría de: Wikibooks, 1.e4 c6 2.d4 d5 3.e5 (...c5 contra la base de la cadena); motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 5...c5 la mejor (+0.19), 6.Cf3 la mejor (+0.24), 6...Cc6, 7.0-0 la mejor (+0.35), 7...Ag4 la mejor (+0.28), 8.Cbd2 la mejor (+0.43).
+
+### Variante del Avance: Defensa Botvinnik-Carls (4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0)
+
+**1.e4 c6 2.d4 d5 3.e5 c5 4.c3 Cc6 5.Cf3 cxd4 6.cxd4 Ag4 7.Ae2 e6 8.0-0**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Negras golpea d4 de inmediato con 3...c5. Lo sostienes con c3 y Cf3; si cambia en d4, retomas con el peón de c y defiendes d4 con piezas.
+- Fuente: B12 · Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, 3...c5 (contra ...c5, retomar en d4 con un peón); motor (Stockfish 19 lite, prof. 18; iterations/v4/comprobaciones-avance-caro-kann.md): 4.c3 a 7 cp de la mejor (4.Cf3), 5.Cf3 a 13 cp a prof. 22, 5...cxd4 la mejor (+0.17), 6...Ag4 la mejor, 7.Ae2 a 4 cp, 8.0-0 a 5 cp.
