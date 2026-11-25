@@ -1,4 +1,4 @@
-# Las marcas del curso de la Caro-Kann, jugada por jugada
+# Las marcas del curso «Alapin contra la Siciliana», jugada por jugada
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
@@ -21,18 +21,18 @@
 | 7.Ae2 | 2...d5: el Cambio Central | tuya | no |  |
 | 7...e6 | 2...d5: el Cambio Central | del rival | no |  |
 | 8.Cc3 | 2...d5: el Cambio Central | tuya | sí | mía hace frase 1: flecha c3→d5 (A2, verde) |
-| 2...Cf6 | 2...Cf6: La cadena | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 3.e5 | 2...Cf6: La cadena | tuya | no |  |
-| 3...Cd5 | 2...Cf6: La cadena | del rival | no |  |
-| 4.d4 | 2...Cf6: La cadena | tuya | no |  |
-| 4...cxd4 | 2...Cf6: La cadena | del rival | no |  |
-| 5.cxd4 | 2...Cf6: La cadena | tuya | no |  |
-| 5...d6 | 2...Cf6: La cadena | del rival | no |  |
-| 6.Cf3 | 2...Cf6: La cadena | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde) |
-| 6...Cc6 | 2...Cf6: La cadena | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja) |
-| 7.Ac4 | 2...Cf6: La cadena | tuya | no |  |
-| 7...Cb6 | 2...Cf6: La cadena | del rival | sí | rival frase 1: flecha b6→c4 (A4, roja) |
-| 8.Ab5 | 2...Cf6: La cadena | tuya | no |  |
+| 2...Cf6 | 2...Cf6: Smith-Morra Rehusado | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 3.e5 | 2...Cf6: Smith-Morra Rehusado | tuya | no |  |
+| 3...Cd5 | 2...Cf6: Smith-Morra Rehusado | del rival | no |  |
+| 4.d4 | 2...Cf6: Smith-Morra Rehusado | tuya | no |  |
+| 4...cxd4 | 2...Cf6: Smith-Morra Rehusado | del rival | no |  |
+| 5.cxd4 | 2...Cf6: Smith-Morra Rehusado | tuya | no |  |
+| 5...d6 | 2...Cf6: Smith-Morra Rehusado | del rival | no |  |
+| 6.Cf3 | 2...Cf6: Smith-Morra Rehusado | tuya | sí | mía hace frase 1: flecha f3→e5 (A2, verde) |
+| 6...Cc6 | 2...Cf6: Smith-Morra Rehusado | del rival | sí | rival frase 1: flecha c6→e5 (A4, roja) |
+| 7.Ac4 | 2...Cf6: Smith-Morra Rehusado | tuya | no |  |
+| 7...Cb6 | 2...Cf6: Smith-Morra Rehusado | del rival | sí | rival frase 1: flecha b6→c4 (A4, roja) |
+| 8.Ab5 | 2...Cf6: Smith-Morra Rehusado | tuya | no |  |
 | 4...Cf6 | 2...d5: la Línea Moderna | del rival | no |  |
 | 5.Cf3 | 2...d5: la Línea Moderna | tuya | sí | mía hace frase 1: flecha f3→d4 (A2, verde); flecha f3→e5 (A2, verde) |
 | 5...Ag4 | 2...d5: la Línea Moderna | del rival | no |  |
@@ -90,7 +90,7 @@
 | plan moderna tuyo frase 1 | Tu caballo de b1 sale a c3 atacando a la dama. | flecha b1→c3 (A3, verde, punteada) |
 | idea 1, paso 7 | O con el caballo, que también ataca e4: 2...Cf6. | flecha f6→e4 (A4, roja) |
 | estructura 2, paso 5 | El rival quiere bloquearlo con una pieza en d5 y cambiar piezas. | casilla d5 (A6, roja) |
-| estructura 4, paso 4 | Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5. | flecha d4→d5 (A3, verde, punteada) |
+| estructura 4, paso 5 | Si lo ataca un caballo y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5. | flecha d4→d5 (A3, verde, punteada) |
 | repaso 1, paso 4 | 5...Cc6 6.Cf3: primero el caballo de g1, que defiende d4. | flecha f3→d4 (A2, verde) |
 | repaso 1, paso 5 | 6...Ag4 7.Ae2 e6 8.Cc3: ahora sí, tu otro caballo ataca a la dama de d5. | flecha c3→d5 (A2, verde) |
 | plan moderna paso a paso, paso 1 | Tu plan: Cc3, tu caballo de b1 ataca a la dama de d5. | flecha c3→d5 (A2, verde) |

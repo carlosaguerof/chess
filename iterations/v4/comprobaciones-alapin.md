@@ -1,101 +1,110 @@
 # Las comprobaciones con el motor del curso de la Alapin (2026-11-25)
 
-Stockfish 19 lite de un hilo (el del repo), profundidad 18 (16 para las amenazas y para `planes-todos`). Evaluaciones desde blancas. Los scripts, fuera del repo (`00_corridas/_local/chess/curso-alapin/`): `motor.mjs` (los modos `mejores`, `jugada` y `amenaza`), `linea.mjs` (la línea, jugada por jugada, con las 5 mejores) y `plan.mjs` (las jugadas de un plan contra las dos mejores respuestas). Cada id es el que cita el curso en su campo `motor`.
+Stockfish 19 lite de un hilo (el del repo), profundidad 18 (16 para las amenazas y para `planes-todos`). Evaluaciones desde blancas. Cada comando se repite desde el repo con `scripts/motor-comprobar.ts` (modos `mejores`, `jugada`, `amenaza`, `linea` y `plan`), el mismo Stockfish de la app. Las salidas de abajo son las de la corrida (con la Air cargada, una corrida por posición: a otra profundidad o en otra máquina las cifras pueden moverse unos centipeones). Cada id es el que cita el curso en su campo `motor`.
 
 | id | Afirmación | Comando | Resultado |
 |---|---|---|---|
-| R-d5 | Contra 2...d5, 3.exd5 es la mejor (la regla del mapa) | `node motor.mjs mejores "e4 c5 c3 d5" --prof 18 --n 3` | Se sostiene: +0.31, la mejor |
-| R-d5-d4 | Defender e4 con 3.d4 sale peor | `node motor.mjs jugada "e4 c5 c3 d5" "d4" --prof 18` | Se sostiene: pierde 101 (−0.64) |
-| R-d5-e5 | 3.e5 es peor que cambiar | `node motor.mjs jugada "e4 c5 c3 d5" "e5" --prof 18` | Se sostiene: pierde 35 |
-| R-d5-d3 | 3.d3 es peor que cambiar | `node motor.mjs jugada "e4 c5 c3 d5" "d3" --prof 18` | Se sostiene: pierde 51 |
-| R-nf6 | Contra 2...Cf6, 3.e5 es la mejor (la regla del mapa) | `node motor.mjs mejores "e4 c5 c3 Nf6" --prof 18 --n 3` | Se sostiene: +0.17, la mejor |
-| R-nf6-d4 | Si no atiendes e4 (3.d4), el caballo lo toma | `node motor.mjs jugada "e4 c5 c3 Nf6" "d4" --prof 18` | Se sostiene: 3.d4 Cxe4, pierde 88 |
-| R-nf6-d3 | 3.d3 es peor que avanzar | `node motor.mjs jugada "e4 c5 c3 Nf6" "d3" --prof 18` | Se sostiene: pierde 20 |
-| R-nf6-bd3 | 3.Ad3 es peor que avanzar | `node motor.mjs jugada "e4 c5 c3 Nf6" "Bd3" --prof 18` | Se sostiene: pierde 40 |
-| R-nc6 | Contra 2...Cc6, 3.d4 | `node motor.mjs mejores "e4 c5 c3 Nc6" --prof 18 --n 3` | Se sostiene: +0.30, la mejor |
-| R-d6 | Contra 2...d6, 3.d4 | `node motor.mjs mejores "e4 c5 c3 d6" --prof 18 --n 3` | Se sostiene: +0.57, la mejor |
-| R-e6 | Contra 2...e6, 3.d4 | `node motor.mjs mejores "e4 c5 c3 e6" --prof 18 --n 3` | Se sostiene: +0.28, la mejor |
-| R-g6 | Contra 2...g6, 3.d4 | `node motor.mjs mejores "e4 c5 c3 g6" --prof 18 --n 3` | Se sostiene: +0.48, la mejor |
-| R-e5 | Contra 2...e5, la regla no se aplica (por eso no se dice "lo demás") | `node motor.mjs mejores "e4 c5 c3 e5" --prof 18 --n 3` | 3.Cf3 +0.52; 3.d4 +0.16 |
-| M-2c3 | 2.c3 está a 0.21 de la mejor de la posición (lo que permite validar-base) | `node linea.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w` | Se sostiene |
-| M-d4 | 4.d4 es la mejor tras 3...Dxd5 | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: +0.33 |
-| M-cc-cxd4 | 5.cxd4 es la mejor tras 4...cxd4 | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: +0.32 |
-| L-cc | El Cambio Central con 7.Cc3 (la mejor): la única buena de negras es 7...Axf3 8.gxf3 Dxd4, y el aislado se deshace | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: 7...Axf3 +0.34; las demás, +1.97 y más |
-| L-cc-be2 | 7.Ae2 pierde 28 contra 7.Cc3, y 8.Cc3 es la mejor (empata con 0-0) | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" w` | Se sostiene |
-| L-mod | Cada jugada blanca de la Línea Moderna a 0.08 o menos de la mejor | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" w` | Se sostiene |
-| L-cc6 | Cada jugada blanca de 4...Cc6 a 0.07 o menos de la mejor | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" w` | Se sostiene |
-| L-g6 | Cada jugada blanca de 4...g6 a 0.06 o menos de la mejor | `node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" w` | Se sostiene |
-| L-gam | Cada jugada blanca del Gambito es la mejor | `node linea.mjs "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w` | Se sostiene |
-| L-cf6 | Cada jugada blanca de 2...Cf6 a 0.20 o menos de la mejor | `node linea.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w` | Se sostiene |
-| F-gam | Contra el gambito, 4.Da4+ es la mejor (4.Ab5+ a 0.29) | `node motor.mjs mejores "e4 c5 c3 d5 exd5 Nf6" --prof 18 --n 3` | Se sostiene |
-| F-nf6-4 | 4.d4 y 4.Cf3 casi empatan (Stoltz y Heidenfeld van por 4.Cf3) | `node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5" --prof 18 --n 3` | Se sostiene: +0.11 y +0.13 |
-| F-nf6d4 | Tras 4...cxd4, 5.cxd4 está a 0.04 de la mejor | `node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4" --prof 18 --n 3` | Se sostiene |
-| A-d5 | 2...d5 amenaza ...dxe4 | `node motor.mjs amenaza "e4 c5 c3 d5" --prof 16` | Se sostiene: si negras jugara otra vez, dxe4 (−1.16) |
-| A-nf6 | 2...Cf6 amenaza ...Cxe4 | `node motor.mjs amenaza "e4 c5 c3 Nf6" --prof 16` | Se sostiene: −1.44 |
-| A-nf6-e5 | 3.e5 ataca al caballo: tiene que moverse | `node motor.mjs amenaza "e4 c5 c3 Nf6 e5" --prof 16` | Se sostiene: si blancas jugara otra vez, exf6 (+5.98) |
-| A-bg4 | 6...Ag4 amenaza cambiar en f3 y ganar d4 | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4" --prof 16` | Se sostiene: Axf3 gxf3 Cxd4 (−1.40) |
-| A-mod-bg4 | 5...Ag4 clava el caballo | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4" --prof 16` | Amenaza Axf3 (−0.45) |
-| A-h3 | 7.h3 ataca al alfil | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3" --prof 16` | Se sostiene: hxg4 (+6.77) |
-| A-c3-nc3 | 8.Cc3 ataca la dama (Cambio Central) | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" --prof 16` | Se sostiene: Cxd5 (+7.54) |
-| A-cc6-nc3 | 8.Cc3 ataca la dama (4...Cc6) | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" --prof 16` | Se sostiene: Cxd5 (+6.79) |
-| A-g6-nc3 | 8.Cc3 ataca la dama (4...g6) | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" --prof 16` | Se sostiene: Cxd5 (+6.86) |
-| A-d6 | 5...d6 ataca la punta de la cadena | `node motor.mjs amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6" --prof 16` | Amenaza dxe5 |
-| A-nb6 | 7...Cb6 ataca el alfil de c4 | `node motor.mjs amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6" --prof 16` | Se sostiene: Cxc4 (−5.26) |
-| A-gam-bd7 | 4...Ad7 ataca la dama de a4 | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7" --prof 16` | Se sostiene: Axa4 (−8.51) |
-| A-gam-b3 | 5.Db3 ataca b7 | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3" --prof 16` | Se sostiene: Dxb7 (+3.54) |
-| A-gam-e6 | 5...e6 ataca otra vez d5 | `node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" --prof 16` | Se sostiene: exd5 (−1.73) |
-| E-d4 | «¿Y si…?» 3.d4 contra 2...d5: error tuyo | `node motor.mjs jugada "e4 c5 c3 d5" "d4" --prof 18` | Se sostiene: pierde 101 |
-| E-d4-b | Lo castiga 3...dxe4 | `node motor.mjs mejores "e4 c5 c3 d5 d4" --prof 18 --n 3` | Se sostiene: la mejor (−0.68) |
-| E-d4-c | Tras 3...dxe4, 4.dxc5 Dxd1+ 5.Rxd1: el rey blanco ya no enroca | `node motor.mjs mejores "e4 c5 c3 d5 d4 dxe4" --prof 18 --n 3` | Se sostiene: −0.65 |
-| E-nc3 | «¿Y si…?» 6.Cc3 antes que Cf3: pierde d4 | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Nc3" --prof 18` | Se sostiene: pierde 63; 6...Dxd4 |
-| E-nc3-b | Lo castiga 6...Dxd4 | `node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3" --prof 18 --n 3` | Se sostiene: la mejor (−0.33); las demás, +1.84 y más |
-| E-nc3-c | Tras 6...Dxd4, negras sigue con el peón de más | `node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3 Qxd4" --prof 18 --n 3` | Se sostiene: −0.42 |
-| E-ne4 | «¿Y si…?» 3...Ce4: error del rival | `node motor.mjs jugada "e4 c5 c3 Nf6 e5" "Ne4" --prof 18` | Se sostiene: pierde 399 |
-| E-ne4-b | Lo castiga 4.d3 | `node motor.mjs mejores "e4 c5 c3 Nf6 e5 Ne4" --prof 18 --n 3` | Se sostiene: la mejor (+4.34) |
-| E-ne4-c | Tras 4.d3, el caballo se pierde: 4...Cxf2 5.Rxf2 | `node motor.mjs mejores "e4 c5 c3 Nf6 e5 Ne4 d3" --prof 18 --n 3` | Se sostiene: +4.43 |
-| E-glot | «¿Y si…?» 8...Dxd4: la dama glotona | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3" "Qxd4" --prof 18` | Se sostiene: pierde 813 |
-| E-glot-b | Lo castiga 9.Axc6+ | `node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4" --prof 18 --n 3` | Se sostiene: +9.16, la mejor |
-| P-cc | El plan del aislado al final del Cambio Central: enrocar sí; "caballo a e5" no | `node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" "O-O Ne5 Be3 h3"` | 0-0 empata con la mejor; 9.Ce5 pierde 93 y 622 |
-| P-mod | Al final de la Moderna: 11.Cc3 la mejor; Ce5 no | `node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" "Nc3 Ne5"` | Ce5 pierde 78 y 40 |
-| P-cc6 | Al final de 4...Cc6: sacar el alfil y enrocar; Ce5 no | `node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" "O-O-O Be2 Bd3 Bc4 Ne5"` | Ce5 pierde 55 y 80 |
-| P-g6 | Al final de 4...g6: enrocar | `node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" "O-O Be3 Ne5"` | 0-0 la mejor o empata |
-| P-cf6 | Al final de 2...Cf6: si negras cambia en e5, 9.Cxe5 (no 9.dxe5) | `node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene: 9.Cxe5 +0.08; 9.dxe5 pierde 83 |
-| P-gam | Al final del Gambito sigues con un peón de más, y Cf3 y 0-0 siguen | `node linea.mjs "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w (FIN)` | Se sostiene |
-| V-cf6-dxe5 | "Ver": 8...dxe5 9.Cxe5 deja el peón de d4 sin peones al lado | `node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene (chess.js: sin peones blancos en c ni e) |
-| C-d6-nf6 | Los dos peones: contra 2...d6 3.d4 Cf6, defender e4 con 4.Ad3 | `node motor.mjs mejores "e4 c5 c3 d6 d4 Nf6" --prof 18 --n 3` | Se sostiene: la mejor (+0.57) |
-| C-d6-nf6-e5 | Ahí, avanzar a e5 pierde | `node motor.mjs jugada "e4 c5 c3 d6 d4 Nf6" "e5" --prof 18` | Se sostiene: pierde 129 |
-| C-d6x-nf6 | Con 3...cxd4 4.cxd4 Cf6, defender con 5.Cc3 | `node motor.mjs mejores "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" --prof 18 --n 3` | Se sostiene: la mejor (+0.92) |
-| C-d6x-nf6-e5 | Ahí, 5.e5 pierde un peón y el enroque | `node motor.mjs jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 206 |
-| C-nc6x-nf6-e5 | Con 2...Cc6 … 4...Cf6, 5.e5 pierde | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 232 (5.Cc3 +0.45) |
-| C-e6x-nf6-e5 | Con 2...e6 … 4...Cf6, 5.e5 pierde | `node motor.mjs jugada "e4 c5 c3 e6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 54 (5.Cc3, la mejor) |
-| C-nc6x-e6 | Los dos peones: Cf3 y Cc3 contra ...e6 | `node motor.mjs mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --prof 18 --n 3` | Se sostiene: +0.37 y +0.35 |
-| C-nc6x-g6-nf3 | Contra ...g6, Cf3 primero no pierde material | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6" "Nf3" --prof 18` | Se sostiene: +0.86 (pierde 119 contra 5.d5) |
-| N-c-nc6-qb6-nc3 | Con ...Db6, 5.Cc3 pierde el peón de d4 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nc3" --prof 18` | Se sostiene: pierde 223 (5...Dxd4) |
-| N-c-nc6-qb6-nf3 | Con ...Db6, 5.Cf3 defiende d4 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nf3" --prof 18` | Se sostiene: +1.52 |
-| I-qxd5-be2 | El aislado: el alfil antes que Cf3 deja que la dama tome g2 | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5" "Be2" --prof 18` | Se sostiene: pierde 124 |
-| I-cc-nc6-be2 | Tras 5...Cc6, el alfil antes que Cf3 deja que la dama tome d4 | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Be2" --prof 18` | Se sostiene: pierde 110 |
-| N-mod-cxd4-bg4-be2 | La clavada sin ...Cc6: 7.Ae2 no pierde material | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 cxd4 cxd4 Bg4" "Be2" --prof 18` | Se sostiene: +0.30 (7.Cc3 +1.00) |
-| N-cc-nf6-nf3-bg4-be2 | La clavada sin ...Cc6 (5...Cf6): 7.Ae2 no pierde material | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nf6 Nf3 Bg4" "Be2" --prof 18` | Se sostiene: +0.27 (7.Cc3 +0.90) |
-| G-e6-nf3 | El gambito: tras 5...e6, sacar piezas (6.Cf3) pierde | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" "Nf3" --prof 18` | Se sostiene: pierde 208; 6.dxe6 y 6.Dxb7 sirven |
-| K-nc6-nf6-bd3 | Gate 2: tras 2...Cc6 3.d4 Cf6, defender con 4.Ad3 pierde un peón (tapa a la dama) | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 Nf6" "Bd3" --prof 18` | Se sostiene: pierde 317 (cxd4 cxd4 Cxd4) |
-| K-nc6-nf6-d5 | Ahí, con su caballo de dama en c6, 4.d5 contra él | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 Nf6" "d5" --prof 18` | Se sostiene: +2.71, a 8 de la mejor |
-| K-nc6x-nf6-d5 | Con 3...cxd4 4.cxd4 Cf6, 5.d5 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "d5" --prof 18` | Se sostiene: +2.38, a 9 |
-| K-nc6x-e6-nf3-nf6-d5 | Con ...e6 y Cf3 jugados, 6.d5 no pierde material | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: +0.50, a 41 (6.Cc3 +0.89) |
-| K-nc6x-g6-nf3-nf6-d5 | Con ...g6, 6.d5 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: la mejor (+2.96) |
-| K-nc6x-d6-nf3-nf6-d5 | Con ...d6, 6.d5 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: la mejor (+0.78) |
-| K-nc6x-e6-nc3-nf6-d5 | Con ...e6 y Cc3 jugados, 6.d5 | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nc3 Nf6" "d5" --prof 18` | Se sostiene: +1.30, a 8 |
-| K-d6x-nf6-nc3-nc6-d5 | Por 2...d6, con su caballo de dama ya en c6, 6.d5 | `node motor.mjs jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 Nc6" "d5" --prof 18` | Se sostiene: la mejor (+1.37) |
-| K-g6-bg7-nf3-nf6-bd3 | Sin su caballo de dama fuera (2...g6), defender con Ad3 no pierde material | `node motor.mjs jugada "e4 c5 c3 g6 d4 Bg7 Nf3 Nf6" "Bd3" --prof 18` | Se sostiene: +0.37 (5.e5 +1.74, la mejor): por eso el texto no dice "no lo avances" en general |
-| K-nc6x-e5-nf3 | Contra ...e5, el caballo de rey primero | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nf3" --prof 18` | Se sostiene: 5.Cf3 +0.16 (pierde 52, sin material) |
-| K-nc6x-e5-nc3 | Contra ...e5, el de dama primero entrega un peón | `node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nc3" --prof 18` | Se sostiene: 5.Cc3 pierde 97 (exd4 Cd5) |
-| B-cc6-bg4-h3 | Plan de la base de 4...Cc6: "contra ...Ag4, h3" pierde un peón | `node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4" "h3" --prof 18` | Se sostiene: pierde 149; 6.Ae2 está a 5 de la mejor |
-| B-stoltz-c4 | Plan de la base del Stoltz: contra ...c4, el alfil a c2 es la única buena | `node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4" --prof 18 --n 3` | Se sostiene: Ac2 +0.15; Aa4 −0.48; d4 −2.11 |
+| R-d5 | Contra 2...d5, 3.exd5 es la mejor (la regla del mapa) | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5" --prof 18 --n 3` | Se sostiene: +0.31, la mejor |
+| R-d5-d4 | Defender e4 con 3.d4 sale peor | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d4" --prof 18` | Se sostiene: pierde 101 (−0.64) |
+| R-d5-e5 | 3.e5 es peor que cambiar | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "e5" --prof 18` | Se sostiene: pierde 35 |
+| R-d5-d3 | 3.d3 es peor que cambiar | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d3" --prof 18` | Se sostiene: pierde 51 |
+| R-nf6 | Contra 2...Cf6, 3.e5 es la mejor (la regla del mapa) | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6" --prof 18 --n 3` | Se sostiene: +0.17, la mejor |
+| R-nf6-d4 | Si no atiendes e4 (3.d4), el caballo lo toma | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "d4" --prof 18` | Se sostiene: 3.d4 Cxe4, pierde 88 |
+| R-nf6-d3 | 3.d3 es peor que avanzar | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "d3" --prof 18` | Se sostiene: pierde 20 |
+| R-nf6-bd3 | 3.Ad3 es peor que avanzar | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "Bd3" --prof 18` | Se sostiene: pierde 40 |
+| R-nc6 | Contra 2...Cc6, 3.d4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nc6" --prof 18 --n 3` | Se sostiene: +0.30, la mejor |
+| R-d6 | Contra 2...d6, 3.d4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6" --prof 18 --n 3` | Se sostiene: +0.57, la mejor |
+| R-e6 | Contra 2...e6, 3.d4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 e6" --prof 18 --n 3` | Se sostiene: +0.28, la mejor |
+| R-g6 | Contra 2...g6, 3.d4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 g6" --prof 18 --n 3` | Se sostiene: +0.48, la mejor |
+| R-e5 | Contra 2...e5, la regla no se aplica (por eso no se dice "lo demás") | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 e5" --prof 18 --n 3` | 3.Cf3 +0.52; 3.d4 +0.16 |
+| M-2c3 | 2.c3 está a 0.21 de la mejor de la posición (lo que permite validar-base) | `node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w` | Se sostiene |
+| M-d4 | 4.d4 es la mejor tras 3...Dxd5 | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: +0.33 |
+| M-cc-cxd4 | 5.cxd4 es la mejor tras 4...cxd4 | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: +0.32 |
+| L-cc | El Cambio Central con 7.Cc3 (la mejor): la única buena de negras es 7...Axf3 8.gxf3 Dxd4, y el aislado se deshace | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w` | Se sostiene: 7...Axf3 +0.34; las demás, +1.97 y más |
+| L-cc-be2 | 7.Ae2 pierde 28 contra 7.Cc3, y 8.Cc3 es la mejor (empata con 0-0) | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" w` | Se sostiene |
+| L-mod | Cada jugada blanca de la Línea Moderna a 0.08 o menos de la mejor | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" w` | Se sostiene |
+| L-cc6 | Cada jugada blanca de 4...Cc6 a 0.07 o menos de la mejor | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" w` | Se sostiene |
+| L-g6 | Cada jugada blanca de 4...g6 a 0.06 o menos de la mejor | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" w` | Se sostiene |
+| L-gam | Cada jugada blanca del Gambito es la mejor | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w` | Se sostiene |
+| L-cf6 | Cada jugada blanca de 2...Cf6 a 0.20 o menos de la mejor | `node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w` | Se sostiene |
+| F-gam | Contra el gambito, 4.Da4+ es la mejor (4.Ab5+ a 0.29) | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Nf6" --prof 18 --n 3` | Se sostiene |
+| F-nf6-4 | 4.d4 y 4.Cf3 casi empatan (Stoltz y Heidenfeld van por 4.Cf3) | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5" --prof 18 --n 3` | Se sostiene: +0.11 y +0.13 |
+| F-nf6d4 | Tras 4...cxd4, 5.cxd4 está a 0.04 de la mejor | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4" --prof 18 --n 3` | Se sostiene |
+| A-d5 | 2...d5 amenaza ...dxe4 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5" --prof 16` | Se sostiene: si negras jugara otra vez, dxe4 (−1.16) |
+| A-nf6 | 2...Cf6 amenaza ...Cxe4 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6" --prof 16` | Se sostiene: −1.44 |
+| A-nf6-e5 | 3.e5 ataca al caballo: tiene que moverse | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5" --prof 16` | Se sostiene: si blancas jugara otra vez, exf6 (+5.98) |
+| A-bg4 | 6...Ag4 amenaza cambiar en f3 y ganar d4 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4" --prof 16` | Se sostiene: Axf3 gxf3 Cxd4 (−1.40) |
+| A-mod-bg4 | 5...Ag4 clava el caballo | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4" --prof 16` | Amenaza Axf3 (−0.45) |
+| A-h3 | 7.h3 ataca al alfil | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3" --prof 16` | Se sostiene: hxg4 (+6.77) |
+| A-c3-nc3 | 8.Cc3 ataca la dama (Cambio Central) | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" --prof 16` | Se sostiene: Cxd5 (+7.54) |
+| A-cc6-nc3 | 8.Cc3 ataca la dama (4...Cc6) | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" --prof 16` | Se sostiene: Cxd5 (+6.79) |
+| A-g6-nc3 | 8.Cc3 ataca la dama (4...g6) | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" --prof 16` | Se sostiene: Cxd5 (+6.86) |
+| A-d6 | 5...d6 ataca la punta de la cadena | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6" --prof 16` | Amenaza dxe5 |
+| A-nb6 | 7...Cb6 ataca el alfil de c4 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6" --prof 16` | Se sostiene: Cxc4 (−5.26) |
+| A-gam-bd7 | 4...Ad7 ataca la dama de a4 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7" --prof 16` | Se sostiene: Axa4 (−8.51) |
+| A-gam-b3 | 5.Db3 ataca b7 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3" --prof 16` | Se sostiene: Dxb7 (+3.54) |
+| A-gam-e6 | 5...e6 ataca otra vez d5 | `node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" --prof 16` | Se sostiene: exd5 (−1.73) |
+| E-d4 | «¿Y si…?» 3.d4 contra 2...d5: error tuyo | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d4" --prof 18` | Se sostiene: pierde 101 |
+| E-d4-b | Lo castiga 3...dxe4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 d4" --prof 18 --n 3` | Se sostiene: la mejor (−0.68) |
+| E-d4-c | Tras 3...dxe4, 4.dxc5 Dxd1+ 5.Rxd1: el rey blanco ya no enroca | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 d4 dxe4" --prof 18 --n 3` | Se sostiene: −0.65 |
+| E-nc3 | «¿Y si…?» 6.Cc3 antes que Cf3: pierde d4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Nc3" --prof 18` | Se sostiene: pierde 63; 6...Dxd4 |
+| E-nc3-b | Lo castiga 6...Dxd4 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3" --prof 18 --n 3` | Se sostiene: la mejor (−0.33); las demás, +1.84 y más |
+| E-nc3-c | Tras 6...Dxd4, negras sigue con el peón de más | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3 Qxd4" --prof 18 --n 3` | Se sostiene: −0.42 |
+| E-ne4 | «¿Y si…?» 3...Ce4: error del rival | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6 e5" "Ne4" --prof 18` | Se sostiene: pierde 399 |
+| E-ne4-b | Lo castiga 4.d3 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Ne4" --prof 18 --n 3` | Se sostiene: la mejor (+4.34) |
+| E-ne4-c | Tras 4.d3, el caballo se pierde: 4...Cxf2 5.Rxf2 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Ne4 d3" --prof 18 --n 3` | Se sostiene: +4.43 |
+| E-glot | «¿Y si…?» 8...Dxd4: la dama glotona | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3" "Qxd4" --prof 18` | Se sostiene: pierde 813 |
+| E-glot-b | Lo castiga 9.Axc6+ | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4" --prof 18 --n 3` | Se sostiene: +9.16, la mejor |
+| P-cc | El plan del aislado al final del Cambio Central: enrocar sí; "caballo a e5" no | `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" "O-O Ne5 Be3 h3"` | 0-0 empata con la mejor; 9.Ce5 pierde 93 y 622 |
+| P-mod | Al final de la Moderna: 11.Cc3 la mejor; Ce5 no | `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" "Nc3 Ne5"` | Ce5 pierde 78 y 40 |
+| P-cc6 | Al final de 4...Cc6: sacar el alfil y enrocar; Ce5 no | `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" "O-O-O Be2 Bd3 Bc4 Ne5"` | Ce5 pierde 55 y 80 |
+| P-g6 | Al final de 4...g6: enrocar | `node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" "O-O Be3 Ne5"` | 0-0 la mejor o empata |
+| P-cf6 | Al final de 2...Cf6: si negras cambia en e5, 9.Cxe5 (no 9.dxe5) | `node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene: 9.Cxe5 +0.08; 9.dxe5 pierde 83 |
+| P-gam | Al final del Gambito sigues con un peón de más, y Cf3 y 0-0 siguen | `node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w` | Se sostiene |
+| V-cf6-dxe5 | "Ver": 8...dxe5 9.Cxe5 deja el peón de d4 sin peones al lado | `node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"` | Se sostiene (chess.js: sin peones blancos en c ni e) |
+| C-d6-nf6 | Los dos peones: contra 2...d6 3.d4 Cf6, defender e4 con 4.Ad3 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6 d4 Nf6" --prof 18 --n 3` | Se sostiene: la mejor (+0.57) |
+| C-d6-nf6-e5 | Ahí, avanzar a e5 pierde | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 Nf6" "e5" --prof 18` | Se sostiene: pierde 129 |
+| C-d6x-nf6 | Con 3...cxd4 4.cxd4 Cf6, defender con 5.Cc3 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" --prof 18 --n 3` | Se sostiene: la mejor (+0.92) |
+| C-d6x-nf6-e5 | Ahí, 5.e5 pierde un peón y el enroque | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 206 |
+| C-nc6x-nf6-e5 | Con 2...Cc6 … 4...Cf6, 5.e5 pierde | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 232 (5.Cc3 +0.45) |
+| C-e6x-nf6-e5 | Con 2...e6 … 4...Cf6, 5.e5 pierde | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 e6 d4 cxd4 cxd4 Nf6" "e5" --prof 18` | Se sostiene: pierde 54 (5.Cc3, la mejor) |
+| C-nc6x-e6 | Los dos peones: Cf3 y Cc3 contra ...e6 | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --prof 18 --n 3` | Se sostiene: +0.37 y +0.35 |
+| C-nc6x-g6-nf3 | Contra ...g6, Cf3 primero no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6" "Nf3" --prof 18` | Se sostiene: +0.86 (pierde 119 contra 5.d5) |
+| N-c-nc6-qb6-nc3 | Con ...Db6, 5.Cc3 pierde el peón de d4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nc3" --prof 18` | Se sostiene: pierde 223 (5...Dxd4) |
+| N-c-nc6-qb6-nf3 | Con ...Db6, 5.Cf3 defiende d4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nf3" --prof 18` | Se sostiene: +1.52 |
+| I-qxd5-be2 | El aislado: el alfil antes que Cf3 deja que la dama tome g2 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5" "Be2" --prof 18` | Se sostiene: pierde 124 |
+| I-cc-nc6-be2 | Tras 5...Cc6, el alfil antes que Cf3 deja que la dama tome d4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Be2" --prof 18` | Se sostiene: pierde 110 |
+| N-mod-cxd4-bg4-be2 | La clavada sin ...Cc6: 7.Ae2 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 cxd4 cxd4 Bg4" "Be2" --prof 18` | Se sostiene: +0.30 (7.Cc3 +1.00) |
+| N-cc-nf6-nf3-bg4-be2 | La clavada sin ...Cc6 (5...Cf6): 7.Ae2 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nf6 Nf3 Bg4" "Be2" --prof 18` | Se sostiene: +0.27 (7.Cc3 +0.90) |
+| G-e6-nf3 | El gambito: tras 5...e6, sacar piezas (6.Cf3) pierde | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" "Nf3" --prof 18` | Se sostiene: pierde 208; 6.dxe6 y 6.Dxb7 sirven |
+| K-nc6-nf6-bd3 | Gate 2: tras 2...Cc6 3.d4 Cf6, defender con 4.Ad3 pierde un peón (tapa a la dama) | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 Nf6" "Bd3" --prof 18` | Se sostiene: pierde 317 (cxd4 cxd4 Cxd4) |
+| K-nc6-nf6-d5 | Ahí, con su caballo de dama en c6, 4.d5 contra él | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 Nf6" "d5" --prof 18` | Se sostiene: +2.71, a 8 de la mejor |
+| K-nc6x-nf6-d5 | Con 3...cxd4 4.cxd4 Cf6, 5.d5 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "d5" --prof 18` | Se sostiene: +2.38, a 9 |
+| K-nc6x-e6-nf3-nf6-d5 | Con ...e6 y Cf3 jugados, 6.d5 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: +0.50, a 41 (6.Cc3 +0.89) |
+| K-nc6x-g6-nf3-nf6-d5 | Con ...g6, 6.d5 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: la mejor (+2.96) |
+| K-nc6x-d6-nf3-nf6-d5 | Con ...d6, 6.d5 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d6 Nf3 Nf6" "d5" --prof 18` | Se sostiene: la mejor (+0.78) |
+| K-nc6x-e6-nc3-nf6-d5 | Con ...e6 y Cc3 jugados, 6.d5 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nc3 Nf6" "d5" --prof 18` | Se sostiene: +1.30, a 8 |
+| K-d6x-nf6-nc3-nc6-d5 | Por 2...d6, con su caballo de dama ya en c6, 6.d5 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 Nc6" "d5" --prof 18` | Se sostiene: la mejor (+1.37) |
+| K-g6-bg7-nf3-nf6-bd3 | Sin su caballo de dama fuera (2...g6), defender con Ad3 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 Bg7 Nf3 Nf6" "Bd3" --prof 18` | Se sostiene: +0.37 (5.e5 +1.74, la mejor): por eso el texto no dice "no lo avances" en general |
+| K-nc6x-e5-nf3 | Contra ...e5, el caballo de rey primero | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nf3" --prof 18` | Se sostiene: 5.Cf3 +0.16 (pierde 52, sin material) |
+| K-nc6x-e5-nc3 | Contra ...e5, el de dama primero entrega un peón | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nc3" --prof 18` | Se sostiene: 5.Cc3 pierde 97 (exd4 Cd5) |
+| B-cc6-bg4-h3 | Plan de la base de 4...Cc6: "contra ...Ag4, h3" pierde un peón | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4" "h3" --prof 18` | Se sostiene: pierde 149; 6.Ae2 está a 5 de la mejor |
+| B-stoltz-c4 | Plan de la base del Stoltz: contra ...c4, el alfil a c2 es la única buena | `node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4" --prof 18 --n 3` | Se sostiene: Ac2 +0.15; Aa4 −0.48; d4 −2.11 |
+| Z-nc6x-d5-nf3 | Revisión final: con un peón en d5 que ataca e4 sin ...e6 (2...Cc6 3.d4 cxd4 4.cxd4 d5), Cf3 primero pierde e4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "Nf3"` | Se sostiene: pierde 113 (dxe4) |
+| Z-nc6x-d5-exd5 | Ahí, cambiar en d5 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "exd5"` | Se sostiene: +0.26, a 10 (5.Cc3 +0.42, la mejor) |
+| Z-nc6x-d5-nc3 | Ahí, Cc3 defiende e4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "Nc3"` | Se sostiene: la mejor |
+| Z-nc6-d5-nf3 | Con 2...Cc6 3.d4 d5, Cf3 primero pierde e4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 d5" "Nf3"` | Se sostiene: pierde 93 |
+| Z-nc6-d5-exd5 | Ahí, cambiar en d5 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 d5" "exd5"` | Se sostiene: +0.12, a 12 |
+| Z-g6x-d5-nf3 | Con 2...g6 3.d4 cxd4 4.cxd4 d5, Cf3 primero pierde e4 | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 cxd4 cxd4 d5" "Nf3"` | Se sostiene: pierde 91 |
+| Z-g6x-d5-exd5 | Ahí, cambiar en d5 no pierde material | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 cxd4 cxd4 d5" "exd5"` | Se sostiene: +0.21, a 53 (5.e5 +0.74, la mejor) |
+| Z-bd3-e6-nc6-d5 | Revisión final: con tu alfil en d3 y su peón en e6, d5 contra el caballo pierde un peón | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 e6 d4 Nf6 Bd3 cxd4 cxd4 Nc6" "d5"` | Se sostiene: pierde 142 (exd5 exd5 Cxd5); 7.Ce2 la mejor |
+| Z-bd3-d6-nc6-d5 | Con tu alfil en d3 pero sin ...e6 (2...d6), d5 sigue bien | `node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 Nf6 Bd3 Nc6" "d5"` | Se sostiene: la mejor (+1.10) |
 
 ## Las salidas, tal cual
 
 ### R-d5
 
-`node motor.mjs mejores "e4 c5 c3 d5" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -108,7 +117,7 @@ Mueven: blancas · profundidad 18
 
 ### R-d5-d4
 
-`node motor.mjs jugada "e4 c5 c3 d5" "d4" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d4" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -121,7 +130,7 @@ Mueven: blancas · profundidad 18
 
 ### R-d5-e5
 
-`node motor.mjs jugada "e4 c5 c3 d5" "e5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "e5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -134,7 +143,7 @@ Mueven: blancas · profundidad 18
 
 ### R-d5-d3
 
-`node motor.mjs jugada "e4 c5 c3 d5" "d3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -147,7 +156,7 @@ Mueven: blancas · profundidad 18
 
 ### R-nf6
 
-`node motor.mjs mejores "e4 c5 c3 Nf6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6
@@ -160,7 +169,7 @@ Mueven: blancas · profundidad 18
 
 ### R-nf6-d4
 
-`node motor.mjs jugada "e4 c5 c3 Nf6" "d4" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "d4" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nf6
@@ -173,7 +182,7 @@ Mueven: blancas · profundidad 18
 
 ### R-nf6-d3
 
-`node motor.mjs jugada "e4 c5 c3 Nf6" "d3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "d3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nf6
@@ -186,7 +195,7 @@ Mueven: blancas · profundidad 18
 
 ### R-nf6-bd3
 
-`node motor.mjs jugada "e4 c5 c3 Nf6" "Bd3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6" "Bd3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nf6
@@ -199,7 +208,7 @@ Mueven: blancas · profundidad 18
 
 ### R-nc6
 
-`node motor.mjs mejores "e4 c5 c3 Nc6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nc6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nc6
@@ -212,7 +221,7 @@ Mueven: blancas · profundidad 18
 
 ### R-d6
 
-`node motor.mjs mejores "e4 c5 c3 d6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d6
@@ -225,7 +234,7 @@ Mueven: blancas · profundidad 18
 
 ### R-e6
 
-`node motor.mjs mejores "e4 c5 c3 e6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 e6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 e6
@@ -238,7 +247,7 @@ Mueven: blancas · profundidad 18
 
 ### R-g6
 
-`node motor.mjs mejores "e4 c5 c3 g6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 g6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 g6
@@ -251,7 +260,7 @@ Mueven: blancas · profundidad 18
 
 ### R-e5
 
-`node motor.mjs mejores "e4 c5 c3 e5" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 e5" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 e5
@@ -264,7 +273,7 @@ Mueven: blancas · profundidad 18
 
 ### M-2c3
 
-`node linea.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
 
 ```
 LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 (lado w, prof 18)
@@ -284,7 +293,7 @@ FIN (mueven negras):
 
 ### M-d4
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
@@ -303,7 +312,7 @@ FIN (mueven negras):
 
 ### M-cc-cxd4
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
@@ -322,7 +331,7 @@ FIN (mueven negras):
 
 ### L-cc
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Nc3 (lado w, prof 18)
@@ -341,7 +350,7 @@ FIN (mueven negras):
 
 ### L-cc-be2
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3 (lado w, prof 18)
@@ -361,7 +370,7 @@ FIN (mueven negras):
 
 ### L-mod
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4 (lado w, prof 18)
@@ -383,7 +392,7 @@ FIN (mueven negras):
 
 ### L-cc6
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3 (lado w, prof 18)
@@ -403,7 +412,7 @@ FIN (mueven negras):
 
 ### L-g6
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3 (lado w, prof 18)
@@ -423,7 +432,7 @@ FIN (mueven negras):
 
 ### L-gam
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 (lado w, prof 18)
@@ -443,7 +452,7 @@ FIN (mueven negras):
 
 ### L-cf6
 
-`node linea.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" w`
 
 ```
 LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 (lado w, prof 18)
@@ -463,7 +472,7 @@ FIN (mueven negras):
 
 ### F-gam
 
-`node motor.mjs mejores "e4 c5 c3 d5 exd5 Nf6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Nf6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Nf6
@@ -476,7 +485,7 @@ Mueven: blancas · profundidad 18
 
 ### F-nf6-4
 
-`node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Nd5
@@ -489,7 +498,7 @@ Mueven: blancas · profundidad 18
 
 ### F-nf6d4
 
-`node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4
@@ -502,7 +511,7 @@ Mueven: blancas · profundidad 18
 
 ### A-d5
 
-`node motor.mjs amenaza "e4 c5 c3 d5" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -514,7 +523,7 @@ Mueven: blancas · profundidad 16
 
 ### A-nf6
 
-`node motor.mjs amenaza "e4 c5 c3 Nf6" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 Nf6
@@ -526,7 +535,7 @@ Mueven: blancas · profundidad 16
 
 ### A-nf6-e5
 
-`node motor.mjs amenaza "e4 c5 c3 Nf6 e5" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5
@@ -538,7 +547,7 @@ Mueven: negras · profundidad 16
 
 ### A-bg4
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4
@@ -550,7 +559,7 @@ Mueven: blancas · profundidad 16
 
 ### A-mod-bg4
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4
@@ -562,7 +571,7 @@ Mueven: blancas · profundidad 16
 
 ### A-h3
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3
@@ -574,7 +583,7 @@ Mueven: negras · profundidad 16
 
 ### A-c3-nc3
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3
@@ -586,7 +595,7 @@ Mueven: negras · profundidad 16
 
 ### A-cc6-nc3
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3
@@ -598,7 +607,7 @@ Mueven: negras · profundidad 16
 
 ### A-g6-nc3
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3
@@ -610,7 +619,7 @@ Mueven: negras · profundidad 16
 
 ### A-d6
 
-`node motor.mjs amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6
@@ -622,7 +631,7 @@ Mueven: blancas · profundidad 16
 
 ### A-nb6
 
-`node motor.mjs amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6
@@ -634,7 +643,7 @@ Mueven: blancas · profundidad 16
 
 ### A-gam-bd7
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7
@@ -646,7 +655,7 @@ Mueven: blancas · profundidad 16
 
 ### A-gam-b3
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3
@@ -658,7 +667,7 @@ Mueven: negras · profundidad 16
 
 ### A-gam-e6
 
-`node motor.mjs amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" --prof 16`
+`node scripts/motor-comprobar.ts amenaza "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" --prof 16`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6
@@ -670,7 +679,7 @@ Mueven: blancas · profundidad 16
 
 ### E-d4
 
-`node motor.mjs jugada "e4 c5 c3 d5" "d4" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5" "d4" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5
@@ -683,7 +692,7 @@ Mueven: blancas · profundidad 18
 
 ### E-d4-b
 
-`node motor.mjs mejores "e4 c5 c3 d5 d4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 d4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 d4
@@ -696,7 +705,7 @@ Mueven: negras · profundidad 18
 
 ### E-d4-c
 
-`node motor.mjs mejores "e4 c5 c3 d5 d4 dxe4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 d4 dxe4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 d4 dxe4
@@ -709,7 +718,7 @@ Mueven: blancas · profundidad 18
 
 ### E-nc3
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Nc3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Nc3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6
@@ -722,7 +731,7 @@ Mueven: blancas · profundidad 18
 
 ### E-nc3-b
 
-`node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3
@@ -735,7 +744,7 @@ Mueven: negras · profundidad 18
 
 ### E-nc3-c
 
-`node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3 Qxd4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3 Qxd4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nc3 Qxd4
@@ -748,7 +757,7 @@ Mueven: blancas · profundidad 18
 
 ### E-ne4
 
-`node motor.mjs jugada "e4 c5 c3 Nf6 e5" "Ne4" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nf6 e5" "Ne4" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5
@@ -761,7 +770,7 @@ Mueven: negras · profundidad 18
 
 ### E-ne4-b
 
-`node motor.mjs mejores "e4 c5 c3 Nf6 e5 Ne4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Ne4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Ne4
@@ -774,7 +783,7 @@ Mueven: blancas · profundidad 18
 
 ### E-ne4-c
 
-`node motor.mjs mejores "e4 c5 c3 Nf6 e5 Ne4 d3" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Ne4 d3" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Ne4 d3
@@ -787,7 +796,7 @@ Mueven: negras · profundidad 18
 
 ### E-glot
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3" "Qxd4" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3" "Qxd4" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3
@@ -800,7 +809,7 @@ Mueven: negras · profundidad 18
 
 ### E-glot-b
 
-`node motor.mjs mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 Bxf3 Bxf3 Qxd4
@@ -813,7 +822,7 @@ Mueven: blancas · profundidad 18
 
 ### P-cc
 
-`node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" "O-O Ne5 Be3 h3"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3" "O-O Ne5 Be3 h3"`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6 Nc3
@@ -833,7 +842,7 @@ Rival (3 mejores): Qa5 +0.21 · Bb4 +0.30 · Qd7 +0.37
 
 ### P-mod
 
-`node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" "Nc3 Ne5"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4" "Nc3 Ne5"`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4 cxd4
@@ -849,7 +858,7 @@ Rival (3 mejores): Be7 +0.10 · Qa5 +0.19 · Bd6 +0.21
 
 ### P-cc6
 
-`node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" "O-O-O Be2 Bd3 Bc4 Ne5"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3" "O-O-O Be2 Bd3 Bc4 Ne5"`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4 cxd4 e6 Nc3
@@ -871,7 +880,7 @@ Rival (3 mejores): Qd6 +0.26 · Qa5 +0.27 · Bb4 +0.28
 
 ### P-g6
 
-`node plan.mjs "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" "O-O Be3 Ne5"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3" "O-O Be3 Ne5"`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4 cxd4 Nf6 Nc3
@@ -889,7 +898,7 @@ Rival (3 mejores): Qd6 +0.09 · Qa5 +0.11 · Qd8 +0.16
 
 ### P-cf6
 
-`node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
 
 ```
 LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5
@@ -911,7 +920,7 @@ Rival (3 mejores): dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
 
 ### P-gam
 
-`node linea.mjs "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w (FIN)`
+`node scripts/motor-comprobar.ts linea "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4" w`
 
 ```
 LÍNEA e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6 dxe6 Bxe6 Bc4 Bxc4 Qxc4 (lado w, prof 18)
@@ -931,7 +940,7 @@ FIN (mueven negras):
 
 ### V-cf6-dxe5
 
-`node plan.mjs "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
+`node scripts/motor-comprobar.ts plan "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5" "Nxe5 dxe5 O-O Nc3 exd6"`
 
 ```
 LÍNEA e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 Nb6 Bb5
@@ -953,7 +962,7 @@ Rival (3 mejores): dxe5 +0.10 · Bd7 +0.16 · e6 +0.35
 
 ### C-d6-nf6
 
-`node motor.mjs mejores "e4 c5 c3 d6 d4 Nf6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6 d4 Nf6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d6 d4 Nf6
@@ -966,7 +975,7 @@ Mueven: blancas · profundidad 18
 
 ### C-d6-nf6-e5
 
-`node motor.mjs jugada "e4 c5 c3 d6 d4 Nf6" "e5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 Nf6" "e5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d6 d4 Nf6
@@ -979,7 +988,7 @@ Mueven: blancas · profundidad 18
 
 ### C-d6x-nf6
 
-`node motor.mjs mejores "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 d6 d4 cxd4 cxd4 Nf6
@@ -992,7 +1001,7 @@ Mueven: blancas · profundidad 18
 
 ### C-d6x-nf6-e5
 
-`node motor.mjs jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d6 d4 cxd4 cxd4 Nf6
@@ -1005,7 +1014,7 @@ Mueven: blancas · profundidad 18
 
 ### C-nc6x-nf6-e5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6
@@ -1018,7 +1027,7 @@ Mueven: blancas · profundidad 18
 
 ### C-e6x-nf6-e5
 
-`node motor.mjs jugada "e4 c5 c3 e6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 e6 d4 cxd4 cxd4 Nf6" "e5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 e6 d4 cxd4 cxd4 Nf6
@@ -1031,7 +1040,7 @@ Mueven: blancas · profundidad 18
 
 ### C-nc6x-e6
 
-`node motor.mjs mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 e6
@@ -1044,7 +1053,7 @@ Mueven: blancas · profundidad 18
 
 ### C-nc6x-g6-nf3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6" "Nf3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6" "Nf3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 g6
@@ -1057,7 +1066,7 @@ Mueven: blancas · profundidad 18
 
 ### N-c-nc6-qb6-nc3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nc3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nc3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6
@@ -1070,7 +1079,7 @@ Mueven: blancas · profundidad 18
 
 ### N-c-nc6-qb6-nf3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nf3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6" "Nf3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6
@@ -1083,7 +1092,7 @@ Mueven: blancas · profundidad 18
 
 ### I-qxd5-be2
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5" "Be2" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5" "Be2" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5
@@ -1096,7 +1105,7 @@ Mueven: blancas · profundidad 18
 
 ### I-cc-nc6-be2
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Be2" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6" "Be2" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6
@@ -1109,7 +1118,7 @@ Mueven: blancas · profundidad 18
 
 ### N-mod-cxd4-bg4-be2
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 cxd4 cxd4 Bg4" "Be2" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 cxd4 cxd4 Bg4" "Be2" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 cxd4 cxd4 Bg4
@@ -1122,7 +1131,7 @@ Mueven: blancas · profundidad 18
 
 ### N-cc-nf6-nf3-bg4-be2
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nf6 Nf3 Bg4" "Be2" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nf6 Nf3 Bg4" "Be2" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nf6 Nf3 Bg4
@@ -1135,7 +1144,7 @@ Mueven: blancas · profundidad 18
 
 ### G-e6-nf3
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" "Nf3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6" "Nf3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Nf6 Qa4+ Bd7 Qb3 e6
@@ -1148,7 +1157,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6-nf6-bd3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 Nf6" "Bd3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 Nf6" "Bd3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 Nf6
@@ -1161,7 +1170,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 Nf6
@@ -1174,7 +1183,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 Nf6
@@ -1187,7 +1196,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-e6-nf3-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 Nf6
@@ -1200,7 +1209,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-g6-nf3-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6 Nf3 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 g6 Nf3 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 g6 Nf3 Nf6
@@ -1213,7 +1222,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-d6-nf3-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d6 Nf3 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d6 Nf3 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 d6 Nf3 Nf6
@@ -1226,7 +1235,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-e6-nc3-nf6-d5
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nc3 Nf6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nc3 Nf6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nc3 Nf6
@@ -1239,7 +1248,7 @@ Mueven: blancas · profundidad 18
 
 ### K-d6x-nf6-nc3-nc6-d5
 
-`node motor.mjs jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 Nc6" "d5" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 Nc6" "d5" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 Nc6
@@ -1252,7 +1261,7 @@ Mueven: blancas · profundidad 18
 
 ### K-g6-bg7-nf3-nf6-bd3
 
-`node motor.mjs jugada "e4 c5 c3 g6 d4 Bg7 Nf3 Nf6" "Bd3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 Bg7 Nf3 Nf6" "Bd3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 g6 d4 Bg7 Nf3 Nf6
@@ -1265,7 +1274,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-e5-nf3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nf3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nf3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 e5
@@ -1278,7 +1287,7 @@ Mueven: blancas · profundidad 18
 
 ### K-nc6x-e5-nc3
 
-`node motor.mjs jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nc3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 e5" "Nc3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 e5
@@ -1291,7 +1300,7 @@ Mueven: blancas · profundidad 18
 
 ### B-cc6-bg4-h3
 
-`node motor.mjs jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4" "h3" --prof 18`
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4" "h3" --prof 18`
 
 ```
 Posición tras: e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4
@@ -1304,7 +1313,7 @@ Mueven: blancas · profundidad 18
 
 ### B-stoltz-c4
 
-`node motor.mjs mejores "e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4" --prof 18 --n 3`
+`node scripts/motor-comprobar.ts mejores "e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4" --prof 18 --n 3`
 
 ```
 Posición tras: e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4
@@ -1315,7 +1324,108 @@ Mueven: blancas · profundidad 18
   -2.11  d4 cxb3 d5 bxa2 Na3 g6 Rxa2 Bg7
 ```
 
+### Z-nc6x-d5-nf3
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "Nf3"`
+
+```
+Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 d5 · mueven blancas · profundidad 18
+  mejor: +0.36  exd5 Qxd5 Nf3 Bg4 Be2 e6 Nc3 Qd7
+  Nf3: -0.77  Nf3 dxe4 Ne5 Nxe5 dxe5 Qxd1+ Kxd1 f5
+  pierde 113 centipeones contra la mejor
+```
+
+### Z-nc6x-d5-exd5
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "exd5"`
+
+```
+Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 d5 · mueven blancas · profundidad 18
+  mejor: +0.36  exd5 Qxd5 Nf3 Bg4 Be2 e6 Nc3 Qd7
+  exd5: +0.26  exd5 Qxd5 Nf3 Bg4 Be2 e6 O-O Nf6
+  pierde 10 centipeones contra la mejor
+```
+
+### Z-nc6x-d5-nc3
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 cxd4 cxd4 d5" "Nc3"`
+
+```
+Posición tras: e4 c5 c3 Nc6 d4 cxd4 cxd4 d5 · mueven blancas · profundidad 18
+  mejor: +0.36  exd5 Qxd5 Nf3 Bg4 Be2 e6 Nc3 Qd7
+  Nc3: +0.42  Nc3 e6 e5 Nge7 Nf3 Nf5 a3 Bd7
+  pierde -6 centipeones contra la mejor
+```
+
+### Z-nc6-d5-nf3
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 d5" "Nf3"`
+
+```
+Posición tras: e4 c5 c3 Nc6 d4 d5 · mueven blancas · profundidad 18
+  mejor: +0.24  dxc5 dxe4 Qxd8+ Nxd8 Bb5+ Nc6 Nd2 Nf6
+  Nf3: -0.69  Nf3 dxe4 Ne5 Nxe5 dxe5 Qxd1+ Kxd1 f5
+  pierde 93 centipeones contra la mejor
+```
+
+### Z-nc6-d5-exd5
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 Nc6 d4 d5" "exd5"`
+
+```
+Posición tras: e4 c5 c3 Nc6 d4 d5 · mueven blancas · profundidad 18
+  mejor: +0.24  dxc5 dxe4 Qxd8+ Nxd8 Bb5+ Nc6 Nd2 Nf6
+  exd5: +0.12  exd5 Qxd5 Nf3 Nf6 dxc5 Qxd1+ Kxd1 Bf5
+  pierde 12 centipeones contra la mejor
+```
+
+### Z-g6x-d5-nf3
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 cxd4 cxd4 d5" "Nf3"`
+
+```
+Posición tras: e4 c5 c3 g6 d4 cxd4 cxd4 d5 · mueven blancas · profundidad 18
+  mejor: +0.74  e5 Nc6 h3 Nh6 Nc3 f6 Bb5 Bg7
+  Nf3: -0.17  Nf3 dxe4 Ne5 Bg7 Bb5+ Bd7 Qb3 e6
+  pierde 91 centipeones contra la mejor
+```
+
+### Z-g6x-d5-exd5
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 g6 d4 cxd4 cxd4 d5" "exd5"`
+
+```
+Posición tras: e4 c5 c3 g6 d4 cxd4 cxd4 d5 · mueven blancas · profundidad 18
+  mejor: +0.74  e5 Nc6 h3 Nh6 Nc3 f6 Bb5 Bg7
+  exd5: +0.21  exd5 Nf6 Bc4 Nxd5 Qb3 e6 Nc3 Bg7
+  pierde 53 centipeones contra la mejor
+```
+
+### Z-bd3-e6-nc6-d5
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 e6 d4 Nf6 Bd3 cxd4 cxd4 Nc6" "d5"`
+
+```
+Posición tras: e4 c5 c3 e6 d4 Nf6 Bd3 cxd4 cxd4 Nc6 · mueven blancas · profundidad 18
+  mejor: +0.70  Ne2 Nb4 Nbc3 Nxd3+ Qxd3 d5 e5 Ng8
+  d5: -0.72  d5 exd5 exd5 Nxd5 Ne2 Nf6 O-O d5
+  pierde 142 centipeones contra la mejor
+```
+
+### Z-bd3-d6-nc6-d5
+
+`node scripts/motor-comprobar.ts jugada "e4 c5 c3 d6 d4 Nf6 Bd3 Nc6" "d5"`
+
+```
+Posición tras: e4 c5 c3 d6 d4 Nf6 Bd3 Nc6 · mueven blancas · profundidad 18
+  mejor: +1.08  d5 Nb8 c4 g6 f4 Bg7 Nf3 e6
+  d5: +1.10  d5 Ne5 Bc2 e6 f4 Ng6 dxe6 fxe6
+  pierde -2 centipeones contra la mejor
+```
+
 ## El plan en cada posición de sus lecciones (notas 5 y 7)
+
+Cada fila se repite con `node scripts/motor-comprobar.ts jugada "<la posición, con la respuesta del rival>" "<la jugada del plan>" --prof 16`.
 
 Stockfish 19 lite, un hilo, profundidad 16. "pierde" = centipeones contra la mejor de blancas en esa posición. ⚠ = 50 o más.
 

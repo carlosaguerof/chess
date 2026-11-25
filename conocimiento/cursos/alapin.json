@@ -323,10 +323,11 @@
     {
      "subtitulo": "Los dos peones del centro",
      "texto": [
-      "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3. Contra 2...e6, lo común es 3...d5, y ahí avanzas: La cadena.",
-      "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
-      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado): no pierdes nada. Tras 2...d6, avanzar a e5 te cuesta un peón.",
-      "Si después el rival lo ataca con un peón en d5 y su peón ya está en e6, lo avanzas, como en tu Avance contra la Francesa. Este curso no trae lección para estas jugadas."
+      "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6 o 2...g6 juegas 3.d4, y en más de la mitad de las partidas el rival cambia en d4 y retomas con el peón de c3. Contra 2...e6, el rival suele cambiar en d4 o atacar tu e4 con ...d5.",
+      "Tu plan: primero atiendes lo que ataque tu peón de e4; después, el caballo de g1 a f3, que defiende d4, y el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
+      "Si lo ataca un peón desde d5: con su peón ya en e6, lo avanzas a e5, como en tu Avance contra la Francesa; si no, cambias en d5. Si sacas antes el caballo de g1, ese peón se come tu e4.",
+      "Si lo ataca un caballo, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 a d5 contra él, salvo con tu alfil en d3 y su peón en e6: ahí ese peón se pierde. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado): no pierdes nada. Tras 2...d6, avanzar a e5 te cuesta un peón.",
+      "Este curso no trae lección para estas jugadas."
      ],
      "tablero": {
       "fen": "4k3/pp1ppppp/8/8/3PP3/8/PP3PPP/4K3 w - - 0 1",
@@ -350,10 +351,13 @@
         "frase": "El rival ya no tiene peón en la columna c."
        },
        {
-        "frase": "Primero tu caballo de g1 sale a f3 y defiende d4; después, el de b1 a c3, y enrocas."
+        "frase": "Primero atiendes lo que ataque tu peón de e4."
        },
        {
-        "frase": "Si un caballo del rival ataca tu peón de e4 y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5.",
+        "frase": "Si lo ataca un peón desde d5: con su peón en e6, avanzas a e5; si no, cambias en d5."
+       },
+       {
+        "frase": "Si lo ataca un caballo y su caballo de dama ya salió a c6, avanzas tu peón de d4 a d5.",
         "marcas": [
          {
           "tipo": "A3",
@@ -368,7 +372,7 @@
         "frase": "Si su caballo de dama no ha salido, defiendes e4 con una pieza."
        },
        {
-        "frase": "Si un peón del rival lo ataca desde d5 y su peón ya está en e6, avanzas a e5."
+        "frase": "Después, tu caballo de g1 sale a f3 y defiende d4; el de b1 va a c3, y enrocas."
        }
       ]
      }
@@ -397,7 +401,7 @@
      "desde": 5,
      "lado": "b",
      "intro": "Contra 2...d5 jugaste 3.d4 en vez de cambiar en d5. Ahora juegas con negras: castiga el error.",
-     "final": "Blancas recupera un peón, pero su rey ya no puede enrocar. Por eso, contra 2...d5, cambias primero: 3.exd5.",
+     "final": "Recuperas un peón, pero tu rey ya no puede enrocar. Por eso, contra 2...d5, cambias primero: 3.exd5.",
      "fuente": [
       "WB-2d5",
       "MOTOR"
@@ -428,7 +432,7 @@
      "desde": 11,
      "lado": "b",
      "intro": "Retomaste en d4 y sacaste el caballo de b1 a c3 antes que el de g1. Ahora juegas con negras: castiga el error.",
-     "final": "Ganaste el peón de d4. Por eso va primero el caballo de g1 a f3, que defiende d4.",
+     "final": "El rival se queda con tu peón de d4. Por eso va primero tu caballo de g1 a f3, que lo defiende.",
      "fuente": [
       "HART",
       "MOTOR"
@@ -531,7 +535,7 @@
      ],
      "texto": [
       "La idea: con 2.c3 preparas d4, y lo que haces con tu peón de e4 depende de quién lo ataque.",
-      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama ya en c6, avanzas tu peón de d4 a d5 contra él; si no, defiendes e4 con una pieza."
+      "Tres reglas: 1) En tu jugada 3, si un peón ataca tu e4 (2...d5), lo cambias; si lo ataca el caballo (2...Cf6), lo avanzas; si nadie lo ataca, 3.d4. 2) Con el aislado, primero el caballo de g1 a f3; cuando el rival cambia en d4, retomas con el peón y el de b1 sale a c3 contra la dama. 3) Con los dos peones del centro, primero atiendes tu e4: contra un peón en d5, avanzas con su peón en e6, o cambias; contra un caballo, d5 si su caballo de dama está en c6, o lo defiendes."
      ],
      "fuente": [
       "WB-2c3",
@@ -599,7 +603,7 @@
         "frase": "Con el peón aislado, no te apresures a cambiar piezas."
        },
        {
-        "frase": "Con los dos peones del centro, si un caballo ataca tu e4: con su caballo de dama en c6, avanzas a d5; si no, defiendes e4."
+        "frase": "Con los dos peones del centro, primero atiendes lo que ataque tu e4; después, tus caballos."
        }
       ]
      }
@@ -702,12 +706,12 @@
    "regla": "Retoma en d4 con el peón; primero Cf3, después Cc3.",
    "frecuencia": 2.95,
    "fuenteFrecuencia": "lichess 1000–1400: 2.9 % de las partidas del curso (n 3), y su posición tras 6.Cf3 llega también desde 2...Cc6 (5.0 %, n 19); El aislado, 12.3 %",
-   "estructura": "Cambias en d5: El aislado"
+   "estructura": "El rival retoma en d5 con la dama"
   },
   {
    "id": "cf6-d4",
    "base": "alapin-curso-cf6-d4",
-   "nombre": "2...Cf6: La cadena",
+   "nombre": "2...Cf6: Smith-Morra Rehusado",
    "desde": 3,
    "intro": "Estás en La cadena: tu objetivo es sostener tus peones del centro con piezas, pero el rival la ataca por delante y puede deshacerla. El rival ataca tu peón de e4 con el caballo.",
    "idea": "Contra el caballo que ataca tu e4, avanzas con 3.e5; después sostienes la cadena con piezas.",
@@ -744,7 +748,7 @@
    "regla": "Contra 2...Cf6, avanza: 3.e5. Después, piezas que sostengan e5 y d4.",
    "frecuencia": 4.33,
    "fuenteFrecuencia": "lichess 1000–1400: 4.3 % de las partidas del curso (n 24); 600–1000: 21.9 % (n 7); la única de La cadena (13.4 % y 21.9 %)",
-   "estructura": "Avanzas a e5: La cadena"
+   "estructura": "El rival ataca tu e4 con el caballo"
   },
   {
    "id": "moderna",
@@ -807,7 +811,7 @@
    "regla": "Contra ...Ag4, Ae2 y h3; contra el cambio en d4, retoma con el peón.",
    "frecuencia": 0,
    "fuenteFrecuencia": "lichess: sin datos en las dos bandas (n 0)",
-   "estructura": "Cambias en d5: El aislado"
+   "estructura": "El rival retoma en d5 con la dama"
   },
   {
    "id": "cc6",
@@ -852,7 +856,7 @@
    "regla": "Defiende d4 con piezas; contra el cambio, retoma con el peón.",
    "frecuencia": 0.72,
    "fuenteFrecuencia": "lichess 1000–1400: 0.7 % de las partidas del curso (n 4); 600–1000: sin datos",
-   "estructura": "Cambias en d5: El aislado"
+   "estructura": "El rival retoma en d5 con la dama"
   },
   {
    "id": "g6",
@@ -896,7 +900,7 @@
    "regla": "Desarrolla y, contra el cambio en d4, retoma con el peón.",
    "frecuencia": 0,
    "fuenteFrecuencia": "lichess: sin datos en las dos bandas (n 0)",
-   "estructura": "Cambias en d5: El aislado"
+   "estructura": "El rival retoma en d5 con la dama"
   },
   {
    "id": "gambito",
@@ -940,7 +944,7 @@
    "regla": "Da4+ y Db3; contra ...e6, tomas otro peón.",
    "frecuencia": 0,
    "fuenteFrecuencia": "lichess: sin datos en las dos bandas (n 0)",
-   "estructura": "Excepción: no recupera el peón (gambito)"
+   "estructura": "El rival no recupera el peón (gambito)"
   }
  ],
  "rival": {

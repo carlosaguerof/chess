@@ -40,7 +40,7 @@ function entrada(js: string[]): 'aislado' | 'cadena' | 'gambito' | 'centro' | 'o
 }
 
 describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
-  const ETIQUETA: Record<string, string> = { aislado: 'Cambias en d5: El aislado', cadena: 'Avanzas a e5: La cadena', gambito: 'Excepción: no recupera el peón (gambito)' }
+  const ETIQUETA: Record<string, string> = { aislado: 'El rival retoma en d5 con la dama', cadena: 'El rival ataca tu e4 con el caballo', gambito: 'El rival no recupera el peón (gambito)' }
 
   it('cada lección cae en una sola entrada, y su etiqueta lo dice', () => {
     const vistas: Record<string, string[]> = {}
@@ -101,7 +101,8 @@ describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
     expect(c.mias['e4 c5 c3 d5 exd5']!.hace).toContain('para tu jugada 3')
     expect(c.mias['e4 c5 c3 Nf6 e5']!.porque).toContain('para tu jugada 3')
     // y con los dos peones del centro, a un caballo que ataque e4 no se le echa
-    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Si ya salió a c6, avanzas tu peón de d4 contra él')
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Si ya salió a c6, avanzas tu peón de d4 a d5 contra él, salvo con tu alfil en d3 y su peón en e6')
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Si sacas antes el caballo de g1, ese peón se come tu e4')
     expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Tras 2...d6, avanzar a e5 te cuesta un peón')
   })
 })
