@@ -4,9 +4,10 @@ import { migrarTodo, pasarTodas, TABLAS_DE_MUDANZA } from '../../src/aprender/mi
 import { exportar, importar } from '../../src/repertorio/edicion.ts'
 import { guardar } from '../../src/estado/almacen.ts'
 import { leerProgreso } from '../../src/repertorio/estado.ts'
-import { leerRepaso, paraHoy } from '../../src/repaso/repaso.ts'
+import { Chess } from 'chess.js'
+import { fichaDe, leerRepaso, paraHoy } from '../../src/repaso/repaso.ts'
 import { cursos } from '../../src/cursos/datos.ts'
-import { avanceVariantes, CURSOS_NUEVOS, cursoNuevo, esOpcional, leccionIdDe } from '../../src/curso/datos.ts'
+import { avanceVariantes, CURSOS_NUEVOS, cursoNuevo, esOpcional, leccionIdDe, NOMBRES_DE_ANTES } from '../../src/curso/datos.ts'
 import { CURSOS_DE_LA_LECCION_DE_ANTES, leerAvance, marcarVariante } from '../../src/curso/avance.ts'
 
 /**
@@ -164,5 +165,32 @@ describe('§3.2 · el avance de las lecciones viejas, una sola regla', () => {
     const c = cursoNuevo('escandinava:w')!
     const v = c.variantes.find((x) => x.base === 'curso-valenciana')!
     expect(leerAvance('escandinava:w').variantes[v.id]).toEqual({ terminada: 7 })
+  })
+})
+
+describe('§3.3 y el Repaso · una lección renombrada sigue reconociendo sus fallos de antes', () => {
+  it('cada nombre de antes es de una variante que existe y que hoy se llama distinto', () => {
+    for (const [curso, vs] of Object.entries(NOMBRES_DE_ANTES))
+      for (const [id, nombres] of Object.entries(vs)) {
+        const v = cursoNuevo(curso)!.variantes.find((x) => x.id === id)
+        expect(v, `${curso} ${id}`).toBeDefined()
+        for (const n of nombres) expect(n).not.toBe(v!.nombre)
+      }
+  })
+
+  it('un fallo guardado con el nombre de antes («Clásica: 3.Cc3», ya publicada) regresa la ficha al escalón 1', () => {
+    const l = cursos().find((x) => x.id === 'caro-kann:b')!.lecciones.find((x) => x.id.endsWith('/curso-clasica'))!
+    expect(l.nombre).toBe('3.Cc3')
+    expect(l.nombresAntes).toEqual(['Clásica: 3.Cc3'])
+    const ply = l.jugadas.indexOf('dxe4')
+    const ch = new Chess()
+    for (const s of l.jugadas.slice(0, ply)) ch.move(s)
+    const fallo = (linea: string) => [{ fen: ch.fen().split(' ').slice(0, 4).join(' '), esperada: 'dxe4', resultado: 'fallo' as const, lugar: 'curso' as const, fecha: Date.parse('2026-11-20T12:00:00Z'), linea }]
+    const e = { [l.id]: { escalon: 4, proxima: '2026-12-10', ultima: Date.parse('2026-11-10T12:00:00Z') } }
+    const hechas = { [l.id]: { fecha: 1 } }
+    expect(fichaDe(e, l.id, hechas, fallo('Clásica: 3.Cc3'), l)!.escalon).toBe(1)
+    expect(fichaDe(e, l.id, hechas, fallo('3.Cc3'), l)!.escalon).toBe(1)
+    // un nombre de otra lección no cuenta
+    expect(fichaDe(e, l.id, hechas, fallo('Avance: 4.Cf3'), l)!.escalon).toBe(4)
   })
 })

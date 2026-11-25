@@ -260,15 +260,20 @@ describe('Los cursos del Avance · lo guardado, el Repaso y Refuerza', () => {
     expect(nuevo['caro-kann:w/w:caro-kann/avance-curso-short']).toEqual({ escalon: 2 })
     expect(nuevo['caro-kann:w/w:caro-kann/avance-short']).toBeUndefined()
     expect(nuevo['francesa:w/w:francesa/curso-paulsen']).toEqual({ escalon: 3 })
-    // tu otra cuarta jugada y la opcional no se mudan: se quedan guardadas y dejan de salir
+    // una opcional también se muda a su variante nueva, como en los demás cursos (cierre de los cursos): su ficha sigue
+    // sin salir en el Repaso, porque es opcional, y lo hecho cuenta en su variante (`leerAvance`)
+    expect(nuevo['francesa:w/w:francesa/curso-lputian']).toEqual({ escalon: 1 })
+    expect(nuevo['francesa:w/w:francesa/lputian']).toBeUndefined()
+    // tu otra cuarta jugada no tiene lección nueva: se queda guardada y deja de salir
     expect(nuevo['caro-kann:w/w:caro-kann/avance-tal']).toEqual({ escalon: 1 })
-    expect(nuevo['francesa:w/w:francesa/lputian']).toEqual({ escalon: 1 })
     expect(nuevo['italiana:w/w:italiana/paris']).toEqual({ escalon: 1 })
-    // cada lección nueva de la tabla existe, y es obligatoria
+    // cada lección nueva de la tabla existe en su curso
     for (const [prefijo, tabla] of Object.entries(LECCIONES_AVANCE)) {
       const c = CURSOS_NUEVOS[prefijo.split('/')[0]!]!
-      for (const nueva of Object.values(tabla)) expect(obligatorias(c).map((v) => v.base), nueva).toContain(nueva)
+      for (const nueva of Object.values(tabla)) expect(c.variantes.map((v) => v.base), nueva).toContain(nueva)
     }
+    // y cada lección vieja de la Francesa que sigue en el curso (la misma fila de la base, ahora con su continuación) se muda
+    for (const v of FR.variantes) expect(Object.values(LECCIONES_AVANCE['francesa:w/w:francesa/']!), v.base).toContain(v.base)
   })
 
   it('el Repaso solo trae lo obligatorio de estos cursos: las opcionales van marcadas (el filtro común de main)', () => {

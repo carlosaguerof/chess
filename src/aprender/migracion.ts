@@ -188,19 +188,24 @@ export function migrarAlCursoEslava(): void {
  * Cada lección vieja que sigue siendo obligatoria tiene su lección nueva de la misma línea (la misma fila de la base, ahora
  * con su continuación): lo que llevaba en el Repaso de hoy se muda ahí, como en la Caro-Kann. Las de tus otras cuartas
  * jugadas contra la Caro-Kann (4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2) ya no son lecciones (`specs/cursos.md` §1, nota 3 del
- * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. El avance del curso nuevo
- * empieza en cero.
+ * 2026-11-25): lo suyo no se borra, se queda en el teléfono y en el Respaldo, y deja de salir. Lo hecho en la lección
+ * vieja cuenta en el avance del curso nuevo al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_AVANCE: Record<string, Record<string, string>> = {
   'caro-kann:w/w:caro-kann/': {
     'avance-short': 'avance-curso-short',
     'avance-botvinnik-carls': 'avance-curso-botvinnik-carls',
   },
-  // las que pasan a opcionales (Lputian, Euwe, Wade y 3...Ad7) no se mudan: una opcional no sale en el Repaso (nota 6)
   'francesa:w/w:francesa/': {
     'avance-c3': 'curso-avance-c3',
     paulsen: 'curso-paulsen',
     'principal-a3': 'curso-principal-a3',
+    // las que pasaron a opcionales también se mudan, como en los demás cursos (cierre de los cursos, 2026-11-25): lo hecho
+    // cuenta en su variante nueva (`leerAvance`), y su ficha sigue sin salir en el Repaso, porque es opcional
+    lputian: 'curso-lputian',
+    euwe: 'curso-euwe',
+    wade: 'curso-wade',
+    'cambio-de-alfil': 'curso-cambio-de-alfil',
   },
 }
 
@@ -242,8 +247,8 @@ export function migrarAlCursoAvance(): void {
  * La captura contra la Escandinava (2026-11-25) pasa al curso por estructuras. Cada lección vieja tiene su lección nueva
  * de la misma línea (la misma fila de la base, ahora con su continuación): lo que llevaba en el Repaso de hoy se muda
  * ahí, como en la Caro-Kann. La Grünfeld y la Transposición Panov no son lecciones del curso nuevo (se separan de otra
- * por una jugada mía; nota 2 del orchestrator): lo suyo se queda guardado y deja de salir. El avance del curso nuevo
- * empieza en cero.
+ * por una jugada mía; nota 2 del orchestrator): lo suyo se queda guardado y deja de salir. Lo hecho en la lección
+ * vieja cuenta en el avance del curso nuevo al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_ESCANDINAVA: Record<string, string> = {
   'da5-clasica': 'curso-clasica',
@@ -287,7 +292,8 @@ export function migrarAlCursoEscandinava(): void {
  * jugada mía (4.Cf3) y ya no son lecciones (`specs/cursos.md` §1, nota 2 del 2026-11-25): lo suyo va a la de la misma
  * respuesta del rival (2...Cf6 3.e5 Cd5), como 3...c5 en la Caro-Kann; si esa ya tiene algo, se queda como estaba,
  * guardado en el teléfono y en el Respaldo. Si la lección nueva es opcional, lo mudado se queda guardado y no sale en el
- * Repaso (lo decide el filtro común de las opcionales). El avance del curso nuevo empieza en cero.
+ * Repaso (lo decide el filtro común de las opcionales). Lo hecho en la lección vieja cuenta en el avance del curso nuevo
+ * al leerlo (`leerAvance`, `src/curso/avance.ts`).
  */
 export const LECCIONES_ALAPIN: Record<string, string> = {
   'alapin-d5-cambio-central': 'alapin-curso-cambio-central',

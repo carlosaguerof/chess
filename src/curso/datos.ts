@@ -134,11 +134,25 @@ export function grupoDeLinea(c: DatosCurso, l: LineaCurso): LineaCurso[] {
   return lineasDe(c).filter((x) => x.tipo === 'variante' && esOpcional(c, x.variante!.id) === opcional)
 }
 
+/**
+ * Los nombres de antes de las lecciones renombradas el 2026-11-25 (cierre de los cursos: en Practicar, el nombre no
+ * adelanta tu jugada), por curso y variante. El registro guarda el nombre de la línea; con esto, un fallo guardado con el
+ * nombre de antes sigue regresando la ficha del Repaso. La Clásica de la Caro-Kann ya estaba publicada.
+ */
+export const NOMBRES_DE_ANTES: Record<string, Record<string, string[]>> = {
+  'caro-kann:b': { clasica: ['Clásica: 3.Cc3'] },
+  'caro-kann:w': { af5: ['3...Af5 4.c3'] },
+  'italiana:w': { 'dos-caballos-d3': ['Dos Caballos: 4.d3'], 'la-bourdonnais': ['3...Ac5 4.c3 d6 (La Bourdonnais)'], principal: ['3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)'] },
+  'eslava:b': { checa: ['Checa: 5.a4'], 'checa-clasica': ['Checa: 9.De2 (Sämisch)'], 'checa-carlsbad': ['Checa: 6.Ce5 (Carlsbad)'] },
+  'otros-negras:b': { 'reti-bogoljubow': ['Réti: 2.c4 c6 3.b3'], 'inglesa-caro-kann': ['Inglesa: 1.c4 c6 2.Cc3'], 'inglesa-anglo-eslava-g3': ['Inglesa: 2.Cf3 d5 3.g3'], 'inglesa-gurevich': ['Inglesa: 2.Cf3 d5 3.e3'] },
+}
+
 /** Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual. */
 export function leccionesDe(c: DatosCurso): Leccion[] {
   return c.variantes.map((v) => {
     const b = BASE.aperturas.find((x) => x.id === c.apertura)!.variantes.find((x) => x.id === v.base)!
-    return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco }
+    const antes = NOMBRES_DE_ANTES[c.fichasDe ?? c.id]?.[v.id]
+    return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco, ...(antes ? { nombresAntes: antes } : {}) }
   })
 }
 
