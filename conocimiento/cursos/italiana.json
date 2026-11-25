@@ -160,8 +160,8 @@
           "texto": [
             "Una pregunta: ¿qué pasó con el peón de e5 de negras? La respuesta te dice qué plan toca.",
             "Si sigue en e5 y tu peón de d está en d3: el Centro cerrado. Si se fue a d4 y lo retomaste con tu peón de c: el Centro ideal. Si se fue a d4 y lo retomaste con una pieza: el Centro abierto.",
-            "Lo decides tú con tu peón de d. Primero mira si atacan una pieza tuya. Después: si el caballo de negras ya está en f6, atacando tu peón de e4, d3, y preparas d4; si negras juega pasivo, sin atacar e4 (...d6, ...h6, ...Ae7), d4 de inmediato.",
-            "Fuera del mapa quedan la Húngara y la Rousseau. Si contra 4.d3 negras juega 4...d5, toma en d5: el centro se abre de otra forma, sin lección. Y si el rival no juega 2...Cc6, no hay lección, pero la pregunta sirve igual."
+            "Lo decides tú con tu peón de d, en tu jugada 4 (o en la 5, tras 3...Ac5 4.c3). Primero mira si atacan una pieza tuya. Después: si el caballo de negras ya está en f6, atacando tu peón de e4, d3, y preparas d4; si negras juega pasivo, sin atacar e4 (...d6, ...h6, ...Ae7), d4 de inmediato.",
+            "Sin lección, pero sale seguido (unas 7 de cada 100 partidas): si contra 4.d3 negras golpea con 4...d5, toma en d5, enroca y lleva tu torre a e1, contra su peón de e5. Fuera del mapa quedan la Húngara y la Rousseau. Y si el rival no juega 2...Cc6, no hay lección, pero la pregunta sirve igual."
           ],
           "tablero": {
             "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
