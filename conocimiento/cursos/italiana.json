@@ -361,7 +361,7 @@
           "desde": 6,
           "lado": "b",
           "intro": "Contra 3...Ac5 saltaste con 4.Cg5 contra f7. Ahora juegas con negras: castiga el error.",
-          "final": "La dama de negras cuidaba g5: ganas un caballo. Por eso, contra 3...Ac5, primero c3.",
+          "final": "La dama de negras cuidaba g5: ganas un caballo. Por eso, contra 3...Ac5, no saltes a g5.",
           "fuente": [
             "WB-3Ac5",
             "MOTOR"
@@ -485,8 +485,8 @@
             "Re1"
           ],
           "texto": [
-            "La pregunta: ¿qué pasó con el peón de e5? Si sigue en e5: el Centro cerrado, sin prisa, y d4 cuando esté preparado. Si se fue a d4 y retomaste con tu peón de c: el Centro ideal; cuida tus peones con piezas. Si retomaste con una pieza: el Centro abierto; saca tus piezas rápido.",
-            "Tres reglas: 1) En tu jugada 4 (o en la 5, si ya jugaste c3), primero mira si atacan una pieza tuya; después, si su caballo de f6 ataca tu peón de e4, d3, y si negras juega pasivo, d4 de inmediato. 2) En el Centro cerrado, con tu torre en e1, nunca eches con h3 a un caballo en g4: la torre regresa a f1. 3) Contra 3...Cd4, no tomes en e5: cambia el caballo."
+            "La pregunta: ¿qué pasó con el peón de e5? Si sigue en e5: el Centro cerrado, sin prisa, y d4 cuando esté preparado. Si se fue a d4 y retomaste con tu peón de c: el Centro ideal: dura poco, y lo que toca depende de la lección. Si retomaste con una pieza: el Centro abierto; saca tus piezas rápido.",
+            "Tres reglas: 1) Antes de cada jugada, mira si atacan una pieza tuya. En tu jugada 4 (o en la 5, si ya jugaste c3): si su caballo de f6 ataca tu peón de e4, d3, y si negras juega pasivo, d4 de inmediato. 2) En el Centro cerrado, con tu torre en e1, nunca eches con h3 a un caballo en g4: la torre regresa a f1. 3) Contra 3...Cd4, no tomes en e5: cambia el caballo."
           ],
           "fuente": [
             "WB-3Ac4",
@@ -722,7 +722,7 @@
           "MOTOR"
         ]
       },
-      "regla": "Si su caballo de f6 ataca tu peón de e4, d3; y con tu torre en e1, nunca eches con h3 a un caballo en g4.",
+      "regla": "En tu jugada 4, si su caballo de f6 ataca tu peón de e4, d3; y con tu torre en e1, nunca eches con h3 a un caballo en g4.",
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas reales: 41.7 % (600–1000) y 36.2 % (1000–1400) de las partidas que llegan a 3.Ac4 siguen con 3...Cf6 (iterations/v4/mapa-italiana.md)"
     },
@@ -978,7 +978,7 @@
       "intro": "Estás en el Centro abierto: sin cadena de peones que sostener, gana quien saca antes sus piezas. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras sostiene e5 con otro peón.",
       "idea": "...d6 es pasiva: d4 de inmediato, retomas con el caballo y sacas tus piezas más rápido que negras.",
       "plan": {
-        "tuyo": "Saca tu último alfil a f4 y lleva una torre a e1. Si negras cambia caballos en d4, retomas con la dama. Si su caballo ataca tu alfil desde e5, retíralo primero a e2.",
+        "tuyo": "Saca tu último alfil a f4 y lleva una torre a e1. Antes de cada paso, mira si atacan una pieza tuya: si su caballo salta a e5, retira tu alfil a e2; si su alfil sale a g4 contra tu dama, f3. Si negras cambia caballos en d4, retomas con la dama.",
         "rival": "Negras busca cambiar piezas para quitarte la ventaja de desarrollo.",
         "marcas": [],
         "marcasDe": {
@@ -999,6 +999,7 @@
                 "punteada": true
               }
             ],
+            [],
             [
               {
                 "tipo": "A3",
@@ -1151,7 +1152,7 @@
       "intro": "Fuera del mapa: aquí el centro no termina en ninguna de las tres formas. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a e7.",
       "idea": "Contra un alfil pasivo en e7, d4 de inmediato; tu peón echa al caballo y tu alfil lo ataca otra vez.",
       "plan": {
-        "tuyo": "Recupera el peón de d4 con cxd4 y después enroca.",
+        "tuyo": "Recupera el peón de d4 con cxd4. Si su caballo ataca tu alfil (...Cb4), retíralo a b3. Después, enroca.",
         "rival": "Negras sostiene su caballo con ...f5.",
         "marcas": [],
         "marcasDe": {
@@ -1186,6 +1187,13 @@
               ]
             },
             {
+              "frase": "Si su caballo ataca tu alfil, ...Cb4, lo retiras: Ab3.",
+              "jugadas": [
+                "...Nb4",
+                "Bb3"
+              ]
+            },
+            {
               "frase": "0-0: tu rey a salvo.",
               "jugadas": [
                 "O-O"
@@ -1210,7 +1218,7 @@
       "intro": "Fuera del mapa: negras ofrece un peón, y el centro no termina en ninguna de las tres formas. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4.",
       "idea": "...f5 debilita al rey de negras: d4 abre el centro y e5 gana espacio.",
       "plan": {
-        "tuyo": "Si su peón de d ataca tu alfil (...d5), sálvalo primero: Ab5. Después, 0-0 y Te1 detrás de tu peón de e5.",
+        "tuyo": "Si su peón de d ataca tu peón de e5 o tu alfil (...d6 o ...d5), tómalo al paso: exd6. Después, 0-0 y Te1.",
         "rival": "Negras ataca tu peón de e5 con ...d6.",
         "marcas": [],
         "marcasDe": {
@@ -1230,12 +1238,18 @@
           "ilustrativo": true,
           "pasos": [
             {
-              "frase": "Tu plan: sacar tus piezas y enrocar; si su peón de d ataca tu alfil, primero lo salvas."
+              "frase": "Tu plan: quitar el peón que te ataca y enrocar."
             },
             {
               "frase": "Negras ataca tu peón de e5 con ...d6.",
               "jugadas": [
                 "...d6"
+              ]
+            },
+            {
+              "frase": "exd6: lo tomas al paso.",
+              "jugadas": [
+                "exd6"
               ]
             },
             {
@@ -1245,7 +1259,7 @@
               ]
             },
             {
-              "frase": "Te1: tu torre detrás de tu peón de e5.",
+              "frase": "Te1: tu torre a la columna e, que quedó abierta.",
               "jugadas": [
                 "Re1"
               ]
@@ -1512,7 +1526,7 @@
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 h6": {
-      "texto": "Negras juega ...h6 para que tu caballo no pueda saltar a g5, pero no saca ninguna pieza.",
+      "texto": "Negras juega ...h6 para que tu caballo no pueda saltar a g5.",
       "marcas": [
         [
           {
@@ -1600,7 +1614,7 @@
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6 c3 Be7": {
-      "texto": "Negras saca su alfil y prepara su enroque, sin defender más su peón.",
+      "texto": "Negras saca su alfil y prepara su enroque.",
       "fuente": [
         "MOTOR"
       ],
@@ -1638,7 +1652,7 @@
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5 Ne4": {
-      "texto": "El caballo salta al centro, sin peones que lo apoyen.",
+      "texto": "El caballo de negras salta al centro.",
       "fuente": [
         "WP-HD"
       ]
@@ -1822,7 +1836,7 @@
       "hace": "Defiendes e4 con un peón y le abres camino a tu alfil de c1.",
       "porque": "Así el caballo de f6 ya no puede tomar en e4: perdería una pieza.",
       "prepara": "Y como e4 ya está seguro, amenazas Cg5 contra f7.",
-      "cuidado": "Si negras golpea con ...d5, toma en d5: si no, su peón se come tu alfil.",
+      "cuidado": "Si negras golpea con ...d5, toma en d5: si juegas otra cosa, su peón se come tu alfil.",
       "marcasDe": {
         "prepara": [
           [
@@ -1847,7 +1861,7 @@
                   "MOTOR"
                 ],
                 "motor": [
-                  "Z-4d5-oo"
+                  "Y-2cd3-a3"
                 ]
               },
               {
@@ -1860,20 +1874,20 @@
                   "MOTOR"
                 ],
                 "motor": [
-                  "Z-4d5-oo"
+                  "Y-2cd3-a3"
                 ]
               },
               {
-                "frase": "5.0-0: enrocas como si nada.",
+                "frase": "5.a3: juegas otra cosa.",
                 "jugadas": [
-                  "O-O"
+                  "a3"
                 ],
                 "fuente": [
                   "WB-4d3",
                   "MOTOR"
                 ],
                 "motor": [
-                  "Z-4d5-oo"
+                  "Y-2cd3-a3"
                 ]
               },
               {
@@ -1886,17 +1900,17 @@
                   "MOTOR"
                 ],
                 "motor": [
-                  "Z-4d5-oo"
+                  "Y-2cd3-a3"
                 ]
               },
               {
-                "frase": "Perdiste tu alfil.",
+                "frase": "Perdiste tu alfil a cambio de un peón.",
                 "fuente": [
                   "WB-4d3",
                   "MOTOR"
                 ],
                 "motor": [
-                  "Z-4d5-oo"
+                  "Y-2cd3-a3"
                 ]
               }
             ]
@@ -1968,7 +1982,8 @@
       "buenas": [
         "d4",
         "Ng5",
-        "Qe2"
+        "Qe2",
+        "Nc3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3": {
@@ -2249,7 +2264,8 @@
         "a4",
         "d3",
         "O-O",
-        "h3"
+        "h3",
+        "Nc3"
       ]
     },
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3": {
@@ -2560,7 +2576,7 @@
     "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4": {
       "clave": true,
       "pregunta": "Negras juega pasivo: no ataca tu peón de e4. Tu peón de c3 ya prepara el avance. ¿Qué haces?",
-      "pista": "Avanza al centro el peón que apoya tu peón de c3.",
+      "pista": "Avanza al centro el peón que tu peón de c3 apoyará.",
       "hace": "Avanzas al centro y atacas el peón de e5.",
       "porque": "Contra una jugada pasiva no hay que esperar: con c3 listo, el centro es tuyo.",
       "prepara": "Si negras cambia en d4, retomas con tu peón de c3 y te quedan dos peones en el centro.",
@@ -2815,7 +2831,7 @@
       "pregunta": "Tu peón de e4 está atacado. ¿Cómo lo defiendes sacando una pieza nueva?",
       "pista": "Con una pieza menor que todavía está en casa y que puede cuidar e4.",
       "hace": "Defiendes e4 y sacas tu otro caballo.",
-      "porque": "Cada jugada saca una pieza nueva: así sigues adelante en desarrollo.",
+      "porque": "Sacas una pieza nueva y cuidas e4 a la vez: así sigues adelante en desarrollo.",
       "marcasDe": {
         "hace": [
           [
@@ -3263,7 +3279,7 @@
       "pregunta": "Tu peón de e4 está atacado. ¿Qué pieza lo defiende desde atrás?",
       "pista": "Una torre en la columna del peón.",
       "hace": "Tu torre defiende e4 desde atrás.",
-      "porque": "Y se queda en la columna e, frente al rey de negras.",
+      "porque": "Tu torre se queda en la columna e, frente al rey de negras.",
       "cuidado": "Si negras juega ...h5 para saltar a g4, h3 le quita esa casilla.",
       "marcasDe": {
         "hace": [
@@ -3415,7 +3431,7 @@
       "pregunta": "Negras debilitó a su rey. ¿Cómo abres el centro?",
       "pista": "Con un peón, atacando e5.",
       "hace": "Atacas el peón de e5 y abres el centro.",
-      "porque": "Su peón de f salió de casa y su rey quedó débil: saca tus piezas rápido y gana espacio.",
+      "porque": "Su peón de f salió de casa y su rey quedó débil: te conviene sacar tus piezas rápido.",
       "cuidado": "Si negras toma en e4, tomas en e5 con el caballo.",
       "fuente": [
         "WB-3f5",
@@ -3557,6 +3573,10 @@
   },
   "glosario": [
     {
+      "termino": "Al paso",
+      "definicion": "Si un peón avanza dos casillas y queda junto a tu peón, puedes tomarlo como si hubiera avanzado una."
+    },
+    {
       "termino": "Cadena de peones",
       "definicion": "Peones en diagonal que se protegen uno a otro."
     },
@@ -3614,7 +3634,7 @@
     },
     {
       "termino": "Pasiva",
-      "definicion": "Una jugada que no ataca nada ni pelea por el centro, como mover un peón de la orilla."
+      "definicion": "En este curso, una jugada de negras que no ataca tu peón de e4 ni una pieza tuya."
     },
     {
       "termino": "Pieza menor",

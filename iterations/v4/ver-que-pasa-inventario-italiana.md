@@ -2,14 +2,14 @@
 
 > Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso «Apertura Italiana»: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
-**76 frases: 9 con "Ver"; 67 sin él** (40 porque explica la jugada que ya está en la línea, sin una alternativa; 18 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 6 porque lo que dice se juega en las jugadas que siguen de la línea; 3 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 4 de las 9 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
+**76 frases: 9 con "Ver"; 67 sin él** (40 porque explica la jugada que ya está en la línea, sin una alternativa; 18 porque dice qué sigue (un plan), no qué pasaría con otra cosa; 6 porque lo que dice se juega en las jugadas que siguen de la línea; 3 porque dice una alternativa, pero sin una consecuencia que se enseñe en el tablero; 0 porque la consecuencia no se sostiene con el motor). 3 de las 9 contienen, en alguna línea, una jugada que esa línea todavía te va a pedir: ahí no salen en Practicar.
 
 ## Con "Ver"
 
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
 | 4.d3 | porque | Así el caballo de f6 ya no puede tomar en e4: perdería una pieza. | 4...♘xe4 5.dxe4 | Aprender y Practicar |
-| 4.d3 | cuidado | Si negras golpea con ...d5, toma en d5: si no, su peón se come tu alfil. | 4...d5 5.0-0 5...dxc4 | solo Aprender |
+| 4.d3 | cuidado | Si negras golpea con ...d5, toma en d5: si juegas otra cosa, su peón se come tu alfil. | 4...d5 5.a3 5...dxc4 | Aprender y Practicar |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | Aprender y Practicar |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | solo Aprender |
 | 8.d5 | cuidado | Si negras toma en e4, tomas su caballo de c6. | 8...♘xe4 9.dxc6 9...♗xf2+ 10.♔f1 | Aprender y Practicar |
@@ -57,7 +57,7 @@
 | 4.d4 | cuidado | Si su alfil de c8 sale a g4 a clavar tu caballo, h3 lo obliga a decidir: cambiarse por tu caballo o retirarse. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.♘xd4 | porque | Sin cadena de peones, tus piezas salen rápido. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.♘xd4 | cuidado | Si su caballo cambia en d4, retoma con la dama. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 6.♘c3 | porque | Cada jugada saca una pieza nueva: así sigues adelante en desarrollo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6.♘c3 | porque | Sacas una pieza nueva y cuidas e4 a la vez: así sigues adelante en desarrollo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.0-0 | porque | Tus caballos y tu alfil ya salieron y tu rey está seguro; el rey de negras sigue en el centro. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | porque | Su jugada fue lenta: abre el centro mientras vas adelante en desarrollo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | cuidado | Aquí no hace falta preparar con c3. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
@@ -68,7 +68,7 @@
 | 4.♘xd4 | porque | Sin ese caballo, la trampa ya no funciona. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.♘xd4 | cuidado | Y si su dama sale a g5 de todos modos, regresa tu caballo a f3. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.0-0 | porque | Negras gastó tiempo con su caballo: tú ya tienes el rey seguro. | explica la jugada que ya está en la línea, sin una alternativa |
-| 6.♖e1 | porque | Y se queda en la columna e, frente al rey de negras. | explica la jugada que ya está en la línea, sin una alternativa |
+| 6.♖e1 | porque | Tu torre se queda en la columna e, frente al rey de negras. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.♖e1 | cuidado | Si negras juega ...h5 para saltar a g4, h3 le quita esa casilla. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 7.c3 | porque | Tus piezas están más adelantadas: abrir el centro te conviene. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.c3 | prepara | Si negras no lo cambia, lo tomas con este peón y te quedan dos peones en el centro. | lo que dice se juega en las jugadas que siguen de la línea |
@@ -79,7 +79,7 @@
 | 5.c3 | cuidado | Si su caballo ataca tu alfil desde a5, sálvalo primero: ♗e2. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.e5 | porque | Ganas espacio, y el caballo tiene que buscar otra casilla. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.♗d5 | porque | Negras tiene que moverlo otra vez, o sostenerlo con su peón de f. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 4.d4 | porque | Su peón de f salió de casa y su rey quedó débil: saca tus piezas rápido y gana espacio. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.d4 | porque | Su peón de f salió de casa y su rey quedó débil: te conviene sacar tus piezas rápido. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | cuidado | Si negras toma en e4, tomas en e5 con el caballo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.e5 | porque | Su rey quedó más débil: ahora sacas tus piezas y enrocas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...♕xg5 | porque | Tu dama cuidaba g5 desde d8: el caballo no tenía apoyo. | explica la jugada que ya está en la línea, sin una alternativa |

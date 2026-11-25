@@ -111,7 +111,7 @@
       "Bb6"
      ],
      "lado": "blancas",
-     "plan": "Si negras responde pasivo con ...d6, aprovecha c3 para jugar d4 de inmediato: tras ...exd4 cxd4 tienes el centro ideal, con peones en e4 y d4. Sigue con h3 (contra ...Ag4) y 0-0; si su caballo de f6 ya ataca e4, d5 echa al caballo de c6 (Cc3 no basta: ...Cxe4 y ...d5 recuperan la pieza).",
+     "plan": "Si negras responde pasivo con ...d6, aprovecha c3 para jugar d4 de inmediato: tras ...exd4 cxd4 tienes el centro ideal, con peones en e4 y d4. Sigue con h3 (contra ...Ag4); si su dama sale a f6, Ae3 protege d4; después, 0-0; si su caballo de f6 ya ataca e4, d5 echa al caballo de c6 (Cc3 no basta: ...Cxe4 y ...d5 recuperan la pieza).",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -296,7 +296,7 @@
       "d6"
      ],
      "lado": "blancas",
-     "plan": "Negras juega sólido pero pasivo: ...d6 le quita casillas a su alfil de f8. Toma el centro de inmediato con 4.d4 (4.d3 es más lento y el motor lo ve peor) y enroca. Si ...Ag4 clava tu caballo, h3 lo obliga a decidir: cambiarse por tu caballo o retirarse. Si su caballo ataca tu alfil desde e5, retíralo antes de enrocar.",
+     "plan": "Negras juega sólido pero pasivo: ...d6 le quita casillas a su alfil de f8. Toma el centro de inmediato con 4.d4 (4.d3 es más lento y el motor lo ve peor) y enroca. Si ...Ag4 clava tu caballo, h3 lo obliga a decidir: cambiarse por tu caballo o retirarse. Si su caballo ataca tu alfil desde e5, retíralo antes de enrocar; si su alfil sale a g4 contra tu dama, f3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -356,7 +356,7 @@
       "Ne4"
      ],
      "lado": "blancas",
-     "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que moverse y tú recuperas el peón de d4 con cxd4 antes de enrocar, con ventaja de espacio. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero.",
+     "plan": "Defensa sólida pero pasiva: el alfil en e7 no presiona nada. Toma el centro con 4.d4; tras 4...exd4 5.c3 Cf6 6.e5 el caballo negro tiene que moverse, y tú recuperas el peón de d4 con cxd4, con ventaja de espacio. Antes de enrocar, mira tu alfil: si un peón o un caballo lo ataca (...d5, ...Cb4 o ...Ca5), sálvalo primero.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -410,7 +410,7 @@
       "f5"
      ],
      "lado": "blancas",
-     "plan": "Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Lo mejor es 4.d4 (o 4.d3 y después Cc3 y 0-0). El orden importa: 4.Cc3 es un error, porque 4...fxe4 ataca tu caballo de f3 y pierdes material. Si negras cambia ...fxe4 después de d3, retoma con el peón (dxe4). Tras 4.d4 exd4 5.e5, si su peón de d ataca tu alfil (...d5), sálvalo primero (Ab5).",
+     "plan": "Gambito arriesgado: ...f5 abre la diagonal de tu alfil hacia g8 y debilita al rey negro. Lo mejor es 4.d4 (o 4.d3 y después Cc3 y 0-0). El orden importa: 4.Cc3 es un error, porque 4...fxe4 ataca tu caballo de f3 y pierdes material. Si negras cambia ...fxe4 después de d3, retoma con el peón (dxe4). Tras 4.d4 exd4 5.e5, si su peón de d ataca tu peón de e5 o tu alfil (...d6 o ...d5), tómalo al paso (exd6).",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -528,7 +528,7 @@
       "O-O"
      ],
      "lado": "blancas",
-     "plan": "...d6 es pasiva: d4 de inmediato. Tras ...exd4 Cxd4 el centro queda abierto (si su caballo cambia en d4, retoma con la dama): Cc3 y 0-0, y aprovechas que vas adelante en desarrollo. Si su caballo ataca tu alfil desde e5, retíralo antes de enrocar.",
+     "plan": "...d6 es pasiva: d4 de inmediato. Tras ...exd4 Cxd4 el centro queda abierto (si su caballo cambia en d4, retoma con la dama): Cc3 y 0-0, y aprovechas que vas adelante en desarrollo. Si su caballo ataca tu alfil desde e5, retíralo antes de enrocar; si su alfil sale a g4 contra tu dama, f3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -608,7 +608,7 @@
       "Bd5"
      ],
      "lado": "blancas",
-     "plan": "Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro tiene que moverse, y si va a e4, 7.Ad5 lo ataca otra vez. Si su caballo de c6 ataca tu alfil desde a5, sálvalo primero. Recupera el peón de d4 con cxd4 y después enroca, con más espacio.",
+     "plan": "Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro tiene que moverse, y si va a e4, 7.Ad5 lo ataca otra vez. Recupera el peón de d4 con cxd4; si su caballo ataca tu alfil (...Cb4 o ...Ca5), sálvalo primero, y después enroca, con más espacio.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -687,7 +687,7 @@
       "e5"
      ],
      "lado": "blancas",
-     "plan": "...f5 debilita al rey negro: 4.d4. Tras ...exd4, 5.e5 gana espacio y le quita f6 al caballo. Si su peón de d ataca tu alfil (...d5), sálvalo primero (Ab5); después, desarrolla y enroca.",
+     "plan": "...f5 debilita al rey negro: 4.d4. Tras ...exd4, 5.e5 gana espacio y le quita f6 al caballo. Si su peón de d ataca tu peón de e5 o tu alfil (...d6 o ...d5), tómalo al paso (exd6); después, desarrolla y enroca.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
