@@ -1,7 +1,7 @@
 import type { Base } from '../base/tipos.ts'
 import type { ColorCorto } from '../ajedrez/reglas.ts'
 import { lineaDeVariante, repertorioInicial, type LineaRepertorio, type Repertorio } from './modelo.ts'
-import { migrarIds, pasarTodas } from '../aprender/migracion.ts'
+import { marcarOtraJugada, migrarIds, pasarTodas } from '../aprender/migracion.ts'
 import { lineasDePgn, ErrorPgn } from './pgn.ts'
 
 /** Agregar a mi repertorio una variante de la base (lo principal de "escoger qué aprendo"). */
@@ -125,7 +125,8 @@ export function importar(texto: string): Respaldo {
     app: 'chess-mis-aperturas',
     version: 2,
     favoritas: v2 ? r.favoritas!.filter((x) => typeof x === 'string') : [],
-    progreso: mudar(v1 ? migrarIds(progreso) : progreso),
+    // lo hecho que viene de otra jugada tuya queda marcado, como al abrir la app (`marcarOtraJugada`)
+    progreso: ((p) => (p && typeof p === 'object' && !Array.isArray(p) ? marcarOtraJugada(p, mudar(p)) : p))(v1 ? migrarIds(progreso) : progreso),
     registro: r.registro ?? [],
     repaso: mudar(v1 ? migrarIds(repaso) : repaso),
     historial: Array.isArray(r.historial) ? r.historial : undefined,

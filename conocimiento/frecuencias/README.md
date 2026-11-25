@@ -2,7 +2,7 @@
 
 Los números con que se decidió qué lección es obligatoria y cuál opcional (`specs/cursos.md` §6, "La regla de obligatorio y opcional"): un archivo chico por curso, con cada lección y cada forma del mapa, por banda, con su `n`. Las pruebas de cada curso leen de aquí; antes los escribían a mano, y una prueba podía pasar con números viejos (cierre de los cursos, 2026-11-25).
 
-**De dónde salen:** partidas Rapid de la base abierta de lichess (CC0, `LICENCIAS.md`), septiembre de 2026, con los dos jugadores en la banda (600–1000 y 1000–1400). El conteo completo (1.4 MB) vive fuera del repo, en `00_corridas/_local/chess/frecuencias-siete/conteo.json`, con su `LEEME.md` (cómo se rehace desde el PGN de lichess). Cada archivo de aquí guarda el `sha256` del conteo del que salió.
+**De dónde salen:** partidas Rapid de la base abierta de lichess (CC0, `LICENCIAS.md`), septiembre de 2026, con los dos jugadores en la banda (600–1000 y 1000–1400). **El conteo completo (1.4 MB) no está en el repo:** vive en `00_corridas/_local/chess/frecuencias-siete/conteo.json`, en las máquinas de Carlos, con su `LEEME.md` y sus scripts (tampoco en el repo). Se rehace desde el PGN abierto de lichess: los primeros 2 GiB de `lichess_db_standard_rated_2026-09.pgn.zst`, las partidas Rapid con los dos jugadores en la banda, hasta 24 medias jugadas, y solo las secuencias con 3 partidas o más (los pasos, en la cabecera de `scripts/frecuencias/comun.mjs`). Las pruebas no lo necesitan: leen estos archivos. Cada archivo de aquí guarda el `sha256` del conteo del que salió.
 
 **Cómo se rehacen:** `node scripts/frecuencias-cursos.mjs [conteo.json] [curso…]`. Cada curso tiene su script en `scripts/frecuencias/<archivo>.mjs`, con el método de su mapa (`iterations/v4/mapa-*.md`).
 

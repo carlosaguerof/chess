@@ -867,7 +867,7 @@
     {
       "id": "principal",
       "base": "giuoco-pianissimo-principal",
-      "nombre": "3...Ac5 y 4...Cf6 (Giuoco Pianissimo)",
+      "nombre": "3...Ac5 y 4...Cf6",
       "desde": 5,
       "estructura": "Centro cerrado",
       "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tus piezas salen antes de que se abra el juego. Ya se jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a c5.",

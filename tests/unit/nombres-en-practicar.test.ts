@@ -60,12 +60,14 @@ function adelantaElNombre(l: LineaCurso): string[] {
  * el rival (el Avance: qué hace negras con d4; la Escandinava: a dónde va su dama; Otras aperturas de blancas: qué peón
  * de blancas ataca tu d5), y su nombre sí puede ir en una lección.
  */
-const FORMAS_QUE_DEFINES_TU: Record<string, { formas: string[]; porque: string }> = {
+const FORMAS_QUE_DEFINES_TU: Record<string, { formas: string[]; sinonimos?: string[]; porque: string }> = {
   'caro-kann:b': { formas: ['Clásica'], porque: 'sus lecciones son las fichas de Repaso del curso que queda, con el mismo nombre' },
   'caro-kann-estructuras:b': { formas: ['Clásica'], porque: 'El mapa: "Tú lo capturaste en e4 y blancas retomó con una pieza: la Clásica."' },
-  'eslava:b': { formas: ['Tensión', 'Checa', 'Pelea del lado de dama'], porque: 'El mapa: "Con e3, no tomas: [...] es la Tensión", "Y si tomaste, ¿alcanzó a jugar a4? Sí: la Checa. No: lo defiendes, y es la Pelea del lado de dama."' },
+  // "la Alekhine" fue el nombre de la Pelea del lado de dama (`iterations/v4/learning.md`): dice lo mismo
+  'eslava:b': { formas: ['Tensión', 'Checa', 'Pelea del lado de dama'], sinonimos: ['Alekhine'], porque: 'El mapa: "Con e3, no tomas: [...] es la Tensión", "Y si tomaste, ¿alcanzó a jugar a4? Sí: la Checa. No: lo defiendes, y es la Pelea del lado de dama."' },
   'siciliana:w': { formas: ['aislado', 'cadena', 'dos peones del centro'], porque: 'El mapa: ¿qué pasó con tu peón de e4? Lo cambiaste en d5, lo avanzaste a e5 o sigue en e4.' },
-  'italiana:w': { formas: ['Centro cerrado', 'Centro ideal', 'Centro abierto'], porque: 'El mapa: con blancas la forma la decides tú (d3, o d4 y cómo retomas).' },
+  // el Giuoco Pianissimo es la Italiana con d3: el Centro cerrado, que defines tú (revisión del cierre, 2026-11-25)
+  'italiana:w': { formas: ['Centro cerrado', 'Centro ideal', 'Centro abierto'], sinonimos: ['Pianissimo'], porque: 'El mapa: con blancas la forma la decides tú (d3, o d4 y cómo retomas).' },
 }
 
 const variantes = Object.values(CURSOS_NUEVOS).flatMap((c) => lineasDe(c).filter((l) => l.tipo === 'variante').map((l) => ({ c, l })))
@@ -105,7 +107,7 @@ describe('§3.3 · en Practicar, el nombre de la lección no adelanta tu jugada'
     const f = FORMAS_QUE_DEFINES_TU[c.id]
     if (!f) continue
     it(`${c.id} · «${l.nombre}»: no nombra una forma que defines tú`, () => {
-      for (const forma of f.formas) expect(l.nombre.toLowerCase().includes(forma.toLowerCase()), `${forma}: ${f.porque}`).toBe(false)
+      for (const forma of [...f.formas, ...(f.sinonimos ?? [])]) expect(l.nombre.toLowerCase().includes(forma.toLowerCase()), `${forma}: ${f.porque}`).toBe(false)
     })
   }
 
@@ -113,6 +115,9 @@ describe('§3.3 · en Practicar, el nombre de la lección no adelanta tu jugada'
     const f = FORMAS_QUE_DEFINES_TU['siciliana:w']!
     expect(f.formas.some((x) => '2...Cf6: La cadena'.toLowerCase().includes(x.toLowerCase()))).toBe(true)
     expect(FORMAS_QUE_DEFINES_TU['caro-kann-estructuras:b']!.formas.some((x) => 'Clásica: 3.Cc3'.includes(x))).toBe(true)
+    // y sus sinónimos: el Giuoco Pianissimo es el Centro cerrado, y "la Alekhine" fue el nombre de la Pelea del lado de dama
+    expect(FORMAS_QUE_DEFINES_TU['italiana:w']!.sinonimos!.some((x) => '3...Ac5 y 4...Cf6 (Giuoco Pianissimo)'.includes(x))).toBe(true)
+    expect(FORMAS_QUE_DEFINES_TU['eslava:b']!.sinonimos!.some((x) => 'Alekhine: 5.e3'.includes(x))).toBe(true)
   })
 
   it('Practicar no muestra otra etiqueta con la forma: la estructura de la lección va solo en la página del curso', async () => {

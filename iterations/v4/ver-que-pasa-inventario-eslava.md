@@ -9,7 +9,7 @@
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
 | 2...c6 | prepara | Con ...e6 harías lo mismo, pero ese alfil se quedaría encerrado detrás de tus peones. | 2...e6 | solo Aprender |
-| 3...♘f6 | prepara | Por eso sale antes que tu alfil de c8: sin el caballo, cxd5 y ♕b3 atacarían b7 y d5 a la vez. | 3...♗f5 4.cxd5 4...cxd5 5.♕b3 | Aprender; en Practicar, solo en Alekhine: 5.e3, Gambito Geller: 5.e4 |
+| 3...♘f6 | prepara | Por eso sale antes que tu alfil de c8: sin el caballo, cxd5 y ♕b3 atacarían b7 y d5 a la vez. | 3...♗f5 4.cxd5 4...cxd5 5.♕b3 | Aprender; en Practicar, solo en 5.e3, Gambito Geller: 5.e4 |
 | 4...♗f5 | porque | Blancas ya jugó e3: si tomaras en c4, su alfil de f1 lo recuperaría de una vez. | 4...dxc4 5.♗xc4 | Aprender y Practicar |
 | 5...e6 | cuidado | Si la dama blanca va a b3 contra b7 antes de cambiar en d5, tu dama la enfrenta en b6. | 6.♕b3 6...♕b6 | Aprender y Practicar |
 | 5...♗f5 | prepara | Desde f5 tu alfil frena e4: si blancas lo juega, pierde ese peón. | 6.e4 6...♘xe4 7.♘xe4 7...♗xe4 | Aprender; en Practicar, solo en 5.a4, 5.a4 y 6.♘e5 (Carlsbad) |

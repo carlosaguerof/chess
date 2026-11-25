@@ -21,7 +21,7 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 - **Lo que más me va a salir y no tiene lección** está en el mapa, con su plan en una frase: los dos peones del centro en la Alapin (55 % de las partidas de 1000–1400), los jaques de la dama en la Escandinava, 3...e6 contra el Avance de la Caro-Kann y otras. Si quiero una lección para alguna, se agrega.
 - **Mis otras jugadas buenas ya no son lecciones aparte.** Cuando la base traía dos jugadas mías en la misma posición, el curso enseña una y la otra sale en azul: "Buena jugada, pero esta lección enseña otra línea". Por eso el Avance contra la Caro-Kann tiene 2 lecciones y no 7.
 - **Con blancas, el plan del final dice "El de negras:"** (antes decía siempre "El de blancas:").
-- **Doce lecciones cambiaron de nombre,** porque en Practicar el nombre se ve arriba antes de mi jugada y la adelantaba: "3...Ac5 4.c3 Cf6" pedía 4.c3 (ahora "3...Ac5 y 4...Cf6 (Giuoco Pianissimo)"), y "Clásica: 3.Cc3" decía que iba a capturar en e4 (ahora "3.Cc3"). Las doce, en `log.md`.
+- **Trece lecciones cambiaron de nombre,** porque en Practicar el nombre se ve arriba antes de mi jugada y la adelantaba: "3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)" pedía 4.c3, y el Pianissimo es la Italiana con d3, que también juegas tú (ahora "3...Ac5 y 4...Cf6"), y "Clásica: 3.Cc3" decía que iba a capturar en e4 (ahora "3.Cc3"). Las trece, en `log.md`. El Repaso sigue reconociendo lo que fallaste con el nombre de antes, también con el que tenía la lección en la versión publicada.
 
 ## El Repaso, Refuerza y la guía
 
@@ -33,7 +33,7 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 
 - **Lo que llevaba en el Repaso de una lección vieja** pasa a la lección nueva de la misma línea, una vez, al abrir la app. Nada se borra.
 - **Un Respaldo de antes de esta actualización también sirve:** al importarlo, lo de las lecciones viejas pasa a las nuevas igual que al abrir la app. Antes, esas lecciones quedaban guardadas pero dejaban de salir en el Repaso.
-- **La tarjeta y la página de cada curso cuentan lo que ya había hecho en la lección de antes:** una lección vieja hecha sale "Hecha" en la nueva de la misma línea (antes, la Alapin decía "0 de 2" aunque hubiera hecho las dos). "Aprendida" no se pasa: la lección de antes no la guardaba. La Caro-Kann sigue como estaba: su avance empezó en cero cuando llegó el piloto, el 2026-10-29.
+- **La tarjeta y la página de cada curso cuentan lo que ya había hecho en la lección de antes:** una lección vieja hecha sale "Hecha" en la nueva de la misma línea (antes, la Alapin decía "0 de 2" aunque hubiera hecho las dos). Si la vieja era otra jugada mía, como la Semieslava o la Stoltz, su ficha del Repaso se muda pero la nueva no sale "Hecha": esa línea no la estudié. "Aprendida" no se pasa: la lección de antes no la guardaba. La Caro-Kann sigue como estaba: su avance empezó en cero cuando llegó el piloto, el 2026-10-29.
 
 ## Lo que falta
 

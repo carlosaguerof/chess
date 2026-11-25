@@ -8,6 +8,13 @@
 //
 //   node scripts/frecuencias-cursos.mjs [conteo.json] [curso…]
 //
+// **El conteo no está en el repo** (1.4 MB) y estos scripts lo necesitan; las pruebas no: leen los JSON chicos. Se rehace
+// desde el PGN abierto de lichess con los scripts de su carpeta (`LEEME.md` ahí, "Cómo se rehace"): bajar los primeros
+// 2 GiB de `https://database.lichess.org/standard/lichess_db_standard_rated_2026-09.pgn.zst`; `extrae.py` (las partidas
+// "Rated Rapid game" con los dos jugadores en 600–1000 o 1000–1400, hasta 24 medias jugadas), `prefijos.py` y `minimo.py`
+// (cuántas partidas pasan por cada secuencia, con 3 o más) y `necesarias.mjs` (el recorte a lo que usan los cursos). Esos
+// scripts tampoco están en el repo. El `sha256` de cada JSON dice de qué conteo salió.
+//
 // Este archivo viene de `comun.mjs` de esa carpeta (la clave de una posición, el árbol de partidas), con chess.js del repo.
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'

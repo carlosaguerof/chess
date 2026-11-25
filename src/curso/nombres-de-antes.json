@@ -1,0 +1,207 @@
+{
+ "caro-kann:b/b:caro-kann/curso-apocalipsis": [
+  "Defensa Caro-Kann: Ataque Apocalipsis (2.Cf3 d5 3.exd5)"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-bayoneta": [
+  "Variante del Avance: Ataque Bayoneta"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-bronstein": [
+  "Variante del Avance: Variante Bronstein"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-c3": [
+  "Variante del Avance: Short (4.c3 y 5.Ae2)"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-short": [
+  "Variante del Avance: Defensa Botvinnik-Carls",
+  "Variante del Avance: Short (4.Cf3)"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-tal": [
+  "Variante del Avance: Variante Tal"
+ ],
+ "caro-kann:b/b:caro-kann/curso-avance-van-der-wiel": [
+  "Variante del Avance: Ataque Van der Wiel"
+ ],
+ "caro-kann:b/b:caro-kann/curso-cambio": [
+  "Variante del Cambio: Variante Rubinstein"
+ ],
+ "caro-kann:b/b:caro-kann/curso-clasica": [
+  "Clásica: 3.Cc3",
+  "Defensa Caro-Kann: 3.Cc3 dxe4",
+  "Variante Clásica",
+  "Variante Karpov",
+  "Variante Karpov: Línea principal moderna",
+  "Variante Karpov: Variante Moderna, Ataque Kasparov"
+ ],
+ "caro-kann:b/b:caro-kann/curso-dos-caballos": [
+  "Ataque de los Dos Caballos: Variante Mindeno, línea del cambio"
+ ],
+ "caro-kann:b/b:caro-kann/curso-fantasia": [
+  "Variante Maróczy: Gambito Maróczy"
+ ],
+ "caro-kann:b/b:caro-kann/curso-hillbilly": [
+  "Ataque Hillbilly: Gambito Schaeffer"
+ ],
+ "caro-kann:b/b:caro-kann/curso-oferta-final": [
+  "Defensa Caro-Kann: Oferta de Final (2.Cf3 d5 3.d3)"
+ ],
+ "caro-kann:b/b:caro-kann/curso-panov-acelerado": [
+  "Ataque Panov Acelerado: Variante Moderna"
+ ],
+ "caro-kann:b/b:caro-kann/panov-principal": [
+  "Ataque Panov: Defensa Moderna, línea Mieses"
+ ],
+ "caro-kann:w/w:caro-kann/avance-curso-botvinnik-carls": [
+  "Variante del Avance: Defensa Botvinnik-Carls"
+ ],
+ "caro-kann:w/w:caro-kann/avance-curso-short": [
+  "Variante del Avance: Short (4.c3 y 5.Ae2)"
+ ],
+ "escandinava:w/w:escandinava/curso-bronstein": [
+  "Variante Bronstein"
+ ],
+ "escandinava:w/w:escandinava/curso-clasica": [
+  "Variante Clásica"
+ ],
+ "escandinava:w/w:escandinava/curso-gipslis": [
+  "Variante Moderna: Variante Gipslis"
+ ],
+ "escandinava:w/w:escandinava/curso-lasker": [
+  "Variante Lasker"
+ ],
+ "escandinava:w/w:escandinava/curso-marshall": [
+  "Variante Marshall"
+ ],
+ "escandinava:w/w:escandinava/curso-richter": [
+  "Variante Richter"
+ ],
+ "escandinava:w/w:escandinava/curso-schiller-pytel": [
+  "Variante Schiller-Pytel"
+ ],
+ "escandinava:w/w:escandinava/curso-valenciana": [
+  "Variante Valenciana: línea principal"
+ ],
+ "eslava:b/b:eslava/cambio-trifunovic": [
+  "Defensa Eslava: Variante del Cambio, Variante Trifunovic"
+ ],
+ "eslava:b/b:eslava/checa-carlsbad": [
+  "Defensa Eslava: Variante Checa, Variante Carlsbad"
+ ],
+ "eslava:b/b:eslava/curso-alekhine-e3": [
+  "Defensa Eslava: Variante Alekhine"
+ ],
+ "eslava:b/b:eslava/curso-cambio": [
+  "Defensa Eslava: Variante del Cambio, Línea Simétrica"
+ ],
+ "eslava:b/b:eslava/curso-cc3": [
+  "Defensa Eslava: 3.Cc3 dxc4"
+ ],
+ "eslava:b/b:eslava/curso-checa": [
+  "Defensa Eslava: Variante Checa",
+  "Defensa Semieslava"
+ ],
+ "eslava:b/b:eslava/curso-checa-clasica": [
+  "Defensa Eslava: Variante Checa, Variante Holandesa, Sämisch"
+ ],
+ "eslava:b/b:eslava/curso-diemer": [
+  "Defensa Eslava: Gambito Diemer"
+ ],
+ "eslava:b/b:eslava/curso-geller": [
+  "Defensa Eslava: Gambito Geller"
+ ],
+ "eslava:b/b:eslava/curso-moderna-g3": [
+  "Defensa Eslava: Línea Moderna"
+ ],
+ "eslava:b/b:eslava/curso-tranquila-schallopp": [
+  "Defensa Eslava: Variante Tranquila, Defensa de la Clavada",
+  "Defensa Eslava: Variante Tranquila, Defensa Schallopp"
+ ],
+ "francesa:w/w:francesa/curso-avance-c3": [
+  "Variante del Avance: 3...c5 4.c3"
+ ],
+ "francesa:w/w:francesa/curso-cambio-de-alfil": [
+  "Variante del Avance: Cambio de Alfil Extendido"
+ ],
+ "francesa:w/w:francesa/curso-euwe": [
+  "Variante del Avance: Variante Euwe"
+ ],
+ "francesa:w/w:francesa/curso-lputian": [
+  "Variante del Avance: Variante Lputian"
+ ],
+ "francesa:w/w:francesa/curso-paulsen": [
+  "Variante del Avance: Ataque Paulsen"
+ ],
+ "francesa:w/w:francesa/curso-principal-a3": [
+  "Variante del Avance: línea principal"
+ ],
+ "francesa:w/w:francesa/curso-wade": [
+  "Variante del Avance: Variante Wade"
+ ],
+ "italiana:w/w:italiana/curso-anti-higado-frito": [
+  "Defensa Anti-Hígado Frito"
+ ],
+ "italiana:w/w:italiana/curso-blackburne-kostic": [
+  "Gambito Blackburne-Kostić"
+ ],
+ "italiana:w/w:italiana/curso-dos-caballos-d3": [
+  "Defensa de los Dos Caballos: Apertura de Alfil Moderna"
+ ],
+ "italiana:w/w:italiana/curso-hungara": [
+  "Defensa Húngara: Variante Tartakower"
+ ],
+ "italiana:w/w:italiana/curso-la-bourdonnais": [
+  "Variante Clásica: Variante La Bourdonnais"
+ ],
+ "italiana:w/w:italiana/curso-paris": [
+  "Defensa París"
+ ],
+ "italiana:w/w:italiana/curso-rousseau": [
+  "Gambito Rousseau"
+ ],
+ "italiana:w/w:italiana/giuoco-pianissimo-principal": [
+  "Variante Clásica, Giuoco Pianissimo: línea principal"
+ ],
+ "otros-negras:b/b:otros-negras/curso-inglesa-anglo-eslava-g3": [
+  "Apertura Réti: Variante Anglo-Eslava, con g3"
+ ],
+ "otros-negras:b/b:otros-negras/curso-inglesa-caro-kann": [
+  "Apertura Inglesa: Sistema defensivo Caro-Kann"
+ ],
+ "otros-negras:b/b:otros-negras/curso-larsen-clasica": [
+  "Ataque Nimzo-Larsen: Variante Clásica"
+ ],
+ "otros-negras:b/b:otros-negras/curso-otras-bird": [
+  "Apertura Bird: Variante Holandesa"
+ ],
+ "otros-negras:b/b:otros-negras/curso-otras-hungara": [
+  "Apertura Húngara: Formación Eslava"
+ ],
+ "otros-negras:b/b:otros-negras/curso-reti-bogoljubow": [
+  "Apertura Réti: Variante Anglo-Eslava, Variante Bogoljubow"
+ ],
+ "otros-negras:b/b:otros-negras/inglesa-gurevich": [
+  "Apertura Réti: Variante Anglo-Eslava, Sistema Gurevich"
+ ],
+ "otros-negras:b/b:otros-negras/reti-fianchetto": [
+  "Juego de Peón de Dama: Variante Simétrica, Pseudo-Catalana"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-cambio-central": [
+  "Variante Alapin: Defensa Barmen, Cambio Central"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-cc6": [
+  "Variante Alapin: Defensa Barmen con 4...Cc6"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-cf6-d4": [
+  "Variante Alapin: Ataque Stoltz",
+  "Variante Alapin: Smith-Morra Rehusado",
+  "Variante Heidenfeld"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-g6": [
+  "Variante Alapin: Defensa Barmen con 4...g6"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-gambito": [
+  "Variante Alapin: Gambito Anti-Alapin"
+ ],
+ "siciliana:w/w:siciliana/alapin-curso-moderna": [
+  "Variante Alapin: Defensa Barmen, Línea Moderna"
+ ]
+}

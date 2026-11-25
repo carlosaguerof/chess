@@ -62,11 +62,12 @@ export function leerAvance(cursoId: string): AvanceCurso {
     }
   const c = deLaLeccionDeAntes ? cursoNuevo(cursoId) : undefined
   if (c) {
-    const hechas = leer<Record<string, { fecha?: number } | undefined>>('progreso', {})
+    const hechas = leer<Record<string, { fecha?: number; otraJugada?: boolean } | undefined>>('progreso', {})
     if (hechas && typeof hechas === 'object')
       for (const v of c.variantes) {
         const h = hechas[leccionIdDe(c, v)]
-        if (!h || variantes[v.id]?.terminada) continue
+        // lo que vino de otra jugada tuya no cuenta: esa línea no se estudió (`marcarOtraJugada`)
+        if (!h || h.otraJugada || variantes[v.id]?.terminada) continue
         variantes[v.id] = { ...variantes[v.id], terminada: typeof h.fecha === 'number' ? h.fecha : 1 }
       }
   }

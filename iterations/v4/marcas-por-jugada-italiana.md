@@ -35,16 +35,16 @@
 | 5.Cxd4 | 3...h6 | tuya | no |  |
 | 5...Cf6 | 3...h6 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
 | 6.Cc3 | 3...h6 | tuya | sí | mía hace frase 1: flecha c3→e4 (A2, verde) |
-| 4...Cf6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
-| 5.d3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | no |  |
-| 5...d6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | no |  |
-| 6.0-0 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | no |  |
-| 6...0-0 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | no |  |
-| 7.Te1 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
-| 7...a6 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha b7→b5 (A7, roja, punteada); flecha b5→c4 (A7, roja, punteada) |
-| 8.Ab3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía hace frase 1: flecha b3→f7 (A2, verde) |
-| 8...Aa7 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | del rival | sí | rival frase 1: flecha a7→f2 (A4, roja) |
-| 9.h3 | 3...Ac5 y 4...Cf6 (Giuoco Pianissimo) | tuya | sí | mía prepara frase 1: flecha d3→d4 (A3, verde, punteada) |
+| 4...Cf6 | 3...Ac5 y 4...Cf6 | del rival | sí | rival frase 1: flecha f6→e4 (A4, roja) |
+| 5.d3 | 3...Ac5 y 4...Cf6 | tuya | no |  |
+| 5...d6 | 3...Ac5 y 4...Cf6 | del rival | no |  |
+| 6.0-0 | 3...Ac5 y 4...Cf6 | tuya | no |  |
+| 6...0-0 | 3...Ac5 y 4...Cf6 | del rival | no |  |
+| 7.Te1 | 3...Ac5 y 4...Cf6 | tuya | sí | mía hace frase 1: flecha e1→e4 (A2, verde) |
+| 7...a6 | 3...Ac5 y 4...Cf6 | del rival | sí | rival frase 1: flecha b7→b5 (A7, roja, punteada); flecha b5→c4 (A7, roja, punteada) |
+| 8.Ab3 | 3...Ac5 y 4...Cf6 | tuya | sí | mía hace frase 1: flecha b3→f7 (A2, verde) |
+| 8...Aa7 | 3...Ac5 y 4...Cf6 | del rival | sí | rival frase 1: flecha a7→f2 (A4, roja) |
+| 9.h3 | 3...Ac5 y 4...Cf6 | tuya | sí | mía prepara frase 1: flecha d3→d4 (A3, verde, punteada) |
 | 3...d6 | 3...d6 (Defensa París) | del rival | no |  |
 | 4.d4 | 3...d6 (Defensa París) | tuya | no |  |
 | 4...exd4 | 3...d6 (Defensa París) | del rival | no |  |

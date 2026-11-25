@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { migrarTodo, pasarTodas, TABLAS_DE_MUDANZA } from '../../src/aprender/migracion.ts'
+import { execFileSync } from 'node:child_process'
+import { esOtraJugada, migrarTodo, pasarTodas, TABLAS_DE_MUDANZA } from '../../src/aprender/migracion.ts'
+import { BASE } from '../../src/base/base.ts'
+import NOMBRES_PUBLICADOS_JSON from '../../src/curso/nombres-de-antes.json' with { type: 'json' }
 import { exportar, importar } from '../../src/repertorio/edicion.ts'
 import { guardar } from '../../src/estado/almacen.ts'
 import { leerProgreso } from '../../src/repertorio/estado.ts'
@@ -17,6 +20,7 @@ import { CURSOS_DE_LA_LECCION_DE_ANTES, leerAvance, marcarVariante } from '../..
  * línea, en los siete cursos, sin contar dos veces.
  */
 
+const NOMBRES_PUBLICADOS = NOMBRES_PUBLICADOS_JSON as Record<string, string[]>
 const HOY = '2026-11-25'
 const cursoDe = (prefijo: string) => prefijo.slice(0, prefijo.indexOf('/'))
 
@@ -125,7 +129,8 @@ describe('§3.2 · el avance de las lecciones viejas, una sola regla', () => {
       migrarTodo()
       const a = leerAvance(id)
       const hechas = leerProgreso()
-      const esperadas = c.variantes.filter((v) => hechas[leccionIdDe(c, v)]).map((v) => v.id)
+      // lo que vino de otra jugada tuya no cuenta (`marcarOtraJugada`)
+      const esperadas = c.variantes.filter((v) => hechas[leccionIdDe(c, v)] && !(hechas[leccionIdDe(c, v)] as { otraJugada?: boolean }).otraJugada).map((v) => v.id)
       if (!cuenta) {
         expect(a.variantes).toEqual({})
         return
@@ -168,6 +173,145 @@ describe('§3.2 · el avance de las lecciones viejas, una sola regla', () => {
   })
 })
 
+/**
+ * La revisión del cierre (2026-11-25): lo que hay en el teléfono es lo publicado (`main` `1baf424`), no `main`. Ahí los
+ * siete cursos usaban la lección de antes, que guardaba en el registro el nombre de la variante de la base. Un fallo
+ * guardado así, después del último repaso, tiene que seguir regresando la ficha al escalón 1 después de la actualización.
+ */
+describe('lo publicado → hoy · los fallos guardados con los nombres publicados siguen contando en el Repaso', () => {
+  const T0 = Date.parse('2026-11-10T12:00:00Z')
+  const T1 = Date.parse('2026-11-20T12:00:00Z')
+  const fenCorto = (ch: Chess) => ch.fen().split(' ').slice(0, 4).join(' ')
+  const leccion = (id: string) => cursos().flatMap((c) => c.lecciones).find((x) => x.id === id)
+  /** Un fallo en la jugada `ply` de una línea, guardado con el nombre `linea`. */
+  const falloEn = (jugadas: string[], ply: number, linea: string) => {
+    const ch = new Chess()
+    for (const s of jugadas.slice(0, ply)) ch.move(s)
+    return [{ fen: fenCorto(ch), esperada: jugadas[ply]!, resultado: 'fallo' as const, lugar: 'curso' as const, fecha: T1, linea }]
+  }
+  const ficha = { escalon: 4, proxima: '2026-12-20', ultima: T0 }
+
+  for (const { prefijo, tabla } of TABLAS_DE_MUDANZA) {
+    const curso = cursoDe(prefijo)
+    const apertura = prefijo.slice(prefijo.lastIndexOf(':') + 1, -1)
+    it(`${curso}: cada lección vieja, hecha y con su ficha, y un fallo con su nombre publicado: al migrar, su ficha nueva regresa al escalón 1`, () => {
+      let revisadas = 0
+      for (const [vieja, nueva] of Object.entries(tabla)) {
+        const base = BASE.aperturas.find((a) => a.id === apertura)!
+        const v = base.variantes.find((x) => x.id === vieja)
+        const n = base.variantes.find((x) => x.id === nueva)!
+        if (!v) continue
+        instalarLocalStorage()
+        guardar('progreso', { [prefijo + vieja]: { fecha: T0 } })
+        guardar('repaso', { [prefijo + vieja]: ficha })
+        // la primera jugada tuya que las dos líneas comparten: ahí falló en la lección de antes
+        const ply = n.jugadas.findIndex((s, i) => (i % 2 === 0 ? 'w' : 'b') === prefijo[prefijo.indexOf(':') + 1] && v.jugadas.slice(0, i + 1).join(' ') === n.jugadas.slice(0, i + 1).join(' '))
+        expect(ply, `${vieja}: comparte una jugada tuya con ${nueva}`).toBeGreaterThanOrEqual(0)
+        const registro = falloEn(n.jugadas, ply, v.nombre)
+        migrarTodo()
+        const l = leccion(prefijo + nueva)!
+        expect(l, prefijo + nueva).toBeDefined()
+        expect(l.nombresAntes ?? [], `${vieja}: «${v.nombre}»`).toContain(v.nombre)
+        expect(fichaDe(leerRepaso(), l.id, leerProgreso(), registro, l)!.escalon, `${vieja} → ${nueva}`).toBe(1)
+        // un fallo con el nombre de otra lección no cuenta
+        expect(fichaDe(leerRepaso(), l.id, leerProgreso(), falloEn(n.jugadas, ply, 'Otra lección'), l)!.escalon).toBe(4)
+        revisadas++
+      }
+      expect(revisadas).toBeGreaterThan(0)
+    })
+  }
+
+  it('y cada lección que ya era lección con su id (lo publicado de la misma variante): cada nombre suyo publicado cuenta', () => {
+    let revisadas = 0
+    for (const id of Object.keys(NOMBRES_PUBLICADOS)) {
+      const l = leccion(id)
+      if (!l) continue // una opcional de hoy no está en cursos() con ficha: no sale en el Repaso
+      for (const nombre of NOMBRES_PUBLICADOS[id]!) {
+        const ply = l.jugadas.findIndex((_, i) => (i % 2 === 0 ? 'w' : 'b') === l.color)
+        const e = { [id]: ficha }
+        expect(fichaDe(e, id, { [id]: { fecha: T0 } }, falloEn(l.jugadas, ply, nombre), l)!.escalon, `${id}: «${nombre}»`).toBe(1)
+        revisadas++
+      }
+    }
+    expect(revisadas).toBeGreaterThan(50)
+  })
+
+  it('los nombres publicados incluyen los que citó la revisión', () => {
+    expect(NOMBRES_PUBLICADOS['siciliana:w/w:siciliana/alapin-curso-cambio-central']).toContain('Variante Alapin: Defensa Barmen, Cambio Central')
+    expect(NOMBRES_PUBLICADOS['italiana:w/w:italiana/curso-paris']).toContain('Defensa París')
+    expect(NOMBRES_PUBLICADOS['caro-kann:b/b:caro-kann/curso-clasica']).toContain('Clásica: 3.Cc3')
+  })
+
+  it('el archivo de nombres publicados está al día con su script (si este clon tiene el commit publicado)', () => {
+    let hay = true
+    try {
+      execFileSync('git', ['cat-file', '-e', '1baf424^{commit}'], { stdio: 'ignore' })
+    } catch {
+      hay = false // una copia sin la historia (la corrida de GitHub clona solo la punta)
+    }
+    if (!hay) return
+    const salida = execFileSync('node', ['scripts/nombres-publicados.ts'], { encoding: 'utf8' })
+    expect(JSON.parse(salida)).toEqual(NOMBRES_PUBLICADOS)
+  })
+})
+
+describe('el avance de varias lecciones viejas a una: solo cuenta la misma línea', () => {
+  it('son otra jugada tuya la Semieslava, la Clavada, la Stoltz y la Heidenfeld (en los siete cursos, solo esas)', () => {
+    const otras = TABLAS_DE_MUDANZA.filter((t) => cursoDe(t.prefijo) !== 'caro-kann:b').flatMap((t) => Object.entries(t.tabla).filter(([v, n]) => esOtraJugada(t.prefijo, v, n)).map(([v]) => v))
+    expect(otras.sort()).toEqual(['alapin-cf6-heidenfeld', 'alapin-cf6-stoltz', 'semieslava', 'tranquila-clavada'])
+  })
+
+  for (const [curso, vieja, nuevaId] of [
+    ['eslava:b', 'semieslava', 'checa'],
+    ['eslava:b', 'tranquila-clavada', 'tranquila-schallopp'],
+    ['siciliana:w', 'alapin-cf6-stoltz', 'cf6-d4'],
+    ['siciliana:w', 'alapin-cf6-heidenfeld', 'cf6-d4'],
+  ] as const)
+    it(`${curso}: hecha solo ${vieja} → su ficha se muda, pero «${nuevaId}» no sale "Hecha"; al abrir y al importar`, async () => {
+      const c = cursoNuevo(curso)!
+      const v = c.variantes.find((x) => x.id === nuevaId)!
+      const prefijo = `${curso}/${c.color}:${c.apertura}/`
+      // al abrir
+      guardar('progreso', { [prefijo + vieja]: { fecha: 5 } })
+      guardar('repaso', { [prefijo + vieja]: { escalon: 2, proxima: '2026-11-20' } })
+      migrarTodo()
+      expect(leerRepaso()[leccionIdDe(c, v)]).toEqual({ escalon: 2, proxima: '2026-11-20' })
+      expect(leerProgreso()[leccionIdDe(c, v)]).toEqual({ fecha: 5, otraJugada: true })
+      expect(leerAvance(curso).variantes[v.id]).toBeUndefined()
+      // al importar un Respaldo viejo
+      const { cargarRespaldo } = await import('../../src/estado/respaldo.ts')
+      instalarLocalStorage()
+      migrarTodo()
+      cargarRespaldo(importar(exportar({ favoritas: [], progreso: { [prefijo + vieja]: { fecha: 5 } }, registro: [], repaso: {} })))
+      expect(leerAvance(curso).variantes[v.id]).toBeUndefined()
+      // si después la termino en el curso nuevo, sí cuenta
+      marcarVariante(curso, v.id, 'terminada', 9)
+      expect(leerAvance(curso).variantes[v.id]).toEqual({ terminada: 9 })
+    })
+
+  it('la misma línea sí cuenta: hecha la Checa de antes → «5.a4» sale "Hecha"', () => {
+    guardar('progreso', { 'eslava:b/b:eslava/checa': { fecha: 3 } })
+    migrarTodo()
+    expect(leerAvance('eslava:b').variantes.checa).toEqual({ terminada: 3 })
+  })
+})
+
+describe('la marca de la migración del Avance sube a 2', () => {
+  it('una copia que ya abrió main (modelo-avance en 1) muda las opcionales nuevas de la Francesa al abrir', () => {
+    guardar('modelo', 2)
+    for (const m of ['modelo-caro-kann', 'modelo-italiana', 'modelo-eslava', 'modelo-escandinava', 'modelo-alapin', 'modelo-avance']) guardar(m, 1)
+    guardar('progreso', { 'francesa:w/w:francesa/lputian': { fecha: 4 }, 'francesa:w/w:francesa/curso-paulsen': { fecha: 6 } })
+    migrarTodo()
+    expect(leerProgreso()).toEqual({ 'francesa:w/w:francesa/curso-lputian': { fecha: 4 }, 'francesa:w/w:francesa/curso-paulsen': { fecha: 6 } })
+    expect(leerAvance('francesa:w').variantes.lputian).toEqual({ terminada: 4 })
+    expect(localStorage.getItem('ajedrez.v1.modelo-avance')).toBe('2')
+    // y no vuelve a correr
+    guardar('progreso', { 'francesa:w/w:francesa/euwe': { fecha: 1 } })
+    migrarTodo()
+    expect(leerProgreso()).toEqual({ 'francesa:w/w:francesa/euwe': { fecha: 1 } })
+  })
+})
+
 describe('§3.3 y el Repaso · una lección renombrada sigue reconociendo sus fallos de antes', () => {
   it('cada nombre de antes es de una variante que existe y que hoy se llama distinto', () => {
     for (const [curso, vs] of Object.entries(NOMBRES_DE_ANTES))
@@ -181,7 +325,7 @@ describe('§3.3 y el Repaso · una lección renombrada sigue reconociendo sus fa
   it('un fallo guardado con el nombre de antes («Clásica: 3.Cc3», ya publicada) regresa la ficha al escalón 1', () => {
     const l = cursos().find((x) => x.id === 'caro-kann:b')!.lecciones.find((x) => x.id.endsWith('/curso-clasica'))!
     expect(l.nombre).toBe('3.Cc3')
-    expect(l.nombresAntes).toEqual(['Clásica: 3.Cc3'])
+    expect(l.nombresAntes).toContain('Clásica: 3.Cc3')
     const ply = l.jugadas.indexOf('dxe4')
     const ch = new Chess()
     for (const s of l.jugadas.slice(0, ply)) ch.move(s)

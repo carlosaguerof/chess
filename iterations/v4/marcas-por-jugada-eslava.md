@@ -56,14 +56,14 @@
 | 9...Ce4 | 5.a4 y 9.De2 (Sämisch) | tuya | no |  |
 | 10.g4 | 5.a4 y 9.De2 (Sämisch) | del rival | no |  |
 | 10...Ag6 | 5.a4 y 9.De2 (Sämisch) | tuya | sí | mía porque frase 1: flecha g6→e4 (A2, verde) |
-| 5.e3 | Alekhine: 5.e3 | del rival | sí | rival frase 1: flecha f1→c4 (A7, roja, punteada) |
-| 5...b5 | Alekhine: 5.e3 | tuya | no |  |
-| 6.a4 | Alekhine: 5.e3 | del rival | no |  |
-| 6...b4 | Alekhine: 5.e3 | tuya | no |  |
-| 7.Ca2 | Alekhine: 5.e3 | del rival | no |  |
-| 7...e6 | Alekhine: 5.e3 | tuya | no |  |
-| 8.Axc4 | Alekhine: 5.e3 | del rival | no |  |
-| 8...Ab7 | Alekhine: 5.e3 | tuya | no |  |
+| 5.e3 | 5.e3 | del rival | sí | rival frase 1: flecha f1→c4 (A7, roja, punteada) |
+| 5...b5 | 5.e3 | tuya | no |  |
+| 6.a4 | 5.e3 | del rival | no |  |
+| 6...b4 | 5.e3 | tuya | no |  |
+| 7.Ca2 | 5.e3 | del rival | no |  |
+| 7...e6 | 5.e3 | tuya | no |  |
+| 8.Axc4 | 5.e3 | del rival | no |  |
+| 8...Ab7 | 5.e3 | tuya | no |  |
 | 6.Ce5 | 5.a4 y 6.Ce5 (Carlsbad) | del rival | sí | rival frase 1: flecha e5→c4 (A7, roja, punteada) |
 | 6...Cbd7 | 5.a4 y 6.Ce5 (Carlsbad) | tuya | sí | mía porque frase 1: flecha d7→e5 (A2, verde) |
 | 7.Cxc4 | 5.a4 y 6.Ce5 (Carlsbad) | del rival | no |  |

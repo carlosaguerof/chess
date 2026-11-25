@@ -1086,7 +1086,7 @@
   {
    "id": "alekhine-e3",
    "base": "curso-alekhine-e3",
-   "nombre": "Alekhine: 5.e3",
+   "nombre": "5.e3",
    "desde": 4,
    "intro": "Estás en la Pelea del lado de dama: tu objetivo es que blancas gaste jugadas mientras tú sacas tus piezas. Blancas saca sus dos caballos y después juega 5.e3.",
    "idea": "En esta línea, ...b5 defiende c4, y contra a4, ...b4 echa al caballo de c3.",
