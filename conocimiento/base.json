@@ -44,7 +44,7 @@
       "h3"
      ],
      "lado": "blancas",
-     "plan": "El esquema lento y sólido: c3 y d3, 0-0 y Te1. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.",
+     "plan": "El esquema lento y sólido: c3 y d3, 0-0 y Te1. Si su caballo salta a g4 con tu torre en e1, regrésala a f1: echarlo con h3 pierde material. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -111,7 +111,7 @@
       "Bb6"
      ],
      "lado": "blancas",
-     "plan": "Si negras responde pasivo con ...d6, aprovecha c3 para jugar d4 de inmediato: tras ...exd4 cxd4 tienes el centro ideal, con peones en e4 y d4. Sigue con Cc3, h3 (contra ...Ag4) y 0-0.",
+     "plan": "Si negras responde pasivo con ...d6, aprovecha c3 para jugar d4 de inmediato: tras ...exd4 cxd4 tienes el centro ideal, con peones en e4 y d4. Sigue con h3 (contra ...Ag4) y 0-0; si su caballo de f6 ya ataca e4, Cc3 no basta: ...Cxe4 y ...d5 recuperan la pieza.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -171,7 +171,7 @@
       "d3"
      ],
      "lado": "blancas",
-     "plan": "La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras sigue con ...Ac5 llegas a esa misma estructura; si juega ...Ae7, el plan no cambia.",
+     "plan": "La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras golpea con ...d5, toma en d5. Si su caballo salta a g4 con tu torre en e1, regrésala a f1: echarlo con h3 pierde material.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -296,7 +296,7 @@
       "d6"
      ],
      "lado": "blancas",
-     "plan": "Negras juega sólido pero pasivo: ...d6 encierra su alfil de f8. Toma el centro con c3 y d4 (o sigue tranquilo con d3 y Cc3) y enroca. Si ...Ag4 clava tu caballo, h3 le pregunta al alfil.",
+     "plan": "Negras juega sólido pero pasivo: ...d6 le quita casillas a su alfil de f8. Toma el centro de inmediato con 4.d4 (4.d3 es más lento y el motor lo ve peor) y enroca. Si ...Ag4 clava tu caballo, h3 le pregunta al alfil.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -323,7 +323,7 @@
       "h6"
      ],
      "lado": "blancas",
-     "plan": "...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo con 4.d4 directo, sin preparar con c3; desarrolla y enroca: tendrás ventaja de desarrollo.",
+     "plan": "...h6 evita Cg5, pero es una jugada lenta. Aprovecha el tiempo con 4.d4 directo, sin preparar con c3. Tras ...exd4 Cxd4, si atacan tu caballo de d4 por segunda vez (...Ac5 o ...Df6), cámbialo en c6 antes de sacar otra pieza; después, desarrolla y enroca.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -419,6 +419,290 @@
       "eco": "C50",
       "name": "Italian Game: Rousseau Gambit",
       "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 f5"
+     }
+    },
+    {
+     "id": "curso-dos-caballos-d3",
+     "clave": "italiana/curso-dos-caballos-d3",
+     "familia": "Defensa de los Dos Caballos",
+     "nombre": "Defensa de los Dos Caballos: Apertura de Alfil Moderna (4...Ac5 5.c3 d6 6.0-0 0-0 7.Te1)",
+     "nombreIngles": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+     "eco": "C55",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Nf6",
+      "d3",
+      "Bc5",
+      "c3",
+      "d6",
+      "O-O",
+      "O-O",
+      "Re1"
+     ],
+     "lado": "blancas",
+     "plan": "Con 4.d3 defiendes e4 y amenazas Cg5 contra f7; si negras golpea con ...d5, toma en d5. Contra 4...Ac5, 5.c3 llega al esquema del Giuoco Pianissimo: 0-0 y Te1, Ab3, el caballo de b1 por d2, y d4 cuando esté preparado. Si su caballo salta a g4 con tu torre en e1, regrésala a f1: echarlo con h3 pierde material.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C55",
+      "name": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3"
+     },
+     "continuacion": {
+      "desde": 7,
+      "fuente": [
+       "Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.d3 (4...Ac5 lleva al Giuoco Pianissimo: 5.c3 d6 6.0-0 0-0)",
+       "motor: 4...Ac5 (+0.18), 5.c3 (+0.18), 5...d6 (+0.19), 6.0-0 (a 0.11), 6...0-0 (+0.16) y 7.Te1 (a 0.07); es la misma posición de la línea principal tras 6...0-0, y las dos lecciones juegan 7.Te1"
+      ]
+     }
+    },
+    {
+     "id": "curso-la-bourdonnais",
+     "clave": "italiana/curso-la-bourdonnais",
+     "familia": "Giuoco Piano",
+     "nombre": "Variante Clásica: Variante La Bourdonnais (7.h3 Cf6 8.d5)",
+     "nombreIngles": "Italian Game: Classical Variation, La Bourdonnais Variation",
+     "eco": "C53",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Bc5",
+      "c3",
+      "d6",
+      "d4",
+      "exd4",
+      "cxd4",
+      "Bb6",
+      "h3",
+      "Nf6",
+      "d5"
+     ],
+     "lado": "blancas",
+     "plan": "Contra ...d6 pasivo, d4 de inmediato: tras ...exd4 cxd4 tienes e4 y d4, el centro ideal, pero dura poco. h3 quita g4 al alfil negro; si su dama sale a f6, Ae3 protege d4. Aquí, cuando su caballo de f6 ataca e4, d5 echa al caballo de c6 (Cc3 no sirve: ...Cxe4 y ...d5 recuperan la pieza). No empujes e5 sin preparar.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C53",
+      "name": "Italian Game: Classical Variation, La Bourdonnais Variation",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6"
+     },
+     "continuacion": {
+      "desde": 12,
+      "fuente": [
+       "motor: 7.h3 (a 0.04 de la mejor), 7...Cf6 (la mejor) y 8.d5 (a 0.11 de la mejor; 8...Cxe4 pierde por 9.dxc6)",
+       "Wikipedia en español, Apertura italiana (el centro ideal con e4 y d4)"
+      ]
+     }
+    },
+    {
+     "id": "curso-paris",
+     "clave": "italiana/curso-paris",
+     "familia": "Defensa París",
+     "nombre": "Defensa París (4.d4 exd4 5.Cxd4 Cf6 6.Cc3 Ae7 7.0-0)",
+     "nombreIngles": "Italian Game: Paris Defense",
+     "eco": "C50",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "d6",
+      "d4",
+      "exd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3",
+      "Be7",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "...d6 es pasiva: d4 de inmediato. Tras ...exd4 Cxd4 el centro queda abierto (si su caballo cambia en d4, retoma con la dama): Cc3 y 0-0, y aprovechas que vas adelante en desarrollo.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C50",
+      "name": "Italian Game: Paris Defense",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 d6"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 d6 (4.d4 exd4 5.Cxd4 Cf6 6.Cc3)",
+       "motor: 4.d4 (a 0.0), 4...exd4, 5.Cxd4 y 5...Cf6 (las mejores), 6.Cc3 (a 0.03), 6...Ae7 (la mejor) y 7.0-0 (a 0.02)"
+      ]
+     }
+    },
+    {
+     "id": "curso-anti-higado-frito",
+     "clave": "italiana/curso-anti-higado-frito",
+     "familia": "Defensa Anti-Hígado Frito",
+     "nombre": "Defensa Anti-Hígado Frito (4.d4 exd4 5.Cxd4 Cf6 6.Cc3)",
+     "nombreIngles": "Italian Game: Anti-Fried Liver Defense",
+     "eco": "C50",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "h6",
+      "d4",
+      "exd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3"
+     ],
+     "lado": "blancas",
+     "plan": "...h6 es lenta: 4.d4 directo. Tras ...exd4 Cxd4, si negras ataca tu caballo de d4 por segunda vez (...Ac5 o ...Df6), cámbialo en c6 antes de sacar otra pieza; si su caballo cambia en d4, retoma con la dama. Después, desarrolla y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C50",
+      "name": "Italian Game: Anti-Fried Liver Defense",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 h6"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 h6 (4.d4 exd4 5.Cxd4: blancas más adelantado en desarrollo)",
+       "motor: 4.d4, 4...exd4, 5.Cxd4, 5...Cf6 y 6.Cc3 son las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-hungara",
+     "clave": "italiana/curso-hungara",
+     "familia": "Defensa Húngara",
+     "nombre": "Defensa Húngara: Variante Tartakower (7.Ad5)",
+     "nombreIngles": "Italian Game: Hungarian Defense, Tartakower Variation",
+     "eco": "C50",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Be7",
+      "d4",
+      "exd4",
+      "c3",
+      "Nf6",
+      "e5",
+      "Ne4",
+      "Bd5"
+     ],
+     "lado": "blancas",
+     "plan": "Toma el centro con 4.d4; tras ...exd4 c3 Cf6 e5, el caballo negro va a e4 y 7.Ad5 lo ataca otra vez. Desarrolla y enroca con más espacio.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C50",
+      "name": "Italian Game: Hungarian Defense, Tartakower Variation",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7 4. d4 exd4 5. c3 Nf6 6. e5 Ne4"
+     },
+     "continuacion": {
+      "desde": 12,
+      "fuente": [
+       "motor: 7.Ad5 es la mejor (+0.58; 7.cxd4 da +0.06)"
+      ]
+     }
+    },
+    {
+     "id": "curso-blackburne-kostic",
+     "clave": "italiana/curso-blackburne-kostic",
+     "familia": "Gambito Blackburne-Kostić",
+     "nombre": "Gambito Blackburne-Kostić (4.Cxd4 exd4 5.0-0 Cf6 6.Te1 d6 7.c3 Ae7 8.cxd4)",
+     "nombreIngles": "Italian Game: Blackburne-Kostić Gambit",
+     "eco": "C50",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Nd4",
+      "Nxd4",
+      "exd4",
+      "O-O",
+      "Nf6",
+      "Re1",
+      "d6",
+      "c3",
+      "Be7",
+      "cxd4"
+     ],
+     "lado": "blancas",
+     "plan": "Es una trampa: no tomes en e5. 4.Cxd4 exd4, enroca y Te1; c3 y cxd4 te dan dos peones en el centro, e4 y d4, con ventaja de desarrollo.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C50",
+      "name": "Italian Game: Blackburne-Kostić Gambit",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 Cd4 (4.Cxd4 exd4 5.c3 o 5.0-0; 4.Cxe5 Dg5 es la trampa)",
+       "motor: 4.Cxd4 (+1.07), 4...exd4, 5.0-0 (+1.09), 5...Cf6, 6.Te1, 6...d6, 7.c3, 7...Ae7 y 8.cxd4 (+1.10) son las mejores"
+      ]
+     }
+    },
+    {
+     "id": "curso-rousseau",
+     "clave": "italiana/curso-rousseau",
+     "familia": "Gambito Rousseau",
+     "nombre": "Gambito Rousseau (4.d4 exd4 5.e5)",
+     "nombreIngles": "Italian Game: Rousseau Gambit",
+     "eco": "C50",
+     "jugadas": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "f5",
+      "d4",
+      "exd4",
+      "e5"
+     ],
+     "lado": "blancas",
+     "plan": "...f5 debilita al rey negro: 4.d4. Tras ...exd4, 5.e5 gana espacio y le quita f6 al caballo; desarrolla y enroca.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "C50",
+      "name": "Italian Game: Rousseau Gambit",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 f5"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 f5 (4.d4 o 4.d3; no 4.Cc3)",
+       "motor: 4.d4 (+1.26), 4...exd4 y 5.e5 (+1.41) son las mejores"
+      ]
      }
     }
    ]

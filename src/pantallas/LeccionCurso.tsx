@@ -141,7 +141,8 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     // con algo que leer después de la jugada (en Aprender y, desde las correcciones, también en Practicar), espera a "Siguiente"
     const r = intentar(l, e, { san: j.san, desde: j.from, hasta: j.to }, { buenas, esperar: explicacionDespues(c, l, e.vuelta, ply).length > 0 })
     setNotaMotor(null)
-    if (r.resultado === 'correcta' && esVariante && e.vuelta === 'practicar')
+    // una opcional no lleva `leccionId`: no entra a Refuerza ni al Repaso (orden de Carlos, 2026-11-25)
+    if (r.resultado === 'correcta' && esVariante && l.leccionId && e.vuelta === 'practicar')
       registrarPasoCurso({ fen: tablero.fen(), esperada: l.jugadas[ply]!, paso: r.estado.pasos[ply]!, linea: l.nombre, camino: l.jugadas.slice(0, ply) })
     if (r.resultado === 'error') revisarConMotor(ply, j.san)
     setE(r.estado)

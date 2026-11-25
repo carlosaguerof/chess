@@ -1,0 +1,3503 @@
+{
+  "id": "italiana:w",
+  "apertura": "italiana",
+  "color": "w",
+  "nombre": "Apertura Italiana",
+  "version": "2026-11-25",
+  "nota": "El curso de la Italiana por estructuras (2026-11-25). Los textos los escribió la corrida con palabras propias y las ideas de las fuentes de 'fuentes'; ninguno es traducción. En la app no se cita nada: 'fuente' y 'motor' son de la base interna. Las jugadas van en SAN inglés (como chess.js); dentro de los textos, en la notación de las guías (R D T A C), que la pantalla convierte a figuras o letras.",
+  "secciones": [
+    {
+      "id": "base",
+      "titulo": "La base",
+      "variantes": [
+        "dos-caballos-d3",
+        "la-bourdonnais",
+        "anti-higado-frito"
+      ]
+    },
+    {
+      "id": "frecuentes",
+      "titulo": "Las que más te van a salir",
+      "variantes": [
+        "principal",
+        "paris",
+        "blackburne-kostic"
+      ]
+    },
+    {
+      "id": "opcional",
+      "titulo": "Opcional",
+      "opcional": true,
+      "nota": "No cuentan para terminar el curso.",
+      "variantes": [
+        "hungara",
+        "rousseau"
+      ]
+    }
+  ],
+  "fuentes": {
+    "WB-1e4": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4",
+    "WB-1e5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5",
+    "WB-3Ac4": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4",
+    "WB-3Ac5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5",
+    "WB-4c3": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5/4._c3",
+    "WB-4c3Cf6": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5/4._c3/4...Nf6",
+    "WB-5d3": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5/4._c3/4...Nf6/5._d3",
+    "WB-6O-O": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5/4._c3/4...Nf6/5._d3/5...d6/6._O-O",
+    "WB-4d3-Ac5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Bc5/4._d3",
+    "WB-3Cf6": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6",
+    "WB-4d3": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._d3",
+    "WB-4Cg5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5",
+    "WB-4d5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5/4...d5",
+    "WB-5exd5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5/4...d5/5._exd5",
+    "WB-5Ca5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5/4...d5/5._exd5/5...Na5",
+    "WB-5Cxd5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5/4...d5/5._exd5/5...Nxd5",
+    "WB-4Ac5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nf6/4._Ng5/4...Bc5",
+    "WB-3d6": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...d6",
+    "WB-3h6": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...h6",
+    "WB-3Ae7": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Be7",
+    "WB-3Cd4": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...Nd4",
+    "WB-3f5": "https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._e4/1...e5/2._Nf3/2...Nc6/3._Bc4/3...f5",
+    "WP-IT": "https://en.wikipedia.org/wiki/Italian_Game",
+    "WP-GP": "https://en.wikipedia.org/wiki/Giuoco_Piano",
+    "WP-2C": "https://en.wikipedia.org/wiki/Two_Knights_Defense",
+    "WP-FL": "https://en.wikipedia.org/wiki/Fried_Liver_Attack",
+    "WP-BK": "https://en.wikipedia.org/wiki/Blackburne_Shilling_Gambit",
+    "WP-RG": "https://en.wikipedia.org/wiki/Rousseau_Gambit",
+    "WP-HD": "https://en.wikipedia.org/wiki/Hungarian_Defense",
+    "WP-TX": "https://en.wikipedia.org/wiki/Traxler_Counterattack",
+    "WP-es": "https://es.wikipedia.org/wiki/Apertura_italiana",
+    "WP-SI": "https://en.wikipedia.org/wiki/Semi-Italian_Opening",
+    "BASE": "la base de este repo (scripts/base/definiciones/italiana.json)",
+    "LICHESS-CC0": "lichess-org/chess-openings (CC0)",
+    "PARTIDAS": "la base abierta de lichess (CC0), partidas Rapid de septiembre de 2026; los números, en iterations/v4/mapa-italiana.md",
+    "MOTOR": "Stockfish 19 lite, profundidad 18 (16 para amenazas); los comandos están en 'motor' y en iterations/v4/comprobaciones-italiana.md"
+  },
+  "piezas": {
+    "idea": {
+      "titulo": "La idea",
+      "paginas": [
+        {
+          "texto": [
+            "Cuando negras contesta 1...e5, sacas tu caballo a f3 y tu alfil a c4: el alfil apunta a f7, el peón más débil de negras al principio. Enrocas pronto y preparas d4 para quedarte con el centro.",
+            "No vas a memorizar cada respuesta. Vas a reconocer qué pasó con el peón de e5 de negras, y eso te dice qué plan toca."
+          ],
+          "tablero": {
+            "jugadas": [
+              "e4",
+              "e5",
+              "Nf3",
+              "Nc6",
+              "Bc4"
+            ]
+          },
+          "fuente": [
+            "WB-3Ac4",
+            "WP-IT",
+            "WP-es"
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "Abres con 1.e4: ocupas el centro.",
+                "jugadas": [
+                  "e4"
+                ]
+              },
+              {
+                "frase": "Negras contesta 1...e5.",
+                "jugadas": [
+                  "e5"
+                ]
+              },
+              {
+                "frase": "2.Cf3: tu caballo sale y ataca el peón de e5.",
+                "jugadas": [
+                  "Nf3"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "f3",
+                    "a": "e5",
+                    "color": "verde"
+                  }
+                ]
+              },
+              {
+                "frase": "Negras lo defiende con 2...Cc6.",
+                "jugadas": [
+                  "Nc6"
+                ]
+              },
+              {
+                "frase": "3.Ac4: tu alfil apunta a f7, que solo cuida el rey de negras.",
+                "jugadas": [
+                  "Bc4"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "c4",
+                    "a": "f7",
+                    "color": "verde"
+                  }
+                ]
+              },
+              {
+                "frase": "Después enrocas y preparas d4, el avance que decide la forma del centro."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "estructura": {
+      "titulo": "La estructura",
+      "paginas": [
+        {
+          "subtitulo": "El mapa",
+          "texto": [
+            "Una pregunta: ¿qué pasó con el peón de e5 de negras? La respuesta te dice qué plan toca.",
+            "Si sigue en e5 y tu peón de d está en d3: el Centro cerrado. Si se fue a d4 y lo retomaste con tu peón de c: el Centro ideal. Si se fue a d4 y lo retomaste con una pieza: el Centro abierto.",
+            "Lo decides tú con tu peón de d. Primero mira si atacan una pieza tuya. Después: si el caballo de negras ya está en f6, atacando tu peón de e4, d3, y preparas d4; si negras juega pasivo, sin atacar e4 (...d6, ...h6, ...Ae7), d4 de inmediato.",
+            "Fuera del mapa quedan la Húngara y la Rousseau. Si contra 4.d3 negras juega 4...d5, toma en d5: el centro se abre de otra forma, sin lección. Y si el rival no juega 2...Cc6, no hay lección, pero la pregunta sirve igual."
+          ],
+          "tablero": {
+            "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
+            "soloPeones": true
+          },
+          "fuente": [
+            "WB-3Ac5",
+            "WB-4d3-Ac5",
+            "WB-3d6",
+            "WB-3h6",
+            "WB-3Ae7",
+            "WP-GP",
+            "WP-es",
+            "PARTIDAS",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "La pregunta: qué pasó con el peón de e5 de negras."
+              },
+              {
+                "frase": "Si sigue en e5 y tu peón está en d3: el Centro cerrado."
+              },
+              {
+                "frase": "Si se fue a d4 y lo retomas con una pieza: el Centro abierto. Las piezas no se ven en este tablero."
+              },
+              {
+                "frase": "Si llegas a d4, se va a d4 con ...exd4 y lo retomas con tu peón de c, cxd4: el Centro ideal.",
+                "jugadas": [
+                  "d4",
+                  "...exd4",
+                  "cxd4"
+                ]
+              },
+              {
+                "frase": "Lo decides tú: si su caballo de f6 ya ataca tu peón de e4, d3; si negras juega pasivo, d4 de inmediato."
+              }
+            ]
+          }
+        },
+        {
+          "subtitulo": "El Centro cerrado",
+          "texto": [
+            "Tus peones: c3, d3 y e4. Los de negras: d6 y e5. Nadie cambia peones: es una partida de maniobras.",
+            "Primero enrocas y llevas una torre a e1; después Ab3, el caballo de b1 por d2 y h3. Si su caballo salta a g4 con tu torre en e1, regrésala a f1: echarlo con h3 pierde material. Tu ruptura: d4, cuando la apoyen tu peón de c3, tu torre de e1 y tu caballo de f3. La de negras: ...d5. La casilla clave: d4. Si negras juega otra cosa sin tocar el centro, como ...h6 o ...Ab4, el plan es el mismo."
+          ],
+          "tablero": {
+            "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
+            "soloPeones": true
+          },
+          "fuente": [
+            "WB-4d3-Ac5",
+            "WB-5d3",
+            "WP-GP",
+            "WP-es",
+            "PARTIDAS",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "Tus peones: c3, d3 y e4."
+              },
+              {
+                "frase": "Los de negras: d6 y e5. Nadie cambia peones."
+              },
+              {
+                "frase": "Tu ruptura: d4, cuando tus piezas la apoyen.",
+                "jugadas": [
+                  "d4"
+                ]
+              },
+              {
+                "frase": "La de negras: ...d5.",
+                "jugadas": [
+                  "...d5"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "subtitulo": "El Centro ideal",
+          "texto": [
+            "Tus peones: d4 y e4, juntos en el centro. A negras le queda el de d6; ya no tiene peón en e5.",
+            "Dura poco: negras ataca tus peones enseguida (...Cf6 contra e4, ...Ab6 y ...Cc6 contra d4), y lo que toca depende de la lección. En La Bourdonnais, d5 echa al caballo de c6; ahí Cc3 no sirve, porque ...Cxe4 y ...d5 recuperan la pieza. En el Blackburne, Cc3 cuida e4, y si negras golpea con ...d5, tomas en d5. Nunca e5 sin preparar: tras ...dxe5, tu centro desaparece. Si negras da jaque con ...Ab4+, tapa con Cc3."
+          ],
+          "tablero": {
+            "fen": "4k3/ppp2ppp/3p4/8/3PP3/8/PP3PPP/4K3 w - - 0 1",
+            "soloPeones": true
+          },
+          "fuente": [
+            "WP-es",
+            "WP-GP",
+            "PARTIDAS",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "fen": "4k3/ppp2ppp/3p4/8/3PP3/8/PP3PPP/4K3 w - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "Tus peones de d4 y e4, juntos en el centro: el Centro ideal."
+              },
+              {
+                "frase": "A negras le queda el peón de d6."
+              },
+              {
+                "frase": "Si negras golpea con ...d5, tomas en d5 con tu peón de e4.",
+                "marcas": [
+                  {
+                    "tipo": "A7",
+                    "de": "d6",
+                    "a": "d5",
+                    "color": "rojo",
+                    "punteada": true
+                  },
+                  {
+                    "tipo": "A3",
+                    "de": "e4",
+                    "a": "d5",
+                    "color": "verde",
+                    "punteada": true
+                  }
+                ]
+              },
+              {
+                "frase": "Nunca e5 sin preparar: tras ...dxe5, tu centro desaparece.",
+                "jugadas": [
+                  "e5",
+                  "...dxe5"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "subtitulo": "El Centro abierto",
+          "texto": [
+            "Tu peón de e4 contra el de d6 de negras. Su peón de e5 se fue a d4, y lo retomaste con una pieza.",
+            "No hay cadena de peones que sostener: sacas tus piezas rápido y enrocas. Pero antes mira tu caballo de d4: si lo atacan por segunda vez (...Ac5 o ...Df6), cambia caballos en c6 antes de sacar otra pieza; si su caballo cambia en d4, retoma con la dama. Cuida tu peón de e4, que el caballo de f6 suele atacar."
+          ],
+          "tablero": {
+            "fen": "4k3/ppp2ppp/3p4/8/4P3/8/PPP2PPP/4K3 w - - 0 1",
+            "soloPeones": true
+          },
+          "fuente": [
+            "WB-3h6",
+            "WP-SI",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "fen": "4k3/ppp2ppp/3p4/8/4P3/8/PPP2PPP/4K3 w - - 0 1",
+            "soloPeones": true,
+            "ilustrativo": true,
+            "pasos": [
+              {
+                "frase": "Tu peón de e4 contra el de d6 de negras."
+              },
+              {
+                "frase": "Ya no hay peón negro en e5 ni tuyo en d4: el centro está abierto."
+              },
+              {
+                "frase": "Sin peones que sostener, tus piezas salen rápido."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "errores": {
+      "titulo": "Errores y trampas",
+      "intro": "Cuatro «¿Y si…?»: tres errores tuyos que negras castiga, y uno de negras que castigas tú. En cada uno, mueves tú la pieza que castiga.",
+      "lista": [
+        {
+          "id": "cg5-contra-ac5",
+          "de": "tuyo",
+          "titulo": "¿Y si juegas 4.Cg5 contra 3...Ac5?",
+          "jugadas": [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+            "Bc4",
+            "Bc5",
+            "Ng5",
+            "Qxg5"
+          ],
+          "desde": 6,
+          "lado": "b",
+          "intro": "Contra 3...Ac5 saltaste con 4.Cg5, como si fuera 3...Cf6. Ahora juegas con negras: castiga el error.",
+          "final": "La dama de negras cuidaba g5: ganas un caballo. Por eso, contra 3...Ac5, primero c3.",
+          "fuente": [
+            "WB-3Ac5",
+            "MOTOR"
+          ],
+          "motor": [
+            "X-ng5-bc5"
+          ]
+        },
+        {
+          "id": "trampa-cd4",
+          "de": "tuyo",
+          "titulo": "¿Y si tomas en e5 contra 3...Cd4?",
+          "jugadas": [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+            "Bc4",
+            "Nd4",
+            "Nxe5",
+            "Qg5",
+            "Nxf7",
+            "Qxg2",
+            "Rf1",
+            "Qxe4+",
+            "Be2",
+            "Nf3#"
+          ],
+          "desde": 6,
+          "lado": "b",
+          "intro": "Contra 3...Cd4 tomaste el peón de e5. Ahora juegas con negras: castiga el error.",
+          "final": "Jaque mate. Aun sin 5.Cxf7, su dama gana material. Por eso, contra 3...Cd4, cambia el caballo.",
+          "fuente": [
+            "WB-3Cd4",
+            "WP-BK",
+            "MOTOR"
+          ],
+          "motor": [
+            "X-trap-bk",
+            "R-trap3"
+          ]
+        },
+        {
+          "id": "cc3-contra-ac5",
+          "de": "tuyo",
+          "titulo": "¿Y si sacas tu otro caballo contra 5...Ac5?",
+          "jugadas": [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+            "Bc4",
+            "h6",
+            "d4",
+            "exd4",
+            "Nxd4",
+            "Bc5",
+            "Nc3",
+            "Bxd4"
+          ],
+          "desde": 10,
+          "lado": "b",
+          "intro": "Contra 3...h6 retomaste en d4 con el caballo, y negras atacó ese caballo otra vez con 5...Ac5. Sacaste tu otro caballo como si nada. Ahora juegas con negras: castiga el error.",
+          "final": "Ganas una pieza: el caballo de d4 tenía dos atacantes y un defensor. Por eso, si lo atacan dos veces, primero cámbialo en c6.",
+          "fuente": [
+            "WB-3h6",
+            "MOTOR"
+          ],
+          "motor": [
+            "D-h6-bc5-cc3",
+            "D-h6-bc5-err"
+          ]
+        },
+        {
+          "id": "cxe4-contra-d3",
+          "de": "rival",
+          "titulo": "¿Y si negras toma en e4 contra 4.d3?",
+          "jugadas": [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+            "Bc4",
+            "Nf6",
+            "d3",
+            "Nxe4",
+            "dxe4"
+          ],
+          "desde": 7,
+          "lado": "w",
+          "intro": "Contra 4.d3, negras tomó tu peón de e4 con el caballo. Castiga el error.",
+          "final": "Ganaste un caballo por un peón: tu peón de e4 estaba defendido.",
+          "fuente": [
+            "WB-4d3",
+            "MOTOR"
+          ],
+          "motor": [
+            "X-2cd3-nxe4"
+          ]
+        }
+      ]
+    },
+    "repaso": {
+      "titulo": "Repaso del curso",
+      "paginas": [
+        {
+          "subtitulo": "Lo que te llevas",
+          "linea": [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+            "Bc4",
+            "Nf6",
+            "d3",
+            "Bc5",
+            "c3",
+            "d6",
+            "O-O",
+            "O-O",
+            "Re1"
+          ],
+          "texto": [
+            "La pregunta: ¿qué pasó con el peón de e5? Si sigue en e5: el Centro cerrado, sin prisa, y d4 cuando esté preparado. Si se fue a d4 y retomaste con tu peón de c: el Centro ideal; cuida tus peones con piezas. Si retomaste con una pieza: el Centro abierto; saca tus piezas rápido.",
+            "Tres reglas: 1) Primero mira si atacan una pieza tuya; después, si su caballo de f6 ataca tu peón de e4, d3, y si negras juega pasivo, d4 de inmediato. 2) Con tu torre en e1, nunca eches con h3 a un caballo en g4: la torre regresa a f1. 3) Contra 3...Cd4, no tomes en e5: cambia el caballo."
+          ],
+          "fuente": [
+            "WB-3Ac4",
+            "WB-4d3",
+            "WB-3d6",
+            "WB-3h6",
+            "WB-3Cd4",
+            "WP-es",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "La línea de la base: 1.e4 e5 2.Cf3 Cc6 3.Ac4.",
+                "jugadas": [
+                  "e4",
+                  "e5",
+                  "Nf3",
+                  "Nc6",
+                  "Bc4"
+                ]
+              },
+              {
+                "frase": "3...Cf6 ataca tu peón de e4: 4.d3 lo defiende.",
+                "jugadas": [
+                  "Nf6",
+                  "d3"
+                ]
+              },
+              {
+                "frase": "4...Ac5 5.c3 d6 6.0-0 0-0 7.Te1: el Centro cerrado, sin prisa.",
+                "jugadas": [
+                  "Bc5",
+                  "c3",
+                  "d6",
+                  "O-O",
+                  "O-O",
+                  "Re1"
+                ]
+              },
+              {
+                "frase": "Contra 3...h6, una jugada pasiva, 4.d4 de inmediato.",
+                "reinicio": [
+                  "e4",
+                  "e5",
+                  "Nf3",
+                  "Nc6",
+                  "Bc4"
+                ],
+                "jugadas": [
+                  "h6",
+                  "d4"
+                ]
+              },
+              {
+                "frase": "Contra 3...Cd4, no tomes en e5: cambia el caballo con 4.Cxd4.",
+                "reinicio": [
+                  "e4",
+                  "e5",
+                  "Nf3",
+                  "Nc6",
+                  "Bc4"
+                ],
+                "jugadas": [
+                  "Nd4",
+                  "Nxd4"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "subtitulo": "Lo que tu guía decía distinto",
+          "texto": [
+            "«Apuntas el alfil a f7»: sí, pero es una meta para después, no un ataque: tu primer plan es el centro, con d3 o con d4.",
+            "«Desarrollo natural, enroque corto»: coincide con la teoría. Lo que tu guía no decía es cuándo d3 y cuándo d4, y eso te lo dice el mapa."
+          ],
+          "fuente": [
+            "WB-3Ac4",
+            "WB-4d3",
+            "MOTOR"
+          ],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "«Apuntas el alfil a f7»: 1.e4 e5 2.Cf3 Cc6 3.Ac4, y tu alfil apunta a f7.",
+                "jugadas": [
+                  "e4",
+                  "e5",
+                  "Nf3",
+                  "Nc6",
+                  "Bc4"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A2",
+                    "de": "c4",
+                    "a": "f7",
+                    "color": "verde"
+                  }
+                ]
+              },
+              {
+                "frase": "Pero f7 es una meta para después: contra 3...Cf6, primero 4.d3.",
+                "jugadas": [
+                  "Nf6",
+                  "d3"
+                ]
+              },
+              {
+                "frase": "«Enroque corto»: coincide. Tras 4...Ac5 5.c3 d6, 6.0-0 en el Centro cerrado.",
+                "jugadas": [
+                  "Bc5",
+                  "c3",
+                  "d6",
+                  "O-O"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "variantes": [
+    {
+      "id": "dos-caballos-d3",
+      "base": "curso-dos-caballos-d3",
+      "nombre": "Dos Caballos: 4.d3",
+      "desde": 0,
+      "estructura": "Centro cerrado",
+      "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tu objetivo es preparar el centro antes de abrirlo. Empiezas desde la primera jugada: 1.e4 e5 2.Cf3 Cc6 3.Ac4, y negras saca su otro caballo.",
+      "idea": "Negras ataca tu peón de e4: lo defiendes con un peón y juegas sin prisa: enroque y una torre en e1.",
+      "plan": {
+        "tuyo": "Siguen Ab3 y Cbd2, y h3 antes de que su caballo salte a g4. Cuando todo apoye a tu peón de d3, d4.",
+        "rival": "Negras busca ...d5, o cambiar tu alfil con ...Ae6.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "c4",
+                "a": "b3",
+                "color": "verde",
+                "punteada": true
+              },
+              {
+                "tipo": "A3",
+                "de": "b1",
+                "a": "d2",
+                "color": "verde",
+                "punteada": true
+              }
+            ],
+            [
+              {
+                "tipo": "A3",
+                "de": "d3",
+                "a": "d4",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "d6",
+                "a": "d5",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A7",
+                "de": "c8",
+                "a": "e6",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: sin prisa, con el centro cerrado."
+            },
+            {
+              "frase": "Ab3: tu alfil se aparta antes de que lo ataquen, y sigue mirando a f7.",
+              "jugadas": [
+                "Bb3"
+              ]
+            },
+            {
+              "frase": "h3: le quitas la casilla g4 al caballo de negras antes de que salte.",
+              "jugadas": [
+                "h3"
+              ]
+            },
+            {
+              "frase": "Cbd2: tu caballo de b1 sale por d2.",
+              "jugadas": [
+                "Nbd2"
+              ]
+            },
+            {
+              "frase": "Cuando todo apoye a tu peón de d3, d4.",
+              "jugadas": [
+                "d4"
+              ]
+            },
+            {
+              "frase": "Negras busca ...d5, o cambiar tu alfil con ...Ae6.",
+              "marcas": [
+                {
+                  "tipo": "A7",
+                  "de": "d6",
+                  "a": "d5",
+                  "color": "rojo",
+                  "punteada": true
+                },
+                {
+                  "tipo": "A7",
+                  "de": "c8",
+                  "a": "e6",
+                  "color": "rojo",
+                  "punteada": true
+                }
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WB-4d3",
+          "WB-5d3",
+          "WP-GP",
+          "MOTOR"
+        ]
+      },
+      "regla": "Si su caballo de f6 ataca tu peón de e4, d3; y con tu torre en e1, nunca eches con h3 a un caballo en g4.",
+      "frecuencia": 5,
+      "fuenteFrecuencia": "partidas reales: 41.7 % (600–1000) y 36.2 % (1000–1400) de las partidas que llegan a 3.Ac4 siguen con 3...Cf6 (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "la-bourdonnais",
+      "base": "curso-la-bourdonnais",
+      "nombre": "3...Ac5 4.c3 d6 (La Bourdonnais)",
+      "desde": 5,
+      "estructura": "Centro ideal",
+      "intro": "Estás en el Centro ideal: aquí tus piezas trabajan para sostener el centro. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a c5.",
+      "idea": "Contra un ...d6 pasivo, d4 de inmediato: tras ...exd4 cxd4 tienes e4 y d4, el Centro ideal.",
+      "plan": {
+        "tuyo": "Tu peón de d5 echó al caballo. Ahora cuida tu peón de e4 con Cc3 y enroca.",
+        "rival": "Negras ataca tu peón de e4 y busca casillas para sus caballos.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "b1",
+                "a": "c3",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: cuidar tus peones del centro y enrocar."
+            },
+            {
+              "frase": "Cc3: tu caballo cuida el peón de e4.",
+              "jugadas": [
+                "Nc3"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "c3",
+                  "a": "e4",
+                  "color": "verde"
+                }
+              ]
+            },
+            {
+              "frase": "0-0: tu rey a salvo.",
+              "jugadas": [
+                "O-O"
+              ]
+            },
+            {
+              "frase": "Tus peones de e4 y d5 te dan más espacio en el centro."
+            }
+          ]
+        },
+        "fuente": [
+          "WP-es",
+          "WP-GP",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra ...d6 pasivo, d4 de inmediato; y cuida tu peón de e4.",
+      "frecuencia": 4,
+      "fuenteFrecuencia": "partidas reales: 6.5 % y 6.2 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "anti-higado-frito",
+      "base": "curso-anti-higado-frito",
+      "nombre": "3...h6",
+      "desde": 5,
+      "estructura": "Centro abierto",
+      "intro": "Estás en el Centro abierto: sin cadena de peones que sostener, gana quien saca antes sus piezas. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras juega una jugada lenta de peón.",
+      "idea": "...h6 es lenta: d4 de inmediato, retomas con el caballo y vas adelante en desarrollo.",
+      "plan": {
+        "tuyo": "Contra ...Ab4, cambia caballos en c6 y después las damas: su rey ya no podrá enrocar. Si no, 0-0.",
+        "rival": "Negras busca cambiar piezas para quitarte la ventaja de desarrollo.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "d4",
+                "a": "c6",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: sacar tus piezas y no dejar que te claven."
+            },
+            {
+              "frase": "Si su alfil clava tu caballo de c3 con ...Ab4,",
+              "jugadas": [
+                "...Bb4"
+              ]
+            },
+            {
+              "frase": "cambias caballos en c6: Cxc6 y ...dxc6.",
+              "jugadas": [
+                "Nxc6",
+                "...dxc6"
+              ]
+            },
+            {
+              "frase": "Y después las damas: Dxd8+ y ...Rxd8. Su rey ya no podrá enrocar.",
+              "jugadas": [
+                "Qxd8+",
+                "...Kxd8"
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WB-3h6",
+          "WP-SI",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra ...h6, d4 de inmediato; si atacan tu caballo de d4 dos veces, cámbialo en c6.",
+      "frecuencia": 4,
+      "fuenteFrecuencia": "partidas reales: 6.4 % y 18.7 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "principal",
+      "base": "giuoco-pianissimo-principal",
+      "nombre": "3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)",
+      "desde": 5,
+      "estructura": "Centro cerrado",
+      "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tu objetivo es preparar el centro antes de abrirlo. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a c5.",
+      "idea": "Contra ...Ac5 y ...Cf6, el esquema lento: c3 y d3, enroque, Te1, Ab3 y h3.",
+      "plan": {
+        "tuyo": "Siguen Cbd2, Cf1 y Cg3: tu caballo viaja hacia el lado del rey. Con todo listo, d4.",
+        "rival": "Negras busca ...d5, o cambiar tu alfil con ...Ae6.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "b1",
+                "a": "d2",
+                "color": "verde",
+                "punteada": true
+              }
+            ],
+            [
+              {
+                "tipo": "A3",
+                "de": "d3",
+                "a": "d4",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "d6",
+                "a": "d5",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A7",
+                "de": "c8",
+                "a": "e6",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: llevar tu caballo de b1 hacia el lado del rey."
+            },
+            {
+              "frase": "Cbd2: tu caballo sale por d2.",
+              "jugadas": [
+                "Nbd2"
+              ]
+            },
+            {
+              "frase": "Cf1: sigue a f1, que dejó libre tu torre.",
+              "jugadas": [
+                "Nf1"
+              ]
+            },
+            {
+              "frase": "Cg3: desde g3 mira a f5 y a h5.",
+              "jugadas": [
+                "Ng3"
+              ]
+            },
+            {
+              "frase": "Con todo listo, d4.",
+              "jugadas": [
+                "d4"
+              ]
+            },
+            {
+              "frase": "Negras busca ...d5, o cambiar tu alfil con ...Ae6.",
+              "marcas": [
+                {
+                  "tipo": "A7",
+                  "de": "d6",
+                  "a": "d5",
+                  "color": "rojo",
+                  "punteada": true
+                },
+                {
+                  "tipo": "A7",
+                  "de": "c8",
+                  "a": "e6",
+                  "color": "rojo",
+                  "punteada": true
+                }
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WB-5d3",
+          "WP-GP",
+          "MOTOR"
+        ]
+      },
+      "regla": "Retira tu alfil a b3 antes de que lo ataquen; con tu torre en e1, nunca eches con h3 a un caballo en g4: la torre regresa a f1.",
+      "frecuencia": 4,
+      "fuenteFrecuencia": "partidas reales: 17.0 % y 13.8 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "paris",
+      "base": "curso-paris",
+      "nombre": "3...d6 (Defensa París)",
+      "desde": 5,
+      "estructura": "Centro abierto",
+      "intro": "Estás en el Centro abierto: sin cadena de peones que sostener, gana quien saca antes sus piezas. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras sostiene e5 con otro peón.",
+      "idea": "...d6 es pasiva: d4 de inmediato, retomas con el caballo y sacas tus piezas más rápido que negras.",
+      "plan": {
+        "tuyo": "Saca tu último alfil a f4 y lleva una torre a e1. Si negras cambia caballos en d4, retomas con la dama.",
+        "rival": "Negras busca cambiar piezas para quitarte la ventaja de desarrollo.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "c1",
+                "a": "f4",
+                "color": "verde",
+                "punteada": true
+              },
+              {
+                "tipo": "A3",
+                "de": "f1",
+                "a": "e1",
+                "color": "verde",
+                "punteada": true
+              }
+            ],
+            [
+              {
+                "tipo": "A3",
+                "de": "d1",
+                "a": "d4",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: tus últimas piezas, a buenas casillas."
+            },
+            {
+              "frase": "Af4: tu último alfil sale.",
+              "jugadas": [
+                "Bf4"
+              ]
+            },
+            {
+              "frase": "Te1: tu torre se pone detrás de tu peón de e4.",
+              "jugadas": [
+                "Re1"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "e1",
+                  "a": "e4",
+                  "color": "verde"
+                }
+              ]
+            },
+            {
+              "frase": "Si negras cambia caballos, ...Cxd4, retomas con la dama: Dxd4.",
+              "jugadas": [
+                "...Nxd4",
+                "Qxd4"
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WB-3d6",
+          "WP-SI",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra jugadas pasivas, d4 de inmediato; el peón se retoma con el caballo, y si cambian caballos, con la dama.",
+      "frecuencia": 4,
+      "fuenteFrecuencia": "partidas reales: 7.0 % y 5.4 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "blackburne-kostic",
+      "base": "curso-blackburne-kostic",
+      "nombre": "3...Cd4 (la trampa)",
+      "desde": 5,
+      "estructura": "Centro ideal",
+      "intro": "Estás en el Centro ideal, pero antes negras te pone una trampa. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras salta al centro con un caballo.",
+      "idea": "El peón de e5 es una trampa: cambias el caballo, enrocas y recuperas el peón de d4 con tu peón de c.",
+      "plan": {
+        "tuyo": "Saca tu caballo a c3 para cuidar e4 y d4. Si negras golpea con ...d5, tomas en d5.",
+        "rival": "Negras quiere golpear tus peones del centro con ...d5.",
+        "marcas": [],
+        "marcasDe": {
+          "tuyo": [
+            [
+              {
+                "tipo": "A3",
+                "de": "b1",
+                "a": "c3",
+                "color": "verde",
+                "punteada": true
+              }
+            ],
+            [
+              {
+                "tipo": "A7",
+                "de": "d6",
+                "a": "d5",
+                "color": "rojo",
+                "punteada": true
+              },
+              {
+                "tipo": "A3",
+                "de": "e4",
+                "a": "d5",
+                "color": "verde",
+                "punteada": true
+              }
+            ]
+          ],
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "d6",
+                "a": "d5",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: cuidar tus dos peones del centro."
+            },
+            {
+              "frase": "Cc3: tu caballo cuida el peón de e4.",
+              "jugadas": [
+                "Nc3"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "c3",
+                  "a": "e4",
+                  "color": "verde"
+                }
+              ]
+            },
+            {
+              "frase": "Si negras golpea con ...d5, tomas en d5: exd5 y ...Cxd5.",
+              "jugadas": [
+                "...d5",
+                "exd5",
+                "...Nxd5"
+              ]
+            },
+            {
+              "frase": "Tus piezas siguen más adelantadas que las de negras."
+            }
+          ]
+        },
+        "fuente": [
+          "WB-3Cd4",
+          "WP-BK",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra 3...Cd4, nunca tomes en e5: cambia el caballo.",
+      "frecuencia": 3,
+      "fuenteFrecuencia": "partidas reales: 1.9 % y 3.8 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "hungara",
+      "base": "curso-hungara",
+      "nombre": "3...Ae7 (Húngara)",
+      "desde": 5,
+      "intro": "Fuera del mapa: aquí el centro no termina en ninguna de las tres formas. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4; negras saca su alfil a e7.",
+      "idea": "Contra un alfil pasivo en e7, d4 de inmediato; tu peón echa al caballo y tu alfil lo ataca otra vez.",
+      "plan": {
+        "tuyo": "Enroca y recupera tu peón de d4.",
+        "rival": "Negras sostiene su caballo con ...f5.",
+        "marcas": [],
+        "marcasDe": {
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "f7",
+                "a": "f5",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: enrocar y recuperar tu peón."
+            },
+            {
+              "frase": "Negras sostiene su caballo con ...f5.",
+              "jugadas": [
+                "...f5"
+              ]
+            },
+            {
+              "frase": "0-0: tu rey a salvo.",
+              "jugadas": [
+                "O-O"
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WP-HD",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra 3...Ae7, d4 de inmediato.",
+      "frecuencia": 1,
+      "fuenteFrecuencia": "partidas reales: 0.6 % y 1.3 % (iterations/v4/mapa-italiana.md)"
+    },
+    {
+      "id": "rousseau",
+      "base": "curso-rousseau",
+      "nombre": "3...f5 (Rousseau)",
+      "desde": 5,
+      "intro": "Fuera del mapa: negras ofrece un peón, y el centro no termina en ninguna de las tres formas. Blancas ya jugó 1.e4 e5 2.Cf3 Cc6 3.Ac4.",
+      "idea": "...f5 debilita al rey de negras: d4 abre el centro y e5 gana espacio.",
+      "plan": {
+        "tuyo": "Saca tus piezas y enroca: 0-0, y Te1 detrás de tu peón de e5.",
+        "rival": "Negras ataca tu peón de e5 con ...d6.",
+        "marcas": [],
+        "marcasDe": {
+          "rival": [
+            [
+              {
+                "tipo": "A7",
+                "de": "d7",
+                "a": "d6",
+                "color": "rojo",
+                "punteada": true
+              }
+            ]
+          ]
+        },
+        "pasoAPaso": {
+          "ilustrativo": true,
+          "pasos": [
+            {
+              "frase": "Tu plan: sacar tus piezas y enrocar."
+            },
+            {
+              "frase": "Negras ataca tu peón de e5 con ...d6.",
+              "jugadas": [
+                "...d6"
+              ]
+            },
+            {
+              "frase": "0-0: tu rey a salvo.",
+              "jugadas": [
+                "O-O"
+              ]
+            },
+            {
+              "frase": "Te1: tu torre detrás de tu peón de e5.",
+              "jugadas": [
+                "Re1"
+              ]
+            }
+          ]
+        },
+        "fuente": [
+          "WB-3f5",
+          "WP-RG",
+          "MOTOR"
+        ]
+      },
+      "regla": "Contra 3...f5, d4: nunca Cc3.",
+      "frecuencia": 1,
+      "fuenteFrecuencia": "partidas reales: 0.6 % y 1.7 % (iterations/v4/mapa-italiana.md)"
+    }
+  ],
+  "rival": {
+    "e4 e5": {
+      "texto": "Negras contesta igual: toma su parte del centro y le abre camino a sus piezas.",
+      "fuente": [
+        "WB-1e4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6": {
+      "texto": "Negras defiende su peón de e5 sacando un caballo, que también mira d4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "c6",
+            "a": "e5",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A4",
+            "de": "c6",
+            "a": "d4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-1e5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6": {
+      "texto": "Negras saca su otro caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3Cf6"
+      ],
+      "motor": [
+        "X-3nf6-e4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5": {
+      "texto": "Negras saca su alfil, que apunta a f2.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "c5",
+            "a": "f2",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-4d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6": {
+      "texto": "Negras sostiene su peón de e5 y le abre camino a su alfil de c8.",
+      "fuente": [
+        "WB-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O": {
+      "texto": "Negras también pone su rey a salvo.",
+      "fuente": [
+        "WB-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5": {
+      "texto": "Negras saca su alfil antes que el caballo: así su dama sigue cuidando g5, y el alfil apunta a f2.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "d8",
+            "a": "g5",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A4",
+            "de": "c5",
+            "a": "f2",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3Ac5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-4c3",
+        "WB-4c3Cf6"
+      ],
+      "motor": [
+        "X-4nf6-e4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6": {
+      "texto": "Negras hace lo mismo: sostiene e5 y le abre camino a su alfil de c8.",
+      "fuente": [
+        "WB-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O": {
+      "texto": "Negras también pone su rey a salvo.",
+      "fuente": [
+        "WB-6O-O"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6": {
+      "texto": "Negras prepara ...b5 para echar a tu alfil de c4, y le hace a su alfil de c5 un refugio en a7.",
+      "marcas": [
+        [
+          {
+            "tipo": "A7",
+            "de": "b7",
+            "a": "b5",
+            "color": "rojo",
+            "punteada": true
+          },
+          {
+            "tipo": "A7",
+            "de": "b5",
+            "a": "c4",
+            "color": "rojo",
+            "punteada": true
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7": {
+      "texto": "Negras también retira su alfil a tiempo, y desde a7 sigue mirando a f2.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "a7",
+            "a": "f2",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6": {
+      "texto": "Negras sostiene su peón de e5 con otro peón, en vez de atacar tu e4.",
+      "fuente": [
+        "WB-4c3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4": {
+      "texto": "Negras cambia peones en el centro.",
+      "fuente": [
+        "LICHESS-CC0"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6": {
+      "texto": "Tu peón de d4 atacaba al alfil: negras lo retira a b6, desde donde sigue atacando d4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "b6",
+            "a": "d4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "LICHESS-CC0"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3 Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6": {
+      "texto": "Negras sostiene su peón de e5 con otro peón: es sólido, pero le quita casillas a su alfil de f8.",
+      "fuente": [
+        "WB-3d6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4": {
+      "texto": "Negras cambia peones en el centro.",
+      "fuente": [
+        "WB-3d6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3d6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7": {
+      "texto": "Negras saca su alfil y prepara su enroque.",
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6": {
+      "texto": "Negras juega ...h6 para que tu caballo no pueda saltar a g5, pero no saca ninguna pieza.",
+      "marcas": [
+        [
+          {
+            "tipo": "A5",
+            "en": "g5",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A5",
+            "de": "f3",
+            "a": "g5",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3h6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4": {
+      "texto": "Negras cambia peones en el centro.",
+      "fuente": [
+        "WB-3h6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4 Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4": {
+      "texto": "Negras salta con su caballo al centro y ataca tu caballo de f3. Su peón de e5 queda sin defensa: es una trampa.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "d4",
+            "a": "f3",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4": {
+      "texto": "Negras retoma con el peón de e5.",
+      "fuente": [
+        "WB-3Cd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6": {
+      "texto": "Negras le abre camino a su alfil de c8 y cuida la casilla e5.",
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6 c3 Be7": {
+      "texto": "Negras saca su alfil y prepara su enroque, sin defender más su peón.",
+      "fuente": [
+        "MOTOR"
+      ],
+      "motor": [
+        "R-bk-cxd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7": {
+      "texto": "Negras saca su alfil: es sólido, pero pasivo.",
+      "fuente": [
+        "WB-3Ae7",
+        "WP-HD"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4": {
+      "texto": "Negras cambia peones en el centro.",
+      "fuente": [
+        "WB-3Ae7"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6": {
+      "texto": "Negras saca su caballo y ataca tu peón de e4.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f6",
+            "a": "e4",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WP-HD"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5 Ne4": {
+      "texto": "El caballo salta al centro, sin peones que lo apoyen.",
+      "fuente": [
+        "WP-HD"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 f5": {
+      "texto": "Negras ofrece un peón con ...f5, pero deja débil a su rey.",
+      "fuente": [
+        "WB-3f5",
+        "WP-RG"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 f5 d4 exd4": {
+      "texto": "Negras cambia peones en el centro.",
+      "fuente": [
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 Ng5": {
+      "texto": "Blancas salta con su caballo contra f7.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "g5",
+            "a": "f7",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3Ac5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5": {
+      "texto": "Blancas toma el peón de e5: cae en la trampa.",
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7": {
+      "texto": "Blancas ataca tu dama y tu torre de h8 con el caballo.",
+      "marcas": [
+        [
+          {
+            "tipo": "A4",
+            "de": "f7",
+            "a": "h8",
+            "color": "rojo"
+          }
+        ]
+      ],
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1": {
+      "texto": "Blancas salva su torre.",
+      "fuente": [
+        "WB-3Cd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1 Qxe4+ Be2": {
+      "texto": "Blancas tapa el jaque con el alfil.",
+      "fuente": [
+        "WB-3Cd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Nxe4": {
+      "texto": "Negras toma tu peón de e4 con el caballo.",
+      "fuente": [
+        "WB-4d3",
+        "MOTOR"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4 Bc5 Nc3": {
+      "texto": "Blancas saca su otro caballo, y el de d4 queda atacado dos veces y defendido una.",
+      "fuente": [
+        "WB-3h6",
+        "MOTOR"
+      ],
+      "motor": [
+        "D-h6-bc5-cc3"
+      ]
+    }
+  },
+  "mias": {
+    "e4": {
+      "pregunta": "Empieza la partida. ¿Cómo ocupas el centro y les abres camino a tus piezas?",
+      "pista": "Un peón al centro que deje salir a tu dama y a un alfil.",
+      "hace": "Pones un peón en el centro.",
+      "porque": "Ocupa el centro y abre camino a tu dama y a tu alfil de f1.",
+      "fuente": [
+        "WB-1e4"
+      ]
+    },
+    "e4 e5 Nf3": {
+      "pregunta": "Saca una pieza que, además, ataque algo de negras.",
+      "pista": "Busca una pieza que salga y ataque el peón de e5 al mismo tiempo.",
+      "hace": "Sacas tu caballo y atacas el peón de e5.",
+      "porque": "Sacas una pieza con amenaza: negras tiene que defender ese peón.",
+      "prepara": "Además, tu caballo cuida d4 y te acerca al enroque.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "f3",
+              "a": "e5",
+              "color": "verde"
+            }
+          ]
+        ],
+        "prepara": [
+          [
+            {
+              "tipo": "A2",
+              "de": "f3",
+              "a": "d4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "describe": {
+        "prepara": [
+          [
+            "O-O"
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-1e5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4": {
+      "clave": true,
+      "pregunta": "Saca tu alfil de f1 a una casilla desde donde apunte al punto más débil de negras.",
+      "pista": "El peón de f7 solo lo cuida su rey: apunta tu alfil hacia él.",
+      "hace": "Sacas tu alfil a una diagonal que apunta a f7.",
+      "porque": "f7 es el peón más débil de negras: al principio solo lo cuida su rey.",
+      "prepara": "Con el caballo y el alfil afuera, ya puedes enrocar.",
+      "cuidado": "Todavía no amenazas nada: f7 es una meta para después, no un ataque inmediato.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "c4",
+              "a": "f7",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "describe": {
+        "prepara": [
+          [
+            "O-O"
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Ac4",
+        "WP-IT"
+      ],
+      "motor": [
+        "M-3ac4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3": {
+      "clave": true,
+      "pregunta": "Tu peón de e4 está atacado. ¿Cómo lo defiendes de forma sólida, sin mover una pieza dos veces?",
+      "pista": "Defiéndelo con un peón: así también le abres camino a tu alfil de c1.",
+      "hace": "Defiendes e4 con un peón y le abres camino a tu alfil de c1.",
+      "porque": "Así el caballo de f6 ya no puede tomar en e4: perdería una pieza.",
+      "prepara": "Y como e4 ya está seguro, amenazas Cg5 contra f7.",
+      "cuidado": "Si negras golpea con ...d5, toma en d5: si sigues con tu plan, su peón se come tu alfil.",
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "f3",
+              "a": "g5",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      },
+      "ver": {
+        "cuidado": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 4.d3.",
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "D-4d5-c3"
+                ]
+              },
+              {
+                "frase": "4...d5: el peón ataca tu alfil de c4 y tu peón de e4.",
+                "jugadas": [
+                  "d5"
+                ],
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "D-4d5-c3"
+                ]
+              },
+              {
+                "frase": "5.c3: sigues con tu plan como si nada.",
+                "jugadas": [
+                  "c3"
+                ],
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "D-4d5-c3"
+                ]
+              },
+              {
+                "frase": "5...dxc4: el peón se come tu alfil.",
+                "jugadas": [
+                  "dxc4"
+                ],
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "D-4d5-c3"
+                ]
+              },
+              {
+                "frase": "Perdiste un alfil por nada.",
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "D-4d5-c3"
+                ]
+              }
+            ]
+          }
+        ],
+        "porque": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 4.d3.",
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-2cd3-nxe4"
+                ]
+              },
+              {
+                "frase": "4...Cxe4: el caballo de negras toma tu peón.",
+                "jugadas": [
+                  "Nxe4"
+                ],
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-2cd3-nxe4"
+                ]
+              },
+              {
+                "frase": "5.dxe4: lo tomas con tu peón de d3.",
+                "jugadas": [
+                  "dxe4"
+                ],
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-2cd3-nxe4"
+                ]
+              },
+              {
+                "frase": "Negras perdió un caballo por un peón.",
+                "fuente": [
+                  "WB-4d3",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-2cd3-nxe4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "fuente": [
+        "WB-4d3",
+        "WB-3Cf6"
+      ],
+      "motor": [
+        "X-2cd3-nxe4",
+        "X-2cd3-amenaza",
+        "M-2cd3-d3",
+        "D-4d5-c3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3": {
+      "pregunta": "Tu caballo de b1 todavía no sale. Antes, ¿qué peón apoya d4 para más adelante?",
+      "pista": "Un peón que apoye la casilla d4, para poder jugar d4 cuando esté preparado.",
+      "hace": "Preparas d4: tu peón de c3 lo apoyará cuando llegue.",
+      "porque": "Llegas al esquema lento del Giuoco Pianissimo: d4 queda para cuando esté preparado.",
+      "prepara": "Tu caballo de b1 saldrá por d2, porque c3 ya está ocupada.",
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "b1",
+              "a": "d2",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-4d3",
+        "WB-5d3"
+      ],
+      "motor": [
+        "K-2cd3-a"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O": {
+      "pregunta": "Ya sacaste tus piezas del lado del rey. ¿Qué haces con tu rey?",
+      "pista": "Ponlo a salvo y acerca una torre al centro.",
+      "hace": "Pones tu rey a salvo y acercas tu torre al centro.",
+      "porque": "Con el centro cerrado no hay prisa: primero, el rey seguro.",
+      "prepara": "Después, Te1 cuida e4 otra vez.",
+      "fuente": [
+        "WB-5d3",
+        "WB-6O-O",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-2cd3-c"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1": {
+      "pregunta": "Piensa en d4 para más adelante: ¿cómo le das más apoyo a tu peón de e4?",
+      "pista": "Una torre detrás de tu peón de e4 lo cuida desde lejos.",
+      "hace": "Tu torre cuida e4 desde atrás.",
+      "porque": "Cuando llegue d4, tu peón de e4 no se quedará solo.",
+      "cuidado": "Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "e1",
+              "a": "e4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "ver": {
+        "cuidado": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 7.Te1.",
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "7...Cg4: el caballo salta contra f2, que también mira el alfil de c5.",
+                "jugadas": [
+                  "Ng4"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "g4",
+                    "a": "f2",
+                    "color": "rojo"
+                  },
+                  {
+                    "tipo": "A4",
+                    "de": "c5",
+                    "a": "f2",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "8.h3: echas al caballo.",
+                "jugadas": [
+                  "h3"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama.",
+                "jugadas": [
+                  "Nxf2"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "f2",
+                    "a": "d1",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "9.De2: salvas tu dama.",
+                "jugadas": [
+                  "Qe2"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "9...Cxd3+: se come otro peón, y el alfil de c5 te da jaque.",
+                "jugadas": [
+                  "Nxd3+"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "10.Rh2: tu rey se aparta.",
+                "jugadas": [
+                  "Kh2"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "10...Cxe1: el caballo se come tu torre.",
+                "jugadas": [
+                  "Nxe1"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "11.Dxe1: recuperas el caballo, pero perdiste una torre y dos peones por él.",
+                "jugadas": [
+                  "Qxe1"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "fuente": [
+        "WB-5d3",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-2cd3-re1",
+        "R-ng4-h3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3": {
+      "clave": true,
+      "pregunta": "Negras mira d4 con tres piezas. ¿Qué peón apoya tu avance al centro?",
+      "pista": "Apoya la casilla d4 con un peón, para poder ocuparla después.",
+      "hace": "Preparas d4: tu peón de c3 lo apoyará.",
+      "porque": "Hoy negras ataca d4 tres veces: con su peón de e5, su caballo de c6 y su alfil de c5.",
+      "prepara": "Amenazas d4, para quedarte con el centro.",
+      "cuidado": "Ahora tu caballo de b1 ya no puede ir a c3 a defender e4.",
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A4",
+              "de": "c6",
+              "a": "d4",
+              "color": "rojo"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Ac5",
+        "WB-4c3"
+      ],
+      "motor": [
+        "X-4c3-amen",
+        "M-4c3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3": {
+      "pregunta": "Tu peón de e4 está atacado y tu caballo de b1 ya no lo puede defender. ¿Cómo lo sostienes?",
+      "pista": "Con un peón, como en el Giuoco Pianissimo: sólido y sin prisa.",
+      "hace": "Defiendes e4 con un peón y le abres camino a tu alfil de c1.",
+      "porque": "Así juegas lento y sólido: d4 queda para cuando esté preparado.",
+      "fuente": [
+        "WB-4c3Cf6",
+        "WB-5d3",
+        "WB-4d3-Ac5"
+      ],
+      "motor": [
+        "X-4nf6-e4",
+        "R-5d3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O": {
+      "pregunta": "Ya sacaste tus piezas del lado del rey. ¿Qué haces con tu rey?",
+      "pista": "Ponlo a salvo y acerca una torre al centro.",
+      "hace": "Pones tu rey a salvo y acercas tu torre al centro.",
+      "porque": "Con el centro cerrado no hay prisa: primero, el rey seguro.",
+      "prepara": "Después, Te1 cuida e4 otra vez.",
+      "fuente": [
+        "WB-5d3",
+        "WB-6O-O"
+      ],
+      "motor": [
+        "M-6oo"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1": {
+      "pregunta": "Piensa en d4 para más adelante: ¿cómo le das más apoyo a tu peón de e4?",
+      "pista": "Una torre detrás de tu peón de e4 lo cuida desde lejos.",
+      "hace": "Tu torre cuida e4 desde atrás.",
+      "porque": "Cuando llegue d4, tu peón de e4 no se quedará solo.",
+      "cuidado": "Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "e1",
+              "a": "e4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "ver": {
+        "cuidado": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 7.Te1.",
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "7...Cg4: el caballo salta contra f2, que también mira el alfil de c5.",
+                "jugadas": [
+                  "Ng4"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "g4",
+                    "a": "f2",
+                    "color": "rojo"
+                  },
+                  {
+                    "tipo": "A4",
+                    "de": "c5",
+                    "a": "f2",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "8.h3: echas al caballo.",
+                "jugadas": [
+                  "h3"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "8...Cxf2: el caballo se come tu peón y ataca tu dama.",
+                "jugadas": [
+                  "Nxf2"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "f2",
+                    "a": "d1",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "9.De2: salvas tu dama.",
+                "jugadas": [
+                  "Qe2"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "9...Cxd3+: se come otro peón, y el alfil de c5 te da jaque.",
+                "jugadas": [
+                  "Nxd3+"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "10.Rh2: tu rey se aparta.",
+                "jugadas": [
+                  "Kh2"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "10...Cxe1: el caballo se come tu torre.",
+                "jugadas": [
+                  "Nxe1"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              },
+              {
+                "frase": "11.Dxe1: recuperas el caballo, pero perdiste una torre y dos peones por él.",
+                "jugadas": [
+                  "Qxe1"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "LICHESS-CC0"
+                ],
+                "motor": [
+                  "R-ng4-h3",
+                  "R-te1-ng4-ver"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "fuente": [
+        "WB-5d3",
+        "LICHESS-CC0",
+        "MOTOR"
+      ],
+      "motor": [
+        "M-7te1",
+        "R-ng4-h3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3": {
+      "pregunta": "Negras prepara un ataque de peón contra tu alfil. ¿Qué haces con él antes de que llegue?",
+      "pista": "Retíralo un paso por su misma diagonal: así sigue mirando a f7.",
+      "hace": "Retiras tu alfil antes de que lo ataquen, y sigue mirando a f7.",
+      "porque": "Así el peón de negras ya no lo echa ganando tiempo.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "b3",
+              "a": "f7",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-5d3",
+        "LICHESS-CC0"
+      ],
+      "motor": [
+        "M-8ab3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 h3": {
+      "pregunta": "Sin prisa: ¿qué peón le quita la casilla g4 al caballo y al alfil de negras?",
+      "pista": "Un peón de tu lado del rey avanza un paso y cuida g4.",
+      "hace": "Le quitas la casilla g4 al caballo de f6 y al alfil de c8.",
+      "porque": "Sin este peón, su caballo podría saltar a g4, contra f2, donde ya mira el alfil de a7.",
+      "prepara": "Siguen Cbd2 y, con todo listo, d4.",
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A3",
+              "de": "b1",
+              "a": "d2",
+              "color": "verde",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "d3",
+              "a": "d4",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-4c3Cf6",
+        "LICHESS-CC0",
+        "MOTOR"
+      ],
+      "motor": [
+        "X-cerr-ng4",
+        "M-9h3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4": {
+      "clave": true,
+      "pregunta": "Negras juega pasivo: no ataca tu peón de e4. Tu peón de c3 ya prepara el avance. ¿Qué haces?",
+      "pista": "Avanza al centro el peón que apoya tu peón de c3.",
+      "hace": "Avanzas al centro y atacas el peón de e5.",
+      "porque": "Contra una jugada pasiva no hay que esperar: con c3 listo, el centro es tuyo.",
+      "prepara": "Si negras cambia en d4, retomas con tu peón de c3 y te quedan dos peones en el centro.",
+      "cuidado": "Si negras no cambia y retira su alfil, tomas en e5.",
+      "describe": {
+        "prepara": [
+          [
+            "cxd4"
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-4c3",
+        "WP-GP"
+      ],
+      "motor": [
+        "R-d3-bour",
+        "D-bour-bb6-dxe5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4": {
+      "pregunta": "Retoma de forma que te queden dos peones juntos en el centro.",
+      "pista": "Con un peón, no con el caballo.",
+      "hace": "Retomas con el peón: ahora tienes e4 y d4, el Centro ideal.",
+      "porque": "Dos peones en el centro les quitan casillas a las piezas de negras.",
+      "cuidado": "Negras los atacará con sus piezas: hay que cuidarlos.",
+      "fuente": [
+        "WP-es",
+        "WP-GP"
+      ],
+      "motor": [
+        "M-6cxd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3": {
+      "pregunta": "El alfil de c8 de negras quiere salir a g4 y clavar tu caballo de f3, que cuida d4. ¿Cómo lo evitas?",
+      "pista": "Un peón de tu lado del rey cuida g4.",
+      "hace": "Le quitas la casilla g4 al alfil de c8.",
+      "porque": "Desde g4, el alfil de negras clavaría tu caballo de f3, que defiende d4.",
+      "cuidado": "Si su dama sale a f6 contra d4, protégelo con Ae3.",
+      "marcasDe": {
+        "porque": [
+          [
+            {
+              "tipo": "A7",
+              "de": "c8",
+              "a": "g4",
+              "color": "rojo",
+              "punteada": true
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "BASE",
+        "WP-GP",
+        "MOTOR"
+      ],
+      "motor": [
+        "F-bour",
+        "D-bour-df6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4 Bb6 h3 Nf6 d5": {
+      "pregunta": "Negras presiona tus dos peones del centro. ¿Cómo ganas espacio y echas a una pieza?",
+      "pista": "Avanza uno de tus peones del centro contra el caballo de c6.",
+      "hace": "Avanzas tu peón y echas al caballo de c6.",
+      "porque": "Si negras toma en e4, tomas su caballo de c6.",
+      "prepara": "Con más espacio en el centro, tus piezas tienen mejores casillas.",
+      "ver": {
+        "porque": [
+          {
+            "pasos": [
+              {
+                "frase": "Esta es la posición después de 8.d5.",
+                "fuente": [
+                  "MOTOR",
+                  "WP-es"
+                ],
+                "motor": [
+                  "B3"
+                ]
+              },
+              {
+                "frase": "8...Cxe4: el caballo de f6 se come tu peón.",
+                "jugadas": [
+                  "Nxe4"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "WP-es"
+                ],
+                "motor": [
+                  "B3"
+                ]
+              },
+              {
+                "frase": "9.dxc6: tu peón se come el caballo de c6.",
+                "jugadas": [
+                  "dxc6"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "WP-es"
+                ],
+                "motor": [
+                  "B3"
+                ]
+              },
+              {
+                "frase": "9...Axf2+: el alfil de negras toma un peón con jaque.",
+                "jugadas": [
+                  "Bxf2+"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "WP-es"
+                ],
+                "motor": [
+                  "B3"
+                ]
+              },
+              {
+                "frase": "10.Rf1: tienes una pieza por dos peones.",
+                "jugadas": [
+                  "Kf1"
+                ],
+                "fuente": [
+                  "MOTOR",
+                  "WP-es"
+                ],
+                "motor": [
+                  "B3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "fuente": [
+        "WP-es",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-bour-d",
+        "B2",
+        "B3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4": {
+      "clave": true,
+      "pregunta": "Negras juega pasivo y tus piezas ya salieron. ¿Cómo abres el centro de inmediato?",
+      "pista": "Ataca el peón de e5 con un peón, sin preparar con c3.",
+      "hace": "Atacas el peón de e5 y abres el centro.",
+      "porque": "Contra una jugada pasiva no hay que esperar: vas adelante en desarrollo.",
+      "prepara": "Si negras cambia en d4, retomas con el caballo y el centro queda abierto.",
+      "cuidado": "Si su alfil de c8 sale a g4 a clavar tu caballo, h3 le pregunta qué hace.",
+      "describe": {
+        "prepara": [
+          [
+            "Nxd4"
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3d6"
+      ],
+      "motor": [
+        "K-paris-a"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4": {
+      "pregunta": "Recupera el peón con una pieza que, además, quede bien plantada en el centro.",
+      "pista": "Con una pieza menor: la dama sola en el centro corre peligro.",
+      "hace": "Recuperas el peón con tu caballo.",
+      "porque": "Sin cadena de peones, tus piezas salen rápido.",
+      "cuidado": "Si su caballo cambia en d4, retoma con la dama.",
+      "errores": {
+        "Qxd4": "Tu dama se perdería: el caballo de c6 cuida esa casilla."
+      },
+      "verErrores": {
+        "Qxd4": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 4...exd4.",
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-paris"
+              ]
+            },
+            {
+              "frase": "5.Dxd4: retomas con la dama.",
+              "jugadas": [
+                "Qxd4"
+              ],
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-paris"
+              ]
+            },
+            {
+              "frase": "5...Cxd4: el caballo de c6 se come tu dama.",
+              "jugadas": [
+                "Nxd4"
+              ],
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-paris"
+              ]
+            }
+          ]
+        }
+      },
+      "fuente": [
+        "WB-3d6"
+      ],
+      "motor": [
+        "K-paris-b",
+        "D-paris-nxd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3": {
+      "pregunta": "Tu peón de e4 está atacado. ¿Cómo lo defiendes sacando una pieza nueva?",
+      "pista": "Con la pieza menor que todavía está en casa del lado de la dama.",
+      "hace": "Defiendes e4 y sacas tu otro caballo.",
+      "porque": "Cada jugada saca una pieza nueva: así sigues adelante en desarrollo.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "c3",
+              "a": "e4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3d6"
+      ],
+      "motor": [
+        "K-paris-d"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 O-O": {
+      "pregunta": "Tus piezas menores ya salieron. ¿Qué haces ahora con tu rey?",
+      "pista": "Ponlo a salvo antes que negras.",
+      "hace": "Pones tu rey a salvo antes que negras.",
+      "porque": "Tus caballos y tu alfil ya salieron y tu rey está seguro; el rey de negras sigue en el centro.",
+      "fuente": [
+        "WB-3d6"
+      ],
+      "motor": [
+        "K-paris-f",
+        "X-abie-fin"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4": {
+      "clave": true,
+      "pregunta": "Negras gastó una jugada sin sacar piezas. ¿Cómo lo aprovechas en el centro?",
+      "pista": "Abre el centro de inmediato, sin preparar con c3.",
+      "hace": "Atacas el peón de e5 y abres el centro.",
+      "porque": "Su jugada fue lenta: abre el centro mientras vas adelante en desarrollo.",
+      "cuidado": "Aquí atacar e5 de inmediato es mejor que preparar con c3.",
+      "fuente": [
+        "WB-3h6"
+      ],
+      "motor": [
+        "K-h6-a",
+        "R-h6-c3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4": {
+      "pregunta": "Recupera el peón con una pieza que, además, quede bien plantada en el centro.",
+      "pista": "Con una pieza menor: la dama sola en el centro corre peligro.",
+      "hace": "Recuperas el peón con tu caballo.",
+      "porque": "Sin cadena de peones, tus piezas salen rápido.",
+      "cuidado": "Si su alfil ataca tu caballo otra vez desde c5, cambia caballos en c6; si su caballo cambia en d4, retoma con la dama.",
+      "errores": {
+        "Qxd4": "Tu dama se perdería: el caballo de c6 cuida esa casilla."
+      },
+      "verErrores": {
+        "Qxd4": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 4...exd4.",
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-h6"
+              ]
+            },
+            {
+              "frase": "5.Dxd4: retomas con la dama.",
+              "jugadas": [
+                "Qxd4"
+              ],
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-h6"
+              ]
+            },
+            {
+              "frase": "5...Cxd4: el caballo de c6 se come tu dama.",
+              "jugadas": [
+                "Nxd4"
+              ],
+              "fuente": [
+                "WB-3d6",
+                "MOTOR"
+              ],
+              "motor": [
+                "R-dama-h6"
+              ]
+            }
+          ]
+        }
+      },
+      "fuente": [
+        "WB-3h6"
+      ],
+      "motor": [
+        "K-h6-b",
+        "P-h6-nxd4",
+        "D-h6-bc5",
+        "D-h6-df6-cxc6"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4 Nf6 Nc3": {
+      "pregunta": "Tu peón de e4 está atacado. ¿Cómo lo defiendes sacando una pieza nueva?",
+      "pista": "Con la pieza menor que todavía está en casa del lado de la dama.",
+      "hace": "Defiendes e4 y sacas tu otro caballo.",
+      "porque": "Tienes tres piezas afuera; negras, dos, y gastó una jugada con su peón de h.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "c3",
+              "a": "e4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3h6"
+      ],
+      "motor": [
+        "K-h6-d",
+        "X-h6-fin"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4": {
+      "clave": true,
+      "pregunta": "El peón de e5 parece gratis, pero es una trampa. ¿Qué haces con el caballo que saltó al centro?",
+      "pista": "Cámbialo: quita del centro la pieza que te pone la trampa.",
+      "hace": "Cambias el caballo que saltó al centro.",
+      "porque": "Sin ese caballo, la trampa ya no funciona.",
+      "cuidado": "No tomes en e5: su dama atacaría tu caballo y tu peón de g2 a la vez. Y si su dama sale a g5 de todos modos, regresa tu caballo a f3.",
+      "errores": {
+        "Nxe5": "Es la trampa: su dama atacaría tu caballo y tu peón de g2 a la vez."
+      },
+      "ver": {
+        "cuidado": [
+          {
+            "antes": true,
+            "pasos": [
+              {
+                "frase": "Regresamos a la posición después de 3...Cd4.",
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "4.Cxe5: tomas el peón de e5.",
+                "jugadas": [
+                  "Nxe5"
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "4...Dg5: la dama ataca tu caballo de e5 y tu peón de g2.",
+                "jugadas": [
+                  "Qg5"
+                ],
+                "marcas": [
+                  {
+                    "tipo": "A4",
+                    "de": "g5",
+                    "a": "e5",
+                    "color": "rojo"
+                  },
+                  {
+                    "tipo": "A4",
+                    "de": "g5",
+                    "a": "g2",
+                    "color": "rojo"
+                  }
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "5.Axf7+: tomas otro peón con jaque.",
+                "jugadas": [
+                  "Bxf7+"
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "5...Rd8: el rey se aparta.",
+                "jugadas": [
+                  "Kd8"
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "6.0-0: salvas tu peón de g2.",
+                "jugadas": [
+                  "O-O"
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              },
+              {
+                "frase": "6...Dxe5: negras se come tu caballo; tienes dos peones por una pieza.",
+                "jugadas": [
+                  "Qxe5"
+                ],
+                "fuente": [
+                  "WB-3Cd4",
+                  "WP-BK",
+                  "MOTOR"
+                ],
+                "motor": [
+                  "X-trap-bk",
+                  "X-trap-bk2"
+                ]
+              }
+            ]
+          },
+          null
+        ]
+      },
+      "verErrores": {
+        "Nxe5": {
+          "antes": true,
+          "pasos": [
+            {
+              "frase": "Esta es la posición después de 3...Cd4.",
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "4.Cxe5: tomas el peón de e5.",
+              "jugadas": [
+                "Nxe5"
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "4...Dg5: la dama ataca tu caballo de e5 y tu peón de g2.",
+              "jugadas": [
+                "Qg5"
+              ],
+              "marcas": [
+                {
+                  "tipo": "A4",
+                  "de": "g5",
+                  "a": "e5",
+                  "color": "rojo"
+                },
+                {
+                  "tipo": "A4",
+                  "de": "g5",
+                  "a": "g2",
+                  "color": "rojo"
+                }
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "5.Axf7+: tomas otro peón con jaque.",
+              "jugadas": [
+                "Bxf7+"
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "5...Rd8: el rey se aparta.",
+              "jugadas": [
+                "Kd8"
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "6.0-0: salvas tu peón de g2.",
+              "jugadas": [
+                "O-O"
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            },
+            {
+              "frase": "6...Dxe5: negras se come tu caballo; tienes dos peones por una pieza.",
+              "jugadas": [
+                "Qxe5"
+              ],
+              "fuente": [
+                "WB-3Cd4",
+                "WP-BK",
+                "MOTOR"
+              ],
+              "motor": [
+                "X-trap-bk",
+                "X-trap-bk2"
+              ]
+            }
+          ]
+        }
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ],
+      "motor": [
+        "K-bk-0",
+        "X-trap-bk",
+        "D-bk-dg5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O": {
+      "pregunta": "Vas adelante en desarrollo. ¿Qué haces con tu rey antes de abrir el juego?",
+      "pista": "Ponlo a salvo y acerca una torre al centro.",
+      "hace": "Pones tu rey a salvo y acercas tu torre al centro.",
+      "porque": "Negras gastó tiempo con su caballo: tú ya tienes el rey seguro.",
+      "fuente": [
+        "WB-3Cd4"
+      ],
+      "motor": [
+        "K-bk-0"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1": {
+      "pregunta": "Tu peón de e4 está atacado. ¿Qué pieza lo defiende desde atrás?",
+      "pista": "Una torre en la columna del peón.",
+      "hace": "Tu torre defiende e4 desde atrás.",
+      "porque": "Y se queda en la columna e, frente al rey de negras.",
+      "cuidado": "Si negras juega ...h5 para saltar a g4, h3 le quita esa casilla.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "e1",
+              "a": "e4",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-bk-b",
+        "D-bk-h5-h3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6 c3": {
+      "pregunta": "El peón de negras en d4 les quita espacio a tus piezas. ¿Cómo lo atacas con un peón?",
+      "pista": "Ataca ese peón para abrir el juego.",
+      "hace": "Atacas el peón de d4 para abrir el juego.",
+      "porque": "Tus piezas están más adelantadas: abrir el centro te conviene.",
+      "prepara": "Si negras no lo cambia, lo tomas con este peón y te quedan dos peones en el centro.",
+      "describe": {
+        "prepara": [
+          [
+            "cxd4"
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-bk-d",
+        "R-bk-cxd4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O Nf6 Re1 d6 c3 Be7 cxd4": {
+      "pregunta": "¿Cómo recuperas el peón y te quedas con dos peones en el centro?",
+      "pista": "Tómalo con el peón que lo atacaba.",
+      "hace": "Recuperas el peón: ahora tienes e4 y d4, el Centro ideal.",
+      "porque": "Tus piezas están más adelantadas, y tus dos peones mandan en el centro.",
+      "prepara": "Si negras golpea con ...d5, tomas en d5.",
+      "marcasDe": {
+        "prepara": [
+          [
+            {
+              "tipo": "A7",
+              "de": "d6",
+              "a": "d5",
+              "color": "rojo",
+              "punteada": true
+            },
+            {
+              "tipo": "A3",
+              "de": "e4",
+              "a": "d5",
+              "color": "verde",
+              "punteada": true
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "WP-es",
+        "MOTOR"
+      ],
+      "motor": [
+        "R-bk-cxd4b",
+        "P-bk-d5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4": {
+      "pregunta": "Negras juega pasivo. ¿Cómo tomas el centro de inmediato?",
+      "pista": "Ataca el peón de e5 con un peón.",
+      "hace": "Atacas el peón de e5 y abres el centro.",
+      "porque": "Su alfil en e7 no presiona nada: no hay que esperar.",
+      "fuente": [
+        "WB-3Ae7",
+        "WP-HD"
+      ],
+      "motor": [
+        "R-d4-ae7"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3": {
+      "pregunta": "Negras tomó en d4. ¿Cómo atacas ese peón para recuperarlo?",
+      "pista": "Con otro peón que lo ataque.",
+      "hace": "Atacas el peón de d4.",
+      "porque": "Si negras toma, retomas con una pieza y sigues adelante en desarrollo.",
+      "cuidado": "Si su caballo ataca tu alfil desde a5, sálvalo primero: Ae2.",
+      "fuente": [
+        "WB-3Ae7",
+        "WP-HD",
+        "BASE"
+      ],
+      "motor": [
+        "M-hung-c3",
+        "D-hung-ca5-ae2"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5": {
+      "pregunta": "Tu peón de e4 está atacado. ¿Cómo lo salvas echando al caballo?",
+      "pista": "Avanza ese peón.",
+      "hace": "Avanzas tu peón y echas al caballo de f6.",
+      "porque": "Ganas espacio, y el caballo tiene que buscar otra casilla.",
+      "fuente": [
+        "WP-HD",
+        "LICHESS-CC0"
+      ],
+      "motor": [
+        "M-hung-e5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5 Ne4 Bd5": {
+      "pregunta": "El caballo de e4 no tiene peones que lo apoyen. ¿Cómo lo atacas otra vez?",
+      "pista": "Con una pieza que lo ataque y, de paso, mire al caballo de c6.",
+      "hace": "Atacas el caballo de e4 con tu alfil.",
+      "porque": "Negras tiene que moverlo otra vez, o sostenerlo con su peón de f.",
+      "fuente": [
+        "MOTOR",
+        "WP-HD"
+      ],
+      "motor": [
+        "K-hung-a"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 f5 d4": {
+      "pregunta": "Negras debilitó a su rey. ¿Cómo abres el centro?",
+      "pista": "Con un peón, atacando e5.",
+      "hace": "Atacas el peón de e5 y abres el centro.",
+      "porque": "Su peón de f salió de casa: a su rey le conviene el juego cerrado; a ti, abrirlo.",
+      "cuidado": "Si negras toma en e4, tomas en e5 con el caballo.",
+      "fuente": [
+        "WB-3f5",
+        "WP-RG",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-rous-a",
+        "D-rous-fxe4"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 f5 d4 exd4 e5": {
+      "pregunta": "¿Cómo ganas espacio y le quitas una casilla al caballo de g8?",
+      "pista": "Avanza tu peón de e4.",
+      "hace": "Avanzas tu peón y le quitas la casilla f6 al caballo de g8.",
+      "porque": "Su rey quedó más débil: ahora sacas tus piezas y enrocas.",
+      "fuente": [
+        "WB-3f5",
+        "MOTOR"
+      ],
+      "motor": [
+        "K-rous-b"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Bc5 Ng5 Qxg5": {
+      "pregunta": "El caballo de g5 no tiene quien lo defienda. ¿Qué pieza tuya lo toma?",
+      "pista": "Tu dama todavía mira esa casilla.",
+      "hace": "Tomas el caballo con tu dama.",
+      "porque": "Tu dama cuidaba g5 desde d8: el caballo no tenía apoyo.",
+      "fuente": [
+        "WB-3Ac5",
+        "MOTOR"
+      ],
+      "motor": [
+        "X-ng5-bc5"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5": {
+      "pregunta": "Blancas tomó el peón de e5. ¿Qué pieza tuya ataca dos cosas a la vez?",
+      "pista": "Tu dama puede atacar el caballo y un peón de su enroque al mismo tiempo.",
+      "hace": "Tu dama ataca el caballo de e5 y el peón de g2.",
+      "porque": "Blancas no puede salvar las dos cosas.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "g5",
+              "a": "e5",
+              "color": "verde"
+            },
+            {
+              "tipo": "A2",
+              "de": "g5",
+              "a": "g2",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK",
+        "MOTOR"
+      ],
+      "motor": [
+        "X-trap-bk2"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2": {
+      "pregunta": "Blancas atacó tu dama y tu torre con el caballo. ¿Qué tomas tú, que vale más?",
+      "pista": "Toma el peón que defendía su enroque: ahora amenazas su torre.",
+      "hace": "Tomas el peón de g2 y atacas la torre de h1.",
+      "porque": "Tu dama entra en el lado del rey de blancas.",
+      "marcasDe": {
+        "hace": [
+          [
+            {
+              "tipo": "A2",
+              "de": "g2",
+              "a": "h1",
+              "color": "verde"
+            }
+          ]
+        ]
+      },
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ],
+      "motor": [
+        "R-trap3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1 Qxe4+": {
+      "pregunta": "La torre se salvó. ¿Cómo sigues con jaque?",
+      "pista": "Tu dama toma un peón del centro dando jaque.",
+      "hace": "Tomas el peón de e4 con jaque.",
+      "porque": "Blancas tiene que tapar con su alfil, y tu caballo de d4 queda listo.",
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ],
+      "motor": [
+        "R-trap3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1 Qxe4+ Be2 Nf3#": {
+      "pregunta": "El rey de blancas no tiene a dónde ir. ¿Con qué pieza das mate?",
+      "pista": "Tu caballo de d4 salta a una casilla junto al rey.",
+      "hace": "Das jaque mate con el caballo.",
+      "porque": "El rey no tiene casilla libre y nadie puede tomar al caballo.",
+      "fuente": [
+        "WB-3Cd4",
+        "WP-BK"
+      ],
+      "motor": [
+        "R-trap3"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 h6 d4 exd4 Nxd4 Bc5 Nc3 Bxd4": {
+      "pregunta": "El caballo de d4 está atacado dos veces y defendido una. ¿Qué haces?",
+      "pista": "Tómalo: si la dama retoma, tu caballo de c6 se la come.",
+      "hace": "Tomas el caballo de d4 con tu alfil.",
+      "porque": "Si su dama retoma, tu caballo de c6 se la come: ganas una pieza.",
+      "fuente": [
+        "WB-3h6",
+        "MOTOR"
+      ],
+      "motor": [
+        "D-h6-bc5-cc3",
+        "D-h6-bc5-err"
+      ]
+    },
+    "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Nxe4 dxe4": {
+      "pregunta": "El caballo de e4 se comió un peón defendido. ¿Cómo lo castigas?",
+      "pista": "Tómalo con el peón que defendía e4.",
+      "hace": "Tomas el caballo con tu peón.",
+      "porque": "Ganas una pieza por un peón.",
+      "fuente": [
+        "WB-4d3",
+        "MOTOR"
+      ],
+      "motor": [
+        "X-2cd3-nxe4"
+      ]
+    }
+  },
+  "glosario": [
+    {
+      "termino": "Centro",
+      "definicion": "Las casillas d4, e4, d5 y e5."
+    },
+    {
+      "termino": "Centro abierto",
+      "definicion": "Su peón de e5 se fue a d4 y lo retomaste con una pieza: sin cadena de peones, gana quien saca antes sus piezas."
+    },
+    {
+      "termino": "Centro cerrado",
+      "definicion": "Tus peones de d3 y e4 contra los de d6 y e5 de negras, sin cambios: una partida de maniobras."
+    },
+    {
+      "termino": "Centro ideal",
+      "definicion": "Tus peones de d4 y e4, juntos en el centro, sin peón negro en e5."
+    },
+    {
+      "termino": "Clavar",
+      "definicion": "Atacar una pieza que no se puede mover sin dejar atacada otra más valiosa detrás de ella."
+    },
+    {
+      "termino": "Columna",
+      "definicion": "Una fila de casillas de arriba abajo, como la e (e1 a e8)."
+    },
+    {
+      "termino": "Desarrollo",
+      "definicion": "Sacar tus piezas de su casilla de inicio. Ir adelante en desarrollo es tener más piezas afuera que el rival."
+    },
+    {
+      "termino": "Diagonal",
+      "definicion": "Una línea de casillas del mismo color, por donde se mueve un alfil."
+    },
+    {
+      "termino": "Enroque",
+      "definicion": "La jugada del rey y la torre juntos (0-0) que pone al rey a salvo."
+    },
+    {
+      "termino": "Estructura",
+      "definicion": "La forma que dejan los peones del centro."
+    },
+    {
+      "termino": "Gambito",
+      "definicion": "Una apertura en la que se ofrece un peón para ganar tiempo o abrir líneas."
+    },
+    {
+      "termino": "Giuoco Pianissimo",
+      "definicion": "El esquema lento de la Italiana: c3 y d3, enroque, y d4 solo cuando esté preparado."
+    },
+    {
+      "termino": "Jaque mate",
+      "definicion": "El rey está atacado y no tiene cómo salvarse: termina la partida."
+    },
+    {
+      "termino": "Pasiva",
+      "definicion": "Una jugada que no ataca nada ni saca piezas, como ...d6 o ...h6 en la Italiana."
+    },
+    {
+      "termino": "Ruptura",
+      "definicion": "Un avance de peón que ataca los peones del rival para abrir el juego."
+    }
+  ]
+}

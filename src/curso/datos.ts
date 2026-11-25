@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js'
 import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'json' }
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
+import italiana from '../../conocimiento/cursos/italiana.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
@@ -17,6 +18,8 @@ const caroKannCurso = caroKann as unknown as DatosCurso
 export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'caro-kann:b': caroKannCurso,
   'caro-kann-estructuras:b': componerCurso(caroKannCurso, caroKannEstructuras as unknown as CapaCurso),
+  // la Italiana, por estructuras (2026-11-25): un solo archivo, con sus secciones
+  'italiana:w': italiana as unknown as DatosCurso,
 }
 
 export const cursoNuevo = (id: string): DatosCurso | undefined => CURSOS_NUEVOS[id]
@@ -50,6 +53,17 @@ export function jugadasDeVariante(c: DatosCurso, v: VarianteCurso): string[] {
 }
 
 /**
+ * Lo que comparten todas las líneas del curso, desde 1.e4: la posición del tablero de arriba de su página (1.e4 c6 en
+ * la Caro-Kann; 1.e4 e6 2.d4 d5 3.e5 en el Avance contra la Francesa).
+ */
+export function troncoDelCurso(c: DatosCurso): string[] {
+  const ls = c.variantes.map((v) => jugadasDeVariante(c, v))
+  const t: string[] = []
+  for (let i = 0; ls.length && ls.every((l) => l[i] !== undefined && l[i] === ls[0]![i]); i++) t.push(ls[0]![i]!)
+  return t
+}
+
+/**
  * El id de lección de una variante, como los de antes: "caro-kann:b/b:caro-kann/curso-avance-short". Un curso que sale
  * de otro usa el del curso de origen: la misma línea tiene una sola ficha de Repaso.
  */
@@ -77,9 +91,13 @@ export function grupoDeLinea(c: DatosCurso, l: LineaCurso): LineaCurso[] {
   return lineasDe(c).filter((x) => x.tipo === 'variante' && esOpcional(c, x.variante!.id) === opcional)
 }
 
-/** Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual. */
-export function leccionesDe(c: DatosCurso): Leccion[] {
-  return c.variantes.map((v) => {
+/**
+ * Las variantes como lecciones del modelo de antes: así el Repaso, el inicio y "Practicar esta línea" las usan igual.
+ * Con `soloObligatorias`, las opcionales no entran: no salen en el Repaso ni en Refuerza (orden de Carlos, 2026-11-25);
+ * lo guardado de antes de esas líneas se queda en el teléfono y deja de salir.
+ */
+export function leccionesDe(c: DatosCurso, { soloObligatorias = false } = {}): Leccion[] {
+  return c.variantes.filter((v) => !soloObligatorias || !esOpcional(c, v.id)).map((v) => {
     const b = BASE.aperturas.find((x) => x.id === c.apertura)!.variantes.find((x) => x.id === v.base)!
     return { id: leccionIdDe(c, v), cursoId: c.fichasDe ?? c.id, nombre: v.nombre, familia: b.familia, plan: v.plan.tuyo, autorPlan: 'ia', frecuencia: v.frecuencia, color: c.color, jugadas: b.jugadas, ingles: b.nombreIngles, eco: b.eco }
   })
