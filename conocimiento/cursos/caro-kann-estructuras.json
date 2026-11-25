@@ -1,9 +1,9 @@
 {
   "id": "caro-kann-estructuras:b",
   "de": "caro-kann:b",
-  "nombre": "Caro-Kann por estructuras",
+  "nombre": "Defensa Caro-Kann",
   "version": "2026-11-01",
-  "nota": "Las mismas jugadas del curso de la Caro-Kann con otra organización, para que Carlos los compare: primero el mapa, después una lección por estructura, después las que más salen, y lo demás como opcional. Este archivo trae solo lo que cambia: las explicaciones de cada jugada, los planes, las fuentes y el glosario salen de caro-kann.json (src/curso/capas.ts). 'fuente' es de la base interna: en la app no se cita nada. Regla: specs/cursos.md §6.",
+  "nota": "Las mismas jugadas del curso de la Caro-Kann con otra organización (Carlos la eligió el 2026-11-25 y es la única Caro-Kann que se ve): primero el mapa, después una lección por estructura, después las que más salen, y lo demás como opcional. Este archivo trae solo lo que cambia: las explicaciones de cada jugada, los planes, las fuentes y el glosario salen de caro-kann.json (src/curso/capas.ts). 'fuente' es de la base interna: en la app no se cita nada. Regla: specs/cursos.md §6.",
   "fuentes": {
     "AJEDREZ": "se comprueba con chess.js sobre las líneas del curso: tests/unit/curso-estructuras.test.ts"
   },

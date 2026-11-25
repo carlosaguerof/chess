@@ -1,4 +1,4 @@
-# El inventario de "Ver qué pasa"
+# El inventario de "Ver qué pasaría"
 
 > Generado con `node scripts/ver-inventario.ts` (2026-10-30). La prueba `tests/unit/ver-que-pasa.test.ts` revisa que esté al día. Cada frase de `porque`, `prepara`, `cuidado` y `errores` del curso de la Caro-Kann: con su "Ver" o con el porqué no lo lleva. `hace` no entra: es "Te toca", antes de jugar. La regla: `specs/cursos.md` §2.3.
 
@@ -78,7 +78,7 @@
 | 6...e6 | porque | Ya no queda ningún alfil que encerrar. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...e6 | prepara | Siguen ...c5 y ...♘c6 contra d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...♗e4 | porque | Desde ahí tu alfil ataca a la torre de h1: el peón de g2 se fue a g4 y dejó la diagonal abierta. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4...♗e4 | prepara | Si f3 echa a tu alfil, vuelve a g6. | lo que dice se juega en las jugadas que siguen de la línea |
+| 4...♗e4 | prepara | Si f3 lo echa, tu alfil va a g6. | lo que dice se juega en las jugadas que siguen de la línea |
 | 5...♗g6 | porque | Tu alfil sigue en su diagonal y a salvo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♕d6 | porque | Si blancas lo cambia en f7, retomas con el alfil y recuperas el peón. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7...♗xf7 | prepara | Tu alfil cuida a tu rey desde f7; siguen ...♘d7 y ...♘gf6. | dice qué sigue (un plan), no qué pasaría con otra cosa |
