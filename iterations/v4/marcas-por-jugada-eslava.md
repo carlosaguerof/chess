@@ -120,12 +120,12 @@
 | Dónde | Frase | Marcas |
 |---|---|---|
 | plan checa tuyo frase 2 | Después, la ruptura ...c5 abre el centro. | flecha c6→c5 (A3, verde, punteada) |
-| plan checa rival frase 1 | Blancas quiere empujar e4 para ganar espacio y echar a tu alfil. | flecha e3→e4 (A7, roja, punteada) |
-| plan tranquila-schallopp tuyo frase 1 | Saca tu caballo de b8 a d7 y tu alfil de f8 a e7. | flecha f8→e7 (A3, verde, punteada) |
-| plan tranquila-schallopp tuyo frase 2 | Tu torre de h8 ya tiene la columna h abierta hasta h2. | flecha h8→h2 (A2, verde) |
+| plan checa rival frase 1 | Blancas quiere empujar e4 para ganar espacio y echar a tu alfil, o llevar su dama a b3. | flecha e3→e4 (A7, roja, punteada) |
+| plan tranquila-schallopp tuyo frase 2 | Después, saca tu caballo de b8 a d7 y tu alfil de f8 a e7. | flecha f8→e7 (A3, verde, punteada) |
+| plan tranquila-schallopp tuyo frase 3 | Tu torre de h8 ya tiene la columna h abierta hasta h2. | flecha h8→h2 (A2, verde) |
 | plan cambio tuyo frase 1 | Saca tu alfil de f8 a b4, donde clava al caballo de c3, y enroca. | flecha f8→b4 (A3, verde, punteada) |
 | plan cambio rival frase 1 | Blancas busca Db3 contra b7, o Ab5 y Ce5 contra tu caballo de c6. | flecha d1→b3 (A7, roja, punteada); flecha b3→b7 (A7, roja, punteada) |
-| plan cc3 tuyo frase 1 | Saca tus piezas: ...e6, ...Cf6 y tu alfil de f8. | flecha e7→e6 (A3, verde, punteada); flecha g8→f6 (A3, verde, punteada) |
+| plan cc3 tuyo frase 2 | Saca tus piezas: ...e6, ...Cf6 y tu alfil de f8. | flecha e7→e6 (A3, verde, punteada); flecha g8→f6 (A3, verde, punteada) |
 | plan cc3 rival frase 1 | Blancas tiene el centro, y su dama de c2 va por tu peón de c4. | flecha c2→c4 (A4, roja) |
 | plan alekhine-e3 tuyo frase 1 | Saca tu caballo de b8 a d7 y tu alfil de f8 a e7, y enroca. | flecha f8→e7 (A3, verde, punteada) |
 | plan checa-carlsbad tuyo frase 1 | Si blancas cambia en e5, retomas con tu caballo de d7. | flecha d7→e5 (A2, verde) |

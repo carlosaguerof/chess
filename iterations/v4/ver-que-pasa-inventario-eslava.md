@@ -38,7 +38,7 @@
 | 6...e6 | porque | Tu alfil de c8 ya está afuera: este peón ya no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...e6 | prepara | Tu alfil de f8 podrá salir a b4: después de a4, ningún peón de blancas puede vigilar esa casilla. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 7...♗b4 | prepara | Y ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 8...0-0 | porque | Blancas recuperó el peón y tú sacaste tus piezas: la partida queda pareja. | explica la jugada que ya está en la línea, sin una alternativa |
+| 8...0-0 | porque | Blancas recuperó el peón y tú sacaste tus alfiles y enrocaste: la partida queda pareja. | explica la jugada que ya está en la línea, sin una alternativa |
 | 9...♘e4 | porque | Desde e4 tu caballo ataca al de c3, que ya estaba atacado por tu alfil de b4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 10...♗g6 | porque | Desde g6 sigue cuidando a tu caballo de e4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♘bd7 | porque | Tu caballo de d7 ataca al de e5: blancas tiene que decidir si lo cambia o se lo lleva a c4. | explica la jugada que ya está en la línea, sin una alternativa |
@@ -57,17 +57,17 @@
 | 5...e6 | porque | Tu alfil de c8 ya está afuera, y tus peones de c6, d5 y e6 forman un centro firme. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♗e7 | porque | Con tu alfil de f8 afuera, ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4...cxd5 | porque | Sigues con un peón en d5, y la posición queda simétrica: los peones de los dos lados son iguales. | explica la jugada que ya está en la línea, sin una alternativa |
-| 5...♘c6 | porque | Tu caballo vigila d4 y e5, y deja libre a tu alfil de c8. | explica la jugada que ya está en la línea, sin una alternativa |
+| 5...♘c6 | porque | Tu caballo vigila d4 y e5, y no le tapa el camino a tu alfil de c8, como haría en d7. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♗f5 | porque | Es la idea de siempre: tu caballo de f6 cuida d5, y el alfil sale antes de que ...e6 lo encierre. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7...e6 | porque | Tu alfil de c8 ya está afuera: este peón ya no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8...♗b4 | porque | Además clavas al caballo de c3 contra el rey de e1. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3...cxd5 | porque | Sigues con un peón en d5 vigilando e4, y la posición queda simétrica. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...♘f6 | porque | Tu caballo de f6 también vigila e4. | explica la jugada que ya está en la línea, sin una alternativa |
-| 5...♘c6 | porque | Tu caballo vigila d4 y e5, y deja libre a tu alfil de c8. | explica la jugada que ya está en la línea, sin una alternativa |
+| 5...♘c6 | porque | Tu caballo vigila d4 y e5, y no le tapa el camino a tu alfil de c8, como haría en d7. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6...♗f5 | porque | Es la idea de siempre: tu caballo de f6 cuida d5, y el alfil sale antes de que ...e6 lo encierre. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7...e6 | porque | Tu alfil de c8 ya salió: este peón ya no lo encierra. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3...dxc4 | porque | Blancas todavía no jugó e3: recuperar el peón le va a costar jugadas. | explica la jugada que ya está en la línea, sin una alternativa |
-| 3...dxc4 | porque | Si no impide ...b5, podrás defenderlo. | lo que dice se juega en las jugadas que siguen de la línea |
+| 3...dxc4 | porque | Si no impide ...b5 ni saca su alfil por g2, podrás defenderlo. | lo que dice se juega en las jugadas que siguen de la línea |
 | 4...b5 | porque | Así su alfil de f1 ya no puede recuperarlo. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...b5 | prepara | Si blancas ataca este peón con a4, lo avanzas contra su caballo de c3. | lo que dice se juega en las jugadas que siguen de la línea |
 | 5...b4 | porque | El caballo de c3 tiene que irse, y blancas pierde tiempo. | explica la jugada que ya está en la línea, sin una alternativa |

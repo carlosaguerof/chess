@@ -3312,7 +3312,7 @@
       "dxc4"
      ],
      "lado": "negras",
-     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4, porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
+     "plan": "Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4 (si blancas no saca su alfil por g2), porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3819,7 +3819,7 @@
       "Qb6"
      ],
      "lado": "negras",
-     "plan": "Contra 3.Cc3 tomas en c4 y sostienes el peón con ...b5; si a4, ...b4 echa al caballo de c3. Tu alfil cuida c4 desde a6 y tu dama gana el peón de d4.",
+     "plan": "Contra 3.Cc3 tomas en c4 y, si blancas no saca su alfil por g2, sostienes el peón con ...b5; si a4, ...b4 echa al caballo de c3. Tu alfil cuida c4 desde a6 y tu dama gana el peón de d4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

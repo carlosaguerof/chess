@@ -43,7 +43,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cc3 dxc4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4, porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.
+- Plan *(redactado por la IA)*: Contra 3.Cc3 puedes tomar en c4 de inmediato con 3...dxc4: aquí sí sostienes el peón con ...b5 y ...b4 (si blancas no saca su alfil por g2), porque el caballo de c3 es un blanco que tu peón persigue (contra 4.e4, 4...b5). Cuidado: tras 4.e3 b5 5.a4, la jugada es 5...b4; si 5...e6, 6.axb5 cxb5 7.Df3 ataca tu torre de a8. La otra opción sólida es 3...Cf6, que lleva a la Variante Checa si blancas juega Cf3.
 - Fuente: D10 · Slav Defense
 
 ## Variante Checa
@@ -183,7 +183,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cc3 dxc4 4.e4 b5 5.a4 b4 6.Cb1 Aa6 7.Dc2 Dxd4 8.Cf3 Db6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 3.Cc3 tomas en c4 y sostienes el peón con ...b5; si a4, ...b4 echa al caballo de c3. Tu alfil cuida c4 desde a6 y tu dama gana el peón de d4.
+- Plan *(redactado por la IA)*: Contra 3.Cc3 tomas en c4 y, si blancas no saca su alfil por g2, sostienes el peón con ...b5; si a4, ...b4 echa al caballo de c3. Tu alfil cuida c4 desde a6 y tu dama gana el peón de d4.
 - Fuente: D10 · Slav Defense
 - Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, 3.Nc3 dxc4 (tabla: 4.e4 b5 5.a4 b4 6.Nb1 Ba6 7.Qc2 Qxd4 8.Nf3 Qb6); Wikipedia, Slav Defense (4.e4 b5 5.a4 b4); motor: cada jugada de negras, la mejor o a 7 de la mejor.
 
