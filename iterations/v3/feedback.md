@@ -40,3 +40,11 @@ Carlos, tomando el curso para aprender. Lo hace la corrida `00_corridas/chess/20
 | 13 | El curso de la Caro-Kann | "Lo que quiero es que la base e idea general me quede sumamente clara. No tener que aprenderme de memoria cada variante posible." | Primero el mapa: una pregunta, cuatro respuestas, y de ahí el plan (`specs/cursos.md` §6) |
 | 14 | Las variantes | "Siento que no se explica así en el curso, sino como lecciones aisladas." | Una lección por estructura; cada introducción dice en qué estructura estás y qué buscas |
 | 15 | Cómo probarlo | "Que lo hagan en un curso nuevo, para yo poder compararlos. O sea que en la app me aparezcan dos cursos de la caro kann. El actual y el nuevo." | Dos tarjetas. El curso actual no cambia ni un byte. El avance va aparte, para empezar el nuevo desde cero |
+
+## La comparación de los dos cursos de la Caro-Kann (2026-11-25)
+
+Carlos, al abrir la sesión del 25 de noviembre, contestando la pregunta de la tarea de Todoist: comparar "Caro-Kann por estructuras" con "Defensa Caro-Kann".
+
+| # | Dónde | Lo que dijo | La regla que sale |
+|---|---|---|---|
+| 16 | Los dos cursos de la Caro-Kann | "A", a "(A) El formato por estructuras es el bueno para los otros siete cursos / (B) Me quedo con el de antes / (C) Le cambiaría: …" | El formato por estructuras es el de los otros siete cursos, y la regla de obligatorio y opcional deja de estar en prueba (`specs/cursos.md` §6). Las dos tarjetas siguen hasta que decida qué pasa con la de antes |

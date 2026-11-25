@@ -753,3 +753,12 @@ Los instructivos de cada corrida viven fuera de este repo (en el repo privado de
 - **Por qué esta entrada va aparte:** los números de las corridas y el `gh-pages` se conocen después del merge, y las entradas de la bitácora no se reescriben.
 - **Quién:** la torre ("publica", condicionado a sus cuatro ajustes y a un subagente nuevo); la corrida de la Air.
 - **Dónde:** `main` al cerrar esta entrada, `gh-pages` `f98f8e2`. El reporte, en `00_corridas/chess/2026-11-01_REPORTE_curso-por-estructuras.md`.
+
+## [2026-11-25] decisión | El formato por estructuras, para los otros siete cursos
+
+- **Qué cambió:** "Caro-Kann por estructuras" deja de estar en prueba. Su formato (el mapa, una lección por estructura, las que más salen y lo demás como opcional) es el de los otros siete cursos. `specs/cursos.md` §6 y `specs/aprender.md` lo dicen. La regla de obligatorio y opcional vale para todos, y sus cortes (5 % y 2 %) se miden de nuevo en cada curso: si ahí no caen en un salto de los datos, la corrida los usa igual, lo anota y se lo dice a Carlos al final. La app no cambia: las dos tarjetas siguen.
+- **Por qué:** Carlos pidió este curso para que "la base e idea general me quede sumamente clara" sin memorizar cada variante, y para compararlo con el de antes (`iterations/v3/feedback.md` n.º 13 a 15). Lo comparó y contestó (A) (n.º 16). Lo de medir los cortes en cada curso es de la sesión: se escogieron con los datos de la Caro-Kann y no se han probado en otro (§6, "Sus límites").
+- **Los siete cursos:** Italiana (13 variantes en la base), Alapin (8), Avance contra la Caro-Kann (7), Avance contra la Francesa (7), la captura contra la Escandinava (10), Eslava (13) y ...c6 + ...d5 contra lo demás (8): 66 variantes. "Otras defensas contra 1.e4" tiene tarjeta en la app, pero el diseño del escalón 1 (§1) la deja sin curso: es de principios.
+- **Lo que falta decidir:** qué pasa con la tarjeta "Defensa Caro-Kann" y en qué orden se hacen los siete. Mientras tanto, los dos textos pendientes del curso de antes (el plan del Cambio sin la torre en b8 y "para que tenga h7") siguen ahí.
+- **Quién:** Carlos, el (A); la sesión del 25 de noviembre, el registro y la regla de medir los cortes en cada curso.
+- **Dónde:** la rama `docs/formato-por-estructuras`.

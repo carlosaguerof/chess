@@ -222,9 +222,9 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 - Las correcciones: `tests/e2e/correcciones-coordenadas.spec.ts` (§1), `tests/unit/correcciones-practicar.test.ts` y `tests/e2e/correcciones-practicar.spec.ts` (Practicar), `tests/unit/correcciones-paso-a-paso.test.ts` y `tests/e2e/correcciones-paso-a-paso.spec.ts` (§2.1), `tests/unit/correcciones-marcas.test.ts` y `tests/e2e/correcciones-marcas.spec.ts` (§2.2 y lo que no adelanta, §2). Las barras del sistema del iPhone en toda pantalla con la barra de abajo: `tests/e2e/barras-del-sistema.spec.ts` (`specs/ux.md`, En el iPhone, regla 7). En la página publicada: `tests/publicado/correcciones-caro-kann.spec.ts`.
 - El motor: `iterations/<vuelta>/comprobaciones-del-curso.md`. Y hasta tres pases adversariales antes de publicar, cada uno con un subagente nuevo y solo siete categorías: errores de ajedrez, afirmaciones que el motor no sostiene, textos que delatan la jugada, puntos del diseño §4 que no se cumplen, algo que ya existía y se rompió, texto copiado, y una frase sobre lo tuyo en tercera persona, sin nombrar la pieza. En el piloto, el primero encontró 25 cosas que las pruebas no veían (`iterations/v3/learning.md`).
 
-## 6. El curso por estructuras, en prueba (Carlos, 2026-11-01)
+## 6. El curso por estructuras (Carlos, 2026-11-01; elegido el 2026-11-25)
 
-> **En prueba.** Esta sección solo la usa el curso comparativo "Caro-Kann por estructuras" (`caro-kann-estructuras:b`). El curso de hoy no lleva `secciones` y se ve como siempre. Los otros siete cursos esperan a que Carlos compare los dos y elija.
+> **El formato de los cursos (Carlos, 2026-11-25).** Carlos comparó los dos cursos de la Caro-Kann y eligió este: los otros siete cursos se hacen así. Hoy solo lo usa "Caro-Kann por estructuras" (`caro-kann-estructuras:b`). El curso de antes no lleva `secciones`, se ve como siempre y sigue en Aprender hasta que Carlos decida qué pasa con su tarjeta. Lo que esta sección dice de la Caro-Kann (el mapa, sus cuatro estructuras, sus cortes) es de la Caro-Kann: cada curso nuevo arma su propio mapa con sus fuentes y mide sus propias partidas.
 
 **Para qué.** Carlos, tomando el curso para aprender: "Lo que quiero es que la base e idea general me quede sumamente clara. No tener que aprenderme de memoria cada variante posible." "Siento que no se explica así en el curso, sino como lecciones aisladas." "Que lo hagan en un curso nuevo, para yo poder compararlos." **Las mismas jugadas, con otra organización:** primero el mapa, después una lección por estructura, después las que más salen, y lo demás como opcional. Debe sentir que entiende qué pasa en el centro y qué plan toca, sin memorizar cada variante.
 
@@ -250,10 +250,12 @@ La jugada del rival no lleva marca extra: ya la enseña el amarillo. Los planes 
 - **Una razón tiene que distinguir:** "blancas no pone un peón en d4" no explicaba por qué una línea queda fuera del mapa, porque otras cuatro lecciones del mapa tampoco lo ponen. 2.♘f3 y 3.d3 es la única de las 16 que termina sin peón blanco en la columna d, y en 2.♗c4 blancas va contra f7, no por el centro.
 - Hoy Practicar abre con `INTRO_PRACTICAR`, no con la introducción de la lección. La regla se cumple de todos modos, por si eso cambia.
 
-**La regla de obligatorio y opcional (en prueba).** Propuesta de la torre sobre los dos objetivos de Carlos: "El entendimiento de estructura esencial de la defensa. Es comprender." y "Ver cuáles suceden más en partidas reales."
+**La regla de obligatorio y opcional.** Propuesta de la torre sobre los dos objetivos de Carlos: "El entendimiento de estructura esencial de la defensa. Es comprender." y "Ver cuáles suceden más en partidas reales."
 1. **Comprender.** Cada lección se asigna a una estructura: la forma que dejan los peones del centro. Si una estructura sale en 5 % o más de las partidas de un nivel, por cualquier camino, la lección más jugada de su grupo es obligatoria.
 2. **Partidas reales.** Otra lección también es obligatoria si ella sola sale en 2 % o más de las partidas de alguno de los dos niveles.
 3. **Lo demás es opcional.** El orden: primero las del paso 1, después las del paso 2; dentro de cada grupo, el orden de hoy.
+
+Con el (A) de Carlos (2026-11-25) deja de estar en prueba y vale para los siete cursos que faltan. **Sus cortes se miden de nuevo en cada curso,** con sus propias partidas. Si ahí no caen en un salto de los datos, la corrida usa los mismos cortes, lo anota y se lo dice a Carlos al final, sin detenerse.
 
 En la Caro-Kann da 8 obligatorias (Avance 4.Cf3, Cambio, Clásica, Dos Caballos; Van der Wiel, 2.Cf3 y 3.d3, 2.d3, 2.Ac4) y 8 opcionales. Los dos cortes son decisión de la torre y caen en saltos de los datos: las estructuras pasan de 9.9 % a 1.2 %, y las lecciones de 2.4 % a 1.2 %. Con un corte de 1 % en el paso 2, 2.c4 y 3.f3 volverían y serían 10.
 
