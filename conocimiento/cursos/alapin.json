@@ -334,7 +334,7 @@
      "texto": [
       "Tus peones: e4 y d4, uno al lado del otro. Es lo que más te va a salir: contra 2...Cc6, 2...d6 o 2...g6 juegas 3.d4, y casi siempre el rival cambia en d4 y retomas con el peón de c3. Contra 2...e6, lo común es 3...d5, y ahí avanzas: La cadena.",
       "Tu plan: primero el caballo de g1 a f3, que defiende d4, y después el de b1 a c3 (ya tiene la casilla libre); luego enrocas.",
-      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado). Tras 2...d6, avanzar a e5 te cuesta un peón.",
+      "Si un caballo del rival ataca tu peón de e4, mira su caballo de dama. Si ya salió a c6, avanzas tu peón de d4 contra él: d5. Si no, defiendes e4 con una pieza (Cc3, o Ad3 si c3 está ocupado): no pierdes nada. Tras 2...d6, avanzar a e5 te cuesta un peón; con su alfil ya en g7, en cambio, avanzar a e5 es todavía mejor.",
       "Si después el rival lo ataca con un peón en d5: con su peón ya en e6, lo avanzas, como en tu Avance contra la Francesa; si no, lo cambias. Este curso no trae lección para estas jugadas."
      ],
      "tablero": {
@@ -495,7 +495,7 @@
      "desde": 16,
      "lado": "w",
      "intro": "Después de 7...Axf3 8.Axf3, la dama del rival se comió tu peón de d4 con 8...Dxd4. Castígala.",
-     "final": "Ganaste la dama por un alfil: tu alfil le quitó con jaque el defensor a su dama.",
+     "final": "Ganaste su dama y su caballo a cambio de tu alfil y tu peón de d4: tu alfil le quitó con jaque el defensor a su dama.",
      "fuente": [
       "HART",
       "MOTOR"
@@ -1086,7 +1086,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bh5 O-O Nc6 Be3 cxd4": {
-   "texto": "El rival cambia en d4: quiere dejarte un peón aislado.",
+   "texto": "El rival cambia su peón de c5 por tu peón de d4.",
    "fuente": [
     "WB-2d5",
     "WP-IQP"
@@ -1119,7 +1119,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Nf6 Be3 cxd4": {
-   "texto": "El rival cambia en d4: quiere dejarte un peón aislado.",
+   "texto": "El rival cambia su peón de c5 por tu peón de d4.",
    "fuente": [
     "WB-2d5",
     "WP-IQP"
@@ -1166,7 +1166,7 @@
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7 Be2 cxd4": {
-   "texto": "El rival cambia en d4: quiere dejarte un peón aislado.",
+   "texto": "El rival cambia su peón de c5 por tu peón de d4.",
    "fuente": [
     "WB-2d5",
     "WP-IQP"
@@ -1406,6 +1406,11 @@
      [
       "d4",
       "cxd4"
+     ]
+    ],
+    "cuidado": [
+     [
+      "Nc3"
      ]
     ]
    },
@@ -1716,7 +1721,7 @@
         ]
        },
        {
-        "frase": "10.Dxd4: te comes su dama; la ganaste por un alfil.",
+        "frase": "10.Dxd4: te comes su dama; ganaste su dama y su caballo a cambio de tu alfil y tu peón de d4.",
         "jugadas": [
          "Qxd4"
         ],
@@ -2545,7 +2550,7 @@
    "pregunta": "¿Qué pieza del rival quedó sin defensa?",
    "pista": "Está en la misma columna que tu dama.",
    "hace": "Te comes la dama del rival.",
-   "porque": "Ganaste la dama por un alfil.",
+   "porque": "Ganaste su dama y su caballo; diste tu alfil y tu peón de d4.",
    "fuente": [
     "MOTOR",
     "AJEDREZ"
@@ -2590,7 +2595,7 @@
   },
   {
    "termino": "Siciliana abierta",
-   "definicion": "La Siciliana en que juegas Cf3 y d4 y retomas en d4 con el caballo; es la de más teoría."
+   "definicion": "La Siciliana en que sacas el caballo a f3, pones el peón en d4 y retomas en d4 con el caballo; es la de más teoría."
   },
   {
    "termino": "Punta de una cadena",

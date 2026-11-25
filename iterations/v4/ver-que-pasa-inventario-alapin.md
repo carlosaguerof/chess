@@ -63,4 +63,4 @@
 | 4.d3 | porque | Todas sus casillas están cubiertas por tus peones y tus piezas: donde vaya, lo ganas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.♔xf2 | porque | Ganas una pieza por un peón. | explica la jugada que ya está en la línea, sin una alternativa |
 | 9.♗xc6+ | porque | Y su dama de d4 se queda sin defensa frente a la tuya. | explica la jugada que ya está en la línea, sin una alternativa |
-| 10.♕xd4 | porque | Ganaste la dama por un alfil. | explica la jugada que ya está en la línea, sin una alternativa |
+| 10.♕xd4 | porque | Ganaste su dama y su caballo; diste tu alfil y tu peón de d4. | explica la jugada que ya está en la línea, sin una alternativa |
