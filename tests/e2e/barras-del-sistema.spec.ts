@@ -19,11 +19,11 @@ const PANTALLAS = [
   { nombre: 'Jugar', ruta: '/bots' },
   { nombre: 'Aprender, con negras', ruta: '/cursos/negras' },
   { nombre: 'Aprender, con blancas', ruta: '/cursos/blancas' },
-  { nombre: 'la página del curso (Palabras del curso)', ruta: '/curso/caro-kann%3Ab' },
-  { nombre: 'La idea', ruta: '/curso/caro-kann%3Ab/leer/idea' },
-  { nombre: 'La estructura', ruta: '/curso/caro-kann%3Ab/leer/estructura' },
-  { nombre: 'El repaso del curso', ruta: '/curso/caro-kann%3Ab/leer/repaso' },
-  { nombre: 'Errores y trampas', ruta: '/curso/caro-kann%3Ab/errores' },
+  { nombre: 'la página del curso (Palabras del curso)', ruta: '/curso/caro-kann-estructuras%3Ab' },
+  { nombre: 'La idea', ruta: '/curso/caro-kann-estructuras%3Ab/leer/idea' },
+  { nombre: 'La estructura', ruta: '/curso/caro-kann-estructuras%3Ab/leer/estructura' },
+  { nombre: 'El repaso del curso', ruta: '/curso/caro-kann-estructuras%3Ab/leer/repaso' },
+  { nombre: 'Errores y trampas', ruta: '/curso/caro-kann-estructuras%3Ab/errores' },
   { nombre: 'Repaso de hoy', ruta: '/repaso' },
   { nombre: 'Refuerza', ruta: '/refuerza' },
   { nombre: 'Mis partidas', ruta: '/historial' },
@@ -95,7 +95,7 @@ test.describe('Las barras del sistema del iPhone: nada queda debajo de la barra 
   })
 
   test('arriba, una franja del color del fondo, del alto de la hora: lo que se desliza no se ve detrás; al cargar, nada empieza debajo de ella', async ({ page }) => {
-    await conBarras(page, '/curso/caro-kann%3Ab')
+    await conBarras(page, '/curso/caro-kann-estructuras%3Ab')
     const franja = page.getByTestId('franja-arriba')
     await expect(franja).toBeAttached()
     const caja = await franja.boundingBox()

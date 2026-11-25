@@ -9,7 +9,7 @@ import type { PasoAPaso } from '../../src/curso/tipos.ts'
  * el repaso, en los dos perfiles. Abrir, avanzar, regresar, Salir y tocar fuera; el tablero cambia con cada paso y
  * coincide con la frase. Las capturas, en iterations/v3/capturas/correcciones/<perfil>/.
  */
-const c = cursoNuevo('caro-kann:b')!
+const c = cursoNuevo('caro-kann-estructuras:b')!
 const ventana = (page: Page) => page.getByTestId('paso-a-paso')
 const frase = (page: Page) => page.getByTestId('paso-a-paso-frase')
 const tablero = (page: Page) => page.getByTestId('tablero-paso-a-paso')
@@ -37,7 +37,7 @@ async function recorrer(page: Page, pa: PasoAPaso, inicio: string[] = []) {
 test.describe('Correcciones · C3 · Ver paso a paso', () => {
   test('La idea: abrir, avanzar, regresar, Salir y tocar fuera; el tablero coincide con cada frase', async ({ page }, info) => {
     const pa = c.piezas.idea.paginas[0]!.pasoAPaso!
-    await page.goto('/#/curso/caro-kann%3Ab/leer/idea')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/idea')
     // la página guarda su texto
     await expect(page.getByTestId('texto-pieza')).toContainText('Cuando blancas abre con 1.e4')
     await page.getByTestId('ver-paso-a-paso').click()
@@ -81,7 +81,7 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
   })
 
   test('La estructura: sus dos páginas, solo con peones', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/leer/estructura')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/estructura')
     for (const [k, pagina] of c.piezas.estructura.paginas.entries()) {
       if (k > 0) await page.getByTestId('pagina-siguiente').click()
       await expect(page.getByTestId('texto-pieza')).toContainText(pagina.texto[0]!.slice(0, 20))
@@ -99,7 +99,7 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
   })
 
   test('El repaso: sus dos páginas', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/leer/repaso')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/repaso')
     for (const [k, pagina] of c.piezas.repaso.paginas.entries()) {
       if (k > 0) await page.getByTestId('pagina-siguiente').click()
       await page.getByTestId('ver-paso-a-paso').click()
@@ -114,8 +114,8 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
     const v = c.variantes.find((x) => x.id === 'avance-tal')!
     const jugadas = jugadasDeVariante(c, v)
     await page.goto('/#/')
-    await page.evaluate((ply) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'aprender', ply, fecha: Date.now() } })), jugadas.length)
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
+    await page.evaluate((ply) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'aprender', ply, fecha: Date.now() } })), jugadas.length)
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
     await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'plan')
     await expect(page.getByTestId('narracion')).toContainText('Tu plan:')
     await page.getByTestId('ver-paso-a-paso').click()
@@ -136,8 +136,8 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
     await page.goto('/#/')
     for (const v of c.variantes) {
       const jugadas = jugadasDeVariante(c, v)
-      await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply, fecha: Date.now() } })), [`v:${v.id}`, jugadas.length] as const)
-      await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(`v:${v.id}`))
+      await page.evaluate(([linea, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta: 'aprender', ply, fecha: Date.now() } })), [`v:${v.id}`, jugadas.length] as const)
+      await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(`v:${v.id}`))
       await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'plan')
       await page.getByTestId('ver-paso-a-paso').click()
       await recorrer(page, v.plan.pasoAPaso!, jugadas)

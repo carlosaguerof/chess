@@ -24,7 +24,7 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
     await page.goto('/#/cursos/negras')
     const tarjeta = page.getByTestId('tarjeta-caro-kann:b')
     await expect(tarjeta).toContainText('Defensa Caro-Kann')
-    await expect(tarjeta).toContainText('0 de 16 variantes')
+    await expect(tarjeta).toContainText('0 de 8 variantes')
     await cap(page, info, '01-aprender-con-negras')
     await tarjeta.click()
     await expect(page.getByTestId('pagina-curso')).toBeVisible()
@@ -34,15 +34,16 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
     await expect(piezas.locator('[data-testid^="paso-"]').first()).toContainText('La idea')
     await expect(piezas.locator('[data-testid^="paso-"]').nth(1)).toContainText('La estructura')
     await expect(piezas.locator('[data-testid^="paso-"]').nth(2)).toContainText('1. Avance: 4.♘f3')
-    await expect(piezas.locator('[data-testid^="paso-"]').nth(18)).toContainText('Errores y trampas')
-    await expect(piezas.locator('[data-testid^="paso-"]').nth(19)).toContainText('Repaso del curso')
+    // el curso por estructuras: las 8 obligatorias, Errores y trampas, Repaso y, al final, las 8 opcionales
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(10)).toContainText('Errores y trampas')
+    await expect(piezas.locator('[data-testid^="paso-"]').nth(11)).toContainText('Repaso del curso')
     await expect(page.getByTestId('pagina-curso')).not.toContainText(/Caro-Kann Defense|B1\d/)
     await sinDesborde(page)
     await cap(page, info, '02-pagina-del-curso', true)
   })
 
   test('las piezas de leer: La idea, La estructura y el Repaso; "Listo" marca la pieza y lleva a lo que sigue', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
     await page.getByTestId('empezar-curso').click()
     await expect(page.getByTestId('pieza-idea')).toBeVisible()
     await expect(page.getByTestId('texto-pieza')).toContainText('1...c6')
@@ -51,20 +52,26 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
     await cap(page, info, '03-la-idea', true)
     await page.getByTestId('pieza-listo').click()
     await expect(page.getByTestId('pieza-estructura')).toBeVisible()
-    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('1 de 2')
+    // el curso por estructuras: El mapa, la Cadena, el Cambio, la Clásica y la Tensión
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('1 de 5')
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('2 de 5')
     await cap(page, info, '04-la-estructura-avance', true)
     await page.getByTestId('pagina-siguiente').click()
-    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('2 de 2')
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('4 de 5')
     await cap(page, info, '05-la-estructura-clasica', true)
+    await page.getByTestId('pagina-siguiente').click()
+    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('5 de 5')
     await page.getByTestId('pieza-listo').click()
     // lo que sigue después de las dos piezas de leer: la primera variante
     await expect(page.getByTestId('leccion-curso')).toBeVisible()
-    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
     await expect(page.getByTestId('paso-idea')).toHaveAttribute('data-estado', 'hecha')
     await expect(page.getByTestId('paso-estructura')).toHaveAttribute('data-estado', 'hecha')
     await expect(page.getByTestId('empezar-curso')).toContainText('Seguir')
     await expect(page.getByTestId('seguir-nombre')).toHaveText('Avance: 4.♘f3')
-    await page.goto('/#/curso/caro-kann%3Ab/leer/repaso')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/repaso')
     await expect(page.getByTestId('linea-repaso')).toContainText('1.e4 c6 2.d4 d5 3.e5 ♗f5 4.♘f3 e6 5.♗e2 c5')
     await cap(page, info, '06-repaso-del-curso', true)
     await page.getByTestId('pagina-siguiente').click()
@@ -73,7 +80,7 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
   })
 
   test('la lección: cada momento, con su captura', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-short'))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-short'))
     await momento(page, 'intro')
     await sinDesborde(page)
     await cap(page, info, '08-leccion-intro')
@@ -108,7 +115,7 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
   })
 
   test('el plan, Practicar y el resumen con sus tres salidas (en la Tal)', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal'))
     await page.getByTestId('empezar-vuelta').click()
     for (const j of ['c8f5', 'h7h5', 'f5d3', 'e7e6']) {
       await momento(page, 'tuTurno')
@@ -140,7 +147,7 @@ test.describe('C6 · las pantallas del curso de la Caro-Kann', () => {
   })
 
   test('Errores y trampas: la lista y un "¿Y si…?"', async ({ page }, info) => {
-    await page.goto('/#/curso/caro-kann%3Ab/errores')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/errores')
     await expect(page.getByTestId('pieza-errores')).toBeVisible()
     await cap(page, info, '18-errores-y-trampas')
     await page.getByTestId('error-cambio-dc7').click()

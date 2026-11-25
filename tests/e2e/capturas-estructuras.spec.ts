@@ -28,12 +28,13 @@ async function fotoDePagina(page: Page, nombre: string) {
 test.describe('capturas del curso por estructuras', () => {
   test.use({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
 
-  test('las dos tarjetas, la página, La estructura, las introducciones y una opcional @capturas-estructuras', async ({ page }) => {
+  test('la tarjeta, la página, La estructura, las introducciones y una opcional @capturas-estructuras', async ({ page }) => {
     test.setTimeout(180_000)
     await page.goto('/#/cursos/negras')
-    await expect(page.getByTestId('tarjeta-caro-kann-estructuras:b')).toBeVisible()
+    // una sola Caro-Kann desde el 2026-11-25: la tarjeta "Defensa Caro-Kann" abre este curso
+    await expect(page.getByTestId('tarjeta-caro-kann:b')).toBeVisible()
     await page.evaluate(() => document.fonts.ready)
-    await foto(page, '01-las-dos-tarjetas')
+    await foto(page, '01-la-tarjeta')
 
     await page.goto(CURSO)
     await expect(page.getByTestId('pagina-curso')).toBeVisible()
@@ -81,5 +82,21 @@ test.describe('capturas del curso por estructuras', () => {
     await page.goto(`${CURSO}/leer/repaso`)
     await expect(page.getByTestId('pieza-repaso')).toBeVisible()
     await fotoDePagina(page, '11-repaso')
+  })
+
+  test('una sola Caro-Kann: la pestaña de negras, la página arriba y una lección hecha en el curso de antes @capturas-una-sola', async ({ page }) => {
+    await page.goto('/#/')
+    // como lo dejó el curso de antes: el Cambio terminado (y La idea leída, que no se pasa)
+    await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: { idea: 1 }, variantes: { cambio: { aprendida: 1, terminada: 2 } }, errores: {} })))
+    await page.goto('/#/cursos/negras')
+    await expect(page.getByTestId('tarjeta-caro-kann:b')).toContainText('1 de 8 variantes')
+    await page.evaluate(() => document.fonts.ready)
+    await foto(page, '01-pestana-negras')
+    await page.getByTestId('tarjeta-caro-kann:b').click()
+    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Defensa Caro-Kann')
+    await foto(page, '02-pagina-del-curso-arriba')
+    await expect(page.getByTestId('paso-v:cambio')).toHaveAttribute('data-estado', 'hecha')
+    await page.getByTestId('paso-v:cambio').evaluate((e) => e.scrollIntoView({ block: 'center' }))
+    await foto(page, '03-leccion-hecha-en-el-curso-de-antes')
   })
 })
