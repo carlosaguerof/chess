@@ -1036,7 +1036,7 @@
    "regla": "Aquí, ...b5 defiende c4, y contra a4, ...b4 echa al caballo de c3.",
    "frecuencia": 5,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 600–1000 35.6 %, 1000–1400 47.4 % de la Eslava",
-   "estructura": "Tomas en c4 y lo defiendes con ...b5"
+   "estructura": "Tomas en c4 y lo defiendes"
   },
   {
    "id": "checa-clasica",
@@ -1146,7 +1146,7 @@
    "regla": "Aquí, ...b5 y, contra a4, ...b4.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4 y lo defiendes con ...b5"
+   "estructura": "Tomas en c4 y lo defiendes"
   },
   {
    "id": "checa-carlsbad",
@@ -1363,7 +1363,7 @@
    "regla": "Contra e5, el caballo al centro.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess (MAPA del curso, 2026-11-25): 0 partidas en las dos bandas",
-   "estructura": "Tomas en c4 y lo defiendes con ...b5"
+   "estructura": "Tomas en c4 y lo defiendes"
   },
   {
    "id": "diemer",

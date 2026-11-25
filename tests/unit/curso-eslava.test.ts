@@ -31,7 +31,7 @@ const jugadas = (l: LineaCurso): Move[] => {
 
 const TENSION = 'Nadie cambia peones'
 const CAMBIO = 'Blancas cambia en d5'
-const ALEKHINE = 'Tomas en c4 y lo defiendes con ...b5'
+const ALEKHINE = 'Tomas en c4 y lo defiendes'
 const CHECA = 'Tomas en c4, pero blancas alcanza a jugar a4'
 
 /** Qué forma dicen las jugadas de una línea, mirando toda la línea (como `curso-estructuras.test.ts`). */

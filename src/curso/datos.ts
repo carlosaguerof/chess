@@ -174,6 +174,15 @@ const conSecciones = (apertura: string, color: string): DatosCurso[] => Object.v
  * la sección opcional de su curso, sea cual sea el curso (`specs/cursos.md` §6). Es la única condición: el Repaso
  * (`cursos()` marca `opcional`) y Refuerza (`soloObligatorias`) la usan, y los cursos nuevos también.
  */
+/**
+ * ¿Esta variante de la base es lección de algún curso (obligatoria u opcional)? La guía en partida la usa para desempatar:
+ * con la misma frecuencia, gana la línea que el curso enseña (orchestrator, 2026-11-25: contra 1.g3 salía el plan de otra
+ * variante porque era la primera de la lista).
+ */
+export function esLeccionDeCurso(apertura: string, color: string, base: string): boolean {
+  return Object.values(CURSOS_NUEVOS).some((c) => c.apertura === apertura && c.color === color && c.variantes.some((v) => v.base === base))
+}
+
 export function esLeccionOpcional(apertura: string, color: string, base: string): boolean {
   return conSecciones(apertura, color).some((c) => opcionales(c).some((v) => v.base === base))
 }
