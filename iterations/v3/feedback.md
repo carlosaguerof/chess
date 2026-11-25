@@ -48,3 +48,13 @@ Carlos, al abrir la sesión del 25 de noviembre, contestando la pregunta de la t
 | # | Dónde | Lo que dijo | La regla que sale |
 |---|---|---|---|
 | 16 | Los dos cursos de la Caro-Kann | "A", a "(A) El formato por estructuras es el bueno para los otros siete cursos / (B) Me quedo con el de antes / (C) Le cambiaría: …" | El formato por estructuras es el de los otros siete cursos, y la regla de obligatorio y opcional deja de estar en prueba (`specs/cursos.md` §6). Las dos tarjetas siguen hasta que decida qué pasa con la de antes |
+
+## No detenerse en lo reversible (2026-11-25)
+
+Carlos, en la sesión "Air - chess", después de elegir el formato por estructuras. Lo hace la corrida `00_corridas/chess/2026-11-25_PROMPT_una-sola-caro-kann.md`.
+
+| # | Dónde | Lo que dijo | La regla que sale |
+|---|---|---|---|
+| 17 | Lo que faltaba de la Caro-Kann y los siete cursos | "No pares hasta terminar con todo lo que falte. Aplica el workflow OW-EO y aplica la regla de no detenerse en nada que sea reversible, y en el caso de este repo todo es reversible, entonces no te detengas hasta terminar todo lo pendiente." | En este repo todo es reversible: las corridas siguen con la opción recomendada, la anotan y se la dicen al final |
+| 18 | Las dos preguntas que seguían abiertas: la tarjeta de antes y el orden de los siete | "1. A. 2. B pon gate de Que si falla pues primero entiendas por qué y luego se considere que no lo hagan así y encuentren como sí funciona." | Una sola Caro-Kann (la de estructuras). Los siete cursos, a la vez, sin esperar su prueba en el iPhone entre uno y otro, con su gate: si el formato falla en un curso, primero se entiende por qué, y luego se considera no hacerlo así y se busca cómo sí funciona |
+
