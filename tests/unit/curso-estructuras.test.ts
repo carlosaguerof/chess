@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { CURSOS_NUEVOS, grupoDeLinea, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { caminoQueQueda, CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, soloObligatorias, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -13,6 +13,9 @@ import { dia, paraHoy, sumarDias } from '../../src/repaso/repaso.ts'
 import { cursoActivo } from '../../src/aprender/interruptores.ts'
 import { lineasDe as lineasDeFavorita, repertorioCompleto } from '../../src/aprender/favoritas.ts'
 import type { AvanceCurso } from '../../src/curso/avance.ts'
+import { cursoQueQueda } from '../../src/curso/queda.ts'
+import { jugadasDeMiRepertorio, jugadasFalladas } from '../../src/registro/refuerza.ts'
+import { fenCorto } from '../../src/registro/registro.ts'
 import type { CapaCurso, LineaCurso, PaginaLeer } from '../../src/curso/tipos.ts'
 
 /**
@@ -62,9 +65,10 @@ function estructuraDe(l: LineaCurso): string[] {
 }
 
 describe('El curso por estructuras · la capa', () => {
-  it('se llama como dijo Carlos y sale del curso actual', () => {
+  it('se llama "Defensa Caro-Kann", como la de antes, y sale del curso actual (su id no cambia)', () => {
     expect(nuevo.id).toBe('caro-kann-estructuras:b')
-    expect(nuevo.nombre).toBe('Caro-Kann por estructuras')
+    expect(nuevo.nombre).toBe('Defensa Caro-Kann')
+    expect(nuevo.nombre).toBe(actual.nombre)
     expect(nuevo.fichasDe).toBe('caro-kann:b')
   })
 
@@ -334,7 +338,7 @@ describe('El curso por estructuras · los textos', () => {
   it('el Cambio pide la torre en b8 en su plan y en su paso a paso, sin tocar lo demás, y sus marcas se quedan', () => {
     const v = nuevo.variantes.find((x) => x.id === 'cambio')!
     const hoy = actual.variantes.find((x) => x.id === 'cambio')!
-    expect(v.plan.tuyo).toBe(hoy.plan.tuyo.replace('Después, adelanta ...b5 y ...b4:', 'Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón:'))
+    expect(v.plan.tuyo).toBe(hoy.plan.tuyo.replace('Después, adelanta ...b5 y ...b4:', 'Después, con una torre en b8, adelanta ...b5 y ...b4, cuidando de no regalar el peón:'))
     // un paso nuevo enseña la torre en el tablero; los demás conservan sus jugadas y sus marcas
     const pasos = v.plan.pasoAPaso!.pasos
     const i = pasos.findIndex((x) => x.jugadas?.[0] === '...Rab8')
@@ -399,13 +403,21 @@ describe('El curso por estructuras · una sola ficha de Repaso por línea', () =
     }
   })
 
-  it('la tarjeta va justo después de la del curso actual, y no trae lecciones: ninguna línea sale dos veces', () => {
+  it('una sola tarjeta de la Caro-Kann: la de antes, con sus lecciones, abre el curso por estructuras; ninguna línea sale dos veces', () => {
     const lista = cursos()
-    const i = lista.findIndex((c) => c.id === 'caro-kann:b')
-    expect(lista[i + 1]).toMatchObject({ id: 'caro-kann-estructuras:b', nombre: 'Caro-Kann por estructuras', color: 'b', lecciones: [] })
-    expect(lista[i + 1]!.raiz).toEqual(lista[i]!.raiz)
+    expect(lista.filter((c) => c.apertura === 'caro-kann' && c.color === 'b').map((c) => c.id)).toEqual(['caro-kann:b'])
+    expect(lista.some((c) => c.id === 'caro-kann-estructuras:b')).toBe(false)
+    expect(cursoQueQueda('caro-kann:b')).toBe('caro-kann-estructuras:b')
+    expect(lista.find((c) => c.id === 'caro-kann:b')!.lecciones.map((l) => l.id)).toEqual(leccionesDe(actual).map((l) => l.id))
     const ids = lista.flatMap((c) => c.lecciones).map((l) => l.id)
     expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('en el Repaso, cada ficha muestra el plan del curso que queda (el Cambio, con la torre en b8), con el mismo orden e ids', () => {
+    const lecciones = cursos().find((c) => c.id === 'caro-kann:b')!.lecciones
+    expect(lecciones.map((l) => l.id)).toEqual(leccionesDe(actual).map((l) => l.id))
+    for (const v of nuevo.variantes) expect(lecciones.find((l) => l.id === leccionIdDe(nuevo, v))!.plan, v.id).toBe(v.plan.tuyo)
+    expect(lecciones.find((l) => l.id.endsWith('/curso-cambio'))!.plan).toContain('con una torre en b8')
   })
 
   it('terminada en el curso nuevo, la línea sale una vez en el Repaso, y en el curso que usa "Practicar esta línea"', () => {
@@ -447,3 +459,183 @@ describe('El curso por estructuras · el Respaldo', () => {
     expect(JSON.parse(memoria.get('ajedrez.v1.curso:caro-kann-estructuras:b')!)).toEqual(dos)
   })
 })
+
+describe('Una sola Caro-Kann · la dirección del curso de antes', () => {
+  const N = '/curso/caro-kann-estructuras%3Ab'
+  const partes = (camino: string) => camino.split('/').filter(Boolean)
+  it('lleva a lo mismo en el curso que queda: la página, cada línea, cada pieza de leer y Errores y trampas', () => {
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab'))).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann:b'))).toBe(N)
+    for (const l of lineasDe(nuevo)) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/linea/${encodeURIComponent(l.id)}`)), l.id).toBe(`${N}/linea/${encodeURIComponent(l.id)}`)
+    for (const p of ['idea', 'estructura', 'repaso']) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/leer/${p}`))).toBe(`${N}/leer/${p}`)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/errores'))).toBe(`${N}/errores`)
+  })
+
+  it('"#/leccion/caro-kann:b/<n>" (Practicar esta línea, el resumen de una lección) abre esa misma línea', () => {
+    actual.variantes.forEach((v, i) => expect(caminoQueQueda(partes(`/leccion/caro-kann%3Ab/${i}`)), v.id).toBe(`${N}/linea/${encodeURIComponent(`v:${v.id}`)}`))
+    actual.variantes.forEach((v, i) => expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/${i}`)), v.id).toBe(`${N}/linea/${encodeURIComponent(`v:${v.id}`)}`))
+  })
+
+  it('lo que no existe en el que queda lleva a su página, nunca a una vacía', () => {
+    const quitados = actual.piezas.errores.lista.filter((e) => !nuevo.piezas.errores.lista.some((x) => x.id === e.id))
+    expect(quitados.length).toBeGreaterThan(0)
+    for (const e of quitados) expect(caminoQueQueda(partes(`/curso/caro-kann%3Ab/linea/${encodeURIComponent(`e:${e.id}`)}`)), e.id).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/linea/v%3Ano-existe'))).toBe(N)
+    expect(caminoQueQueda(partes('/leccion/caro-kann%3Ab/99'))).toBe(N)
+    expect(caminoQueQueda(partes('/curso/caro-kann%3Ab/leer/otra'))).toBe(N)
+  })
+
+  it('las demás direcciones no cambian', () => {
+    for (const c of ['/', '/cursos/negras', '/curso/caro-kann-estructuras%3Ab', '/curso/eslava%3Ab', '/leccion/eslava%3Ab/0', '/curso/caro-kann%3Aw', '/repaso']) expect(caminoQueQueda(partes(c)), c).toBeUndefined()
+  })
+})
+
+describe('Una sola Caro-Kann · el avance de antes cuenta', () => {
+  let memoria: Map<string, string>
+  beforeEach(() => {
+    memoria = instalarLocalStorage()
+    ;(globalThis as unknown as { window: EventTarget }).window = new EventTarget()
+  })
+  const ANTES = 'ajedrez.v1.curso:caro-kann:b'
+  const QUEDA = 'ajedrez.v1.curso:caro-kann-estructuras:b'
+
+  it('una lección terminada en el de antes sale hecha en el que queda; las piezas de leer, los «¿Y si…?» y dónde me quedé, no', async () => {
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    const antes = { piezas: { idea: 1, estructura: 2, errores: 3, repaso: 4 }, variantes: { cambio: { aprendida: 5, terminada: 6 }, fantasia: { aprendida: 7 } }, errores: { 'tal-e6': 8, 'cambio-dc7': 9 }, enCurso: { linea: 'v:clasica', vuelta: 'practicar', ply: 5, fecha: 10 } }
+    memoria.set(ANTES, JSON.stringify(antes))
+    const a = leerAvance('caro-kann-estructuras:b')
+    expect(a.variantes).toEqual({ cambio: { aprendida: 5, terminada: 6 }, fantasia: { aprendida: 7 } })
+    expect(a.piezas).toEqual({})
+    expect(a.errores).toEqual({})
+    expect(a.enCurso).toBeUndefined()
+    // "1 de 8" en la tarjeta y en la página, y "Seguir" se salta lo hecho
+    expect(pasosDelCurso(nuevo, { ...a, piezas: { idea: 1, estructura: 1 } }).find((p) => p.id === 'v:cambio')!.hecho).toBe(true)
+    expect(siguientePaso(nuevo, { ...a, piezas: { idea: 1, estructura: 1 } })!.id).toBe('v:avance-short')
+    // el de antes no cambia, y el que queda no guardó nada
+    expect(JSON.parse(memoria.get(ANTES)!)).toEqual(antes)
+    expect(memoria.has(QUEDA)).toBe(false)
+    // al de antes no le llega nada del que queda
+    memoria.set(QUEDA, JSON.stringify({ piezas: {}, variantes: { panov: { terminada: 11 } }, errores: {} }))
+    expect(leerAvance('caro-kann:b').variantes).toEqual(antes.variantes)
+  })
+
+  it('lo del que queda gana, y se junta campo por campo', async () => {
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: {}, variantes: { cambio: { aprendida: 1, terminada: 2 }, clasica: { aprendida: 3, terminada: 4 } }, errores: {} }))
+    memoria.set(QUEDA, JSON.stringify({ piezas: { idea: 5 }, variantes: { cambio: { aprendida: 6 }, panov: { terminada: 7 } }, errores: {} }))
+    const a = leerAvance('caro-kann-estructuras:b')
+    expect(a.variantes).toEqual({ cambio: { aprendida: 6, terminada: 2 }, clasica: { aprendida: 3, terminada: 4 }, panov: { terminada: 7 } })
+    expect(a.piezas).toEqual({ idea: 5 })
+  })
+
+  it('al terminar algo en el que queda, se guarda solo lo suyo: nada del de antes se copia', async () => {
+    const { leerAvance, marcarVariante, marcarPieza } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: {}, variantes: { cambio: { aprendida: 1, terminada: 2 } }, errores: {} }))
+    marcarVariante('caro-kann-estructuras:b', 'clasica', 'terminada', 3)
+    marcarPieza('caro-kann-estructuras:b', 'idea', 4)
+    expect(JSON.parse(memoria.get(QUEDA)!)).toEqual({ piezas: { idea: 4 }, variantes: { clasica: { terminada: 3 } }, errores: {} })
+    expect(leerAvance('caro-kann-estructuras:b').variantes).toEqual({ cambio: { aprendida: 1, terminada: 2 }, clasica: { terminada: 3 } })
+  })
+
+  it('un Respaldo viejo, con solo el avance de antes, sigue sirviendo', async () => {
+    const { textoDelRespaldo, cargarRespaldo } = await import('../../src/estado/respaldo.ts')
+    const { importar } = await import('../../src/repertorio/edicion.ts')
+    const { leerAvance } = await import('../../src/curso/avance.ts')
+    memoria.set(ANTES, JSON.stringify({ piezas: { idea: 1 }, variantes: { 'avance-short': { aprendida: 1, terminada: 2 } }, errores: {} }))
+    const archivo = textoDelRespaldo()
+    memoria.clear()
+    cargarRespaldo(importar(archivo))
+    expect(leerAvance('caro-kann-estructuras:b').variantes).toEqual({ 'avance-short': { aprendida: 1, terminada: 2 } })
+  })
+})
+
+describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refuerza', () => {
+  const caroKann = () => cursos().find((c) => c.id === 'caro-kann:b')!
+  const fen = (camino: string[]) => {
+    const ch = new Chess()
+    for (const s of camino) ch.move(s)
+    return fenCorto(ch.fen())
+  }
+  const fallo = (camino: string[], esperada: string) => ({ fen: fen(camino), esperada, resultado: 'fallo' as const, lugar: 'curso' as const, fecha: 1, linea: 'x', camino })
+
+  it('en cursos(), las 16 lecciones siguen (mismo orden e ids) y las 8 opcionales van marcadas', () => {
+    const ls = caroKann().lecciones
+    expect(ls).toHaveLength(16)
+    const marcadas = ls.filter((l) => l.opcional).map((l) => l.id).sort()
+    expect(marcadas).toEqual(opcionales(nuevo).map((v) => leccionIdDe(nuevo, v)).sort())
+  })
+
+  it('el Repaso no saca una opcional, aunque tenga su ficha guardada; una obligatoria, sí', () => {
+    const ls = cursos().flatMap((c) => c.lecciones)
+    const tal = leccionIdDe(nuevo, nuevo.variantes.find((v) => v.id === 'avance-tal')!)
+    const cambio = leccionIdDe(nuevo, nuevo.variantes.find((v) => v.id === 'cambio')!)
+    const ayer = new Date(`${sumarDias(dia(), -1)}T12:00:00`).getTime()
+    const hechas = { [tal]: { fecha: ayer }, [cambio]: { fecha: ayer } }
+    const fichas = { [tal]: { escalon: 2, proxima: dia() } }
+    expect(paraHoy(fichas, hechas, ls, dia()).map((l) => l.id)).toEqual([cambio])
+    // nada se borra: la ficha y lo aprendido siguen ahí
+    expect(fichas[tal]).toEqual({ escalon: 2, proxima: dia() })
+    expect(Object.keys(hechas)).toContain(tal)
+  })
+
+  it('Refuerza: de la Caro-Kann, solo las líneas de las 8 obligatorias; lo demás y la guía, igual', () => {
+    const todo = repertorioCompleto()
+    const rep = soloObligatorias(todo)
+    const ck = (r: typeof todo) => r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.id)
+    expect(ck(rep).sort()).toEqual(obligatorias(nuevo).map((v) => `b:caro-kann/${v.base}`).sort())
+    expect(rep.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b'))).toEqual(todo.lineas.filter((l) => !(l.apertura === 'caro-kann' && l.color === 'b')))
+    // la guía y los bots siguen con todo
+    expect(ck(todo).length).toBeGreaterThan(ck(rep).length)
+    expect(repertorioCompleto().lineas).toHaveLength(todo.lineas.length)
+  })
+
+  it('una sola condición: esLeccionOpcional marca en el Repaso y filtra en Refuerza las mismas 8', () => {
+    for (const v of nuevo.variantes) expect(esLeccionOpcional('caro-kann', 'b', v.base), v.id).toBe(opcionales(nuevo).includes(v))
+    const marcadas = caroKann().lecciones.filter((l) => l.opcional).map((l) => l.id.slice(l.id.lastIndexOf('/') + 1)).sort()
+    expect(marcadas).toEqual(opcionales(nuevo).map((v) => v.base).sort())
+    const fuera = repertorioCompleto().lineas.filter((l) => !soloObligatorias(repertorioCompleto()).lineas.includes(l)).map((l) => l.id.slice(l.id.indexOf('/') + 1))
+    for (const b of marcadas) expect(fuera, b).toContain(b)
+    // ningún otro curso tiene opcionales hoy
+    expect(cursos().filter((c) => c.id !== 'caro-kann:b').flatMap((c) => c.lecciones).filter((l) => l.opcional)).toEqual([])
+  })
+
+  it('Refuerza deja de mostrar 37 jugadas de la Caro-Kann: 23 de opcionales y 14 de líneas de la base que no son lección', () => {
+    const todas = jugadasDeMiRepertorio(repertorioCompleto(), [])
+    const quedan = new Set(jugadasDeMiRepertorio(soloObligatorias(repertorioCompleto()), []).map((j) => `${j.fen}|${j.esperada}`))
+    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`))
+    expect(fuera).toHaveLength(37)
+    const enOpcional = (j: (typeof todas)[number]) => opcionales(nuevo).some((v) => {
+      const ch = new Chess()
+      return jugadasDeVariante(nuevo, v).some((s) => {
+        const ok = ch.fen() === j.fen && s === j.esperada
+        ch.move(s)
+        return ok
+      })
+    })
+    expect(fuera.filter(enOpcional)).toHaveLength(23)
+  })
+
+  it('un curso nuevo con su propio id y secciones usa la misma condición', () => {
+    const it = repertorioCompleto().lineas.find((l) => l.apertura === 'italiana' && l.color === 'w')!
+    const base = it.id.slice(it.id.indexOf('/') + 1)
+    const v = { ...nuevo.variantes[0]!, id: 'prueba', base }
+    CURSOS_NUEVOS['prueba:w'] = { ...nuevo, id: 'prueba:w', apertura: 'italiana', color: 'w', fichasDe: undefined, variantes: [v], secciones: [{ id: 'opcional', titulo: 'Opcional', opcional: true, variantes: ['prueba'] }] }
+    try {
+      expect(esLeccionOpcional('italiana', 'w', base)).toBe(true)
+      expect(soloObligatorias(repertorioCompleto()).lineas.some((l) => l.id === it.id)).toBe(false)
+    } finally {
+      delete CURSOS_NUEVOS['prueba:w']
+    }
+    expect(esLeccionOpcional('italiana', 'w', base)).toBe(false)
+  })
+
+  it('Refuerza: un fallo en una jugada que solo está en una opcional no sale; uno en una obligatoria, sí', () => {
+    const soloTal = fallo(['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5', 'h4'], 'h5')
+    const deLaBase = fallo(['e4', 'c6', 'd4', 'd5', 'e5'], 'Bf5')
+    const rep = soloObligatorias(repertorioCompleto())
+    expect(jugadasFalladas(repertorioCompleto(), [soloTal]).map((j) => j.esperada), 'antes salía').toEqual(['h5'])
+    expect(jugadasFalladas(rep, [soloTal])).toEqual([])
+    expect(jugadasFalladas(rep, [soloTal, deLaBase]).map((j) => j.esperada)).toEqual(['Bf5'])
+  })
+})
+

@@ -161,12 +161,16 @@ describe.runIf(esCaroKann)('C3 · el registro sigue alimentando Refuerza y el Re
     const ck = cursos().find((x) => x.id === 'caro-kann:b')!
     // los dos cursos de la Caro-Kann, con las mismas fichas (cada uno en su orden)
     expect(ck.lecciones.map((l) => l.id).sort()).toEqual(leccionesDe(c).map((l) => l.id).sort())
-    const l = ck.lecciones.find((x) => x.id.endsWith('/curso-avance-tal'))!
-    expect(l.nombre).toBe(tal.nombre)
+    // una obligatoria (la Van der Wiel); la Tal es opcional en el curso que se ve y no sale en el Repaso (specs/cursos.md §6)
+    const l = ck.lecciones.find((x) => x.id.endsWith('/curso-avance-van-der-wiel'))!
+    expect(l.nombre).toBe(c.variantes.find((v) => v.id === 'avance-van-der-wiel')!.nombre)
     const hoy = dia()
     const hechas = { [l.id]: { fecha: Date.now() } }
     expect(paraHoy({}, hechas, ck.lecciones, hoy)).toHaveLength(0)
     expect(paraHoy({}, hechas, ck.lecciones, sumarDias(hoy, 1)).map((x) => x.id)).toEqual([l.id])
+    const t = ck.lecciones.find((x) => x.id.endsWith('/curso-avance-tal'))!
+    expect(t.nombre).toBe(tal.nombre)
+    expect(paraHoy({}, { [t.id]: { fecha: Date.now() } }, ck.lecciones, sumarDias(hoy, 1))).toHaveLength(0)
   })
 
   it('lo que ya llevaba en el Repaso de la Caro-Kann vieja pasa a la lección nueva de la misma respuesta', () => {

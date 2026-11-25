@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useRuta, navegar } from './ruta.ts'
 import { empezarPartida } from './partida/usePartidaBot.ts'
 import { CLAVES, guardar } from './estado/almacen.ts'
@@ -12,7 +12,7 @@ import { Licencias } from './pantallas/Licencias.tsx'
 import { Leccion } from './pantallas/Leccion.tsx'
 import { LeccionCurso } from './pantallas/LeccionCurso.tsx'
 import { CursoPagina, ErroresDelCurso, PiezaDeLeer } from './pantallas/CursoPagina.tsx'
-import { cursoNuevo } from './curso/datos.ts'
+import { caminoQueQueda, cursoNuevo } from './curso/datos.ts'
 import { Refuerza } from './pantallas/Refuerza.tsx'
 import { AperturasYDefensas, PaginaApertura, PaginaVariante, pestanaDe } from './pantallas/AperturasYDefensas.tsx'
 import { Respaldo } from './pantallas/Respaldo.tsx'
@@ -53,6 +53,9 @@ export function App() {
   if (import.meta.env.DEV && primera === 'prueba-partida') return <PruebaPartida consulta={ruta.consulta} />
   // la partida ocupa toda la pantalla (N8: solo lo que importa)
   if (primera === 'partida') return <Partida />
+  // una sola Caro-Kann (2026-11-25): la dirección del curso de antes lleva a lo mismo en el que queda
+  const queda = caminoQueQueda(ruta.partes)
+  if (queda) return <Redirigir a={queda} />
   // C3: el curso piloto (la Caro-Kann) usa la lección nueva; los demás, la de antes
   const nuevo = segunda ? cursoNuevo(decodeURIComponent(segunda)) : undefined
   if (primera === 'curso' && nuevo && ruta.partes[2] === 'linea' && ruta.partes[3]) return <LeccionCurso key={ruta.camino} cursoId={nuevo.id} lineaId={decodeURIComponent(ruta.partes[3])} />
@@ -84,6 +87,17 @@ export function App() {
       {pantalla}
     </Marco>
   )
+}
+
+/**
+ * Lleva a otra dirección sin dejar la de antes en el historial (Atrás no regresa a ella). Antes de pintar: así no se ve
+ * un instante en blanco.
+ */
+function Redirigir({ a }: { a: string }) {
+  useLayoutEffect(() => {
+    navegar(a, true)
+  }, [a])
+  return null
 }
 
 /** Solo en desarrollo: arma una partida con jugadas fijas para las pruebas y abre la partida. */

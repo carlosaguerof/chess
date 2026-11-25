@@ -101,7 +101,7 @@ export function ligadas(c: DatosCurso): Ligada[] {
       if (p.marcas?.length) r.push({ donde: `${nombre}, paso ${i + 1}`, frase: p.frase, marcas: p.marcas, fen: fotos[i]!.fen, mio: c.color, grupos: [`paso:${nombre}:${grupo}`], fenTablero: fotos[i]!.fen })
     })
   }
-  // "Ver qué pasa": las de cada paso, como en el paso a paso; cada frase, su propia ventana
+  // "Ver qué pasaría": las de cada paso, como en el paso a paso; cada frase, su propia ventana
   for (const v of todosLosVer(c)) {
     const nombre = `ver de ${v.clave}, ${v.campo} ${v.i}`
     const fotos = fotosDePasos({ pasos: v.ver.pasos }, v.inicio)

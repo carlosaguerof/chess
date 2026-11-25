@@ -33,8 +33,9 @@ const enUci = (san: string[]) => {
     return m.from + m.to + (m.promotion ?? '')
   })
 }
-const CURSO = 'caro-kann:b'
+// una sola Caro-Kann (2026-11-25): la de estructuras; el curso de antes ya no se ve
 const ESTRUCTURAS = 'caro-kann-estructuras:b'
+const CURSO = ESTRUCTURAS
 /** la introducción más larga del curso por estructuras: la frase nueva le suma alto */
 const MAS_LARGA = [...cursoNuevo(ESTRUCTURAS)!.variantes].sort((a, b) => palabras(b.intro) - palabras(a.intro))[0]!
 const CLASICA = lineaPorId(cursoNuevo(CURSO)!, 'v:clasica')!
@@ -102,7 +103,7 @@ for (const p of PANTALLAS) {
       await cabe(page, info, '0-introduccion', [...BOTONES, 'empezar-vuelta'], 'narracion')
     })
 
-    for (const curso of [CURSO, ESTRUCTURAS])
+    for (const curso of [ESTRUCTURAS])
     test(`${curso}: sin scroll de la página en los momentos más altos, y el botón del resumen en un renglón`, async ({ page }, info) => {
       test.setTimeout(120_000)
       await page.goto('/#/')
@@ -170,8 +171,8 @@ test.describe('Nota 1: los botones con jugadas en su texto no se parten en colum
 
   test('"Seguir" y "Avance: 4.♘f3" en la página del curso van en un solo elemento, no un trozo por figura', async ({ page }) => {
     await page.goto('/#/')
-    await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-short', vuelta: 'aprender', ply: 1, fecha: Date.now() } })))
-    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-short', vuelta: 'aprender', ply: 1, fecha: Date.now() } })))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
     const boton = page.getByTestId('empezar-curso')
     // dos renglones desde el 2026-10-29: "Seguir" y, abajo, el nombre (tests/e2e/boton-seguir.spec.ts)
     await expect(boton).toContainText('Seguir')

@@ -118,16 +118,18 @@ test('R7 · pedir Pista o Respuesta en el repaso también la regresa a mañana',
   await expect(page.getByTestId('manana')).toContainText('Mañana tocan 2 líneas')
 })
 
-test('R7 · una variante del curso nuevo de la Caro-Kann también entra al Repaso de hoy', async ({ page }, info) => {
+test('R7 · una variante obligatoria del curso de la Caro-Kann también entra al Repaso de hoy', async ({ page }, info) => {
   test.setTimeout(120_000)
-  const tal = cursos().find((c) => c.id === 'caro-kann:b')!.lecciones.find((l) => l.id.endsWith('/curso-avance-tal'))!
+  // la Van der Wiel: una obligatoria del curso por estructuras (las opcionales no salen en el Repaso, specs/cursos.md §6)
+  const vdw = cursos().find((c) => c.id === 'caro-kann:b')!.lecciones.find((l) => l.id.endsWith('/curso-avance-van-der-wiel'))!
+  expect(vdw.opcional).toBeFalsy()
   await page.clock.setFixedTime(HOY)
   await page.goto('/')
-  await page.evaluate(([a, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f } })), [tal.id, HOY.getTime() - 86_400_000] as const)
+  await page.evaluate(([a, f]) => localStorage.setItem('ajedrez.v1.progreso', JSON.stringify({ [a]: { fecha: f } })), [vdw.id, HOY.getTime() - 86_400_000] as const)
   await page.reload()
   await expect(page.getByTestId('repaso-hoy')).toHaveAttribute('data-n', '1')
   await page.goto('/#/repaso')
-  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(tal.nombre, 'figuras'))
-  await contestar(page, info, tal)
+  await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(vdw.nombre, 'figuras'))
+  await contestar(page, info, vdw)
   await expect(page.getByTestId('cuando-vuelve')).toContainText('vuelve en 3 días')
 })

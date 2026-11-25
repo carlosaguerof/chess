@@ -7,9 +7,9 @@ import { jugar } from './_util.ts'
  * Correcciones de la Caro-Kann, C2 (punto 5 del feedback): "Practicar" sin ayudas que no pediste, en los dos perfiles.
  * En la Tal (3...Af5 4.h4 h5 5.Ad3 Axd3 6.Dxd3 e6), desde la primera jugada mía de Practicar.
  */
-const c = cursoNuevo('caro-kann:b')!
+const c = cursoNuevo('caro-kann-estructuras:b')!
 const mia = c.mias['e4 c6 d4 d5 e5 Bf5']!
-const TAL = '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-tal')
+const TAL = '/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-tal')
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
 const momento = (page: Page, m: string) => expect(leccion(page)).toHaveAttribute('data-momento', m, { timeout: 10_000 })
 const narracion = (page: Page) => page.getByTestId('narracion')
@@ -20,7 +20,7 @@ const ver = (t: string) => mostrarTexto(t, 'figuras')
 
 async function practicarTal(page: Page) {
   await page.goto('/#/')
-  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'practicar', ply: 5, fecha: Date.now() } })))
+  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:avance-tal', vuelta: 'practicar', ply: 5, fecha: Date.now() } })))
   await page.goto(TAL)
   await momento(page, 'tuTurno')
   await expect(leccion(page)).toHaveAttribute('data-vuelta', 'practicar')

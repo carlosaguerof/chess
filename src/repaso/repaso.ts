@@ -74,9 +74,13 @@ export function alRepasar(e: EstadoRepaso, id: string, hoy: string, limpia: bool
   return { ...e, [id]: { escalon, proxima: sumarDias(hoy, ESCALONES[escalon - 1]!), ultima: ahora } }
 }
 
-/** Las lecciones que tocan hoy (o que ya tocaban): solo las aprendidas y que siguen en mis cursos. */
+/**
+ * Las lecciones que tocan hoy (o que ya tocaban): solo las aprendidas y que siguen en mis cursos. Las opcionales no
+ * salen; su ficha se queda guardada.
+ */
 export function paraHoy(e: EstadoRepaso, hechas: Progreso, lecciones: Leccion[], hoy: string, registro: EntradaRegistro[] = []): Leccion[] {
   return lecciones
+    .filter((l) => !l.opcional)
     .map((l) => ({ l, f: fichaDe(e, l.id, hechas, registro, l) }))
     .filter((x): x is { l: Leccion; f: FichaRepaso } => !!x.f && x.f.proxima <= hoy)
     .sort((a, b) => a.f.proxima.localeCompare(b.f.proxima) || a.f.escalon - b.f.escalon)
