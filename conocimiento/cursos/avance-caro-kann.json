@@ -103,7 +103,8 @@
             "Después de 3.e5, negras ataca la base de tu cadena, d4, con su peón de c. De ahí sale la pregunta que ordena este curso: ¿qué pasó con d4?",
             "Hay dos respuestas, cada una con su nombre. Tu peón de c3 sigue detrás de d4 y nadie ha cambiado: la cadena entera. Negras cambió en d4 y retomaste con el peón de c: la base sola.",
             "Las dos se juegan con un solo esquema, c3, Cf3, Ae2 y 0-0, y un aviso: cuando ya no hay peón que defienda d4, en la base sola, cuenta sus atacantes y defensores antes de cada jugada. Son las mismas dos formas que contra la Francesa.",
-            "Si negras juega 3...e6 y encierra su alfil, y después golpea con ...c5 contra tu c3, también estás en la cadena entera."
+            "Si negras juega 3...e6 y encierra su alfil, y después golpea con ...c5 contra tu c3, también estás en la cadena entera.",
+            "Fuera del mapa, sin lección: contra 3...f6 o 3...Cd7, sigue con c3 y Cf3; si negras cambia en e5, retomas."
           ],
           "tablero": {
             "jugadas": [
@@ -342,7 +343,7 @@
           "texto": [
             "La pregunta: ¿qué pasó con d4? La respuesta te dice qué plan toca.",
             "La idea: con 3.e5 ganas espacio, y sostienes la base de tu cadena, d4, con el mismo esqueleto que contra la Francesa: c3, Cf3, Ae2 y 0-0. En la cadena entera la sostiene c3; en la base sola, tus piezas.",
-            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4, y no tapes a tu dama. 3) Contra la clavada del alfil en g4, tu alfil va a e2."
+            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4, y no pongas tu alfil en d3, delante de tu dama. 3) Contra la clavada del alfil en g4, tu alfil va a e2."
           ],
           "linea": [
             "e4",
@@ -504,7 +505,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 3...c5 en 21.8 % (600–1000, n 37 de 170 con 3.e5) y 29.5 % (1000–1400, n 689 de 2336)",
       "plan": {
-        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tu caballo de f3 y tu dama. Sigue el caballo de b1 a c3, y antes de cada jugada cuentas atacantes y defensores de d4.",
+        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tu caballo de f3 y tu dama. Sigue el caballo de b1 a d2: si negras cambia en f3, retomas con él y d4 sigue defendido. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras lleva el caballo de g8 por e7 a f5, contra d4.",
         "marcas": [],
         "pasoAPaso": {
@@ -539,9 +540,9 @@
               ]
             },
             {
-              "frase": "Tú sacas el caballo de b1: Cc3.",
+              "frase": "Tú sacas el caballo de b1 a d2: Cbd2.",
               "jugadas": [
-                "Nc3"
+                "Nbd2"
               ]
             }
           ]

@@ -78,7 +78,7 @@
 
 | Dónde | Frase | Marcas |
 |---|---|---|
-| plan cambio-d4 tuyo frase 3 | El caballo de f5 es el que más presiona d4: con tu caballo ya en c3, empuja h4, y más adelante g4 lo echa de ahí. | flecha h2→h4 (A3, verde, punteada); casilla f5 (A6, roja) |
+| plan cambio-d4 tuyo frase 3 | El caballo de f5 es el que más presiona d4: con tu caballo ya en c3 y sin la dama de negras en b6, empuja h4, y más adelante g4 lo echa de ahí. | flecha h2→h4 (A3, verde, punteada); casilla f5 (A6, roja) |
 | plan cambio-d4 rival frase 1 | Negras suma piezas contra d4, como su dama en b6. | flecha d8→b6 (A7, roja, punteada) |
 | plan cge7 rival frase 1 | Negras puede cambiar en d4 o atacar tu peón de e5 con ...f6. | flecha f7→f6 (A7, roja, punteada) |
 | plan euwe rival frase 1 | Negras puede atacar tu peón de e5 con ...f6 o sumar la dama con ...Db6. | flecha f7→f6 (A7, roja, punteada); flecha d8→b6 (A7, roja, punteada) |

@@ -124,7 +124,9 @@
           "texto": [
             "Después de 3.e5, negras ataca la base de tu cadena, d4, con su peón de c. De ahí sale la pregunta que ordena este curso: ¿qué pasó con d4?",
             "Hay tres respuestas, cada una con su nombre. Tu peón de c3 sigue detrás de d4 y nadie ha cambiado: la cadena entera. Negras cambió en d4 y retomaste con el peón de c: la base sola. Negras empujó su peón a c4: la cadena cerrada.",
-            "En las tres, el plan empieza igual: antes de cada jugada, cuentas atacantes y defensores de d4. Las dos primeras formas también salen contra la Caro-Kann."
+            "En las tres, el plan empieza igual: antes de cada jugada, cuentas atacantes y defensores de d4. Las dos primeras formas también salen contra la Caro-Kann.",
+            "Fuera del mapa, sin lección: si en tu jugada 2 negras no contesta ...d5, todavía no hay cadena. Contra 2...Cf6, 3.e5 echa al caballo; contra 2...Dh4, 3.Cc3 defiende e4; contra lo demás, 3.Cf3.",
+            "Si después de 3.e5 negras saca su caballo, 3...Cc6, no golpea d4: sigue con 4.Cf3. Si ataca e5 con ...f6, 5.Ad3, y si cambia en e5, retomas con el caballo; contra ...Ab4+, 5.c3."
           ],
           "tablero": {
             "jugadas": [
@@ -141,7 +143,9 @@
             "WB-FR-3e5",
             "WB-FR-3c5",
             "WP-FR",
-            "AJEDREZ"
+            "AJEDREZ",
+            "MOTOR",
+            "PARTIDAS"
           ],
           "pasoAPaso": {
             "pasos": [
@@ -425,7 +429,7 @@
           "texto": [
             "La pregunta: ¿qué pasó con d4? La respuesta te dice qué plan toca.",
             "La idea: con 3.e5 ganas espacio, y tu trabajo es sostener la base de tu cadena, d4. En la cadena entera la sostiene c3; en la base sola, tus piezas; en la cadena cerrada, nadie la ataca con un peón y te desarrollas.",
-            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4, y no tapes a tu dama. 3) Antes de mover tu alfil de c1, mira b2."
+            "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4; en tu jugada 5, no pongas el alfil en d3, delante de tu dama. 3) Antes de mover tu alfil de c1, mira b2."
           ],
           "linea": [
             "e4",
@@ -549,7 +553,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 4...cxd4 en 7.5 % (600–1000, n 3) y 6.5 % (1000–1400, n 65) de las partidas con 1.e4 e6",
       "plan": {
-        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tus piezas. Tu caballo de c3 no lo defiende: si negras suma un atacante, suma tú un defensor o echa al atacante; contra la dama en b6, tu caballo va a a4. El caballo de f5 es el que más presiona d4: con tu caballo ya en c3, empuja h4, y más adelante g4 lo echa de ahí.",
+        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tus piezas. Tu caballo de c3 no lo defiende: si negras suma un atacante, suma tú un defensor o echa al atacante; contra la dama en b6, tu caballo va a a4. El caballo de f5 es el que más presiona d4: con tu caballo ya en c3 y sin la dama de negras en b6, empuja h4, y más adelante g4 lo echa de ahí.",
         "rival": "Negras suma piezas contra d4, como su dama en b6.",
         "marcas": [],
         "marcasDe": {
@@ -712,7 +716,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0): 5...Db6 en 9.3 % (600–1000, n 3) y 15.7 % (1000–1400, n 100); lo que sigue a 6.a3 no se puede medir (5 partidas)",
       "plan": {
-        "tuyo": "Estás en la cadena cerrada: ningún peón de negras ataca d4. Con tu alfil en e2 y tu rey enrocado, sigue con h3 y Te1, y juega en el lado de rey, hacia donde apunta tu cadena.",
+        "tuyo": "Estás en la cadena cerrada: ningún peón de negras ataca d4. Con tu alfil en e2 y tu rey enrocado, sigue con h3 y Te1, y juega en el lado de rey, hacia donde apunta tu cadena. Si su caballo salta a b3, cámbialo con el tuyo de d2.",
         "rival": "Negras lleva su caballo de g8 por e7 a f5.",
         "marcas": [],
         "pasoAPaso": {
