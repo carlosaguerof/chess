@@ -40,7 +40,6 @@
   "WP-PS": "https://en.wikipedia.org/wiki/Pawn_structure",
   "WP-glosario": "https://en.wikipedia.org/wiki/Glossary_of_chess",
   "HART": "J. Hartmann, \"The Alapin\", Chess Life Kids (US Chess), febrero de 2024: https://bt.royle.com/article/In+Session/4715960/814117/article.html (solo la idea; derechos reservados)",
-  "BASE": "la base de este repo (scripts/base/definiciones/siciliana.json, variantes alapin-curso-*)",
   "LICHESS-CC0": "lichess-org/chess-openings (CC0) y la base abierta de partidas de lichess (CC0), septiembre de 2026",
   "MOTOR": "Stockfish 19 lite, un hilo, profundidad 18 (16 para amenazas); los comandos y su salida están en iterations/v4/comprobaciones-alapin.md",
   "AJEDREZ": "las reglas del ajedrez, comprobadas con chess.js"
@@ -910,7 +909,6 @@
     },
     "fuente": [
      "WP-IQP",
-     "BASE",
      "MOTOR"
     ]
    },
@@ -1005,14 +1003,14 @@
    "texto": "El rival cambia enseguida su peón de c5 por tu peón de d4.",
    "fuente": [
     "WB-2d5",
-    "BASE"
+    "LICHESS-CC0"
    ]
   },
   "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6": {
    "texto": "El rival saca su caballo y ataca tu peón de d4: ya lo atacan su dama y su caballo.",
    "fuente": [
     "WB-2d5",
-    "BASE"
+    "LICHESS-CC0"
    ],
    "marcas": [
     [
@@ -1049,7 +1047,6 @@
   "e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3 Bg4 Be2 e6": {
    "texto": "El rival abre la diagonal de su alfil de f8 y apoya a su dama en d5.",
    "fuente": [
-    "BASE",
     "MOTOR"
    ]
   },
@@ -1118,7 +1115,7 @@
    "texto": "El rival saca su caballo y ataca tu peón de d4.",
    "fuente": [
     "WB-2d5",
-    "BASE"
+    "LICHESS-CC0"
    ],
    "marcas": [
     [
@@ -1156,7 +1153,7 @@
   "e4 c5 c3 d5 exd5 Qxd5 d4 g6": {
    "texto": "El rival prepara sacar su alfil de f8 por g7, a la diagonal larga.",
    "fuente": [
-    "BASE",
+    "MOTOR",
     "WP-glosario"
    ],
    "marcas": [
@@ -1174,7 +1171,7 @@
   "e4 c5 c3 d5 exd5 Qxd5 d4 g6 Nf3 Bg7": {
    "texto": "El alfil del rival sale a g7 y apunta a tu peón de d4.",
    "fuente": [
-    "BASE"
+    "MOTOR"
    ],
    "marcas": [
     [
@@ -1937,7 +1934,7 @@
    },
    "fuente": [
     "WB-2d5",
-    "BASE"
+    "LICHESS-CC0"
    ],
    "buenas": [
     "dxc5"
@@ -2037,7 +2034,6 @@
     ]
    },
    "fuente": [
-    "BASE",
     "MOTOR"
    ],
    "motor": [
@@ -2056,7 +2052,6 @@
    "hace": "Sacas tu alfil de f1: ya puedes enrocar.",
    "porque": "Desarrollas tus piezas del lado del rey antes de que se abra el juego.",
    "fuente": [
-    "BASE",
     "MOTOR"
    ],
    "motor": [
@@ -2085,7 +2080,7 @@
    "fuente": [
     "WB-2c3",
     "WP-IQP",
-    "BASE"
+    "MOTOR"
    ],
    "motor": [
     "L-g6"
@@ -2114,7 +2109,6 @@
    },
    "fuente": [
     "WB-2c3",
-    "BASE",
     "MOTOR"
    ],
    "motor": [

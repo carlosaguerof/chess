@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
-import { caminoQueQueda, CURSOS_NUEVOS, cursoNuevo, esLeccionOpcional, grupoDeLinea, soloObligatorias, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { caminoQueQueda, CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, soloObligatorias, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
@@ -583,9 +583,10 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
     const rep = soloObligatorias(todo)
     const ck = (r: typeof todo) => r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b').map((l) => l.id)
     expect(ck(rep).sort()).toEqual(obligatorias(nuevo).map((v) => `b:caro-kann/${v.base}`).sort())
-    // las aperturas sin un curso con secciones no cambian (las que sí lo tienen, como la Alapin, filtran lo suyo)
-    const sinSecciones = (l: (typeof todo.lineas)[number]) => !Object.values(CURSOS_NUEVOS).some((c) => c.secciones && c.apertura === l.apertura && c.color === l.color)
-    expect(rep.lineas.filter(sinSecciones)).toEqual(todo.lineas.filter(sinSecciones))
+    // las aperturas sin un curso con secciones no cambian (los cursos nuevos por estructuras tienen su propia prueba)
+    const conSecciones = new Set(Object.values(CURSOS_NUEVOS).filter((c) => c.secciones).map((c) => `${c.apertura}:${c.color}`))
+    const sinCurso = (l: (typeof todo.lineas)[number]) => !conSecciones.has(`${l.apertura}:${l.color}`)
+    expect(rep.lineas.filter(sinCurso)).toEqual(todo.lineas.filter(sinCurso))
     // la guía y los bots siguen con todo
     expect(ck(todo).length).toBeGreaterThan(ck(rep).length)
     expect(repertorioCompleto().lineas).toHaveLength(todo.lineas.length)
@@ -597,19 +598,15 @@ describe('Una sola Caro-Kann · las opcionales no salen en el Repaso ni en Refue
     expect(marcadas).toEqual(opcionales(nuevo).map((v) => v.base).sort())
     const fuera = repertorioCompleto().lineas.filter((l) => !soloObligatorias(repertorioCompleto()).lineas.includes(l)).map((l) => l.id.slice(l.id.indexOf('/') + 1))
     for (const b of marcadas) expect(fuera, b).toContain(b)
-    // en los demás cursos, las marcadas son justo las de su sección opcional (y ninguna, si no la tiene)
-    for (const c of cursos().filter((x) => x.id !== 'caro-kann:b')) {
-      const n = cursoNuevo(c.id)
-      expect(c.lecciones.filter((l) => l.opcional).map((l) => l.id.slice(l.id.lastIndexOf('/') + 1)).sort(), c.id).toEqual(n ? opcionales(n).map((v) => v.base).sort() : [])
-    }
+    // ningún curso sin secciones tiene opcionales (los cursos nuevos por estructuras declaran las suyas)
+    expect(cursos().filter((c) => c.id !== 'caro-kann:b' && !CURSOS_NUEVOS[c.id]?.secciones).flatMap((c) => c.lecciones).filter((l) => l.opcional)).toEqual([])
   })
 
   it('Refuerza deja de mostrar 37 jugadas de la Caro-Kann: 23 de opcionales y 14 de líneas de la base que no son lección', () => {
-    // solo la Caro-Kann con negras: los demás cursos con secciones filtran lo suyo
-    const soloCk = (r: ReturnType<typeof repertorioCompleto>) => ({ ...r, lineas: r.lineas.filter((l) => l.apertura === 'caro-kann' && l.color === 'b') })
-    const todas = jugadasDeMiRepertorio(soloCk(repertorioCompleto()), [])
-    const quedan = new Set(jugadasDeMiRepertorio(soloCk(soloObligatorias(repertorioCompleto())), []).map((j) => `${j.fen}|${j.esperada}`))
-    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`))
+    const todas = jugadasDeMiRepertorio(repertorioCompleto(), [])
+    const quedan = new Set(jugadasDeMiRepertorio(soloObligatorias(repertorioCompleto()), []).map((j) => `${j.fen}|${j.esperada}`))
+    // las de la Caro-Kann con negras (los cursos nuevos cuentan las suyas en su propia prueba)
+    const fuera = todas.filter((j) => !quedan.has(`${j.fen}|${j.esperada}`) && j.linea.apertura === 'caro-kann' && j.linea.color === 'b')
     expect(fuera).toHaveLength(37)
     const enOpcional = (j: (typeof todas)[number]) => opcionales(nuevo).some((v) => {
       const ch = new Chess()
