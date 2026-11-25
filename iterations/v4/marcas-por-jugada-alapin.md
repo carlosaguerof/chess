@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 31 de 96.** Más 13 frases del plan y del paso a paso.
+**Jugadas con marcas: 31 de 96.** Más 12 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -107,9 +107,8 @@
 
 | Dónde | Frase | Marcas |
 |---|---|---|
-| plan centro-cc6 tuyo frase 2 | Si el rival cambia en d5, retomas con tu peón de e4; si te da jaque con su alfil desde b4, lo tapas con tu caballo de b1 en c3. | flecha b1→c3 (A3, verde, punteada) |
 | plan centro-cc6 rival frase 1 | El rival cambia en d5 o te da jaque con su alfil desde b4, y sigue sacando sus piezas. | flecha f8→b4 (A7, roja, punteada) |
-| plan centro-d6 tuyo frase 1 | Sacas tu alfil de c1 a e3, que cuida d4, y juegas h3 para que su alfil de c8 no se instale en g4. | flecha c1→e3 (A3, verde, punteada) |
+| plan centro-d6 tuyo frase 1 | Sacas tu alfil de c1 a e3, que cuida d4, y juegas h3 para que su alfil de c8 no se instale en g4. | flecha c1→e3 (A3, verde, punteada); flecha h2→h3 (A3, verde, punteada) |
 | plan moderna tuyo frase 1 | Tu caballo de b1 sale a c3 atacando a la dama. | flecha b1→c3 (A3, verde, punteada) |
 | idea 1, paso 7 | O con el caballo, que también ataca e4: 2...Cf6. | flecha f6→e4 (A4, roja) |
 | estructura 2, paso 5 | El rival quiere bloquearlo con una pieza en d5 y cambiar piezas. | casilla d5 (A6, roja) |

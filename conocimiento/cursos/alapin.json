@@ -776,15 +776,7 @@
     "marcasDe": {
      "tuyo": [
       [],
-      [
-       {
-        "tipo": "A3",
-        "de": "b1",
-        "a": "c3",
-        "color": "verde",
-        "punteada": true
-       }
-      ]
+      []
      ],
      "rival": [
       [
@@ -848,6 +840,13 @@
         "tipo": "A3",
         "de": "c1",
         "a": "e3",
+        "color": "verde",
+        "punteada": true
+       },
+       {
+        "tipo": "A3",
+        "de": "h2",
+        "a": "h3",
         "color": "verde",
         "punteada": true
        }
@@ -3158,7 +3157,7 @@
     "h3",
     "Bb5+"
    ],
-   "hace": "Sacas tu alfil de f1: ya no hay nada entre tu rey y tu torre.",
+   "hace": "Sacas tu alfil de f1 a e2, cerca de tu rey.",
    "prepara": "Ya puedes enrocar.",
    "describe": {
     "prepara": [

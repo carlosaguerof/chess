@@ -323,7 +323,7 @@
         "fuente": [
           "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De5+ \"4. Be2 and White has developed another piece\")",
           "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De5+ es 32.6 % y 15.6 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Ag4 es la más jugada (21.9 % y 35.1 %); tras 5.d4, 5...De6 (30 de 53 en 1000–1400)",
-          "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.f3, 7.g4 y 8.f4, cada una la mejor; 6...Af5 empata con 6...Ah5, la mejor de negras; 7...Ag6, la mejor"
+          "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.f3, 7.g4 y 8.f4, cada una la mejor; 6...Af5, la única con partidas (3), a 0.16 de 6...Ah5, la mejor de negras; 7...Ag6, la mejor"
         ]
       },
       "lado": "blancas",
@@ -344,8 +344,8 @@
         "jugadas": "Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O c6 Re1",
         "fuente": [
           "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De6+ \"4. Be2 and White has developed another piece\")",
-          "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De6+ es 19.6 % y 20.0 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %); tras 5.d4, 5...Dg6, 5...Cb4 y 5...Cf6 empatan (5, 4 y 4 partidas) y el motor escoge 5...Cb4",
-          "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.Cf3 y 7.0-0, cada una la mejor; 8.Te1 a 0.05 de la mejor; 5...Cb4 la mejor de negras; 6...Cf6 a 0.03 y 7...c6 a 0.16 de la mejor"
+          "partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De6+ es 19.6 % y 20.0 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Cc6 es la más jugada (21.3 % y 26.8 %); tras 5.d4, 5...Dg6 (5 partidas), 5...Cb4, 5...Cf6 y 5...Cxd4 (4 cada una): con tan pocas partidas, una de diferencia no decide, y la lección sigue la mejor del motor entre ellas, 5...Cb4",
+          "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.Cf3 y 7.0-0, cada una la mejor; 8.Te1 a 0.05 de la mejor; 5...Cb4 la mejor de negras; sin partidas, 6...Cf6 (a 0.03 de la mejor) y 7...c6 (a 0.16), las que sacan pieza y apoyan d5"
         ]
       },
       "lado": "blancas",

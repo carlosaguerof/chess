@@ -4243,6 +4243,10 @@
    "definicion": "Tener los dos alfiles cuando el rival ya cambió uno de los suyos."
   },
   {
+   "termino": "Peones doblados",
+   "definicion": "Dos peones tuyos en la misma columna: se estorban y es más difícil defenderlos."
+  },
+  {
    "termino": "Tiempo",
    "definicion": "Una jugada. Ganar un tiempo es lograr algo útil mientras el rival gasta una jugada, por ejemplo sacar una pieza que obliga a su dama a moverse otra vez."
   }

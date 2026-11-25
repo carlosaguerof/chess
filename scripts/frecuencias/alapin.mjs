@@ -44,6 +44,16 @@ function libro(ls) {
   return m
 }
 
+/** La posición justo antes de una jugada de la línea (la jugada es un objeto de `jug(seq).ms`). */
+function antesDe(seq, m) {
+  const c = new Chess()
+  for (const s of seq.split(' ')) {
+    const x = c.move(s)
+    if (x.before === m.before && x.san === m.san) return new Chess(x.before)
+  }
+  return null
+}
+
 const jug = (seq) => {
   const c = new Chess()
   return { c, ms: seq.split(' ').map((s) => c.move(s)) }
@@ -54,8 +64,8 @@ const jug = (seq) => {
  * - 'cadena': lo avanzaste a e5;
  * - 'gambito': lo cambiaste en d5 (el peón de d7) y el rival no retomó en d5 en su jugada siguiente;
  * - 'aislado': lo cambiaste en d5, el rival retomó con una pieza y tienes un peón en d4;
- * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro), o ese peón ya avanzó de d4 a d5, que es la
- *   regla de su página contra un caballo en c6 (desde el 2026-11-25, con su lección: antes eso contaba como 'otra');
+ * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro), o ese peón ya avanzó de d4 a d5 con un caballo
+ *   de negras en c6, que es la regla de su página contra un caballo (desde el 2026-11-25, con su lección: antes contaba como 'otra');
  * - 'otra': lo demás (incluido lo que todavía no se decide).
  */
 export function forma(seq) {
@@ -74,7 +84,8 @@ export function forma(seq) {
     return 'otra'
   }
   const e4 = c.get('e4')
-  const d4d5 = ms.some((x) => x.color === 'w' && x.piece === 'p' && x.from === 'd4' && x.to === 'd5') && c.get('d5')?.type === 'p' && c.get('d5')?.color === 'w'
+  // el avance de d4 a d5 que manda la página: con un caballo de negras en c6 en ese momento (la regla del caballo)
+  const d4d5 = c.get('d5')?.type === 'p' && c.get('d5')?.color === 'w' && ms.some((x) => x.color === 'w' && x.piece === 'p' && x.from === 'd4' && x.to === 'd5' && antesDe(seq, x)?.get('c6')?.type === 'n' && antesDe(seq, x)?.get('c6')?.color === 'b')
   if (e4?.type === 'p' && e4.color === 'w' && (peonD4 || d4d5)) return 'centro'
   return 'otra'
 }
