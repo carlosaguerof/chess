@@ -100,9 +100,11 @@ describe('Los cursos del Avance · las lecciones y su mapa', () => {
     }
   })
 
-  it('contra la Caro-Kann, tu jugada es una sola: 4.c3; tus otras cuartas jugadas de la base van en "buenas"', () => {
+  it('contra la Caro-Kann, tu jugada es una sola: 4.c3; tus otras cuartas jugadas de la base a 0.2 o menos van en "buenas"', () => {
     const c3 = CK.mias['e4 c6 d4 d5 e5 Bf5 c3']!
-    for (const s of ['Nf3', 'Nc3', 'h4', 'g4', 'Ne2']) expect(c3.buenas, s).toContain(s)
+    for (const s of ['Nf3', 'Nc3', 'h4', 'g4', 'Nd2', 'Be2']) expect(c3.buenas, s).toContain(s)
+    // 4.Ce2 pierde 34 cp (comprobaciones-avance-caro-kann.md, M-ck-4c3): no es "buena"
+    expect(c3.buenas).not.toContain('Ne2')
   })
 
   it('si dos lecciones llegan a la misma posición, enseñan la misma jugada tuya (nota 7)', () => {

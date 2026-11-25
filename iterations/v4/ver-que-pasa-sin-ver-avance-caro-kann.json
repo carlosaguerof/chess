@@ -3,7 +3,6 @@
   "e4 c6 d4 | porque | 0": "explica",
   "e4 c6 d4 d5 e5 | porque | 0": "explica",
   "e4 c6 d4 d5 e5 | prepara | 0": "plan",
-  "e4 c6 d4 d5 e5 | cuidado | 0": "plan",
   "e4 c6 d4 d5 e5 Bf5 c3 | porque | 0": "plan",
   "e4 c6 d4 d5 e5 Bf5 c3 | prepara | 0": "plan",
   "e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 | porque | 0": "explica",
@@ -13,5 +12,9 @@
   "e4 c6 d4 d5 e5 c5 c3 | porque | 0": "linea",
   "e4 c6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 | porque | 0": "explica",
   "e4 c6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bg4 Be2 e6 O-O | porque | 0": "explica",
-  "e4 c6 d4 d5 e5 c5 c3 Nc6 Bd3 cxd4 | porque | 0": "linea"
+  "e4 c6 d4 d5 e5 c5 c3 Nc6 Bd3 cxd4 | porque | 0": "linea",
+  "e4 c6 d4 d5 e5 | prepara | 1": "plan",
+  "e4 c6 d4 d5 e5 Bf5 c3 e6 Be2 c5 Nf3 | errores | dxc5": "explica",
+  "e4 c6 d4 d5 e5 c5 c3 Nc6 Nf3 | errores | Bd3": "explica",
+  "e4 c6 d4 d5 e5 c5 c3 Nc6 Nf3 cxd4 cxd4 Bg4 Be2 | errores | Bd3": "explica"
 }

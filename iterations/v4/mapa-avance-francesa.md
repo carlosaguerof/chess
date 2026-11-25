@@ -8,7 +8,7 @@ El curso `francesa:w` (`conocimiento/cursos/avance-francesa.json`), por estructu
 
 | Forma (etiqueta en la página) | Cómo se reconoce (con chess.js, en toda la línea) | Tu plan, como lo dice el curso | Comprobado en |
 |---|---|---|---|
-| **La cadena entera** («Nadie cambia en d4») | Tus peones de d4 y e5 siguen, tienes peón en c3, negras no empujó a c4 y nadie ha cambiado en d4 | Sostener d4 con c3 y Cf3. Contra un caballo que va a f5, suma un defensor antes de enrocar: el caballo de b1 por a3 a c2; con tus caballos en f3 y c2, tu alfil puede ir a d3, frente al caballo de f5. Si negras cambia en d4, retomas con el peón de c | `P-fr-cadena`, `P-fr-cge7-ad3`, `N9-fr-cxd4`, `N11-fr-cge7` |
+| **La cadena entera** («Nadie cambia en d4») | Tus peones de d4 y e5 siguen, tienes peón en c3, negras no empujó a c4 y nadie ha cambiado en d4 | Sostener d4 con c3 y Cf3. Contra un caballo que va a f5, suma un defensor antes de enrocar: el caballo de b1 por a3 a c2; con tus caballos en f3 y c2, tu alfil puede ir a d3, contra el caballo de f5. Si negras cambia en d4, retomas con el peón de c | `P-fr-cadena`, `P-fr-cge7-ad3`, `N9-fr-cxd4`, `N11-fr-cge7` |
 | **La base sola** («Negras cambia en d4») | Negras cambió en d4 y retomaste con el peón de c: ningún peón defiende d4 | Defender d4 con piezas: si negras suma un atacante, suma un defensor o echa al atacante (Ca3-c2, Ab2 tras b4, o Ca4 contra la dama en b6). Con tu caballo ya en c3 y sin la dama de negras en b6, h4, y más adelante g4, echa al caballo de f5 | `P-fr-sola`, `P-fr-sola-h4`, `N11-fr-sola` |
 | **La cadena cerrada** («Negras empuja a c4») | Negras empujó su peón a c4: ningún peón suyo ataca d4 | Desarrollarte con calma, sin empujar b4 de inmediato. Con tu alfil en e2 y tu rey enrocado, h3 y Te1, y juegas en el lado de rey; si su caballo salta a b3, lo cambias con el tuyo de d2 | `P-fr-cerrada`, `P-fr-cerrada-h3`, `N11-fr-cerrada` |
 
@@ -32,7 +32,7 @@ La regla (`specs/cursos.md` §6): cada forma que sale en 5 % o más trae a La ba
 |---|---|---|---|---|---|
 | La base | **4...cxd4** (`cambio-d4`, base `curso-avance-c3`) | 3.e5 c5 4.c3 cxd4 5.cxd4 Cc6 6.Cf3 Cge7 7.a3 Cf5 8.Cc3 | la base sola | 4...cxd4 tras 4.c3: 15.3 % en 1000–1400 (65 de 425); 3 de 10 en 600–1000 | 6.5 % y 7.5 % |
 | La base | **5...Cge7 (Paulsen)** (`cge7`, base `curso-paulsen`) | …4...Cc6 5.Cf3 Cge7 6.Ca3 Cf5 7.Cc2 | la cadena entera | 5...Cge7 tras 5.Cf3: 15.9 % en 1000–1400 (22 de 138); 0 de 4 en 600–1000 | 3.7 % |
-| Las que más te van a salir | **5...Db6 6.a3 (línea principal)** (`principal`, base `curso-principal-a3`) | …5.Cf3 Db6 6.a3 c4 7.Cbd2 Ca5 8.Ae2 Ad7 9.0-0 | la cadena cerrada | 5...Db6 tras 5.Cf3: 47.1 % en 1000–1400 (65 de 138); 3 de 4 en 600–1000. Lo que sigue a 6.a3 no se puede medir (5 partidas) | 10.8 % y 9.3 % |
+| Las que más te van a salir | **5...Db6 (línea principal)** (`principal`, base `curso-principal-a3`) | …5.Cf3 Db6 6.a3 c4 7.Cbd2 Ca5 8.Ae2 Ad7 9.0-0 | la cadena cerrada | 5...Db6 tras 5.Cf3: 47.1 % en 1000–1400 (65 de 138); 3 de 4 en 600–1000. Lo que sigue a 6.a3 no se puede medir (5 partidas) | 10.8 % y 9.3 % |
 | Opcional | 6...Ch6 (Lputian) (`lputian`) | …6.a3 Ch6 7.b4 cxd4 8.cxd4 Cf5 9.Ab2 | la base sola | 0 de 5 tras 6.a3 | 0 % |
 | Opcional | 5...Ad7 (Euwe) (`euwe`) | …5.Cf3 Ad7 6.Ae2 Cge7 7.Ca3 cxd4 8.cxd4 Cf5 9.Cc2 | la base sola | 7.2 % (10 de 138) | 1.7 % |
 | Opcional | 4...Db6 y 5...Ad7 (Wade) (`wade`) | …4...Db6 5.Cf3 Ad7 6.Ae2 Ab5 7.0-0 Axe2 8.Dxe2 | la cadena entera | 10.9 % (5 de 46) | 0.7 % |
@@ -43,6 +43,8 @@ La regla (`specs/cursos.md` §6): cada forma que sale en 5 % o más trae a La ba
 - Los dos «¿Y si…?» de Errores y trampas: 5.Ad3 (`E-fr-ad3`: ...cxd4 y ...Cxd4 ganan el peón) y 6.Ae3 con la dama en b6 (`E-fr-ae3`: ...Dxb2 y ...Dxa1).
 
 ## Fuera del mapa, sin lección
+
+Aquí el porcentaje es de tus partidas del curso desde 1.e4 e6 (las proporciones de las jugadas del rival, con tus jugadas fijas); el de las lecciones, arriba, es el de su posición.
 
 | Respuesta | De tus partidas (600–1000 / 1000–1400) | Qué dice la página del mapa | Comprobado en |
 |---|---|---|---|

@@ -9,7 +9,7 @@ El curso `caro-kann:w` (`conocimiento/cursos/avance-caro-kann.json`), por estruc
 | Forma (etiqueta en la página) | Cómo se reconoce (con chess.js, en toda la línea) | Tu plan, como lo dice el curso | Comprobado en |
 |---|---|---|---|
 | **La cadena entera** («Nadie cambia en d4») | Tus peones de d4 y e5 siguen, tienes peón en c3 y nadie ha cambiado en d4 | Esquema c3, Cf3, Ae2 y 0-0. Si negras cambia en d4, retomas con el peón de c y pasas a la base sola. Ya enrocado y con tu caballo en d2, h3 le pregunta al alfil de g4 | `P-ck-af5`, `P-ck-af5-h3`, `N9-ck-cxd4`, `N11-ck-af5` |
-| **La base sola** («Negras cambia en d4») | Negras cambió en d4 y retomaste con el peón de c: ningún peón defiende d4 | El mismo esquema y un aviso: cuenta atacantes y defensores de d4 antes de cada jugada. Contra la clavada del alfil de g4, tu alfil va a e2, no a d3; tu caballo de b1, a d2: si negras cambia en f3, retomas con él | `P-ck-c5`, `P-ck-c5-cbd2`, `N9-ck-ae2` |
+| **La base sola** («Negras cambia en d4») | Negras cambió en d4 y retomaste con el peón de c: ningún peón defiende d4 | El mismo esquema y un aviso: cuenta atacantes y defensores de d4 antes de cada jugada. Después de ...cxd4 y cxd4, contra la clavada del alfil de g4, tu alfil va a e2, no a d3; tu caballo de b1, a d2 (tapa a tu dama un momento, pero si negras cambia en f3, retomas con él); si su caballo llega a f5, h3 | `P-ck-c5`, `P-ck-c5-cbd2`, `P-ck-c5-h3`, `N9-ck-ae2` |
 
 La Francesa tiene una tercera forma (la cadena cerrada, ...c4); contra la Caro-Kann sale en 0.5 % de tus partidas de 1000–1400: no es forma de este curso.
 
@@ -27,7 +27,7 @@ Entre tus partidas que llegan a 1.e4 c6 2.d4 d5 (juegas 3.e5 y lo del curso), a 
 
 ## Las lecciones
 
-Tu jugada es una sola en cada posición (`specs/cursos.md` §1): contra 3...Af5, 4.c3. Tus otras cuartas jugadas de la base (4.Cf3, 4.Cc3, 4.h4, 4.g4, 4.Ce2, 4.Cd2, 4.Ae2) van en "buenas" de 4.c3: el motor no las separa (todas a 0.2 o menos, `M-ck-4c3`). Lo guardado de esas líneas no se borra; deja de salir.
+Tu jugada es una sola en cada posición (`specs/cursos.md` §1): contra 3...Af5, 4.c3. Tus otras cuartas jugadas de la base que el motor no separa de 4.c3 (a 0.2 o menos: 4.Cd2, 4.h4, 4.Cf3, 4.Ae2, 4.Cc3 y 4.g4, `M-ck-4c3`) van en "buenas" de 4.c3; 4.Ce2 pierde 34 cp y no va. Lo guardado de esas líneas no se borra; deja de salir.
 
 | Sección | Lección | Línea | Forma | Frecuencia, en la posición que la define | Por qué es obligatoria |
 |---|---|---|---|---|---|
@@ -39,6 +39,8 @@ Sin opcionales: la pregunta para Carlos, en el reporte, es si sus otras cuartas 
 Los dos «¿Y si…?» de Errores y trampas: 5.Ad3 contra 3...c5 (`E-ck-5ad3`: ...cxd4 y ...Cxd4 ganan el peón) y Ad3 contra la clavada de g4 en la base sola.
 
 ## Fuera del mapa, sin lección
+
+Aquí el porcentaje es de tus partidas del curso desde 1.e4 c6 (las proporciones de las jugadas del rival, con tus jugadas fijas); el de las lecciones, arriba, es el de su posición.
 
 | Respuesta | De tus partidas (600–1000 / 1000–1400) | Qué dice la página del mapa | Comprobado en |
 |---|---|---|---|

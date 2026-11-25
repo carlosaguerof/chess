@@ -123,7 +123,7 @@
           "subtitulo": "El mapa",
           "texto": [
             "Después de 3.e5, negras ataca la base de tu cadena, d4, con su peón de c. De ahí sale la pregunta que ordena este curso: ¿qué pasó con d4?",
-            "Hay tres respuestas, cada una con su nombre. Tu peón de c3 sigue detrás de d4 y nadie ha cambiado: la cadena entera. Negras cambió en d4 y retomaste con el peón de c: la base sola. Negras empujó su peón a c4: la cadena cerrada.",
+            "Hay tres respuestas, cada una con su nombre. Tu peón de c3 sigue detrás de d4, nadie ha cambiado y negras no empujó a c4: la cadena entera. Negras cambió en d4 y retomaste con el peón de c: la base sola. Negras empujó su peón a c4: la cadena cerrada.",
             "Debajo de cada lección dice cuál: «Nadie cambia en d4» es la cadena entera, «Negras cambia en d4» la base sola y «Negras empuja a c4» la cadena cerrada.",
             "En las tres, el plan empieza igual: antes de cada jugada, cuentas atacantes y defensores de d4. Las dos primeras formas también salen contra la Caro-Kann.",
             "Fuera del mapa, sin lección: si negras no contesta 2...d5, todavía no hay cadena. Contra 2...Cf6, 3.e5 echa al caballo; contra 2...Dh4, 3.Cc3 defiende e4; contra lo demás, 3.Cf3.",
@@ -207,7 +207,7 @@
           "subtitulo": "La cadena entera",
           "texto": [
             "Tus peones de d4 y e5 forman la cadena, y su base es d4: ahí golpea negras. Tu peón de c3 la sostiene desde atrás. Los de negras: e6 y d5, y su peón de c5 ataca d4.",
-            "Tu plan: sostener d4 con c3 y con Cf3; en tu jugada 5, no pongas tu alfil en d3, delante de tu dama. Las jugadas son casi forzadas. Contra un caballo que va a f5, cuenta antes de enrocar: si sus atacantes alcanzan a tus defensores, tu caballo de b1 va por a3 a c2. Si negras cambia en d4, retomas con el peón de c.",
+            "Tu plan: sostener d4 con c3 y con Cf3; en tu jugada 5, no pongas tu alfil en d3, delante de tu dama. Las jugadas son casi forzadas. Contra un caballo que va a f5, cuenta antes de enrocar: si tiene tantos atacantes como tú defensores, tu caballo de b1 va por a3 a c2. Si negras cambia en d4, retomas con el peón de c.",
             "Negras golpea con ...c5 la base y con ...f6 la cabeza, e5. Contra la Caro-Kann tus peones son los mismos, pero allá el alfil de c8 de negras ya salió."
           ],
           "tablero": {
@@ -226,7 +226,7 @@
             "ilustrativo": true,
             "pasos": [
               {
-                "frase": "Tus peones: c3, d4 y e5, en diagonal: una cadena."
+                "frase": "Tus peones de d4 y e5 forman la cadena, con tu peón de c3 detrás."
               },
               {
                 "frase": "Su base es d4: ahí golpea negras con su peón de c5."
@@ -331,7 +331,7 @@
                 "frase": "Negras empujó su peón a c4: ningún peón de negras ataca d4."
               },
               {
-                "frase": "Tu cadena, c3, d4 y e5, está a salvo."
+                "frase": "Tu cadena, d4 y e5, con tu peón de c3 detrás, está a salvo."
               },
               {
                 "frase": "No empujes b4 de inmediato: negras lo captura al paso."
@@ -420,7 +420,7 @@
           "subtitulo": "Lo que te llevas",
           "texto": [
             "La pregunta: ¿qué pasó con d4? La respuesta te dice qué plan toca.",
-            "La idea: con 3.e5 ganas espacio, y tu trabajo es sostener la base de tu cadena, d4. En la cadena entera la sostiene c3; en la base sola, tus piezas; en la cadena cerrada, nadie la ataca con un peón y te desarrollas.",
+            "La idea: con 3.e5 ganas espacio, y tu trabajo es sostener la base de tu cadena, d4. En la cadena entera la sostiene tu peón de c3; en la base sola, tus piezas; en la cadena cerrada, nadie la ataca con un peón y te desarrollas.",
             "Tres reglas: 1) Contra ...c5, c3: si negras cambia, retomas con un peón. 2) Antes de cada jugada, también antes de enrocar, cuenta atacantes y defensores de d4; en tu jugada 5, no pongas el alfil en d3, delante de tu dama. 3) Antes de mover tu alfil de c1, mira b2."
           ],
           "linea": [
@@ -630,7 +630,7 @@
       "frecuencia": 4,
       "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 5...Cge7 tras 5.Cf3 sale en 15.9 % de las partidas que llegan ahí en 1000–1400 (22 de 138); en 600–1000, 0 de 4. De tus partidas del curso: 3.7 % (1000–1400)",
       "plan": {
-        "tuyo": "Estás en la cadena entera: c3 sigue detrás de d4. Con el peón de c3 y tus caballos en f3 y c2, d4 tiene defensores de sobra: tu alfil de f1 puede ir a d3, frente al caballo de f5, y después enrocas. Si negras cambia en d4, retomas con el peón de c. Antes de cada jugada, cuenta atacantes y defensores de d4.",
+        "tuyo": "Estás en la cadena entera: tu peón de c3 sigue detrás de d4. Con el peón de c3 y tus caballos en f3 y c2, d4 tiene defensores de sobra: tu alfil de f1 puede ir a d3, contra el caballo de f5, y después enrocas. Si negras cambia en d4, retomas con el peón de c. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras puede cambiar en d4 o atacar tu peón de e5 con ...f6.",
         "marcas": [],
         "marcasDe": {
@@ -650,13 +650,13 @@
           "ilustrativo": true,
           "pasos": [
             {
-              "frase": "Estás en la cadena entera: c3 sigue detrás de d4."
+              "frase": "Estás en la cadena entera: tu peón de c3 sigue detrás de d4."
             },
             {
               "frase": "Cuatro piezas tuyas defienden d4: el peón de c3, los dos caballos y la dama."
             },
             {
-              "frase": "Con defensores de sobra, tu alfil puede ir a d3, frente al caballo de f5: Ad3.",
+              "frase": "Con defensores de sobra, tu alfil puede ir a d3, contra el caballo de f5: Ad3.",
               "jugadas": [
                 "Bd3"
               ],
@@ -706,7 +706,7 @@
       "idea": "Contra la dama en b6, a3 prepara b4; si negras cierra con ...c4, d4 ya no tiene un peón encima y te desarrollas.",
       "regla": "Con la dama de negras en b6, tu alfil de c1 no sale en la jugada 6: la dama se comería tu peón de b2.",
       "frecuencia": 5,
-      "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 5...Db6 tras 5.Cf3 sale en 47.1 % de las partidas que llegan ahí en 1000–1400 (65 de 138); en 600–1000, 3 de 4. De tus partidas del curso: 10.8 % y 9.3 %. Lo que sigue a 6.a3 no se puede medir (5 partidas)",
+      "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 5...Db6 tras 5.Cf3 sale en 47.1 % de las partidas que llegan ahí en 1000–1400 (65 de 138); en 600–1000, 3 de 4. De tus partidas del curso, 5...Db6 sale en 10.8 % y 9.3 %; la cadena cerrada, después de 6.a3 c4, no se puede medir aparte. Lo que sigue a 6.a3 no se puede medir (5 partidas)",
       "plan": {
         "tuyo": "Estás en la cadena cerrada: ningún peón de negras ataca d4. Con tu alfil en e2 y tu rey enrocado, sigue con h3 y Te1, y juega en el lado de rey, hacia donde apunta tu cadena. Si su caballo salta a b3, cámbialo con el tuyo de d2.",
         "rival": "Negras lleva su caballo de g8 por e7 a f5.",
@@ -765,7 +765,7 @@
               "frase": "Estás en la base sola: ningún peón defiende d4."
             },
             {
-              "frase": "Tu alfil de b2, tu caballo de f3 y tu dama defienden d4.",
+              "frase": "Tu alfil de b2 y tu dama defienden d4.",
               "marcas": [
                 {
                   "tipo": "A2",
@@ -782,13 +782,25 @@
               ]
             },
             {
+              "frase": "Tu caballo de f3 también defiende d4.",
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "f3",
+                  "a": "d4",
+                  "color": "verde",
+                  "por": "f4"
+                }
+              ]
+            },
+            {
               "frase": "Negras termina de desarrollarse: ...Ae7.",
               "jugadas": [
                 "...Be7"
               ]
             },
             {
-              "frase": "Con su alfil en e7, tu alfil va a d3, frente al caballo de f5: Ad3.",
+              "frase": "Con su alfil en e7, tu alfil va a d3, contra el caballo de f5: Ad3.",
               "jugadas": [
                 "Bd3"
               ],
@@ -824,7 +836,7 @@
       "frecuencia": 2,
       "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 5...Ad7 tras 5.Cf3 sale en 7.2 % de las partidas que llegan ahí en 1000–1400 (10 de 138); en 600–1000, 0 de 4. De tus partidas del curso: 1.7 %",
       "plan": {
-        "tuyo": "Estás en la base sola: tus dos caballos y tu dama defienden d4. Sigue el enroque, contando antes los defensores de d4.",
+        "tuyo": "Estás en la base sola: tus dos caballos y tu dama defienden d4. Después enrocas, contando antes los defensores de d4.",
         "rival": "Negras puede atacar tu peón de e5 con ...f6 o sumar la dama con ...Db6.",
         "marcas": [],
         "marcasDe": {
@@ -854,11 +866,29 @@
               "frase": "Estás en la base sola: ningún peón defiende d4."
             },
             {
-              "frase": "Tus dos caballos y tu dama defienden d4.",
+              "frase": "Tus caballos de c2 y f3 defienden d4.",
               "marcas": [
                 {
                   "tipo": "A2",
                   "de": "c2",
+                  "a": "d4",
+                  "color": "verde"
+                },
+                {
+                  "tipo": "A2",
+                  "de": "f3",
+                  "a": "d4",
+                  "color": "verde",
+                  "por": "f4"
+                }
+              ]
+            },
+            {
+              "frase": "Tu dama también defiende d4.",
+              "marcas": [
+                {
+                  "tipo": "A2",
+                  "de": "d1",
                   "a": "d4",
                   "color": "verde"
                 }
@@ -900,7 +930,7 @@
           "ilustrativo": true,
           "pasos": [
             {
-              "frase": "Estás en la cadena entera: c3 sigue detrás de d4."
+              "frase": "Estás en la cadena entera: tu peón de c3 sigue detrás de d4."
             },
             {
               "frase": "Negras ya cambió su alfil encerrado; tú conservas más espacio."
@@ -945,7 +975,7 @@
           "ilustrativo": true,
           "pasos": [
             {
-              "frase": "Estás en la cadena entera: c3 sigue detrás de d4."
+              "frase": "Estás en la cadena entera: tu peón de c3 sigue detrás de d4."
             },
             {
               "frase": "Negras ya cambió su alfil encerrado."
@@ -1076,12 +1106,18 @@
       ]
     },
     "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Nge7 Na3 Nf5": {
-      "texto": "El caballo llega a f5: ahora tres piezas atacan d4, el peón de c5 y los dos caballos.",
+      "texto": "El caballo llega a f5: ahora atacan d4 el peón de c5 y los caballos de c6 y f5.",
       "marcas": [
         [
           {
             "tipo": "A4",
             "de": "f5",
+            "a": "d4",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A4",
+            "de": "c6",
             "a": "d4",
             "color": "rojo"
           }
@@ -1180,7 +1216,7 @@
       ]
     },
     "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3 Nh6 b4 cxd4 cxd4 Nf5": {
-      "texto": "El caballo llega a f5: ahora atacan d4 la dama, el caballo de c6 y el de f5.",
+      "texto": "El caballo llega a f5 y ataca d4. También atacan d4 la dama de b6 y el caballo de c6.",
       "marcas": [
         [
           {
@@ -1188,10 +1224,18 @@
             "de": "f5",
             "a": "d4",
             "color": "rojo"
-          },
+          }
+        ],
+        [
           {
             "tipo": "A4",
             "de": "b6",
+            "a": "d4",
+            "color": "rojo"
+          },
+          {
+            "tipo": "A4",
+            "de": "c6",
             "a": "d4",
             "color": "rojo"
           }
@@ -1436,8 +1480,7 @@
       ],
       "hace": "Empujas tu peón: cierras el centro y ganas espacio.",
       "porque": "Desde ahí le quitas la casilla f6 al caballo de g8, y el alfil de c8 de negras se queda encerrado detrás de e6.",
-      "prepara": "Tus peones de d4 y e5 forman una cadena, y su base es d4: ahí va a golpear negras.",
-      "cuidado": "Tu trabajo en la apertura es sostener d4.",
+      "prepara": "Tus peones de d4 y e5 forman una cadena, y su base es d4: ahí va a golpear negras. Tu trabajo en la apertura es sostener d4.",
       "fuente": [
         "WB-FR-3e5",
         "WP-FR"
@@ -1448,11 +1491,14 @@
     },
     "e4 e6 d4 d5 e5 c5 c3": {
       "clave": true,
-      "pregunta": "Negras ataca d4 con un peón. Si lo cambia, ¿cómo te aseguras de poder retomar con otro peón?",
+      "pregunta": "Negras ataca d4 con un peón. ¿Cómo mantienes tu cadena en pie si lo cambia?",
       "pista": "Negras va a golpear d4 con su peón de c: prepárate para sostenerlo.",
-      "hace": "Pones un peón detrás de d4: c3 sostiene la base de tu cadena.",
+      "hace": "Pones un peón detrás de d4: desde ahí sostiene la base de tu cadena.",
       "porque": "Si negras cambia en d4, retomas con el peón de c y tu cadena sigue en pie.",
-      "prepara": "Si cambiaras tú en c5, soltarías tu centro: el alfil de negras retoma y tu peón de e5 se queda sin su base.",
+      "cuidado": "Si cambiaras tú en c5, soltarías tu centro: el alfil de negras retoma y tu peón de e5 se queda sin su base.",
+      "errores": {
+        "dxc5": "Si cambias en c5, sueltas tu centro: el alfil de negras retoma y tu peón de e5 se queda sin su base."
+      },
       "describe": {
         "porque": [
           [
@@ -1461,7 +1507,7 @@
         ]
       },
       "ver": {
-        "prepara": [
+        "cuidado": [
           {
             "antes": true,
             "pasos": [
@@ -1535,6 +1581,9 @@
       "hace": "Retomas con el peón de c: tu peón vuelve a d4.",
       "porque": "Si retomaras con la dama, el caballo de negras la atacaría desde c6 y negras ganaría un tiempo.",
       "prepara": "Ahora ningún peón defiende d4: estás en la base sola.",
+      "errores": {
+        "Qxd4": "Si retomas con la dama, el caballo de negras la ataca desde c6 y negras gana un tiempo."
+      },
       "ver": {
         "porque": [
           {
@@ -1632,7 +1681,7 @@
         "Bb5"
       ],
       "hace": "Le quitas la casilla b4 a las piezas de negras.",
-      "porque": "Así ni su caballo de c6 ni su alfil de f8 pueden saltar a b4.",
+      "porque": "Así su caballo de c6 no va a b4, ni su alfil de f8 cuando el caballo deje e7.",
       "prepara": "Tu otro caballo ya puede salir sin que nadie lo clave.",
       "describe": {
         "prepara": [
@@ -1734,6 +1783,9 @@
       "pista": "Desarrolla una pieza que ayude en el centro.",
       "hace": "Desarrollas el caballo, que defiende d4 y e5.",
       "porque": "No saques el alfil a d3: taparía a tu dama, y negras cambiaría en d4 para ganarte el peón.",
+      "errores": {
+        "Bd3": "Desde d3 tu alfil tapa a tu dama: negras cambia en d4 y te gana el peón."
+      },
       "ver": {
         "porque": [
           {
@@ -1841,7 +1893,7 @@
       ],
       "hace": "Tu caballo sale por a3, rumbo a c2.",
       "porque": "Desde c2 defenderá d4 sin tapar a tu dama.",
-      "prepara": "Por ahora, c3 sigue detrás de d4: si negras cambia, retomas con el peón.",
+      "prepara": "Por ahora, tu peón de c3 sigue detrás de d4: si negras cambia, retomas con el peón.",
       "describe": {
         "hace": [
           [
@@ -1893,15 +1945,17 @@
     },
     "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3": {
       "clave": true,
-      "pregunta": "La dama de negras mira b2 y d4, y tu alfil de c1 todavía no puede salir. ¿Cómo empiezas a ganar espacio en el lado de dama?",
+      "pregunta": "La dama de negras mira b2 y d4, y todavía no conviene sacar tu alfil de c1. ¿Cómo empiezas a ganar espacio en el lado de dama?",
       "pista": "Busca ganar espacio del lado de dama sin regalar nada.",
       "buenas": [
         "Be2"
       ],
-      "hace": "Cubres b4 por segunda vez, para cuando tu peón de c3 se vaya, y preparas b4.",
-      "porque": "Con un peón en b4, tu alfil de c1 ya no tendrá que cuidar b2 y podrá ir a b2 a defender d4.",
-      "prepara": "Si negras no cierra con ...c4 y saca su caballo a e7, Ae2 todavía no: tras ...cxd4 y ...Cf5, tres piezas atacarían d4 y solo dos lo defenderían.",
-      "cuidado": "No saques todavía el alfil de c1: la dama de negras se comería tu peón de b2 y después tu torre.",
+      "hace": "Cubres b4 por segunda vez y preparas el avance de tu peón de b2.",
+      "porque": "Con un peón en b4, tu alfil de c1 ya no tendrá que cuidar b2 y, cuando tu peón de c3 se vaya, podrá defender d4 desde b2.",
+      "cuidado": "Si negras no cierra con ...c4 y saca su caballo a e7, Ae2 todavía no: tras ...cxd4 y ...Cf5, tres piezas atacarían d4 y dos lo defenderían. Si en vez de a3 sacabas el alfil de c1, la dama se comía tu peón de b2 y después tu torre.",
+      "errores": {
+        "Be3": "Con la dama de negras en b6, tu alfil de c1 no sale todavía: la dama se come tu peón de b2."
+      },
       "describe": {
         "hace": [
           [
@@ -1916,7 +1970,7 @@
         ]
       },
       "ver": {
-        "prepara": [
+        "cuidado": [
           {
             "pasos": [
               {
@@ -2001,9 +2055,7 @@
                 ]
               }
             ]
-          }
-        ],
-        "cuidado": [
+          },
           {
             "antes": true,
             "pasos": [
@@ -2100,6 +2152,9 @@
       "hace": "Desarrollas el caballo de b1.",
       "porque": "Con ...c4, ningún peón de negras ataca d4, y tu peón de c3 y tu caballo de f3 lo defienden: el caballo puede ir delante de tu dama.",
       "prepara": "Desde d2 vigila c4 y e4.",
+      "errores": {
+        "b4": "Si empujas b4 ahora, negras lo captura al paso con su peón de c4."
+      },
       "fuente": [
         "WB-FR-6a3",
         "WP-FR",
@@ -2107,7 +2162,8 @@
         "AJEDREZ"
       ],
       "motor": [
-        "M-fr-7cbd2"
+        "M-fr-7cbd2",
+        "M-fr-7b4-cerrada"
       ]
     },
     "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 a3 c4 Nbd2 Na5 Be2": {
@@ -2167,8 +2223,11 @@
       ],
       "hace": "Ganas espacio en el lado de dama.",
       "porque": "Tu alfil de c1 ya no tiene que cuidar b2: tu peón está ahora en b4, defendido por tus peones de a3 y c3.",
-      "prepara": "Tu alfil podrá salir a defender d4 desde b2.",
+      "prepara": "Cuando cambien en d4 y retomes, tu alfil podrá defender d4 desde b2.",
       "cuidado": "En vez de b4, no tomes el caballo de h6 con tu alfil: la dama de negras se comería tu peón de b2 y recuperaría la pieza.",
+      "errores": {
+        "Bxh6": "Si tomas en h6, la dama de negras se come tu peón de b2 y negras recupera la pieza."
+      },
       "describe": {
         "prepara": [
           [
@@ -2500,7 +2559,7 @@
         "a3",
         "Be2"
       ],
-      "hace": "Pones un peón detrás de d4: c3 sostiene la base de tu cadena.",
+      "hace": "Pones un peón detrás de d4: desde ahí sostiene la base de tu cadena.",
       "porque": "Cuando negras golpee con ...c5, ya tienes un peón para retomar en d4.",
       "fuente": [
         "WB-FR-4c3",
@@ -2521,7 +2580,7 @@
         "Nbd2"
       ],
       "hace": "Cambias los alfiles con jaque.",
-      "porque": "Así negras tiene que retomar enseguida y tú ya puedes enrocar.",
+      "porque": "Así negras casi siempre retoma enseguida y tú ya puedes enrocar.",
       "cuidado": "Si negras tapa con ...c6, tienes una pieza de más y tu alfil sigue atacado: retíralo a a4.",
       "describe": {
         "porque": [
@@ -2668,7 +2727,7 @@
     },
     {
       "termino": "Cadena de peones",
-      "definicion": "Peones en diagonal que se protegen uno a otro; la base es el de atrás y la cabeza, el de adelante. En el Avance, tu cadena es d4-e5 y c3 la sostiene."
+      "definicion": "Peones en diagonal que se protegen uno a otro; la base es el de atrás y la cabeza, el de adelante. En el Avance, tu cadena es d4-e5 y tu peón de c3 la sostiene."
     },
     {
       "termino": "Centro",
@@ -2679,10 +2738,6 @@
       "definicion": "Una pieza que no se puede mover sin dejar expuesta otra más valiosa detrás."
     },
     {
-      "termino": "Colgado",
-      "definicion": "Una pieza o un peón sin defensa, que el rival puede comer."
-    },
-    {
       "termino": "Desarrollar",
       "definicion": "Sacar una pieza de su casilla de inicio a una casilla útil."
     },
@@ -2691,16 +2746,16 @@
       "definicion": "La forma que dejan los peones en el tablero."
     },
     {
+      "termino": "Ganar espacio",
+      "definicion": "Avanzar tus peones para que tus piezas tengan más casillas y las del rival, menos."
+    },
+    {
       "termino": "Lado de dama y lado de rey",
       "definicion": "Las dos mitades del tablero: de la columna a a la d, el lado de dama; de la e a la h, el lado de rey."
     },
     {
       "termino": "Las tres formas",
-      "definicion": "La cadena entera (c3 sigue detrás de d4), la base sola (negras cambió en d4 y retomaste con el peón de c) y la cadena cerrada (negras empujó su peón a c4)."
-    },
-    {
-      "termino": "Ruptura",
-      "definicion": "Empujar un peón para romper la cadena del rival."
+      "definicion": "La cadena entera (tu peón de c3 sigue detrás de d4), la base sola (negras cambió en d4 y retomaste con el peón de c) y la cadena cerrada (negras empujó su peón a c4)."
     },
     {
       "termino": "Tiempo",

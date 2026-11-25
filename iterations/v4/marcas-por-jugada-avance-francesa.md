@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 20 de 67.** Más 14 frases del plan y del paso a paso.
+**Jugadas con marcas: 20 de 67.** Más 16 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -25,7 +25,7 @@
 | 5.Cf3 | 5...Cge7 (Paulsen) | tuya | no |  |
 | 5...Cge7 | 5...Cge7 (Paulsen) | del rival | sí | rival frase 1: casilla f5 (A6, roja) |
 | 6.Ca3 | 5...Cge7 (Paulsen) | tuya | no |  |
-| 6...Cf5 | 5...Cge7 (Paulsen) | del rival | sí | rival frase 1: flecha f5→d4 (A4, roja) |
+| 6...Cf5 | 5...Cge7 (Paulsen) | del rival | sí | rival frase 1: flecha f5→d4 (A4, roja); flecha c6→d4 (A4, roja) |
 | 7.Cc2 | 5...Cge7 (Paulsen) | tuya | sí | mía porque frase 1: flecha c2→d4 (A2, verde) |
 | 5...Db6 | 5...Db6 (línea principal) | del rival | sí | rival frase 1: flecha b6→b2 (A4, roja) |
 | 6.a3 | 5...Db6 (línea principal) | tuya | no |  |
@@ -39,7 +39,7 @@
 | 7.b4 | 6...Ch6 (Lputian) | tuya | no |  |
 | 7...cxd4 | 6...Ch6 (Lputian) | del rival | no |  |
 | 8.cxd4 | 6...Ch6 (Lputian) | tuya | no |  |
-| 8...Cf5 | 6...Ch6 (Lputian) | del rival | sí | rival frase 1: flecha f5→d4 (A4, roja); flecha b6→d4 (A4, roja) |
+| 8...Cf5 | 6...Ch6 (Lputian) | del rival | sí | rival frase 1: flecha f5→d4 (A4, roja)<br>rival frase 2: flecha b6→d4 (A4, roja); flecha c6→d4 (A4, roja) |
 | 9.Ab2 | 6...Ch6 (Lputian) | tuya | no |  |
 | 5...Ad7 | 5...Ad7 (Euwe) | del rival | no |  |
 | 6.Ae2 | 5...Ad7 (Euwe) | tuya | no |  |
@@ -87,8 +87,10 @@
 | estructura 3, paso 4 | La casilla clave es f5: por ahí llega el caballo de negras contra d4. | casilla f5 (A6, roja) |
 | repaso 1, paso 4 | La dama de negras va a b6, 5...Db6: mira b2 antes de mover tu alfil de c1. | flecha b6→b2 (A4, roja) |
 | plan cambio-d4 paso a paso, paso 2 | El caballo de f5 es el que más presiona d4. | flecha f5→d4 (A4, roja) |
-| plan cge7 paso a paso, paso 3 | Con defensores de sobra, tu alfil puede ir a d3, frente al caballo de f5: Ad3. | flecha d3→f5 (A2, verde) |
+| plan cge7 paso a paso, paso 3 | Con defensores de sobra, tu alfil puede ir a d3, contra el caballo de f5: Ad3. | flecha d3→f5 (A2, verde) |
 | plan cge7 paso a paso, paso 5 | Negras también puede atacar tu peón de e5 con ...f6. | flecha f7→f6 (A7, roja, punteada) |
-| plan lputian paso a paso, paso 2 | Tu alfil de b2, tu caballo de f3 y tu dama defienden d4. | flecha b2→d4 (A2, verde); flecha d1→d4 (A2, verde) |
-| plan lputian paso a paso, paso 4 | Con su alfil en e7, tu alfil va a d3, frente al caballo de f5: Ad3. | flecha d3→f5 (A2, verde) |
-| plan euwe paso a paso, paso 2 | Tus dos caballos y tu dama defienden d4. | flecha c2→d4 (A2, verde) |
+| plan lputian paso a paso, paso 2 | Tu alfil de b2 y tu dama defienden d4. | flecha b2→d4 (A2, verde); flecha d1→d4 (A2, verde) |
+| plan lputian paso a paso, paso 3 | Tu caballo de f3 también defiende d4. | flecha f3→d4 (A2, verde) |
+| plan lputian paso a paso, paso 5 | Con su alfil en e7, tu alfil va a d3, contra el caballo de f5: Ad3. | flecha d3→f5 (A2, verde) |
+| plan euwe paso a paso, paso 2 | Tus caballos de c2 y f3 defienden d4. | flecha c2→d4 (A2, verde); flecha f3→d4 (A2, verde) |
+| plan euwe paso a paso, paso 3 | Tu dama también defiende d4. | flecha d1→d4 (A2, verde) |
