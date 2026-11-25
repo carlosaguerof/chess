@@ -9,7 +9,7 @@ El curso `caro-kann:w` (`conocimiento/cursos/avance-caro-kann.json`), por estruc
 | Forma (etiqueta en la página) | Cómo se reconoce (con chess.js, en toda la línea) | Tu plan, como lo dice el curso | Comprobado en |
 |---|---|---|---|
 | **La cadena entera** («Nadie cambia en d4») | Tus peones de d4 y e5 siguen, tienes peón en c3 y nadie ha cambiado en d4 | Esquema c3, Cf3, Ae2 y 0-0. Si negras cambia en d4, retomas con el peón de c y pasas a la base sola. Ya enrocado y con tu caballo en d2, h3 le pregunta al alfil de g4 | `P-ck-af5`, `P-ck-af5-h3`, `N9-ck-cxd4`, `N11-ck-af5` |
-| **La base sola** («Negras cambia en d4») | Negras cambió en d4 y retomaste con el peón de c: ningún peón defiende d4 | El mismo esquema y un aviso: cuenta atacantes y defensores de d4 antes de cada jugada. Después de ...cxd4 y cxd4, contra la clavada del alfil de g4, tu alfil va a e2, no a d3; tu caballo de b1, a d2 (tapa a tu dama un momento, pero si negras cambia en f3, retomas con él); si su caballo llega a f5, h3 | `P-ck-c5`, `P-ck-c5-cbd2`, `P-ck-c5-h3`, `N9-ck-ae2` |
+| **La base sola** («Negras cambia en d4») | Negras cambió en d4 y retomaste con el peón de c: ningún peón defiende d4 | El mismo esquema y un aviso: cuenta atacantes y defensores de d4 antes de cada jugada. Después de ...cxd4 y cxd4, contra la clavada del alfil de g4, tu alfil va a e2, no a d3; tu caballo de b1, a d2 (tapa a tu dama un momento, pero si negras cambia en f3, retomas con él); si su caballo llega a f5, h3; y si después su dama llega a b6, Ae3 | `P-ck-c5-cbd2`, `P-ck-c5-h3`, `P-ck-c5-ae3`, `N9-ck-ae2` |
 
 La Francesa tiene una tercera forma (la cadena cerrada, ...c4); contra la Caro-Kann sale en 0.5 % de tus partidas de 1000–1400: no es forma de este curso.
 

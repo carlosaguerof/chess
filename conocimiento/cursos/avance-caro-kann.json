@@ -507,7 +507,7 @@
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas de lichess (CC0), medidas en la posición que define la lección: 3...c5 tras 3.e5 sale en 21.8 % de las partidas que llegan ahí en 600–1000 (37 de 170) y en 29.5 % en 1000–1400 (689 de 2336)",
       "plan": {
-        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tu caballo de f3 y tu dama. Sigue el caballo de b1 a d2: tapa a tu dama un momento, pero si negras cambia en f3, retomas con él. Si su caballo llega a f5, h3 obliga a su alfil de g4 a decidir: se retira o se cambia. Antes de cada jugada, cuenta atacantes y defensores de d4.",
+        "tuyo": "Estás en la base sola: ningún peón defiende d4, y lo sostienen tu caballo de f3 y tu dama. Sigue el caballo de b1 a d2: tapa a tu dama un momento, pero retoma si negras cambia en f3. Si su caballo llega a f5, h3 obliga a su alfil de g4 a decidir. Si se cambia en f3 y su dama llega a b6, suma un defensor de d4 con Ae3. Antes de cada jugada, cuenta atacantes y defensores de d4.",
         "rival": "Negras lleva el caballo de g8 por e7 a f5, contra d4.",
         "marcas": [],
         "marcasDe": {

@@ -49,7 +49,7 @@ Aquí el porcentaje es de tus partidas del curso desde 1.e4 e6 (las proporciones
 | Respuesta | De tus partidas (600–1000 / 1000–1400) | Qué dice la página del mapa | Comprobado en |
 |---|---|---|---|
 | **Sin 2...d5** (2...Dh4, 2...Cf6, 2...d6, 2...Cc6, 2...c5, 2...c6) | 8.3, 8.2, 6.3, 5.5, 3.1 y 2.5 % / 4.6, 3.5, 6.5, 2.6, 5.8 y 5.2 % | Todavía no hay cadena: contra 2...Cf6, 3.e5 echa al caballo; contra 2...Dh4, 3.Cc3 defiende e4; contra lo demás, 3.Cf3 | `P-fr-sin-d5` (3.Cf3 contra 2...Dh4 pierde e4: por eso no se dice) |
-| **3...Cc6** | 13.2 % (27) / 6.7 % (153) | No golpea d4: 4.Cf3. Si ataca e5 con ...f6, 5.Ad3, y si cambia en e5, retomas con el caballo; contra ...Ab4+, 5.c3 | `P-fr-3cc6` |
+| **3...Cc6** | 13.2 % (27) / 6.7 % (153) | No golpea d4 con su peón de c: lo tapa. 4.Cf3. Si ataca e5 con ...f6, 5.Ad3, y si cambia en e5, retomas con el caballo; contra ...Ab4+, 5.c3 | `P-fr-3cc6` |
 
 Las demás respuestas a 3.e5 salen en menos de 5 % en las dos bandas.
 

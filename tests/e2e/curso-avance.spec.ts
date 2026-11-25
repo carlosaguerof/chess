@@ -57,6 +57,14 @@ test.describe('Los cursos del Avance', () => {
     await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Avance contra la Caro-Kann')
   })
 
+  test('una dirección vieja de una lección que ya no existe lleva a la página de su curso, no a la pestaña de negras', async ({ page }) => {
+    // el curso contra la Caro-Kann pasó de 7 lecciones a 2: "#/leccion/caro-kann:w/5" era la Bronstein
+    await page.goto('/#/leccion/caro-kann%3Aw/5')
+    await expect(page.getByTestId('leccion-no-encontrada')).toHaveAttribute('href', `#/curso/${encodeURIComponent('caro-kann:w')}`)
+    await page.getByTestId('leccion-no-encontrada').click()
+    await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Avance contra la Caro-Kann')
+  })
+
   test('la página: La idea, La estructura, sus secciones, Errores y trampas, Repaso y, al final, Opcional', async ({ page }) => {
     for (const c of [CK, FR]) {
       await page.goto(urlCurso(c))
