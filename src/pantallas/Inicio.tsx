@@ -9,6 +9,7 @@ import { cursos } from '../cursos/datos.ts'
 import { leerRegistro } from '../registro/almacen-registro.ts'
 import { dia, leerRepaso, minutos, paraHoy, repasoActivo, sumarDias } from '../repaso/repaso.ts'
 import { repertorioCompleto } from '../aprender/favoritas.ts'
+import { soloObligatorias } from '../curso/datos.ts'
 import { jugadasFalladas } from '../registro/refuerza.ts'
 import { COMO_FUNCIONA_REFUERZA, COMO_FUNCIONA_REPASO, Info } from '../componentes/ComoFunciona.tsx'
 
@@ -26,10 +27,10 @@ export function Inicio() {
     const registro = leerRegistro()
     const hoy = paraHoy(leerRepaso(), hechas, lecciones, dia(), registro)
     const manana = paraHoy(leerRepaso(), hechas, lecciones, sumarDias(dia(), 1), registro).length
-    return { n: hoy.length, min: minutos(hoy), manana, aprendidas: lecciones.some((l) => hechas[l.id]) }
+    return { n: hoy.length, min: minutos(hoy), manana, aprendidas: lecciones.some((l) => !l.opcional && hechas[l.id]) }
   })()
   // Refuerza: sin jugadas falladas, la tarjeta lo dice y no lleva botón
-  const falladas = jugadasFalladas(repertorioCompleto(), leerRegistro()).length
+  const falladas = jugadasFalladas(soloObligatorias(repertorioCompleto()), leerRegistro()).length
   const jugar = () => {
     empezarPartida(bot.id, 'w')
     navegar('/partida')

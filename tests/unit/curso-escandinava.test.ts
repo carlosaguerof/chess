@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { Chess, type Move } from 'chess.js'
 import { instalarLocalStorage } from './memoria-navegador.ts'
 import { BASE } from '../../src/base/base.ts'
-import { CURSOS_NUEVOS, esOpcional, jugadasDeLaBaseEn, leccionIdDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
+import { CURSOS_NUEVOS, esOpcional, soloObligatorias, jugadasDeLaBaseEn, leccionIdDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { continuar, empezar, intentar, jugarRival, progreso, reintentar, type EstadoCiclo } from '../../src/curso/ciclo.ts'
 import { fotosDePasos } from '../../src/curso/pasos.ts'
 import { posicion } from '../../src/curso/textos.ts'
@@ -21,8 +21,6 @@ import type { LineaCurso } from '../../src/curso/tipos.ts'
  */
 const c = CURSOS_NUEVOS['escandinava:w']!
 const linea = (id: string) => lineaPorId(c, `v:${id}`)!
-/** ¿Ya está en la rama el filtro común de las opcionales (Repaso y Refuerza)? Hasta entonces, sus dos pruebas esperan. */
-const FILTRO_COMUN = cursos().find((x) => x.id === 'escandinava:w')!.lecciones.length === obligatorias(c).length
 
 const CLAVADA = 'La clavada'
 const CASA = 'La dama en casa'
@@ -267,27 +265,28 @@ describe('El curso de la Escandinava · el ciclo, el Repaso y Refuerza', () => {
     expect(reintentar(mal.estado).momento).toBe('tuTurno')
   })
 
-  // el filtro de las opcionales es común a todos los cursos y llega con «una sola Caro-Kann» (nota 6 del orchestrator):
-  // estas dos pruebas se prenden al unir origin/main con ese filtro
-  it.skipIf(!FILTRO_COMUN)('un fallo en Practicar de una obligatoria sale en Refuerza; el de una opcional, no (nota 4: "que solo lo obligatorio salga en Repaso y Refuerza")', () => {
+  // el filtro de las opcionales es común a todos los cursos (llegó con «una sola Caro-Kann», nota 6 del orchestrator)
+  it('un fallo en Practicar de una obligatoria sale en Refuerza; el de una opcional, no (nota 4: "que solo lo obligatorio salga en Repaso y Refuerza")', () => {
     const fallo = (lin: LineaCurso, ply: number) =>
       registrarPasoCurso({ fen: posicion(lin.jugadas, ply).fen(), esperada: lin.jugadas[ply]!, paso: { fallos: 1, pista: false, respuesta: false }, linea: lin.nombre, camino: lin.jugadas.slice(0, ply) })
     const clasica = fallo(l, 14) // 8.Cd5
     const bronstein = linea('bronstein')
     const opcional = fallo(bronstein, 10) // 6.g3, solo en la Bronstein
-    const falladas = jugadasFalladas(repertorioCompleto(), [clasica, opcional])
+    const falladas = jugadasFalladas(soloObligatorias(repertorioCompleto()), [clasica, opcional])
     expect(falladas.some((j) => j.esperada === 'Nd5')).toBe(true)
     expect(falladas.some((j) => j.esperada === 'g3')).toBe(false)
     // las líneas de la base de la Escandinava con blancas que entran a Refuerza son las de las cuatro obligatorias
-    const deLaEscandinava = repertorioCompleto().lineas.filter((x) => x.apertura === 'escandinava' && x.color === 'w').map((x) => x.claveBase).sort()
+    const deLaEscandinava = soloObligatorias(repertorioCompleto()).lineas.filter((x) => x.apertura === 'escandinava' && x.color === 'w').map((x) => x.claveBase).sort()
     expect(deLaEscandinava).toEqual(obligatorias(c).map((v) => `escandinava/${v.base}`).sort())
     // y la apertura sigue completa en la base (la guía y los bots no cambian)
     expect(lineasDeFavorita('escandinava:w').length).toBeGreaterThan(deLaEscandinava.length)
   })
 
-  it.skipIf(!FILTRO_COMUN)('el Repaso lleva solo las cuatro obligatorias, con su id de siempre', () => {
+  it('el Repaso lleva solo las cuatro obligatorias, con su id de siempre', () => {
     const curso = cursos().find((x) => x.id === 'escandinava:w')!
-    expect(curso.lecciones.map((x) => x.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
+    // las opcionales van marcadas y el Repaso no las saca (`esLeccionOpcional`, la condición común)
+    expect(curso.lecciones.filter((x) => !x.opcional).map((x) => x.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))
+    expect(curso.lecciones.filter((x) => x.opcional).map((x) => x.id)).toEqual(opcionales(c).map((v) => leccionIdDe(c, v)))
     expect(curso.lecciones.map((x) => x.id)).toContain('escandinava:w/w:escandinava/curso-valenciana')
   })
 })

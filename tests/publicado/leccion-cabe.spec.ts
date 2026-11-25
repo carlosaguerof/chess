@@ -9,8 +9,8 @@ test.use({ viewport: { width: 402, height: 874 } })
 
 test('La lección a 402×874: sin scroll de la página, con los cuatro botones a la vista', async ({ page }) => {
   await page.goto('./#/')
-  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:clasica', vuelta: 'aprender', ply: 19, fecha: Date.now() } })))
-  await page.goto('./#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:clasica'))
+  await page.evaluate(() => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea: 'v:clasica', vuelta: 'aprender', ply: 19, fecha: Date.now() } })))
+  await page.goto('./#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:clasica'))
   await page.reload()
   await expect(page.getByTestId('leccion-curso')).toHaveAttribute('data-momento', 'tuTurno')
   await expect(page.getByTestId('reiniciar')).toHaveText('Reiniciar')

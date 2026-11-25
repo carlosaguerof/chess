@@ -49,24 +49,25 @@ async function revisarTablero(tablero: Locator) {
 test.describe('Correcciones · C1 · coordenadas en los tableros de leer', () => {
   test('La idea y las dos páginas de La estructura traen a–h y 1–8, volteadas para negras', async ({ page }, info) => {
     const cap = (nombre: string) => page.screenshot({ path: `iterations/v3/capturas/correcciones/${info.project.name}/${nombre}.png`, fullPage: true })
-    await page.goto('/#/curso/caro-kann%3Ab/leer/idea')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/idea')
     await expect(page.getByTestId('pieza-idea')).toBeVisible()
     await revisarTablero(page.getByTestId('tablero-leer'))
     await cap('c1-la-idea')
 
-    await page.goto('/#/curso/caro-kann%3Ab/leer/estructura')
-    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('1 de 2')
-    await revisarTablero(page.getByTestId('tablero-leer'))
-    await cap('c1-la-estructura-avance')
-    await page.getByTestId('pagina-siguiente').click()
-    await expect(page.getByTestId('pagina-n-de-m')).toHaveText('2 de 2')
-    await revisarTablero(page.getByTestId('tablero-leer'))
-    await cap('c1-la-estructura-clasica')
+    // el curso por estructuras: cinco páginas (El mapa, la Cadena, el Cambio, la Clásica y la Tensión), todas con coordenadas
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/estructura')
+    for (let i = 1; i <= 5; i++) {
+      if (i > 1) await page.getByTestId('pagina-siguiente').click()
+      await expect(page.getByTestId('pagina-n-de-m')).toHaveText(`${i} de 5`)
+      await revisarTablero(page.getByTestId('tablero-leer'))
+      if (i === 2) await cap('c1-la-estructura-avance')
+      if (i === 4) await cap('c1-la-estructura-clasica')
+    }
   })
 
   test('el tablero de arriba de la página del curso también (2026-10-30); los de las tarjetas de Aprender, no', async ({ page }) => {
     // "todo tablero lleva las letras y los números, volteados con negras" (punto 1 del feedback del piloto)
-    await page.goto('/#/curso/caro-kann%3Ab')
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab')
     await revisarTablero(page.getByTestId('pagina-curso').getByTestId('tablero-mini'))
     // las miniaturas de las tarjetas se quedan sin coordenadas: ahí no se leerían
     await page.goto('/#/cursos/negras')
@@ -77,7 +78,7 @@ test.describe('Correcciones · C1 · coordenadas en los tableros de leer', () =>
   })
 
   test('el tablero de la lección no cambia: sigue con sus coordenadas', async ({ page }) => {
-    await page.goto('/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent('v:avance-short'))
+    await page.goto('/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent('v:avance-short'))
     await revisarTablero(page.getByTestId('tablero').first())
   })
 })

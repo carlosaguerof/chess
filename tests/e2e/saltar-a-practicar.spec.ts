@@ -1,6 +1,6 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { Chess } from 'chess.js'
-import { cursoNuevo, leccionIdDe, lineaPorId, misJugadas } from '../../src/curso/datos.ts'
+import { cursoNuevo, leccionIdDe, lineaPorId, misJugadas, obligatorias } from '../../src/curso/datos.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { jugar } from './_util.ts'
 
@@ -12,7 +12,7 @@ import { jugar } from './_util.ts'
  * antes del cambio salieron de la primera prueba con CAPTURAS=antes, en Chromium.
  */
 
-const c = cursoNuevo('caro-kann:b')!
+const c = cursoNuevo('caro-kann-estructuras:b')!
 const enUci = (san: string[]) => {
   const t = new Chess()
   return san.map((s) => {
@@ -25,7 +25,7 @@ const TAL = lineaPorId(c, 'v:avance-tal')!
 const EN_LA_3 = misJugadas(TAL)[2]!
 /** La Fantasía, la más corta: dos jugadas mías */
 const FANTASIA = lineaPorId(c, 'v:fantasia')!
-const url = (id: string) => '/#/curso/caro-kann%3Ab/linea/' + encodeURIComponent(id)
+const url = (id: string) => '/#/curso/caro-kann-estructuras%3Ab/linea/' + encodeURIComponent(id)
 const CUANDO = process.env.CAPTURAS === 'antes' ? 'antes' : 'despues'
 
 const leccion = (page: Page) => page.getByTestId('leccion-curso')
@@ -36,7 +36,7 @@ const marcas = (page: Page) => page.locator('[data-testid="tablero"] [data-marca
 /** Retoma una lección como al volver a ella a medias: la vuelta y la jugada guardadas. */
 async function retomar(page: Page, linea: string, vuelta: 'aprender' | 'practicar', ply: number) {
   await page.goto('/#/')
-  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
+  await page.evaluate(([linea, vuelta, ply]) => localStorage.setItem('ajedrez.v1.curso:caro-kann-estructuras:b', JSON.stringify({ piezas: {}, variantes: {}, errores: {}, enCurso: { linea, vuelta, ply, fecha: Date.now() } })), [linea, vuelta, ply] as const)
   await page.goto(url(linea))
   await page.reload()
   await momento(page, 'tuTurno')
@@ -44,7 +44,7 @@ async function retomar(page: Page, linea: string, vuelta: 'aprender' | 'practica
   await expect(leccion(page)).toHaveAttribute('data-ply', String(ply))
 }
 
-const enCurso = (page: Page) => page.evaluate(() => JSON.parse(localStorage.getItem('ajedrez.v1.curso:caro-kann:b') ?? '{}').enCurso ?? null)
+const enCurso = (page: Page) => page.evaluate(() => JSON.parse(localStorage.getItem('ajedrez.v1.curso:caro-kann-estructuras:b') ?? '{}').enCurso ?? null)
 
 for (const p of [
   { ancho: 402, alto: 874 },
@@ -192,9 +192,11 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
   })
 
   test('terminar Practicar sin Aprender cuenta la variante en la página del curso, entra al Repaso y registra las jugadas', async ({ page }, info) => {
+    // una obligatoria: en el curso por estructuras, una opcional no entra al Repaso (specs/cursos.md §6)
+    const HILLBILLY = lineaPorId(c, 'v:hillbilly')!
     await page.goto('/#/')
     await page.evaluate(() => localStorage.clear())
-    await page.goto(url(FANTASIA.id))
+    await page.goto(url(HILLBILLY.id))
     // la primera vez, la lección abre en Aprender
     await momento(page, 'intro')
     await expect(leccion(page)).toHaveAttribute('data-vuelta', 'aprender')
@@ -203,8 +205,8 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
     await expect(leccion(page)).toHaveAttribute('data-vuelta', 'practicar')
     await page.getByTestId('empezar-vuelta').click()
 
-    const uci = enUci(FANTASIA.jugadas)
-    for (const ply of misJugadas(FANTASIA)) {
+    const uci = enUci(HILLBILLY.jugadas)
+    for (const ply of misJugadas(HILLBILLY)) {
       await momento(page, 'tuTurno')
       await expect(leccion(page)).toHaveAttribute('data-ply', String(ply))
       await jugar(page, info, uci[ply]!)
@@ -215,21 +217,21 @@ test.describe('Saltar a Practicar · el interruptor Aprender | Practicar', () =>
 
     // el avance: terminada (sin "aprendida"), sin "dónde me quedé"; el Repaso; y el registro de cada jugada de Practicar
     const guardado = await page.evaluate(() => ({
-      avance: JSON.parse(localStorage.getItem('ajedrez.v1.curso:caro-kann:b') ?? '{}'),
+      avance: JSON.parse(localStorage.getItem('ajedrez.v1.curso:caro-kann-estructuras:b') ?? '{}'),
       progreso: JSON.parse(localStorage.getItem('ajedrez.v1.progreso') ?? '{}'),
       registro: JSON.parse(localStorage.getItem('ajedrez.v1.registro') ?? '[]'),
     }))
-    expect(guardado.avance.variantes['fantasia']?.terminada).toBeTruthy()
-    expect(guardado.avance.variantes['fantasia']?.aprendida).toBeUndefined()
+    expect(guardado.avance.variantes['hillbilly']?.terminada).toBeTruthy()
+    expect(guardado.avance.variantes['hillbilly']?.aprendida).toBeUndefined()
     expect(guardado.avance.enCurso).toBeUndefined()
-    expect(Object.keys(guardado.progreso)).toEqual([leccionIdDe(c, FANTASIA.variante!)])
-    expect(guardado.registro.filter((r: { lugar: string; linea: string }) => r.lugar === 'curso' && r.linea === FANTASIA.nombre)).toHaveLength(misJugadas(FANTASIA).length)
+    expect(Object.keys(guardado.progreso)).toEqual([leccionIdDe(c, HILLBILLY.variante!)])
+    expect(guardado.registro.filter((r: { lugar: string; linea: string }) => r.lugar === 'curso' && r.linea === HILLBILLY.nombre)).toHaveLength(misJugadas(HILLBILLY).length)
 
     // la página del curso la cuenta
     await page.getByTestId('salida-curso').click()
-    await expect(page.getByTestId('avance')).toHaveText(`1 de ${c.variantes.length} variantes`)
-    await expect(page.getByTestId(`paso-${FANTASIA.id}`)).toHaveAttribute('data-estado', 'hecha')
-    await expect(page.getByTestId(`paso-${FANTASIA.id}`)).toContainText('Hecha')
+    await expect(page.getByTestId('avance')).toHaveText(`1 de ${obligatorias(c).length} variantes`)
+    await expect(page.getByTestId(`paso-${HILLBILLY.id}`)).toHaveAttribute('data-estado', 'hecha')
+    await expect(page.getByTestId(`paso-${HILLBILLY.id}`)).toContainText('Hecha')
 
     // y el inicio la trae para el Repaso (mañana, como cuando hago las dos vueltas)
     await page.goto('/#/')

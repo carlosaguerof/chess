@@ -150,7 +150,7 @@
 | plan avance-short tuyo frase 1 | Presiona d4, la base de la cadena: ...Cc6, ...cxd4 y el caballo de g8 por e7. | flecha b8→c6 (A3, verde, punteada); flecha c5→d4 (A3, verde, punteada) |
 | plan avance-short rival frase 1 | Blancas sostiene d4 con piezas y, cuando pueda, abre el juego con c4. | flecha c2→c4 (A7, roja, punteada) |
 | plan cambio tuyo frase 1 | ...e6, ...Ad6 y 0-0. | flecha e7→e6 (A3, verde, punteada) |
-| plan cambio tuyo frase 2 | Después, con una torre en b8, adelanta ...b5 y ...b4, sin regalar el peón: es el ataque de minorías, avanzar los peones del lado donde tienes menos para debilitar los del rival. | flecha b7→b5 (A3, verde, punteada) |
+| plan cambio tuyo frase 2 | Después, con una torre en b8, adelanta ...b5 y ...b4, cuidando de no regalar el peón: es el ataque de minorías, avanzar los peones del lado donde tienes menos para debilitar los del rival. | flecha b7→b5 (A3, verde, punteada) |
 | plan cambio rival frase 1 | Blancas busca la casilla e5 para un caballo y atacar en el lado de rey. | casilla e5 (A6, roja) |
 | plan clasica tuyo frase 1 | Termina el desarrollo con ...Cgf6, ...Dc7 o ...Ae7 y enroca. | flecha g8→f6 (A3, verde, punteada) |
 | plan clasica tuyo frase 2 | Después, ...c5 contra d4. | flecha c6→c5 (A3, verde, punteada) |

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { guardar, leer } from '../estado/almacen.ts'
 import type { Vuelta } from './ciclo.ts'
+import { cursosDeAntes } from './queda.ts'
 
 /**
  * El avance de un curso nuevo, guardado en el teléfono (diseño §4): las piezas leídas, las variantes aprendidas y
@@ -19,14 +20,37 @@ const clave = (cursoId: string) => `curso:${cursoId}`
 const vacio = (): AvanceCurso => ({ piezas: {}, variantes: {}, errores: {} })
 const EVENTO = 'ajedrez:avance-curso'
 
-export function leerAvance(cursoId: string): AvanceCurso {
+/** Lo guardado de este curso, tal cual. */
+function leerGuardado(cursoId: string): AvanceCurso {
   const a = leer<AvanceCurso | null>(clave(cursoId), null)
   if (!a || typeof a !== 'object') return vacio()
   return { piezas: a.piezas ?? {}, variantes: a.variantes ?? {}, errores: a.errores ?? {}, enCurso: a.enCurso }
 }
 
+/**
+ * El avance de un curso. Si reemplaza a uno de antes (`queda.ts`), una variante que aprendí o terminé allá sale así
+ * aquí: es la misma línea. Se calcula al leer y no se guarda: lo del curso de antes se queda donde estaba, un Respaldo
+ * viejo sigue sirviendo y, si el curso de antes regresa, cada uno tiene lo suyo. Las piezas de leer (La idea, La
+ * estructura, Errores y trampas con sus «¿Y si…?», Repaso del curso) y dónde me quedé no se pasan: cambiaron
+ * (Carlos, 2026-11-25).
+ */
+export function leerAvance(cursoId: string): AvanceCurso {
+  const a = leerGuardado(cursoId)
+  const antes = cursosDeAntes(cursoId)
+  if (antes.length === 0) return a
+  const variantes = { ...a.variantes }
+  for (const id of antes)
+    for (const [v, x] of Object.entries(leerGuardado(id).variantes)) {
+      if (!x || typeof x !== 'object') continue
+      // lo de este curso gana; lo que no tiene, lo pone el de antes
+      variantes[v] = { ...x, ...variantes[v] }
+    }
+  return { ...a, variantes }
+}
+
+/** Solo escribe lo de este curso: nada del de antes se copia aquí. */
 function cambiar(cursoId: string, f: (a: AvanceCurso) => AvanceCurso): AvanceCurso {
-  const nuevo = f(leerAvance(cursoId))
+  const nuevo = f(leerGuardado(cursoId))
   guardar(clave(cursoId), nuevo)
   try {
     window.dispatchEvent(new Event(EVENTO))
