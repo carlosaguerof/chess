@@ -231,6 +231,9 @@ describe('El curso de la Escandinava · las excepciones, cada una con su «Ver q
         if (/^(Otra )?[Ee]xcepción/.test(t)) expect(p.ver![k], t).toBeTruthy()
       })
       for (const v of p.ver.filter((x) => x !== null)) {
+        // empieza en la posición de la que habla la frase, sin mover nada (specs/cursos.md §2.3, punto 3)
+        expect(v!.pasos[0]!.frase, p.subtitulo).toMatch(/^Esta es la posición después de /)
+        expect(v!.pasos[0]!.jugadas ?? [], p.subtitulo).toEqual([])
         expect(() => tras(lineaDe(v!)), p.subtitulo).not.toThrow()
         expect(fotosDePasos({ pasos: v!.pasos }, v!.inicio)).toHaveLength(v!.pasos.length)
       }
@@ -243,9 +246,11 @@ describe('El curso de la Escandinava · las excepciones, cada una con su «Ver q
     const cl = tras(lineaDe(pagina('La clavada').ver![4]!))
     expect(cl.attackers('d4', 'b').sort()).toEqual(['c6', 'd8'])
     expect(cl.attackers('d4', 'w')).toEqual([])
-    // la dama en casa: el caballo de d4 ataca a la dama; la dama de d4 ataca al alfil de c4
+    // la dama en casa: el caballo de d4 ataca a la dama; tras 8.Dxf3 nadie defiende d4, y la dama de d4 ataca al alfil de c4
     expect(tras(lineaDe(pagina('La dama en casa').ver![3]!)).attackers('f3', 'b')).toContain('d4')
-    expect(tras(lineaDe(pagina('La dama en casa').ver![4]!)).attackers('c4', 'b')).toContain('d4')
+    const v4 = pagina('La dama en casa').ver![4]!
+    expect(tras(lineaDe(v4).slice(0, -1)).attackers('d4', 'w')).toEqual([])
+    expect(tras(lineaDe(v4)).attackers('c4', 'b')).toContain('d4')
     // Ab5 clava: el caballo de c6 no se puede mover (con el peón en d5 atacándolo)
     expect(tras(lineaDe(pagina('La dama en casa').ver![5]!)).moves({ square: 'c6' })).toEqual([])
     // el jaque: tras 7.Tg3, la torre ataca a la dama de h3

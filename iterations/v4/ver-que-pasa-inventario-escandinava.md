@@ -21,7 +21,7 @@
 | 3.♘c3 | prepara | Cada vez que una pieza tuya salga atacando a la dama, ganarás otro tiempo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Tu caballo de c3 queda clavado: si se moviera, la dama de a5 daría jaque. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | prepara | Tu alfil podrá ir a d2 a quitar la clavada. | lo que dice se juega en las jugadas que siguen de la línea |
-| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.♗c4 | porque | Más adelante, ese alfil apoya a tu caballo si salta a d5. | lo que dice se juega en las jugadas que siguen de la línea |
 | 6.♗c4 | prepara | Con el alfil afuera, ya puedes enrocar. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 7.♗d2 | porque | Y si el caballo salta, tu alfil de d2 queda atacando a la dama de a5. | lo que dice se juega en las jugadas que siguen de la línea |
@@ -30,7 +30,7 @@
 | 8.♗d2 | porque | Sin la clavada, tu caballo vuelve a ser una pieza libre. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 8.♗d2 | prepara | Ya puedes enrocar largo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.d4 | porque | Aquí tu caballo no queda clavado. | explica la jugada que ya está en la línea, sin una alternativa |
-| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.g3 | porque | Contra la dama en d6, este plan funciona bien según los maestros, y el motor la ve como la mejor aquí. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.g3 | prepara | Tu alfil de f1 tendrá la diagonal larga. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♗f4 | porque | Es otro tiempo ganado: la dama tiene que moverse de nuevo. | explica la jugada que ya está en la línea, sin una alternativa |
@@ -39,7 +39,7 @@
 | 6.♘e5 | porque | Desde ahí, tu caballo podrá saltar otra vez contra la dama. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♘c4 | porque | La dama tiene que moverse otra vez, mientras tú sigues sacando piezas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | porque | Tienes un peón en el centro y un caballo afuera; negras todavía no saca ninguna pieza. | explica la jugada que ya está en la línea, sin una alternativa |
-| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1. | dice qué sigue (un plan), no qué pasaría con otra cosa |
+| 5.♘f3 | porque | Desde f3, tu caballo también vigila e5. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.h3 | porque | El alfil tiene que decidir: si se cambia por tu caballo, te quedas con los dos alfiles; si se retira, pierde tiempo. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♕xf3 | porque | Tienes los dos alfiles, y tu dama ataca b7. | explica la jugada que ya está en la línea, sin una alternativa |
 | 3.d4 | porque | Es la respuesta más sólida, según la teoría: dejas que negras recupere su peón y tú te quedas con el centro. | explica la jugada que ya está en la línea, sin una alternativa |

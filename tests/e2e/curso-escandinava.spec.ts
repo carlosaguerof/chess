@@ -99,7 +99,11 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     await vers.nth(1).click()
     const ventana = page.getByTestId('paso-a-paso')
     await expect(ventana).toBeVisible()
+    // empieza en la posición de la que habla la frase, sin mover nada; después, la jugada que la regla evita
     await expect(ventana).toHaveAttribute('data-paso', '1')
+    await expect(ventana).toContainText('Esta es la posición después de 5...')
+    await page.getByTestId('pap-siguiente').click()
+    await expect(ventana).toHaveAttribute('data-paso', '2')
     await expect(ventana).toContainText('le preguntas al alfil')
     await page.keyboard.press('Escape')
     await expect(ventana).toBeHidden()

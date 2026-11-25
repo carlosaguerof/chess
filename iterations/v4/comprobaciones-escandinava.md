@@ -149,7 +149,7 @@ Stockfish 19 lite, un hilo, profundidad 18, con la Air muy cargada. `jugada "<ju
 | P3-ae2-retoma | "Si cambia en f3, retomas con una pieza, no con un peón" (con tu alfil en e2, Dxf3 no es legal) | `mejores "… Qd8 d4 Nf6 Nf3 c6 Be2 Bg4" --n 3` · `mejores "… Be2 Bg4 h3 Bxf3" --n 3` | h3 la mejor (+0.52) · Axf3 la mejor (+0.56; gxf3 +0.00) | Se sostiene |
 | P3-lasker-cc6 | "Si después saca su caballo a c6, Ab5 lo clava" (la Lasker, una jugada antes del final: 7...Cc6 en vez de 7...c6) | `mejores "… Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 Nc6" --n 3` | +2.40 Ab5, la mejor · Ad2 −0.04 (pierde 225: 8...0-0-0 y d4 cae) | Se sostiene; la idea de la Lasker y La clavada lo dicen |
 
-Las salidas, completas: `lote11a.out` a `lote14.out` en la carpeta de trabajo de la corrida (fuera de este repo); cada fila trae su comando para repetirla con `node scripts/motor-consulta.mjs`.
+Las salidas, completas: `lote11a.out` a `lote15.out` en la carpeta de trabajo de la corrida (fuera de este repo); cada fila trae su comando para repetirla con `node scripts/motor-consulta.mjs`.
 
 ## La revisión final de la rama: las reglas cortas, sus excepciones con «Ver qué pasaría», y el jaque con ...Dg5 o ...Dg6
 
@@ -166,6 +166,9 @@ Las reglas del Repaso y de las lecciones quedan en una frase; cada excepción va
 | V-ca-exc1 | "Excepción: si ya hay un caballo de negras en c6, … d5, no h3. Con h3, … su caballo se come tu peón de d4" (ventana: 6.h3 Axf3 7.Dxf3 Cxd4) | `mejores "… Qd8 d4 Nc6 Nf3 Bg4 h3 Bxf3 Qxf3" --n 3` | Cxd4, la mejor (+0.07; antes de h3, d5 daba +2.69) | Se sostiene |
 | V-ca-exc2 | "Otra excepción: con tu alfil en c4 y su peón en c6, … Ae2, no h3. Con h3, … su dama se come tu peón de d4" (ventana: 7.h3 Axf3 8.Dxf3 Dxd4) | `mejores "… Qd8 d4 Nf6 Nf3 c6 Bc4 Bg4 h3 Bxf3 Qxf3" --n 3` | Dxd4, la mejor (−0.13) | Se sostiene (P3-d8-c6-ac4: Ae2 +0.34) |
 | V-ca-ab5 | "Si cambia en f3 y después saca su caballo a c6, Ab5 lo clava" (ventana: 8.Ab5 Tb8 9.d5) | `mejores "… Qd8 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 Nc6 Bb5" --n 3` | +3.78 Tb8 d5 (la mejor de negras) | Se sostiene |
+| V2-cl-ab5 | La clavada: la excepción no va "si tu alfil lo clava desde b5" (segunda revisión, hallazgo 2) | `mejores "… Qa5 d4 Nf6 Nf3 Nc6 Bb5 Bg4" --n 3` · `jugada … "h3"` | +1.55 0-0 · h3 a 10 de la mejor; d5 −0.50 (el revisor, prof. 22: ...0-0-0 clava d5 contra tu dama) | Se sostiene con la condición |
+| V2-ca-ae3 | La dama en casa: "con su peón en c6, contra ...Ag4 juegas primero Ae3, que defiende tu peón de d4, y después h3" (segunda revisión, hallazgo 3: el motivo, no "con tu alfil en c4") | `jugada "<posición>" "Be3"` con tu alfil de f1 en f1, d3, c4, g5 y f4 | f1: +0.78, la mejor · d3: +0.44, la mejor · c4: +0.17 (sin perder material; Ce5 +3.93 es una táctica que el curso no enseña) · g5: +0.20, a 13 · f4: +0.12, a 53 | Ninguna pierde material |
+| V2-ca-ae3-h3 | Con Ae3 jugado, h3 ya sirve | `jugada "… Qd8 d4 Nf6 Nf3 c6 Be3 Bg4" "h3"` · `jugada "… Be3 Bg4 h3 Bxf3 Qxf3" "Qxd4"` | h3 la mejor (+0.76) · ...Dxd4 pierde 701 (Axd4) | Se sostiene |
 | M-1e3 | 1.e3 como buena (a 0.2 o menos de 1.e4; revisión final, hallazgo 8) | `mejores "" --n 6` | +0.36 e4 · +0.16 e3: a 0.20 | Se sostiene, en el límite |
 
 ## Los planes de la base, también los de las variantes que no son lección (nota 12)

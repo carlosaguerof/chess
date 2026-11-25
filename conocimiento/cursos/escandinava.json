@@ -233,7 +233,7 @@
       "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Si su alfil clava tu caballo de f3 desde g4, h3, y si cambia en f3, retomas con la dama.",
       "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3.",
       "Si en su cuarta jugada negras saca ...Cc6, d5 lo echa.",
-      "Excepción: si ya hay un caballo de negras en c6, contra ...Ag4 juegas d5, no h3. Con h3, negras cambia en f3, enroca largo y tu peón de d4 queda atacado dos veces, sin defensa.",
+      "Excepción: si ya hay un caballo de negras en c6 y tu alfil no lo clava desde b5, contra ...Ag4 juegas d5, no h3. Con h3, negras cambia en f3, enroca largo y tu peón de d4 queda atacado dos veces, sin defensa.",
       "Si cambia en f3 y después saca su caballo a c6, Ab5 lo clava contra su rey."
      ],
      "ver": [
@@ -252,6 +252,9 @@
         "Nc6"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 4...Cc6."
+        },
         {
          "frase": "5.d5: tu peón ataca al caballo de c6.",
          "jugadas": [
@@ -290,6 +293,9 @@
         "Bg4"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 6...Ag4."
+        },
         {
          "frase": "7.h3: le preguntas al alfil.",
          "jugadas": [
@@ -343,6 +349,9 @@
         "Nc6"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 7...Cc6."
+        },
         {
          "frase": "8.Ab5: tu alfil clava al caballo de c6 contra su rey.",
          "jugadas": [
@@ -450,7 +459,7 @@
       "Tu plan: ocupas el centro con d4, sacas tus piezas y enrocas. Si su alfil clava tu caballo de f3 desde g4, h3, y si cambia en f3, retomas con una pieza, no con un peón.",
       "Si en su cuarta jugada negras saca ...Cc6, d5 lo echa.",
       "Excepción: si ya hay un caballo de negras en c6, contra ...Ag4 juegas d5, no h3. Con h3, negras cambia en f3 y su caballo se come tu peón de d4.",
-      "Otra excepción: con tu alfil en c4 y su peón en c6, contra ...Ag4 juegas Ae2, no h3. Con h3, negras cambia en f3 y su dama se come tu peón de d4.",
+      "Otra excepción: con su peón en c6, contra ...Ag4 juegas primero Ae3, que defiende tu peón de d4, y después h3. Con h3 antes, negras cambia en f3, tu dama deja d1 y la suya se come d4.",
       "Si cambia en f3 y después saca su caballo a c6, Ab5 lo clava contra su rey."
      ],
      "ver": [
@@ -468,6 +477,9 @@
         "Nc6"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 4...Cc6."
+        },
         {
          "frase": "5.d5: tu peón ataca al caballo de c6.",
          "jugadas": [
@@ -504,6 +516,9 @@
         "Bg4"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 5...Ag4."
+        },
         {
          "frase": "6.h3: le preguntas al alfil.",
          "jugadas": [
@@ -550,13 +565,16 @@
        ],
        "pasos": [
         {
+         "frase": "Esta es la posición después de 6...Ag4."
+        },
+        {
          "frase": "7.h3: le preguntas al alfil.",
          "jugadas": [
           "h3"
          ]
         },
         {
-         "frase": "7...Axf3 8.Dxf3: negras cambia, y tu caballo ya no defiende d4.",
+         "frase": "7...Axf3 8.Dxf3: retomas con la dama, que deja d1. Ya nadie defiende tu peón de d4.",
          "jugadas": [
           "Bxf3",
           "Qxf3"
@@ -596,6 +614,9 @@
         "Nc6"
        ],
        "pasos": [
+        {
+         "frase": "Esta es la posición después de 7...Cc6."
+        },
         {
          "frase": "8.Ab5: tu alfil clava al caballo de c6 contra su rey.",
          "jugadas": [
@@ -710,6 +731,9 @@
        ],
        "pasos": [
         {
+         "frase": "Esta es la posición después de 4...Dg5."
+        },
+        {
          "frase": "5.Cf3: sacas tu caballo y atacas a la dama, aunque tu peón de g2 quede sin defensa.",
          "jugadas": [
           "Nf3"
@@ -730,7 +754,7 @@
          ]
         },
         {
-         "frase": "6.Tg1: tu torre la ataca, ya en la columna abierta.",
+         "frase": "6.Tg1: tu torre la ataca.",
          "jugadas": [
           "Rg1"
          ],
@@ -1037,7 +1061,7 @@
      ],
      "texto": [
       "La pregunta: ¿a dónde se fue la dama cuando la atacaste? Si negras recuperó con el caballo, es el centro grande. La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Saca tus piezas; si una puede atacar a la dama sin costarte nada, mejor: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3. 3) Si su alfil clava tu caballo de f3 desde g4, h3. Las excepciones de las reglas 2 y 3, cada una con su «Ver qué pasaría», están en las páginas de la clavada y de la dama en casa."
+      "Tres reglas: 1) Saca tus piezas; si una puede atacar a la dama sin costarte nada, mejor: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3. 3) Con la dama en a5 o en d8, si su alfil clava tu caballo de f3 desde g4, h3. Las excepciones de las reglas 2 y 3, cada una con su «Ver qué pasaría», están en las páginas de la clavada y de la dama en casa."
      ],
      "fuente": [
       "WB-3Cc3",
@@ -2265,7 +2289,7 @@
     "a3"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5.",
    "marcasDe": {
     "hace": [
      [
@@ -2275,16 +2299,6 @@
        "a": "d4",
        "color": "verde"
       }
-     ]
-    ]
-   },
-   "describe": {
-    "porque": [
-     [
-      "Bc4",
-      "Bg2",
-      "Be2",
-      "O-O"
      ]
     ]
    },
@@ -2602,7 +2616,7 @@
     "Bc4"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5.",
    "marcasDe": {
     "hace": [
      [
@@ -2612,16 +2626,6 @@
        "a": "d4",
        "color": "verde"
       }
-     ]
-    ]
-   },
-   "describe": {
-    "porque": [
-     [
-      "Bc4",
-      "Bg2",
-      "Be2",
-      "O-O"
      ]
     ]
    },
@@ -2797,7 +2801,7 @@
     "Bc4"
    ],
    "hace": "Sacas tu caballo de g1 y defiendes d4 con una pieza más.",
-   "porque": "Desde f3, tu caballo también vigila e5 y deja libre el camino de tu alfil de f1.",
+   "porque": "Desde f3, tu caballo también vigila e5.",
    "marcasDe": {
     "hace": [
      [
@@ -2807,16 +2811,6 @@
        "a": "d4",
        "color": "verde"
       }
-     ]
-    ]
-   },
-   "describe": {
-    "porque": [
-     [
-      "Bc4",
-      "Bg2",
-      "Be2",
-      "O-O"
      ]
     ]
    },
