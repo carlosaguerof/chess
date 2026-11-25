@@ -46,7 +46,11 @@ export function LeccionCurso({ cursoId, lineaId }: { cursoId: string; lineaId: s
   if (!c || !l)
     return (
       <p className="vacio">
-        No encontré esa lección. <a href="#/cursos/negras">Ver mis cursos</a>
+        No encontré esa lección.{' '}
+        {/* a la página del curso si existe (una lección que dejó de existir, de una dirección vieja); si no, a la pestaña de su color */}
+        <a href={c ? `#/curso/${encodeURIComponent(c.id)}` : `#/cursos/${cursoId.endsWith(':w') ? 'blancas' : 'negras'}`} data-testid="leccion-no-encontrada">
+          {c ? 'Ver el curso' : 'Ver mis cursos'}
+        </a>
       </p>
     )
   return <Linea key={l.id} c={c} l={l} />

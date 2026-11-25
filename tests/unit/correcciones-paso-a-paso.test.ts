@@ -6,14 +6,11 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
 import { palabras } from '../../src/curso/textos.ts'
 import type { PasoAPaso } from '../../src/curso/tipos.ts'
 
-import { esCaroKann } from '../../scripts/archivos-del-curso.ts'
 /**
  * Correcciones de la Caro-Kann, C3 (puntos 2 y 3 del feedback): "Ver paso a paso" en La idea, La estructura, el plan y
  * el repaso. La prueba sobre los datos: cada paso es una frase, y cada paso que habla de una jugada trae esa jugada.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
-// los ejemplos de Carlos son de la Caro-Kann: ahí se prueban; lo que recorre todo el curso, en todos (2026-11-25)
-const CK = esCaroKann(c)
 
 /** Todos los paso a paso del curso, con su salida. */
 const TODOS: { nombre: string; pa: PasoAPaso; inicio: string[] }[] = [
@@ -30,8 +27,9 @@ const escrita = (frase: string, sanEs: string) => new RegExp(`(^|[^A-Za-zÁÉÍ�
 describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('La idea, las dos páginas de La estructura, las dos del Repaso y los 16 planes traen su paso a paso', () => {
     // en el curso por estructuras, La estructura trae cinco páginas: El mapa, las cuatro estructuras
-    if (CK) expect(TODOS).toHaveLength(1 + (c.secciones ? 5 : 2) + 2 + 16)
-    else expect(TODOS).toHaveLength(1 + c.piezas.estructura.paginas.length + c.piezas.repaso.paginas.length + c.variantes.length)
+    if ((c.fichasDe ?? c.id) === 'caro-kann:b') expect(TODOS).toHaveLength(1 + (c.secciones ? 5 : 2) + 2 + 16)
+    // en los demás cursos: cada página de leer y cada plan
+    else expect(TODOS).toHaveLength(c.piezas.idea.paginas.length + c.piezas.estructura.paginas.length + c.piezas.repaso.paginas.length + c.variantes.length)
     for (const t of TODOS) expect(t.pa?.pasos.length ?? 0, t.nombre).toBeGreaterThanOrEqual(3)
   })
 
@@ -99,7 +97,9 @@ describe('Correcciones · C3 · los datos del paso a paso', () => {
     const fotos = fotosDePasos(c.piezas.idea.paginas[0]!.pasoAPaso!)
     const pagina = new Chess()
     for (const s of c.piezas.idea.paginas[0]!.tablero!.jugadas!) pagina.move(s)
-    if (CK) expect(fotos[3]!.fen).toBe(pagina.fen())
-    else expect(fotos.map((f) => f.fen)).toContain(pagina.fen())
+    expect(fotos[0]!.fen).not.toBe(pagina.fen())
+    // en la Caro-Kann, en el paso 4; en los demás cursos, en el paso donde su idea llega a esa posición
+    if ((c.fichasDe ?? c.id) === 'caro-kann:b') expect(fotos[3]!.fen).toBe(pagina.fen())
+    else expect(fotos.map((f) => f.fen), 'algún paso llega al tablero de la página').toContain(pagina.fen())
   })
 })

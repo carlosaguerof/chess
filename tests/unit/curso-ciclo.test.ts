@@ -9,12 +9,11 @@ import { paraHoy, dia, sumarDias } from '../../src/repaso/repaso.ts'
 import { cursos } from '../../src/cursos/datos.ts'
 import { LECCIONES_CARO_KANN, pasarCaroKann } from '../../src/aprender/migracion.ts'
 import type { EntradaRegistro } from '../../src/registro/registro.ts'
-import { esCaroKann } from '../../scripts/archivos-del-curso.ts'
 
 /** C3: el ciclo de la lección nueva, sin pantalla; y el registro sigue alimentando Refuerza y el Repaso de hoy. */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
 // el ciclo se prueba con la Tal de la Caro-Kann; en los demás cursos, con su propia línea (tests/unit/curso-<curso>.test.ts)
-const CK = esCaroKann(c)
+const CK = (c.fichasDe ?? c.id) === 'caro-kann:b'
 const tal = lineaPorId(CK ? c : CURSOS_NUEVOS['caro-kann:b']!, 'v:avance-tal')!
 const mov = (san: string, e: EstadoCiclo) => {
   const m = posicion(tal.jugadas, e.ply).move(san)
