@@ -108,7 +108,7 @@
 | plan larsen-clasica tuyo frase 1 | Saca tu alfil de f8 a d6 y tu caballo de b8 a d7, y enroca. | flecha f8→d6 (A3, verde, punteada) |
 | plan larsen-clasica rival frase 1 | Blancas puede atacar tu centro con c4. | flecha c2→c4 (A7, roja, punteada) |
 | plan otras-bird tuyo frase 1 | Enroca, y después ...c5 o ...h6. | flecha c7→c5 (A3, verde, punteada) |
-| plan otras-bird rival frase 1 | Blancas busca e4 con d3 y su dama. | flecha e3→e4 (A7, roja, punteada) |
+| plan otras-bird rival frase 1 | Blancas busca e4. | flecha e3→e4 (A7, roja, punteada) |
 | plan inglesa-anglo-eslava-g3 tuyo frase 1 | Sin damas, saca tu alfil de f8 a e7 y enroca. | flecha f8→e7 (A3, verde, punteada) |
 | plan otras-hungara paso a paso, paso 4 | Blancas busca e4 para pelear por el centro. | flecha e2→e4 (A7, roja, punteada) |
 | plan inglesa-caro-kann paso a paso, paso 4 | Blancas busca Db3 contra b7. | flecha b3→b7 (A4, roja) |
