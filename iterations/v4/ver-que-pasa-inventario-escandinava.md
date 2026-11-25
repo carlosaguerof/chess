@@ -59,4 +59,4 @@
 | 7...♕xd5 | porque | Sin un alfil en c4, nadie apoyaba a ese caballo: el ataque descubierto no funcionó. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.♗b5 | porque | Es una clavada: negras tiene que dar su dama por tu alfil. | explica la jugada que ya está en la línea, sin una alternativa |
 | 8.♕xb7 | porque | La torre no tiene a dónde ir, y la dama de negras está lejos para cuidarla. | explica la jugada que ya está en la línea, sin una alternativa |
-| 9.♗xa5 | porque | El ataque descubierto funcionó: ganas la dama, aunque después negras se lleve tu caballo y tu alfil. | explica la jugada que ya está en la línea, sin una alternativa |
+| 9.♗xa5 | porque | El ataque descubierto funcionó: ganas la dama por un caballo y un alfil. | explica la jugada que ya está en la línea, sin una alternativa |

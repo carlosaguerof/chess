@@ -230,8 +230,8 @@
      "subtitulo": "La clavada",
      "texto": [
       "La dama de negras está en a5. Cuando juegas d4, tu caballo de c3 queda clavado: si se moviera, la dama daría jaque a tu rey.",
-      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Contra ...Ag4, h3. Si en su cuarta jugada negras saca ...Cc6, d5 echa al caballo.",
-      "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu alfil en c4 apoyándolo, y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3."
+      "Tu plan: sacas tus piezas y, antes de mover ese caballo, Ad2, que se pone entre el caballo y tu rey. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5.",
+      "El salto Cd5 destapa a tu alfil de d2 contra la dama. Juégalo con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3."
      ],
      "tablero": {
       "jugadas": [
@@ -311,7 +311,7 @@
      "subtitulo": "La dama en casa",
      "texto": [
       "La dama de negras volvió a d8. Está segura, pero negras ya la movió dos veces y tú ya sacaste un caballo.",
-      "Tu plan: ocupas el centro con d4, sacas tus piezas y enrocas. Contra ...Ag4, h3: si negras cambia en f3, retomas con la dama, que queda mirando a b7."
+      "Tu plan: ocupas el centro con d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5. Si cambia en f3, retomas con la dama."
      ],
      "tablero": {
       "jugadas": [
@@ -441,8 +441,8 @@
     {
      "subtitulo": "El centro grande",
      "texto": [
-      "Negras recupera el peón con el caballo. Tu peón del centro es d4; después le sumas uno en c4, y negras ya no tiene peón en la columna d.",
-      "Tu plan: d4 y Cf3; después c4 echa al caballo de d5, y tus peones de c4 y d4 quedan juntos, dominando el centro. Negras presiona d4 con sus piezas: mantenlo defendido. Con tus piezas fuera y tu rey enrocado, si un caballo de negras va a c6, d5 lo echa."
+      "Negras recupera el peón con el caballo. Tu peón del centro es d4; después le sumas el de c4, que lo acompaña, y negras ya no tiene peón en la columna d.",
+      "Tu plan: d4 y Cf3; después c4 echa al caballo de d5, y tus peones de c4 y d4 quedan juntos, dominando el centro. Si su alfil sale a f5, primero Ad3 y lo cambias. Negras presiona d4 con sus piezas: mantenlo defendido. Con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa."
      ],
      "tablero": {
       "jugadas": [
@@ -485,7 +485,7 @@
         "frase": "Negras presiona d4 con sus piezas: mantenlo defendido."
        },
        {
-        "frase": "Si un caballo de negras está en c6, d5 lo echa y ganas espacio.",
+        "frase": "Con tu caballo en c3, si un caballo de negras está en c6, d5 lo echa y ganas espacio.",
         "jugadas": [
          "d5"
         ]
@@ -522,7 +522,7 @@
      "desde": 12,
      "lado": "b",
      "intro": "Imagina que, con blancas, sacas tu alfil a d2 antes que el de f1 y saltas con 7.Cd5. Ahora juegas con negras: castiga ese error.",
-     "final": "La dama de negras se comió el caballo de blancas, y nadie la puede tomar. Cuando juegues con blancas: el salto a d5, solo con tu alfil en c4.",
+     "final": "Tu dama se comió el caballo de blancas, y nadie la puede tomar. Cuando juegues con blancas: el salto a d5, solo con tu alfil en c4.",
      "fuente": [
       "MOTOR"
      ],
@@ -653,7 +653,7 @@
      ],
      "texto": [
       "La pregunta: ¿a dónde se fue la dama cuando la atacaste? Si negras recuperó con el caballo, es el centro grande. La respuesta te dice qué plan toca.",
-      "Tres reglas: 1) Saca piezas que ataquen a la dama sin quedar colgadas: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, con tu alfil en c4 y ningún alfil de negras en b4. 3) Con la dama en a5 o en d8, contra ...Ag4, h3; si negras cambia en f3, retoma con la dama."
+      "Tres reglas: 1) Saca piezas que ataquen a la dama sin quedar colgadas: cada ataque es un tiempo. 2) Con la dama en a5, Ad2 antes de mover tu caballo de c3; el salto Cd5, con tu caballo en f3, tu alfil en c4 y ningún alfil de negras en b4. 3) Con la dama en a5 o en d8, contra ...Ag4 y con tu caballo en f3, h3, salvo con un caballo de negras en c6: ahí, d5."
      ],
      "fuente": [
       "WB-3Cc3",
@@ -759,7 +759,7 @@
         ]
        },
        {
-        "frase": "Si la dama va a a5, 3...Da5 4.d4 clava tu caballo de c3.",
+        "frase": "Si la dama va a a5, 3...Da5 4.d4: la dama clava tu caballo de c3.",
         "jugadas": [
          "Qa5",
          "d4"
@@ -874,9 +874,9 @@
      ]
     }
    },
-   "regla": "Con la dama en a5, Ad2 antes de mover tu caballo de c3. El salto Cd5, con tu alfil en c4 y ningún alfil de negras en b4.",
+   "regla": "Con la dama en a5, Ad2 antes de mover tu caballo de c3. El salto Cd5, con tu caballo en f3, tu alfil en c4 y ningún alfil de negras en b4.",
    "frecuencia": 3,
-   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.5 % (iterations/v4/mapa-escandinava.md)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.3 % en 5...Af5 (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "valenciana",
@@ -887,7 +887,7 @@
    "intro": "Estás en la dama en casa: la dama de negras vuelve a d8, y tu objetivo es usar las jugadas que ganaste para sacar tus piezas. Negras saca después su alfil a g4.",
    "idea": "Contra ...Ag4, h3: si negras cambia en f3, te quedas con los dos alfiles y tu dama mira a b7.",
    "plan": {
-    "tuyo": "Saca tu alfil de c1 a e3 o a f4, y enroca largo. Si negras deja b7 sin cuidar, tu dama se lo come.",
+    "tuyo": "Saca tu alfil de c1 a e3 y enroca largo. Si negras deja b7 sin cuidar, tu dama se lo come. Si saca su caballo a c6, Ab5 lo clava.",
     "rival": "Negras tapa la diagonal de tu dama con ...c6 y saca sus piezas: ...e6 y su alfil de f8.",
     "marcas": [],
     "fuente": [
@@ -911,6 +911,15 @@
         "de": "f3",
         "a": "b7",
         "color": "verde"
+       }
+      ],
+      [
+       {
+        "tipo": "A3",
+        "de": "f1",
+        "a": "b5",
+        "color": "verde",
+        "punteada": true
        }
       ]
      ]
@@ -945,9 +954,9 @@
      "ilustrativo": true
     }
    },
-   "regla": "Contra ...Ag4, h3; si negras cambia en f3, retoma con la dama.",
+   "regla": "Contra ...Ag4, h3, salvo con un caballo de negras en c6: ahí, d5. Si cambia en f3, retoma con la dama.",
    "frecuencia": 3,
-   "fuenteFrecuencia": "partidas de lichess: 13.2 % (600–1000) y 19.9 % (1000–1400)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 1.8 % en 5...Ag4; la dama en casa, 19.9 % (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "gipslis",
@@ -956,7 +965,7 @@
    "desde": 3,
    "estructura": "El centro grande",
    "intro": "Estás en el centro grande: negras recupera el peón con el caballo, y tu objetivo es quedarte con el centro. Negras saca después su alfil a g4.",
-   "idea": "Primero sacas tus piezas y enrocas; después echas al caballo con c4 y te quedas con c4 y d4.",
+   "idea": "Ae2 quita la clavada; sacas tus piezas, enrocas y echas al caballo con c4: te quedas con c4 y d4.",
    "plan": {
     "tuyo": "Empuja d5: ganas espacio y echas al caballo de c6. Si negras cambia en f3, retoma con tu alfil.",
     "rival": "Negras presiona tu peón de d4 con su caballo de c6 y con su alfil de g4.",
@@ -1003,9 +1012,9 @@
      "ilustrativo": true
     }
    },
-   "regla": "Primero sacas piezas y enrocas; luego c4 echa al caballo.",
+   "regla": "Contra ...Ag4, Ae2 quita la clavada. c4 echa al caballo de d5, antes o después de enrocar.",
    "frecuencia": 3,
-   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 3.0 % (iterations/v4/mapa-escandinava.md)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 3.0 % en 4...Ag4 (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "lasker",
@@ -1016,7 +1025,7 @@
    "intro": "Estás en la clavada: la dama de negras se va a a5, y tu objetivo es sacar tus piezas sin que esa clavada te frene. Aquí negras saca su alfil a g4.",
    "idea": "Contra ...Ag4, h3; con los dos alfiles, Ad2 quita la clavada y enrocas largo.",
    "plan": {
-    "tuyo": "Enroca largo: tu torre llega a d1 y defiende d4. Después sacas tu alfil de f1 a c4, con tus dos alfiles mirando a todo el tablero.",
+    "tuyo": "Enroca largo: tu rey queda a salvo y tu torre llega a la columna d. Después sacas tu alfil de f1 a c4, con tus dos alfiles mirando a todo el tablero.",
     "rival": "Negras saca su caballo de b8 a d7 y su peón de e, y busca poner a salvo a su dama.",
     "marcas": [],
     "fuente": [
@@ -1045,7 +1054,7 @@
        ]
       },
       {
-       "frase": "Enrocas largo, 0-0-0: tu torre llega a d1 y defiende d4.",
+       "frase": "Enrocas largo, 0-0-0: tu rey queda a salvo y tu torre llega a la columna d.",
        "jugadas": [
         "O-O-O"
        ]
@@ -1066,9 +1075,9 @@
      "ilustrativo": true
     }
    },
-   "regla": "Contra ...Ag4, h3; si cambia en f3, retoma con la dama.",
+   "regla": "Contra ...Ag4, h3, salvo con un caballo de negras en c6: ahí, d5. Si cambia en f3, retoma con la dama.",
    "frecuencia": 3,
-   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.2 % (iterations/v4/mapa-escandinava.md)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 2.2 % en 5...Ag4 (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "bronstein",
@@ -1108,7 +1117,7 @@
    },
    "regla": "Contra la dama en d6, tu alfil sale a f4 cuando tu peón de g3 lo protege.",
    "frecuencia": 1,
-   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 0.8 % (iterations/v4/mapa-escandinava.md)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 0.2 % en 5...a6 (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "schiller-pytel",
@@ -1116,7 +1125,7 @@
    "nombre": "La dama en d6: Schiller-Pytel (4...c6)",
    "desde": 3,
    "intro": "Esta lección queda fuera del mapa: la dama de negras se va a d6, una casilla que casi no sale en tus partidas. Aquí negras la cuida con ...c6.",
-   "idea": "Tu caballo salta al centro y después a c4: cada salto ataca a la dama otra vez.",
+   "idea": "Tu caballo salta al centro y después a c4, desde donde ataca a la dama otra vez.",
    "plan": {
     "tuyo": "Si la dama va a c7, mueves tu peón de g a g3, sacas tu alfil a g2 y enrocas. Si da jaque en e6, lo tapas con tu alfil de f1 y enrocas.",
     "rival": "Negras retira su dama y termina de sacar sus piezas.",
@@ -1157,7 +1166,7 @@
    },
    "regla": "Si la dama da jaque, tápalo con una pieza que se desarrolla.",
    "frecuencia": 1,
-   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 0.2 % (iterations/v4/mapa-escandinava.md)"
+   "fuenteFrecuencia": "partidas de lichess, 1000–1400: 0.2 % en 4...c6 (iterations/v4/mapa-escandinava.md)"
   },
   {
    "id": "marshall",
@@ -1219,7 +1228,7 @@
      "ilustrativo": true
     }
    },
-   "regla": "Echa al caballo de d5 con c4 cuando tu rey ya esté a salvo.",
+   "regla": "Contra el alfil en f5, primero Ad3 y lo cambias; después c4 echa al caballo.",
    "frecuencia": 1,
    "fuenteFrecuencia": "partidas de lichess: sin datos en las dos bandas (iterations/v4/mapa-escandinava.md)"
   },
@@ -1794,6 +1803,16 @@
      ]
     ]
    },
+   "describe": {
+    "prepara": [
+     [
+      "Bf4",
+      "Nc4",
+      "Nd5",
+      "Bb5"
+     ]
+    ]
+   },
    "fuente": [
     "WB-3Cc3",
     "WP-ESC"
@@ -1804,12 +1823,13 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4": {
-   "pregunta": "La dama de a5 ya no está atacada. ¿Cómo ocupas el centro y le abres paso a tu alfil de c1?",
-   "pista": "Un peón del centro, dos casillas adelante.",
+   "pregunta": "La dama de a5 ya no está atacada. ¿Cómo sigues?",
+   "pista": "Piensa en el centro.",
    "buenas": [
     "Nf3",
     "a3",
-    "Bc4"
+    "Bc4",
+    "h3"
    ],
    "hace": "Ocupas el centro con un peón y le abres paso a tu alfil de c1.",
    "porque": "Tu caballo de c3 queda clavado: si se moviera, la dama de a5 daría jaque.",
@@ -1900,7 +1920,7 @@
     "h3",
     "Nd2"
    ],
-   "hace": "Sacas tu alfil a una diagonal que pasa por d5 y llega a f7.",
+   "hace": "Sacas tu alfil a una diagonal abierta, que llega hasta f7.",
    "porque": "Más adelante, ese alfil apoya a tu caballo si salta a d5.",
    "prepara": "Con el alfil afuera, ya puedes enrocar.",
    "marcasDe": {
@@ -1931,8 +1951,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bf5 Bc4 e6 Bd2": {
-   "pregunta": "Tu caballo de c3 sigue clavado por la dama de a5. ¿Qué pieza sacas para liberarlo?",
-   "pista": "Mira la diagonal que va de la dama de a5 a tu rey.",
+   "pregunta": "Tu caballo de c3 sigue clavado por la dama de a5. ¿Qué haces?",
+   "pista": "Mientras siga clavado, tu caballo no se puede mover.",
    "buenas": [
     "O-O",
     "a3",
@@ -2156,8 +2176,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 c6 Bd2": {
-   "pregunta": "Tu caballo de c3 sigue clavado por la dama de a5. ¿Cómo lo liberas mientras sacas una pieza?",
-   "pista": "Mira la diagonal que va de la dama de a5 a tu rey.",
+   "pregunta": "Tu caballo de c3 sigue clavado por la dama de a5. ¿Qué haces?",
+   "pista": "Mientras siga clavado, tu caballo no se puede mover.",
    "buenas": [
     "Bc4"
    ],
@@ -2173,8 +2193,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4": {
-   "pregunta": "La dama de negras está en d6. ¿Cómo ocupas el centro y le abres paso a tu alfil de c1?",
-   "pista": "Un peón del centro, dos casillas adelante.",
+   "pregunta": "La dama de negras está en d6. ¿Cómo sigues?",
+   "pista": "Piensa en el centro.",
    "buenas": [
     "Nf3"
    ],
@@ -2250,8 +2270,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 a6 g3 Nc6 Bf4": {
-   "pregunta": "Tu alfil de c1 puede salir a una casilla desde donde ataque a la dama de d6, y tu peón de g3 lo protegería. ¿Cuál?",
-   "pista": "Una pieza que todavía no sale puede atacarla.",
+   "pregunta": "Negras sacó su otro caballo. ¿Qué pieza sacas ahora, y a dónde?",
+   "pista": "Si puede salir atacando a la dama, mejor.",
    "hace": "Sacas tu alfil y atacas a la dama de d6.",
    "porque": "Es otro tiempo ganado: la dama tiene que moverse de nuevo.",
    "marcasDe": {
@@ -2276,8 +2296,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 a6 g3 Nc6 Bf4 Qd8 Bg2": {
-   "pregunta": "Ya preparaste la diagonal larga. ¿Qué pieza la ocupa?",
-   "pista": "La pieza que todavía está en su casilla de inicio, en el lado del rey.",
+   "pregunta": "La dama volvió a d8. ¿Cómo sigues tu desarrollo?",
+   "pista": "Te falta una pieza del lado del rey para poder enrocar.",
    "hace": "Sacas tu alfil de f1 a la diagonal larga.",
    "porque": "Con el alfil afuera, ya puedes enrocar corto.",
    "fuente": [
@@ -2326,8 +2346,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 c6 Nf3 Nf6 Ne5": {
-   "pregunta": "Tu caballo de f3 puede saltar al centro, a una casilla donde ningún peón de negras lo ataca. ¿A dónde?",
-   "pista": "Busca una casilla desde la que tu caballo, después, pueda volver a atacar a la dama.",
+   "pregunta": "Negras sacó su caballo de g8. ¿Qué pieza tuya puede volver a molestar a la dama?",
+   "pista": "Un caballo que salta hacia adelante.",
    "buenas": [
     "h3",
     "Be2",
@@ -2351,8 +2371,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd6 d4 c6 Nf3 Nf6 Ne5 Nbd7 Nc4": {
-   "pregunta": "Tu caballo de e5 está atacado. ¿A dónde lo mueves para que, de paso, ataque a la dama de d6?",
-   "pista": "Busca una casilla desde la que tu caballo ataque a la dama.",
+   "pregunta": "Tu caballo de e5 está atacado. ¿A dónde lo mueves?",
+   "pista": "Si desde su nueva casilla molesta a la dama, mejor.",
    "buenas": [
     "f4",
     "Bf4"
@@ -2369,8 +2389,8 @@
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qd8 d4": {
-   "pregunta": "La dama de negras volvió a casa. ¿Cómo ocupas el centro y le abres paso a tu alfil de c1?",
-   "pista": "Un peón del centro, dos casillas adelante.",
+   "pregunta": "La dama de negras volvió a casa. ¿Cómo sigues?",
+   "pista": "Piensa en el centro.",
    "buenas": [
     "Nf3"
    ],
@@ -2594,12 +2614,13 @@
    ]
   },
   "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bf5 Bd3": {
-   "pregunta": "El alfil de negras salió a f5. ¿Cómo le pones enfrente uno de tus alfiles para cambiarlo?",
-   "pista": "Tu alfil de f1 se puede poner en la misma diagonal que el de negras.",
+   "pregunta": "El alfil de negras salió a f5. ¿Cómo sigues tu desarrollo?",
+   "pista": "Un alfil tuyo puede ofrecerle un cambio al de negras.",
    "buenas": [
     "Nh4",
     "a3",
-    "Bb5+"
+    "Bb5+",
+    "c4"
    ],
    "hace": "Pones tu alfil frente al de f5, en su misma diagonal.",
    "porque": "Si negras cambia los alfiles, tu dama retoma y sale al juego.",
@@ -2673,10 +2694,11 @@
    ]
   },
   "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O c6 c4": {
-   "pregunta": "El caballo de negras sigue en el centro. ¿Cómo lo echas y de paso ganas espacio?",
-   "pista": "Un peón puede atacar al caballo.",
+   "pregunta": "El caballo de negras sigue en el centro. ¿Qué haces con él?",
+   "pista": "Puedes echarlo y ganar espacio a la vez.",
    "buenas": [
-    "Re1"
+    "Re1",
+    "Rd1"
    ],
    "hace": "Echas al caballo de d5 con un peón: tus peones de c4 y d4 quedan juntos, dominando el centro.",
    "porque": "Es el centro grande: tus peones de c4 y d4 le quitan casillas a las piezas de negras.",
@@ -2690,8 +2712,8 @@
    ]
   },
   "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bg4 Be2": {
-   "pregunta": "El alfil de g4 clava tu caballo contra tu dama. ¿Cómo quitas la clavada mientras sacas una pieza?",
-   "pista": "Una pieza que se desarrolle y, de paso, quite la clavada.",
+   "pregunta": "El alfil de g4 clava tu caballo contra tu dama. ¿Qué haces?",
+   "pista": "Puedes sacar una pieza y quitar la clavada a la vez.",
    "buenas": [
     "c4",
     "h3",
@@ -2740,7 +2762,7 @@
   },
   "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bg4 Be2 e6 O-O Nc6 c4": {
    "pregunta": "Tu rey ya está a salvo y el caballo de negras sigue en d5. ¿Cómo lo echas ganando espacio?",
-   "pista": "Un peón puede atacar al caballo.",
+   "pista": "Puedes echarlo y ganar espacio a la vez.",
    "hace": "Echas al caballo de d5 con un peón: tus peones de c4 y d4 quedan juntos, dominando el centro.",
    "porque": "Es el centro grande: tus peones de c4 y d4 le quitan casillas a las piezas de negras.",
    "fuente": [
@@ -2795,8 +2817,8 @@
    ]
   },
   "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 g6 c4": {
-   "pregunta": "El caballo de negras sigue en d5. ¿Cómo lo echas y ganas espacio en el centro?",
-   "pista": "Un peón puede atacar al caballo.",
+   "pregunta": "El caballo de negras sigue en d5. ¿Qué haces con él?",
+   "pista": "Puedes echarlo y ganar espacio a la vez.",
    "buenas": [
     "Be2"
    ],
@@ -2968,7 +2990,7 @@
    "pregunta": "Negras tomó tu caballo con el peón. ¿Qué pieza tuya quedó atacando a su dama?",
    "pista": "Mira la diagonal de tu alfil de d2.",
    "hace": "Tu alfil se come la dama de a5.",
-   "porque": "El ataque descubierto funcionó: ganas la dama, aunque después negras se lleve tu caballo y tu alfil.",
+   "porque": "El ataque descubierto funcionó: ganas la dama por un caballo y un alfil.",
    "fuente": [
     "WB-3Da5",
     "MOTOR"
@@ -2990,7 +3012,7 @@
   },
   {
    "termino": "Centro grande",
-   "definicion": "Dos peones tuyos juntos en el centro, como c4 y d4, sin peones del rival enfrente."
+   "definicion": "Tus peones de c4 y d4 juntos, dominando el centro, cuando negras ya no tiene peón en la columna d."
   },
   {
    "termino": "Clavada",

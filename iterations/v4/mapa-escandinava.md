@@ -1,15 +1,15 @@
 # El mapa del curso de la captura contra la Escandinava, y su tabla de obligatorio y opcional (2026-11-25)
 
-> El mapa del curso `escandinava:w` (`conocimiento/cursos/escandinava.json`), con su regla de obligatorio y opcional (`specs/cursos.md` §6) medida en las partidas de este curso. Es la segunda versión, la que quedó tras el gate del mapa: un evaluator independiente midió cada regla donde se usa y se corrigieron cuatro. Las comprobaciones del motor, con su comando: `iterations/v4/comprobaciones-escandinava.md`. Las partidas: la base abierta de lichess (CC0), septiembre de 2026, Rapid, los dos jugadores en la banda (600–1000 o 1000–1400), contadas por la corrida de frecuencias del 2026-11-25 (fuera de este repo).
+> El mapa del curso `escandinava:w` (`conocimiento/cursos/escandinava.json`), con su regla de obligatorio y opcional (`specs/cursos.md` §6) medida en las partidas de este curso. Es la versión que quedó tras las dos vueltas del gate del mapa: un evaluator independiente midió cada regla donde se usa; en la primera se corrigieron cuatro, y en la segunda, dos reglas que todavía regalaban un peón cuando el rival ya tenía otra jugada natural en el tablero. Las comprobaciones del motor, con su comando: `iterations/v4/comprobaciones-escandinava.md`. Las partidas: la base abierta de lichess (CC0), septiembre de 2026, Rapid, los dos jugadores en la banda (600–1000 o 1000–1400), contadas por la corrida de frecuencias del 2026-11-25 (fuera de este repo).
 
 ## En corto
 
 - **La pregunta:** ¿a dónde se fue la dama cuando la atacaste con 3.Cc3? (Tras 1.e4 d5 2.exd5, negras casi siempre recupera el peón con la dama, y tu caballo la ataca.)
 - **Cuatro entradas en el mapa, cada una con su señal y su jugada:**
-  - **La clavada:** la dama fue a a5. Con d4, tu caballo de c3 queda clavado: antes de moverlo, Ad2. El salto Cd5 destapa a tu alfil de d2 contra la dama, con tu alfil en c4 apoyándolo y sin un alfil de negras en b4 (si llega a b4, primero a3). Contra ...Ag4, h3; contra ...Cc6, d5.
-  - **La dama en casa:** la dama volvió a d8. Ya no hay a quién atacar: d4, sacas tus piezas y enrocas. Contra ...Ag4, h3; si cambia en f3, Dxf3, que mira a b7.
-  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y la vuelves a atacar sin regalar nada: con la dama en e5, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 y contra lo demás Cf3. Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** (notas 1 y 7).
-  - **El centro grande:** negras no recuperó con la dama sino con el caballo (2...Cf6 3.d4 Cxd5). d4 y Cf3; después c4 echa al caballo y te quedas con c4 y d4. Mantén d4 defendido; si un caballo de negras va a c6, d5 lo echa.
+  - **La clavada:** la dama fue a a5. Con d4, tu caballo de c3 queda clavado: antes de moverlo, Ad2. El salto Cd5 destapa a tu alfil de d2 contra la dama, con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4 (si llega a b4, primero a3). Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5.
+  - **La dama en casa:** la dama volvió a d8. Ya no hay a quién atacar: d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5. Si cambia en f3, Dxf3.
+  - **El jaque:** la dama dio jaque en e5 o e6. Lo tapas con Ae2 y sigues sacando piezas sin regalar nada: con la dama en e5 la vuelves a atacar, contra ...Ag4 d4 y contra lo demás Cf3; con la dama en e6, contra ...Cc6 d4 (amenaza d5) y contra lo demás Cf3. Si se va a c6, Ab5 la gana. Cuando se vaya, mira a dónde fue y sigue el mapa. **Sin lección** (notas 1 y 7).
+  - **El centro grande:** negras no recuperó con la dama sino con el caballo (2...Cf6 3.d4 Cxd5). d4 y Cf3; después c4 echa al caballo y te quedas con c4 y d4 (si su alfil sale a f5, primero Ad3 y lo cambias). Mantén d4 defendido; con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa.
 - **La dama en d6 queda fuera del mapa:** sale en 2.9 % y 2.5 % (menos del 5 %, como las formas chicas de la Caro-Kann). Sus dos lecciones son opcionales y van sin etiqueta.
 - **8 lecciones: 4 obligatorias y 4 opcionales.** La base: Clásica (la clavada), Valenciana (la dama en casa), Gipslis (el centro grande). Las que más te van a salir: Lasker. Opcional: Bronstein y Schiller-Pytel (fuera del mapa), Marshall y Richter.
 - **Una sola jugada tuya por posición (nota 2):** la Grünfeld (6.Ce5) y la Transposición Panov (3.c4) se separan por una jugada tuya: no son lecciones, quedan como buena jugada (azul).
@@ -18,10 +18,10 @@
 
 | Entrada | La señal | Qué juegas (como queda escrito en la página) | Fuente |
 |---|---|---|---|
-| **La clavada** | La dama de negras en a5 | "Sacas tus piezas y, antes de mover ese caballo, Ad2. Contra ...Ag4, h3. Contra ...Cc6, d5 echa al caballo. El salto Cd5 destapa a tu alfil de d2 contra la dama: juégalo con tu alfil en c4 apoyándolo, y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3." | WB 3...Da5 ("it frees the d2 square for the bishop, so that White might move their knight with tempo on the black queen"; tabla 7.Ad2 e6 8.Cd5 Dd8 9.Cxf6+ gxf6), WP (línea principal con Ac4 y Ad2), motor |
-| **La dama en casa** | La dama de negras de vuelta en d8 | "Ocupas el centro con d4, sacas tus piezas y enrocas. Contra ...Ag4, h3: si negras cambia en f3, retomas con la dama, que queda mirando a b7." | WB 3...Dd8 ("White now has a free hand to continue development"; 6.h3 Axf3 7.Dxf3; "7...Qxd4?? allows 8. Qxb7"), motor |
-| **El jaque** | La dama de negras da jaque en e5 o e6 | "Lo tapas con tu alfil de f1: Ae2. Después la vuelves a atacar sin regalar nada. Con la dama en e5: contra ...Ag4, d4; contra lo demás, Cf3. Con la dama en e6: contra ...Cc6, d4; contra lo demás, Cf3. Si la dama se va a c6, Ab5 la clava contra su rey y la ganas. Cuando la dama se vaya, mira a dónde fue y sigue el mapa." | WB 3.Cc3 ("common amateur tries, but they do not accomplish much for Black. 4. Be2 and White has developed another piece"; "3...Qc6?? and Bb5 pins it to the king"), WP ("gives White a handy lead in development"), partidas, motor |
-| **El centro grande** | Negras recuperó con el caballo (en d5) | "d4 y Cf3; después c4 echa al caballo de d5 y te quedas con dos peones en el centro. Negras presiona d4 con sus piezas: mantenlo defendido. Si un caballo de negras va a c6, d5 lo echa." | WP ("White can respond with 4.c4, forcing the knight to move"), WB 2...Cf6 ("3. d4 is the most robust reply"; Gipslis con 9.d5), motor |
+| **La clavada** | La dama de negras en a5 | "Sacas tus piezas y, antes de mover ese caballo, Ad2. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5. El salto Cd5 destapa a tu alfil de d2 contra la dama: juégalo con tu caballo de f3 ya afuera, tu alfil en c4 apoyándolo y sin un alfil de negras en b4: si ese alfil llega a b4, primero a3." | WB 3...Da5 ("it frees the d2 square for the bishop, so that White might move their knight with tempo on the black queen"; tabla 7.Ad2 e6 8.Cd5 Dd8 9.Cxf6+ gxf6), WP (línea principal con Ac4 y Ad2), motor |
+| **La dama en casa** | La dama de negras de vuelta en d8 | "Ocupas el centro con d4, sacas tus piezas y enrocas. Si en su cuarta jugada negras saca ...Cc6, d5 lo echa. Contra ...Ag4, con tu caballo en f3: h3, salvo con un caballo de negras en c6; ahí, d5. Si cambia en f3, retomas con la dama." | WB 3...Dd8 ("White now has a free hand to continue development"; 6.h3 Axf3 7.Dxf3; "7...Qxd4?? allows 8. Qxb7"), motor |
+| **El jaque** | La dama de negras da jaque en e5 o e6 | "Lo tapas con tu alfil de f1: Ae2. Después sigues sacando piezas sin regalar nada. Con la dama en e5, la vuelves a atacar: contra ...Ag4, d4; contra lo demás, Cf3. Con la dama en e6: contra ...Cc6, d4, que amenaza d5 contra la dama y el caballo; contra lo demás, Cf3. Si la dama se va a c6, Ab5 la clava contra su rey y la ganas. Cuando la dama se vaya, mira a dónde fue y sigue el mapa." | WB 3.Cc3 ("common amateur tries, but they do not accomplish much for Black. 4. Be2 and White has developed another piece"; "3...Qc6?? and Bb5 pins it to the king"), WP ("gives White a handy lead in development"), partidas, motor |
+| **El centro grande** | Negras recuperó con el caballo (en d5) | "d4 y Cf3; después c4 echa al caballo de d5, y tus peones de c4 y d4 quedan juntos, dominando el centro. Si su alfil sale a f5, primero Ad3 y lo cambias. Negras presiona d4 con sus piezas: mantenlo defendido. Con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa." | WP ("White can respond with 4.c4, forcing the knight to move"), WB 2...Cf6 ("3. d4 is the most robust reply"; Gipslis con 9.d5), motor |
 
 **Lo que une a lo de la dama:** cada pieza que sacas, si puede, la ataca sin quedar colgada: es ganar tiempos (WB 3.Cc3). El "sin quedar colgada" sale del gate: Af4 contra la dama en d6 sin g3 pierde el alfil.
 
@@ -74,7 +74,7 @@ Todas las medidas, con su comando: `iterations/v4/comprobaciones-escandinava.md`
 |---|---|---|---|---|---|
 | Clásica | Cxf6+; con la dama, De2 y 0-0-0; con el peón, 0-0 | 8...Dd8 (la única) | | 9...gxf6 (Wikibooks): 10.0-0 la mejor (+0.81); 10.De2 pierde 63 y ya no hay enroque largo | **Corregido:** el plan dice las dos retomas |
 | Lasker | 0-0-0 y después Ac4 | 8...Cbd7: Ac4 +1.15, 0-0-0 +1.04 | 8...Db6: 0-0-0 +1.24; Ac4 pierde 74 | | **Corregido** antes del gate (primero 0-0-0) |
-| Valenciana | Ae3 o Af4 y 0-0-0; si b7 queda sin cuidar, Dxb7 | 7...c6: Ae3 +0.72, Af4 +0.57 | 7...Dc8: Af4 +2.04, Ae3 +1.76 | 7...c6 (Wikibooks) | Se sostiene (la del motor, 8.g4, no se enseña); contra 7...e6, Dxb7 +2.95 |
+| Valenciana | Ae3 y 0-0-0; si b7 queda sin cuidar, Dxb7; contra ...Cc6, Ab5 (segunda vuelta del gate: sin "o a f4", que suelta d4 contra 7...Cc6) | 7...c6: Ae3 +0.72, Af4 +0.57 | 7...Dc8: Af4 +2.04, Ae3 +1.76 | 7...c6 (Wikibooks) | Se sostiene (la del motor, 8.g4, no se enseña); contra 7...e6, Dxb7 +2.95 |
 | Gipslis | d5; si cambia en f3, Axf3 | 8...Ae7: d5 la mejor | 8...Ab4: d5 a 0.11 | 8...Ae7 (Wikibooks) | Se sostiene; contra 8...Axf3, Axf3 +1.16 (gxf3 −1.36) |
 | Marshall | Cc3 y Af4 | 8...Cf6: Cc3 la mejor | 8...Cb6: Af4 +1.08, Cc3 +1.04 | | Se sostiene |
 | Richter | d4 defendido; contra ...Ag4, h3; contra ...Cc6, d5 | 8...Ag4: h3 la mejor | 8...Te8: (no aplica) Ae3 +1.18 | 8...Cc6: d5 la mejor | Se sostiene |
@@ -86,13 +86,14 @@ Todas las medidas, con su comando: `iterations/v4/comprobaciones-escandinava.md`
 | Jugada nombrada | Dónde se midió | ¿Pierde material? |
 |---|---|---|
 | Ad2 (la clavada) | tras 4...c6, tras 6...e6 de la Clásica, tras 7...c6 de la Lasker | No: la mejor en las tres |
-| Cd5 (la clavada) | con Ac4 y Ad2 y ...c6: la mejor (+0.69); con ...Ab4: pierde 664; sin Ac4 (6.Ad2 c6 7.Cd5): pierde 588 | Sí, sin la condición completa: por eso la regla la dice |
+| Cd5 (la clavada) | con Ac4 y Ad2 y ...c6: la mejor (+0.69); con ...Ab4: pierde 664; sin Ac4 (6.Ad2 c6 7.Cd5): pierde 588; sin Cf3 y con ...Ag4 (4...c6 5.Ad2 Cf6 6.Ac4 Ag4): pierde 555, por eso la condición "con tu caballo en f3" | Sí, sin la condición completa: por eso la regla la dice |
 | a3 (contra ...Ab4) | tras 7...Ab4 de la Clásica | No: la mejor |
-| h3 (contra ...Ag4) | dama en a5, dama en d8, tras 4...c6 5.Cf3 Ag4, dama en d6 | No: la mejor en las cuatro. Con el caballo en d5 (Gipslis) no se nombra: ahí la lección juega Ae2 |
-| d5 (contra ...Cc6) | dama en a5; Gipslis; Richter | No: la mejor en las tres |
+| h3 (contra ...Ag4) | dama en a5, dama en d8, tras 4...c6 5.Cf3 Ag4, dama en d6: la mejor en las cuatro. **Con un caballo de negras en c6 pierde d4** (segunda vuelta del gate): 4...Cc6 5.Cf3 Ag4, −253; 4...Cf6 5.Cf3 Cc6 6.Ac4 Ag4, −95 (−0.34); con la dama en a5, 5.Cf3 Cc6 6.Ad2 Ag4, −186. Ahí d5 es la mejor (G2-…). Sin Cf3 (4...c6 5.Ad2 Cf6 6.Ac4 Ag4) deja la dama colgada: la regla dice "con tu caballo en f3" | Sí, sin las dos condiciones; con ellas, no. Con el caballo en d5 (Gipslis) no se nombra: ahí la lección juega Ae2 |
+| d5 (contra ...Cc6) | En la cuarta jugada (dama en a5 y en d8): la mejor. Contra ...Ag4 con el caballo en c6: la mejor en 4 de 5 posiciones; con la dama en a5 y sin Ad2 (4...Cc6 5.Cf3 Ag4), +0.23, a 61 de la mejor (5.Ab5), sin perder material. En el centro grande, con tu caballo en c3 (Gipslis tras 8...Ae7, Richter): la mejor; **sin tu Cc3, en la Gipslis tras 7...Cb6, pierde un peón (−120)**: la regla dice "con tu caballo en c3". Fuera de esas señales (por ejemplo 4...Cf6 5.Cf3 Cc6, o tras ...Axf3 Dxf3 Cc6) no es la mejor y el mapa no la nombra | No, con sus condiciones |
 | Dxf3 | Lasker y Valenciana | No: la mejor (+0.96 y +1.14; con el peón, −0.73 y +0.08) |
-| Dxb7 | si negras deja b7 sin cuidar (Valenciana, tras 7...e6 o 7...Dxd4) | No: +2.95 y +6.92 |
-| c4 (centro grande) | Marshall, Gipslis, Richter, y contra 4...Cc6 | No: la mejor o casi; contra 4...Af5, c4 inmediato pierde 76 sin material, y la lección juega antes Ad3 |
+| Dxb7 | si negras deja b7 sin cuidar (Valenciana, tras 7...e6, 7...Cbd7 o 7...Dxd4) | No: +2.95, +2.81 y +6.92. Con 7...Cc6, b7 queda tapado (no hay Dxb7) y el plan dice Ab5 (+3.51, la mejor) |
+| Ab5 (Valenciana, contra ...Cc6) | tras 7...Cc6 | No: la mejor (+3.51); Ae3 ahí pierde 220 |
+| c4 (centro grande) | Marshall, Gipslis, Richter, y contra 4...Cc6. Antes de enrocar es la mejor en la Gipslis 5 y 6 y en la Marshall 7 (por eso las reglas ya no dicen "cuando tu rey esté a salvo", pase 2) | No: la mejor o casi; contra 4...Af5, c4 inmediato pierde 76 sin material (la página dice "primero Ad3"), y la lección juega antes Ad3 |
 | Ae2, d4, Cf3, Ab5 (el jaque) | las 12 posiciones de la tabla F-… | No: la frase pierde como mucho 41 (contra 4...b6) |
 | Af4 (Bronstein) | sin g3: pierde 633; con g3: la mejor | Sí, sin g3: la regla dice "con g3" |
 
@@ -102,8 +103,8 @@ Todas las medidas, con su comando: `iterations/v4/comprobaciones-escandinava.md`
 
 | Entrada | 600–1000 | 1000–1400 | ¿5 % o más? | Su lección más jugada |
 |---|---|---|---|---|
-| La clavada (3...Da5) | 14.2 % | 24.8 % | sí | Clásica (sin datos / 2.5) |
-| La dama en casa (3...Dd8) | 13.2 % | 19.9 % | sí | Valenciana (13.2 / 19.9) |
+| La clavada (3...Da5) | 14.2 % | 24.8 % | sí | Clásica (sin datos / 2.3) |
+| La dama en casa (3...Dd8) | 13.2 % | 19.9 % | sí | Valenciana (sin datos / 1.8) |
 | El jaque (3...De5+ o 3...De6+) | 44.7 % | 28.4 % | sí | sin lección (nota 1) |
 | El centro grande (2...Cf6 3.d4 Cxd5) | sin datos (5.5 % juega 2...Cf6 y ninguna secuencia sigue tras 3.d4) | 7.2 % (de 32 partidas) | sí, en 1000–1400 | Gipslis (sin datos / 3.0, de 7 partidas) |
 | La dama en d6, fuera del mapa (3...Dd6) | 2.9 % | 2.5 % | no | (Bronstein y Schiller-Pytel, opcionales) |
@@ -112,16 +113,17 @@ Todas las medidas, con su comando: `iterations/v4/comprobaciones-escandinava.md`
 
 | Sección | Lección | Entrada | 600–1000 | n | 1000–1400 | n | Por qué |
 |---|---|---|---|---|---|---|---|
-| La base | Clásica | La clavada | sin datos | 0 | 2.5 % | 22 ⚠ | la más jugada de su entrada |
-| La base | Valenciana | La dama en casa | 13.2 % | 183 | 19.9 % | 1637 | la más jugada de su entrada |
+| La base | Clásica | La clavada | sin datos | 0 | 2.3 % | 22 ⚠ | la más jugada de su entrada |
+| La base | Valenciana | La dama en casa | sin datos | 0 | 1.8 % | 23 ⚠ | la única lección de su entrada (regla 1); la entrada, 13.2 % y 19.9 % |
 | La base | Gipslis | El centro grande | sin datos | 0 | 3.0 % | 7 ⚠ | la más jugada de su entrada |
 | Las que más te van a salir | Lasker | La clavada | sin datos | 0 | 2.2 % | 21 ⚠ | 2 % o más |
-| Opcional | Bronstein | fuera del mapa | sin datos | 0 | 0.8 % | 18 ⚠ | menos de 2 % |
+| Opcional | Bronstein | fuera del mapa | sin datos | 0 | 0.2 % | 3 ⚠ | menos de 2 % |
 | Opcional | Schiller-Pytel | fuera del mapa | sin datos | 0 | 0.2 % | 5 ⚠ | menos de 2 % |
 | Opcional | Marshall | El centro grande | sin datos | 0 | sin datos (menos de 3 de 17 partidas) | | sin datos |
 | Opcional | Richter | El centro grande | sin datos | 0 | sin datos (menos de 3 de 17 partidas) | | sin datos |
 
-- **Los cortes caen en saltos, así que uso los mismos (5 % y 2 %).** Entradas con lección: 24.8, 19.9, 7.2 y después 2.9 (la dama en d6). Lecciones (1000–1400): 19.9, 3.0, 2.5, 2.2 y después 0.8.
+- **Cada lección se mide en la posición que la define en la base** (nota 11; la primera versión daba a la Valenciana el 19.9 % de toda su entrada): la Clásica en 5...Af5, la Lasker y la Valenciana en 5...Ag4, la Gipslis en 4...Ag4, la Bronstein en 5...a6, la Schiller-Pytel en 4...c6. El % del curso multiplica, paso a paso, lo que se juega en cada jugada de negras (`lecciones-freq.mjs`, fuera del repo).
+- **Los cortes de las entradas caen en saltos; los de las lecciones ya no tanto.** Entradas con lección: 24.8, 19.9, 7.2 y después 2.9 (la dama en d6). Lecciones (1000–1400): 3.0, 2.3, 2.2, 1.8 y después 0.2. La Valenciana (1.8 %) queda debajo del 2 % y entra por la regla 1, como la lección de su entrada; el corte entre obligatorias y opcionales sigue en un salto (de 1.8 a 0.2), pero entre las obligatorias no hay salto. La lista no cambia.
 - **El n es chico en casi todo, en 600–1000 sobre todo:** fuera de la Valenciana y de los jaques, esa banda no tiene datos tras la jugada 4. La Clásica (22) contra la Lasker (21) no se distingue con estos datos; las dos son obligatorias de todos modos.
 - **La Clásica se mide en 5...Af5,** la posición de la base que la define. **La Marshall** dejó de ser el principio de la Gipslis y la Richter: con su continuación (4.Cf3 Af5) ya es su propia línea, sin datos.
 
@@ -133,9 +135,11 @@ Con 10 % o más de las partidas que llegan a su posición y 2 % o más de las de
 |---|---|---|---|---|
 | 3...De5+ | 32.6 % (n 386) / 15.6 % (n 1025) | 27.9 % / 12.5 % | **El jaque** (entrada propia, sin lección) | Tabla F-… de las comprobaciones: la frase, medida en las 6 respuestas más jugadas tras 4.Ae2 |
 | 3...De6+ | 19.6 % (n 232) / 20.0 % (n 1310) | 16.8 % / 15.9 % | **El jaque** | Ídem, en 5 respuestas, más 4...Dc6 5.Ab5 (+6.26) |
-| 3...Da5 4.d4 c6 | 36.4 % (1000–1400, n 177) | 9.0 % | **La clavada**: Ad2 (la mejor); con 5.Cf3 Cf6 6.Ac4 Af5 7.Ad2 e6 llega a la posición de la Clásica (el orden de Wikipedia) | partidas; motor G-a5-c6 |
+| 3...Da5 4.d4 c6 | 36.4 % (1000–1400, n 177) | 9.0 % | **La clavada**: Ad2 (la mejor). Tras 5.Ad2, lo más jugado es 5...Dc7 (62 %): la dama sale de a5 y ya no hay clavada; sigues sacando piezas (6.Cf3 la mejor, 6.Ac4 a 0.08). Con 5.Cf3 Cf6 6.Ac4 Af5 7.Ad2 e6 llega a la posición de la Clásica (el orden de Wikipedia) | partidas; motor G-a5-c6, G2-a5-c6-dc7 |
+| 3...Da5 4.d4 Af5 | 10.5 % (n 51) | 2.6 % | **La clavada**: Ad2 (+0.71, a 0.08 de la mejor) | motor G2-a5-af5 |
 | 3...Da5 4.d4 Cc6 | 25.5 % (600–1000) | 3.6 % | **La clavada**: d5 echa al caballo (la mejor) | motor G-cd5-cc6 |
 | 3...Da5 4.d4 e5 | 10.7 % | 2.7 % | **La clavada**: Cf3 (la mejor) | motor G-a5-e5 |
+| 3...Dd8 4.d4 Cc6 | 10.8 % (n 48) / 19.6 % (n 10) | 2.1 % / 2.6 % | **La dama en casa**: d5 echa al caballo (la mejor, +1.45); h3 contra un ...Ag4 posterior pierde d4, por eso la regla "salvo con un caballo en c6" | motor G2-d8-cc6 |
 | 3...Dd8 4.d4 e6 | 27.4 % | 5.5 % | **La dama en casa**: Cf3 (pierde 3) | motor G-d8-e6 |
 | 3...Dd8 4.d4 Af5 | 13.7 % | 2.7 % | **La dama en casa**; la página no nombra jugada para ella | motor G-d8-af5 |
 | 2...Cf6 3.d4 Dxd5 | 25 % (n 13) | 2.9 % | Vuelve a las entradas de la dama: 4.Cc3 la ataca (la mejor) | motor |
@@ -159,6 +163,15 @@ Las de 2 % a 10 % (solo en el reporte): 3...Dd4 (3.0 % de su posición en 600–
 - La base: los `plan` de la Clásica, la Lasker, la Bronstein y la Schiller-Pytel dicen lo mismo que el curso.
 - La tabla de la nota 1 con las jugadas que pasan los dos umbrales (hallazgo 10), y "sin datos" donde no hay partidas (hallazgo 12).
 - Hallazgo 9 (g3 contra las respuestas con partidas en la señal de d6): ya no hay regla del mapa para la dama en d6. Hallazgo 13 (n chico): queda dicho arriba. Hallazgo 14 (la frase de los jaques aunque "no llega a una forma"): el orchestrator lo resolvió en la nota 7, como entrada propia.
+
+## La segunda vuelta del gate (notas 10 y 11)
+
+El evaluator midió las reglas con otra jugada natural del rival ya en el tablero, y encontró tres que fallaban así (`iterations/v4/comprobaciones-escandinava.md`, "La segunda vuelta del gate"):
+
+1. **"Contra ...Ag4, h3" perdía d4 con un caballo de negras en c6** (5 partidas llegan a esa posición). Ahora: "h3, salvo con un caballo de negras en c6; ahí, d5", medida en las cinco posiciones donde se juntan las dos señales.
+2. **"Si un caballo va a c6, d5" del centro grande perdía un peón una jugada antes del final de la Gipslis.** Ahora: "con tu caballo en c3".
+3. **Cd5 y h3 daban por hecho tu Cf3.** Ahora lo dicen.
+4. Lo demás: el plan de la Valenciana sin "o a f4" y con Ab5 contra ...Cc6; cada lección medida en su posición de la base; las dos jugadas que faltaban en la tabla de la nota 1 (3...Da5 4.d4 Af5 y 3...Dd8 4.d4 Cc6); los planes de dos variantes de antes de la base (la Clásica y la Bronstein) alineados con el curso; "la vuelves a atacar" solo con la dama en e5; y qué sigue tras 4...c6 5.Ad2 Dc7.
 
 ## Para Carlos, al final
 

@@ -2677,7 +2677,7 @@
       "Bf5"
      ],
      "lado": "ambos",
-     "plan": "Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4, Ad2 y 0-0; también 6.Ce5 contra el alfil. Ad2 quita la clavada y además amenaza Cd5: el caballo se mueve y tu alfil ataca a la dama de a5.",
+     "plan": "Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4 y Ad2, que quita la clavada y prepara Cd5: el caballo se mueve y tu alfil ataca a la dama de a5. El salto solo sirve con tu caballo en f3, tu alfil en c4 apoyándolo y ningún alfil de negras en b4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2774,7 +2774,7 @@
       "a6"
      ],
      "lado": "ambos",
-     "plan": "La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola con Cb5, Af4 o Ce4. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas, el esquema que mejor funciona es g3, Ag2, 0-0 y Ce5.",
+     "plan": "La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas funciona bien g3 primero: así Af4 ataca a la dama protegido por el peón de g3; después Ag2 y 0-0.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2803,7 +2803,7 @@
       "c6"
      ],
      "lado": "ambos",
-     "plan": "Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas, lo principal es g3 con Ag2 y desarrollo rápido: la dama negra ya tiene c7 para retirarse, así que no ganas mucho persiguiéndola.",
+     "plan": "Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Cf3 y, contra ...Cf6, Ce5 y después Cc4, que ataca a la dama otra vez. Si la dama va a c7, g3, Ag2 y 0-0; si da jaque en e6, lo tapas con Ae2 y enrocas.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2861,7 +2861,7 @@
       "Nxd5"
      ],
      "lado": "ambos",
-     "plan": "Negras recupera el peón con el caballo en vez de la dama, así blancas no gana tiempos contra ella. Con blancas: Cf3, Ae2 o Ac4 y 0-0, y c4 para echar al caballo de d5 y formar un centro grande; negras sigue con ...Ag4 o ...g6, y ...e6 o ...c6.",
+     "plan": "Negras recupera el peón con el caballo en vez de la dama, así blancas no gana tiempos contra ella. Con blancas: Cf3; contra ...Ag4, Ae2; contra ...Af5, Ad3 para cambiar ese alfil. c4 echa al caballo de d5, antes o después de enrocar, y forma un centro grande; con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2919,7 +2919,7 @@
       "g6"
      ],
      "lado": "ambos",
-     "plan": "Negras fianchetea con ...g6 y ...Ag7 para presionar d4 desde lejos, y enroca corto. Con blancas: Ae2 o Ac4, 0-0 y c4 para echar al caballo de d5 y quedarte con el centro.",
+     "plan": "Negras fianchetea con ...g6 y ...Ag7 para presionar d4 desde lejos, y enroca corto. Con blancas: c4 echa al caballo de d5; después Cc3, Ae2 y 0-0, con d4 siempre defendido. Contra ...Ag4, h3; si un caballo de negras va a c6, d5 lo echa.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -2982,7 +2982,7 @@
       "Nd5"
      ],
      "lado": "blancas",
-     "plan": "Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve si ningún alfil de negras está en b4.",
+     "plan": "Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve con tu caballo en f3 y ningún alfil de negras en b4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3027,7 +3027,7 @@
       "Bd2"
      ],
      "lado": "blancas",
-     "plan": "Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con la torre en d1 defendiendo d4, y después Ac4.",
+     "plan": "Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con tu rey a salvo y tu torre en la columna d, y después Ac4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3153,7 +3153,7 @@
       "Qxf3"
      ],
      "lado": "blancas",
-     "plan": "Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Desarrolla el alfil de c1 y enroca; si la dama negra toma en d4, Dxb7 gana la torre de a8.",
+     "plan": "Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Saca tu alfil de c1 a e3 y enroca largo; si la dama negra toma en d4, Dxb7 gana la torre de a8, y si negras saca su caballo a c6, Ab5 lo clava.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3196,7 +3196,7 @@
       "c4"
      ],
      "lado": "blancas",
-     "plan": "Con c4 echaste al caballo y te quedaste con dos peones en el centro. Sigue Cc3 y el desarrollo.",
+     "plan": "Con c4 echaste al caballo, y tus peones de c4 y d4 dominan el centro. Sigue Cc3 y el desarrollo.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

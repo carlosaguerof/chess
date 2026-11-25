@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Af5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4, Ad2 y 0-0; también 6.Ce5 contra el alfil. Ad2 quita la clavada y además amenaza Cd5: el caballo se mueve y tu alfil ataca a la dama de a5.
+- Plan *(redactado por la IA)*: Negras pone la dama en a5, desde donde clava el caballo de c3 (el peón de d ya no está en d2), y desarrolla ...Cf6, ...Af5, ...c6, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Ac4 y Ad2, que quita la clavada y prepara Cd5: el caballo se mueve y tu alfil ataca a la dama de a5. El salto solo sirve con tu caballo en f3, tu alfil en c4 apoyándolo y ningún alfil de negras en b4.
 - Fuente: B01 · Scandinavian Defense: Classical Variation
 
 ### Variante Grünfeld
@@ -39,7 +39,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 Cf6 5.Cf3 a6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola con Cb5, Af4 o Ce4. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas, el esquema que mejor funciona es g3, Ag2, 0-0 y Ce5.
+- Plan *(redactado por la IA)*: La dama en d6 está más centralizada, pero blancas puede ganar tiempos atacándola. Por eso ...a6 le quita la casilla b5 a las piezas blancas; luego ...Ag4 o ...Af5, ...Cc6 y ...e6. Con blancas funciona bien g3 primero: así Af4 ataca a la dama protegido por el peón de g3; después Ag2 y 0-0.
 - Fuente: B01 · Scandinavian Defense: Bronstein Variation
 
 ### Variante Schiller-Pytel
@@ -47,7 +47,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 c6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas, lo principal es g3 con Ag2 y desarrollo rápido: la dama negra ya tiene c7 para retirarse, así que no ganas mucho persiguiéndola.
+- Plan *(redactado por la IA)*: Con ...c6 negras cubre b5 y d5 y le prepara a la dama la retirada a c7; luego ...Cf6, ...Af5 o ...Ag4, ...e6 y ...Cbd7, una estructura tipo Caro-Kann. Con blancas: Cf3 y, contra ...Cf6, Ce5 y después Cc4, que ataca a la dama otra vez. Si la dama va a c7, g3, Ag2 y 0-0; si da jaque en e6, lo tapas con Ae2 y enrocas.
 - Fuente: B01 · Scandinavian Defense: Schiller-Pytel Variation
 
 ## Variante Valenciana (3...Dd8)
@@ -67,7 +67,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Cf6 3.d4 Cxd5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras recupera el peón con el caballo en vez de la dama, así blancas no gana tiempos contra ella. Con blancas: Cf3, Ae2 o Ac4 y 0-0, y c4 para echar al caballo de d5 y formar un centro grande; negras sigue con ...Ag4 o ...g6, y ...e6 o ...c6.
+- Plan *(redactado por la IA)*: Negras recupera el peón con el caballo en vez de la dama, así blancas no gana tiempos contra ella. Con blancas: Cf3; contra ...Ag4, Ae2; contra ...Af5, Ad3 para cambiar ese alfil. c4 echa al caballo de d5, antes o después de enrocar, y forma un centro grande; con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa.
 - Fuente: B01 · Scandinavian Defense: Marshall Variation
 
 ### Variante Moderna: Variante Gipslis
@@ -83,7 +83,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Cf6 3.d4 Cxd5 4.Cf3 g6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Negras fianchetea con ...g6 y ...Ag7 para presionar d4 desde lejos, y enroca corto. Con blancas: Ae2 o Ac4, 0-0 y c4 para echar al caballo de d5 y quedarte con el centro.
+- Plan *(redactado por la IA)*: Negras fianchetea con ...g6 y ...Ag7 para presionar d4 desde lejos, y enroca corto. Con blancas: c4 echa al caballo de d5; después Cc3, Ae2 y 0-0, con d4 siempre defendido. Contra ...Ag4, h3; si un caballo de negras va a c6, d5 lo echa.
 - Fuente: B01 · Scandinavian Defense: Richter Variation
 
 ### Transposición Panov
@@ -101,7 +101,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Af5 6.Ac4 e6 7.Ad2 c6 8.Cd5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve si ningún alfil de negras está en b4.
+- Plan *(redactado por la IA)*: Con Cd5, tu alfil de d2 ataca a la dama de a5: negras la retira a d8 y ya no clava a tu caballo. Sigue Cxf6+: si negras retoma con la dama, De2 y 0-0-0; si retoma con el peón, 0-0. El salto solo sirve con tu caballo en f3 y ningún alfil de negras en b4.
 - Fuente: B01 · Scandinavian Defense: Classical Variation
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Scandinavian Defense (la línea principal: 6.Ac4 Af5 7.Ad2 e6); Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 (7.Ad2 e6 8.Cd5 Dd8); J. Hartmann, "Beat The Scandi!", Chess Life Kids, dic. 2023 (6.Ac4 e6 7.Ad2 c6; solo la idea); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.Ac4 a 0.11 de la mejor; 6...e6 a 0.07; 7.Ad2 la mejor; 7...c6 a 0.17; 8.Cd5 la mejor.
 
@@ -110,7 +110,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6 8.Ad2**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con la torre en d1 defendiendo d4, y después Ac4.
+- Plan *(redactado por la IA)*: Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0, con tu rey a salvo y tu torre en la columna d, y después Ac4.
 - Fuente: B01 · Scandinavian Defense: Lasker Variation
 - Sigue la fila de la fuente desde la media jugada 12 con teoría de: motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6...Axf3 la mejor; 7.Dxf3 la mejor; 7...c6 la mejor; 8.Ad2 la mejor; Wikibooks, 3...Da5 (Ad2 libera d2 para que el caballo se mueva con tiempo sobre la dama).
 
@@ -141,7 +141,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd8 4.d4 Cf6 5.Cf3 Ag4 6.h3 Axf3 7.Dxf3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Desarrolla el alfil de c1 y enroca; si la dama negra toma en d4, Dxb7 gana la torre de a8.
+- Plan *(redactado por la IA)*: Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Saca tu alfil de c1 a e3 y enroca largo; si la dama negra toma en d4, Dxb7 gana la torre de a8, y si negras saca su caballo a c6, Ab5 lo clava.
 - Fuente: B01 · Scandinavian Defense: Valencian Variation, Main Line
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd8 (5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.h3 la mejor; 6...Axf3 a 0.02 de la mejor; 7.Dxf3 la mejor.
 
@@ -152,7 +152,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Cf6 3.d4 Cxd5 4.Cf3 Af5 5.Ad3 Axd3 6.Dxd3 e6 7.0-0 c6 8.c4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con c4 echaste al caballo y te quedaste con dos peones en el centro. Sigue Cc3 y el desarrollo.
+- Plan *(redactado por la IA)*: Con c4 echaste al caballo, y tus peones de c4 y d4 dominan el centro. Sigue Cc3 y el desarrollo.
 - Fuente: B01 · Scandinavian Defense: Marshall Variation
 - Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Cf6 (Marshall: 4.Cf3 Af5 5.Ad3 Axd3 6.Dxd3 e6 7.0-0); Wikipedia, Scandinavian Defense (4.c4 echa al caballo de d5); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 4...Af5 a 0.03 de la mejor; 7.0-0 a 0.02; 7...c6 la mejor; 8.c4 la mejor.
 

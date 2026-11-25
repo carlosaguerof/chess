@@ -5,7 +5,7 @@ Cada afirmación del curso que el motor puede medir ("es la mejor", "ataca", "pi
 Cada id aparece en el campo `motor` del texto que lo afirma, en `conocimiento/cursos/escandinava.json`. Las líneas del curso (las continuaciones de la base) y su comprobación: `scripts/base/definiciones/escandinava.json` (variantes `curso-*`); `npm run validar-base` (ninguna jugada mía pierde más de 100 cp) y `node scripts/validar-libros.ts` (ninguna jugada de libro pierde más de 200).
 
 **Lo que el motor corrigió:**
-- **El plan de la Lasker:** decía "Ac4 y 0-0-0". Contra 8...Db6 (la segunda del motor), 9.Ac4 pierde 74 (9...Dxd4). Ahora dice primero 0-0-0 (la torre defiende d4) y después el alfil (P-lasker-b).
+- **El plan de la Lasker:** decía "Ac4 y 0-0-0". Contra 8...Db6 (la segunda del motor), 9.Ac4 pierde 74 (9...Dxd4). Ahora dice primero 0-0-0 y después el alfil (P-lasker-b). Tras 0-0-0, 9...Dxd4 pierde 430 por 10.Cb5 (Dxd4 Cb5 Da4 Cc7+): d4 aguanta por esa táctica, no porque la torre lo defienda (el alfil de d2 tapa la columna; pase adversarial 2).
 - **El plan de la Schiller-Pytel:** "g3, Ag2 y 0-0" no se puede contra 7...De6+ (hay que tapar el jaque). Lleva su condición (P-sp-b).
 - **El gate del mapa** (abajo): el alfil a f4 contra la dama en d6, solo con g3 jugado; el salto Cd5 de la Clásica, con su condición completa (ningún alfil de negras en b4); el plan de la Clásica, con las dos retomas en f6; la frase de los jaques, medida como queda escrita; y el "Ce5 cuando se pueda" de la Bronstein se quitó (con el caballo de negras en c6, Ce5 suelta d4).
 - **La Grünfeld y la Transposición Panov** dejaron de ser lecciones (una sola jugada tuya por posición, nota 2 del orchestrator); 6.Ce5 (a 0.11 de 6.Ac4, la mejor del motor) y 3.c4 siguen como buenas jugadas.
@@ -114,6 +114,54 @@ Un evaluator independiente midió cada regla del mapa donde se usa, también con
 | G-clasica-gxf6 | Si negras retoma con el peón, 9...gxf6, enroca corto (no De2) | `mejores "… Nxf6+ gxf6" --n 4` · `jugada … "Qe2"` | +0.81 O-O (la mejor) · Qe2 pierde 63 (Axc2, y ya no hay 0-0-0) | **Corregido:** el plan dice las dos retomas |
 | G-d8-e6 | Con la dama en d8, contra ...e6 (27.4 %), Cf3 | `jugada "… Qd8 d4 e6" "Nf3"` | +0.77 Nf3 (pierde 3) | Se sostiene |
 | G-d8-af5 | Con la dama en d8, contra 4...Af5 (13.7 %): sacas tus piezas (el plan no nombra jugada) | `mejores "… Qd8 d4 Bf5" --n 4` | +1.08 g4 · +0.95 Df3 · +0.72 Ad3 · +0.68 Ac4 | Sin regla nombrada: no se dice nada más |
+
+## La segunda vuelta del gate (notas 10 y 11): cada regla con otra jugada natural del rival ya en el tablero
+
+Stockfish 19 lite, un hilo, profundidad 18, con la Air muy cargada. `jugada "<jugadas>" "<candidata>"` da la mejor y la candidata; "pierde" es la diferencia. Las jugadas, desde 1.e4 (abreviado: "…" es `e4 d5 exd5 Qxd5 Nc3`; VAL es `… Qd8 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3`; RICH es `e4 d5 exd5 Nf6 d4 Nxd5 Nf3 g6 c4 Nb6 Nc3 Bg7 Be2 O-O O-O`).
+
+| Id | Regla (como queda escrita) | Posición | Candidata | Resultado | Veredicto |
+|---|---|---|---|---|---|
+| G2-d8-cc6 | "Si en su cuarta jugada negras saca ...Cc6, d5 lo echa" (dama en d8) | `… Qd8 d4 Nc6` | d5 | +1.45; la mejor, d5 con otra continuación (+1.65) | Se sostiene |
+| G2-a5-cc6 | Ídem, dama en a5 | `… Qa5 d4 Nc6` | d5 | +1.52; la mejor, d5 (+1.61) | Se sostiene |
+| G2-d8-cc6-ag4 | "Contra ...Ag4: h3, salvo con un caballo de negras en c6; ahí, d5" | `… Qd8 d4 Nc6 Nf3 Bg4` | d5 · h3 | d5 +2.66 (la mejor) · h3 +0.16, pierde 253 (Axf3 Dxf3 Cxd4) | Se sostiene; h3 sola no |
+| G2-d8-cc6-af5 | (con el caballo en c6, contra ...Af5) | `… Qd8 d4 Nc6 Nf3 Bf5` | d5 | +1.54, la mejor | Se sostiene |
+| G2-d8-cf6-cc6-ag4 | ídem | `… Qd8 d4 Nf6 Nf3 Nc6 Bc4 Bg4` | d5 · h3 | d5 +0.46 (la mejor, d5 +0.61) · h3 −0.34, pierde 95 | Se sostiene; h3 sola no |
+| G2-d8-ag4-cc6 | ídem, con ...Ag4 primero y Ae2 | `… Qd8 d4 Nf6 Nf3 Bg4 Be2 Nc6` | d5 | +0.53, a 20 de la mejor (Ab5) | Se sostiene |
+| G2-a5-cc6-ad2-ag4 | ídem, dama en a5 | `… Qa5 d4 Nf6 Nf3 Nc6 Bd2 Bg4` | d5 · h3 | d5 +1.22 (la mejor, d5 +1.61) · h3 −0.25, pierde 186 | Se sostiene; h3 sola no |
+| G2-a5-cc6-ag4 | ídem, sin Ad2 | `… Qa5 d4 Nc6 Nf3 Bg4` | d5 · h3 · Ad2 | la mejor Ab5 +0.84 · d5 +0.23 · h3 +0.16 · Ad2 +0.43 | d5 no pierde material (a 61 de la mejor) |
+| G2-cf6-cc6 | (sin ...Ag4, no se nombra d5) | `… Qd8 d4 Nf6 Nf3 Nc6` · `… Qa5 d4 Nf6 Nf3 Nc6` | d5 | −70 (Ab5 +1.02) · −57 (Ad2 +1.10, la mejor) | Por eso la regla solo dice d5 en la cuarta jugada o con ...Ag4 |
+| G2-ae5-cc6 | (con un caballo blanco en e5, d5 lo cuelga; fuera de las líneas) | `… Qd8 d4 Nf6 Nf3 Bg4 h3 Bh5 g4 Bg6 Ne5 Nc6` | d5 | −1.61, pierde 489 (Ab5 +3.28) | Fuera de las señales de la regla (el alfil ya no está en g4) |
+| G2-sin-cf3 | "Contra ...Ag4, con tu caballo en f3"; "el salto Cd5, con tu caballo en f3" | `… Qa5 d4 c6 Bd2 Nf6 Bc4 Bg4` | Cf3 · f3 | f3 +1.15 (la mejor) · Cf3 +0.65 | Sin Cf3, ni h3 ni Cd5 (el gate: −751 y −555) |
+| G2-a5-af5 | 3...Da5 4.d4 Af5: Ad2 (la regla de la clavada) | `… Qa5 d4 Bf5` | Ad2 | +0.71 (la mejor, Df3 +0.63) | Se sostiene |
+| G2-a5-c6-dc7 | Tras 4...c6 5.Ad2 Dc7, ya no hay clavada: sigues sacando piezas | `… Qa5 d4 c6 Bd2 Qc7` | Cf3 · Ac4 | Cf3 +0.94 (la mejor) · Ac4 +0.99 | Se sostiene |
+| G2-lasker-cc6 | (Lasker, tras ...Axf3 Dxf3 Cc6) | `… Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 Nc6` | Ab5 · Ad2 | Ab5 +2.13 (la mejor) · Ad2 −0.04, pierde 225 | La línea sigue 7...c6; no se nombra |
+| G2-val-c6 | Plan de la Valenciana: "Saca tu alfil de c1 a e3 y enroca largo" | `VAL c6` · `VAL c6 Be3 e6` | Ae3 · 0-0-0 | Ae3 +0.72 (g4 +1.11) · 0-0-0 +0.64 (Ad3 +0.88) | Se sostiene, sin material |
+| G2-val-b7 | "Si negras deja b7 sin cuidar, tu dama se lo come" | `VAL e6` · `VAL Nbd7` | Dxb7 | +2.95 y +2.81, la mejor en las dos (Ae3 ahí: +0.77 y +1.13) | Se sostiene |
+| G2-val-cc6 | "Si saca su caballo a c6, Ab5 lo clava" | `VAL Nc6` | Ab5 · Ae3 · d5 | Ab5 +3.51 (la mejor) · Ae3 +1.24 · d5 +0.94 (con el caballo en c6, Dxb7 no es posible: c6 tapa la diagonal) | Se sostiene; por eso se quitó "o a f4" y se agregó Ab5 |
+| G2-gipslis-d5 | "Con tu caballo en c3, si un caballo de negras va a c6, d5 lo echa" | `e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bg4 Be2 e6 O-O Nc6 c4 Nb6` · `… Nc3 Be7` | d5 · Cc3 | sin Cc3: d5 −0.40, pierde 120 (exd5 cxd5 Dxd5) · Cc3 la mejor · con Cc3 y 8...Ae7: d5 la mejor (+0.83) | Se sostiene con la condición |
+| G2-grande-sin-e6 | ídem, sin ...e6 | `e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Nc6 c4 Nb6` · `… Nf3 Bg4 Be2 Nc6 c4 Nb6` | d5 | −28 (+1.23) · la mejor (+0.76) | Sin material; la regla no la nombra sin Cc3 |
+| G2-richter | "Contra ...Ag4, h3; si un caballo va a c6, d5" (con Cc3) | `RICH Nc6` · `RICH Bg4` · `RICH Bg4 h3 Bxf3 Bxf3 Nc6` | d5 · h3 · d5 | d5 la mejor (+0.98) · h3 la mejor (+0.90) · d5 +0.34, a 17 | Se sostiene |
+| G2-marshall-af5 | "Si su alfil sale a f5, primero Ad3 y lo cambias" | `e4 d5 exd5 Nf6 d4 Nxd5 Nf3 Bf5` | c4 · Ad3 | Ad3 +0.68 (la mejor, Ad3 +0.75) · c4 −0.01, pierde 76 (...Cb4) | Se sostiene |
+| G2-lasker-plan | Plan de la Lasker: 0-0-0 y Ac4 (sin "la torre defiende d4": el alfil de d2 tapa la columna; pase 2) | `… Qa5 d4 Nf6 Nf3 Bg4 h3 Bxf3 Qxf3 c6 Bd2 Nbd7` · `… O-O-O e6` | 0-0-0 · Ac4 | +0.96 (g4 +0.80) · +0.95 (Rb1 +0.90) | Se sostiene |
+
+Las salidas, completas: `lote11a.out`, `lote11b.out`, `lote11c.out` y `lote12.out` en la carpeta de trabajo de la corrida (fuera de este repo).
+
+## Los planes de la base, también los de las variantes que no son lección (nota 12)
+
+La guía en partida muestra el `plan` de la variante de la base en la que estás, sea o no lección. Ninguno contradice al curso:
+
+| Variante | Qué decía | Qué dice ahora | Respaldo |
+|---|---|---|---|
+| da5-clasica | "Ad2 … amenaza Cd5", sin condición | Ad2 prepara Cd5; el salto solo con tu caballo en f3, tu alfil en c4 y ningún alfil de negras en b4 | G-cd5-ab4, G2-sin-cf3 |
+| dd6-bronstein | "atacándola con Cb5, Af4 o Ce4"; "g3, Ag2, 0-0 y Ce5" | g3 primero, y Af4 protegido por g3; Ag2 y 0-0 (sin Ce5) | G-af4, P-bronstein |
+| dd6-schiller-pytel | "lo principal es g3 con Ag2…: no ganas mucho persiguiéndola" | Ce5 y Cc4, que ataca a la dama otra vez; si va a c7, g3, Ag2 y 0-0; si da jaque en e6, Ae2 | M-6ce5-sp, P-schiller-pytel |
+| moderna-marshall | "Cf3, Ae2 o Ac4 y 0-0, y c4" | contra ...Ag4, Ae2; contra ...Af5, Ad3; c4 antes o después de enrocar; con Cc3, contra ...Cc6, d5 | G2-marshall-af5, G2-gipslis-d5 |
+| moderna-richter | "Ae2 o Ac4, 0-0 y c4" (con el alfil en c4, el peón de c ya no puede ir a c4) | c4; después Cc3, Ae2 y 0-0; contra ...Ag4, h3; contra ...Cc6, d5 | G2-richter |
+| curso-lasker | "la torre en d1 defendiendo d4" | "tu rey a salvo y tu torre en la columna d" | G2-lasker-plan |
+| curso-valenciana | "Desarrolla el alfil de c1 y enroca" | Ae3 y 0-0-0; Dxb7 si toma en d4; contra ...Cc6, Ab5 | G2-val-… |
+| curso-marshall | "dos peones en el centro" | "tus peones de c4 y d4 dominan el centro" | (pase 1, el centro) |
+| da5-lasker | (sin cambio) "Si negras contesta 6...Dh5, 7.hxg4 Dxh1 8.Ce2 y la dama negra queda atrapada" | igual | B-lasker-dh5: `jugada "… Qa5 d4 Nf6 Nf3 Bg4 h3 Qh5" "hxg4" --prof 16` la mejor (+2.99); `mejores "… h3 Qh5 hxg4 Qxh1 Ne2" --prof 16`: +4.82 (h5 Cg3 hxg4 Cxh1) |
+| da5-grunfeld, dd8-valenciana, moderna-gipslis, moderna-panov | (sin cambio) | igual | Grünfeld y Panov son tus otras jugadas (6.Ce5, 3.c4), buenas en el curso; la Valenciana y la Gipslis dicen lo mismo que sus lecciones |
 
 ## Los jaques en e5 y e6 (nota 1 del orchestrator; la frase, medida como queda escrita, nota 8)
 
