@@ -97,8 +97,8 @@
 | plan dos-caballos-d3 tuyo frase 1 | Siguen Ab3 y Cbd2, y h3 antes de que su caballo salte a g4. | flecha c4→b3 (A3, verde, punteada) |
 | plan dos-caballos-d3 tuyo frase 2 | Cuando todo apoye a tu peón de d3, d4. | flecha d3→d4 (A3, verde, punteada) |
 | plan dos-caballos-d3 rival frase 1 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
-| plan la-bourdonnais tuyo frase 2 | Ahora cuida tu peón de e4 con Cc3 y enroca. | flecha b1→c3 (A3, verde, punteada) |
-| plan anti-higado-frito tuyo frase 1 | Contra ...Ab4, cambia caballos en c6 y después las damas: su rey ya no podrá enrocar. | flecha d4→c6 (A3, verde, punteada) |
+| plan la-bourdonnais tuyo frase 2 | Si salta a e5, cámbialo: Cxe5; si va a a5, retira tu alfil a d3. | flecha f3→e5 (A3, verde, punteada) |
+| plan anti-higado-frito tuyo frase 1 | Contra ...Ab4, cambia caballos en c6 y, si retoma con ...dxc6, también las damas: su rey ya no podrá enrocar. | flecha d4→c6 (A3, verde, punteada) |
 | plan principal tuyo frase 2 | Con todo listo, d4. | flecha d3→d4 (A3, verde, punteada) |
 | plan principal rival frase 1 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
 | plan paris tuyo frase 1 | Saca tu último alfil a f4 y lleva una torre a e1. | flecha c1→f4 (A3, verde, punteada); flecha f1→e1 (A3, verde, punteada) |
@@ -113,7 +113,7 @@
 | estructura 3, paso 3 | Si negras golpea con ...d5, tomas en d5 con tu peón de e4. | flecha d6→d5 (A7, roja, punteada); flecha e4→d5 (A3, verde, punteada) |
 | repaso 2, paso 1 | «Apuntas el alfil a f7»: 1.e4 e5 2.Cf3 Cc6 3.Ac4, y tu alfil apunta a f7. | flecha c4→f7 (A2, verde) |
 | plan dos-caballos-d3 paso a paso, paso 6 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
-| plan la-bourdonnais paso a paso, paso 2 | Cc3: tu caballo cuida el peón de e4. | flecha c3→e4 (A2, verde) |
+| plan la-bourdonnais paso a paso, paso 3 | Cc3: tu otro caballo cuida el peón de e4. | flecha c3→e4 (A2, verde) |
 | plan principal paso a paso, paso 6 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
 | plan paris paso a paso, paso 3 | Te1: tu torre se pone detrás de tu peón de e4. | flecha e1→e4 (A2, verde) |
 | plan blackburne-kostic paso a paso, paso 2 | Cc3: tu caballo cuida el peón de e4. | flecha c3→e4 (A2, verde) |

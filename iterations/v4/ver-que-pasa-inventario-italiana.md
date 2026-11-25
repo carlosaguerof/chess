@@ -9,7 +9,7 @@
 | Jugada | Campo | Frase | La línea | Dónde sale |
 |---|---|---|---|---|
 | 4.d3 | porque | Así el caballo de f6 ya no puede tomar en e4: perdería una pieza. | 4...♘xe4 5.dxe4 | Aprender y Practicar |
-| 4.d3 | cuidado | Si negras golpea con ...d5, toma en d5: si sigues con tu plan, su peón se come tu alfil. | 4...d5 5.c3 5...dxc4 | solo Aprender |
+| 4.d3 | cuidado | Si negras golpea con ...d5, toma en d5: si no, su peón se come tu alfil. | 4...d5 5.0-0 5...dxc4 | solo Aprender |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | Aprender y Practicar |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | solo Aprender |
 | 8.d5 | cuidado | Si negras toma en e4, tomas su caballo de c6. | 8...♘xe4 9.dxc6 9...♗xf2+ 10.♔f1 | Aprender y Practicar |
@@ -34,14 +34,14 @@
 | 6.0-0 | porque | Con el centro cerrado no hay prisa: primero, el rey seguro. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.0-0 | prepara | Después, ♖e1 cuida e4 otra vez. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♖e1 | porque | Cuando llegue d4, tu peón de e4 no se quedará solo. | explica la jugada que ya está en la línea, sin una alternativa |
-| 4.c3 | porque | Ahora negras ataca d4 tres veces: con su peón de e5, su caballo de c6 y su alfil de c5. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.c3 | porque | Negras ataca d4 tres veces: con su peón de e5, su caballo de c6 y su alfil de c5. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.c3 | prepara | Amenazas d4, para quedarte con el centro. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 4.c3 | cuidado | Ahora tu caballo de b1 ya no puede ir a c3 a defender e4. | explica la jugada que ya está en la línea, sin una alternativa |
 | 5.d3 | porque | Así juegas lento y sólido: d4 queda para cuando esté preparado. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.0-0 | porque | Con el centro cerrado no hay prisa: primero, el rey seguro. | explica la jugada que ya está en la línea, sin una alternativa |
 | 6.0-0 | prepara | Después, ♖e1 cuida e4 otra vez. | lo que dice se juega en las jugadas que siguen de la línea |
 | 7.♖e1 | porque | Cuando llegue d4, tu peón de e4 no se quedará solo. | explica la jugada que ya está en la línea, sin una alternativa |
-| 8.♗b3 | porque | Así el peón de negras ya no lo echa con amenaza. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
+| 8.♗b3 | porque | Así, cuando llegue ...b5, tu alfil ya no tiene que moverse. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 9.h3 | porque | Sin este peón, su caballo podría saltar a g4, contra f2, donde ya mira el alfil de a7. | dice una alternativa, pero sin una consecuencia que se enseñe en el tablero |
 | 9.h3 | prepara | Siguen ♘bd2 y, con todo listo, d4. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.d4 | porque | Contra una jugada pasiva no hay que esperar: con c3 listo, el centro es tuyo. | explica la jugada que ya está en la línea, sin una alternativa |
@@ -79,7 +79,7 @@
 | 5.c3 | cuidado | Si su caballo ataca tu alfil desde a5, sálvalo primero: ♗e2. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 6.e5 | porque | Ganas espacio, y el caballo tiene que buscar otra casilla. | explica la jugada que ya está en la línea, sin una alternativa |
 | 7.♗d5 | porque | Negras tiene que moverlo otra vez, o sostenerlo con su peón de f. | dice qué sigue (un plan), no qué pasaría con otra cosa |
-| 4.d4 | porque | Su peón de f salió de casa: a su rey le conviene el juego cerrado; a ti, abrirlo. | explica la jugada que ya está en la línea, sin una alternativa |
+| 4.d4 | porque | Su peón de f salió de casa y su rey quedó débil: saca tus piezas rápido y gana espacio. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4.d4 | cuidado | Si negras toma en e4, tomas en e5 con el caballo. | dice qué sigue (un plan), no qué pasaría con otra cosa |
 | 5.e5 | porque | Su rey quedó más débil: ahora sacas tus piezas y enrocas. | explica la jugada que ya está en la línea, sin una alternativa |
 | 4...♕xg5 | porque | Tu dama cuidaba g5 desde d8: el caballo no tenía apoyo. | explica la jugada que ya está en la línea, sin una alternativa |
