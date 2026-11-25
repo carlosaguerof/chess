@@ -3285,7 +3285,7 @@
       "Bf5"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3733,7 +3733,7 @@
       "Bb7"
      ],
      "lado": "negras",
-     "plan": "Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón, pero su caballo quedó en a2; tu alfil sale a b7.",
+     "plan": "Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón con Axc4, pero su caballo quedó en a2; tu alfil sale a b7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3862,7 +3862,7 @@
       "hxg6"
      ],
      "lado": "negras",
-     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
+     "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -3943,7 +3943,7 @@
       "e6"
      ],
      "lado": "negras",
-     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Si Db3 ataca b7, ...Ab4.",
+     "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con ...e6 ya jugado, si Db3 ataca b7, ...Ab4.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4432,7 +4432,7 @@
      "id": "curso-otras-bird",
      "clave": "otros-negras/curso-otras-bird",
      "familia": "Apertura Bird (1.f4)",
-     "nombre": "Apertura Bird: Variante Holandesa (2.Cf3 Cf6 3.g3 g6 4.Ag2 Ag7 5.0-0 0-0 6.d3 c5)",
+     "nombre": "Apertura Bird: Variante Holandesa (2.Cf3 Cf6 3.e3 Af5 4.Ae2 e6 5.0-0 Ae7)",
      "nombreIngles": "Bird Opening: Dutch Variation",
      "eco": "A03",
      "jugadas": [
@@ -4440,17 +4440,15 @@
       "d5",
       "Nf3",
       "Nf6",
-      "g3",
-      "g6",
-      "Bg2",
-      "Bg7",
+      "e3",
+      "Bf5",
+      "Be2",
+      "e6",
       "O-O",
-      "O-O",
-      "d3",
-      "c5"
+      "Be7"
      ],
      "lado": "negras",
-     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil por g7 y enroca; ...c5 te da más centro.",
+     "plan": "1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a f5 y luego ...e6, ...Ae7 y 0-0; ...c5 o ...h6 vienen después.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",
@@ -4463,8 +4461,8 @@
      "continuacion": {
       "desde": 2,
       "fuente": [
-       "partidas de lichess: 2.Cf3 (71 %) y 3.g3 (56 %) son las más comunes",
-       "motor: 3...g6 la mejor, cada jugada de negras a 7 o menos de la mejor"
+       "partidas de lichess: 2.Cf3 (71 %) es la más común; 3.e3, la segunda (24 %)",
+       "motor: 3.e3 es la mejor de blancas y 3...Af5 la mejor de negras; 4.Ae2 a 7 de la mejor; 4...e6, 5.0-0 y 5...Ae7 son la línea principal del motor"
       ]
      }
     }

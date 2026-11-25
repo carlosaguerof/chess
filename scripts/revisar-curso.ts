@@ -47,7 +47,11 @@ for (const l of lineasDe(c))
     const j = ch.move(l.jugadas[ply]!)
     const es = sanAEspanol(j.san).replace(/[+#]/g, '')
     // lo que se ve en Practicar antes de jugar: la frase de la jugada del rival, la pregunta y la Pista
-    const antes = ply > l.desde ? textoRival(c, l.jugadas, ply - 1)?.texto ?? '' : ''
+    // la frase del rival puede nombrar la casilla de su propia amenaza (A7, reglas de las marcas v1.3, ejemplo 5): es lo
+    // que hace el rival, no tu jugada. La misma excepción de tests/unit/curso-contenido.test.ts (2026-11-25)
+    const rival = ply > l.desde ? textoRival(c, l.jugadas, ply - 1) : undefined
+    const amenaza = new Set((rival?.marcas ?? []).flat().filter((x) => x.tipo === 'A7').map((x) => x.a))
+    const antes = rival && !amenaza.has(j.to) ? rival.texto : ''
     // y el porqué de una jugada equivocada (sale en rojo también en Practicar)
     for (const t of [antes, m.pregunta, m.pista ?? '', ...Object.values(m.errores ?? {})]) {
       if (t.includes(es)) aviso('DELATA', l.id, j.san, '|', t)

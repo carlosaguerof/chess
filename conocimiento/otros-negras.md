@@ -135,11 +135,11 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 
 ## Apertura Bird (1.f4)
 
-### Apertura Bird: Variante Holandesa (2.Cf3 Cf6 3.g3 g6 4.Ag2 Ag7 5.0-0 0-0 6.d3 c5)
+### Apertura Bird: Variante Holandesa (2.Cf3 Cf6 3.e3 Af5 4.Ae2 e6 5.0-0 Ae7)
 
-**1.f4 d5 2.Cf3 Cf6 3.g3 g6 4.Ag2 Ag7 5.0-0 0-0 6.d3 c5**
+**1.f4 d5 2.Cf3 Cf6 3.e3 Af5 4.Ae2 e6 5.0-0 Ae7**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: 1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil por g7 y enroca; ...c5 te da más centro.
+- Plan *(redactado por la IA)*: 1.f4 controla e5. Ocupa el centro con ...d5, desarrolla ...Cf6, saca el alfil a f5 y luego ...e6, ...Ae7 y 0-0; ...c5 o ...h6 vienen después.
 - Fuente: A03 · Bird Opening: Dutch Variation
-- Sigue la fila de la fuente desde la media jugada 3 con teoría de: partidas de lichess: 2.Cf3 (71 %) y 3.g3 (56 %) son las más comunes; motor: 3...g6 la mejor, cada jugada de negras a 7 o menos de la mejor.
+- Sigue la fila de la fuente desde la media jugada 3 con teoría de: partidas de lichess: 2.Cf3 (71 %) es la más común; 3.e3, la segunda (24 %); motor: 3.e3 es la mejor de blancas y 3...Af5 la mejor de negras; 4.Ae2 a 7 de la mejor; 4...e6, 5.0-0 y 5...Ae7 son la línea principal del motor.

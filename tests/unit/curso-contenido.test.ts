@@ -4,6 +4,7 @@ import { BASE } from '../../src/base/base.ts'
 import { CURSOS_NUEVOS, jugadasDeLaBaseEn, lineasDe, misJugadas, textoMio, textoRival } from '../../src/curso/datos.ts'
 import { despues, palabras } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
+import { esCaroKann } from '../../scripts/archivos-del-curso.ts'
 
 /**
  * C4: el contenido del curso de la Caro-Kann. Cada jugada es legal y está en la base; cada jugada mía trae su texto;
@@ -11,6 +12,8 @@ import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
  * Practicar no delata la jugada.
  */
 const c = CURSOS_NUEVOS[process.env.CURSO ?? 'caro-kann:b']!
+// los ejemplos de Carlos son de la Caro-Kann: ahí se prueban; lo que recorre todo el curso, en todos (2026-11-25)
+const CK = esCaroKann(c)
 const lineas = lineasDe(c)
 const variantes = lineas.filter((l) => l.tipo === 'variante')
 const fenCorto = (f: string) => f.split(' ').slice(0, 4).join(' ')
@@ -44,7 +47,7 @@ describe('C4 · el curso de la Caro-Kann', () => {
     expect(c.piezas.errores.lista.length).toBeGreaterThanOrEqual(2)
     expect(c.piezas.errores.lista.length).toBeLessThanOrEqual(4)
     expect(c.piezas.repaso.paginas.length).toBeGreaterThan(0)
-    expect(c.variantes.length).toBeGreaterThanOrEqual(10)
+    expect(c.variantes.length).toBeGreaterThanOrEqual(CK ? 10 : 2)
     const f = c.variantes.map((v) => v.frecuencia)
     // un curso con secciones sigue el orden de sus secciones (`tests/unit/curso-estructuras.test.ts`)
     if (!c.secciones) expect([...f].sort((a, b) => b - a)).toEqual(f)
@@ -70,9 +73,9 @@ describe('C4 · el curso de la Caro-Kann', () => {
         expect(jugadasDeLaBaseEn(ch.fen()).has(s), `${l.id}: ${s} no está en la base`).toBe(true)
         ch.move(s)
       })
-      // y la variante de la base es de la Caro-Kann, con negras
-      const v = BASE.aperturas.find((a) => a.id === 'caro-kann')!.variantes.find((x) => x.id === l.variante!.base)!
-      expect(v.lado === 'negras' || v.lado === 'ambos', l.id).toBe(true)
+      // y la variante de la base es de la apertura del curso, de su lado
+      const v = BASE.aperturas.find((a) => a.id === c.apertura)!.variantes.find((x) => x.id === l.variante!.base)!
+      expect(v.lado === (c.color === 'b' ? 'negras' : 'blancas') || v.lado === 'ambos', l.id).toBe(true)
     }
   })
 
@@ -188,7 +191,7 @@ describe('C4 · el curso de la Caro-Kann', () => {
       }
   })
 
-  it('La estructura del Avance: la cadena blanca d4-e5 contra c5, d5 y e6', () => {
+  it.runIf(CK)('La estructura del Avance: la cadena blanca d4-e5 contra c5, d5 y e6', () => {
     // en el curso por estructuras, antes va El mapa
     const ch = new Chess(c.piezas.estructura.paginas[c.secciones ? 1 : 0]!.tablero!.fen!)
     const peones = (color: 'w' | 'b') => ch.board().flat().filter((s) => s && s.type === 'p' && s.color === color).map((s) => s!.square).sort()

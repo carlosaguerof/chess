@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js'
 import caroKann from '../../conocimiento/cursos/caro-kann.json' with { type: 'json' }
 import caroKannEstructuras from '../../conocimiento/cursos/caro-kann-estructuras.json' with { type: 'json' }
+import eslava from '../../conocimiento/cursos/eslava.json' with { type: 'json' }
 import { BASE } from '../base/base.ts'
 import type { Leccion } from '../cursos/modelo.ts'
 import type { AvanceCurso } from './avance.ts'
@@ -17,6 +18,8 @@ const caroKannCurso = caroKann as unknown as DatosCurso
 export const CURSOS_NUEVOS: Record<string, DatosCurso> = {
   'caro-kann:b': caroKannCurso,
   'caro-kann-estructuras:b': componerCurso(caroKannCurso, caroKannEstructuras as unknown as CapaCurso),
+  // la Eslava, por estructuras (2026-11-25): un solo archivo, con sus secciones (specs/cursos.md §6)
+  'eslava:b': eslava as unknown as DatosCurso,
 }
 
 export const cursoNuevo = (id: string): DatosCurso | undefined => CURSOS_NUEVOS[id]

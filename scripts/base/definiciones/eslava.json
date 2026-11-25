@@ -45,7 +45,7 @@
         "pgn": "1. d4 d5 2. c4 c6 3. cxd5 cxd5 4. Nc3 Nf6 5. Nf3 Nc6 6. Bf4 Bf5"
       },
       "lado": "negras",
-      "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
+      "plan": "Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -248,7 +248,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón, pero su caballo quedó en a2; tu alfil sale a b7.",
+      "plan": "Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón con Axc4, pero su caballo quedó en a2; tu alfil sale a b7.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -312,7 +312,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0.",
+      "plan": "Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
@@ -353,7 +353,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Si Db3 ataca b7, ...Ab4.",
+      "plan": "Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con ...e6 ya jugado, si Db3 ataca b7, ...Ab4.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },

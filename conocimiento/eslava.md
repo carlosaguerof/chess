@@ -33,7 +33,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.cxd5 cxd5 4.Cc3 Cf6 5.Cf3 Cc6 6.Af4 Af5**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con Cf3 y Af4 ya jugados, ...Ab4; con Af4 y sin Cf3, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.
+- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica y tranquila: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, pero no copies las jugadas de blancas sin mirar sus amenazas. Si Db3 ataca b7: con ...e6 ya jugado, ...Ab4; antes de ...e6, ...Ca5, porque si Dxb7, Cxb7 te gana la dama.
 - Fuente: D14 · Slav Defense: Exchange Variation, Symmetrical Line
 
 ## Variante 3.Cc3
@@ -163,7 +163,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.Cc3 dxc4 5.e3 b5 6.a4 b4 7.Ca2 e6 8.Axc4 Ab7**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón, pero su caballo quedó en a2; tu alfil sale a b7.
+- Plan *(redactado por la IA)*: Sin a4 a tiempo, ...b5 defiende el peón de c4. Si a4, ...b4 echa al caballo de c3. Blancas recupera el peón con Axc4, pero su caballo quedó en a2; tu alfil sale a b7.
 - Fuente: D15 · Slav Defense: Alekhine Variation
 - Sigue la fila de la fuente desde la media jugada 10 con teoría de: Wikipedia, Slav Defense (5.e3 b5 6.a4 b4 7.Na2 e6 8.Bxc4); motor: 5...b5, 6...b4, 7...e6 y 8...Ab7 son las mejores o a 1 de la mejor.
 
@@ -194,7 +194,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.Cf3 Cf6 4.e3 Af5 5.Cc3 e6 6.Ch4 Ag6 7.Cxg6 hxg6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7, ...Ad6 o ...Ae7 y 0-0.
+- Plan *(redactado por la IA)*: Contra 4.e3 el alfil sale a f5 antes de ...e6. Si Ch4 lo persigue, se retira a g6, y si blancas lo cambia, retomas con el peón de h: tu torre de h8 gana una columna. Sigue ...Cbd7 y ...Ae7.
 - Fuente: D12 · Slav Defense: Quiet Variation, Schallopp Defense
 - Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Slav Defense (4...Bf5 5.Nc3 e6 6.Nh4); motor: 6.Ch4 es la mejor de blancas; 6...Ag6 y 7...hxg6 las mejores.
 
@@ -216,7 +216,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.d4 d5 2.c4 c6 3.cxd5 cxd5 4.Cc3 Cf6 5.Cf3 Cc6 6.Af4 Af5 7.e3 e6**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Si Db3 ataca b7, ...Ab4.
+- Plan *(redactado por la IA)*: Tras 3.cxd5 cxd5 la posición es simétrica: desarrolla con ...Cf6, ...Cc6, ...Af5, ...e6 y 0-0, sin copiar a blancas sin mirar sus amenazas. Con ...e6 ya jugado, si Db3 ataca b7, ...Ab4.
 - Fuente: D14 · Slav Defense: Exchange Variation, Symmetrical Line
 - Sigue la fila de la fuente desde la media jugada 13 con teoría de: Wikibooks, 3.cxd5 cxd5 (tabla: 4.Nc3 Nf6 5.Nf3 Nc6 6.Bf4 Bf5); motor: 7.e3 es la mejor de blancas y 7...e6 la mejor de negras.
 
