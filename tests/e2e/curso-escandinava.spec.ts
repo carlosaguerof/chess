@@ -131,6 +131,27 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     await expect(page.getByTestId('paso-v:richter')).toHaveAttribute('data-estado', 'hecha')
   })
 
+  test('con blancas, todo tablero del curso va desde el lado de blancas, con sus coordenadas: a–h de izquierda a derecha, 1–8 de abajo arriba (correcciones, C1)', async ({ page }) => {
+    const revisar = async (tablero: ReturnType<Page['getByTestId']>, donde: string) => {
+      await expect(tablero, donde).toHaveAttribute('data-orientacion', 'white')
+      const leer = (sel: string) => tablero.locator(sel).evaluateAll((els) => els.map((el) => { const r = el.getBoundingClientRect(); return { t: (el.textContent ?? '').trim(), x: r.x, y: r.y } }))
+      const columnas = await leer('coords.files coord')
+      const filas = await leer('coords.ranks coord')
+      expect([...columnas].sort((a, b) => a.x - b.x).map((c) => c.t), donde).toEqual(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'])
+      expect([...filas].sort((a, b) => b.y - a.y).map((f) => f.t), donde).toEqual(['1', '2', '3', '4', '5', '6', '7', '8'])
+    }
+    await page.goto(`${URL_CURSO}/leer/idea`)
+    await revisar(page.getByTestId('tablero-leer'), 'La idea')
+    await page.goto(`${URL_CURSO}/leer/estructura`)
+    await revisar(page.getByTestId('tablero-leer'), 'El mapa')
+    await page.getByTestId('ver-paso-a-paso').click()
+    await revisar(page.getByTestId('paso-a-paso').locator('[data-orientacion]').first(), 'el paso a paso')
+    await page.keyboard.press('Escape')
+    await page.goto(urlDe('v:valenciana'))
+    await momento(page, 'intro')
+    await revisar(page.getByTestId('tablero').first(), 'la lección')
+  })
+
   test('las obligatorias y opcionales del curso son las de la tabla', async () => {
     expect(obligatorias(C).map((v) => v.id)).toEqual(['clasica', 'valenciana', 'gipslis', 'lasker'])
     expect(opcionales(C).map((v) => v.id)).toEqual(['bronstein', 'schiller-pytel', 'marshall', 'richter'])
