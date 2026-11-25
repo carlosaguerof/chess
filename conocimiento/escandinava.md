@@ -93,3 +93,83 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
 - Plan *(redactado por la IA)*: Blancas sostiene el peón con c4 y negras contesta ...c6 para abrir líneas. Si 4.d4 cxd5, la partida pasa al Ataque Panov de la Caro-Kann, con el peón aislado de blancas en d4; si blancas toma en c6, negras recaptura con el caballo y gana desarrollo rápido a cambio del peón.
 - Fuente: B01 · Scandinavian Defense: Panov Transfer
+
+## Línea principal (3...Da5)
+
+### Variante Clásica (6.Ac4 e6 7.Ad2 c6 8.Cd5)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Af5 6.Ac4 e6 7.Ad2 c6 8.Cd5**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tu dama tiene que irse: Cd5 la atacó con el alfil de d2. Sigue con Cxf6+, De2 y el enroque; la dama negra ya no clava a tu caballo.
+- Fuente: B01 · Scandinavian Defense: Classical Variation
+- Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Scandinavian Defense (la línea principal: 6.Ac4 Af5 7.Ad2 e6); Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 (7.Ad2 e6 8.Cd5 Dd8); J. Hartmann, "Beat The Scandi!", Chess Life Kids, dic. 2023 (6.Ac4 e6 7.Ad2 c6; solo la idea); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.Ac4 a 0.11 de la mejor; 6...e6 a 0.07; 7.Ad2 la mejor; 7...c6 a 0.17; 8.Cd5 la mejor.
+
+### Variante Lasker (6...Axf3 7.Dxf3 c6 8.Ad2)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 4.d4 Cf6 5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6 8.Ad2**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0 o Ac4 y el enroque.
+- Fuente: B01 · Scandinavian Defense: Lasker Variation
+- Sigue la fila de la fuente desde la media jugada 12 con teoría de: motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6...Axf3 la mejor; 7.Dxf3 la mejor; 7...c6 la mejor; 8.Ad2 la mejor; Wikibooks, 3...Da5 (Ad2 libera d2 para que el caballo se mueva con tiempo sobre la dama).
+
+## Defensa Gubinsky-Melts (3...Dd6)
+
+### Variante Bronstein (6.g3 Cc6 7.Af4 Dd8 8.Ag2)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 Cf6 5.Cf3 a6 6.g3 Cc6 7.Af4 Dd8 8.Ag2**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Af4 echó a la dama otra vez. Sigue 0-0 y, cuando se pueda, Ce5.
+- Fuente: B01 · Scandinavian Defense: Bronstein Variation
+- Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.g3 la mejor; 6...Cc6 la mejor; 7.Af4 la mejor; 7...Dd8 la mejor; 8.Ag2 la mejor.
+
+### Variante Schiller-Pytel (5.Cf3 Cf6 6.Ce5 Cbd7 7.Cc4)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd6 4.d4 c6 5.Cf3 Cf6 6.Ce5 Cbd7 7.Cc4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: El caballo saltó a e5 y después a c4, donde ataca a la dama de d6 otra vez. Sigue tu desarrollo: Af4 o g3 y Ag2, y el enroque.
+- Fuente: B01 · Scandinavian Defense: Schiller-Pytel Variation
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5); Wikibooks, 3.Cc3 (negras tiene que jugar ...c6 o ...a6 para que Cb5 no eche a la dama); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.Cf3 a 0.12 de la mejor; 5...Cf6 la mejor; 6.Ce5 a 0.03; 6...Cbd7 la mejor; 7.Cc4 la mejor.
+
+## Variante Valenciana (3...Dd8)
+
+### Variante Valenciana (6.h3 Axf3 7.Dxf3)
+
+**1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd8 4.d4 Cf6 5.Cf3 Ag4 6.h3 Axf3 7.Dxf3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Desarrolla el alfil de c1 y enroca; si la dama negra toma en d4, Dxb7 gana la torre de a8.
+- Fuente: B01 · Scandinavian Defense: Valencian Variation, Main Line
+- Sigue la fila de la fuente desde la media jugada 11 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd8 (5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.h3 la mejor; 6...Axf3 a 0.02 de la mejor; 7.Dxf3 la mejor.
+
+## Variante Moderna (2...Cf6)
+
+### Variante Marshall (4.Cf3 Af5 5.Ad3 ... 8.c4)
+
+**1.e4 d5 2.exd5 Cf6 3.d4 Cxd5 4.Cf3 Af5 5.Ad3 Axd3 6.Dxd3 e6 7.0-0 c6 8.c4**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Con c4 echaste al caballo y te quedaste con dos peones en el centro. Sigue Cc3 y el desarrollo.
+- Fuente: B01 · Scandinavian Defense: Marshall Variation
+- Sigue la fila de la fuente desde la media jugada 7 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Cf6 (Marshall: 4.Cf3 Af5 5.Ad3 Axd3 6.Dxd3 e6 7.0-0); Wikipedia, Scandinavian Defense (4.c4 echa al caballo de d5); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 4...Af5 a 0.03 de la mejor; 7.0-0 a 0.02; 7...c6 la mejor; 8.c4 la mejor.
+
+### Variante Gipslis (5.Ae2 e6 6.0-0 Cc6 7.c4 Cb6 8.Cc3)
+
+**1.e4 d5 2.exd5 Cf6 3.d4 Cxd5 4.Cf3 Ag4 5.Ae2 e6 6.0-0 Cc6 7.c4 Cb6 8.Cc3**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tienes c4 y d4, y todas tus piezas cerca del centro. Cuando negras ponga el alfil en e7, d5 gana espacio.
+- Fuente: B01 · Scandinavian Defense: Modern Variation, Gipslis Variation
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Cf6 (Gipslis: 5.Ae2 e6 6.0-0 Cc6 7.c4 Cb6 8.Cc3 Ae7 9.d5); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.Ae2 a 0.07 de la mejor; 6.0-0 a 0.11; 6...Cc6 a 0.05; 7.c4 la mejor; 7...Cb6 la mejor; 8.Cc3 la mejor.
+
+### Variante Richter (5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0)
+
+**1.e4 d5 2.exd5 Cf6 3.d4 Cxd5 4.Cf3 g6 5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Echaste al caballo con c4 y enrocaste. El alfil de g7 mira a d4: mantenlo defendido.
+- Fuente: B01 · Scandinavian Defense: Richter Variation
+- Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Cf6 (Richter: 5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.c4 la mejor; 6.Cc3 a 0.26 de la mejor (la de Wikibooks); 7.Ae2 la mejor.

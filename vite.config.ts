@@ -20,6 +20,15 @@ export default defineConfig({
           env: { CURSO: 'caro-kann-estructuras:b' },
         },
       },
+      // la captura contra la Escandinava, por estructuras (2026-11-25): las mismas pruebas de contenido, sin relajarse
+      {
+        extends: true,
+        test: {
+          name: 'curso escandinava',
+          include: ['curso-contenido', 'curso-ciclo', 'correcciones-marcas', 'correcciones-paso-a-paso', 'correcciones-practicar', 'ver-que-pasa'].map((p) => `tests/unit/${p}.test.ts`),
+          env: { CURSO: 'escandinava:w' },
+        },
+      },
     ],
   },
 })

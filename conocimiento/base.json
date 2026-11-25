@@ -2956,6 +2956,350 @@
       "name": "Scandinavian Defense: Panov Transfer",
       "pgn": "1. e4 d5 2. exd5 Nf6 3. c4 c6"
      }
+    },
+    {
+     "id": "curso-clasica",
+     "clave": "escandinava/curso-clasica",
+     "familia": "Línea principal (3...Da5)",
+     "nombre": "Variante Clásica (6.Ac4 e6 7.Ad2 c6 8.Cd5)",
+     "nombreIngles": "Scandinavian Defense: Classical Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qa5",
+      "d4",
+      "Nf6",
+      "Nf3",
+      "Bf5",
+      "Bc4",
+      "e6",
+      "Bd2",
+      "c6",
+      "Nd5"
+     ],
+     "lado": "blancas",
+     "plan": "Tu dama tiene que irse: Cd5 la atacó con el alfil de d2. Sigue con Cxf6+, De2 y el enroque; la dama negra ya no clava a tu caballo.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Classical Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikipedia, Scandinavian Defense (la línea principal: 6.Ac4 Af5 7.Ad2 e6)",
+       "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Da5 (7.Ad2 e6 8.Cd5 Dd8)",
+       "J. Hartmann, \"Beat The Scandi!\", Chess Life Kids, dic. 2023 (6.Ac4 e6 7.Ad2 c6; solo la idea)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.Ac4 a 0.11 de la mejor; 6...e6 a 0.07; 7.Ad2 la mejor; 7...c6 a 0.17; 8.Cd5 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-lasker",
+     "clave": "escandinava/curso-lasker",
+     "familia": "Línea principal (3...Da5)",
+     "nombre": "Variante Lasker (6...Axf3 7.Dxf3 c6 8.Ad2)",
+     "nombreIngles": "Scandinavian Defense: Lasker Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qa5",
+      "d4",
+      "Nf6",
+      "Nf3",
+      "Bg4",
+      "h3",
+      "Bxf3",
+      "Qxf3",
+      "c6",
+      "Bd2"
+     ],
+     "lado": "blancas",
+     "plan": "Te quedaste con los dos alfiles. Ad2 quita la clavada de tu caballo; sigue 0-0-0 o Ac4 y el enroque.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Lasker Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bg4 6. h3"
+     },
+     "continuacion": {
+      "desde": 11,
+      "fuente": [
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6...Axf3 la mejor; 7.Dxf3 la mejor; 7...c6 la mejor; 8.Ad2 la mejor",
+       "Wikibooks, 3...Da5 (Ad2 libera d2 para que el caballo se mueva con tiempo sobre la dama)"
+      ]
+     }
+    },
+    {
+     "id": "curso-bronstein",
+     "clave": "escandinava/curso-bronstein",
+     "familia": "Defensa Gubinsky-Melts (3...Dd6)",
+     "nombre": "Variante Bronstein (6.g3 Cc6 7.Af4 Dd8 8.Ag2)",
+     "nombreIngles": "Scandinavian Defense: Bronstein Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qd6",
+      "d4",
+      "Nf6",
+      "Nf3",
+      "a6",
+      "g3",
+      "Nc6",
+      "Bf4",
+      "Qd8",
+      "Bg2"
+     ],
+     "lado": "blancas",
+     "plan": "Af4 echó a la dama otra vez. Sigue 0-0 y, cuando se pueda, Ce5.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Bronstein Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd6 4. d4 Nf6 5. Nf3 a6"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.g3 la mejor; 6...Cc6 la mejor; 7.Af4 la mejor; 7...Dd8 la mejor; 8.Ag2 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-schiller-pytel",
+     "clave": "escandinava/curso-schiller-pytel",
+     "familia": "Defensa Gubinsky-Melts (3...Dd6)",
+     "nombre": "Variante Schiller-Pytel (5.Cf3 Cf6 6.Ce5 Cbd7 7.Cc4)",
+     "nombreIngles": "Scandinavian Defense: Schiller-Pytel Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qd6",
+      "d4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Ne5",
+      "Nbd7",
+      "Nc4"
+     ],
+     "lado": "blancas",
+     "plan": "El caballo saltó a e5 y después a c4, donde ataca a la dama de d6 otra vez. Sigue tu desarrollo: Af4 o g3 y Ag2, y el enroque.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Schiller-Pytel Variation",
+      "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd6 4. d4 c6"
+     },
+     "continuacion": {
+      "desde": 8,
+      "fuente": [
+       "Wikipedia, Scandinavian Defense (contra 3...Dd6: d4, Cf3, g3, Ag2, 0-0 y Ce5)",
+       "Wikibooks, 3.Cc3 (negras tiene que jugar ...c6 o ...a6 para que Cb5 no eche a la dama)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.Cf3 a 0.12 de la mejor; 5...Cf6 la mejor; 6.Ce5 a 0.03; 6...Cbd7 la mejor; 7.Cc4 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-valenciana",
+     "clave": "escandinava/curso-valenciana",
+     "familia": "Variante Valenciana (3...Dd8)",
+     "nombre": "Variante Valenciana (6.h3 Axf3 7.Dxf3)",
+     "nombreIngles": "Scandinavian Defense: Valencian Variation, Main Line",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qd8",
+      "d4",
+      "Nf6",
+      "Nf3",
+      "Bg4",
+      "h3",
+      "Bxf3",
+      "Qxf3"
+     ],
+     "lado": "blancas",
+     "plan": "Con h3 le preguntaste al alfil, y negras te dio la pareja de alfiles. Desarrolla el alfil de c1 y enroca; si la dama negra toma en d4, Dxb7 gana la torre de a8.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Valencian Variation, Main Line",
+      "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd8 4. d4 Nf6 5. Nf3 Bg4"
+     },
+     "continuacion": {
+      "desde": 10,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 Dd8 (5.Cf3 Ag4 6.h3 Axf3 7.Dxf3 c6)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 6.h3 la mejor; 6...Axf3 a 0.02 de la mejor; 7.Dxf3 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-marshall",
+     "clave": "escandinava/curso-marshall",
+     "familia": "Variante Moderna (2...Cf6)",
+     "nombre": "Variante Marshall (4.Cf3 Af5 5.Ad3 ... 8.c4)",
+     "nombreIngles": "Scandinavian Defense: Marshall Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Nf6",
+      "d4",
+      "Nxd5",
+      "Nf3",
+      "Bf5",
+      "Bd3",
+      "Bxd3",
+      "Qxd3",
+      "e6",
+      "O-O",
+      "c6",
+      "c4"
+     ],
+     "lado": "blancas",
+     "plan": "Con c4 echaste al caballo y te quedaste con dos peones en el centro. Sigue Cc3 y el desarrollo.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Marshall Variation",
+      "pgn": "1. e4 d5 2. exd5 Nf6 3. d4 Nxd5"
+     },
+     "continuacion": {
+      "desde": 6,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Cf6 (Marshall: 4.Cf3 Af5 5.Ad3 Axd3 6.Dxd3 e6 7.0-0)",
+       "Wikipedia, Scandinavian Defense (4.c4 echa al caballo de d5)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 4...Af5 a 0.03 de la mejor; 7.0-0 a 0.02; 7...c6 la mejor; 8.c4 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-gipslis",
+     "clave": "escandinava/curso-gipslis",
+     "familia": "Variante Moderna (2...Cf6)",
+     "nombre": "Variante Gipslis (5.Ae2 e6 6.0-0 Cc6 7.c4 Cb6 8.Cc3)",
+     "nombreIngles": "Scandinavian Defense: Modern Variation, Gipslis Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Nf6",
+      "d4",
+      "Nxd5",
+      "Nf3",
+      "Bg4",
+      "Be2",
+      "e6",
+      "O-O",
+      "Nc6",
+      "c4",
+      "Nb6",
+      "Nc3"
+     ],
+     "lado": "blancas",
+     "plan": "Tienes c4 y d4, y todas tus piezas cerca del centro. Cuando negras ponga el alfil en e7, d5 gana espacio.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Modern Variation, Gipslis Variation",
+      "pgn": "1. e4 d5 2. exd5 Nf6 3. d4 Nxd5 4. Nf3 Bg4"
+     },
+     "continuacion": {
+      "desde": 8,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Cf6 (Gipslis: 5.Ae2 e6 6.0-0 Cc6 7.c4 Cb6 8.Cc3 Ae7 9.d5)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.Ae2 a 0.07 de la mejor; 6.0-0 a 0.11; 6...Cc6 a 0.05; 7.c4 la mejor; 7...Cb6 la mejor; 8.Cc3 la mejor"
+      ]
+     }
+    },
+    {
+     "id": "curso-richter",
+     "clave": "escandinava/curso-richter",
+     "familia": "Variante Moderna (2...Cf6)",
+     "nombre": "Variante Richter (5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0)",
+     "nombreIngles": "Scandinavian Defense: Richter Variation",
+     "eco": "B01",
+     "jugadas": [
+      "e4",
+      "d5",
+      "exd5",
+      "Nf6",
+      "d4",
+      "Nxd5",
+      "Nf3",
+      "g6",
+      "c4",
+      "Nb6",
+      "Nc3",
+      "Bg7",
+      "Be2",
+      "O-O",
+      "O-O"
+     ],
+     "lado": "blancas",
+     "plan": "Echaste al caballo con c4 y enrocaste. El alfil de g7 mira a d4: mantenlo defendido.",
+     "autorPlan": "ia",
+     "frecuencia": 3,
+     "fuenteFrecuencia": "sin dato (regla: 3)",
+     "fuente": {
+      "repo": "lichess-org/chess-openings",
+      "eco": "B01",
+      "name": "Scandinavian Defense: Richter Variation",
+      "pgn": "1. e4 d5 2. exd5 Nf6 3. d4 Nxd5 4. Nf3 g6"
+     },
+     "continuacion": {
+      "desde": 8,
+      "fuente": [
+       "Wikibooks, 1.e4 d5 2.exd5 Cf6 (Richter: 5.c4 Cb6 6.Cc3 Ag7 7.Ae2 0-0 8.0-0)",
+       "motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md): 5.c4 la mejor; 6.Cc3 a 0.26 de la mejor (la de Wikibooks); 7.Ae2 la mejor"
+      ]
+     }
     }
    ]
   },
