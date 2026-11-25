@@ -122,6 +122,42 @@ test.describe('El curso de la Alapin', () => {
   })
 })
 
+test.describe('La Alapin · las correcciones del piloto, con blancas', () => {
+  /** Las coordenadas de un tablero, en el orden en que se ven: de izquierda a derecha y de arriba abajo. */
+  const coordenadas = (t: ReturnType<Page['getByTestId']>) =>
+    t.evaluate((el) => {
+      const leer = (sel: string, eje: 'x' | 'y') =>
+        Array.from(el.querySelectorAll(sel), (c) => ({ t: (c.textContent ?? '').trim(), v: c.getBoundingClientRect()[eje] })).sort((a, b) => a.v - b.v).map((c) => c.t)
+      return { columnas: leer('coords.files coord', 'x'), filas: leer('coords.ranks coord', 'y') }
+    })
+
+  test('todo tablero del curso lleva coordenadas, desde el lado de blancas: a…h de izquierda a derecha y 8…1 de arriba abajo', async ({ page }) => {
+    const BLANCAS = { columnas: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], filas: ['8', '7', '6', '5', '4', '3', '2', '1'] }
+    await page.goto(URL)
+    expect(await coordenadas(page.getByTestId('pagina-curso').getByTestId('tablero-mini').first())).toEqual(BLANCAS)
+    await page.goto(`${URL}/leer/estructura`)
+    expect(await coordenadas(page.getByTestId('tablero-leer').first())).toEqual(BLANCAS)
+    await page.goto(urlDe('v:cambio-central'))
+    await momento(page, 'intro')
+    expect(await coordenadas(page.getByTestId('tablero').first())).toEqual(BLANCAS)
+  })
+
+  test('Practicar: en tu turno no hay texto de tu jugada; después de jugar, su explicación', async ({ page }, info) => {
+    const l = lineaPorId(C, 'v:cf6-d4')!
+    await page.goto(urlDe(l.id))
+    await page.getByTestId('vuelta-practicar').click()
+    await momento(page, 'intro')
+    await page.getByTestId('empezar-vuelta').click()
+    await momento(page, 'tuTurno')
+    const ply = Number(await leccion(page).getAttribute('data-ply'))
+    const narracion = await page.getByTestId('narracion').innerText()
+    expect(narracion).not.toContain('Te toca')
+    expect(narracion).not.toContain(mostrarTexto(C.mias[l.jugadas.slice(0, ply + 1).join(' ')]!.pregunta, 'figuras'))
+    await jugar(page, info, uci(l, ply))
+    await expect(page.getByTestId('narracion')).toContainText('Correcto')
+  })
+})
+
 test.describe('La Alapin en el celular', () => {
   const ANCHOS = [
     { ancho: 360, alto: 740 },
