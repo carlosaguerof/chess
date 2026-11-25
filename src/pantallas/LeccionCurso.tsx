@@ -221,7 +221,7 @@ function Linea({ c, l }: { c: DatosCurso; l: LineaCurso }) {
     mensajes.push({ tipo: 'buena', jugada: jugadaEs(e.intento.san, e.ply), texto: 'Buena jugada, pero esta lección enseña otra línea. Prueba de nuevo.' })
     boton = { texto: 'Reintentar', testid: 'reintentar', accion: () => setE(reintentar(e)) }
   } else if (e.momento === 'plan' && l.variante) {
-    mensajes.push({ tipo: 'info', texto: 'Ya terminó la apertura.' }, { tipo: 'explica', jugada: 'Tu plan:', texto: l.variante.plan.tuyo }, { tipo: 'explica', jugada: 'El de blancas:', texto: l.variante.plan.rival })
+    mensajes.push({ tipo: 'info', texto: 'Ya terminó la apertura.' }, { tipo: 'explica', jugada: 'Tu plan:', texto: l.variante.plan.tuyo }, { tipo: 'explica', jugada: l.lado === 'w' ? 'El de negras:' : 'El de blancas:', texto: l.variante.plan.rival })
     boton = { texto: 'Ahora, Practicar', testid: 'a-practicar', accion: () => setE(empezar(l, 'practicar')) }
   }
 
