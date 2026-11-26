@@ -173,15 +173,22 @@ describe('La Alapin · obligatorio y opcional (§6, con las partidas de este cur
   it('la regla de la Caro-Kann, con los mismos cortes: la más jugada de cada forma de 5 % o más, y toda lección de 2 % o más', () => {
     const L = Object.entries(F.lecciones)
     const paso1 = Object.entries(F.formas).filter(([, p]) => max(p) >= 5).map(([f]) => L.filter(([, l]) => l.forma === f).sort((a, b) => max(b[1]) - max(a[1]))[0]![0])
-    const paso2 = L.filter(([id, l]) => max(l) >= 2 && !paso1.includes(id)).map(([id]) => id)
+    // el paso 2: 2 % o más en una banda donde la lección tiene 10 partidas o más (una banda con menos no decide, §6 n.º 14)
+    const decide = (l: Fila) => BANDAS.some((b) => (l[b].pct ?? 0) >= 2 && l[b].n >= 10)
+    const paso2 = L.filter(([id, l]) => decide(l) && !paso1.includes(id)).map(([id]) => id)
     expect(paso1).toEqual(['cambio-central', 'cf6-d4', 'centro-cc6'])
-    // 2...d6 entra por el paso 2: 2 % o más en una banda con 10 partidas o más (1000–1400)
-    expect(paso2).toEqual(['centro-d6'])
-    expect(F.lecciones['centro-d6']!['1000-1400'].n).toBeGreaterThanOrEqual(10)
-    expect(obligatorias(c).map((v) => v.id)).toEqual([...paso1, ...paso2])
+    expect(paso2).toEqual([])
+    // 2...d6, con ...g6, medida en 5...g6, la jugada que la nombra: 2.7 % con 7 partidas, que no decide. Sigue obligatoria por
+    // el gate, como la Checa en la Eslava (revisión del 2026-11-26): es la única lección del curso donde defiendes e4 con una
+    // pieza, la otra rama de la regla del caballo de la página de Los dos peones del centro
+    const POR_EL_GATE = ['centro-d6']
+    expect(decide(F.lecciones['centro-d6']!)).toBe(false)
+    expect(F.lecciones['centro-d6']!['1000-1400'].n).toBeLessThan(10)
+    expect(obligatorias(c).map((v) => v.id)).toEqual([...paso1, ...POR_EL_GATE])
     expect(opcionales(c).map((v) => v.id)).toEqual(['moderna', 'cc6', 'g6', 'gambito'])
     expect(c.secciones!.map((s) => s.id)).toEqual(['base', 'frecuentes', 'opcional'])
-    expect(c.secciones!.map((s) => s.variantes)).toEqual([paso1, paso2, ['moderna', 'cc6', 'g6', 'gambito']])
+    expect(c.secciones!.map((s) => s.variantes)).toEqual([paso1, POR_EL_GATE, ['moderna', 'cc6', 'g6', 'gambito']])
+    expect(c.variantes.find((v) => v.id === 'centro-d6')!.fuenteFrecuencia).toContain('por el gate')
     expect(c.secciones!.find((s) => s.id === 'opcional')!.nota).toBe('No cuentan para terminar el curso.')
     // lo que más te va a salir ya tiene sus lecciones (D1 A de Carlos, 2026-11-25), y el gambito, la excepción, no tiene datos
     expect(max(F.formas[CENTRO]!)).toBeGreaterThanOrEqual(5)

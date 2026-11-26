@@ -101,8 +101,22 @@ function delMapa(seq) {
   return undefined
 }
 
-/** La posición donde se mide una lección: lo que la separa de las demás, hasta la última jugada del rival. */
+/**
+ * La jugada que nombra a una lección, cuando no es la que la separa de las demás (revisión del 2026-11-26, el mismo
+ * criterio que `NOMBRADA` en `escandinava.mjs`): las dos de Los dos peones del centro se separan en la jugada 2 (2...Cc6,
+ * 2...d6), pero las nombra su respuesta de después, "con ...e6" y "con ...g6".
+ */
+const NOMBRADA = {
+  'centro-cc6': 'e4 c5 c3 Nc6 d4 cxd4 cxd4 e6',
+  'centro-d6': 'e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6',
+}
+
+/** La posición donde se mide una lección: lo que la separa de las demás, hasta la última jugada del rival (o la que la nombra). */
 function definicion(ls, l) {
+  if (NOMBRADA[l.id]) {
+    if (!l.jugadas.join(' ').startsWith(NOMBRADA[l.id] + ' ')) throw new Error(`la jugada que nombra a ${l.id} no está en su línea`)
+    return NOMBRADA[l.id]
+  }
   const otras = ls.filter((x) => x !== l)
   let i = 0
   for (; i < l.jugadas.length; i++) {
@@ -249,7 +263,7 @@ export default function medir(datos) {
   return {
     metodo:
       'Las partidas del curso llegan a 1.e4 c5 y juegas 2.c3; todo porcentaje es de las partidas con 2.c3 (`partidas`). ' +
-      'Una lección se mide en la jugada del rival que la separa de las demás: la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. ' +
+      'Una lección se mide en la jugada del rival que la separa de las demás (las dos de Los dos peones del centro, en la respuesta que las nombra: 4...e6 y 5...g6): la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. ' +
       'Una forma se mide hasta la media jugada 12 siguiendo las jugadas del mapa (en el libro, lo del curso; fuera, la regla de la jugada 3 y, contra un peón en d5 que ataca e4, e5 con ...e6 jugado y si no exd5), y cada hoja se clasifica por lo que pasó con tu peón de e4; su `n` son las partidas reales de sus hojas (si tu jugada del mapa no tiene partidas, las de la posición donde la juegas). ' +
       'La transposición se mide en 4...d5 (de ahí, tus 5.exd5 y 6.Cf3 son las del mapa y 5...Dxd5 la jugaron todas); las jugadas del rival tras 2.c3, sobre las que siguen.',
     partidas,

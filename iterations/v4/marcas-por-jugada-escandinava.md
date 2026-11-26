@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 42 de 101.** Más 23 frases del plan y del paso a paso.
+**Jugadas con marcas: 42 de 101.** Más 24 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -119,7 +119,8 @@
 | plan valenciana tuyo frase 3 | Si saca su caballo a c6, Ab5 lo clava. | flecha f1→b5 (A3, verde, punteada) |
 | plan gipslis tuyo frase 1 | Empuja d5: ganas espacio y echas al caballo de c6. | flecha d4→d5 (A3, verde, punteada) |
 | plan jaque-e5 tuyo frase 1 | Tu peón de f4 amenaza f5, que atacaría a la vez a la dama y al alfil. | flecha f4→f5 (A3, verde, punteada) |
-| plan jaque-e5 tuyo frase 2 | Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3. | flecha g1→f3 (A3, verde, punteada) |
+| plan jaque-e5 tuyo frase 2 | Si su dama se va a c6, Ab5 la clava contra su rey. | flecha e2→b5 (A3, verde, punteada) |
+| plan jaque-e5 tuyo frase 3 | Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3. | flecha g1→f3 (A3, verde, punteada) |
 | plan lasker tuyo frase 2 | Después sacas tu alfil de f1 a c4, con tus dos alfiles mirando a todo el tablero. | flecha f1→c4 (A3, verde, punteada) |
 | plan jaque-e6 tuyo frase 1 | Si su caballo sigue en b4, a3 lo echa. | flecha a2→a3 (A3, verde, punteada) |
 | plan jaque-e6 tuyo frase 2 | Después, tu caballo de f3 salta a e5. | flecha f3→e5 (A3, verde, punteada) |

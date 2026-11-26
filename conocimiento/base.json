@@ -4345,7 +4345,7 @@
       "f4"
      ],
      "lado": "blancas",
-     "plan": "Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
+     "plan": "Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si su dama se va a c6, Ab5 la clava; si negras tapa con ...f5, sacas tu caballo de g1 a f3.",
      "autorPlan": "ia",
      "frecuencia": 3,
      "fuenteFrecuencia": "sin dato (regla: 3)",

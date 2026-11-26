@@ -807,8 +807,8 @@
     ]
    },
    "regla": "Si un caballo ataca tu e4 y su caballo de dama ya está en c6, d5 contra él. Lo demás, en la página de Los dos peones del centro.",
-   "frecuencia": 42.24,
-   "fuenteFrecuencia": "lichess 1000–1400: 42.2 % de las partidas del curso (n 234), en 2...Cc6; 600–1000: 43.8 % (n 14); Los dos peones del centro, 63.8 % y 71.9 %",
+   "frecuencia": 8.32,
+   "fuenteFrecuencia": "lichess 1000–1400: 8.3 % de las partidas del curso (n 31), en 4...e6, la jugada que la nombra; 600–1000: sin datos; la más jugada de Los dos peones del centro (63.8 % y 71.9 %)",
    "estructura": "El rival no ataca tu e4 de entrada"
   },
   {
@@ -868,8 +868,8 @@
     ]
    },
    "regla": "Si un caballo ataca tu e4 y su caballo de dama no está en c6, defiendes e4 con una pieza. Lo demás, en la página de Los dos peones del centro.",
-   "frecuencia": 16.06,
-   "fuenteFrecuencia": "lichess 1000–1400: 16.1 % de las partidas del curso (n 89), en 2...d6; 600–1000: 9.4 % (n 3)",
+   "frecuencia": 2.65,
+   "fuenteFrecuencia": "lichess 1000–1400: 2.7 % de las partidas del curso (n 7), en 5...g6, la jugada que la nombra; 600–1000: sin datos. Con menos de 10 partidas no decide (la regla la dejaría opcional): es obligatoria por el gate, como la Checa en la Eslava, porque es la única lección del curso donde defiendes e4 con una pieza (2...d6 sale en 16.1 % de tus Alapin)",
    "estructura": "El rival no ataca tu e4 de entrada"
   },
   {

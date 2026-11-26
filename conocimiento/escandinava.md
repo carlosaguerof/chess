@@ -181,7 +181,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 d5 2.exd5 Dxd5 3.Cc3 De5+ 4.Ae2 Ag4 5.d4 De6 6.f3 Af5 7.g4 Ag6 8.f4**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.
+- Plan *(redactado por la IA)*: Con d4 volviste a atacar a la dama, y con f3 y g4 echaste a su alfil. Amenazas f5, que ataca a la vez a la dama y al alfil; si su dama se va a c6, Ab5 la clava; si negras tapa con ...f5, sacas tu caballo de g1 a f3.
 - Fuente: B01 · Scandinavian Defense: Mieses-Kotroc Variation
 - Sigue la fila de la fuente desde la media jugada 5 con teoría de: Wikibooks, 1.e4 d5 2.exd5 Dxd5 3.Cc3 (3...De5+ "4. Be2 and White has developed another piece"); partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): 3...De5+ es 32.6 % y 15.6 % de las partidas tras 3.Cc3; tras 4.Ae2, 4...Ag4 es la más jugada (21.9 % y 35.1 %); tras 5.d4, 5...De6 (30 de 53 en 1000–1400); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-escandinava.md, ids J2-…): 3.Cc3, 4.Ae2, 5.d4, 6.f3, 7.g4 y 8.f4, cada una la mejor; 6...Af5, la única con partidas (3), a 0.16 de 6...Ah5, la mejor de negras; 7...Ag6, la mejor.
 

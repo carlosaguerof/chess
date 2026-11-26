@@ -1437,7 +1437,7 @@
    "intro": "Estás en el jaque: la dama de negras da jaque desde e5, y tu objetivo es ganar tiempos contra sus piezas sin regalar nada. Aquí negras saca su alfil de c8.",
    "idea": "Tapas el jaque con Ae2 y vuelves a atacar a la dama con d4. Si su alfil se queda en g4 con la dama como único defensor, tus peones lo echan, y f4 amenaza f5.",
    "plan": {
-    "tuyo": "Tu peón de f4 amenaza f5, que atacaría a la vez a la dama y al alfil. Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
+    "tuyo": "Tu peón de f4 amenaza f5, que atacaría a la vez a la dama y al alfil. Si su dama se va a c6, Ab5 la clava contra su rey. Si negras lo tapa con ...f5, sacas tu caballo de g1 a f3.",
     "rival": "Negras tapa tu amenaza con su peón de f; sus caballos y su otro alfil siguen en casa.",
     "marcas": [],
     "marcasDe": {
@@ -1447,6 +1447,15 @@
         "tipo": "A3",
         "de": "f4",
         "a": "f5",
+        "color": "verde",
+        "punteada": true
+       }
+      ],
+      [
+       {
+        "tipo": "A3",
+        "de": "e2",
+        "a": "b5",
         "color": "verde",
         "punteada": true
        }
@@ -1495,7 +1504,7 @@
      "MOTOR"
     ]
    },
-   "regla": "Contra el jaque en e5, Ae2; si su alfil sale a g4, d4 vuelve a atacar a la dama. Lo demás, en la página del jaque.",
+   "regla": "Contra el jaque en e5, Ae2; si su alfil sale a g4, d4 vuelve a atacar a la dama, y si su caballo sale a c6, Cf3. Lo demás, en la página del jaque.",
    "frecuencia": 3,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 4.4 % en 4...Ag4; 600–1000: 6.1 % (iterations/v4/mapa-escandinava.md); el jaque, 28.4 % y 44.7 %"
   },
@@ -1629,7 +1638,7 @@
      "MOTOR"
     ]
    },
-   "regla": "Contra el jaque en e6, Ae2; si su caballo sale a c6, d4, que amenaza d5. Lo demás, en la página del jaque.",
+   "regla": "Contra el jaque en e6, Ae2; si su caballo sale a c6, d4, que amenaza d5 (con la dama en e5, Cf3). Lo demás, en la página del jaque.",
    "frecuencia": 3,
    "fuenteFrecuencia": "partidas de lichess, 1000–1400: 4.3 % en 4...Cc6; 600–1000: 3.6 % (iterations/v4/mapa-escandinava.md)"
   },
@@ -3693,8 +3702,51 @@
    "pista": "Un peón que avanza dos casillas puede ocupar el centro y atacar a la dama.",
    "hace": "Avanzas tu peón de d al centro y atacas a la dama de e5: tiene que moverse otra vez.",
    "porque": "Ganas otro tiempo: tú ocupas el centro y negras mueve la dama por tercera vez. Además le abres camino a tu alfil de c1.",
+   "prepara": "Si su dama sale de la columna e, su alfil de g4 se queda sin defensa: tu alfil de e2 se lo come.",
    "cuidado": "Si su alfil cambia en e2, retomas con tu caballo de g1: tu peón de d4 sigue atacando a la dama.",
    "ver": {
+    "prepara": [
+     {
+      "pasos": [
+       {
+        "frase": "Esta es la posición después de 5.d4.",
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-axg4"
+        ]
+       },
+       {
+        "frase": "5...Da5: la dama sale de la columna e y deja solo a su alfil de g4.",
+        "jugadas": [
+         "Qa5"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-axg4"
+        ]
+       },
+       {
+        "frase": "6.Axg4: tu alfil de e2 se come el alfil de g4. Ganaste un alfil.",
+        "jugadas": [
+         "Bxg4"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-axg4"
+        ]
+       }
+      ]
+     }
+    ],
     "cuidado": [
      {
       "pasos": [
@@ -3806,7 +3858,8 @@
     "F-e5-ag4",
     "J-e5-ag4",
     "J2-e5-cf3",
-    "J2-e5-axe2"
+    "J2-e5-axe2",
+    "J2-e5-axg4"
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3": {
@@ -3909,7 +3962,7 @@
    "pregunta": "Su alfil se fue a g6, en la misma fila que su dama. ¿Qué amenaza creas?",
    "pista": "Un peón que llegue a f5 atacaría a la dama y al alfil a la vez.",
    "hace": "Avanzas tu peón de f y amenazas f5, que atacaría a la vez a la dama de e6 y al alfil de g6.",
-   "porque": "Si negras no lo tapa, f5 gana su alfil.",
+   "porque": "Si negras no lo tapa, f5 gana su alfil. Pero si su dama se va a c6, primero Ab5: la clava contra su rey y la ganas.",
    "marcasDe": {
     "hace": [
      [
@@ -4003,6 +4056,85 @@
         ]
        }
       ]
+     },
+     {
+      "pasos": [
+       {
+        "frase": "Esta es la posición después de 8.f4.",
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       },
+       {
+        "frase": "8...Dc6: la dama se va a c6.",
+        "jugadas": [
+         "Qc6"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       },
+       {
+        "frase": "9.Ab5: tu alfil clava la dama contra su rey: no se puede mover de esa diagonal.",
+        "jugadas": [
+         "Bb5"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       },
+       {
+        "frase": "9...e6: negras saca su peón de e.",
+        "jugadas": [
+         "e6"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       },
+       {
+        "frase": "10.Axc6+: tu alfil se come la dama, con jaque.",
+        "jugadas": [
+         "Bxc6+"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       },
+       {
+        "frase": "10...Cxc6: su caballo retoma. Ganaste la dama por un alfil.",
+        "jugadas": [
+         "Nxc6"
+        ],
+        "fuente": [
+         "WB-3Cc3",
+         "MOTOR"
+        ],
+        "motor": [
+         "J2-e5-dc6"
+        ]
+       }
+      ]
      }
     ]
    },
@@ -4011,7 +4143,8 @@
    ],
    "motor": [
     "J2-e5-f4",
-    "J2-e5-db6"
+    "J2-e5-db6",
+    "J2-e5-dc6"
    ]
   },
   "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2": {
@@ -4135,7 +4268,7 @@
    "pregunta": "Su caballo de b4 mira a tu peón de c2, pero tu dama lo cuida. ¿Qué pieza sacas ahora?",
    "pista": "Tu caballo de rey todavía no sale, y desde su casilla defendería tu peón del centro.",
    "hace": "Sacas tu caballo de rey: defiende tu peón de d4.",
-   "porque": "Tu peón de c2 está seguro: si el caballo de b4 se lo come, tu dama lo captura.",
+   "porque": "Mientras solo el caballo de b4 ataque tu peón de c2, está seguro: si se lo come, tu dama lo captura.",
    "prepara": "Ya puedes enrocar.",
    "marcasDe": {
     "hace": [
@@ -4215,9 +4348,9 @@
    "buenas": [
     "Ne5"
    ],
-   "hace": "Enrocas: tu rey se pone a salvo y sale de la columna e.",
-   "porque": "Con tu rey en e1, tu alfil de e2 estaba clavado por la dama.",
-   "prepara": "Tu torre puede ir a e1, frente a la dama.",
+   "hace": "Enrocas: tu rey se pone a salvo.",
+   "porque": "Con tu rey en e1, tu alfil de e2 estaba clavado.",
+   "prepara": "Tu torre puede ir a e1, frente a la dama, si su dama no ataca también tu peón de c2.",
    "describe": {
     "prepara": [
      [
