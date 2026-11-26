@@ -1311,7 +1311,7 @@
    "intro": "Estás en la Pelea del lado de dama: tu objetivo es que blancas gaste jugadas mientras tú sacas tus piezas. Blancas saca sus dos caballos y después juega 5.e4.",
    "idea": "Contra e4 y e5, ...b5 sostiene c4 y tu caballo se va al centro, a d5.",
    "plan": {
-    "tuyo": "Si blancas cambia en b5, primero ...Cxc3: cambias su caballo, y después retomas en b5 con tu peón de c. Si su caballo salta a g5, primero ...Ab7, que cuida tu torre de a8, y si su dama llega a h5, ...g6 cuida f7; después sacas tus piezas y enrocas.",
+    "tuyo": "Si blancas cambia en b5, primero ...Cxc3 y retomas en b5 con tu peón de c. Si su caballo salta a g5, ...Ae7, y contra h4, ...h6; con tu alfil en e7, si ese caballo sigue en g5, tómalo antes de retomar en b5. Si salta a g5 después del cambio, ...Ab7, y contra Dh5, ...g6. Después sacas tus piezas y enrocas.",
     "rival": "Blancas va a atacar en el lado de rey con sus piezas.",
     "marcas": [],
     "fuente": [
@@ -1322,7 +1322,9 @@
      "E-ge-w8",
      "O-ge-axb5",
      "O-ge-a6",
-     "O-ge-cg5"
+     "O-ge-cg5",
+     "O-ge-cg5-directo",
+     "O-ge-cg5-axg5"
     ],
     "pasoAPaso": {
      "ilustrativo": true,
