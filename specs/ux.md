@@ -6,7 +6,7 @@
 
 Decidida por Carlos el 2026-10-28 (Limpieza §3; decisión 21 de `log.md`). Manda sobre lo que el MVP decía del inglés y el ECO.
 
-1. **Una pantalla, un propósito,** con una acción principal clara.
+1. **Una pantalla, un propósito,** con una acción principal clara. Si a una pantalla le entra una acción principal nueva, la de antes baja a secundaria (gris), en su lugar y de su tamaño: dos botones verdes grandes son dos acciones principales (Inicio con "Seguir", vuelta 5, `iterations/v5/learning.md` n.º 4).
 2. **Sin párrafos que expliquen la app.** Como mucho, un subtítulo corto.
 3. **Sin etiquetas sobre de dónde sale cada cosa** ("de tu guía", "en tu repertorio", "redactado por la IA", la fuente) en las vistas principales. Si hace falta, van en un "Detalles" que no estorbe.
 4. **Sin nombres en inglés ni códigos ECO,** salvo en ese "Detalles" de Aperturas y defensas, y en la guía "Instalar en el iPhone", donde los botones van como los muestra el iPhone de Carlos (en inglés), con su explicación en español.

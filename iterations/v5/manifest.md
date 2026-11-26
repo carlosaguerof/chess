@@ -38,5 +38,7 @@ Abro la app, toco "Seguir" y caigo en lo siguiente obligatorio del orden que esc
 |---|---|
 | `manifest.md` | Esta página. |
 | `analisis-orden.md` | La recomendación del orden, la pregunta para mí, el porqué, los datos con sus comandos y las fuentes. |
+| `capturas/` | Inicio antes y después de "Seguir" (`antes/` y `despues/`, al ancho del iPhone y de la computadora, en Chromium). |
+| `learning.md` | Lo aprendido al construir el escalón 1 (adelantado: se abrió con la corrida del botón). |
 
 Al cerrarla: `feedback.md`, `changes.md` y `learning.md`.
