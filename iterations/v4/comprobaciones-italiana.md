@@ -231,3 +231,15 @@ Las posiciones finales de cada lección, los planes contra las respuestas más j
 | Z-hung-nc5 | `node motor.mjs mejores "e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4 c3 Nf6 e5 Ne4 Bd5 Nc5" --prof 18 --n 3` | Mueven: blancas · profundidad 18 · +1.44  cxd4 Na6 O-O d6 Nc3 O-O Qe2 Ncb4 · +0.26  b4 Ne6 b5 Na5 cxd4 O-O O-O d6 · -0.03  a3 dxc3 Nxc3 d6 exd6 cxd6 Bf4 Bf5 |
 | Z-paris-ne5 | `node motor.mjs mejores "e4 e5 Nf3 Nc6 Bc4 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 O-O Ne5" --prof 18 --n 3` | Mueven: blancas · profundidad 18 · +0.76  Be2 O-O f4 Ng6 g4 c6 g5 Ne8 · +0.39  Bb5+ c6 Be2 O-O f4 Ng6 Kh1 Re8 · +0.38  Bb3 O-O f4 Ned7 Qf3 Re8 Be3 Nc5 |
 | Z-pol-e4 | `node motor.mjs mejores "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Be2 h6 Nf3 e4" --prof 18 --n 3` | Mueven: blancas · profundidad 18 · -0.24  Ne5 Bc5 d3 Bxf2+ Kxf2 Qd4+ Ke1 Qxe5 · -1.15  Ng1 Bc5 d4 exd3 Qxd3 Qb6 Nc3 O-O · -3.22  Nh4 g5 d3 gxh4 Nc3 Rg8 Be3 Be6 |
+
+## La revisión de lo publicado (2026-11-26): el caballo en g4 y un alfil que mira a f2
+
+La regla decía "con su alfil en c5"; la revisión independiente de lo publicado (`00_corridas/chess/2026-11-26_REVISION_correcciones-publicadas.md`, I1 e I2) encontró que el motivo es un alfil que mira a f2, también desde b6 o a7, y que ya enrocado con la torre en f1, h3 sí sirve. Comandos con `node scripts/motor-comprobar.ts`, profundidad 20, desde la raíz del repo.
+
+| Id | Afirmación | Comando | Resultado | Veredicto |
+|---|---|---|---|---|
+| W2-ng4-a7-te1 | Con su alfil en a7 y tu torre en e1, h3 contra ...Cg4 pierde; regrésala a f1 | `mejores "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 Nbd2 Ng4" --n 3 --prof 20` · `jugada … "h3"` | +0.29 Te2 · +0.04 Tf1 · h3 pierde 593 (Cxf2) | Se sostiene |
+| W2-ng4-b6-te1 | Con su alfil en b6 y tu torre en e1, igual | `mejores "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 Bb6 Nbd2 Ng4" --n 3 --prof 20` | 0.00 Tf1 · 0.00 Te2 · −2.04 d4 | Se sostiene |
+| W2-ng4-b6-antes | Con su alfil en b6, antes de enrocar, h3 pierde; d4 no pierde material (0-0 es la mejor) | `mejores "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 Bb6 Nbd2 Ng4" --n 3 --prof 20` · `jugada … "h3"` · `jugada … "d4"` · `jugada … "O-O"` | +0.54 0-0 · h3 pierde 449 · d4 a 41 (+0.13) · 0-0 la mejor | Se sostiene |
+| W2-ng4-f1 | Ya enrocado y con tu torre en f1, h3 sí sirve (con su alfil en c5 o en b6) | `jugada "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Ng4" "h3" --prof 20` · `jugada "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 O-O O-O Ng4" "h3"` · `jugada "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Bb6 Bb3 Ng4" "h3"` | h3 la mejor en las tres (+0.67, +1.18, +0.61) | Se sostiene |
+| W2-d3-plan | El plan de la Dos Caballos con 4.d3: h3 primero, antes de Ab3 y Cbd2 | `plan "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1" "h3 Bb3 Nbd2 Rf1"` | contra ...a6: h3 a 8 · contra ...Ae6: h3 a 38 (Axe6 la mejor); ninguna pierde material | Se sostiene |

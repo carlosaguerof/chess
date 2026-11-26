@@ -38,11 +38,21 @@ const material = (ch: Chess) => {
 }
 const posicion = (js: string[]) => jugar(js).ch.fen().split(' ').slice(0, 4).join(' ')
 
-/** La entrada del mapa de una línea, mirando toda la línea (no solo su final). */
+/**
+ * La entrada del mapa de una línea, mirando toda la línea (no solo su final). Los dos peones del centro (2026-11-25, con
+ * sus lecciones): tu peón de e4 no se mueve en toda la línea y en algún momento tienes peones en e4 y d4 a la vez.
+ */
 function entrada(js: string[]): 'aislado' | 'cadena' | 'gambito' | 'centro' | 'otra' {
   const { ms } = jugar(js)
   const i = ms.findIndex((m) => m.color === 'w' && m.piece === 'p' && m.from === 'e4')
-  if (i < 0) return 'otra'
+  if (i < 0) {
+    const ch = new Chess()
+    const juntos = js.some((s) => {
+      ch.move(s)
+      return ['e4', 'd4'].every((x) => ch.get(x as never)?.type === 'p' && ch.get(x as never)?.color === 'w')
+    })
+    return juntos ? 'centro' : 'otra'
+  }
   if (ms[i]!.to === 'e5') return 'cadena'
   if (ms[i]!.to !== 'd5') return 'otra'
   const sig = ms[i + 1]
@@ -52,7 +62,7 @@ function entrada(js: string[]): 'aislado' | 'cadena' | 'gambito' | 'centro' | 'o
 }
 
 describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
-  const ETIQUETA: Record<string, string> = { aislado: 'El rival retoma en d5 con la dama', cadena: 'El rival ataca tu e4 con el caballo', gambito: 'El rival no recupera el peón (gambito)' }
+  const ETIQUETA: Record<string, string> = { aislado: 'El rival retoma en d5 con la dama', cadena: 'El rival ataca tu e4 con el caballo', gambito: 'El rival no recupera el peón (gambito)', centro: 'El rival no ataca tu e4 de entrada' }
 
   it('cada lección cae en una sola entrada, y su etiqueta lo dice', () => {
     const vistas: Record<string, string[]> = {}
@@ -61,7 +71,7 @@ describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
       ;(vistas[e] ??= []).push(v.id)
       expect(v.estructura, v.id).toBe(ETIQUETA[e])
     }
-    expect(vistas).toEqual({ aislado: ['cambio-central', 'moderna', 'cc6', 'g6'], cadena: ['cf6-d4'], gambito: ['gambito'] })
+    expect(vistas).toEqual({ aislado: ['cambio-central', 'moderna', 'cc6', 'g6'], cadena: ['cf6-d4'], centro: ['centro-cc6', 'centro-d6'], gambito: ['gambito'] })
   })
 
   it('El aislado: al final de sus cuatro lecciones, tu peón de d4 no tiene peones propios en c ni en e (hallazgo 10 del gate)', () => {
@@ -86,6 +96,29 @@ describe('La Alapin · el mapa contra las líneas (chess.js)', () => {
     // a media captura (7...Axc4, antes de 8.Dxc4) no cuenta: se mide cuando ya jugaste
     for (let n = js.indexOf('Nf6') + 2; n <= js.length; n += 2) expect(material(jugar(js.slice(0, n)).ch), js.slice(0, n).join(' ')).toBeGreaterThanOrEqual(1)
     expect(material(jugar(js).ch)).toBe(1)
+  })
+
+  it('Los dos peones del centro: tu peón de e4 sigue en e4 al final de sus dos lecciones, y cada una aplica la regla del caballo de su página', () => {
+    const cc6 = jugadasDeVariante(c, c.variantes.find((v) => v.id === 'centro-cc6')!)
+    const d6 = jugadasDeVariante(c, c.variantes.find((v) => v.id === 'centro-d6')!)
+    for (const js of [cc6, d6]) expect(jugar(js).ch.get('e4'), js.join(' ')).toMatchObject({ type: 'p', color: 'w' })
+    // en 2...Cc6, su caballo de f6 ataca e4 y su caballo de dama está en c6: d5 contra él
+    const antesD5 = jugar(cc6.slice(0, -1)).ch
+    expect(antesD5.attackers('e4' as never, 'b')).toContain('f6')
+    expect(antesD5.get('c6')).toMatchObject({ type: 'n', color: 'b' })
+    expect(cc6.at(-1)).toBe('d5')
+    // y si el caballo de f6 se come e4, tu peón de d5 se come el de c6
+    expect(jugar([...cc6, 'Nxe4']).ch.moves()).toContain('dxc6')
+    // en 2...d6, su caballo ataca e4 y su caballo de dama sigue en b8: defiendes e4 con el caballo de b1
+    const i = d6.indexOf('Nc3')
+    const antesCc3 = jugar(d6.slice(0, i)).ch
+    expect(antesCc3.attackers('e4' as never, 'b')).toContain('f6')
+    expect(antesCc3.get('b8')).toMatchObject({ type: 'n', color: 'b' })
+    expect(jugar(d6.slice(0, i + 1)).ch.attackers('e4' as never, 'w')).toContain('c3')
+    // la página ya no dice que no tiene lección, y el mapa tampoco
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).not.toContain('no trae lección')
+    expect(c.piezas.estructura.paginas[3]!.texto.join(' ')).toContain('Sus dos lecciones')
+    expect(c.piezas.estructura.paginas[0]!.texto.join(' ')).not.toContain('no tiene lección')
   })
 
   it('las páginas de La estructura: El mapa, El aislado, La cadena y Los dos peones del centro (sin la del gambito)', () => {
@@ -123,15 +156,15 @@ describe('La Alapin · obligatorio y opcional (§6, con las partidas de este cur
   // Los números salen de `conocimiento/frecuencias/alapin.json` (`node scripts/frecuencias-cursos.mjs siciliana:w`, con el
   // método del mapa, `iterations/v4/mapa-alapin.md`): lichess 600–1000 y 1000–1400, siguiendo las jugadas del mapa.
   const max = (x: Fila) => Math.max(...BANDAS.map((b) => x[b].pct ?? 0))
-  const FORMA_DE: Record<string, string> = { aislado: 'El aislado', cadena: 'La cadena', gambito: 'El gambito (la excepción)' }
-  const SIN_LECCION = 'Los dos peones del centro'
+  const FORMA_DE: Record<string, string> = { aislado: 'El aislado', cadena: 'La cadena', gambito: 'El gambito (la excepción)', centro: 'Los dos peones del centro' }
+  const CENTRO = 'Los dos peones del centro'
   const TRANSPOSICION = '2...Cc6 3.d4 cxd4 4.cxd4 d5: con 5.exd5 Dxd5 6.Cf3 llega al Cambio Central'
 
   it('el archivo de frecuencias es de este curso: una fila por cada lección, y ninguna de más', () => {
     expect(F.curso).toBe('siciliana:w')
     expect(Object.keys(F.lecciones).sort()).toEqual(c.variantes.map((v) => v.id).sort())
     for (const v of c.variantes) expect(F.lecciones[v.id]!.forma, v.id).toBe(FORMA_DE[entrada(jugadasDeVariante(c, v))])
-    expect(Object.keys(F.formas).sort()).toEqual(['El aislado', 'La cadena'])
+    expect(Object.keys(F.formas).sort()).toEqual(['El aislado', 'La cadena', CENTRO])
     // "sin datos" no es 0 %: un pct null va con n 0, y un pct con partidas
     for (const fila of [...Object.values(F.lecciones), ...Object.values(F.formas), ...Object.values(F.otras)])
       for (const b of BANDAS) expect(fila[b].pct === null, JSON.stringify(fila)).toBe(fila[b].n === 0)
@@ -140,16 +173,26 @@ describe('La Alapin · obligatorio y opcional (§6, con las partidas de este cur
   it('la regla de la Caro-Kann, con los mismos cortes: la más jugada de cada forma de 5 % o más, y toda lección de 2 % o más', () => {
     const L = Object.entries(F.lecciones)
     const paso1 = Object.entries(F.formas).filter(([, p]) => max(p) >= 5).map(([f]) => L.filter(([, l]) => l.forma === f).sort((a, b) => max(b[1]) - max(a[1]))[0]![0])
-    const paso2 = L.filter(([id, l]) => max(l) >= 2 && !paso1.includes(id)).map(([id]) => id)
-    expect(paso1).toEqual(['cambio-central', 'cf6-d4'])
+    // el paso 2: 2 % o más en una banda donde la lección tiene 10 partidas o más (una banda con menos no decide, §6 n.º 14)
+    const decide = (l: Fila) => BANDAS.some((b) => (l[b].pct ?? 0) >= 2 && l[b].n >= 10)
+    const paso2 = L.filter(([id, l]) => decide(l) && !paso1.includes(id)).map(([id]) => id)
+    expect(paso1).toEqual(['cambio-central', 'cf6-d4', 'centro-cc6'])
     expect(paso2).toEqual([])
-    expect(obligatorias(c).map((v) => v.id)).toEqual([...paso1, ...paso2])
+    // 2...d6, con ...g6, medida en 5...g6, la jugada que la nombra: 2.7 % con 7 partidas, que no decide. Sigue obligatoria por
+    // el gate, como la Checa en la Eslava (revisión del 2026-11-26): es la única lección del curso donde defiendes e4 con una
+    // pieza, la otra rama de la regla del caballo de la página de Los dos peones del centro
+    const POR_EL_GATE = ['centro-d6']
+    expect(decide(F.lecciones['centro-d6']!)).toBe(false)
+    expect(F.lecciones['centro-d6']!['1000-1400'].n).toBeLessThan(10)
+    expect(obligatorias(c).map((v) => v.id)).toEqual([...paso1, ...POR_EL_GATE])
     expect(opcionales(c).map((v) => v.id)).toEqual(['moderna', 'cc6', 'g6', 'gambito'])
-    expect(c.secciones!.map((s) => s.id)).toEqual(['base', 'opcional'])
+    expect(c.secciones!.map((s) => s.id)).toEqual(['base', 'frecuentes', 'opcional'])
+    expect(c.secciones!.map((s) => s.variantes)).toEqual([paso1, POR_EL_GATE, ['moderna', 'cc6', 'g6', 'gambito']])
+    expect(c.variantes.find((v) => v.id === 'centro-d6')!.fuenteFrecuencia).toContain('por el gate')
     expect(c.secciones!.find((s) => s.id === 'opcional')!.nota).toBe('No cuentan para terminar el curso.')
-    // lo que más te va a salir no tiene lección (el mapa), y el gambito, la excepción, no tiene datos
-    expect(max(F.otras[SIN_LECCION]!)).toBeGreaterThanOrEqual(5)
-    expect(L.some(([, l]) => l.forma === SIN_LECCION)).toBe(false)
+    // lo que más te va a salir ya tiene sus lecciones (D1 A de Carlos, 2026-11-25), y el gambito, la excepción, no tiene datos
+    expect(max(F.formas[CENTRO]!)).toBeGreaterThanOrEqual(5)
+    expect(L.filter(([, l]) => l.forma === CENTRO).map(([id]) => id)).toEqual(['centro-cc6', 'centro-d6'])
     expect(BANDAS.map((b) => F.otras['El gambito (la excepción)']![b].pct)).toEqual([null, null])
   })
 
@@ -218,6 +261,11 @@ describe('La Alapin · lo guardado de antes', () => {
     // la Heidenfeld sola sí se muda a la de 4.d4
     expect(pasarAlapin({ [`${P}alapin-cf6-heidenfeld`]: 7 })).toEqual({ [`${P}alapin-curso-cf6-d4`]: 7 })
     // el id nuevo es el de `leccionIdDe`: lo que se muda, el Repaso lo encuentra
-    for (const v of c.variantes) expect(Object.values(LECCIONES_ALAPIN).map((b) => P + b)).toContain(leccionIdDe(c, v))
+    const ids = c.variantes.map((v) => leccionIdDe(c, v))
+    for (const b of Object.values(LECCIONES_ALAPIN)) expect(ids).toContain(P + b)
+    // las lecciones de Los dos peones del centro (2026-11-25) no tenían lección de antes: nada se muda a ellas
+    expect(Object.values(LECCIONES_ALAPIN).filter((b) => b.includes('centro'))).toEqual([])
+    // y todas las demás lecciones del curso sí reciben lo de una lección vieja
+    for (const v of c.variantes.filter((x) => !x.id.startsWith('centro-'))) expect(Object.values(LECCIONES_ALAPIN).map((b) => P + b)).toContain(leccionIdDe(c, v))
   })
 })

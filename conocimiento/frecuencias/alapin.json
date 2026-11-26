@@ -12,7 +12,7 @@
   "minimo": 3
  },
  "script": "scripts/frecuencias/alapin.mjs",
- "metodo": "Las partidas del curso llegan a 1.e4 c5 y juegas 2.c3; todo porcentaje es de las partidas con 2.c3 (`partidas`). Una lección se mide en la jugada del rival que la separa de las demás: la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. Una forma se mide hasta la media jugada 12 siguiendo las jugadas del mapa (en el libro, lo del curso; fuera, la regla de la jugada 3 y, contra un peón en d5 que ataca e4, e5 con ...e6 jugado y si no exd5), y cada hoja se clasifica por lo que pasó con tu peón de e4; su `n` son las partidas reales de sus hojas (si tu jugada del mapa no tiene partidas, las de la posición donde la juegas). La transposición se mide en 4...d5 (de ahí, tus 5.exd5 y 6.Cf3 son las del mapa y 5...Dxd5 la jugaron todas); las jugadas del rival tras 2.c3, sobre las que siguen.",
+ "metodo": "Las partidas del curso llegan a 1.e4 c5 y juegas 2.c3; todo porcentaje es de las partidas con 2.c3 (`partidas`). Una lección se mide en la jugada del rival que la separa de las demás (las dos de Los dos peones del centro, en la respuesta que las nombra: 4...e6 y 5...g6): la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. Una forma se mide hasta la media jugada 12 siguiendo las jugadas del mapa (en el libro, lo del curso; fuera, la regla de la jugada 3 y, contra un peón en d5 que ataca e4, e5 con ...e6 jugado y si no exd5), y cada hoja se clasifica por lo que pasó con tu peón de e4; su `n` son las partidas reales de sus hojas (si tu jugada del mapa no tiene partidas, las de la posición donde la juegas). La transposición se mide en 4...d5 (de ahí, tus 5.exd5 y 6.Cf3 son las del mapa y 5...Dxd5 la jugaron todas); las jugadas del rival tras 2.c3, sobre las que siguen.",
  "partidas": {
   "600-1000": 32,
   "1000-1400": 555
@@ -42,6 +42,30 @@
    },
    "frecuencia": 4.33
   },
+  "centro-cc6": {
+   "forma": "Los dos peones del centro",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 8.3,
+    "n": 31
+   },
+   "frecuencia": 8.32
+  },
+  "centro-d6": {
+   "forma": "Los dos peones del centro",
+   "600-1000": {
+    "pct": null,
+    "n": 0
+   },
+   "1000-1400": {
+    "pct": 2.7,
+    "n": 7
+   },
+   "frecuencia": 2.65
+  },
   "moderna": {
    "forma": "El aislado",
    "600-1000": {
@@ -61,10 +85,10 @@
     "n": 0
    },
    "1000-1400": {
-    "pct": 0.7,
+    "pct": 1.1,
     "n": 4
    },
-   "frecuencia": 0.72
+   "frecuencia": 1.06
   },
   "g6": {
    "forma": "El aislado",
@@ -108,8 +132,18 @@
     "n": 7
    },
    "1000-1400": {
-    "pct": 13.4,
-    "n": 25
+    "pct": 14.6,
+    "n": 22
+   }
+  },
+  "Los dos peones del centro": {
+   "600-1000": {
+    "pct": 71.9,
+    "n": 14
+   },
+   "1000-1400": {
+    "pct": 63.8,
+    "n": 227
    }
   }
  },
@@ -122,16 +156,6 @@
    "1000-1400": {
     "pct": 5.2,
     "n": 13988
-   }
-  },
-  "Los dos peones del centro": {
-   "600-1000": {
-    "pct": 71.9,
-    "n": 14
-   },
-   "1000-1400": {
-    "pct": 55,
-    "n": 222
    }
   },
   "El gambito (la excepción)": {
@@ -150,7 +174,7 @@
     "n": 0
    },
    "1000-1400": {
-    "pct": 5,
+    "pct": 5.1,
     "n": 19
    }
   },

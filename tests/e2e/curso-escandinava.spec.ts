@@ -47,21 +47,21 @@ async function terminar(page: Page, info: TestInfo, id: string) {
 }
 
 test.describe('El curso de la captura contra la Escandinava', () => {
-  test('en Aprender, pestaña blancas, la tarjeta de siempre abre el curso nuevo, con sus 4 obligatorias', async ({ page }) => {
+  test('en Aprender, pestaña blancas, la tarjeta de siempre abre el curso nuevo, con sus 6 obligatorias', async ({ page }) => {
     await page.goto('/#/cursos/blancas')
     const tarjeta = page.getByTestId('tarjeta-escandinava:w')
     await expect(tarjeta).toContainText('Contra la Escandinava')
-    await expect(tarjeta).toContainText('0 de 4 variantes')
+    await expect(tarjeta).toContainText('0 de 6 variantes')
     await tarjeta.click()
     await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Contra la Escandinava')
-    await expect(page.getByTestId('avance')).toHaveText('0 de 4 variantes')
+    await expect(page.getByTestId('avance')).toHaveText('0 de 6 variantes')
   })
 
   test('la página: La idea, La estructura, La base, Las que más te van a salir, Errores y trampas, Repaso y Opcional, en ese orden', async ({ page }) => {
     await page.goto(URL_CURSO)
     const orden = await page.getByTestId('piezas-curso').locator('[data-testid^="paso-"], [data-testid^="seccion-"]').evaluateAll((xs) => xs.map((x) => x.getAttribute('data-testid')))
     const vs = (ids: string[]) => ids.map((id) => `paso-v:${id}`)
-    expect(orden).toEqual(['paso-idea', 'paso-estructura', 'seccion-base', ...vs(['clasica', 'valenciana', 'gipslis']), 'seccion-frecuentes', ...vs(['lasker']), 'paso-errores', 'paso-repaso', 'seccion-opcional', ...vs(['bronstein', 'schiller-pytel', 'marshall', 'richter'])])
+    expect(orden).toEqual(['paso-idea', 'paso-estructura', 'seccion-base', ...vs(['clasica', 'valenciana', 'gipslis', 'jaque-e5']), 'seccion-frecuentes', ...vs(['lasker', 'jaque-e6']), 'paso-errores', 'paso-repaso', 'seccion-opcional', ...vs(['bronstein', 'schiller-pytel', 'marshall', 'richter'])])
     await expect(page.getByTestId('seccion-opcional')).toContainText('No cuentan para terminar el curso.')
     for (const v of C.variantes) {
       const e = page.getByTestId(`paso-v:${v.id}`).getByTestId('estructura-leccion')
@@ -109,7 +109,7 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     await expect(ventana).toBeHidden()
   })
 
-  for (const [id, cual] of [['clasica', 'Variante 1 de 4'], ['lasker', 'Variante 4 de 4'], ['bronstein', 'Opcional 1 de 4']] as const)
+  for (const [id, cual] of [['clasica', 'Variante 1 de 6'], ['jaque-e5', 'Variante 4 de 6'], ['lasker', 'Variante 5 de 6'], ['jaque-e6', 'Variante 6 de 6'], ['bronstein', 'Opcional 1 de 4']] as const)
     test(`${id}: Aprender y Practicar, con su número arriba ("${cual}")`, async ({ page }, info) => {
       const l = lineaPorId(C, `v:${id}`)!
       const mias = misJugadas(l)
@@ -139,9 +139,10 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     await terminar(page, info, 'gipslis')
     await expect(page.getByTestId('salida-siguiente')).toHaveText('Siguiente variante')
     await page.getByTestId('salida-siguiente').click()
-    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(lineaPorId(C, 'v:lasker')!.nombre, 'figuras'))
-    await expect(page.getByTestId('cual-variante')).toHaveText('Variante 4 de 4')
-    await terminar(page, info, 'lasker')
+    // tras la última de La base (el jaque en e5, desde el 2026-11-25), la primera de las que más te van a salir
+    await expect(page.getByTestId('nombre-linea')).toHaveText(mostrarTexto(lineaPorId(C, 'v:jaque-e5')!.nombre, 'figuras'))
+    await expect(page.getByTestId('cual-variante')).toHaveText('Variante 4 de 6')
+    await terminar(page, info, 'jaque-e6')
     await expect(page.getByTestId('salida-siguiente')).toHaveText('Errores y trampas')
     await page.getByTestId('salida-siguiente').click()
     await expect(page.getByTestId('pieza-errores').locator('[data-testid^="error-"]')).toHaveCount(4)
@@ -157,7 +158,7 @@ test.describe('El curso de la captura contra la Escandinava', () => {
     expect((await leido(page, CLAVE)).variantes.richter.terminada).toBeTruthy()
     expect((await leido(page, 'ajedrez.v1.progreso')) ?? {}).toEqual({})
     await page.goto(URL_CURSO)
-    await expect(page.getByTestId('avance')).toHaveText('0 de 4 variantes')
+    await expect(page.getByTestId('avance')).toHaveText('0 de 6 variantes')
     await expect(page.getByTestId('paso-v:richter')).toHaveAttribute('data-estado', 'hecha')
   })
 
@@ -200,7 +201,7 @@ test.describe('El curso de la captura contra la Escandinava', () => {
   })
 
   test('las obligatorias y opcionales del curso son las de la tabla', async () => {
-    expect(obligatorias(C).map((v) => v.id)).toEqual(['clasica', 'valenciana', 'gipslis', 'lasker'])
+    expect(obligatorias(C).map((v) => v.id)).toEqual(['clasica', 'valenciana', 'gipslis', 'jaque-e5', 'lasker', 'jaque-e6'])
     expect(opcionales(C).map((v) => v.id)).toEqual(['bronstein', 'schiller-pytel', 'marshall', 'richter'])
   })
 

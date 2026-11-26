@@ -223,3 +223,74 @@ La primera frase, antes del gate, decía "sigues sacando piezas con Cf3 y d4" si
 | J-e6-cf6 | 4.Ae2 Cf6 (14.2 %) | `mejores "… Qe6 Be2 Nf6" --n 3` | +1.12 Nf3 Qd6 · +1.12 d4 Qd6 | Se sostiene |
 
 Las salidas completas de cada comando quedan en la carpeta de trabajo de la corrida, fuera del repo.
+
+## Las lecciones del jaque (2026-11-25; D1 A de Carlos, "agregarles lección")
+
+Las dos lecciones nuevas, 3...De5+ 4.Ae2 Ag4 y 3...De6+ 4.Ae2 Cc6, con lo que más se juega en cada una. Las jugadas del rival salen de las partidas (lichess CC0, las dos bandas juntas, 3 partidas o más); donde no hay, de la mejor del motor. Comandos con `node scripts/motor-comprobar.ts` (Stockfish 19 lite, un hilo, profundidad 18; amenazas, 16), desde la raíz del repo; "…" abrevia la línea de la lección.
+
+| Id | Afirmación del curso | Comando | Resultado del motor | Veredicto |
+|---|---|---|---|---|
+| J2-e5-f3 | 6.f3 la mejor por mucho: ataca al alfil de g4, que solo defiende la dama; tras f3 el alfil ya no llega a e2 | `mejores "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6" --n 5 --prof 22` · `mejores "… Qe6 f3" --n 6` | +2.16 f3 · +1.44 d5 · +1.41 Dd3 · +1.40 Af4 · +1.31 Ae3 (prof. 22) · tras f3: +2.09 Ah5 · +2.25 Af5 · +5.37 h5; ...Axe2 ya no es legal (chess.js) | Se sostiene |
+| J2-e5-g4 | 7.g4 la mejor; el alfil vuelve a moverse | `mejores "… f3 Bf5" --n 5` | +2.31 g4 · +1.02 f4 · +0.82 h4 | Se sostiene |
+| J2-e5-f4 | 8.f4 la mejor; amenaza f5 contra la dama de e6 y el alfil de g6 | `mejores "… g4 Bg6" --n 5` · `amenaza "… g4 Bg6 f4" --prof 16` | +2.41 f4 · +1.98 Ch3 · si blancas jugara otra vez: f5 (+5.28) | Se sostiene |
+| J2-e5-db6 | "Si negras no lo tapa, f5 gana su alfil" (ventana: 8...Db6 9.f5 Cc6 10.fxg6 hxg6) | `mejores "… f4 Qb6" --n 3` · `mejores "… f4 Qb6 f5" --n 3` | +3.46 f5 Cc6 fxg6 hxg6 · tras 9.f5: +3.45 Cc6 fxg6 hxg6 | Se sostiene |
+| J2-e5-cf3 | 5.Cf3 (en vez de d4) es un error: Axf3 y el alfil de e2 no puede retomar (clavado por la dama de e5), gxf3 | `jugada "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4" "Nf3"` · `mejores "… Bg4 Nf3" --n 3` | Cf3 pierde 131 (−0.47) · −0.52 Axf3 gxf3 Cc6 | Se sostiene (chess.js: tras 5...Axf3, 6.Axf3 es ilegal) |
+| J2-e5-axe2 | "Si su alfil cambia en e2, retomas con tu caballo de g1: tu peón de d4 sigue atacando a la dama" (5...Axe2, 16 de 53 partidas) | `jugada "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Bxe2" "Ngxe2"` | +0.81 Cgxe2; la mejor del motor es la misma jugada, con otra línea (+0.93) | Se sostiene |
+| J2-e5-plan | El plan: f5 amenaza; si ...f5, Cf3 | `plan "… f3 Bf5 g4 Bg6 f4" "Nf3 f5 g5 O-O Kf1"` | contra 8...f5 (+2.31): Cf3, la mejor · contra 8...Db6 (+3.33): f5, la mejor (+3.50); Cf3 pierde 178 sin material | Se sostiene |
+| J2-e5-cf3-6 | 6.Cf3 (en vez de f3) es un error: Axf3 y el alfil de e2, clavado por la dama de e6, no puede retomar; gxf3 | `jugada "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6" "Nf3"` · `mejores "… Qe6 Nf3" --n 2` | Cf3 pierde 148 (+0.75) · +0.83 Axf3 gxf3 | Se sostiene (chess.js: tras 6...Axf3, 7.Axf3 es ilegal) |
+| J2-e6-cf3-5 | 5.Cf3 (en vez de d4) es un error sin pérdida de material: no crea amenaza | `jugada "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6" "Nf3"` | Cf3 pierde 111 (+1.26; d4 +2.37) | Se sostiene |
+| J2-e5-dc6 | "Pero si su dama se va a c6, primero Ab5: la clava contra su rey y la ganas" (revisión del 2026-11-26: ahí f5 pierde la torre de h1); ventana 8...Dc6 9.Ab5 e6 10.Axc6+ Cxc6 | `jugada "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 Bg6 f4 Qc6" "Bb5"` · `jugada "… f4 Qc6" "f5"` · `mejores "… Qc6 Bb5" --n 3` · `jugada "… Qc6 Bb5 e6" "Bxc6+"` | Ab5 la mejor (+6.48) · f5 pierde 682 (...Dxh1) · tras 9.Ab5: +6.31 e6 · 10.Axc6+ +5.97, a 29 de la mejor: la dama por un alfil | Se sostiene |
+| J2-e5-axg4 | "Si su dama sale de la columna e, su alfil de g4 se queda sin defensa: tu alfil de e2 se lo come" (revisión del 2026-11-26); ventana 5...Da5 6.Axg4 | `mejores "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qa5" --n 3` · `mejores "… d4 Qa5 Bxg4" --n 2` | +6.90 Axg4, la mejor · tras 6.Axg4: +6.60 e5 | Se sostiene (5...Da5: 3 de 53 partidas) |
+| J2-e6-df5 | "Mientras solo el caballo de b4 ataque tu peón de c2, está seguro" y "Tu torre puede ir a e1… mientras su dama no ataque también tu peón de c2" (revisión del 2026-11-26) | `mejores "… Nb4 Nf3 Qf5" --n 4` · `mejores "… Nf3 Nf6 O-O Qf5" --n 4` · `jugada "… O-O Qf5" "Re1"` | tras 6...Df5: +2.92 0-0 Dxc2 (c2 cae) · tras 7...Df5: +3.37 Ce5; Te1 pierde 346 (...Dxc2) | Se sostiene con la condición |
+| J2-e5-plan-b | El plan del jaque en e5, una jugada antes del final (tras 7.g4) | `plan "e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4" "f4 Nf3"` | contra 7...Ag6: f4 a 12 · contra 7...Dg6: f4 pierde 159 sin material (8.gxf5 gana el alfil) | Se sostiene |
+| J2-e6-cb4 | 5...Cb4 es la mejor de negras tras 5.d4 (en las partidas, 5...Dg6 sale en 5 y 5...Cb4, 5...Cf6 y 5...Cxd4 en 4 cada una: una de diferencia no decide); 6.Cf3 la mejor | `mejores "e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4" --n 5` · `mejores "… d4 Nb4" --n 5` | +2.05 Cb4 · +2.29 Df5 · +2.29 Dd6 · +2.29 Dd7 · tras Cb4: +2.26 Cf3 · +1.76 a3 | Se sostiene |
+| J2-e6-cxc2 | "Si el caballo de b4 se come c2, tu dama lo captura" | `jugada "… Nb4 Nf3" "Nxc2+"` · `mejores "… Nf3 Nxc2+" --n 2` | ...Cxc2+ pierde 496 · +6.96 Dxc2 | Se sostiene |
+| J2-e6-cf6-d5 | "Si negras no se cuida, d5 gana una pieza" (ventana: 5...Cf6 6.d5 Cxd5 7.Cxd5) | `mejores "… Nc6 d4 Nf6" --n 4` · `mejores "… d4 Nf6 d5" --n 3` · `mejores "… d5 Nxd5" --n 3` | +5.11 d5 · tras 6.d5: +4.94 Cxd5 · tras 6...Cxd5: +5.14 Cxd5 | Se sostiene |
+| J2-e6-cf3 | 6...Cf6 a 0.03 de la mejor de negras | `mejores "… Nb4 Nf3" --n 4` | +2.39 c6 · +2.42 Cf6 · +2.42 Dd6 | Se sostiene |
+| J2-e6-oo | 7.0-0 la mejor; buena: Ce5. 7...c6 a 0.16 de la mejor de negras; con ...c6, d5 queda controlada | `mejores "… Nf3 Nf6" --n 5` · `mejores "… Nf6 O-O" --n 4` | +2.18 0-0 · +2.09 Ce5 · tras 0-0: +2.49 g6 · +2.65 c6 | Se sostiene |
+| J2-e6-te1 | 8.Te1 a 0.05 de la mejor; buena: Ca4 | `mejores "… O-O c6" --n 5` | +2.42 Ca4 · +2.37 Te1 · +2.14 Ce5 | Se sostiene |
+| J2-e6-plan | El plan: si su caballo sigue en b4, a3; después Ce5 | `plan "… O-O c6 Re1" "a3 Bc4 Ne5 Bf4 Bb5"` | contra 8...Dd6 (+2.53): a3, la mejor · contra 8...Cbd5 (+3.04): Ce5, la mejor; a3 pierde 59 sin material | Se sostiene |
+| J2-e6-plan-b | El plan, una jugada antes del final (tras 7...c6) | `jugada "… O-O c6" "a3"` · `jugada "… O-O c6" "Ne5"` | a3 pierde 86, Ce5 pierde 47; ninguna pierde material (+1.76 y +2.15) | Se sostiene |
+
+**En cada posición de las lecciones donde le toca al rival** (§6, n.º 6): sus dos respuestas más jugadas (o las dos del motor, sin partidas), y si la siguiente jugada de la lección pierde material. `node scripts/senales-leccion.mjs S-e5 "<línea>"` y `S-e6`. Las filas de las jugadas 2 y 3 (S-…-3-… y S-…-5-…) son de posiciones que comparten todas las lecciones del curso: ahí la siguiente jugada de estas lecciones no es la de la otra respuesta (contra 2...Cf6, 3.d4; contra 3...Da5 o 3...Dd8, 4.d4), y se quedan solo como medida. Donde la siguiente jugada no aplica (4...Dg5 o 4...Dg6, contra las que la página dice Cf3, F-g5 y F-g6; 5...Axe2, contra la que retomas, J2-e5-axe2), la fila lo deja ver; en ninguna la jugada que toca pierde material. S-e5-13-Qg6: contra 7...Dg6 (la segunda del motor, sin partidas), 8.f4 no pierde material, pero 8.gxf5 gana el alfil (+3.80).
+
+| Id | Posición (le toca al rival) | Respuesta | Partidas | Tu jugada | Resultado del motor |
+|---|---|---|---|---|---|
+| S-e6-3-Qxd5 | e4 d5 exd5 | Qxd5 | 9599 (partidas) | Nc3 | mejor Nc3 (+0.60) · Nc3: +0.66  Nc3 Qd8 d4 Nf6 Nf3 g6 Bc4 Bg7 · pierde -6 |
+| S-e6-3-Nf6 | e4 d5 exd5 | Nf6 | 1266 (partidas) | Nc3 | mejor d4 (+0.63) · Nc3: +0.25  Nc3 Nxd5 Nf3 g6 Nxd5 Qxd5 d4 Bg7 · pierde 38 |
+| S-e6-5-Qa5 | e4 d5 exd5 Qxd5 Nc3 | Qa5 | 2237 (partidas) | Be2 | mejor d4 (+0.57) · Be2: +0.45  Be2 e5 Nf3 Nc6 O-O Nf6 Bb5 Bd6 · pierde 12 |
+| S-e6-5-Qd8 | e4 d5 exd5 Qxd5 Nc3 | Qd8 | 1820 (partidas) | Be2 | mejor d4 (+0.75) · Be2: +0.18  Be2 c5 Nf3 Nc6 Bb5 Bd7 d4 cxd4 · pierde 57 |
+| S-e6-7-Nc6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 | Nc6 | 253 (partidas) | d4 | mejor d4 (+2.37) · d4: +2.32  d4 Nb4 Nf3 c6 O-O Nf6 Re1 Qd6 · pierde 5 |
+| S-e6-7-Qg6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 | Qg6 | 220 (partidas) | d4 | mejor Nf3 (+1.67) · d4: +1.06  d4 Qxg2 Bf3 Qg6 Bf4 Na6 Nge2 Qb6 · pierde 61 |
+| S-e6-9-Qg6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 | Qg6 | 5 (partidas) | Nf3 | mejor Nb5 (+3.09) · Nf3: +2.24  Nf3 Bg4 d5 Bxf3 Bxf3 Ne5 O-O Nxf3+ · pierde 85 |
+| S-e6-9-Nb4 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 | Nb4 | 4 (partidas) | Nf3 | mejor Nf3 (+2.49) · Nf3: +2.40  Nf3 Qg6 O-O Qxc2 Qxc2 Nxc2 Nb5 Kd8 · pierde 9 |
+| S-e6-11-Nf6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 | Nf6 | motor | O-O | mejor O-O (+2.43) · O-O: +2.23  O-O Qd6 Nb5 Qd8 a3 Na6 Nc3 Nb8 · pierde 20 |
+| S-e6-11-c6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 | c6 | motor | O-O | mejor O-O (+2.45) · O-O: +2.56  O-O Nf6 Re1 Qd6 a3 Nbd5 Nxd5 Qxd5 · pierde -11 |
+| S-e6-13-c6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | c6 | motor | Re1 | mejor Re1 (+2.62) · Re1: +2.71  Re1 Qd6 a3 Nbd5 Nxd5 Nxd5 c4 Nf4 · pierde -9 |
+| S-e6-13-Qd6 | e4 d5 exd5 Qxd5 Nc3 Qe6+ Be2 Nc6 d4 Nb4 Nf3 Nf6 O-O | Qd6 | motor | Re1 | mejor a3 (+2.57) · Re1: +2.36  Re1 Bf5 Nb5 Qb6 c4 c6 c5 Qd8 · pierde 21 |
+| S-e5-3-Qxd5 | e4 d5 exd5 | Qxd5 | 9599 (partidas) | Nc3 | mejor Nc3 (+0.60) · Nc3: +0.66  Nc3 Qd8 d4 Nf6 Nf3 g6 Bc4 Bg7 · pierde -6 |
+| S-e5-3-Nf6 | e4 d5 exd5 | Nf6 | 1266 (partidas) | Nc3 | mejor d4 (+0.63) · Nc3: +0.25  Nc3 Nxd5 Nf3 g6 Nxd5 Qxd5 d4 Bg7 · pierde 38 |
+| S-e5-5-Qa5 | e4 d5 exd5 Qxd5 Nc3 | Qa5 | 2237 (partidas) | Be2 | mejor d4 (+0.57) · Be2: +0.45  Be2 e5 Nf3 Nc6 O-O Nf6 Bb5 Bd6 · pierde 12 |
+| S-e5-5-Qd8 | e4 d5 exd5 Qxd5 Nc3 | Qd8 | 1820 (partidas) | Be2 | mejor d4 (+0.75) · Be2: +0.18  Be2 c5 Nf3 Nc6 Bb5 Bd7 d4 cxd4 · pierde 57 |
+| S-e5-7-Bg4 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 | Bg4 | 283 (partidas) | d4 | mejor d4 (+0.84) · d4: +0.92  d4 Bxe2 Ngxe2 Qa5 b4 Qf5 O-O Nf6 · pierde -8 |
+| S-e5-7-Qg5 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 | Qg5 | 150 (partidas) | d4 | mejor Nf3 (+1.75) · d4: +1.25  d4 Qxg2 Bf3 Qg6 Bf4 Nf6 Qd2 c6 · pierde 50 |
+| S-e5-9-Qe6 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 | Qe6 | 33 (partidas) | f3 | mejor f3 (+2.23) · f3: +2.15  f3 Bh5 g4 Bg6 f4 f5 Nf3 Nf6 · pierde 8 |
+| S-e5-9-Bxe2 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 | Bxe2 | 16 (partidas) | f3 | mejor Ngxe2 (+0.93) · f3: -6.50  f3 Bxd1+ dxe5 Bxc2 Be3 Bf5 h4 Bd7 · pierde 743 |
+| S-e5-11-Bf5 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | Bf5 | 3 (partidas) | g4 | mejor g4 (+2.04) · g4: +2.35  g4 Bg6 f4 f5 Nf3 Nf6 O-O Nxg4 · pierde -31 |
+| S-e5-11-Bh5 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | Bh5 | motor | g4 | mejor g4 (+2.15) · g4: +2.25  g4 Bg6 f4 f5 Nf3 Nf6 O-O Nxg4 · pierde -10 |
+| S-e5-13-Bg6 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 | Bg6 | motor | f4 | mejor f4 (+2.33) · f4: +2.21  f4 f5 Nf3 Nf6 d5 Qb6 Ne5 e6 · pierde 12 |
+| S-e5-13-Qg6 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 | Qg6 | motor | f4 | mejor gxf5 (+3.80) · f4: +2.21  f4 Bd7 Nf3 Qb6 Ne5 e6 f5 h5 · pierde 159 |
+
+## La revisión de lo publicado (2026-11-26): la excepción de La clavada, por la casilla de tus alfiles
+
+La revisión independiente (`00_corridas/chess/2026-11-26_REVISION_correcciones-publicadas.md`, S1) encontró que "juegas d5, no h3" solo sirve con tu alfil de c1 en d2. Posición: `e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Nc6 <tu alfil> Bg4`; comandos `mejores … --n 3 --prof 20`, `jugada … "h3"`, `jugada … "d5"` y `jugada … "Bb5"`.
+
+| Id | Tu alfil | Mejor | h3 | d5 | Ab5 | La página dice |
+|---|---|---|---|---|---|---|
+| V3-cl-ad2 | Ad2 | d5 (+1.65) | pierde 177 | a 16 | | d5 |
+| V3-cl-ad3 | Ad3 | Ab5 (−0.10) | pierde 56; tras ...Axf3 Dxf3 0-0-0, d4 cae (−0.71) | pierde 183 | a 32 | Ab5 |
+| V3-cl-af4 | Af4 | Ab5 (−0.17) | pierde 48; tras ...0-0-0, d4 cae (−0.91) | pierde 221 | a 4 | Ab5 |
+| V3-cl-ac4 | Ac4 | h3 (0.00) | la mejor | pierde 70 | pierde 37 | h3 |
+| V3-cl-ae3 | Ae3 | h3 (+0.59) | a 8 | pierde 361 | | h3 |
+| V3-cl-ae2 | Ae2 | h3 (+0.42) | la mejor | pierde 39 | pierde 67 | h3 |
+| V3-cl-ab5 | Ab5 (ya clava) | h3 (+1.53) | la mejor | | | h3 (V2-cl-ab5) |

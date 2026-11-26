@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 30 de 83.** Más 33 frases del plan y del paso a paso.
+**Jugadas con marcas: 30 de 83.** Más 32 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -94,8 +94,7 @@
 
 | Dónde | Frase | Marcas |
 |---|---|---|
-| plan dos-caballos-d3 tuyo frase 1 | Siguen Ab3 y Cbd2, y h3 antes de que su caballo salte a g4. | flecha c4→b3 (A3, verde, punteada) |
-| plan dos-caballos-d3 tuyo frase 2 | Cuando todo apoye a tu peón de d3, d4. | flecha d3→d4 (A3, verde, punteada) |
+| plan dos-caballos-d3 tuyo frase 1 | Sigue h3, antes de que su caballo salte a g4; después Ab3 y Cbd2. | flecha h2→h3 (A3, verde, punteada); flecha c4→b3 (A3, verde, punteada) |
 | plan dos-caballos-d3 rival frase 1 | Negras busca ...d5, o cambiar tu alfil con ...Ae6. | flecha d6→d5 (A7, roja, punteada); flecha c8→e6 (A7, roja, punteada) |
 | plan la-bourdonnais tuyo frase 2 | Si salta a e5, cámbialo: Cxe5; si va a a5, retira tu alfil a d3. | flecha f3→e5 (A3, verde, punteada) |
 | plan anti-higado-frito tuyo frase 1 | Contra ...Ab4, cambia caballos en c6 y, si retoma con ...dxc6, también las damas: su rey ya no podrá enrocar. | flecha d4→c6 (A3, verde, punteada) |

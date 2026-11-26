@@ -46,18 +46,18 @@ async function recorrer(page: Page, info: TestInfo, l: LineaCurso, vuelta: 'apre
 }
 
 test.describe('El curso de la Alapin', () => {
-  test('en Aprender, la tarjeta de la Alapin abre el curso nuevo: "0 de 2 variantes" y su tablero desde 1.e4 c5 2.c3', async ({ page }) => {
+  test('en Aprender, la tarjeta de la Alapin abre el curso nuevo: "0 de 4 variantes" y su tablero desde 1.e4 c5 2.c3', async ({ page }) => {
     await page.goto('/#/cursos')
     const tarjeta = page.getByTestId('tarjeta-siciliana:w')
     // la tarjeta conserva su nombre de antes (`nombreCurso`): con blancas, "Contra la Siciliana"
     await expect(tarjeta).toContainText('Contra la Siciliana')
-    await expect(tarjeta).toContainText('0 de 2 variantes')
+    await expect(tarjeta).toContainText('0 de 4 variantes')
     await tarjeta.click()
     await expect(page).toHaveURL(/#\/curso\/siciliana%3Aw$/)
     await expect(page.getByTestId('pagina-curso').locator('h1')).toHaveText('Alapin contra la Siciliana')
-    await expect(page.getByTestId('avance')).toHaveText('0 de 2 variantes')
+    await expect(page.getByTestId('avance')).toHaveText('0 de 4 variantes')
     await expect(page.getByTestId('empezar-curso')).toHaveText('Empezar')
-    // el tablero de arriba: lo que comparten las seis líneas, con blancas abajo
+    // el tablero de arriba: lo que comparten las ocho líneas, con blancas abajo
     const t = page.getByTestId('pagina-curso').getByTestId('tablero-mini').first()
     await expect(t).toHaveAttribute('data-orientacion', 'white')
     const ch = new Chess()
@@ -65,16 +65,18 @@ test.describe('El curso de la Alapin', () => {
     expect((await t.getAttribute('data-fen'))!.split(' ')[0]).toBe(ch.fen().split(' ')[0])
   })
 
-  test('la página: La idea, La estructura, La base, Errores y trampas, Repaso y Opcional, en ese orden', async ({ page }) => {
+  test('la página: La idea, La estructura, La base, Las que más te van a salir, Errores y trampas, Repaso y Opcional, en ese orden', async ({ page }) => {
     await page.goto(URL)
     const orden = await page.getByTestId('piezas-curso').locator('[data-testid^="paso-"], [data-testid^="seccion-"]').evaluateAll((xs) => xs.map((x) => x.getAttribute('data-testid')))
     const de = (i: number) => C.secciones![i]!.variantes.map((v) => `paso-v:${v}`)
-    expect(orden).toEqual(['paso-idea', 'paso-estructura', 'seccion-base', ...de(0), 'paso-errores', 'paso-repaso', 'seccion-opcional', ...de(1)])
+    expect(orden).toEqual(['paso-idea', 'paso-estructura', 'seccion-base', ...de(0), 'seccion-frecuentes', ...de(1), 'paso-errores', 'paso-repaso', 'seccion-opcional', ...de(2)])
     await expect(page.getByTestId('seccion-base')).toHaveText('La base')
-    await expect(page.getByTestId('seccion-frecuentes')).toHaveCount(0)
+    // las lecciones de Los dos peones del centro (2026-11-25): 2...Cc6 en La base, 2...d6 en Las que más te van a salir
+    expect(de(0)).toContain('paso-v:centro-cc6')
+    expect(de(1)).toEqual(['paso-v:centro-d6'])
     await expect(page.getByTestId('seccion-opcional')).toContainText('No cuentan para terminar el curso.')
     const numeros = await page.locator('.numero-variante').allTextContents()
-    expect(numeros.map((n) => Number.parseInt(n))).toEqual([1, 2, 1, 2, 3, 4])
+    expect(numeros.map((n) => Number.parseInt(n))).toEqual([1, 2, 3, 4, 1, 2, 3, 4])
     for (const v of C.variantes) await expect(page.getByTestId(`paso-v:${v.id}`).getByTestId('estructura-leccion'), v.id).toHaveText(v.estructura!)
   })
 
@@ -93,7 +95,7 @@ test.describe('El curso de la Alapin', () => {
   test('La base, 2...Cf6: Aprender hasta el plan (el del rival, "El de negras") y Practicar hasta el resumen', async ({ page }, info) => {
     const l = lineaPorId(C, 'v:cf6-d4')!
     await page.goto(urlDe(l.id))
-    await expect(page.getByTestId('cual-variante')).toContainText('Variante 2 de 2')
+    await expect(page.getByTestId('cual-variante')).toContainText('Variante 2 de 4')
     await recorrer(page, info, l, 'aprender')
     await expect(page.getByTestId('narracion')).toContainText('El de negras:')
     await expect(page.getByTestId('narracion')).not.toContainText('El de blancas:')
@@ -105,14 +107,14 @@ test.describe('El curso de la Alapin', () => {
     expect(a.variantes['cf6-d4'].terminada).toBeTruthy()
   })
 
-  test('Opcional, el gambito: Practicar sin Aprender, y cuenta como hecha sin cambiar "N de 2"', async ({ page }, info) => {
+  test('Opcional, el gambito: Practicar sin Aprender, y cuenta como hecha sin cambiar "N de 4"', async ({ page }, info) => {
     const l = lineaPorId(C, 'v:gambito')!
     await page.goto(urlDe(l.id))
     await expect(page.getByTestId('cual-variante')).toContainText('Opcional 4 de 4')
     await page.getByTestId('vuelta-practicar').click()
     await recorrer(page, info, l, 'practicar')
     await page.goto(URL)
-    await expect(page.getByTestId('avance')).toHaveText('0 de 2 variantes')
+    await expect(page.getByTestId('avance')).toHaveText('0 de 4 variantes')
   })
 
   test('el Cambio Central, en Aprender: "Ver qué pasaría" sale junto a su frase después de 6.Cf3', async ({ page }, info) => {
@@ -235,7 +237,7 @@ test.describe('La Alapin · lo guardado de antes', () => {
     expect(r.repaso).toEqual({ 'siciliana:w/w:siciliana/alapin-curso-cf6-d4': { escalon: 2, proxima: '2026-11-30' } })
     expect(r.progreso).toEqual({ 'siciliana:w/w:siciliana/alapin-curso-cambio-central': { fecha: 1 } })
     expect(r.modelo).toBe('1')
-    expect(opcionales(C).length + obligatorias(C).length).toBe(6)
+    expect(opcionales(C).length + obligatorias(C).length).toBe(8)
     expect(misJugadas(lineaPorId(C, 'v:moderna')!).length).toBe(8)
   })
 })

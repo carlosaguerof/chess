@@ -1458,3 +1458,51 @@ Stockfish 19 lite, un hilo, profundidad 16. "pierde" = centipeones contra la mej
 - tras e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 **Nb6** [motor] · mejor Bb5 +0.13 · O-O -3.09 (pierde 322) ⚠
 - tras e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 cxd4 d6 Nf3 Nc6 Bc4 **dxe5** [motor] · mejor dxe5 +0.25 · Nxe5 +0.08 (pierde 17) · O-O -0.48 (pierde 73) ⚠
 
+
+## Las lecciones de Los dos peones del centro (2026-11-25; D1 A de Carlos, "agregarles lección")
+
+Las dos lecciones nuevas: 2...Cc6 3.d4 cxd4 4.cxd4 e6 5.Cf3 Cf6 6.d5 y 2...d6 3.d4 cxd4 4.cxd4 Cf6 5.Cc3 g6 6.Cf3 Ag7 7.Ae2 0-0 8.0-0. Las jugadas del rival salen de las partidas (lichess CC0); donde no hay, de la mejor del motor. Comandos con `node scripts/motor-comprobar.ts`, desde la raíz del repo; "…" abrevia la línea de la lección.
+
+| Id | Afirmación del curso | Comando | Resultado | Veredicto |
+|---|---|---|---|---|
+| D-cc6-d4 | Contra 2...Cc6, 3.d4 la mejor; buena: Cf3 | `mejores "e4 c5 c3 Nc6" --n 5` | +0.28 d4 · +0.14 Cf3 · +0.05 Ab5 | Se sostiene |
+| D-cc6-cxd4 | 4.cxd4 la mejor | `mejores "e4 c5 c3 Nc6 d4 cxd4" --n 5` | +0.40 cxd4 · −0.22 Cf3 | Se sostiene |
+| D-cc6-5 | Tras 5.Cf3, la lección sigue 5...Cf6 (3 partidas, como 5...d5): 5...d5 es la mejor del motor, pero con ella la página manda avanzar a e5 y la lección saldría de su forma | `mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3" --n 3` · `jugada "… e6 Nf3" "Nf6"` | +0.51 d5 e5 · +0.87 Cf6 · ...Cf6 a 42 de la mejor | Decisión anotada (`specs/cursos.md` §6, n.º 22) |
+| D-cc6-plan-b | El plan de 2...Cc6, una jugada antes del final (tras 5.Cf3) | `plan "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3" "d5 Nc3 e5"` | contra 5...d5: e5 la mejor (la página) · contra 5...Cf6: Cc3 la mejor, d5 a 41; ninguna pierde material | Se sostiene |
+| D-cc6-cf3 | 5.Cf3 a 0.03 de la mejor; buenas: Cc3, d5, a3, Ae3 | `mejores "e4 c5 c3 Nc6 d4 cxd4 cxd4 e6" --n 5` | +0.45 Cc3 · +0.42 Cf3 · +0.42 d5 · +0.38 a3 · +0.29 Ae3 | Se sostiene |
+| D-cc6-d5 | 6.d5, la regla de la página (con su caballo de dama en c6, d5 contra él), no pierde material; buenas: Cc3 (la mejor), e5, Ad3, Cbd2 | `mejores "… e6 Nf3 Nf6" --n 5` · `mejores "… e6 Nf3 Nf6" --n 4 --prof 22` | +0.83 Cc3 · +0.58 d5 · +0.44 e5 · +0.43 Ad3 · +0.40 Cbd2; a prof. 22, d5 a 49 de Cc3 (+0.43) | Se sostiene: no pierde material; Cc3, en azul (K-nc6x-e6-nf3-nf6-d5) |
+| D-cc6-cxe4 | "Si el caballo de f6 se come tu e4, tú te comes el de c6" (ventana: 6...Cxe4 7.dxc6 bxc6) | `jugada "… Nf6 d5" "Nxe4"` · `mejores "… d5 Nxe4" --n 3` · `mejores "… d5 Nxe4 dxc6" --n 3` | ...Cxe4 pierde 285 · +3.14 dxc6 · tras 7.dxc6: +3.06 bxc6 | Se sostiene |
+| D-cc6-plan | El plan: si cambia en d5, retomas con el peón de e4; si da jaque desde b4, Cc3 | `plan "… Nf6 d5" "exd5 Nc3 Bd2 Bd3 e5"` | contra 6...exd5 (+0.49): exd5, la mejor · contra 6...Ab4+ (+0.62): Cc3, a 15 | Se sostiene |
+| D-d6-d4 | Contra 2...d6, 3.d4 la mejor | `mejores "e4 c5 c3 d6" --n 5` | +0.56 d4 · +0.24 Ae2 | Se sostiene |
+| D-d6-cxd4 | 4.cxd4 la mejor | `mejores "e4 c5 c3 d6 d4 cxd4" --n 5` | +0.55 cxd4 · +0.25 Ab5+ | Se sostiene |
+| D-d6-cc3 | 5.Cc3 la mejor: defiende e4 con una pieza | `mejores "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" --n 5` | +0.77 Cc3 · +0.55 Ad3 · +0.47 f3 | Se sostiene (C-d6x-nf6) |
+| D-d6-e5 | El error 5.e5: dxe5 dxe5 Dxd1+ Rxd1 Cg4 Re1 Cxe5, un peón menos y sin enroque | `jugada "e4 c5 c3 d6 d4 cxd4 cxd4 Nf6" "e5"` · `mejores "… Nf6 e5" --n 3` · `mejores "… e5 dxe5 dxe5" --n 3` · `mejores "… dxe5 Qxd1+ Kxd1" --n 3` | e5 pierde 206 · −1.09 dxe5 · −1.18 Dxd1+ · −1.00 Cg4 Re1 Cxe5 | Se sostiene (C-d6x-nf6-e5) |
+| D-d6-cf3 | 6.Cf3, la de las partidas (4 de 7) y la de la página, a 0.23 de la mejor sin perder material; buenas: h3, Ab5+, Ae3, Ae2 | `mejores "… Nf6 Nc3 g6" --n 5` | +0.88 h3 · +0.70 Ab5+ · +0.65 Ae3 · +0.65 Cf3 · +0.63 Ae2 | Se sostiene |
+| D-d6-ae2 | 7.Ae2 a 0.03 de la mejor; buenas: Ae3, h3, Ab5+; 7...0-0, la mejor de negras | `mejores "… g6 Nf3 Bg7" --n 5` · `mejores "… Bg7 Be2" --n 3` | +0.79 Ae3 · +0.78 h3 · +0.76 Ae2 · +0.65 Ab5+ · tras Ae2: +0.74 0-0 · +0.76 a6 | Se sostiene |
+| D-d6-oo | 8.0-0 la mejor; buenas: h3, Ae3 | `mejores "… Be2 O-O" --n 5` | +0.67 0-0 · +0.66 h3 · +0.62 Ae3 | Se sostiene |
+| D-d6-plan | El plan: Ae3 y h3 | `plan "… Be2 O-O O-O" "h3 Be3 d5 e5 Re1"` · `plan "… Bg7 Be2" "Be3 h3"` | contra 8...Ag4 (+0.60): Ae3, la mejor; h3 pierde 10 · contra 8...a6 (+0.83): h3, la mejor; Ae3 pierde 22 · una jugada antes (tras 7.Ae2): contra 0-0, h3 la mejor y Ae3 a 15; contra ...a6, h3 a 23 y Ae3 a 45; ninguna pierde material | Se sostiene |
+
+**En cada posición de las lecciones donde le toca al rival** (§6, n.º 6), con `node scripts/senales-leccion.mjs S-cc6 "<línea>"` y `S-d6`. Donde la siguiente jugada no aplica (4...d5, contra la que la página dice cambiar en d5, Z-nc6x-d5-exd5; 5...Cc6 por 2...d6, contra la que la página dice d5, K-d6x-nf6-nc3-nc6-d5), la fila lo deja ver; en ninguna la jugada que toca pierde material.
+
+| Id | Posición (le toca al rival) | Respuesta | Partidas | Tu jugada | Resultado del motor |
+|---|---|---|---|---|---|
+| S-cc6-3-Nc6 | e4 c5 c3 | Nc6 | 248 (partidas) | d4 | mejor d4 (+0.32) · d4: +0.41  d4 d5 exd5 Qxd5 dxc5 Qxd1+ Kxd1 Bf5 · pierde -9 |
+| S-cc6-3-d6 | e4 c5 c3 | d6 | 92 (partidas) | d4 | mejor d4 (+0.57) · d4: +0.67  d4 Nf6 Bd3 g6 h3 Bg7 Nf3 O-O · pierde -10 |
+| S-cc6-5-cxd4 | e4 c5 c3 Nc6 d4 | cxd4 | 106 (partidas) | cxd4 | mejor cxd4 (+0.56) · cxd4: +0.39  cxd4 e6 d5 exd5 exd5 Bb4+ Nc3 Ne5 · pierde 17 |
+| S-cc6-5-e6 | e4 c5 c3 Nc6 d4 | e6 | 28 (partidas) | cxd4 | cxd4 no es legal aquí |
+| S-cc6-7-e6 | e4 c5 c3 Nc6 d4 cxd4 cxd4 | e6 | 31 (partidas) | Nf3 | mejor Nf3 (+0.51) · Nf3: +0.41  Nf3 d5 e5 Nge7 Na3 Nf5 Nc2 f6 · pierde 10 |
+| S-cc6-7-d5 | e4 c5 c3 Nc6 d4 cxd4 cxd4 | d5 | 19 (partidas) | Nf3 | mejor exd5 (+0.36) · Nf3: -0.77  Nf3 dxe4 Ne5 Nxe5 dxe5 Qxd1+ Kxd1 f5 · pierde 113 |
+| S-cc6-9-Nf6 | e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 | Nf6 | 3 (partidas) | d5 | mejor Nc3 (+0.91) · d5: +0.50  d5 Bb4+ Nc3 exd5 exd5 Ne7 d6 Ned5 · pierde 41 |
+| S-cc6-9-d5 | e4 c5 c3 Nc6 d4 cxd4 cxd4 e6 Nf3 | d5 | 3 (partidas) | d5 | d5 no es legal aquí |
+| S-d6-3-Nc6 | e4 c5 c3 | Nc6 | 248 (partidas) | d4 | mejor d4 (+0.32) · d4: +0.41  d4 d5 exd5 Qxd5 dxc5 Qxd1+ Kxd1 Bf5 · pierde -9 |
+| S-d6-3-d6 | e4 c5 c3 | d6 | 92 (partidas) | d4 | mejor d4 (+0.57) · d4: +0.67  d4 Nf6 Bd3 g6 h3 Bg7 Nf3 O-O · pierde -10 |
+| S-d6-5-cxd4 | e4 c5 c3 d6 d4 | cxd4 | 53 (partidas) | cxd4 | mejor cxd4 (+0.81) · cxd4: +0.47  cxd4 d5 e5 Bf5 Nc3 e6 g4 Bg6 · pierde 34 |
+| S-d6-5-Nf6 | e4 c5 c3 d6 d4 | Nf6 | 5 (partidas) | cxd4 | cxd4 no es legal aquí |
+| S-d6-7-Nf6 | e4 c5 c3 d6 d4 cxd4 cxd4 | Nf6 | 19 (partidas) | Nc3 | mejor Nc3 (+0.85) · Nc3: +0.71  Nc3 g6 Bb5+ Bd7 Be2 Nc6 h3 Bg7 · pierde 14 |
+| S-d6-7-Nc6 | e4 c5 c3 d6 d4 cxd4 cxd4 | Nc6 | 13 (partidas) | Nc3 | mejor d5 (+1.22) · Nc3: +1.05  Nc3 e6 Nf3 Nf6 Bd3 Be7 Be3 O-O · pierde 17 |
+| S-d6-9-g6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 | g6 | 7 (partidas) | Nf3 | mejor Bb5+ (+0.74) · Nf3: +0.69  Nf3 Bg7 h3 O-O Be2 d5 e5 Ne4 · pierde 5 |
+| S-d6-9-Nc6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 | Nc6 | 3 (partidas) | Nf3 | mejor d5 (+1.28) · Nf3: +0.86  Nf3 d5 e5 Ne4 Bd3 Bf5 Qb3 Nc5 · pierde 42 |
+| S-d6-11-Bg7 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 | Bg7 | 4 (motor) | Be2 | mejor h3 (+0.77) · Be2: +0.78  Be2 Bg4 O-O Nc6 Be3 O-O d5 Bxf3 · pierde -1 |
+| S-d6-11-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 | a6 | motor | Be2 | mejor h3 (+0.98) · Be2: +1.00  Be2 Bg7 e5 Nfd7 exd6 exd6 Bf4 O-O · pierde -2 |
+| S-d6-13-O-O | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | O-O | motor | O-O | mejor h3 (+0.68) · O-O: +0.60  O-O Bg4 Be3 Bxf3 Bxf3 Nc6 Ne2 Rc8 · pierde 8 |
+| S-d6-13-a6 | e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6 Nf3 Bg7 Be2 | a6 | motor | O-O | mejor e5 (+0.91) · O-O: +0.90  O-O O-O h3 b5 e5 dxe5 dxe5 Nfd7 · pierde 1 |

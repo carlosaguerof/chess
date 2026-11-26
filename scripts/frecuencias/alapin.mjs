@@ -20,12 +20,15 @@ const HASTA_FORMA = 12
 
 /** Los nombres de las formas, como en el mapa. */
 const NOMBRE = { aislado: 'El aislado', cadena: 'La cadena', centro: 'Los dos peones del centro', gambito: 'El gambito (la excepción)' }
-/** Las formas con lecciones (la regla del paso 1). Los dos peones del centro no tiene lección, y el gambito es una excepción. */
-const FORMAS = ['aislado', 'cadena']
+/**
+ * Las formas con lecciones (la regla del paso 1). Los dos peones del centro tiene lección desde el 2026-11-25 (D1 A de
+ * Carlos: "agregarles lección"); el gambito es una excepción.
+ */
+const FORMAS = ['aislado', 'cadena', 'centro']
 /** La transposición que decide la lección base de El aislado: tras 4...d5, con 5.exd5 Dxd5 6.Cf3 llegas al Cambio Central. */
 const TRANSPOSICION = 'e4 c5 c3 Nc6 d4 cxd4 cxd4 d5'
 const CAMBIO_CENTRAL_TRAS_CF3 = 'e4 c5 c3 d5 exd5 Qxd5 d4 cxd4 cxd4 Nc6 Nf3'
-/** Las jugadas frecuentes del rival sin lección (la tabla del mapa). */
+/** Las jugadas frecuentes del rival de la tabla del mapa (2...Cc6 y 2...d6 tienen lección desde el 2026-11-25). */
 const RIVAL = { Nc6: '2...Cc6', d6: '2...d6', e6: '2...e6' }
 
 /** Las jugadas de Carlos en cada posición del libro (una sola por posición: si dos lecciones juegan distinto, se detiene). */
@@ -41,6 +44,16 @@ function libro(ls) {
   return m
 }
 
+/** La posición justo antes de una jugada de la línea (la jugada es un objeto de `jug(seq).ms`). */
+function antesDe(seq, m) {
+  const c = new Chess()
+  for (const s of seq.split(' ')) {
+    const x = c.move(s)
+    if (x.before === m.before && x.san === m.san) return new Chess(x.before)
+  }
+  return null
+}
+
 const jug = (seq) => {
   const c = new Chess()
   return { c, ms: seq.split(' ').map((s) => c.move(s)) }
@@ -51,7 +64,8 @@ const jug = (seq) => {
  * - 'cadena': lo avanzaste a e5;
  * - 'gambito': lo cambiaste en d5 (el peón de d7) y el rival no retomó en d5 en su jugada siguiente;
  * - 'aislado': lo cambiaste en d5, el rival retomó con una pieza y tienes un peón en d4;
- * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro);
+ * - 'centro': sigue en e4 y tienes un peón en d4 (los dos peones del centro), o ese peón ya avanzó de d4 a d5 con un caballo
+ *   de negras en c6, que es la regla de su página contra un caballo (desde el 2026-11-25, con su lección: antes contaba como 'otra');
  * - 'otra': lo demás (incluido lo que todavía no se decide).
  */
 export function forma(seq) {
@@ -70,7 +84,9 @@ export function forma(seq) {
     return 'otra'
   }
   const e4 = c.get('e4')
-  if (e4?.type === 'p' && e4.color === 'w' && peonD4) return 'centro'
+  // el avance de d4 a d5 que manda la página: con un caballo de negras en c6 en ese momento (la regla del caballo)
+  const d4d5 = c.get('d5')?.type === 'p' && c.get('d5')?.color === 'w' && ms.some((x) => x.color === 'w' && x.piece === 'p' && x.from === 'd4' && x.to === 'd5' && antesDe(seq, x)?.get('c6')?.type === 'n' && antesDe(seq, x)?.get('c6')?.color === 'b')
+  if (e4?.type === 'p' && e4.color === 'w' && (peonD4 || d4d5)) return 'centro'
   return 'otra'
 }
 
@@ -85,8 +101,22 @@ function delMapa(seq) {
   return undefined
 }
 
-/** La posición donde se mide una lección: lo que la separa de las demás, hasta la última jugada del rival. */
+/**
+ * La jugada que nombra a una lección, cuando no es la que la separa de las demás (revisión del 2026-11-26, el mismo
+ * criterio que `NOMBRADA` en `escandinava.mjs`): las dos de Los dos peones del centro se separan en la jugada 2 (2...Cc6,
+ * 2...d6), pero las nombra su respuesta de después, "con ...e6" y "con ...g6".
+ */
+const NOMBRADA = {
+  'centro-cc6': 'e4 c5 c3 Nc6 d4 cxd4 cxd4 e6',
+  'centro-d6': 'e4 c5 c3 d6 d4 cxd4 cxd4 Nf6 Nc3 g6',
+}
+
+/** La posición donde se mide una lección: lo que la separa de las demás, hasta la última jugada del rival (o la que la nombra). */
 function definicion(ls, l) {
+  if (NOMBRADA[l.id]) {
+    if (!l.jugadas.join(' ').startsWith(NOMBRADA[l.id] + ' ')) throw new Error(`la jugada que nombra a ${l.id} no está en su línea`)
+    return NOMBRADA[l.id]
+  }
   const otras = ls.filter((x) => x !== l)
   let i = 0
   for (; i < l.jugadas.length; i++) {
@@ -200,12 +230,11 @@ export default function medir(datos) {
   const formas = Object.fromEntries(FORMAS.map((f) => [NOMBRE[f], {}]))
   const otras = {
     '1.e4 c5: las partidas que llegan a la raíz del curso (pct: de todas las de la banda)': {},
-    [NOMBRE.centro]: {},
     [NOMBRE.gambito]: {},
     '2...Cc6 3.d4 cxd4 4.cxd4 d5: con 5.exd5 Dxd5 6.Cf3 llega al Cambio Central': {},
     ...Object.fromEntries(Object.values(RIVAL).map((r) => [r, {}])),
   }
-  const claveTransp = Object.keys(otras)[3]
+  const claveTransp = Object.keys(otras)[2]
 
   for (const banda of BANDAS) {
     const A = arbol(datos.bandas[banda])
@@ -224,7 +253,7 @@ export default function medir(datos) {
 
     const { f, visita } = recorrido(A, LP)
     for (const c of FORMAS) formas[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
-    for (const c of ['centro', 'gambito']) otras[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
+    for (const c of ['gambito']) otras[NOMBRE[c]][banda] = celda(f[c]?.p ?? 0, f[c]?.n ?? 0)
     otras[claveTransp][banda] = celda(visita.get(TRANSPOSICION) ?? 0, A.n(TRANSPOSICION))
 
     const den = A.n(raiz) - A.fin(raiz)
@@ -234,7 +263,7 @@ export default function medir(datos) {
   return {
     metodo:
       'Las partidas del curso llegan a 1.e4 c5 y juegas 2.c3; todo porcentaje es de las partidas con 2.c3 (`partidas`). ' +
-      'Una lección se mide en la jugada del rival que la separa de las demás: la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. ' +
+      'Una lección se mide en la jugada del rival que la separa de las demás (las dos de Los dos peones del centro, en la respuesta que las nombra: 4...e6 y 5...g6): la probabilidad de llegar a esa posición (por su FEN, todos los caminos) jugando lo del curso en su libro y, fuera de él, lo que juega la gente, hasta 24 medias jugadas; `frecuencia` es el valor de 1000–1400 con dos decimales que guarda la variante del curso. ' +
       'Una forma se mide hasta la media jugada 12 siguiendo las jugadas del mapa (en el libro, lo del curso; fuera, la regla de la jugada 3 y, contra un peón en d5 que ataca e4, e5 con ...e6 jugado y si no exd5), y cada hoja se clasifica por lo que pasó con tu peón de e4; su `n` son las partidas reales de sus hojas (si tu jugada del mapa no tiene partidas, las de la posición donde la juegas). ' +
       'La transposición se mide en 4...d5 (de ahí, tus 5.exd5 y 6.Cf3 son las del mapa y 5...Dxd5 la jugaron todas); las jugadas del rival tras 2.c3, sobre las que siguen.',
     partidas,

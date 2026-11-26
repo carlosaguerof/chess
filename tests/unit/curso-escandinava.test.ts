@@ -26,11 +26,13 @@ const linea = (id: string) => lineaPorId(c, `v:${id}`)!
 const CLAVADA = 'La clavada'
 const CASA = 'La dama en casa'
 const GRANDE = 'El centro grande'
+/** El jaque: entrada del mapa con sus dos lecciones desde el 2026-11-25 (D1 A de Carlos, "agregarles lección"). */
+const JAQUE = 'El jaque'
 /** La dama en d6 sale en menos del 5 %: sus lecciones quedan fuera del mapa, sin etiqueta (gate del mapa, nota 7) */
 const FUERA = undefined
 const TABLA: [string, string, boolean, [string, string | undefined][]][] = [
-  ['La base', 'base', false, [['clasica', CLAVADA], ['valenciana', CASA], ['gipslis', GRANDE]]],
-  ['Las que más te van a salir', 'frecuentes', false, [['lasker', CLAVADA]]],
+  ['La base', 'base', false, [['clasica', CLAVADA], ['valenciana', CASA], ['gipslis', GRANDE], ['jaque-e5', JAQUE]]],
+  ['Las que más te van a salir', 'frecuentes', false, [['lasker', CLAVADA], ['jaque-e6', JAQUE]]],
   ['Opcional', 'opcional', true, [['bronstein', FUERA], ['schiller-pytel', FUERA], ['marshall', GRANDE], ['richter', GRANDE]]],
 ]
 
@@ -52,7 +54,7 @@ function formaDe(l: Pick<LineaCurso, 'jugadas'>): string | undefined {
   if (m[i]!.piece !== 'q') return undefined
   const sig = m.slice(i + 1).find((x) => x.color === 'b')
   if (sig?.piece !== 'q') return undefined
-  return ({ a5: CLAVADA, d8: CASA } as Record<string, string>)[sig.to]
+  return ({ a5: CLAVADA, d8: CASA, e5: JAQUE, e6: JAQUE } as Record<string, string>)[sig.to]
 }
 
 /**
@@ -74,8 +76,6 @@ const FRECUENCIAS = JSON.parse(readFileSync('conocimiento/frecuencias/escandinav
 const BANDAS = ['600-1000', '1000-1400'] as const
 /** La entrada de la dama en d6, fuera del mapa: en el archivo, la forma de la Bronstein y la Schiller-Pytel. */
 const D6 = 'La dama en d6 (fuera del mapa)'
-/** El jaque: entrada del mapa sin lección (3...De5+ o 3...De6+). */
-const JAQUE = 'El jaque (3...De5+ o 3...De6+), sin lección'
 const dosBandas = (x: Record<string, Banda>): [number | null, number | null] => [x[BANDAS[0]]!.pct, x[BANDAS[1]]!.pct]
 const FORMAS = Object.fromEntries(Object.entries(FRECUENCIAS.formas).map(([f, x]) => [f, dosBandas(x)]))
 const LECCIONES = Object.fromEntries(Object.entries(FRECUENCIAS.lecciones).map(([id, x]) => [id, dosBandas(x)]))
@@ -94,10 +94,10 @@ describe('El curso de la Escandinava · las lecciones', () => {
     expect(c.secciones!.map((s) => [s.titulo, s.id, !!s.opcional, s.variantes])).toEqual(TABLA.map(([t, id, o, ls]) => [t, id, o, ls.map(([x]) => x)]))
     expect(c.variantes.map((v) => [v.id, v.estructura])).toEqual(TABLA.flatMap(([, , , ls]) => ls))
     expect(c.secciones![2]!.nota).toBe('No cuentan para terminar el curso.')
-    expect(obligatorias(c)).toHaveLength(4)
+    expect(obligatorias(c)).toHaveLength(6)
     expect(opcionales(c)).toHaveLength(4)
     // la primera empieza desde 1.e4; las demás, con el tronco 1.e4 d5 2.exd5 en el tablero
-    expect(c.variantes.map((v) => v.desde)).toEqual([0, 3, 3, 3, 3, 3, 3, 3])
+    expect(c.variantes.map((v) => v.desde)).toEqual([0, 3, 3, 3, 3, 3, 3, 3, 3, 3])
   })
 
   it('una lección por cada variante de la base que no se separa de otra por una jugada tuya (nota 2 del orchestrator)', () => {
@@ -216,6 +216,38 @@ describe('El curso de la Escandinava · el mapa (chess.js)', () => {
     expect(pagina.texto.join(' ')).toContain('contra ...Ag4, d4')
   })
 
+  it('las lecciones del jaque: lo que dicen se ve en el tablero (chess.js)', () => {
+    const tras = (js: string[]) => posicion(js, js.length)
+    const e5 = linea('jaque-e5').jugadas
+    const e6 = linea('jaque-e6').jugadas
+    // 5...De6 defiende al alfil de g4, que no tiene otro defensor; tras 6.f3, el alfil ya no llega a e2
+    const conDe6 = tras(e5.slice(0, e5.indexOf('f3')))
+    expect(conDe6.attackers('g4', 'b')).toEqual(['e6'])
+    const conF3 = tras(e5.slice(0, e5.indexOf('f3') + 1))
+    expect(conF3.moves({ square: 'g4' })).not.toContain('Bxe2')
+    // 8.f4 amenaza f5, que atacaría a la dama de e6 y al alfil de g6
+    const conF5 = new Chess(tras(e5).fen().replace(' b ', ' w '))
+    conF5.move('f5')
+    expect(['e6', 'g6'].map((x) => conF5.attackers(x as never, 'w').includes('f5' as never))).toEqual([true, true])
+    // el error 5.Cf3: tras 5...Axf3, tu alfil de e2 no puede retomar (dejaría a tu rey en jaque de la dama de e5)
+    const err = tras([...e5.slice(0, e5.indexOf('d4')), 'Nf3', 'Bxf3'])
+    expect(err.moves()).not.toContain('Bxf3')
+    expect(err.moves()).toContain('gxf3')
+    // y una jugada después: 6.Cf3 Axf3, con la dama en e6, tampoco deja retomar con el alfil
+    const err6 = tras([...e5.slice(0, e5.indexOf('f3')), 'Nf3', 'Bxf3'])
+    expect(err6.moves()).not.toContain('Bxf3')
+    expect(err6.moves()).toContain('gxf3')
+    // 5.d4 amenaza d5 contra la dama de e6 y el caballo de c6
+    const conD4 = new Chess(tras(e6.slice(0, e6.indexOf('d4') + 1)).fen().replace(' b ', ' w '))
+    conD4.move('d5')
+    expect(['e6', 'c6'].map((x) => conD4.attackers(x as never, 'w').includes('d5' as never))).toEqual([true, true])
+    // con tu rey en e1, tu alfil de e2 está clavado: antes del enroque no se puede mover
+    const antesDelEnroque = new Chess(tras(e6.slice(0, e6.indexOf('O-O'))).fen())
+    expect(antesDelEnroque.moves({ square: 'e2' })).toEqual([])
+    // si el caballo de b4 se come c2, tu dama lo retoma
+    expect(tras([...e6.slice(0, e6.indexOf('Nf3') + 1), 'Nxc2+']).moves()).toContain('Qxc2')
+  })
+
   it('las introducciones abren con la forma y no nombran una jugada tuya', () => {
     for (const v of c.variantes) {
       expect(v.intro, v.id).toMatch(v.estructura ? new RegExp(`^Estás en ${v.estructura.toLowerCase()}:`) : /^Esta lección queda fuera del mapa:/)
@@ -306,11 +338,18 @@ describe('El curso de la Escandinava · obligatorio y opcional', () => {
     expect(c.variantes.find((v) => v.id === 'valenciana')!.fuenteFrecuencia).toContain(`la dama en casa, ${FORMAS[CASA]![1]!.toFixed(1)} %`)
   })
 
-  it('el jaque es una entrada del mapa sin lección: 5 % o más en las dos bandas, y ninguna lección lo lleva', () => {
-    const jaque = FRECUENCIAS.otras![JAQUE]!
-    for (const b of BANDAS) expect(jaque[b]!.pct!, b).toBeGreaterThanOrEqual(5)
-    expect(c.variantes.filter((v) => v.estructura === 'El jaque')).toEqual([])
-    expect(FORMAS[JAQUE]).toBeUndefined()
+  it('el jaque es una entrada del mapa con sus dos lecciones (D1 A de Carlos): 5 % o más en las dos bandas; cada lección, en la respuesta del rival a 4.Ae2 que la nombra', () => {
+    for (const b of BANDAS) expect(FRECUENCIAS.formas[JAQUE]![b]!.pct!, b).toBeGreaterThanOrEqual(5)
+    expect(c.variantes.filter((v) => v.estructura === JAQUE).map((v) => v.id)).toEqual(['jaque-e5', 'jaque-e6'])
+    // ya no va en `otras` como entrada sin lección
+    expect(Object.keys(FRECUENCIAS.otras ?? {}).some((k) => k.startsWith('El jaque'))).toBe(false)
+    // las dos, 2 % o más en una banda con 10 partidas o más: la más jugada es de La base; la otra, de las que más te van a salir
+    for (const id of ['jaque-e5', 'jaque-e6']) expect(BANDAS.some((b) => FRECUENCIAS.lecciones[id]![b]!.pct! >= 2 && FRECUENCIAS.lecciones[id]![b]!.n >= 10), id).toBe(true)
+    expect(max(LECCIONES['jaque-e5']!)).toBeGreaterThan(max(LECCIONES['jaque-e6']!))
+    // la página del jaque y su regla siguen; dice que ya tiene lecciones
+    const pagina = c.piezas.estructura.paginas.find((p) => p.subtitulo === 'El jaque')!
+    expect(pagina.texto.join(' ')).toContain('contra ...Ag4, d4')
+    expect(pagina.texto.at(-1)).toContain('Sus dos lecciones')
   })
 
   it('la regla de §6 con los datos de este curso da la tabla: por forma, 5 % o más; por lección, 2 % o más', () => {
@@ -379,14 +418,14 @@ describe('El curso de la Escandinava · el ciclo, el Repaso y Refuerza', () => {
     const falladas = jugadasFalladas(soloObligatorias(repertorioCompleto()), [clasica, opcional])
     expect(falladas.some((j) => j.esperada === 'Nd5')).toBe(true)
     expect(falladas.some((j) => j.esperada === 'g3')).toBe(false)
-    // las líneas de la base de la Escandinava con blancas que entran a Refuerza son las de las cuatro obligatorias
+    // las líneas de la base de la Escandinava con blancas que entran a Refuerza son las de las seis obligatorias
     const deLaEscandinava = soloObligatorias(repertorioCompleto()).lineas.filter((x) => x.apertura === 'escandinava' && x.color === 'w').map((x) => x.claveBase).sort()
     expect(deLaEscandinava).toEqual(obligatorias(c).map((v) => `escandinava/${v.base}`).sort())
     // y la apertura sigue completa en la base (la guía y los bots no cambian)
     expect(lineasDeFavorita('escandinava:w').length).toBeGreaterThan(deLaEscandinava.length)
   })
 
-  it('el Repaso lleva solo las cuatro obligatorias, con su id de siempre', () => {
+  it('el Repaso lleva solo las seis obligatorias (las dos del jaque, desde el 2026-11-25), con su id de siempre', () => {
     const curso = cursos().find((x) => x.id === 'escandinava:w')!
     // las opcionales van marcadas y el Repaso no las saca (`esLeccionOpcional`, la condición común)
     expect(curso.lecciones.filter((x) => !x.opcional).map((x) => x.id)).toEqual(obligatorias(c).map((v) => leccionIdDe(c, v)))

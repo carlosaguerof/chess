@@ -306,3 +306,11 @@ Los ids que cita el mapa (`iterations/v4/mapa-eslava.md` y el MAPA de la corrida
 | P2-eslava-77-diemer-opc | `node motor.mjs mejores "d4 d5 c4 c6 e4 dxe4 Nc3 e5 Be3 exd4 Bxd4" --prof 18 --n 3` | Mueven: negras · profundidad 18 · -0.98  Nf6 Nge2 Na6 Ng3 h5 Be2 h4 Ngxe4 · -0.64  Bf5 g4 Be6 Nxe4 Bb4+ Nc3 Nf6 g5 · -0.39  Qa5 Qd2 c5 Be3 Nc6 Nxe4 Qxd2+ Bxd2 |
 | P2-eslava-78-diemer-opc | `node motor.mjs mejores "d4 d5 c4 c6 e4 dxe4 Nc3 e5 Be3 exd4 Qxd4 Qxd4 Bxd4" --prof 18 --n 3` | Mueven: negras · profundidad 18 · -0.46  Nf6 O-O-O Nbd7 Nge2 Nc5 Ng3 Bg4 Be2 · -0.46  Na6 O-O-O Nf6 Nge2 Nc5 Ng3 Bg4 Be2 · -0.40  Bf5 O-O-O Nd7 Nge2 Ngf6 Ng3 Bg6 Ncxe4 |
 | P2-eslava-79-diemer-opc | `node motor.mjs mejores "d4 d5 c4 c6 e4 dxe4 Nc3 e5 Be3 exd4 Qxd4 Qxd4 Be2" --prof 18 --n 3` | Mueven: negras · profundidad 18 · -8.04  Qe5 g4 Nh6 h3 Nd7 O-O-O Be7 f4 · -7.50  Qd7 Nxe4 Bb4+ Nd2 Nf6 O-O-O O-O Ne4 · -7.41  Qd8 Nxe4 Bb4+ Nd2 Nf6 Nf3 O-O O-O-O |
+
+## La revisión de lo publicado (2026-11-26): el plan del Gambito Geller
+
+La revisión independiente (`00_corridas/chess/2026-11-26_REVISION_correcciones-publicadas.md`, E1) encontró que contra 10.Cg5, la de libro y la mejor de blancas, ...Cd7 y ...Ae7 pierden. Comandos con `node scripts/motor-comprobar.ts`, profundidad 20.
+
+| Id | Afirmación | Comando | Resultado | Veredicto |
+|---|---|---|---|---|
+| O-ge-cg5 | "Si su caballo salta a g5, primero ...Ab7, que cuida tu torre de a8, y si su dama llega a h5, ...g6 cuida f7" | `mejores "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e4 b5 e5 Nd5 a4 e6 axb5 Nxc3 bxc3 cxb5" --n 3 --prof 20` · `jugada "… cxb5 Ng5" "Nd7"` · `jugada "… cxb5 Ng5" "Be7"` · `mejores "… Ng5 Bb7" --n 3` · `mejores "… Ng5 Bb7 Qh5" --n 3` · `jugada "… Bb7 Qh5" "Be7"` | 10.Cg5 la mejor de blancas (−0.97) · ...Ab7 la mejor (−0.93) · ...Cd7 pierde 662 (Df3) · ...Ae7 pierde 549 (Cxf7) · tras ...Ab7, 11.Dh5 la mejor · ...g6 la mejor (−0.85) · ...Ae7 ahí pierde 718 | Se sostiene |

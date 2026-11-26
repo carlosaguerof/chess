@@ -12,7 +12,7 @@
   "minimo": 3
  },
  "script": "scripts/frecuencias/escandinava.mjs",
- "metodo": "Las partidas del curso: las que llegan a 1.e4 d5 y siguen. En cada posición, una jugada pesa por sus partidas entre las que siguen (n - fin). Las entradas del mapa (`formas`, y en `otras` el jaque y lo que no tiene lección): juegas lo del curso mientras haya respuesta (por posición) y si no, lo que juega la gente; lo del rival pesa por lo que se juega; cada partida se clasifica con su línea en la media jugada 12 (la primera captura de negras en d5 dice la pieza; si es la dama, su jugada siguiente dice la casilla); su `n`, las partidas que llegaron a la jugada que la decide. Cada lección, en la posición que la define en la base (la última jugada de negras de su variante de la base, o la jugada en que se separa de las demás lecciones), por la secuencia exacta: el producto de la parte de cada jugada de negras desde 2...; su `n`, las partidas de esa última jugada. Las jugadas del rival sin lección, igual (del curso) y su parte de las partidas de su posición. `null`: ninguna secuencia de 3 partidas o más llega ahí. Es el método de formas.mjs, lecciones-freq.mjs y consulta.mjs del worker del curso.",
+ "metodo": "Las partidas del curso: las que llegan a 1.e4 d5 y siguen. En cada posición, una jugada pesa por sus partidas entre las que siguen (n - fin). Las entradas del mapa (`formas`, con el jaque, que tiene lección desde el 2026-11-25; en `otras`, lo que no tiene lección): juegas lo del curso mientras haya respuesta (por posición) y si no, lo que juega la gente; lo del rival pesa por lo que se juega; cada partida se clasifica con su línea en la media jugada 12 (la primera captura de negras en d5 dice la pieza; si es la dama, su jugada siguiente dice la casilla); su `n`, las partidas que llegaron a la jugada que la decide. Cada lección, en la posición que la define en la base (la última jugada de negras de su variante de la base, o la jugada en que se separa de las demás lecciones; las dos del jaque, en la primera respuesta del rival a 4.Ae2, que las nombra), por la secuencia exacta: el producto de la parte de cada jugada de negras desde 2...; su `n`, las partidas de esa última jugada. Las jugadas del rival sin lección, igual (del curso) y su parte de las partidas de su posición. `null`: ninguna secuencia de 3 partidas o más llega ahí. Es el método de formas.mjs, lecciones-freq.mjs y consulta.mjs del worker del curso.",
  "partidas": {
   "600-1000": 6147,
   "1000-1400": 18730
@@ -51,6 +51,17 @@
     "n": 7
    }
   },
+  "jaque-e5": {
+   "forma": "El jaque",
+   "600-1000": {
+    "pct": 6.1,
+    "n": 55
+   },
+   "1000-1400": {
+    "pct": 4.4,
+    "n": 228
+   }
+  },
   "lasker": {
    "forma": "La clavada",
    "600-1000": {
@@ -60,6 +71,17 @@
    "1000-1400": {
     "pct": 2.2,
     "n": 21
+   }
+  },
+  "jaque-e6": {
+   "forma": "El jaque",
+   "600-1000": {
+    "pct": 3.6,
+    "n": 30
+   },
+   "1000-1400": {
+    "pct": 4.3,
+    "n": 223
    }
   },
   "bronstein": {
@@ -128,6 +150,16 @@
     "n": 1637
    }
   },
+  "El jaque": {
+   "600-1000": {
+    "pct": 44.7,
+    "n": 618
+   },
+   "1000-1400": {
+    "pct": 28.4,
+    "n": 2335
+   }
+  },
   "El centro grande": {
    "600-1000": {
     "pct": null,
@@ -150,16 +182,6 @@
   }
  },
  "otras": {
-  "El jaque (3...De5+ o 3...De6+), sin lección": {
-   "600-1000": {
-    "pct": 44.7,
-    "n": 618
-   },
-   "1000-1400": {
-    "pct": 28.4,
-    "n": 2335
-   }
-  },
   "La dama a e5 o e6 por otro camino (2...Cf6 3.d4 Dxd5 4.Cc3 De6+), sin lección y fuera de la fila del jaque": {
    "600-1000": {
     "pct": null,

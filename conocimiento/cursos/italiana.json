@@ -210,7 +210,8 @@
           "subtitulo": "El Centro cerrado",
           "texto": [
             "Tus peones: c3, d3 y e4. Los de negras: d6 y e5. Nadie cambia peones: es una partida lenta, de mover piezas sin abrir el centro.",
-            "Primero enrocas y llevas una torre a e1; después Ab3, el caballo de b1 por d2 y h3. Si su caballo salta a g4 con su alfil en c5, no lo eches con h3: ...Cxf2 gana material. Antes de enrocar, juega d4; con tu torre en e1, regrésala a f1. Tu ruptura: d4, cuando la apoyen tu peón de c3 y tu caballo de f3, con tu torre de e1 cuidando e4. La de negras: ...d5. La casilla clave: d4. Si negras juega otra cosa sin tocar el centro, como ...h6 o ...a6, el plan es el mismo."
+            "Primero enrocas y llevas una torre a e1; después Ab3, el caballo de b1 por d2 y h3. Tu ruptura: d4, cuando la apoyen tu peón de c3 y tu caballo de f3, con tu torre de e1 cuidando e4. La de negras: ...d5. La casilla clave: d4. Si negras juega otra cosa sin tocar el centro, como ...h6 o ...a6, el plan es el mismo.",
+            "Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), no lo eches con h3 mientras tu torre no esté en f1: ...Cxf2 gana material. Antes de enrocar, juega d4; con tu torre en e1, regrésala a f1; ya enrocado y con tu torre en f1, h3 sí sirve."
           ],
           "tablero": {
             "fen": "6k1/ppp2ppp/3p4/4p3/4P3/2PP4/PP3PPP/6K1 w - - 0 1",
@@ -486,7 +487,7 @@
           ],
           "texto": [
             "La pregunta: ¿qué pasó con el peón de e5? Si sigue en e5: el Centro cerrado, sin prisa, y d4 cuando esté preparado. Si se fue a d4 y retomaste con tu peón de c: el Centro ideal: dura poco, y lo que toca depende de la lección. Si retomaste con una pieza: el Centro abierto; saca tus piezas rápido.",
-            "Tres reglas: 1) Antes de cada jugada, mira si atacan una pieza tuya. En tu jugada 4 (o en la 5, si ya jugaste c3): si su caballo de f6 ataca tu peón de e4, d3, y si negras juega pasivo, d4 de inmediato. 2) En el Centro cerrado, con su alfil en c5, nunca eches con h3 a un caballo en g4: antes de enrocar, d4; con tu torre en e1, regrésala a f1. 3) Contra 3...Cd4, no tomes en e5: cambia el caballo."
+            "Tres reglas: 1) Antes de cada jugada, mira si atacan una pieza tuya. En tu jugada 4 (o en la 5, si ya jugaste c3): si su caballo de f6 ataca tu peón de e4, d3, y si negras juega pasivo, d4 de inmediato. 2) En el Centro cerrado, contra un caballo en g4 con un alfil que mira a f2: antes de enrocar, d4; con tu torre en e1, regrésala a f1; con ella en f1, h3. 3) Contra 3...Cd4, no tomes en e5: cambia el caballo."
           ],
           "fuente": [
             "WB-3Ac4",
@@ -621,12 +622,19 @@
       "intro": "Estás en el Centro cerrado: aquí no hay prisa, y tus piezas salen antes de que se abra el juego. Empiezas desde la primera jugada.",
       "idea": "Negras ataca tu peón de e4: lo defiendes con un peón y juegas sin prisa: enroque y una torre en e1.",
       "plan": {
-        "tuyo": "Siguen Ab3 y Cbd2, y h3 antes de que su caballo salte a g4. Cuando todo apoye a tu peón de d3, d4.",
+        "tuyo": "Sigue h3, antes de que su caballo salte a g4; después Ab3 y Cbd2. Cuando todo apoye a tu peón de d3, d4.",
         "rival": "Negras busca ...d5, o cambiar tu alfil con ...Ae6.",
         "marcas": [],
         "marcasDe": {
           "tuyo": [
             [
+              {
+                "tipo": "A3",
+                "de": "h2",
+                "a": "h3",
+                "color": "verde",
+                "punteada": true
+              },
               {
                 "tipo": "A3",
                 "de": "c4",
@@ -635,15 +643,7 @@
                 "punteada": true
               }
             ],
-            [
-              {
-                "tipo": "A3",
-                "de": "d3",
-                "a": "d4",
-                "color": "verde",
-                "punteada": true
-              }
-            ]
+            []
           ],
           "rival": [
             [
@@ -671,15 +671,15 @@
               "frase": "Tu plan: sin prisa, con el centro cerrado."
             },
             {
-              "frase": "Ab3: tu alfil se aparta antes de que lo ataquen, y sigue mirando a f7.",
-              "jugadas": [
-                "Bb3"
-              ]
-            },
-            {
               "frase": "h3: le quitas la casilla g4 al caballo de negras antes de que salte.",
               "jugadas": [
                 "h3"
+              ]
+            },
+            {
+              "frase": "Ab3: tu alfil se aparta antes de que lo ataquen, y sigue mirando a f7.",
+              "jugadas": [
+                "Bb3"
               ]
             },
             {
@@ -722,7 +722,7 @@
           "MOTOR"
         ]
       },
-      "regla": "En tu jugada 4, si su caballo de f6 ataca tu e4, d3. Con su alfil en c5, nunca eches con h3 a un caballo en g4: antes de enrocar, d4; con tu torre en e1, regrésala a f1.",
+      "regla": "En tu jugada 4, si su caballo de f6 ataca tu e4, d3. Caballo en g4 y un alfil que mira a f2: antes de enrocar, d4; con tu torre en e1, regrésala a f1; con ella en f1, h3.",
       "frecuencia": 5,
       "fuenteFrecuencia": "partidas reales: 41.6 % (600–1000) y 36.2 % (1000–1400) de las partidas que llegan a 3.Ac4 siguen con 3...Cf6 (conocimiento/frecuencias/italiana.json)"
     },
@@ -965,7 +965,7 @@
           "MOTOR"
         ]
       },
-      "regla": "Retira tu alfil a b3 antes de que lo ataquen; y con su alfil en c5, nunca eches con h3 a un caballo en g4: antes de enrocar, d4; con tu torre en e1, regrésala a f1.",
+      "regla": "Retira tu alfil a b3 antes de que lo ataquen. Contra un caballo en g4 con un alfil que mira a f2: antes de enrocar, d4; con tu torre en e1, regrésala a f1; con ella en f1, h3.",
       "frecuencia": 4,
       "fuenteFrecuencia": "partidas reales: 17.0 % y 13.8 % (iterations/v4/mapa-italiana.md)"
     },
@@ -2097,7 +2097,14 @@
         "O-O",
         "a4",
         "h3"
-      ]
+      ],
+      "describe": {
+        "cuidado": [
+          [
+            "O-O"
+          ]
+        ]
+      }
     },
     "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O": {
       "pregunta": "Ya sacaste tus piezas del lado del rey. ¿Qué haces con tu rey?",

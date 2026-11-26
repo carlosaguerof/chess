@@ -269,3 +269,21 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 - Plan *(redactado por la IA)*: Sostienes la cadena e5-d4 con piezas: Cf3, Ac4 y Ab5, que clava al caballo que ataca e5. Si negras cambia en e5, retomas con el caballo y te queda el peón de d4 solo.
 - Fuente: B22 · Sicilian Defense: Alapin Variation, Smith-Morra Declined
 - Sigue la fila de la fuente desde la media jugada 9 con teoría de: Wikibooks, Chess Opening Theory/1. e4/1...c5/2. c3/2...Nf6/3. e5/3...Nd5 (4.d4 cxd4 5.cxd4); J. Hartmann, "The Alapin", Chess Life Kids, feb. 2024 (6.Cf3 Cc6 7.Ac4; solo la idea); motor: 8.Ab5 es la mejor; 6.Cf3 a 0.20 de 6.Ac4, iterations/v4/comprobaciones-alapin.md.
+
+### Variante Alapin: 2...Cc6 3.d4 cxd4 4.cxd4 e6 (5.Cf3 Cf6 6.d5)
+
+**1.e4 c5 2.c3 Cc6 3.d4 cxd4 4.cxd4 e6 5.Cf3 Cf6 6.d5**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tus peones de e4 y d4 tomaron el centro, y tu peón de d5 echa a su caballo de c6. Si negras cambia en d5, retomas con tu peón de e4; si te da jaque con su alfil desde b4, lo tapas con tu caballo de b1 en c3.
+- Fuente: B22 · Sicilian Defense: Alapin Variation
+- Sigue la fila de la fuente desde la media jugada 4 con teoría de: partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): tras 2.c3, 2...Cc6 es la más jugada (43.8 % y 42.2 %); 3.d4 cxd4 (64.2 %), 4.cxd4 e6 (30.7 %, la más jugada); tras 5.Cf3, 5...Cf6 y 5...d5 empatan (3 y 3): la lección sigue 5...Cf6, a 0.42 de 5...d5 (la mejor del motor), porque con 5...d5 la página manda avanzar a e5 y la lección saldría de su forma (sería La cadena); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-alapin.md, ids D-…): 3.d4 y 4.cxd4, la mejor; 5.Cf3 a 0.03 de la mejor; 6.d5, a 0.25–0.49 de 6.Cc3, es la regla de la página de los dos peones del centro (no pierde material, K-nc6x-e6-nf3-nf6-d5).
+
+### Variante Alapin: 2...d6 3.d4 cxd4 4.cxd4 Cf6 5.Cc3 g6
+
+**1.e4 c5 2.c3 d6 3.d4 cxd4 4.cxd4 Cf6 5.Cc3 g6 6.Cf3 Ag7 7.Ae2 0-0 8.0-0**
+
+- Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
+- Plan *(redactado por la IA)*: Tus peones de e4 y d4 tienen el centro, defendidos, y ya enrocaste. Sacas tu alfil de c1 a e3, que cuida d4, y juegas h3 para que su alfil no se instale en g4.
+- Fuente: B22 · Sicilian Defense: Alapin Variation
+- Sigue la fila de la fuente desde la media jugada 4 con teoría de: partidas de lichess (CC0, https://database.lichess.org/, septiembre de 2026, Rapid, 600–1000 y 1000–1400): tras 2.c3, 2...d6 es 16.1 % en 1000–1400; 3.d4 cxd4 (79.1 %), 4.cxd4 Cf6 (38.8 %), 5.Cc3 g6 (7 de 13), 6.Cf3 (4 de 7) Ag7 (4 de 4); motor (Stockfish 19 lite, prof. 18; comprobaciones en iterations/v4/comprobaciones-alapin.md, ids D-…): 3.d4, 4.cxd4, 5.Cc3 y 8.0-0, la mejor; 6.Cf3 a 0.23 de la mejor (la de las partidas y la de la página: primero el caballo de g1); 7.Ae2 a 0.03; 7...0-0, la mejor de negras.

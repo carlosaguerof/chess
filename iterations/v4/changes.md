@@ -10,15 +10,15 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 | Curso | Lecciones obligatorias | Opcionales | La pregunta del mapa |
 |---|---|---|---|
 | Italiana | 6 | 2 | ¿Qué pasó con el peón de e5 de negras? |
-| Alapin contra la Siciliana | 2 | 4 | ¿Qué pasó con mi peón de e4? |
+| Alapin contra la Siciliana | 2 (4 desde las lecciones de lo frecuente) | 4 | ¿Qué pasó con mi peón de e4? |
 | Contra la Caro-Kann (Avance) | 2 | 0 | ¿Qué pasó con d4, la base de mi cadena? |
 | Contra la Francesa (Avance) | 3 | 4 | La misma, con una forma más |
-| Contra la Escandinava | 4 | 4 | ¿A dónde se fue la dama cuando la ataqué con 3.Cc3? |
+| Contra la Escandinava | 4 (6 desde las lecciones de lo frecuente) | 4 | ¿A dónde se fue la dama cuando la ataqué con 3.Cc3? |
 | Defensa Eslava | 4 | 7 | Tres preguntas en fila (¿cambió en d5?, ¿ya jugó e3?, ¿alcanzó a jugar a4?) |
 | Otras aperturas de blancas | 6 | 2 | ¿Qué peón de blancas ataca mi peón de d5? |
 | Defensa Caro-Kann | 8 | 8 | ¿Qué pasó con el peón de e4? |
 
-- **Lo que más me va a salir y no tiene lección** está en el mapa, con su plan en una frase: los dos peones del centro en la Alapin (55 % de las partidas de 1000–1400), los jaques de la dama en la Escandinava, 3...e6 contra el Avance de la Caro-Kann y otras. Si quiero una lección para alguna, se agrega.
+- **Lo que más me va a salir y no tiene lección** está en el mapa, con su plan en una frase: los dos peones del centro en la Alapin (55 % de las partidas de 1000–1400), los jaques de la dama en la Escandinava, 3...e6 contra el Avance de la Caro-Kann y otras. Si quiero una lección para alguna, se agrega. (Después del cierre, los jaques y los dos peones del centro ya tienen lección: abajo, al final.)
 - **Mis otras jugadas buenas ya no son lecciones aparte.** Cuando la base traía dos jugadas mías en la misma posición, el curso enseña una y la otra sale en azul: "Buena jugada, pero esta lección enseña otra línea". Por eso el Avance contra la Caro-Kann tiene 2 lecciones y no 7.
 - **Con blancas, el plan del final dice "El de negras:"** (antes decía siempre "El de blancas:").
 - **Trece lecciones cambiaron de nombre,** porque en Practicar el nombre se ve arriba antes de mi jugada y la adelantaba: "3...Ac5 4.c3 Cf6 (Giuoco Pianissimo)" pedía 4.c3, y el Pianissimo es la Italiana con d3, que también juegas tú (ahora "3...Ac5 y 4...Cf6"), y "Clásica: 3.Cc3" decía que iba a capturar en e4 (ahora "3.Cc3"). Las trece, en `log.md`. El Repaso sigue reconociendo lo que fallaste con el nombre de antes, también con el que tenía la lección en la versión publicada.
@@ -38,3 +38,10 @@ Lo que veo distinto al abrir la app. El detalle de cada cambio, con su porqué, 
 ## Lo que falta
 
 Probar todo en GitHub (los dos perfiles; la llave de la Air no tiene permiso), publicar, y que yo recorra los siete cursos en el iPhone y conteste sus preguntas.
+
+## Después del cierre: lecciones para lo que más me sale (2026-11-25)
+
+- **Contra la Escandinava, los jaques de la dama ya tienen lección:** "El jaque en e5: 4...♗g4" (en La base) y "El jaque en e6: 4...♘c6" (en Las que más te van a salir). El curso pasa de 4 a 6 obligatorias.
+- **En la Alapin, los dos peones del centro ya tienen lección:** "2...♘c6, con ...e6" (en La base) y "2...d6, con ...g6" (en una sección nueva, Las que más te van a salir). El curso pasa de 2 a 4 obligatorias.
+- **El mapa y las páginas** de esas formas dicen que ya tienen lecciones; sus reglas son las mismas.
+- **Lo guardado no cambia:** lo que ya había hecho sigue contando igual. Las cuatro lecciones nuevas salen pendientes y entran al Repaso y a Refuerza cuando las termine.
