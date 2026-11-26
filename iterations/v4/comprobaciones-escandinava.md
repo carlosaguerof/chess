@@ -294,3 +294,11 @@ La revisión independiente (`00_corridas/chess/2026-11-26_REVISION_correcciones-
 | V3-cl-ae3 | Ae3 | h3 (+0.59) | a 8 | pierde 361 | | h3 |
 | V3-cl-ae2 | Ae2 | h3 (+0.42) | la mejor | pierde 39 | pierde 67 | h3 |
 | V3-cl-ab5 | Ab5 (ya clava) | h3 (+1.53) | la mejor | | | h3 (V2-cl-ab5) |
+
+## La segunda revisión (2026-11-26): la excepción de La clavada, por su motivo
+
+La revisión de lo corregido (`2026-11-26_REVISION_lecciones-de-lo-frecuente-2.md`, hallazgo 2) encontró que la regla por casillas fallaba con tu alfil en g5. La excepción queda por su motivo: con un caballo de negras en c6, contra ...Ag4, no h3 (pueden atacar tu peón de d4 dos veces); clava ese caballo con Ab5; con tu alfil de c1 en d2, d5 es todavía mejor; si tu alfil ya lo clava desde b5, h3 sí sirve. Posición `e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Nc6 <tu alfil> Bg4`; `jugada … "Bb5" --prof 20`.
+
+| Id | Tu alfil | Ab5 | Veredicto |
+|---|---|---|---|
+| V4-cl-ab5 | Ad2 · Ac4 · Ae3 · Af4 · Ad3 · Ae2 · Ag5 · ninguno (`… Nc6 a3 Bg4`) | a 121 (d5 la mejor, +1.65) · a 37 · a 35 · a 4 · a 32 · a 67 · a 10 · la mejor (+0.12) | Ab5 no pierde material en ninguna; con el alfil en d2, la página dice d5 (V3-cl-ad2) |

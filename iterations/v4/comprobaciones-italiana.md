@@ -243,3 +243,19 @@ La regla decía "con su alfil en c5"; la revisión independiente de lo publicado
 | W2-ng4-b6-antes | Con su alfil en b6, antes de enrocar, h3 pierde; d4 no pierde material (0-0 es la mejor) | `mejores "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 Bb6 Nbd2 Ng4" --n 3 --prof 20` · `jugada … "h3"` · `jugada … "d4"` · `jugada … "O-O"` | +0.54 0-0 · h3 pierde 449 · d4 a 41 (+0.13) · 0-0 la mejor | Se sostiene |
 | W2-ng4-f1 | Ya enrocado y con tu torre en f1, h3 sí sirve (con su alfil en c5 o en b6) | `jugada "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Ng4" "h3" --prof 20` · `jugada "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 O-O O-O Ng4" "h3"` · `jugada "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Bb6 Bb3 Ng4" "h3"` | h3 la mejor en las tres (+0.67, +1.18, +0.61) | Se sostiene |
 | W2-d3-plan | El plan de la Dos Caballos con 4.d3: h3 primero, antes de Ab3 y Cbd2 | `plan "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1" "h3 Bb3 Nbd2 Rf1"` | contra ...a6: h3 a 8 · contra ...Ae6: h3 a 38 (Axe6 la mejor); ninguna pierde material | Se sostiene |
+
+## La segunda revisión (2026-11-26): la regla del caballo en g4, por su motivo
+
+La revisión de lo corregido (`00_corridas/chess/2026-11-26_REVISION_lecciones-de-lo-frecuente-2.md`, hallazgos 1, 3, 5 y 6) encontró que "antes de enrocar, d4" pierde con tu caballo ya en d2. La regla queda: si no has enrocado, enroca; con tu torre en f1, h3 (si negras lo apoya con ...h5 y su rey sigue en el centro, no lo tomes); con tu torre en e1, regrésala a f1, o a e2 si tu caballo ya está en f1. Comandos con `node scripts/motor-comprobar.ts`, profundidad 20.
+
+| Id | Posición (…Ng4) | Comando | 0-0 | h3 | Veredicto |
+|---|---|---|---|---|---|
+| W3-ng4-5d3 | `e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 Ng4` (y por 3...Cf6 4.d3 Ac5 5.c3, la misma posición) | `mejores … --n 3` · `jugada … "O-O"` · `jugada … "h3"` | a 73 (+0.68; d4 +1.70, la mejor) | pierde 576 | 0-0 no pierde material |
+| W3-ng4-cbd2 | `… d3 d6 Nbd2 Ng4` | ídem | la mejor (+0.61) | pierde 537 | Se sostiene |
+| W3-ng4-cbd2-b | `… d3 O-O Nbd2 Ng4` | ídem | la mejor (+0.65) | pierde 733 | Se sostiene |
+| W3-ng4-b6 | `… d3 d6 Bb3 Bb6 Nbd2 Ng4` | ídem | la mejor (+0.56) | pierde 685 | Se sostiene |
+| W3-ng4-ab3 | `e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 Bb3 Ng4` | ídem | la mejor (+0.45) | pierde 665 | Se sostiene |
+| W3-ng4-a7 | `… d3 a6 Bb3 Ba7 Nbd2 Ng4` | ídem | a 5 (+0.71) | pierde 654 | Se sostiene |
+| W3-ng4-h5 | Con tu torre en f1, h3 y ...h5, sin que negras haya enrocado: no lo tomes | `mejores "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Ng4 h3 h5" --n 3` · `jugada … "hxg4"` | | b4 +1.97, la mejor; hxg4 pierde 252 | Se sostiene (con negras enrocado, hxg4 +2.27, según la revisión) |
+| W3-ng4-cf1 | Con tu torre en e1 y tu caballo en f1, Te2 | `mejores "… Re1 a6 Bb3 Ba7 Nbd2 Be6 Nf1 Ng4" --n 3` | | Te2 +0.34, la mejor | Se sostiene |
+| W3-d3-plan | El plan de la Dos Caballos con 4.d3, en el orden de la página: Ab3, Cbd2 y h3 | `plan "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 c3 d6 O-O O-O Re1" "Bb3 Nbd2 h3 Bb5"` · `jugada "… Re1 Na5" "Bb3"` | | contra ...a6: Ab3 a 6 · contra ...Ae6: Ab3 a 5 · contra ...Ca5: Ab3 a 53, sin material (Ab5 +0.26) | Se sostiene |
