@@ -4,12 +4,13 @@ import { siguienteLeccion } from './modelo.ts'
 /**
  * T18: en una misma sesión de práctica, la lección que fallé vuelve antes que las demás.
  * `falladas`: las lecciones donde me equivoqué en esta sesión (en orden), sin las que ya repetí bien.
+ * Sin `actual` (el botón "Seguir" de Inicio, que no viene de una lección), la primera fallada o la primera sin hacer.
  */
-export function siguienteEnSesion(curso: Curso, hechas: Record<string, unknown>, actual: Leccion, falladas: string[]): Leccion | undefined {
+export function siguienteEnSesion(curso: Curso, hechas: Record<string, unknown>, actual: Leccion | undefined, falladas: string[]): Leccion | undefined {
   // solo las falladas de este curso: las de otro curso no le cierran el paso a las de aquí
-  const pendiente = falladas.find((id) => id !== actual.id && curso.lecciones.some((l) => l.id === id))
+  const pendiente = falladas.find((id) => id !== actual?.id && curso.lecciones.some((l) => l.id === id))
   if (pendiente) return curso.lecciones.find((l) => l.id === pendiente)
-  return siguienteLeccion(curso, hechas, actual.id)
+  return siguienteLeccion(curso, hechas, actual?.id)
 }
 
 /** Al terminar una lección: si fallé algún paso, entra a la lista; si la terminé sin fallos, sale. */
@@ -22,7 +23,9 @@ const CLAVE = 'ajedrez.v1.sesion-falladas'
 
 export function leerFalladas(): string[] {
   try {
-    return JSON.parse(sessionStorage.getItem(CLAVE) ?? '[]') as string[]
+    // solo una lista de ids: algo dañado cuenta como vacío (Inicio lo lee para "Seguir" y no debe tronar)
+    const f: unknown = JSON.parse(sessionStorage.getItem(CLAVE) ?? '[]')
+    return Array.isArray(f) ? f.filter((x): x is string => typeof x === 'string') : []
   } catch {
     return []
   }

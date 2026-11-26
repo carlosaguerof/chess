@@ -12,6 +12,8 @@ import { repertorioCompleto } from '../aprender/favoritas.ts'
 import { soloObligatorias } from '../curso/datos.ts'
 import { jugadasFalladas } from '../registro/refuerza.ts'
 import { COMO_FUNCIONA_REFUERZA, COMO_FUNCIONA_REPASO, Info } from '../componentes/ComoFunciona.tsx'
+import { Texto } from '../componentes/Notacion.tsx'
+import { seguir } from '../curso/seguir.ts'
 
 export function Inicio() {
   // L4: el último bot con el que jugué (Brisa, 700, la primera vez), igual que en Jugar
@@ -19,6 +21,8 @@ export function Inicio() {
   const enCurso = partidaEnCurso()
   const rival = personajePorId(enCurso?.botId)
   const [confirmar, setConfirmar] = useState(false)
+  // vuelta 5: lo siguiente que toca de los cursos, en el orden que escogió Carlos (`specs/aprender.md`, "Seguir"); solo lee
+  const sigue = seguir()
   // R7: el repaso de hoy (si el interruptor está prendido)
   const repaso = (() => {
     if (!repasoActivo()) return null
@@ -37,6 +41,18 @@ export function Inicio() {
   }
   return (
     <div className="inicio">
+      {/* un solo elemento hijo del botón: .boton es inline-flex y cada trozo sería una columna aparte (specs/ux.md) */}
+      <button type="button" className="boton primario grande" onClick={() => navegar(sigue.url)} data-testid="seguir-inicio" data-curso={sigue.fin ? '' : sigue.cursoId}>
+        <span className="boton-seguir">
+          <span>{sigue.fin ? 'Repasar' : 'Seguir'}</span>
+          <span className="boton-seguir-nombre" data-testid="seguir-curso">
+            {sigue.fin ? 'Terminaste los nueve cursos' : sigue.curso}
+          </span>
+          <span className="boton-seguir-nombre" data-testid="seguir-paso">
+            {sigue.fin ? 'Repaso de hoy' : <Texto t={sigue.paso} />}
+          </span>
+        </span>
+      </button>
       {enCurso && rival && (
         <a className="tarjeta en-curso" href="#/partida" data-testid="partida-en-curso">
           <Avatar personaje={rival} tam={40} />
@@ -57,7 +73,8 @@ export function Inicio() {
             <p className="frase">{bot.frase}</p>
           </div>
         </div>
-        <button type="button" className="boton primario grande" data-testid="jugar-recomendado" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
+        {/* gris desde la vuelta 5: la acción principal de Inicio es "Seguir" (specs/aprender.md, "Seguir", punto 1) */}
+        <button type="button" className="boton secundario grande" data-testid="jugar-recomendado" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
           Jugar
         </button>
         <a className="enlace" href="#/bots">

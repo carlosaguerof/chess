@@ -22,11 +22,15 @@ Antes, al plantear la idea: mi hipótesis es terminar un curso completo antes de
 3. **Construir**, con pruebas, revisión y publicación.
 4. **Lo pruebo en el iPhone.**
 
-**Cuándo arranca** (mi respuesta, 2026-11-26): **"1 A."** El análisis ya, en paralelo; se construye cuando yo haya decidido el orden. Sigue abierta la otra pregunta: dónde va el botón.
+**Cuándo arranca** (mi respuesta, 2026-11-26): **"1 A."** El análisis ya, en paralelo; se construye cuando yo haya decidido el orden.
+
+**El orden** (mi respuesta, 2026-11-26, en la sesión "Air - chess"): **"Adelante con el orden de la tabla."** Es la opción (A) del análisis: Defensa Caro-Kann, Apertura Italiana, Contra la Caro-Kann, Contra la Francesa, Contra la Siciliana, Contra la Escandinava, Defensa Eslava, Otras aperturas de blancas y Otras defensas contra 1.e4, un curso completo antes del siguiente.
+
+**Dónde va el botón** (sin contestar): el orchestrator ("Air - chess") eligió la recomendada, que se puede cambiar: **un botón grande arriba en Inicio**; Aprender queda igual, y Repaso y Refuerza siguen debajo, como hoy. Si digo otra cosa, se cambia. La regla escrita: `specs/aprender.md`, "Seguir".
 
 ## Qué es éxito del escalón 1
 
-Abro la app, toco "Seguir" y caigo en lo siguiente obligatorio del orden que escogí, sin pasar por Aprender ni escoger curso; lo que ya hice no se repite ni se pierde.
+Abro la app, toco "Seguir" y caigo en lo siguiente obligatorio del orden que escogí; lo que ya hice no se repite ni se pierde. *(Propuesta del análisis, no dicha por mí: sin pasar por Aprender ni escoger curso.)*
 
 ## Archivos de esta vuelta
 
@@ -34,5 +38,7 @@ Abro la app, toco "Seguir" y caigo en lo siguiente obligatorio del orden que esc
 |---|---|
 | `manifest.md` | Esta página. |
 | `analisis-orden.md` | La recomendación del orden, la pregunta para mí, el porqué, los datos con sus comandos y las fuentes. |
+| `capturas/` | Inicio antes y después de "Seguir" (`antes/` y `despues/`, al ancho del iPhone y de la computadora, en Chromium). |
+| `learning.md` | Lo aprendido al construir el escalón 1 (adelantado: se abrió con la corrida del botón). |
 
 Al cerrarla: `feedback.md`, `changes.md` y `learning.md`.
