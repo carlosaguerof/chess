@@ -49,7 +49,7 @@ export async function abrirInicioCon(page: Page, guardado: Record<string, unknow
 /** Lo que puede decir el botón de un curso: el nombre de su tarjeta y cada paso suyo. */
 export function nombresPosibles(id: string): string[] {
   const tarjeta = cursoPorId(id)!.nombre
-  if (id === 'otros-1e4:w') return [tarjeta, ...otros().lecciones.map((l) => l.familia)]
+  if (id === 'otros-1e4:w') return [tarjeta, ...otros().lecciones.map((l, i, ls) => `Lección ${i + 1} de ${ls.length}: ${l.familia}`)]
   const c = nuevoDe(id)
   return [tarjeta, c.piezas.idea.titulo, c.piezas.estructura.titulo, ...obligatorias(c).map((v) => v.nombre), c.piezas.errores.titulo, c.piezas.repaso.titulo]
 }

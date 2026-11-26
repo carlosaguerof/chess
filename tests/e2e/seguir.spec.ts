@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 import { obligatorias } from '../../src/curso/datos.ts'
-import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
+import { cambiarNotacion, mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import { abrirInicioCon, cursosTerminados, ESTADOS, nombresPosibles, nuevoDe, ORDEN, otros } from './_seguir.ts'
 
 /**
@@ -8,6 +8,14 @@ import { abrirInicioCon, cursosTerminados, ESTADOS, nombresPosibles, nuevoDe, OR
  * sin pasar por Aprender. Con el avance vacío, con la Caro-Kann a medias, con un curso terminado, con Otras defensas
  * contra 1.e4 en turno y con todo terminado. Y su texto cabe, en tres renglones, a 360 de ancho.
  */
+
+/** Los nombres como se ven con "Notación: Letras" en Ajustes (Nf3, O-O); de regreso a figuras al terminar. */
+function conLetras(ns: string[]): string[] {
+  cambiarNotacion('letras')
+  const r = ns.map((n) => mostrarTexto(n))
+  cambiarNotacion('figuras')
+  return r
+}
 
 const boton = (page: Page) => page.getByTestId('seguir-inicio')
 const enc = encodeURIComponent
@@ -21,6 +29,10 @@ test.describe('Seguir en Inicio', () => {
     expect(await y('seguir-inicio')).toBeLessThan(await y('jugar-recomendado'))
     expect(await y('jugar-recomendado')).toBeLessThan(await y('repaso-hoy'))
     expect(await y('repaso-hoy')).toBeLessThan(await y('ir-refuerza'))
+    // la acción principal es una sola ("Pantalla limpia", regla 1): Jugar queda gris, en su lugar y de su tamaño
+    await expect(page.locator('.inicio .boton.primario.grande')).toHaveCount(1)
+    await expect(page.getByTestId('jugar-recomendado')).toHaveClass(/secundario/)
+    await expect(page.getByTestId('jugar-recomendado')).toHaveClass(/grande/)
   })
 
   test('con el avance vacío: Defensa Caro-Kann, La idea, y un toque la abre', async ({ page }) => {
@@ -56,7 +68,7 @@ test.describe('Seguir en Inicio', () => {
     const o = otros()
     await abrirInicioCon(page, { ...cursosTerminados(ORDEN.slice(0, 8)), progreso: { [o.lecciones[0]!.id]: { fecha: 1 } } })
     await expect(page.getByTestId('seguir-curso')).toHaveText('Otras defensas contra 1.e4')
-    await expect(page.getByTestId('seguir-paso')).toHaveText(o.lecciones[1]!.familia)
+    await expect(page.getByTestId('seguir-paso')).toHaveText(`Lección 2 de 8: ${o.lecciones[1]!.familia}`)
     await boton(page).click()
     await expect(page).toHaveURL(new RegExp(`#/leccion/${enc('otros-1e4:w')}/1$`))
     await expect(page.getByTestId('leccion-pantalla')).toBeVisible()
@@ -75,6 +87,7 @@ test.describe('Seguir en Inicio', () => {
     await page.setViewportSize({ width: 360, height: 740 })
     await abrirInicioCon(page, ESTADOS.vacio)
     const nombres = [...new Set([...ORDEN.flatMap(nombresPosibles), 'Terminaste los nueve cursos', 'Repaso de hoy'])]
+    expect(nombres.some((n) => /C[a-h]?[1-8]|A[a-h][1-8]/.test(n))).toBe(true) // hay jugadas que cambian entre figuras y letras
     const medidas = await page.evaluate((ns) => {
       const s = document.querySelector('[data-testid="seguir-paso"]') as HTMLElement
       const alto = (() => {
@@ -85,7 +98,7 @@ test.describe('Seguir en Inicio', () => {
         s.textContent = n
         return { n, alto: s.getBoundingClientRect().height, cabe: s.scrollWidth <= s.clientWidth + 1, uno: s.getBoundingClientRect().height <= alto + 1 }
       })
-    }, nombres.map((n) => mostrarTexto(n)))
+    }, [...nombres.map((n) => mostrarTexto(n)), ...conLetras(nombres)])
     for (const m of medidas) expect(m.uno && m.cabe, `${m.n} (${m.alto})`).toBe(true)
   })
 })

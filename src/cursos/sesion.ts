@@ -23,7 +23,9 @@ const CLAVE = 'ajedrez.v1.sesion-falladas'
 
 export function leerFalladas(): string[] {
   try {
-    return JSON.parse(sessionStorage.getItem(CLAVE) ?? '[]') as string[]
+    // solo una lista de ids: algo dañado cuenta como vacío (Inicio lo lee para "Seguir" y no debe tronar)
+    const f: unknown = JSON.parse(sessionStorage.getItem(CLAVE) ?? '[]')
+    return Array.isArray(f) ? f.filter((x): x is string => typeof x === 'string') : []
   } catch {
     return []
   }

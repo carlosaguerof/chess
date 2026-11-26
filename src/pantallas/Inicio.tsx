@@ -73,7 +73,8 @@ export function Inicio() {
             <p className="frase">{bot.frase}</p>
           </div>
         </div>
-        <button type="button" className="boton primario grande" data-testid="jugar-recomendado" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
+        {/* gris desde la vuelta 5: la acción principal de Inicio es "Seguir" (specs/aprender.md, "Seguir", punto 1) */}
+        <button type="button" className="boton secundario grande" data-testid="jugar-recomendado" onClick={() => (enCurso ? setConfirmar(true) : jugar())}>
           Jugar
         </button>
         <a className="enlace" href="#/bots">

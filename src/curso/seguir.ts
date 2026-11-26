@@ -37,13 +37,15 @@ function pasoDe(id: string, leer: LecturaSeguir): { paso: string; url: string } 
   // sesión (la regla del botón "Siguiente" de esa lección) o la primera sin hacer
   const curso = cursoPorId(id)
   if (!curso) return undefined
-  const hechas = leer.progreso()
+  const guardado: unknown = leer.progreso()
+  const hechas = (guardado && typeof guardado === 'object' ? guardado : {}) as Record<string, unknown>
   const cuentan = curso.lecciones.filter((l) => !l.opcional)
   if (cuentan.every((l) => hechas[l.id])) return undefined
   const l = siguienteEnSesion({ ...curso, lecciones: cuentan }, hechas, undefined, leer.falladas())
   if (!l) return undefined
-  // el nombre de la base dice mis jugadas ("Variante de los Dos Caballos"): solo la defensa del rival
-  return { paso: l.familia || curso.nombre, url: `/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(l)}` }
+  // el nombre de la base dice mis jugadas ("Variante de los Dos Caballos"): solo la defensa del rival, con su número
+  // (las dos de la Nimzowitsch van seguidas y, sin él, el botón no cambiaría al terminar la primera)
+  return { paso: `Lección ${cuentan.indexOf(l) + 1} de ${cuentan.length}: ${l.familia || curso.nombre}`, url: `/leccion/${encodeURIComponent(curso.id)}/${curso.lecciones.indexOf(l)}` }
 }
 
 /**

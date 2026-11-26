@@ -4,7 +4,7 @@ import { ORDEN_SEGUIR, seguir } from '../../src/curso/seguir.ts'
 import { cursos, cursoPorId } from '../../src/cursos/datos.ts'
 import { CURSOS_NUEVOS, cursoNuevo, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { cursoQueQueda } from '../../src/curso/queda.ts'
-import { pasosDelCurso } from '../../src/pantallas/CursoPagina.tsx'
+import { pasosDelCurso, siguientePaso } from '../../src/pantallas/CursoPagina.tsx'
 import { leerAvance, type AvanceCurso } from '../../src/curso/avance.ts'
 import type { DatosCurso } from '../../src/curso/tipos.ts'
 
@@ -154,19 +154,62 @@ describe('Seguir · qué toca', () => {
       expect(seguir(), id).toMatchObject({ fin: false, cursoId: id, paso: primero.nombre, url: primero.url })
     }
   })
+
+  it('con avances a medias, el paso es el que da siguientePaso en la página de cada curso', () => {
+    for (const [i, id] of ORDEN_SEGUIR.slice(0, 8).entries()) {
+      const c = nuevo(id)
+      const vs = obligatorias(c)
+      const parciales: AvanceCurso[] = [
+        { piezas: { idea: 1 }, variantes: {}, errores: {} },
+        { piezas: { idea: 1, estructura: 1 }, variantes: { [vs[0]!.id]: { terminada: 1 } }, errores: {} },
+        { piezas: { idea: 1, estructura: 1 }, variantes: Object.fromEntries(vs.map((v) => [v.id, { terminada: 1 }])), errores: {} },
+        { piezas: { idea: 1, estructura: 1, errores: 1 }, variantes: Object.fromEntries(vs.map((v) => [v.id, { terminada: 1 }])), errores: {} },
+        { piezas: {}, variantes: {}, errores: {}, enCurso: { linea: `v:${vs[vs.length - 1]!.id}`, vuelta: 'aprender', ply: 2, fecha: 1 } },
+        { piezas: {}, variantes: { [vs[0]!.id]: { terminada: 1 } }, errores: {}, enCurso: { linea: `v:${vs[0]!.id}`, vuelta: 'practicar', ply: 2, fecha: 1 } },
+      ]
+      for (const [k, a] of parciales.entries()) {
+        local.clear()
+        for (const antes of ORDEN_SEGUIR.slice(0, i)) terminar(antes)
+        guardarAvance(c.id, a)
+        const p = siguientePaso(c, leerAvance(c.id))!
+        expect(p, `${id} caso ${k}`).toBeDefined()
+        expect(seguir(), `${id} caso ${k}`).toMatchObject({ fin: false, cursoId: id, paso: p.nombre, url: p.url })
+      }
+    }
+  })
+})
+
+describe('Seguir · lo guardado dañado no lo tumba', () => {
+  it('avance dañado: empieza en La idea', () => {
+    for (const malo of ['"texto"', '{roto', 'null', '{"variantes":null,"enCurso":"x"}']) {
+      local.clear()
+      local.set(`${P}curso:caro-kann-estructuras:b`, malo)
+      expect(seguir(), malo).toMatchObject({ cursoId: 'caro-kann:b', paso: 'La idea' })
+    }
+  })
+  it('progreso o falladas dañados, con Otras defensas en turno: cuentan como vacíos', () => {
+    for (const [progreso, falladas] of [['null', 'null'], ['"x"', '{"a":1}'], ['{roto', '[1, null]']]) {
+      local.clear()
+      sesion.clear()
+      terminarLosOchoNuevos()
+      local.set(`${P}progreso`, progreso!)
+      sesion.set('ajedrez.v1.sesion-falladas', falladas!)
+      expect(seguir(), `${progreso} ${falladas}`).toMatchObject({ cursoId: 'otros-1e4:w', url: `/leccion/${encodeURIComponent('otros-1e4:w')}/0` })
+    }
+  })
 })
 
 describe('Seguir · Otras defensas contra 1.e4 (la lección de antes)', () => {
   it('con los ocho nuevos terminados: su primera lección, en el orden de su página', () => {
     terminarLosOchoNuevos()
     const o = otros()
-    expect(seguir()).toEqual({ fin: false, cursoId: 'otros-1e4:w', curso: 'Otras defensas contra 1.e4', paso: o.lecciones[0]!.familia, url: `/leccion/${encodeURIComponent(o.id)}/0` })
+    expect(seguir()).toEqual({ fin: false, cursoId: 'otros-1e4:w', curso: 'Otras defensas contra 1.e4', paso: `Lección 1 de 8: ${o.lecciones[0]!.familia}`, url: `/leccion/${encodeURIComponent(o.id)}/0` })
   })
   it('la primera sin hacer', () => {
     terminarLosOchoNuevos()
     const o = otros()
     guardarProgreso([o.lecciones[0]!.id, o.lecciones[1]!.id, o.lecciones[3]!.id])
-    expect(seguir()).toMatchObject({ url: `/leccion/${encodeURIComponent(o.id)}/2`, paso: o.lecciones[2]!.familia })
+    expect(seguir()).toMatchObject({ url: `/leccion/${encodeURIComponent(o.id)}/2`, paso: `Lección 3 de 8: ${o.lecciones[2]!.familia}` })
   })
   it('la que fallé en esta sesión vuelve antes (la regla del botón "Siguiente" de la lección)', () => {
     terminarLosOchoNuevos()
@@ -190,15 +233,19 @@ describe('Seguir · Otras defensas contra 1.e4 (la lección de antes)', () => {
   it('el nombre no adelanta tu jugada: solo la defensa del rival', () => {
     terminarLosOchoNuevos()
     const o = otros()
+    const pasos: string[] = []
     for (const [i, l] of o.lecciones.entries()) {
       guardarProgreso(o.lecciones.slice(0, i).map((x) => x.id))
       const d = seguir()
       expect(d.fin).toBe(false)
       if (d.fin) continue
-      expect(d.paso, l.nombre).toBe(l.familia)
-      expect(d.paso).toMatch(/^Defensa [A-ZÁÉÍÓÚ][a-záéíóú]+( [A-Z][a-z]+)?$/)
-      expect(l.nombre.startsWith(d.paso)).toBe(true)
+      expect(d.paso, l.nombre).toBe(`Lección ${i + 1} de 8: ${l.familia}`)
+      expect(d.paso).toMatch(/^Lección [1-8] de 8: Defensa [A-ZÁÉÍÓÚ][a-záéíóú]+( [A-Z][a-z]+)?$/)
+      expect(l.nombre.startsWith(l.familia)).toBe(true)
+      // las dos de la Nimzowitsch, seguidas, no dicen lo mismo
+      pasos.push(d.paso)
     }
+    expect(new Set(pasos).size).toBe(8)
   })
 })
 
