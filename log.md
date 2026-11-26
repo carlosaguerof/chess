@@ -980,3 +980,11 @@ Tres subagentes nuevos, uno tras otro, revisaron los textos, las marcas, los pla
 - **Cómo se comprobó:** `W3-ng4-*`, `W3-d3-plan`, `V4-cl-ab5` y `O-ge-cg5-directo` en las comprobaciones de cada curso; `npm test` en verde.
 - **Quién:** la revisión, un evaluator; el orchestrator ("Air - chess"), qué corregir; la corrida de las lecciones, cómo.
 - **Dónde:** la rama `fix/reglas-por-su-motivo`; `specs/cursos.md` (la Italiana); `iterations/v4/mapa-italiana.md`; lo aprendido, n.º 50 de `iterations/v4/learning.md`.
+
+## [2026-11-26] cambio | Las reglas, por su motivo: lo que encontró su revisión
+
+- **Qué cambió** (la revisión de `fix/reglas-por-su-motivo`, `00_corridas/chess/2026-11-26_REVISION_reglas-por-su-motivo.md`, verdict "entra después de corregir dos frases"): (N1) Escandinava, La clavada: "Clava ese caballo con Ab5, y si negras enroca largo, cámbialo en c6"; se quitó "si tu alfil ya lo clava desde b5, h3 sí sirve", que invitaba a perder d4. (N2) Eslava, Geller: con tu alfil en e7, si su caballo sigue en g5, tómalo antes de retomar en b5 (retomar perdía una torre), y tras 8.Cg5 Ae7 9.h4, ...h6; en el curso y en la base. (N4) Italiana: la regla del caballo en g4, corta y por su motivo, "h3 solo con tu torre en f1; si no está ahí, llévala", y remite a la regla 1 ("si atacan una pieza tuya, primero eso") en vez de repetirla. (N5) se quitó el "(o a e2)" repetido de un plan de la base. (N6) el mapa de la Escandinava dice lo mismo que la página. (N7) la entrada anterior decía que el plan de la Dos Caballos con 4.d3 iba "en el orden de la página y de la principal": va en el de la página (Ab3, Cbd2 y h3); la lección principal juega Ab3 y h3, y deja Cbd2 para su plan. N3 (un peón de negras en a6 contra Ab5) no se toca, por decisión del orchestrator.
+- **Por qué:** cada corrección había abierto un caso nuevo con la jugada siguiente del rival; las reglas, cortas y por su motivo, sin sumar casos que no se juegan.
+- **Cómo se comprobó:** `V5-cl-axc6`, `O-ge-cg5-axg5` y las filas `W3-ng4-*`; `npm test` en verde.
+- **Quién:** la revisión, un evaluator; el orchestrator ("Air - chess"), qué corregir; la corrida de las lecciones, cómo.
+- **Dónde:** la rama `fix/reglas-por-su-motivo`; `specs/cursos.md` (la Italiana); los mapas de la Escandinava y la Italiana; lo aprendido, n.º 51 de `iterations/v4/learning.md`.

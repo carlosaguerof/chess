@@ -302,3 +302,11 @@ La revisión de lo corregido (`2026-11-26_REVISION_lecciones-de-lo-frecuente-2.m
 | Id | Tu alfil | Ab5 | Veredicto |
 |---|---|---|---|
 | V4-cl-ab5 | Ad2 · Ac4 · Ae3 · Af4 · Ad3 · Ae2 · Ag5 · ninguno (`… Nc6 a3 Bg4`) | a 121 (d5 la mejor, +1.65) · a 37 · a 35 · a 4 · a 32 · a 67 · a 10 · la mejor (+0.12) | Ab5 no pierde material en ninguna; con el alfil en d2, la página dice d5 (V3-cl-ad2) |
+
+## La tercera revisión (2026-11-26): qué sigue tras Ab5
+
+La revisión de `fix/reglas-por-su-motivo` (`2026-11-26_REVISION_reglas-por-su-motivo.md`, N1) encontró que tras tu Ab5, si negras enroca largo, h3 pierde. La excepción queda: "Clava ese caballo con Ab5, y si negras enroca largo, cámbialo en c6"; "si tu alfil ya lo clava desde b5, h3 sí sirve" se quitó. Posición `e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Nc6 <tu alfil> Bg4 Bb5`; `mejores … --n 2 --prof 20` y `mejores "… Bb5 O-O-O" --n 2 --prof 20`.
+
+| Id | Tu alfil | Las dos mejores de negras tras Ab5 | Tras ...0-0-0, tu mejor | Veredicto |
+|---|---|---|---|---|
+| V5-cl-axc6 | Ad2 · Ac4 · Ae3 · Af4 · Ad3 · Ae2 · Ag5 · ninguno (a3) · por 4...Cc6 | 0-0-0 / Db4 · 0-0-0 / Cd5 · Cd5 / Ce4 · Cd5 / 0-0-0 · 0-0-0 / Cd5 · 0-0-0 / Cd5 · 0-0-0 / Cd5 · Cd5 / Ce4 · (0-0-0) | Axc6, la mejor en las nueve (+0.39 · −0.32 · +0.61 · +0.49 · −0.32 · −0.32 · −0.30 · +0.32 · +0.75) | Se sostiene |

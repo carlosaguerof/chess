@@ -13,7 +13,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ac5 4.c3 Cf6 5.d3 d6 6.0-0 0-0 7.Te1 a6 8.Ab3 Aa7 9.h3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El esquema lento y sólido: c3 y d3, 0-0 y Te1. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), no lo eches con h3 (...Cxf2 gana material) mientras tu torre no esté en f1: si no has enrocado, enroca; con tu torre en f1, h3 sí sirve (si negras lo apoya con ...h5 sin haber enrocado, no lo tomes); con tu torre en e1, regrésala a f1, o a e2 si tu caballo ya está en f1. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.
+- Plan *(redactado por la IA)*: El esquema lento y sólido: c3 y d3, 0-0 y Te1. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), h3 solo con tu torre en f1 (...Cxf2 gana material): si no está ahí, llévala, enrocando o regresándola de e1 (o a e2 si tu caballo ya está en f1); si negras lo apoya con ...h5 sin haber enrocado, no lo tomes, y si además atacan una pieza tuya, primero eso. ...a6 no amenaza nada todavía: prepara ...Aa7 y ...b5, así que retiras el alfil a b3 a tiempo; h3 le quita g4 al alfil y al caballo negros. Después, Cbd2-f1-g3 y d4 cuando todo esté listo.
 - Fuente: C54 · Italian Game: Classical Variation, Giuoco Pianissimo, Main Line
 
 ### Variante Clásica, Giuoco Pianissimo: con 6.Cbd2
@@ -21,7 +21,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Ac5 4.c3 Cf6 5.d3 d6 6.Cbd2 0-0 7.0-0**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), no lo eches con h3 (...Cxf2 gana material) mientras tu torre no esté en f1: si no has enrocado, enroca; con tu torre en f1, h3 sí sirve (si negras lo apoya con ...h5 sin haber enrocado, no lo tomes); con tu torre en e1, regrésala a f1, o a e2 si tu caballo ya está en f1 (o a e2). Sin prisa: d4 llega cuando tus piezas estén listas.
+- Plan *(redactado por la IA)*: El mismo esquema, con Cbd2 antes de enrocar. Después de 0-0 y Te1, el caballo viaja por f1 hacia g3 o e3. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), h3 solo con tu torre en f1 (...Cxf2 gana material): si no está ahí, llévala, enrocando o regresándola de e1 (o a e2 si tu caballo ya está en f1); si negras lo apoya con ...h5 sin haber enrocado, no lo tomes, y si además atacan una pieza tuya, primero eso. Sin prisa: d4 llega cuando tus piezas estén listas.
 - Fuente: C54 · Italian Game: Classical Variation, Giuoco Pianissimo
 
 ### Variante Clásica: Variante La Bourdonnais
@@ -47,7 +47,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.d3**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras golpea con ...d5, toma en d5. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), no lo eches con h3 (...Cxf2 gana material) mientras tu torre no esté en f1: si no has enrocado, enroca; con tu torre en f1, h3 sí sirve (si negras lo apoya con ...h5 sin haber enrocado, no lo tomes); con tu torre en e1, regrésala a f1, o a e2 si tu caballo ya está en f1.
+- Plan *(redactado por la IA)*: La forma tranquila contra 3...Cf6: d3 defiende e4 y juegas como en el Giuoco Pianissimo (c3, 0-0, Te1, Cbd2). Ahora 4...Cxe4 pierde una pieza (5.dxe4), y como e4 ya está seguro, tú amenazas 5.Cg5 contra f7. Si negras golpea con ...d5, toma en d5. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), h3 solo con tu torre en f1 (...Cxf2 gana material): si no está ahí, llévala, enrocando o regresándola de e1 (o a e2 si tu caballo ya está en f1); si negras lo apoya con ...h5 sin haber enrocado, no lo tomes, y si además atacan una pieza tuya, primero eso.
 - Fuente: C55 · Italian Game: Two Knights Defense, Modern Bishop's Opening
 
 ### Defensa de los Dos Caballos: Ataque Lolli
@@ -131,7 +131,7 @@ Las líneas salen de la lista abierta de aperturas de lichess (`lichess-org/ches
 **1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.d3 Ac5 5.c3 d6 6.0-0 0-0 7.Te1**
 
 - Frecuencia: ●●●○○ (3 de 5; sin dato (regla: 3))
-- Plan *(redactado por la IA)*: Con 4.d3 defiendes e4 y amenazas Cg5 contra f7; si negras golpea con ...d5, toma en d5. Contra 4...Ac5, 5.c3 llega al esquema del Giuoco Pianissimo: 0-0 y Te1, Ab3, el caballo de b1 por d2, y d4 cuando esté preparado. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), no lo eches con h3 (...Cxf2 gana material) mientras tu torre no esté en f1: si no has enrocado, enroca; con tu torre en f1, h3 sí sirve (si negras lo apoya con ...h5 sin haber enrocado, no lo tomes); con tu torre en e1, regrésala a f1, o a e2 si tu caballo ya está en f1.
+- Plan *(redactado por la IA)*: Con 4.d3 defiendes e4 y amenazas Cg5 contra f7; si negras golpea con ...d5, toma en d5. Contra 4...Ac5, 5.c3 llega al esquema del Giuoco Pianissimo: 0-0 y Te1, Ab3, el caballo de b1 por d2, y d4 cuando esté preparado. Si su caballo salta a g4 y un alfil de negras mira a f2 (desde c5, b6 o a7), h3 solo con tu torre en f1 (...Cxf2 gana material): si no está ahí, llévala, enrocando o regresándola de e1 (o a e2 si tu caballo ya está en f1); si negras lo apoya con ...h5 sin haber enrocado, no lo tomes, y si además atacan una pieza tuya, primero eso.
 - Fuente: C55 · Italian Game: Two Knights Defense, Modern Bishop's Opening
 - Sigue la fila de la fuente desde la media jugada 8 con teoría de: Wikibooks, 1.e4 e5 2.Cf3 Cc6 3.Ac4 Cf6 4.d3 (4...Ac5 lleva al Giuoco Pianissimo: 5.c3 d6 6.0-0 0-0); motor: 4...Ac5 (+0.18), 5.c3 (+0.18), 5...d6 (+0.19), 6.0-0 (a 0.11), 6...0-0 (+0.16) y 7.Te1 (a 0.07); es la misma posición de la línea principal tras 6...0-0, y las dos lecciones juegan 7.Te1.
 

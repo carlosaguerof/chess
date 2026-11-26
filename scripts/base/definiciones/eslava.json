@@ -269,7 +269,7 @@
         ]
       },
       "lado": "negras",
-      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: si blancas cambia en b5 y después su caballo salta a g5, ...Ab7 cuida tu torre de a8, y contra Dh5, ...g6 cuida f7; si su caballo salta a g5 sin cambiar antes, ...Ae7. Después termina tu desarrollo y enroca.",
+      "plan": "Contra 5.e4, ...b5 guarda el peón de más. Tras 6.e5, tu caballo va al centro con ...Cd5, y ...e6 lo sostiene. Es una línea con mucha pelea: si su caballo salta a g5, ...Ae7 (y contra h4, ...h6), y con tu alfil en e7, si ese caballo sigue en g5, tómalo antes de retomar en b5; si salta después del cambio en b5, ...Ab7 (y contra Dh5, ...g6). Después termina tu desarrollo y enroca.",
       "frecuencia": null,
       "fuenteFrecuencia": null
     },
