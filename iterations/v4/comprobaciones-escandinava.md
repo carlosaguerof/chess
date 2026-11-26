@@ -280,3 +280,17 @@ Las dos lecciones nuevas, 3...De5+ 4.Ae2 Ag4 y 3...De6+ 4.Ae2 Cc6, con lo que m�
 | S-e5-11-Bh5 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 | Bh5 | motor | g4 | mejor g4 (+2.15) · g4: +2.25  g4 Bg6 f4 f5 Nf3 Nf6 O-O Nxg4 · pierde -10 |
 | S-e5-13-Bg6 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 | Bg6 | motor | f4 | mejor f4 (+2.33) · f4: +2.21  f4 f5 Nf3 Nf6 d5 Qb6 Ne5 e6 · pierde 12 |
 | S-e5-13-Qg6 | e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Bg4 d4 Qe6 f3 Bf5 g4 | Qg6 | motor | f4 | mejor gxf5 (+3.80) · f4: +2.21  f4 Bd7 Nf3 Qb6 Ne5 e6 f5 h5 · pierde 159 |
+
+## La revisión de lo publicado (2026-11-26): la excepción de La clavada, por la casilla de tus alfiles
+
+La revisión independiente (`00_corridas/chess/2026-11-26_REVISION_correcciones-publicadas.md`, S1) encontró que "juegas d5, no h3" solo sirve con tu alfil de c1 en d2. Posición: `e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 Nc6 <tu alfil> Bg4`; comandos `mejores … --n 3 --prof 20`, `jugada … "h3"`, `jugada … "d5"` y `jugada … "Bb5"`.
+
+| Id | Tu alfil | Mejor | h3 | d5 | Ab5 | La página dice |
+|---|---|---|---|---|---|---|
+| V3-cl-ad2 | Ad2 | d5 (+1.65) | pierde 177 | a 16 | | d5 |
+| V3-cl-ad3 | Ad3 | Ab5 (−0.10) | pierde 56; tras ...Axf3 Dxf3 0-0-0, d4 cae (−0.71) | pierde 183 | a 32 | Ab5 |
+| V3-cl-af4 | Af4 | Ab5 (−0.17) | pierde 48; tras ...0-0-0, d4 cae (−0.91) | pierde 221 | a 4 | Ab5 |
+| V3-cl-ac4 | Ac4 | h3 (0.00) | la mejor | pierde 70 | pierde 37 | h3 |
+| V3-cl-ae3 | Ae3 | h3 (+0.59) | a 8 | pierde 361 | | h3 |
+| V3-cl-ae2 | Ae2 | h3 (+0.42) | la mejor | pierde 39 | pierde 67 | h3 |
+| V3-cl-ab5 | Ab5 (ya clava) | h3 (+1.53) | la mejor | | | h3 (V2-cl-ab5) |

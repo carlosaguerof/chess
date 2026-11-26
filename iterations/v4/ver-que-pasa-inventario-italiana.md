@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 4.d3 | porque | Así el caballo de f6 ya no puede tomar en e4: perdería una pieza. | 4...♘xe4 5.dxe4 | Aprender y Practicar |
 | 4.d3 | cuidado | Si negras golpea con ...d5, toma en d5: si juegas otra cosa, pierdes tu alfil o tu peón de e4. | 4...d5 5.a3 5...dxc4 | Aprender y Practicar |
-| 5.c3 | cuidado | Si su caballo salta a g4 antes de enrocar, d4: echarlo con h3 pierde una torre. | 5...♘g4 6.h3 6...♘xf2 7.♕b3 7...♘xh1 | Aprender y Practicar |
+| 5.c3 | cuidado | Si su caballo salta a g4 antes de enrocar, d4: echarlo con h3 pierde una torre. | 5...♘g4 6.h3 6...♘xf2 7.♕b3 7...♘xh1 | solo Aprender |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | Aprender y Practicar |
 | 5.d3 | cuidado | Si su caballo salta a g4 antes de enrocar, d4: echarlo con h3 pierde una torre. | 5...♘g4 6.h3 6...♘xf2 7.♕b3 7...♘xh1 | solo Aprender |
 | 7.♖e1 | cuidado | Si su caballo salta a g4, aparta tu torre a f1; si lo echas con h3, pierdes material. | 7...♘g4 8.h3 8...♘xf2 9.♕e2 9...♘xd3+ 10.♔h2 10...♘xe1 11.♕xe1 | solo Aprender |

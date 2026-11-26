@@ -1311,7 +1311,7 @@
    "intro": "Estás en la Pelea del lado de dama: tu objetivo es que blancas gaste jugadas mientras tú sacas tus piezas. Blancas saca sus dos caballos y después juega 5.e4.",
    "idea": "Contra e4 y e5, ...b5 sostiene c4 y tu caballo se va al centro, a d5.",
    "plan": {
-    "tuyo": "Si blancas cambia en b5, primero ...Cxc3: cambias su caballo, y después retomas en b5 con tu peón de c. Saca tus piezas (...Cd7 y ...Ae7) y enroca.",
+    "tuyo": "Si blancas cambia en b5, primero ...Cxc3: cambias su caballo, y después retomas en b5 con tu peón de c. Si su caballo salta a g5, primero ...Ab7, que cuida tu torre de a8, y si su dama llega a h5, ...g6 cuida f7; después sacas tus piezas y enrocas.",
     "rival": "Blancas va a atacar en el lado de rey con sus piezas.",
     "marcas": [],
     "fuente": [
@@ -1321,7 +1321,8 @@
     "motor": [
      "E-ge-w8",
      "O-ge-axb5",
-     "O-ge-a6"
+     "O-ge-a6",
+     "O-ge-cg5"
     ],
     "pasoAPaso": {
      "ilustrativo": true,
@@ -1341,15 +1342,23 @@
        ]
       },
       {
-       "frase": "...Cd7 y ...Ae7: sacas tus piezas.",
+       "frase": "Si su caballo salta a g5, Cg5, primero ...Ab7: cuida tu torre de a8.",
        "jugadas": [
-        "...Nd7",
-        "...Be7"
+        "Ng5",
+        "...Bb7"
        ]
       },
       {
-       "frase": "Enrocas: 0-0.",
+       "frase": "Si su dama llega a h5, Dh5, ...g6 tapa su ataque contra f7.",
        "jugadas": [
+        "Qh5",
+        "...g6"
+       ]
+      },
+      {
+       "frase": "Después sacas tu alfil, ...Ae7, y enrocas: 0-0.",
+       "jugadas": [
+        "...Be7",
         "...O-O"
        ]
       }
