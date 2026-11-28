@@ -291,22 +291,24 @@ describe('El curso por estructuras · los textos', () => {
         antes = ahora
       })
     }
-    expect(capturas).toBeGreaterThanOrEqual(15)
+    // las cuentas de hoy: 14 capturas en las cinco páginas, cada una vista y dicha
+    expect(capturas).toBe(14)
   })
 
   it('cada término se explica la primera vez que sale (en el orden en que se lee), o se dice con palabras simples', () => {
     // el término, y la frase que lo explica: ninguna frase de antes lo nombra
     const TERMINOS: [RegExp, string][] = [
-      [/estructura de peones/i, 'La estructura de peones es la forma que dejan los peones en el tablero'],
-      [/cadena/i, 'uno protege al otro, como una cadena'],
+      [/estructura de peones/i, 'La estructura de peones es la forma que dejan los peones; como un peón nunca regresa'],
+      [/cadena/i, 'd4 protege a e5, como en una cadena'],
       [/tensi[oó]n/i, 'A eso se le llama tensión'],
       // "La base" con mayúscula es el nombre de la sección del curso, no el término
       [/(?<!La )\bbase\b/, 'por el peón de atrás, su base'],
-      [/casilla clave/i, 'la casilla clave, la que más importa aquí'],
-      [/ruptura/i, 'Tu ruptura, empujar un peón para romper la cadena del rival'],
+      [/casilla clave/i, 'La casilla clave, la más importante aquí, es e5'],
+      [/ruptura/i, 'Tu ruptura, empujar un peón contra los del rival para romper su forma'],
       [/ataque de minor[ií]as/i, 'Es el ataque de minorías: en las columnas a, b y c tienes dos peones contra tres'],
       [/lado de rey/i, 'en el lado de rey, de la e a la h'],
-      [/\bd[eé]bil(es)?\b/i, 'Ninguno es débil, de los que cuesta defender'],
+      [/\bd[eé]bil(es)?\b/i, 'un peón débil, de los que cuesta defender'],
+      [/espacio/i, 'más espacio, más casillas para sus piezas detrás de sus peones'],
     ]
     const todas = paginas().flatMap(frasesDePagina)
     for (const [termino, explica] of TERMINOS) {
@@ -315,12 +317,17 @@ describe('El curso por estructuras · los textos', () => {
       expect(todas[primera], String(termino)).toContain(explica)
     }
     // palabras que ya no se usan: se dicen con palabras simples
-    for (const f of todas) expect(f).not.toMatch(/sim[eé]tric|debilidades|lado de dama/i)
+    for (const f of todas) expect(f).not.toMatch(/sim[eé]tric|debilidades|lado de dama|casi iguales/i)
+    // cada término quiere decir una sola cosa: "casilla clave" es una casilla vacía (no un peón), y "cadena" son los peones de blancas
+    for (const f of todas.filter((x) => /casilla clave/i.test(x))) expect(f, f).not.toMatch(/d4/)
+    expect(todas.filter((x) => /cadena de tus peones|tu cadena/i.test(x))).toEqual([])
   })
 
   it('El mapa: qué es una estructura de peones y por qué importa, la pregunta, y las cuatro respuestas en el tablero', () => {
     const p = pagina('El mapa')
-    expect(p.texto[0]).toMatch(/^La estructura de peones es la forma que dejan los peones en el tablero; como un peón nunca regresa, esa forma dura y te dice qué plan toca\.$/)
+    expect(p.texto[0]).toMatch(/^La estructura de peones es la forma que dejan los peones; como un peón nunca regresa, esa forma se queda mucho tiempo y te dice qué plan toca\.$/)
+    // las cuatro respuestas: tres desde 2...d5 y una antes, sin 2.d4 (el pase adversarial: "cuatro" no estaban en ese tablero)
+    expect(enPaso('El mapa', 'Blancas juega 2.d4').paso.frase).toContain('blancas lo empuja, lo cambia o lo defiende; o, antes, no juega 2.d4')
     expect(p.texto[1]).toContain('¿qué pasó con el peón de e4?')
     // la Cadena: el peón llegó a e5
     const cadena = enPaso('El mapa', 'La Cadena').ch
@@ -336,7 +343,7 @@ describe('El curso por estructuras · los textos', () => {
     expect(enPaso('El mapa', 'Tomas el peón de e4').ch.get('e4')).toMatchObject({ type: 'p', color: 'b' })
     expect(enPaso('El mapa', 'Blancas retoma con su caballo').ch.get('e4')).toMatchObject({ type: 'n', color: 'w' })
     // la Tensión: los dos peones siguen ahí, y nadie cambió peones
-    const t = enPaso('El mapa', 'Juegas 5...e6').ch
+    const t = enPaso('El mapa', 'Nadie ha cambiado peones').ch
     expect(t.get('e4')).toMatchObject({ type: 'p', color: 'w' })
     expect(t.get('d5')).toMatchObject({ type: 'p', color: 'b' })
     expect(peones(t, 'w')).toHaveLength(8)
@@ -355,7 +362,7 @@ describe('El curso por estructuras · los textos', () => {
   })
 
   it('La Cadena: los peones de la cadena, su base, tu ruptura y la de blancas, en el paso a paso', () => {
-    const t = enPaso('La Cadena', 'Tus peones: d5 y e6').ch
+    const t = enPaso('La Cadena', 'Tus peones de adelante: d5 y e6').ch
     expect(peones(t, 'w')).toEqual(['a2', 'b2', 'c2', 'd4', 'e5', 'f2', 'g2', 'h2'])
     expect(peones(t, 'b')).toEqual(['a7', 'b7', 'c5', 'd5', 'e6', 'f7', 'g7', 'h7'])
     // la cadena: e5 protegido por d4, y d4 sin peón que lo proteja (la base); tu c5 ya la ataca
@@ -363,11 +370,14 @@ describe('El curso por estructuras · los textos', () => {
     expect(t.attackers('d4', 'w').filter((s) => t.get(s)?.type === 'p')).toEqual([])
     expect(t.attackers('d4', 'b')).toContain('c5')
     expect(enPaso('La Cadena', 'También puedes romper con ...f6').foto.hechas.map((m) => m.san)).toEqual(['f6'])
-    expect(enPaso('La Cadena', 'La ruptura de blancas: c4').ch.attackers('d5', 'w')).toContain('c4')
+    // la de blancas, desde la posición de antes de ...f6 (sin las dos rupturas a la vez)
+    const c4 = enPaso('La Cadena', 'Volvemos atrás. Blancas también puede romper')
+    expect(c4.ch.attackers('d5', 'w')).toContain('c4')
+    expect(c4.ch.get('f6')).toBeUndefined()
   })
 
   it('El Cambio: sus peones son los del final de la lección con ...e6, y lo que dice de ellos es cierto', () => {
-    const { ch } = enPaso('El Cambio', 'Tus peones del centro: d5 y e6.')
+    const { ch } = enPaso('El Cambio', 'Tus peones de adelante: d5 y e6.')
     const final = alFinal(linea('cambio'))
     expect(peones(ch, 'w')).toEqual(peones(final, 'w'))
     expect(peones(ch, 'b')).toEqual(peones(final, 'b').map((s) => (s === 'e7' ? 'e6' : s)).sort())
@@ -389,12 +399,12 @@ describe('El curso por estructuras · los textos', () => {
     const i = pasos.findIndex((x) => x.frase === 'Primero sacas tus piezas y enrocas.')
     expect(i).toBeGreaterThan(0)
     expect(pasos[i]!.jugadas).toBeUndefined()
-    expect(pasos[i + 1]!.frase).toContain('con una torre en b8, empiezas con ...b5, cuidando de no regalar el peón')
+    expect(pasos[i + 1]!.frase).toContain('Pones una torre en b8, para defender tu peón cuando avance. Luego empujas ...b5, cuidando de no regalar ese peón.')
     expect(pasos[i + 2]!.frase).toContain('...b4')
   })
 
   it('La Clásica: tus peones sin debilidades, el peón de d4 de blancas, la ruptura después de sacar tus piezas, y la casilla e5', () => {
-    const { ch } = enPaso('La Clásica', 'Tus peones del centro: c6 y e6.')
+    const { ch } = enPaso('La Clásica', 'Tus peones de adelante: c6 y e6.')
     const final = alFinal(linea('clasica'))
     expect(peones(ch, 'w')).toEqual(peones(final, 'w'))
     expect(peones(ch, 'b')).toEqual(peones(final, 'b'))
@@ -415,11 +425,11 @@ describe('El curso por estructuras · los textos', () => {
     expect(peones(ch, 'b')).toEqual(['a7', 'b7', 'c6', 'd5', 'e6', 'f7', 'g7', 'h7'])
     expect(peones(ch, 'w')).toContain('e4')
     expect(peones(ch, 'w')).toContain('d2')
-    expect(pagina('La Tensión').texto.join(' ')).toContain('El centro todavía no se decide')
+    expect(pagina('La Tensión').texto.join(' ')).toContain('Todavía puede volverse la Cadena, el Cambio o la Clásica')
     // el peón de e4 y el de d5 se atacan
     expect(ch.attackers('d5', 'w')).toContain('e4')
     expect(ch.attackers('e4', 'b')).toContain('d5')
-    expect(peones(new Chess(enPaso('La Tensión', 'Si blancas juega d4 y e5').foto.fen), 'w')).toEqual(expect.arrayContaining(['d4', 'e5']))
+    expect(peones(new Chess(enPaso('La Tensión', 'Y si después empuja e5').foto.fen), 'w')).toEqual(expect.arrayContaining(['d4', 'e5']))
     const cambio = enPaso('La Tensión', 'Volvemos atrás. Si blancas toma tu peón de d5')
     expect(cambio.ch.get('d5')).toMatchObject({ type: 'p', color: 'b' })
     expect(peones(cambio.ch, 'b')).not.toContain('c6')

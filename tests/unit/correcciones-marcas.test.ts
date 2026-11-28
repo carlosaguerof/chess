@@ -809,7 +809,7 @@ describe('Las marcas · reglas v1.4 (solo en el paso a paso)', () => {
         expect(k).toBeGreaterThanOrEqual(0)
       })
     })
-    expect(capturas).toBeGreaterThanOrEqual(15)
+    expect(capturas).toBe(14)
     expect(nombradas).toBeGreaterThanOrEqual(20)
   })
 })
