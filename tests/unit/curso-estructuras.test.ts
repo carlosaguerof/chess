@@ -5,8 +5,8 @@ import { instalarLocalStorage } from './memoria-navegador.ts'
 import { caminoQueQueda, CURSOS_NUEVOS, esLeccionOpcional, grupoDeLinea, soloObligatorias, jugadasDeVariante, leccionIdDe, leccionesDe, lineaPorId, lineasDe, misJugadas, obligatorias, opcionales } from '../../src/curso/datos.ts'
 import { componerCurso } from '../../src/curso/capas.ts'
 import { adelanta } from '../../src/curso/adelantar.ts'
-import { fotosDePasos } from '../../src/curso/pasos.ts'
-import { palabras, posicion } from '../../src/curso/textos.ts'
+import { fenQueSeVe, fotosDePasos, soloPeones } from '../../src/curso/pasos.ts'
+import { frasesDe, palabras, posicion } from '../../src/curso/textos.ts'
 import { pasosDelCurso, siguientePaso } from '../../src/pantallas/CursoPagina.tsx'
 import { cursos } from '../../src/cursos/datos.ts'
 import { dia, paraHoy, sumarDias } from '../../src/repaso/repaso.ts'
@@ -169,33 +169,179 @@ describe('El curso por estructuras · los textos', () => {
     expect(nuevo.piezas.idea.paginas[0]!.pasoAPaso).toBe(hoy.pasoAPaso)
   })
 
-  it('La estructura trae cinco páginas, y la Cadena y la Clásica son las de hoy', () => {
-    expect(nuevo.piezas.estructura.paginas.map((p) => p.subtitulo)).toEqual(['El mapa', 'La Cadena', 'El Cambio', 'La Clásica', 'La Tensión'])
-    const sinTitulo = ({ subtitulo: _, ...p }: PaginaLeer) => p
-    expect(sinTitulo(pagina('La Cadena'))).toEqual(sinTitulo(actual.piezas.estructura.paginas[0]!))
-    expect(sinTitulo(pagina('La Clásica'))).toEqual(sinTitulo(actual.piezas.estructura.paginas[1]!))
+  // La estructura, 2026-11-28 (Carlos en su iPhone: "pondría en toda esa descripción solo la idea general de esa lección y
+  // el paso a paso verlo con el botón"; "De repente ya no existen 2 peones, 1 y 1 de cada jugador, no entiendo por qué").
+  // Arriba, la idea; el detalle, en el paso a paso, que parte de la posición inicial con todas las piezas.
+  const paginas = () => nuevo.piezas.estructura.paginas
+  const fotosDe = (titulo: string) => fotosDePasos(pagina(titulo).pasoAPaso!)
+  /** El paso cuya frase empieza así, y la posición de verdad en él. */
+  const enPaso = (titulo: string, empieza: string) => {
+    const pa = pagina(titulo).pasoAPaso!
+    const i = pa.pasos.findIndex((x) => x.frase.startsWith(empieza))
+    expect(i, `${titulo}: «${empieza}…»`).toBeGreaterThanOrEqual(0)
+    return { i, paso: pa.pasos[i]!, foto: fotosDe(titulo)[i]!, ch: new Chess(fotosDe(titulo)[i]!.fen) }
+  }
+  const QUITAMOS = 'Quitamos las demás piezas para ver solo los peones.'
+  /** Las frases de una página en el orden en que se leen: la idea de arriba y después cada paso. */
+  const frasesDePagina = (p: PaginaLeer) => [...p.texto, ...p.pasoAPaso!.pasos.map((x) => x.frase)]
+
+  it('La estructura trae cinco páginas; la Cadena y la Clásica salen de las páginas del curso de antes, que no cambian', () => {
+    expect(paginas().map((p) => p.subtitulo)).toEqual(['El mapa', 'La Cadena', 'El Cambio', 'La Clásica', 'La Tensión'])
+    const capaDe = capa.piezas.estructura.paginas
+    expect(capaDe[1]!.de).toBe(0)
+    expect(capaDe[3]!.de).toBe(1)
+    // las de origen se quedan como estaban: el curso de antes no cambia
+    const [avance, clasica] = actual.piezas.estructura.paginas
+    expect(avance!.texto[0]).toMatch(/^Tus peones: c6, d5 y e6, y luego \.\.\.c5\./)
+    expect(clasica!.texto[0]).toMatch(/^Tus peones: c6 y e6, sin debilidades\./)
+    expect(avance!.pasoAPaso!.soloPeones && clasica!.pasoAPaso!.soloPeones).toBe(true)
+    // y sus fuentes siguen en las páginas de este curso
+    for (const f of avance!.fuente) expect(pagina('La Cadena').fuente).toContain(f)
+    for (const f of clasica!.fuente) expect(pagina('La Clásica').fuente).toContain(f)
   })
 
-  it('El mapa: cada respuesta tiene su nombre, y el tablero la muestra', () => {
+  it('cada página: arriba, solo la idea general, en una o dos frases cortas, con la posición real de la lección', () => {
+    for (const p of paginas()) {
+      const frases = p.texto.flatMap((t) => frasesDe(t))
+      expect(frases.length, p.subtitulo).toBeLessThanOrEqual(2)
+      expect(palabras(p.texto.join(' ')), p.subtitulo).toBeLessThanOrEqual(45)
+      // el detalle se fue al paso a paso: arriba ya no van las listas de peones
+      expect(p.texto.join(' '), p.subtitulo).not.toMatch(/Tus peones:|Los de blancas:/)
+      // el tablero de arriba: una posición de la partida, con todas las piezas
+      expect(p.tablero!.jugadas, p.subtitulo).toBeDefined()
+      expect(p.tablero!.soloPeones, p.subtitulo).toBeFalsy()
+      expect(p.pasoAPaso, p.subtitulo).toBeDefined()
+    }
+    // la de cada forma es la de su lección, hasta donde la estructura ya está formada
+    const hasta = (id: string, n: number) => jugadasDeVariante(nuevo, nuevo.variantes.find((v) => v.id === id)!).slice(0, n)
+    expect(pagina('La Cadena').tablero!.jugadas).toEqual(hasta('avance-short', 10))
+    expect(pagina('El Cambio').tablero!.jugadas).toEqual(hasta('cambio', 14))
+    expect(pagina('La Clásica').tablero!.jugadas).toEqual(hasta('clasica', 20))
+    expect(pagina('La Tensión').tablero!.jugadas).toEqual(linea('dos-caballos').jugadas)
+  })
+
+  it('cada paso a paso parte de la posición inicial con todas las piezas y juega la partida de su lección; solo después de un paso que lo dice, enseña los peones', () => {
+    const lecciones: Record<string, string> = { 'La Cadena': 'avance-short', 'El Cambio': 'cambio', 'La Clásica': 'clasica', 'La Tensión': 'dos-caballos' }
+    for (const p of paginas()) {
+      const pa = p.pasoAPaso!
+      const fotos = fotosDePasos(pa)
+      expect(pa.fen, p.subtitulo).toBeUndefined()
+      expect(pa.soloPeones || pa.ilustrativo, p.subtitulo).toBeFalsy()
+      // el primer tablero: la posición inicial, con sus 32 piezas
+      expect(new Chess(fotos[0]!.fen).history().length + new Chess(fotos[0]!.fen).board().flat().filter(Boolean).length, p.subtitulo).toBe(32)
+      const quita = pa.pasos.findIndex((x) => x.soloPeones)
+      if (p.subtitulo === 'El mapa') {
+        expect(quita).toBe(-1)
+        continue
+      }
+      // un solo paso quita las piezas; lo dice, no juega nada, y desde ahí es ilustración
+      expect(pa.pasos[quita]!.frase, p.subtitulo).toBe(QUITAMOS)
+      expect(pa.pasos.filter((x) => x.soloPeones !== undefined), p.subtitulo).toHaveLength(1)
+      expect(pa.pasos[quita]!.ilustrativo, p.subtitulo).toBe(true)
+      fotos.forEach((f, i) => expect([f.soloPeones, f.ilustrativo], `${p.subtitulo}, paso ${i + 1}`).toEqual([i >= quita, i >= quita]))
+      // hasta ahí, las jugadas de los dos lados, una tras otra: la línea de su lección
+      const jugadas = fotos.slice(0, quita).flatMap((f) => f.hechas.map((m) => m.san))
+      const l = jugadasDeVariante(nuevo, nuevo.variantes.find((v) => v.id === lecciones[p.subtitulo!])!)
+      expect(jugadas, p.subtitulo).toEqual(l.slice(0, jugadas.length))
+      expect(jugadas.length, p.subtitulo).toBeGreaterThanOrEqual(6)
+    }
+  })
+
+  it('ningún peón ni pieza desaparece sin una captura en ese paso, y cada captura se dice en palabras (quién toma a quién)', () => {
+    /** Cuántas piezas de cada clase se ven: "bp" → 7. */
+    const cuenta = (fen: string) => {
+      const r = new Map<string, number>()
+      for (const s of new Chess(fen, { skipValidation: true }).board().flat()) if (s) r.set(s.color + s.type, (r.get(s.color + s.type) ?? 0) + 1)
+      return r
+    }
+    const tableroDe = (fen: string) => fen.split(' ')[0]!
+    let capturas = 0
+    for (const p of paginas()) {
+      const pa = p.pasoAPaso!
+      const fotos = fotosDePasos(pa)
+      const vistos: string[] = [tableroDe(new Chess().fen())]
+      let antes = new Chess().fen()
+      pa.pasos.forEach((paso, i) => {
+        const f = fotos[i]!
+        const donde = `${p.subtitulo}, paso ${i + 1}: «${paso.frase}»`
+        // un regreso vuelve a un tablero que ya se vio, y la frase lo dice
+        if (paso.reinicio) {
+          const de = new Chess()
+          for (const s of paso.reinicio) de.move(s)
+          const seVe = f.soloPeones ? soloPeones(de.fen()) : de.fen()
+          expect(vistos, `${donde}: regresa a un tablero que no se vio`).toContain(tableroDe(seVe))
+          expect(paso.frase, donde).toMatch(/^(.+: )?[Vv]olvemos/)
+          antes = seVe
+        }
+        const ahora = fenQueSeVe(f)
+        const [a, b] = [cuenta(antes), cuenta(ahora)]
+        // lo que capturó este paso, por clase
+        const tomadas = new Map<string, number>()
+        for (const m of f.hechas.filter((x) => x.captured)) tomadas.set((m.color === 'w' ? 'b' : 'w') + m.captured, (tomadas.get((m.color === 'w' ? 'b' : 'w') + m.captured) ?? 0) + 1)
+        for (const k of new Set([...a.keys(), ...b.keys()])) {
+          const menos = (a.get(k) ?? 0) - (b.get(k) ?? 0)
+          // el paso que quita las piezas: se van todas las que no son peones, y solo esas
+          if (f.cambiaVista && f.soloPeones && k[1] !== 'p') expect(b.get(k) ?? 0, donde).toBe(0)
+          else expect(menos, `${donde}: ${k}`).toBe(tomadas.get(k) ?? 0)
+        }
+        const capturo = f.hechas.filter((x) => x.captured)
+        capturas += capturo.length
+        if (capturo.length) expect(paso.frase, `${donde}: la captura, en palabras`).toMatch(/\b(toma|tomas|retoma|retomas)\b/i)
+        vistos.push(tableroDe(ahora))
+        antes = ahora
+      })
+    }
+    expect(capturas).toBeGreaterThanOrEqual(15)
+  })
+
+  it('cada término se explica la primera vez que sale (en el orden en que se lee), o se dice con palabras simples', () => {
+    // el término, y la frase que lo explica: ninguna frase de antes lo nombra
+    const TERMINOS: [RegExp, string][] = [
+      [/estructura de peones/i, 'La estructura de peones es la forma que dejan los peones en el tablero'],
+      [/cadena/i, 'uno protege al otro, como una cadena'],
+      [/tensi[oó]n/i, 'A eso se le llama tensión'],
+      // "La base" con mayúscula es el nombre de la sección del curso, no el término
+      [/(?<!La )\bbase\b/, 'por el peón de atrás, su base'],
+      [/casilla clave/i, 'la casilla clave, la que más importa aquí'],
+      [/ruptura/i, 'Tu ruptura, empujar un peón para romper la cadena del rival'],
+      [/ataque de minor[ií]as/i, 'Es el ataque de minorías: en las columnas a, b y c tienes dos peones contra tres'],
+      [/lado de rey/i, 'en el lado de rey, de la e a la h'],
+      [/\bd[eé]bil(es)?\b/i, 'Ninguno es débil, de los que cuesta defender'],
+    ]
+    const todas = paginas().flatMap(frasesDePagina)
+    for (const [termino, explica] of TERMINOS) {
+      const primera = todas.findIndex((f) => termino.test(f))
+      expect(primera, String(termino)).toBeGreaterThanOrEqual(0)
+      expect(todas[primera], String(termino)).toContain(explica)
+    }
+    // palabras que ya no se usan: se dicen con palabras simples
+    for (const f of todas) expect(f).not.toMatch(/sim[eé]tric|debilidades|lado de dama/i)
+  })
+
+  it('El mapa: qué es una estructura de peones y por qué importa, la pregunta, y las cuatro respuestas en el tablero', () => {
     const p = pagina('El mapa')
-    expect(p.texto[0]).toContain('¿qué pasó con el peón de e4?')
-    for (const [q, n] of [['empujó a e5', 'la Cadena'], ['cambió en d5', 'el Cambio'], ['capturaste en e4 y blancas retomó con una pieza', 'la Clásica'], ['Sigue en e4', 'la Tensión']]) expect(p.texto[1], q).toMatch(new RegExp(`${q}: ${n}`))
-    const fotos = fotosDePasos(p.pasoAPaso!)
-    const cuando = (texto: string) => new Chess(fotos[p.pasoAPaso!.pasos.findIndex((x) => x.frase.startsWith(texto))]!.fen)
+    expect(p.texto[0]).toMatch(/^La estructura de peones es la forma que dejan los peones en el tablero; como un peón nunca regresa, esa forma dura y te dice qué plan toca\.$/)
+    expect(p.texto[1]).toContain('¿qué pasó con el peón de e4?')
     // la Cadena: el peón llegó a e5
-    expect(cuando('La Cadena').get('e5')).toMatchObject({ type: 'p', color: 'w' })
-    expect(cuando('La Cadena').get('e4')).toBeUndefined()
-    // el Cambio: en d5 quedó tu peón, retomado con el de c
-    expect(cuando('El Cambio').get('d5')).toMatchObject({ type: 'p', color: 'b' })
-    expect(cuando('El Cambio').get('c6')).toBeUndefined()
-    // la Clásica: tu peón lo capturó
-    expect(cuando('La Clásica').get('e4')).toMatchObject({ type: 'p', color: 'b' })
+    const cadena = enPaso('El mapa', 'La Cadena').ch
+    expect(cadena.get('e5')).toMatchObject({ type: 'p', color: 'w' })
+    expect(cadena.get('e4')).toBeUndefined()
+    // el Cambio: blancas toma en d5 con el peón de e4, y retomas con el de c
+    const toma = enPaso('El mapa', 'El Cambio')
+    expect(toma.foto.hechas.map((m) => [m.from, m.to, m.captured])).toEqual([['e4', 'd5', 'p']])
+    const cambio = enPaso('El mapa', 'Retomas con tu peón de c6').ch
+    expect(cambio.get('d5')).toMatchObject({ type: 'p', color: 'b' })
+    expect(cambio.get('c6')).toBeUndefined()
+    // la Clásica: tu peón captura en e4 y blancas retoma con una pieza
+    expect(enPaso('El mapa', 'Tomas el peón de e4').ch.get('e4')).toMatchObject({ type: 'p', color: 'b' })
+    expect(enPaso('El mapa', 'Blancas retoma con su caballo').ch.get('e4')).toMatchObject({ type: 'n', color: 'w' })
     // la Tensión: los dos peones siguen ahí, y nadie cambió peones
-    const t = cuando('Después de 4.h3')
+    const t = enPaso('El mapa', 'Juegas 5...e6').ch
     expect(t.get('e4')).toMatchObject({ type: 'p', color: 'w' })
     expect(t.get('d5')).toMatchObject({ type: 'p', color: 'b' })
     expect(peones(t, 'w')).toHaveLength(8)
     expect(peones(t, 'b')).toHaveLength(8)
+    expect(t.attackers('e4', 'b')).toContain('d5')
   })
 
   it('lo que une a las cuatro lecciones de La base: tu alfil de c8 sale antes de ...e6', () => {
@@ -208,50 +354,81 @@ describe('El curso por estructuras · los textos', () => {
     }
   })
 
+  it('La Cadena: los peones de la cadena, su base, tu ruptura y la de blancas, en el paso a paso', () => {
+    const t = enPaso('La Cadena', 'Tus peones: d5 y e6').ch
+    expect(peones(t, 'w')).toEqual(['a2', 'b2', 'c2', 'd4', 'e5', 'f2', 'g2', 'h2'])
+    expect(peones(t, 'b')).toEqual(['a7', 'b7', 'c5', 'd5', 'e6', 'f7', 'g7', 'h7'])
+    // la cadena: e5 protegido por d4, y d4 sin peón que lo proteja (la base); tu c5 ya la ataca
+    expect(t.attackers('e5', 'w')).toContain('d4')
+    expect(t.attackers('d4', 'w').filter((s) => t.get(s)?.type === 'p')).toEqual([])
+    expect(t.attackers('d4', 'b')).toContain('c5')
+    expect(enPaso('La Cadena', 'También puedes romper con ...f6').foto.hechas.map((m) => m.san)).toEqual(['f6'])
+    expect(enPaso('La Cadena', 'La ruptura de blancas: c4').ch.attackers('d5', 'w')).toContain('c4')
+  })
+
   it('El Cambio: sus peones son los del final de la lección con ...e6, y lo que dice de ellos es cierto', () => {
-    const p = pagina('El Cambio')
-    const ch = new Chess(p.tablero!.fen!)
+    const { ch } = enPaso('El Cambio', 'Tus peones del centro: d5 y e6.')
     const final = alFinal(linea('cambio'))
     expect(peones(ch, 'w')).toEqual(peones(final, 'w'))
     expect(peones(ch, 'b')).toEqual(peones(final, 'b').map((s) => (s === 'e7' ? 'e6' : s)).sort())
-    expect(p.texto[0]).toContain('Tus peones: d5 y e6. Los de blancas: c3 y d4.')
+    expect(enPaso('El Cambio', 'Los de blancas: c3 y d4.').paso.marcas!.map((m) => m.en)).toEqual(['c3', 'd4'])
     // blancas no tiene peón en la columna e, y tú no tienes en la c
     expect(peones(ch, 'w').some((s) => s[0] === 'e')).toBe(false)
     expect(peones(ch, 'b').some((s) => s[0] === 'c')).toBe(false)
-    // el ataque de minorías: tienes menos peones de ese lado, y ...b4 llega contra c3
-    const lado = (color: 'w' | 'b') => peones(ch, color).filter((s) => 'abc'.includes(s[0]!)).length
-    expect(lado('b')).toBeLessThan(lado('w'))
-    expect(ch.get('c3')).toMatchObject({ type: 'p', color: 'w' })
-    // el paso a paso sale de la misma posición, con el turno de negras para ...b5
-    expect(p.pasoAPaso!.fen!.split(' ')[0]).toBe(p.tablero!.fen!.split(' ')[0])
-    expect(p.pasoAPaso!.soloPeones && p.tablero!.soloPeones).toBe(true)
+    // el ataque de minorías: en las columnas a, b y c, dos tuyos contra tres; y ...b4 llega contra c3
+    const minorias = enPaso('El Cambio', 'Es el ataque de minorías').ch
+    const lado = (color: 'w' | 'b') => peones(minorias, color).filter((s) => 'abc'.includes(s[0]!)).length
+    expect([lado('b'), lado('w')]).toEqual([2, 3])
+    expect(minorias.get('c3')).toMatchObject({ type: 'p', color: 'w' })
+    expect(minorias.get('b5')).toMatchObject({ type: 'p', color: 'b' })
+  })
+
+  it('El Cambio: primero sacas tus piezas y enrocas, y después la ruptura, con la torre en b8 y sin regalar el peón; arriba, el plan en ese orden', () => {
+    expect(pagina('El Cambio').texto[0]).toMatch(/Tu plan: sacar tus piezas, enrocar y después avanzar/)
+    const pasos = pagina('El Cambio').pasoAPaso!.pasos
+    const i = pasos.findIndex((x) => x.frase === 'Primero sacas tus piezas y enrocas.')
+    expect(i).toBeGreaterThan(0)
+    expect(pasos[i]!.jugadas).toBeUndefined()
+    expect(pasos[i + 1]!.frase).toContain('con una torre en b8, empiezas con ...b5, cuidando de no regalar el peón')
+    expect(pasos[i + 2]!.frase).toContain('...b4')
+  })
+
+  it('La Clásica: tus peones sin debilidades, el peón de d4 de blancas, la ruptura después de sacar tus piezas, y la casilla e5', () => {
+    const { ch } = enPaso('La Clásica', 'Tus peones del centro: c6 y e6.')
+    const final = alFinal(linea('clasica'))
+    expect(peones(ch, 'w')).toEqual(peones(final, 'w'))
+    expect(peones(ch, 'b')).toEqual(peones(final, 'b'))
+    expect(peones(ch, 'w')).toContain('d4')
+    expect(peones(ch, 'w').some((s) => s[0] === 'e')).toBe(false)
+    const pasos = pagina('La Clásica').pasoAPaso!.pasos
+    const primero = pasos.findIndex((x) => x.frase === 'Primero terminas de sacar tus piezas y enrocas.')
+    expect(pasos[primero + 1]!.jugadas).toEqual(['...c5'])
+    expect(pasos.at(-1)!.marcas).toEqual([{ tipo: 'A6', en: 'e5', color: 'rojo' }])
   })
 
   it('La Tensión: la posición es la de Dos Caballos tras 5...e6, y las tres salidas son jugadas legales', () => {
-    const p = pagina('La Tensión')
     const dc = linea('dos-caballos')
     expect(dc.jugadas.at(-1)).toBe('e6')
-    expect(p.tablero!.jugadas).toEqual(dc.jugadas)
-    expect(p.tablero!.soloPeones).toBe(true)
     const ch = alFinal(dc)
-    expect(p.pasoAPaso!.fen).toBe(ch.fen())
+    const { foto } = enPaso('La Tensión', QUITAMOS)
+    expect(foto.fen).toBe(ch.fen())
     expect(peones(ch, 'b')).toEqual(['a7', 'b7', 'c6', 'd5', 'e6', 'f7', 'g7', 'h7'])
     expect(peones(ch, 'w')).toContain('e4')
     expect(peones(ch, 'w')).toContain('d2')
-    expect(p.texto[0]).toContain('el centro todavía no se decide')
-    expect(p.texto[1]).toContain('puede terminar en otra forma')
+    expect(pagina('La Tensión').texto.join(' ')).toContain('El centro todavía no se decide')
     // el peón de e4 y el de d5 se atacan
     expect(ch.attackers('d5', 'w')).toContain('e4')
     expect(ch.attackers('e4', 'b')).toContain('d5')
-    const fotos = fotosDePasos(p.pasoAPaso!)
-    expect(peones(new Chess(fotos[3]!.fen), 'w')).toEqual(expect.arrayContaining(['d4', 'e5']))
-    expect(new Chess(fotos[4]!.fen).get('d5')).toMatchObject({ type: 'p', color: 'b' })
-    expect(peones(new Chess(fotos[4]!.fen), 'b')).not.toContain('c6')
+    expect(peones(new Chess(enPaso('La Tensión', 'Si blancas juega d4 y e5').foto.fen), 'w')).toEqual(expect.arrayContaining(['d4', 'e5']))
+    const cambio = enPaso('La Tensión', 'Volvemos atrás. Si blancas toma tu peón de d5')
+    expect(cambio.ch.get('d5')).toMatchObject({ type: 'p', color: 'b' })
+    expect(peones(cambio.ch, 'b')).not.toContain('c6')
+    expect(cambio.paso.marcas!.filter((m) => m.tipo === 'A9')).toHaveLength(2)
     // la captura en e4 no se juega: la frase no dice con qué pieza retoma blancas, y lleva su flecha de plan (`specs/cursos.md` §2.1, regla 4)
-    const captura = p.pasoAPaso!.pasos[5]!
-    expect(captura.jugadas).toBeUndefined()
-    expect(captura.marcas).toEqual([{ tipo: 'A3', de: 'd5', a: 'e4', color: 'verde', punteada: true }])
-    expect(fotos[5]!.fen).toBe(ch.fen())
+    const captura = enPaso('La Tensión', 'Volvemos atrás. Si tomas el peón de e4')
+    expect(captura.paso.jugadas).toBeUndefined()
+    expect(captura.paso.marcas).toEqual([{ tipo: 'A3', de: 'd5', a: 'e4', color: 'verde', punteada: true }])
+    expect(captura.foto.fen).toBe(ch.fen())
   })
 
   it('cada introducción abre con su frase y sigue con la de hoy; "La más común" se fue', () => {
@@ -365,16 +542,6 @@ describe('El curso por estructuras · los textos', () => {
     expect(clasica.idea).toBe(hoy.idea.replace('para que tenga h7', 'para que tu alfil tenga h7'))
     expect(hoy.idea).toContain('para que tenga h7')
     for (const v of nuevo.variantes) if (v.id !== 'clasica') expect(v.idea, v.id).toBe(actual.variantes.find((x) => x.id === v.id)!.idea)
-  })
-
-  it('la página del Cambio: primero sacas tus piezas y enrocas, y después la ruptura, en el texto y en el paso a paso', () => {
-    const p = pagina('El Cambio')
-    expect(p.texto[1]).toMatch(/^Primero sacas tus piezas y enrocas\. Después, con una torre en b8, tu ruptura: \.\.\.b5 y \.\.\.b4, contra c3, cuidando de no regalar el peón\./)
-    const pasos = p.pasoAPaso!.pasos
-    const i = pasos.findIndex((x) => x.frase === 'Primero sacas tus piezas y enrocas.')
-    expect(i).toBeGreaterThan(0)
-    expect(pasos[i]!.jugadas).toBeUndefined()
-    expect(pasos[i + 1]!.frase).toContain('tu ruptura empieza con ...b5')
   })
 
   it('cada fuente citada existe, y cada término nuevo está en el glosario', () => {

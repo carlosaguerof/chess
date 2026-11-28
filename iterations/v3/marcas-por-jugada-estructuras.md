@@ -2,7 +2,7 @@
 
 > Generado con `node scripts/marcas-por-jugada.ts` (correcciones, C5; reglas de las marcas v1.3, 2026-10-30). La prueba `tests/unit/correcciones-marcas.test.ts` revisa que esté al día. Sirve para revisar que solo se marque lo que no se ve solo (R8): lo del rival en su frase, antes de tu jugada; lo tuyo, después. Una marca de una frase de tu jugada se ve después de jugarla; las de "hace", solo en Practicar.
 
-**Jugadas con marcas: 49 de 136.** Más 85 frases del plan y del paso a paso.
+**Jugadas con marcas: 49 de 136.** Más 130 frases del plan y del paso a paso.
 
 | Jugada | Línea | De quién | Marcas | En qué frase |
 |---|---|---|---|---|
@@ -175,10 +175,55 @@
 | plan fantasia tuyo frase 1 | Termina el desarrollo con ...Ce7 o ...Cf6 y enroca: el peón de f3 debilitó el lado de rey blanco. | flecha g8→f6 (A3, verde, punteada) |
 | idea 1, paso 2 | Contestas 1...c6: preparas ...d5 con un peón detrás que lo apoya. | flecha d7→d5 (A3, verde, punteada) |
 | idea 1, paso 7 | Si blancas avanza, 3.e5, tu alfil de casillas blancas sale antes de que cierres con ...e6: 3...Af5. | flecha e7→e6 (A3, verde, punteada) |
-| estructura 3, paso 5 | Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3, cuidando de no regalar el peón. | casilla b8 (A6, verde); flecha b5→b4 (A3, verde, punteada) |
-| estructura 3, paso 7 | La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey. | casilla e5 (A6, roja) |
-| estructura 4, paso 4 | Blancas tiene más espacio y la casilla e5 para un caballo. | casilla e5 (A6, roja) |
-| estructura 5, paso 6 | Si capturas en e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica. | flecha d5→e4 (A3, verde, punteada) |
+| estructura 1, paso 2 | Blancas juega 2.d4 y tú 2...d5: tu peón de d5 ataca al peón de e4. Lo que importa es qué pasa con ese peón, y hay cuatro respuestas. | casilla e4 (A8, roja) |
+| estructura 1, paso 3 | La Cadena: blancas no toma, empuja su peón a e5, 3.e5. Sus peones de d4 y e5 quedan en diagonal: uno protege al otro, como una cadena. | casilla d4 (A8, roja) |
+| estructura 1, paso 5 | El Cambio: volvemos a la posición después de tu ...d5. Blancas toma tu peón de d5 con su peón de e4: 3.exd5. | flecha e4→d5 (A9, roja) |
+| estructura 1, paso 6 | Retomas con tu peón de c6: 3...cxd5. Ya no hay peón blanco en la columna e, ni tuyo en la c: tu peón de c ahora está en d5. | flecha c6→d5 (A9, verde) |
+| estructura 1, paso 7 | La Clásica: volvemos a la posición después de tu ...d5. Blancas defiende su peón de e4 con el caballo, 3.Cc3. | casilla e4 (A8, roja) |
+| estructura 1, paso 8 | Tomas el peón de e4 con tu peón de d5: 3...dxe4. | flecha d5→e4 (A9, verde) |
+| estructura 1, paso 9 | Blancas retoma con su caballo, 4.Cxe4. Ya no hay peón blanco en la columna e, ni tuyo en la d. | flecha c3→e4 (A9, roja) |
+| estructura 1, paso 13 | Blancas echa a tu alfil con su peón, 4.h3; tu alfil toma su caballo, 4...Axf3, y su dama retoma, 5.Dxf3. | flecha g4→f3 (A9, verde); flecha d1→f3 (A9, roja) |
+| estructura 1, paso 14 | Juegas 5...e6. Nadie ha cambiado peones: tu peón de d5 y el de e4 se atacan, y ninguno toma. A eso se le llama tensión: es la Tensión. | casilla d5 (A8, verde); casilla e4 (A8, roja) |
+| estructura 2, paso 1 | Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4. | casilla e4 (A8, roja) |
+| estructura 2, paso 2 | Blancas no toma: empuja su peón, 3.e5. Ahora sus peones de d4 y e5 están en diagonal y uno protege al otro: es una cadena. | casilla d4 (A8, roja) |
+| estructura 2, paso 4 | Blancas saca su caballo, 4.Cf3, y juegas 4...e6: tu alfil de f5 ya salió y no queda encerrado, como en la Defensa Francesa, donde ...e6 va primero. | casilla f5 (A8, verde) |
+| estructura 2, paso 5 | Blancas juega 5.Ae2 y tú atacas la cadena por el peón de atrás, su base: 5...c5, contra d4. | casilla d4 (A8, roja) |
+| estructura 2, paso 7 | Tus peones: d5 y e6, frente a la cadena. | casilla d5 (A8, verde); casilla e6 (A8, verde) |
+| estructura 2, paso 8 | Y tu peón de c5, que ya ataca la cadena por detrás. | casilla c5 (A8, verde) |
+| estructura 2, paso 9 | Los de blancas: d4 y e5. Su base, d4, es el peón de atrás, el que ningún peón protege: la casilla clave, la que más importa aquí. | casilla d4 (A8, roja); casilla e5 (A8, roja) |
+| estructura 2, paso 10 | Tu ruptura, empujar un peón para romper la cadena del rival, fue ...c5. | casilla c5 (A8, verde) |
+| estructura 2, paso 11 | También puedes romper con ...f6, contra e5. | casilla e5 (A8, roja) |
+| estructura 2, paso 12 | La ruptura de blancas: c4, contra tu peón de d5. | casilla d5 (A8, verde) |
+| estructura 3, paso 1 | Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4. | casilla e4 (A8, roja) |
+| estructura 3, paso 2 | Blancas toma tu peón de d5 con su peón de e4: 3.exd5. | flecha e4→d5 (A9, roja) |
+| estructura 3, paso 3 | Retomas con tu peón de c6: 3...cxd5. Ya no hay peón blanco en la columna e, ni tuyo en la c: tu peón de c ahora está en d5. | flecha c6→d5 (A9, verde) |
+| estructura 3, paso 5 | Blancas sostiene su peón de d4 con otro peón, 5.c3, y juegas 5...Cf6. | casilla d4 (A8, roja); casilla c3 (A8, roja) |
+| estructura 3, paso 9 | Tus peones del centro: d5 y e6. | casilla d5 (A8, verde); casilla e6 (A8, verde) |
+| estructura 3, paso 10 | Los de blancas: c3 y d4. | casilla c3 (A8, roja); casilla d4 (A8, roja) |
+| estructura 3, paso 13 | Tu ruptura, el peón que empujas contra los del rival: con una torre en b8, empiezas con ...b5, cuidando de no regalar el peón. | casilla b8 (A6, verde) |
+| estructura 3, paso 14 | Después sigue ...b4, contra el peón de c3. | flecha b5→b4 (A3, verde, punteada); casilla c3 (A8, roja) |
+| estructura 3, paso 16 | La casilla clave, la más importante aquí, es e5: blancas la busca para un caballo y para atacar en el lado de rey, de la e a la h. | casilla e5 (A6, roja) |
+| estructura 4, paso 1 | Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4. | casilla e4 (A8, roja) |
+| estructura 4, paso 2 | Blancas defiende su peón de e4 con el caballo, 3.Cc3. | casilla e4 (A8, roja) |
+| estructura 4, paso 3 | Tomas el peón de e4 con tu peón de d5: 3...dxe4. | flecha d5→e4 (A9, verde) |
+| estructura 4, paso 4 | Blancas retoma con su caballo, 4.Cxe4. Ya no hay peón blanco en la columna e, ni tuyo en la d. | flecha c3→e4 (A9, roja) |
+| estructura 4, paso 5 | Tu alfil de c8 sale, 4...Af5, y ataca al caballo de e4. | casilla e4 (A8, roja) |
+| estructura 4, paso 7 | Blancas empuja 6.h4: amenaza h5, y tu alfil de g6 se quedaría sin casillas. | flecha h4→h5 (A7, roja, punteada); casilla g6 (A8, verde) |
+| estructura 4, paso 8 | Juegas 6...h6, para que tu alfil tenga h7. | flecha g6→h7 (A3, verde, punteada) |
+| estructura 4, paso 10 | Blancas ofrece cambiar alfiles con 9.Ad3, y tu alfil toma el suyo: 9...Axd3. | flecha h7→d3 (A9, verde) |
+| estructura 4, paso 11 | Su dama retoma, 10.Dxd3, y juegas 10...e6. | flecha d1→d3 (A9, roja) |
+| estructura 4, paso 13 | Tus peones del centro: c6 y e6. Ninguno es débil, de los que cuesta defender. | casilla c6 (A8, verde); casilla e6 (A8, verde) |
+| estructura 4, paso 14 | Blancas tiene un solo peón en el centro, d4, y ya no tiene peón de e. | casilla d4 (A8, roja) |
+| estructura 4, paso 16 | Después, tu ruptura: ...c5, contra d4. | casilla d4 (A8, roja) |
+| estructura 4, paso 17 | Blancas tiene más espacio y la casilla e5 para un caballo; la partida es lenta y tranquila. | casilla e5 (A6, roja) |
+| estructura 5, paso 2 | Blancas no adelanta su peón de d: saca su caballo, 2.Cc3, y juegas 2...d5, apoyado por tu peón de c6, contra el de e4. | casilla c6 (A8, verde); casilla e4 (A8, roja) |
+| estructura 5, paso 4 | Blancas echa a tu alfil con su peón, 4.h3; tu alfil toma su caballo, 4...Axf3, y su dama retoma, 5.Dxf3. | flecha g4→f3 (A9, verde); flecha d1→f3 (A9, roja) |
+| estructura 5, paso 7 | Tu peón de d5 y el de e4 se atacan, y nadie ha tomado: a eso se le llama tensión. | casilla d5 (A8, verde); casilla e4 (A8, roja) |
+| estructura 5, paso 9 | Tus peones del centro: d5 y e6. | casilla d5 (A8, verde); casilla e6 (A8, verde) |
+| estructura 5, paso 10 | Y tu peón de c6, que sostiene al de d5. | casilla c6 (A8, verde) |
+| estructura 5, paso 11 | Los de blancas: e4 y d2; su peón de d todavía no sale. | casilla e4 (A8, roja); casilla d2 (A8, roja) |
+| estructura 5, paso 13 | Volvemos atrás. Si blancas toma tu peón de d5 con su peón de e4, exd5, y tú retomas con el de c6, ...cxd5, vas hacia el Cambio. | flecha e4→d5 (A9, roja); flecha c6→d5 (A9, verde) |
+| estructura 5, paso 14 | Volvemos atrás. Si tomas el peón de e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica. | flecha d5→e4 (A3, verde, punteada) |
 | repaso 1, paso 2 | 3.e5 Af5: tu alfil sale antes de ...e6. | flecha e7→e6 (A3, verde, punteada) |
 | repaso 1, paso 6 | En la Clásica, contra 6.h4, juegas 6...h6: así tu alfil tiene h7. | flecha g6→h7 (A3, verde, punteada) |
 | repaso 1, paso 9 | Nunca pongas tu dama en c7: ahí la atacaría el alfil de f4. | flecha f4→c7 (A4, roja) |

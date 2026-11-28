@@ -6,6 +6,7 @@ import { Chess, type Color, type Square } from 'chess.js'
 import { CURSOS_NUEVOS, lineaPorId, lineasDe, misJugadas, textoRival } from '../../src/curso/datos.ts'
 import { empezar, pedirPista, pedirRespuesta, type EstadoCiclo, type Vuelta } from '../../src/curso/ciclo.ts'
 import { caminosDeCaballo, centro, COLORES, colorDe, esSaltoDeCaballo, marcasDelMomento, marcasDelPaso, puntosDeFlecha, puntosDeFlechas, frasesDe, MARCAS_NUEVAS_DE_ENTRADA } from '../../src/curso/marcas.ts'
+import { fenQueSeVe, fotosDePasos } from '../../src/curso/pasos.ts'
 import { explicacionDespues } from '../../src/curso/turno.ts'
 import { posicion } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
@@ -64,8 +65,12 @@ function llega(fen: string, de: string, a: string, color: Color) {
 /** El primer paso de una A7: la flecha A7 de la misma frase que termina donde empieza esta (si la hay). */
 const pasoAnterior = (x: Pick<Ligada, 'marcas'>, m: Marca) => x.marcas.find((n) => n.tipo === 'A7' && n !== m && n.a === m.de)
 
-/** La pieza que hace una flecha: la de su casilla, o en el segundo paso de una A7, la del primero. */
+/**
+ * La pieza que hace una flecha: la de su casilla, o en el segundo paso de una A7, la del primero. En una captura del
+ * paso a paso (A9, v1.4) la flecha se mide después de la jugada: la pieza que capturó ya está en la llegada.
+ */
 function piezaDe(x: Pick<Ligada, 'marcas' | 'fen'>, m: Marca) {
+  if (m.tipo === 'A9') return new Chess(x.fen).get(m.a as Square)
   const primero = m.tipo === 'A7' ? pasoAnterior(x, m) : undefined
   return new Chess(x.fen).get((primero ?? m).de as Square)
 }
@@ -123,6 +128,27 @@ function revisarR4(x: Ligada): string[] {
       case 'A6':
         if (!/^[a-h][1-8]$/.test(m.en ?? '')) mal('no es una casilla')
         break
+      case 'A8': {
+        // v1.4, solo en el paso a paso: la pieza o el peón que la frase nombra, del color de quien es; si el tablero enseña
+        // solo los peones, un peón (si no, la casilla se vería vacía); y no la que movió en ese paso: ya la enseña el amarillo
+        const p = tablero.get(m.en as Square)
+        if (!x.paso) mal('la A8 va solo en el paso a paso')
+        else if (!p) mal(`no hay pieza en ${m.en}`)
+        else {
+          if ((p.color === mio) !== (m.color === 'verde')) mal(`la pieza de ${m.en} es ${p.color === mio ? 'tuya' : 'del rival'}`)
+          if (x.paso.soloPeones && p.type !== 'p') mal(`solo se ven los peones, y en ${m.en} hay otra pieza`)
+          if (x.paso.hechas.at(-1)?.to === m.en) mal(`la pieza de ${m.en} acaba de mover: ya la enseña el amarillo`)
+        }
+        break
+      }
+      case 'A9': {
+        // v1.4, solo en el paso a paso: la flecha de una captura que el tablero juega en ese paso, del color de quien captura
+        const j = x.paso?.hechas.find((h) => h.from === m.de && h.to === m.a)
+        if (!x.paso) mal('la A9 va solo en el paso a paso')
+        else if (!j || !j.captured) mal(`el tablero no captura ${m.de}→${m.a} en ese paso`)
+        else if ((j.color === mio) !== (m.color === 'verde')) mal(`la captura es ${j.color === mio ? 'tuya' : 'del rival'}`)
+        break
+      }
       case 'A7': {
         // el primer paso, una jugada legal de esa pieza; el segundo, legal (o un ataque) desde ahí, con el primero hecho
         const primero = pasoAnterior(x, m)
@@ -278,9 +304,10 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
       expect(new Set(cs).size, `${g}: casillas repetidas`).toBe(cs.length)
       const tablero = new Chess(v.fen)
       for (const m of casillas(v.marcas)) {
-        // tampoco se ilumina una pieza tuya: se lee como "esta pieza", no como la casilla (pase visual 1, el plan del Panov)
+        // tampoco se ilumina una pieza tuya: se lee como "esta pieza", no como la casilla (pase visual 1, el plan del Panov);
+        // salvo la A8 del paso a paso (v1.4), que es justo eso: la pieza que la frase nombra
         const p = tablero.get(m.en as Square)
-        expect(!p || p.color !== TODAS.find((x) => x.marcas.includes(m))!.mio, `${g}: ${m.en} encierra una pieza tuya`).toBe(true)
+        if (m.tipo !== 'A8') expect(!p || p.color !== TODAS.find((x) => x.marcas.includes(m))!.mio, `${g}: ${m.en} encierra una pieza tuya`).toBe(true)
         expect(fs.some((f) => f.de === m.en), `${g}: la casilla ${m.en} es la salida de una flecha`).toBe(false)
         // solo se ilumina la llegada de una flecha si está vacía (A5: la casilla que te quitan)
         if (fs.some((f) => f.a === m.en)) expect(tablero.get(m.en as Square), `${g}: ${m.en} encierra una pieza`).toBeFalsy()
@@ -315,8 +342,8 @@ describe('Correcciones · las marcas (reglas v1.3)', () => {
         expect(!!m.punteada, `${d}: punteadas solo la A3 y la A7`).toBe(m.tipo === 'A3' || m.tipo === 'A7')
         if (['A1', 'A2', 'A3'].includes(m.tipo!)) expect(m.color, d).toBe('verde')
         if (['A4', 'A5', 'A7'].includes(m.tipo!)) expect(m.color, d).toBe('rojo')
-        if (['A1', 'A2', 'A3', 'A4', 'A7'].includes(m.tipo!)) expect(!!(m.de && m.a) && !m.en, `${d}: es flecha`).toBe(true)
-        if (m.tipo === 'A6') expect(!!m.en && !m.de, `${d}: es casilla`).toBe(true)
+        if (['A1', 'A2', 'A3', 'A4', 'A7', 'A9'].includes(m.tipo!)) expect(!!(m.de && m.a) && !m.en, `${d}: es flecha`).toBe(true)
+        if (m.tipo === 'A6' || m.tipo === 'A8') expect(!!m.en && !m.de, `${d}: es casilla`).toBe(true)
       }
     expect(Object.keys(COLORES)).toEqual(['verde', 'rojo'])
     const usados = new Set(TODAS.flatMap((x) => x.marcas.map(colorDe)))
@@ -697,5 +724,92 @@ describe.runIf(esCaroKann)('Las marcas · los ejemplos de referencia (§4 de las
     expect(explicacionDespues(c, l, 'practicar', 11)[0]).toBe('Sacas el alfil antes de ...e6 y atacas a la dama de d1.')
     expect(antesDe('v:cambio', 11)).toEqual(['f4→c7 A4 rojo'])
     expect(marcasDelMomento(c, l, despuesDe(l, 'aprender', 11))).toEqual([])
+  })
+})
+
+/**
+ * Las reglas v1.4 (Carlos, 2026-11-28, opción A): solo en el "Ver paso a paso", la pieza o el peón que la frase nombra se
+ * ilumina (A8: verde lo tuyo, rojo lo del rival) y cada captura que juega el tablero lleva su flecha (A9), aunque las
+ * casillas estén pegadas. R1, R2, R3 y R5 siguen valiendo (las de arriba ya las miden con la A8 y la A9).
+ */
+describe('Las marcas · reglas v1.4 (solo en el paso a paso)', () => {
+  const nuevas = (x: Ligada) => x.marcas.filter((m) => m.tipo === 'A8' || m.tipo === 'A9')
+
+  it('la A8 y la A9 van solo en el paso a paso: ni en la lección, ni en el plan, ni en "Ver qué pasaría"', () => {
+    for (const x of TODAS.filter((y) => nuevas(y).length)) expect(x.donde, x.frase).toMatch(/^(idea|estructura|repaso) \d+, paso \d+$|^plan .+ paso a paso, paso \d+$/)
+    // y la lección no las enseña en ningún momento
+    for (const l of VARIANTES)
+      for (const ply of misJugadas(l))
+        for (const vuelta of ['aprender', 'practicar'] as const)
+          for (const e of [enTurno(l, vuelta, ply), despuesDe(l, vuelta, ply)]) expect(marcasDelMomento(c, l, e).filter((m) => m.tipo === 'A8' || m.tipo === 'A9'), `${l.id} ${ply}`).toEqual([])
+  })
+
+  it('R8 no aplica a la A8 ni a la A9: la captura lleva su flecha aunque las casillas estén pegadas (y R4 lo mide)', () => {
+    expect(revisarR8(TODAS.filter((x) => nuevas(x).length))).toEqual([])
+    if (c.id !== 'caro-kann-estructuras:b') return
+    // 3.exd5 en El Cambio: de e4 a d5, pegadas en diagonal
+    expect(TODAS.some((x) => x.marcas.some((m) => m.tipo === 'A9' && m.de === 'e4' && m.a === 'd5' && m.color === 'rojo'))).toBe(true)
+  })
+
+  it('R4 atrapa una A8 y una A9 que no dicen algo cierto (metidas a propósito)', () => {
+    const base: Ligada = { donde: 'estructura 1, paso 1', frase: 'Blancas toma tu peón de d5 con su peón de e4: 3.exd5.', marcas: [], fen: '', mio: 'b', grupos: [], fenTablero: '' }
+    const ch = new Chess()
+    for (const j of ['e4', 'c6', 'd4', 'd5']) ch.move(j)
+    const m = ch.move('exd5')
+    const x = { ...base, fen: ch.fen(), fenTablero: ch.fen(), paso: { hechas: [{ from: m.from, to: m.to, color: m.color, captured: m.captured }], soloPeones: false } }
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A9', de: 'e4', a: 'd5', color: 'rojo' }, { tipo: 'A8', en: 'd4', color: 'rojo' }] })).toEqual([])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A9', de: 'e4', a: 'd5', color: 'verde' }] })).toEqual([expect.stringContaining('la captura es del rival')])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A9', de: 'c6', a: 'd5', color: 'verde' }] })).toEqual([expect.stringContaining('el tablero no captura c6→d5')])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A8', en: 'e5', color: 'rojo' }] })).toEqual([expect.stringContaining('no hay pieza en e5')])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A8', en: 'd4', color: 'verde' }] })).toEqual([expect.stringContaining('es del rival')])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A8', en: 'd1', color: 'rojo' }], paso: { ...x.paso, soloPeones: true } })).toEqual([expect.stringContaining('solo se ven los peones')])
+    expect(revisarR4({ ...x, marcas: [{ tipo: 'A8', en: 'd5', color: 'rojo' }] })).toEqual([expect.stringContaining('acaba de mover')])
+    // y fuera del paso a paso no van
+    expect(revisarR4({ ...base, fen: ch.fen(), marcas: [{ tipo: 'A8', en: 'd4', color: 'rojo' }] })).toEqual([expect.stringContaining('solo en el paso a paso')])
+  })
+
+  it('el código las dibuja: la A8, una casilla con el relleno más claro (la pieza se sigue viendo); la A9, una flecha sólida', () => {
+    const dibujo = (m: Marca) => renderToStaticMarkup(createElement(CapaMarcas, { marcas: [m], orientacion: 'black', fen: '8/8/8/3p4/3P4/8/8/8 w - - 0 1' }))
+    const a8 = dibujo({ tipo: 'A8', en: 'd4', color: 'rojo' })
+    expect(a8).toContain('data-tipo="A8"')
+    expect(a8).toContain('fill-opacity="0.16"')
+    expect(a8).toContain(`stroke="${COLORES.rojo}"`)
+    expect(dibujo({ tipo: 'A6', en: 'e5', color: 'rojo' })).toContain('fill-opacity="0.32"')
+    const a9 = dibujo({ tipo: 'A9', de: 'e4', a: 'd5', color: 'rojo' })
+    expect(a9).toContain('data-tipo="A9"')
+    expect(a9).toContain('data-punteada="no"')
+    expect(a9).not.toContain('stroke-dasharray')
+  })
+
+  it.runIf(c.id === 'caro-kann-estructuras:b')('en La estructura de la Caro-Kann, cada captura del tablero lleva su A9, y cada peón o pieza que la frase nombra por su casilla se ilumina (o ya lo señala una flecha)', () => {
+    // una casilla escrita sola ("de d5", "d4 y e5"), no la de una jugada ("...e6", "3.e5", "Af5", "cxd5")
+    const sueltas = (frase: string) => [...frase.matchAll(/(?<![A-Za-z0-9.x])([a-h][1-8])(?![0-9])/g)].map((m) => m[1]!)
+    let capturas = 0
+    let nombradas = 0
+    c.piezas.estructura.paginas.forEach((pag, k) => {
+      const pa = pag.pasoAPaso!
+      const fotos = fotosDePasos(pa)
+      pa.pasos.forEach((p, i) => {
+        const donde = `${pag.subtitulo}, paso ${i + 1}: «${p.frase}»`
+        const propias = p.marcas ?? []
+        for (const j of fotos[i]!.hechas.filter((h) => h.captured)) {
+          capturas++
+          expect(propias.some((m) => m.tipo === 'A9' && m.de === j.from && m.a === j.to), `${donde}: la captura ${j.san} sin su flecha`).toBe(true)
+        }
+        const seVen = marcasDelPaso(pa, i)
+        const tablero = new Chess(fenQueSeVe(fotos[i]!), { skipValidation: true })
+        // las jugadas del paso ("1.e4 c6 2.d4 d5") se narran a sí mismas: el tablero las hace
+        const jugadas = new Set<string>(fotos[i]!.hechas.map((h) => h.to))
+        for (const sq of sueltas(p.frase)) {
+          if (!tablero.get(sq as Square) || jugadas.has(sq)) continue
+          nombradas++
+          const ok = seVen.some((m) => m.en === sq || m.de === sq || m.a === sq)
+          expect(ok, `${donde}: ${sq} no se ilumina`).toBe(true)
+        }
+        expect(k).toBeGreaterThanOrEqual(0)
+      })
+    })
+    expect(capturas).toBeGreaterThanOrEqual(15)
+    expect(nombradas).toBeGreaterThanOrEqual(20)
   })
 })

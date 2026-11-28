@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Texto } from './Notacion.tsx'
 import { TableroMini } from './TableroMini.tsx'
-import { fotosDePasos, soloPeones } from '../curso/pasos.ts'
+import { fenQueSeVe, fotosDePasos } from '../curso/pasos.ts'
 import { marcasDelPaso, marcasNuevas } from '../curso/marcas.ts'
 import { posicion } from '../curso/textos.ts'
 import type { VerDelMomento } from '../curso/ver.ts'
@@ -66,18 +66,23 @@ function VentanaPasoAPaso({ titulo, pa, inicio, orientacion, verQuePasa, onCerra
     return () => window.removeEventListener('keydown', tecla)
   }, [onCerrar])
 
-  // la última jugada en amarillo: la de este paso, o la del último paso que movió (el que solo explica no la borra)
+  // la última jugada en amarillo: la de este paso, o la del último paso que movió (el que solo explica no la borra; el
+  // que quita las piezas, sí: el amarillo quedaría en casillas que ya no enseñan nada)
   const ultimaJugada = (k: number): [string, string] | undefined => {
     for (let j = k; j >= 0; j--) {
       const m = fotos[j]!.hechas.at(-1)
       if (m) return [m.from, m.to]
+      if (fotos[j]!.cambiaVista) return undefined
       const reinicio = pa.pasos[j]!.reinicio
       if (reinicio) return verQuePasa ? ultimaDe([...(inicio ?? []), ...reinicio]) : undefined
     }
     return verQuePasa ? ultimaDe(inicio ?? []) : undefined
   }
   const foto = fotos[i]!
-  const fen = pa.soloPeones ? soloPeones(foto.fen) : foto.fen
+  const fen = fenQueSeVe(foto)
+  // la nota de la ilustración: en una ventana que pasa a ilustración a media explicación (La estructura de la Caro-Kann),
+  // su renglón está desde el principio y se ve desde ese paso, para que el tablero no brinque
+  const algunaIlustrativa = fotos.some((f) => f.ilustrativo)
 
   return createPortal(
     <div className="dialogo-fondo" onClick={onCerrar} data-testid="paso-a-paso-fondo">
@@ -85,7 +90,11 @@ function VentanaPasoAPaso({ titulo, pa, inicio, orientacion, verQuePasa, onCerra
         <h2 data-testid="paso-a-paso-titulo">
           <Texto t={titulo} />
         </h2>
-        {pa.ilustrativo && <p className="paso-a-paso-nota">Es una ilustración: el rival no contesta cada jugada.</p>}
+        {algunaIlustrativa && (
+          <p className="paso-a-paso-nota" style={foto.ilustrativo ? undefined : { visibility: 'hidden' }} aria-hidden={!foto.ilustrativo} data-testid="paso-a-paso-nota">
+            Es una ilustración: el rival no contesta cada jugada.
+          </p>
+        )}
         {/* C5: las marcas de la frase, que se acumulan hasta que el tablero vuelve a mover (detrás del interruptor) */}
         <TableroMini fen={fen} orientacion={orientacion} ultima={ultimaJugada(i)} testid="tablero-paso-a-paso" coordenadas marcas={marcasNuevas() ? marcasDelPaso(pa, i) : undefined} />
         <p className="paso-a-paso-frase" data-testid="paso-a-paso-frase" aria-live="polite">

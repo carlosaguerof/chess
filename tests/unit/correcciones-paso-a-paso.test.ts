@@ -37,7 +37,14 @@ describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('cada jugada es legal; solo un plan o una estructura (ilustrativo) mueve dos veces seguidas el mismo color', () => {
     for (const t of TODOS) {
       expect(() => fotosDePasos(t.pa, t.inicio), t.nombre).not.toThrow()
-      if (!t.pa.ilustrativo) expect(() => fotosDePasos({ ...t.pa, ilustrativo: false }, t.inicio), t.nombre).not.toThrow()
+      // sin ilustración en ningún paso, el mismo color nunca mueve dos veces (La estructura de la Caro-Kann pasa a
+      // ilustración a media ventana, en el paso que quita las piezas: 2026-11-28)
+      const nunca = !t.pa.ilustrativo && t.pa.pasos.every((p) => !p.ilustrativo)
+      const sinIlustrar = { ...t.pa, ilustrativo: false, pasos: t.pa.pasos.map((p) => ({ ...p, ilustrativo: undefined })) }
+      if (nunca) expect(() => fotosDePasos(sinIlustrar, t.inicio), t.nombre).not.toThrow()
+      // y hasta el paso que pasa a ilustración, tampoco
+      const hasta = t.pa.pasos.findIndex((p) => p.ilustrativo)
+      if (!t.pa.ilustrativo && hasta > 0) expect(() => fotosDePasos({ ...sinIlustrar, pasos: sinIlustrar.pasos.slice(0, hasta) }, t.inicio), t.nombre).not.toThrow()
     }
     // "...": la jugada es de negras; en un ilustrativo se les da el turno, y fuera de él, no
     expect(mover(new Chess(), '...e5', true).color).toBe('b')
@@ -58,8 +65,9 @@ describe('Correcciones · C3 · los datos del paso a paso', () => {
           const ok = hechas.some((h) => h.es === jugada && h.num === Number(num) && h.color === color)
           expect(ok, `${t.nombre}, paso ${i + 1}: "${num}.${puntos ?? ''}${jugada}" se juega en ese paso`).toBe(true)
         }
-        // en un plan o una estructura no hay números de jugada: las jugadas no siguen una partida
-        if (t.pa.ilustrativo) expect(p.frase, `${t.nombre}, paso ${i + 1}`).not.toMatch(NUMERADA)
+        // en un plan o una estructura no hay números de jugada: las jugadas no siguen una partida (desde el paso que pasa a
+        // ilustración, si la ventana empieza con la partida real)
+        if (fotos[i]!.ilustrativo) expect(p.frase, `${t.nombre}, paso ${i + 1}`).not.toMatch(NUMERADA)
       })
   })
 
@@ -75,7 +83,9 @@ describe('Correcciones · C3 · los datos del paso a paso', () => {
   it('el tablero cambia en cada paso que juega, y no cambia en el que solo explica', () => {
     for (const t of TODOS) {
       const fotos = fotosDePasos(t.pa, t.inicio)
-      t.pa.pasos.forEach((p, i) => expect(fotos[i]!.cambia, `${t.nombre}, paso ${i + 1}`).toBe(!!(p.jugadas?.length || p.reinicio)))
+      // el paso que quita las piezas (o las regresa) también cambia el tablero que se ve, sin jugar nada
+      t.pa.pasos.forEach((p, i) => expect(fotos[i]!.cambia, `${t.nombre}, paso ${i + 1}`).toBe(!!(p.jugadas?.length || p.reinicio || fotos[i]!.cambiaVista)))
+      t.pa.pasos.forEach((p, i) => fotos[i]!.cambiaVista && expect(p.jugadas ?? [], `${t.nombre}, paso ${i + 1}: el paso que cambia la vista no juega`).toEqual([]))
     }
   })
 

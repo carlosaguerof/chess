@@ -13,13 +13,18 @@
  * casilla vacía (la casilla y la flecha de tu pieza a ella), A6 la casilla clave, A7 el plan o la amenaza del rival
  * (punteada roja, una flecha por paso, hasta dos). Solo verde (lo tuyo) y rojo (lo del rival). Las de antes, sin
  * `tipo`, se ven mientras el interruptor siga apagado.
+ *
+ * Reglas v1.4 (Carlos, 2026-11-28, opción A), solo en el "Ver paso a paso": A8, la pieza o el peón que la frase nombra
+ * (su casilla iluminada, verde si es tuya, roja si es del rival) y A9, la captura que el tablero juega en ese paso (la
+ * flecha de la casilla de salida de quien captura a la de la captura, del color de quien captura). Las dos van aunque
+ * las casillas estén pegadas.
  */
 export interface Marca {
   de?: string
   a?: string
   en?: string
   color?: 'verde' | 'rojo' | 'azul' | 'amarillo'
-  tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7'
+  tipo?: 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7' | 'A8' | 'A9'
   /** "después": un plan, una ruta o una amenaza (A3 verde, A7 roja) */
   punteada?: boolean
   /** la esquina de la L de un caballo, si su camino de siempre pasa sobre la pieza de la que sale otra flecha */
@@ -57,6 +62,13 @@ export interface PasoLeer {
   jugadas?: string[]
   /** las marcas de esta frase (correcciones, C5) */
   marcas?: Marca[]
+  /**
+   * desde este paso, solo los peones (`true`: "Quitamos las demás piezas para ver solo los peones") o todas las piezas
+   * (`false`); sin el campo, sigue como venía. Las piezas siguen en la posición: solo dejan de verse
+   */
+  soloPeones?: boolean
+  /** desde este paso, es una ilustración (`true`) o una partida (`false`); sin el campo, sigue como venía */
+  ilustrativo?: boolean
   /** de dónde sale esta frase y qué comprobó el motor ("Ver qué pasaría"; en los demás pasos, los trae su página o su plan) */
   fuente?: string[]
   motor?: string[]

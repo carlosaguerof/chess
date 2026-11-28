@@ -7,11 +7,18 @@ import type { PasoAPaso } from './tipos.ts'
  * (`ilustrativo`), se mueven solo las piezas de las que habla la frase, aunque el mismo color juegue dos veces seguidas.
  */
 export interface FotoPaso {
+  /** la posición de verdad, con todas las piezas (aunque se vean solo los peones) */
   fen: string
   /** las jugadas que hizo este paso (para la última jugada en amarillo y la prueba de los datos) */
   hechas: Move[]
-  /** si el tablero cambió respecto del paso anterior */
+  /** si el tablero que se ve cambió respecto del paso anterior (una jugada, un regreso o el paso a solo peones) */
   cambia: boolean
+  /** en este paso se ven solo los peones */
+  soloPeones: boolean
+  /** en este paso es una ilustración: se mueven solo las piezas de las que habla la frase */
+  ilustrativo: boolean
+  /** este paso pasa a solo peones, o regresa a todas las piezas */
+  cambiaVista: boolean
 }
 
 /**
@@ -37,22 +44,42 @@ function salida(pa: PasoAPaso, inicio: string[] = []): Chess {
   return ch
 }
 
+/**
+ * Las fotos de cada paso. Un paso puede cambiar la vista desde ahí (La estructura de la Caro-Kann, 2026-11-28: "De
+ * repente ya no existen 2 peones [...] no entiendo por qué"): el paso a paso parte de una posición real, con todas las
+ * piezas, y juega las jugadas que forman la estructura; después, un paso pasa a solo peones (`soloPeones: true`, "Quitamos
+ * las demás piezas…") y, si mueve piezas sin la respuesta del rival, a ilustración (`ilustrativo: true`). Los dos valen
+ * desde ese paso hasta que otro paso los cambie; al empezar, los de la ventana (`pa.soloPeones`, `pa.ilustrativo`).
+ */
 export function fotosDePasos(pa: PasoAPaso, inicio: string[] = []): FotoPaso[] {
   const ch = salida(pa, inicio)
-  let antes = ch.fen()
+  let peones = !!pa.soloPeones
+  let ilustrativo = !!pa.ilustrativo
+  let antes = vista(ch.fen(), peones)
   return pa.pasos.map((p) => {
+    const cambiaVista = p.soloPeones !== undefined && p.soloPeones !== peones
+    if (p.soloPeones !== undefined) peones = p.soloPeones
+    if (p.ilustrativo !== undefined) ilustrativo = p.ilustrativo
     if (p.reinicio) {
       const de = salida(pa, inicio)
+      // el regreso se juega como empezó la ventana: en La estructura, la partida real hasta ahí, con las jugadas de los dos
       for (const s of p.reinicio) mover(de, s, pa.ilustrativo)
       ch.load(de.fen())
     }
-    const hechas = (p.jugadas ?? []).map((s) => mover(ch, s, pa.ilustrativo))
+    const hechas = (p.jugadas ?? []).map((s) => mover(ch, s, ilustrativo))
     const fen = ch.fen()
-    const foto = { fen, hechas, cambia: fen.split(' ')[0] !== antes.split(' ')[0] }
-    antes = fen
+    const seVe = vista(fen, peones)
+    const foto = { fen, hechas, cambia: seVe !== antes, soloPeones: peones, ilustrativo, cambiaVista }
+    antes = seVe
     return foto
   })
 }
+
+/** Las piezas que se ven en una posición (solo la parte del tablero de la FEN). */
+const vista = (fen: string, peones: boolean) => (peones ? soloPeones(fen) : fen).split(' ')[0]!
+
+/** La posición que se ve en un paso: la de verdad, o solo sus peones. */
+export const fenQueSeVe = (f: FotoPaso): string => (f.soloPeones ? soloPeones(f.fen) : f.fen)
 
 /** Solo los peones (la ficha de la estructura): las demás piezas se quitan del tablero que se ve. */
 export function soloPeones(fen: string): string {

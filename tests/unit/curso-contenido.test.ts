@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { Chess } from 'chess.js'
 import { BASE } from '../../src/base/base.ts'
 import { CURSOS_NUEVOS, jugadasDeLaBaseEn, lineasDe, misJugadas, textoMio, textoRival } from '../../src/curso/datos.ts'
-import { despues, palabras } from '../../src/curso/textos.ts'
+import { despues, palabras, posicion } from '../../src/curso/textos.ts'
 import { sanAEspanol } from '../../src/ajedrez/notacion.ts'
 
 /**
@@ -195,7 +195,9 @@ describe('C4 · el curso de la Caro-Kann', () => {
 
   it.runIf(esCaroKann)('La estructura del Avance: la cadena blanca d4-e5 contra c5, d5 y e6', () => {
     // en el curso por estructuras, antes va El mapa
-    const ch = new Chess(c.piezas.estructura.paginas[c.secciones ? 1 : 0]!.tablero!.fen!)
+    // en el curso por estructuras, el tablero de la página es la posición real de la lección (2026-11-28), con las jugadas
+    const t = c.piezas.estructura.paginas[c.secciones ? 1 : 0]!.tablero!
+    const ch = t.fen ? new Chess(t.fen) : posicion(t.jugadas!, t.jugadas!.length)
     const peones = (color: 'w' | 'b') => ch.board().flat().filter((s) => s && s.type === 'p' && s.color === color).map((s) => s!.square).sort()
     expect(peones('w')).toEqual(['a2', 'b2', 'c2', 'd4', 'e5', 'f2', 'g2', 'h2'])
     expect(peones('b')).toEqual(['a7', 'b7', 'c5', 'd5', 'e6', 'f7', 'g7', 'h7'])

@@ -32,84 +32,461 @@
         {
           "subtitulo": "El mapa",
           "texto": [
-            "Después de 1.e4 c6, juegas ...d5 y atacas el peón de e4. De ahí sale la pregunta que ordena este curso: ¿qué pasó con el peón de e4?",
-            "Hay cuatro respuestas, cada una con su nombre. Blancas lo empujó a e5: la Cadena. Blancas lo cambió en d5: el Cambio. Tú lo capturaste en e4 y blancas retomó con una pieza: la Clásica. Sigue en e4: la Tensión.",
-            "Y la idea que une a las cuatro lecciones de La base: tu alfil de c8 sale antes de ...e6."
+            "La estructura de peones es la forma que dejan los peones en el tablero; como un peón nunca regresa, esa forma dura y te dice qué plan toca.",
+            "En la Caro-Kann, la forma sale de una pregunta: ¿qué pasó con el peón de e4?"
           ],
           "tablero": { "jugadas": ["e4", "c6", "d4", "d5"] },
-          "fuente": ["WB-1c6", "WB-2d5", "WP-CK", "AJEDREZ"],
+          "fuente": ["WB-1c6", "WB-2d5", "WP-CK", "WP-PS", "AJEDREZ"],
           "pasoAPaso": {
             "pasos": [
               { "frase": "Blancas abre con 1.e4 y contestas 1...c6.", "jugadas": ["e4", "c6"] },
-              { "frase": "Blancas juega 2.d4 y tú 2...d5: atacas el peón de e4.", "jugadas": ["d4", "d5"] },
-              { "frase": "La pregunta de este curso es qué pasó con el peón de e4." },
-              { "frase": "La Cadena: blancas lo empuja a e5, 3.e5, y tu alfil sale, 3...Af5.", "jugadas": ["e5", "Bf5"] },
-              { "frase": "El Cambio: blancas lo cambia en d5, 3.exd5, y retomas con el peón de c, 3...cxd5.", "reinicio": ["e4", "c6", "d4", "d5"], "jugadas": ["exd5", "cxd5"] },
-              { "frase": "La Clásica: blancas defiende e4 con 3.Cc3 y tú lo capturas, 3...dxe4.", "reinicio": ["e4", "c6", "d4", "d5"], "jugadas": ["Nc3", "dxe4"] },
-              { "frase": "Blancas retoma, 4.Cxe4, y tu alfil sale: 4...Af5.", "jugadas": ["Nxe4", "Bf5"] },
-              { "frase": "La Tensión: blancas saca sus caballos, 2.Cc3 d5 3.Cf3, y tu alfil sale: 3...Ag4.", "reinicio": ["e4", "c6"], "jugadas": ["Nc3", "d5", "Nf3", "Bg4"] },
-              { "frase": "Después de 4.h3 Axf3 5.Dxf3 e6, nadie ha cambiado peones: el de e4 sigue ahí.", "jugadas": ["h3", "Bxf3", "Qxf3", "e6"] },
+              {
+                "frase": "Blancas juega 2.d4 y tú 2...d5: tu peón de d5 ataca al peón de e4. Lo que importa es qué pasa con ese peón, y hay cuatro respuestas.",
+                "jugadas": ["d4", "d5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "La Cadena: blancas no toma, empuja su peón a e5, 3.e5. Sus peones de d4 y e5 quedan en diagonal: uno protege al otro, como una cadena.",
+                "jugadas": ["e5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Tu alfil de c8 sale, 3...Af5, antes de ...e6: así no se queda encerrado detrás de tus peones.", "jugadas": ["Bf5"] },
+              {
+                "frase": "El Cambio: volvemos a la posición después de tu ...d5. Blancas toma tu peón de d5 con su peón de e4: 3.exd5.",
+                "reinicio": ["e4", "c6", "d4", "d5"],
+                "jugadas": ["exd5"],
+                "marcas": [
+                  { "tipo": "A9", "de": "e4", "a": "d5", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Retomas con tu peón de c6: 3...cxd5. Ya no hay peón blanco en la columna e, ni tuyo en la c: tu peón de c ahora está en d5.",
+                "jugadas": ["cxd5"],
+                "marcas": [
+                  { "tipo": "A9", "de": "c6", "a": "d5", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "La Clásica: volvemos a la posición después de tu ...d5. Blancas defiende su peón de e4 con el caballo, 3.Cc3.",
+                "reinicio": ["e4", "c6", "d4", "d5"],
+                "jugadas": ["Nc3"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Tomas el peón de e4 con tu peón de d5: 3...dxe4.",
+                "jugadas": ["dxe4"],
+                "marcas": [
+                  { "tipo": "A9", "de": "d5", "a": "e4", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Blancas retoma con su caballo, 4.Cxe4. Ya no hay peón blanco en la columna e, ni tuyo en la d.",
+                "jugadas": ["Nxe4"],
+                "marcas": [
+                  { "tipo": "A9", "de": "c3", "a": "e4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Tu alfil de c8 sale, 4...Af5, también antes de ...e6.", "jugadas": ["Bf5"] },
+              {
+                "frase": "La última respuesta: volvemos a la posición después de tu ...c6. Blancas saca su caballo, 2.Cc3, y juegas 2...d5.",
+                "reinicio": ["e4", "c6"],
+                "jugadas": ["Nc3", "d5"]
+              },
+              { "frase": "Blancas saca el otro caballo, 3.Cf3, y tu alfil de c8 sale: 3...Ag4.", "jugadas": ["Nf3", "Bg4"] },
+              {
+                "frase": "Blancas echa a tu alfil con su peón, 4.h3; tu alfil toma su caballo, 4...Axf3, y su dama retoma, 5.Dxf3.",
+                "jugadas": ["h3", "Bxf3", "Qxf3"],
+                "marcas": [
+                  { "tipo": "A9", "de": "g4", "a": "f3", "color": "verde" },
+                  { "tipo": "A9", "de": "d1", "a": "f3", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Juegas 5...e6. Nadie ha cambiado peones: tu peón de d5 y el de e4 se atacan, y ninguno toma. A eso se le llama tensión: es la Tensión.",
+                "jugadas": ["e6"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" },
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
               { "frase": "Lo que une a las cuatro lecciones de La base: tu alfil de c8 sale antes de ...e6." }
             ]
           }
         },
-        { "de": 0, "subtitulo": "La Cadena" },
         {
-          "subtitulo": "El Cambio",
+          "de": 0,
+          "subtitulo": "La Cadena",
           "texto": [
-            "Tus peones: d5 y e6. Los de blancas: c3 y d4. Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c.",
-            "Primero sacas tus piezas y enrocas. Después, con una torre en b8, tu ruptura: ...b5 y ...b4, contra c3, cuidando de no regalar el peón. Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival. La casilla clave: e5. Blancas la busca para un caballo y para atacar en el lado de rey."
+            "Blancas empuja su peón a e5, y sus peones de d4 y e5 forman una cadena: en diagonal, uno protege al otro. Tu plan es atacar la cadena por el peón de atrás, d4, con ...c5."
           ],
-          "tablero": { "fen": "4k3/pp3ppp/4p3/3p4/3P4/2P5/PP3PPP/4K3 w - - 0 1", "soloPeones": true },
-          "fuente": ["WP-PS", "WP-MA", "WP-CK", "WB-3exd5", "BASE", "MOTOR", "AJEDREZ"],
+          "tablero": { "jugadas": ["e4", "c6", "d4", "d5", "e5", "Bf5", "Nf3", "e6", "Be2", "c5"] },
+          "fuente": ["WB-3e5", "WB-3Af5", "WB-5Ae2", "WP-PS", "WP-CK", "AJEDREZ"],
           "pasoAPaso": {
-            "fen": "4k3/pp3ppp/4p3/3p4/3P4/2P5/PP3PPP/4K3 b - - 0 1",
-            "soloPeones": true,
-            "ilustrativo": true,
             "pasos": [
-              { "frase": "Tus peones: d5 y e6." },
-              { "frase": "Los de blancas: c3 y d4." },
-              { "frase": "Es casi simétrico: blancas no tiene peón en la columna e, y tú no tienes en la c." },
-              { "frase": "Primero sacas tus piezas y enrocas." },
               {
-                "frase": "Con una torre en b8, tu ruptura empieza con ...b5, y después sigue ...b4, contra c3, cuidando de no regalar el peón.",
-                "jugadas": ["...b5"],
+                "frase": "Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4.",
+                "jugadas": ["e4", "c6", "d4", "d5"],
                 "marcas": [
-                  { "tipo": "A6", "en": "b8", "color": "verde" },
-                  { "tipo": "A3", "de": "b5", "a": "b4", "color": "verde", "punteada": true }
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
                 ]
               },
-              { "frase": "Es el ataque de minorías: avanzas los peones del lado donde tienes menos para debilitar los del rival." },
               {
-                "frase": "La casilla clave es e5: blancas la busca para un caballo y para atacar en el lado de rey.",
-                "marcas": [{ "tipo": "A6", "en": "e5", "color": "rojo" }]
+                "frase": "Blancas no toma: empuja su peón, 3.e5. Ahora sus peones de d4 y e5 están en diagonal y uno protege al otro: es una cadena.",
+                "jugadas": ["e5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Tu alfil de c8 sale, 3...Af5, fuera de la cadena de tus peones.", "jugadas": ["Bf5"] },
+              {
+                "frase": "Blancas saca su caballo, 4.Cf3, y juegas 4...e6: tu alfil de f5 ya salió y no queda encerrado, como en la Defensa Francesa, donde ...e6 va primero.",
+                "jugadas": ["Nf3", "e6"],
+                "marcas": [
+                  { "tipo": "A8", "en": "f5", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Blancas juega 5.Ae2 y tú atacas la cadena por el peón de atrás, su base: 5...c5, contra d4.",
+                "jugadas": ["Be2", "c5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Quitamos las demás piezas para ver solo los peones.", "soloPeones": true, "ilustrativo": true },
+              {
+                "frase": "Tus peones: d5 y e6, frente a la cadena.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" },
+                  { "tipo": "A8", "en": "e6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Y tu peón de c5, que ya ataca la cadena por detrás.",
+                "marcas": [
+                  { "tipo": "A8", "en": "c5", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Los de blancas: d4 y e5. Su base, d4, es el peón de atrás, el que ningún peón protege: la casilla clave, la que más importa aquí.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" },
+                  { "tipo": "A8", "en": "e5", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Tu ruptura, empujar un peón para romper la cadena del rival, fue ...c5.",
+                "marcas": [
+                  { "tipo": "A8", "en": "c5", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "También puedes romper con ...f6, contra e5.",
+                "jugadas": ["...f6"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e5", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "La ruptura de blancas: c4, contra tu peón de d5.",
+                "jugadas": ["c4"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" }
+                ]
               }
             ]
           }
         },
-        { "de": 1, "subtitulo": "La Clásica" },
+        {
+          "subtitulo": "El Cambio",
+          "texto": [
+            "Blancas cambia su peón de e4 por tu peón de d5, y el centro queda casi igual para los dos. Tu plan: sacar tus piezas, enrocar y después avanzar tus peones de las columnas a y b contra los suyos."
+          ],
+          "tablero": { "jugadas": ["e4", "c6", "d4", "d5", "exd5", "cxd5", "Bd3", "Nc6", "c3", "Nf6", "Bf4", "Bg4", "Qb3", "Qd7"] },
+          "fuente": ["WP-PS", "WP-MA", "WP-CK", "WB-3exd5", "WB-3cxd5", "BASE", "MOTOR", "AJEDREZ"],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4.",
+                "jugadas": ["e4", "c6", "d4", "d5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Blancas toma tu peón de d5 con su peón de e4: 3.exd5.",
+                "jugadas": ["exd5"],
+                "marcas": [
+                  { "tipo": "A9", "de": "e4", "a": "d5", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Retomas con tu peón de c6: 3...cxd5. Ya no hay peón blanco en la columna e, ni tuyo en la c: tu peón de c ahora está en d5.",
+                "jugadas": ["cxd5"],
+                "marcas": [
+                  { "tipo": "A9", "de": "c6", "a": "d5", "color": "verde" }
+                ]
+              },
+              { "frase": "Blancas saca su alfil, 4.Ad3, y tú tu caballo, 4...Cc6.", "jugadas": ["Bd3", "Nc6"] },
+              {
+                "frase": "Blancas sostiene su peón de d4 con otro peón, 5.c3, y juegas 5...Cf6.",
+                "jugadas": ["c3", "Nf6"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" },
+                  { "tipo": "A8", "en": "c3", "color": "rojo" }
+                ]
+              },
+              { "frase": "Siguen 6.Af4 Ag4 7.Db3 Dd7: salen más piezas y los peones no se mueven.", "jugadas": ["Bf4", "Bg4", "Qb3", "Qd7"] },
+              { "frase": "Quitamos las demás piezas para ver solo los peones.", "soloPeones": true, "ilustrativo": true },
+              { "frase": "Más adelante juegas ...e6, para que salga tu otro alfil.", "jugadas": ["...e6"] },
+              {
+                "frase": "Tus peones del centro: d5 y e6.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" },
+                  { "tipo": "A8", "en": "e6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Los de blancas: c3 y d4.",
+                "marcas": [
+                  { "tipo": "A8", "en": "c3", "color": "rojo" },
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Quedan casi iguales: blancas no tiene peón en la columna e, y tú no tienes en la c." },
+              { "frase": "Primero sacas tus piezas y enrocas." },
+              {
+                "frase": "Tu ruptura, el peón que empujas contra los del rival: con una torre en b8, empiezas con ...b5, cuidando de no regalar el peón.",
+                "jugadas": ["...b5"],
+                "marcas": [
+                  { "tipo": "A6", "en": "b8", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Después sigue ...b4, contra el peón de c3.",
+                "marcas": [
+                  { "tipo": "A3", "de": "b5", "a": "b4", "color": "verde", "punteada": true },
+                  { "tipo": "A8", "en": "c3", "color": "rojo" }
+                ]
+              },
+              { "frase": "Es el ataque de minorías: en las columnas a, b y c tienes dos peones contra tres, y los avanzas para debilitar los de blancas." },
+              {
+                "frase": "La casilla clave, la más importante aquí, es e5: blancas la busca para un caballo y para atacar en el lado de rey, de la e a la h.",
+                "marcas": [
+                  { "tipo": "A6", "en": "e5", "color": "rojo" }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "de": 1,
+          "subtitulo": "La Clásica",
+          "texto": [
+            "Tomas el peón de e4 y blancas retoma con una pieza: se van su peón de e y tu peón de d. Tus peones quedan fáciles de defender, y tu plan es sacar tus piezas, enrocar y después atacar d4 con ...c5."
+          ],
+          "tablero": {
+            "jugadas": [
+              "e4",
+              "c6",
+              "d4",
+              "d5",
+              "Nc3",
+              "dxe4",
+              "Nxe4",
+              "Bf5",
+              "Ng3",
+              "Bg6",
+              "h4",
+              "h6",
+              "Nf3",
+              "Nd7",
+              "h5",
+              "Bh7",
+              "Bd3",
+              "Bxd3",
+              "Qxd3",
+              "e6"
+            ]
+          },
+          "fuente": ["WP-PS", "WP-CK", "CB", "WB-3Cc3", "WB-3dxe4", "WB-4Cxe4", "WB-5Cg3", "WB-6h4", "AJEDREZ"],
+          "pasoAPaso": {
+            "pasos": [
+              {
+                "frase": "Las primeras jugadas: 1.e4 c6 2.d4 d5. Tu peón de d5 ataca al peón de e4.",
+                "jugadas": ["e4", "c6", "d4", "d5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Blancas defiende su peón de e4 con el caballo, 3.Cc3.",
+                "jugadas": ["Nc3"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Tomas el peón de e4 con tu peón de d5: 3...dxe4.",
+                "jugadas": ["dxe4"],
+                "marcas": [
+                  { "tipo": "A9", "de": "d5", "a": "e4", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Blancas retoma con su caballo, 4.Cxe4. Ya no hay peón blanco en la columna e, ni tuyo en la d.",
+                "jugadas": ["Nxe4"],
+                "marcas": [
+                  { "tipo": "A9", "de": "c3", "a": "e4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Tu alfil de c8 sale, 4...Af5, y ataca al caballo de e4.",
+                "jugadas": ["Bf5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              { "frase": "El caballo se aparta, 5.Cg3, y tu alfil se retira, 5...Ag6.", "jugadas": ["Ng3", "Bg6"] },
+              {
+                "frase": "Blancas empuja 6.h4: amenaza h5, y tu alfil de g6 se quedaría sin casillas.",
+                "jugadas": ["h4"],
+                "marcas": [
+                  { "tipo": "A7", "de": "h4", "a": "h5", "color": "rojo", "punteada": true },
+                  { "tipo": "A8", "en": "g6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Juegas 6...h6, para que tu alfil tenga h7.",
+                "jugadas": ["h6"],
+                "marcas": [
+                  { "tipo": "A3", "de": "g6", "a": "h7", "color": "verde", "punteada": true }
+                ]
+              },
+              { "frase": "Los dos sacan un caballo, 7.Cf3 Cd7, y blancas empuja 8.h5; tu alfil se va a 8...Ah7.", "jugadas": ["Nf3", "Nd7", "h5", "Bh7"] },
+              {
+                "frase": "Blancas ofrece cambiar alfiles con 9.Ad3, y tu alfil toma el suyo: 9...Axd3.",
+                "jugadas": ["Bd3", "Bxd3"],
+                "marcas": [
+                  { "tipo": "A9", "de": "h7", "a": "d3", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Su dama retoma, 10.Dxd3, y juegas 10...e6.",
+                "jugadas": ["Qxd3", "e6"],
+                "marcas": [
+                  { "tipo": "A9", "de": "d1", "a": "d3", "color": "rojo" }
+                ]
+              },
+              { "frase": "Quitamos las demás piezas para ver solo los peones.", "soloPeones": true, "ilustrativo": true },
+              {
+                "frase": "Tus peones del centro: c6 y e6. Ninguno es débil, de los que cuesta defender.",
+                "marcas": [
+                  { "tipo": "A8", "en": "c6", "color": "verde" },
+                  { "tipo": "A8", "en": "e6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Blancas tiene un solo peón en el centro, d4, y ya no tiene peón de e.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Primero terminas de sacar tus piezas y enrocas." },
+              {
+                "frase": "Después, tu ruptura: ...c5, contra d4.",
+                "jugadas": ["...c5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "d4", "color": "rojo" }
+                ]
+              },
+              {
+                "frase": "Blancas tiene más espacio y la casilla e5 para un caballo; la partida es lenta y tranquila.",
+                "marcas": [
+                  { "tipo": "A6", "en": "e5", "color": "rojo" }
+                ]
+              }
+            ]
+          }
+        },
         {
           "subtitulo": "La Tensión",
           "texto": [
-            "Tus peones: c6, d5 y e6. Los de blancas: e4 y d2. Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado peones: el centro todavía no se decide.",
-            "Por eso puede terminar en otra forma. Si blancas juega d4 y empuja a e5, se forma la Cadena. Si blancas cambia en d5, vas hacia el Cambio. Si tú capturas en e4 y blancas retoma con una pieza, vas hacia la Clásica."
+            "Tu peón de d5 y el de e4 se atacan, y nadie toma: a eso se le llama tensión. El centro todavía no se decide, y tu plan es sacar tus piezas."
           ],
-          "tablero": { "jugadas": ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4", "h3", "Bxf3", "Qxf3", "e6"], "soloPeones": true },
+          "tablero": { "jugadas": ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4", "h3", "Bxf3", "Qxf3", "e6"] },
           "fuente": ["WP-CK", "HOU", "BASE", "MOTOR", "AJEDREZ"],
           "pasoAPaso": {
-            "fen": "rn1qkbnr/pp3ppp/2p1p3/3p4/4P3/2N2Q1P/PPPP1PP1/R1B1KB1R w KQkq - 0 6",
-            "soloPeones": true,
-            "ilustrativo": true,
             "pasos": [
-              { "frase": "Tus peones: c6, d5 y e6." },
-              { "frase": "Los de blancas: e4 y d2." },
-              { "frase": "Tu peón de d5 y el de e4 se atacan, y nadie ha cambiado peones: el centro todavía no se decide." },
-              { "frase": "Puede terminar en otra forma: si blancas juega d4 y e5, se forma la Cadena.", "jugadas": ["d4", "e5"] },
-              { "frase": "Si blancas cambia, exd5, y retomas con el peón de c, ...cxd5, vas hacia el Cambio.", "reinicio": [], "jugadas": ["exd5", "...cxd5"] },
+              { "frase": "Blancas abre con 1.e4 y contestas 1...c6.", "jugadas": ["e4", "c6"] },
               {
-                "frase": "Si capturas en e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica.",
-                "reinicio": [],
-                "marcas": [{ "tipo": "A3", "de": "d5", "a": "e4", "color": "verde", "punteada": true }]
+                "frase": "Blancas no adelanta su peón de d: saca su caballo, 2.Cc3, y juegas 2...d5, apoyado por tu peón de c6, contra el de e4.",
+                "jugadas": ["Nc3", "d5"],
+                "marcas": [
+                  { "tipo": "A8", "en": "c6", "color": "verde" },
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              { "frase": "Blancas saca el otro caballo, 3.Cf3, y tu alfil de c8 sale: 3...Ag4.", "jugadas": ["Nf3", "Bg4"] },
+              {
+                "frase": "Blancas echa a tu alfil con su peón, 4.h3; tu alfil toma su caballo, 4...Axf3, y su dama retoma, 5.Dxf3.",
+                "jugadas": ["h3", "Bxf3", "Qxf3"],
+                "marcas": [
+                  { "tipo": "A9", "de": "g4", "a": "f3", "color": "verde" },
+                  { "tipo": "A9", "de": "d1", "a": "f3", "color": "rojo" }
+                ]
+              },
+              { "frase": "Juegas 5...e6. Nadie ha cambiado peones.", "jugadas": ["e6"] },
+              { "frase": "Quitamos las demás piezas para ver solo los peones.", "soloPeones": true, "ilustrativo": true },
+              {
+                "frase": "Tu peón de d5 y el de e4 se atacan, y nadie ha tomado: a eso se le llama tensión.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" },
+                  { "tipo": "A8", "en": "e4", "color": "rojo" }
+                ]
+              },
+              { "frase": "El centro todavía no se decide: puede terminar en otra forma." },
+              {
+                "frase": "Tus peones del centro: d5 y e6.",
+                "marcas": [
+                  { "tipo": "A8", "en": "d5", "color": "verde" },
+                  { "tipo": "A8", "en": "e6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Y tu peón de c6, que sostiene al de d5.",
+                "marcas": [
+                  { "tipo": "A8", "en": "c6", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Los de blancas: e4 y d2; su peón de d todavía no sale.",
+                "marcas": [
+                  { "tipo": "A8", "en": "e4", "color": "rojo" },
+                  { "tipo": "A8", "en": "d2", "color": "rojo" }
+                ]
+              },
+              { "frase": "Si blancas juega d4 y e5, se forma la Cadena.", "jugadas": ["d4", "e5"] },
+              {
+                "frase": "Volvemos atrás. Si blancas toma tu peón de d5 con su peón de e4, exd5, y tú retomas con el de c6, ...cxd5, vas hacia el Cambio.",
+                "reinicio": ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4", "h3", "Bxf3", "Qxf3", "e6"],
+                "jugadas": ["exd5", "...cxd5"],
+                "marcas": [
+                  { "tipo": "A9", "de": "e4", "a": "d5", "color": "rojo" },
+                  { "tipo": "A9", "de": "c6", "a": "d5", "color": "verde" }
+                ]
+              },
+              {
+                "frase": "Volvemos atrás. Si tomas el peón de e4 con tu peón de d5 y blancas retoma con una pieza, vas hacia la Clásica.",
+                "reinicio": ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4", "h3", "Bxf3", "Qxf3", "e6"],
+                "marcas": [
+                  { "tipo": "A3", "de": "d5", "a": "e4", "color": "verde", "punteada": true }
+                ]
               }
             ]
           }

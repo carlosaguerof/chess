@@ -5,7 +5,9 @@ import { centro, colorDe, puntosDeFlechas } from '../curso/marcas.ts'
  * Las marcas encima del tablero (correcciones de la Caro-Kann, C5; reglas de las marcas v1.3): un dibujo propio, porque
  * el de chessground no hace flechas punteadas ni en L. Flecha: de la pieza a la casilla, sólida (ahora) o punteada
  * ("después": tu plan en verde, A3; el plan o la amenaza del rival en rojo, A7, una flecha por paso); la del caballo,
- * en L. Casilla: iluminada. Solo verde y rojo. No se puede tocar: las jugadas pasan por debajo.
+ * en L. Casilla: iluminada. Solo verde y rojo. No se puede tocar: las jugadas pasan por debajo. Las dos de la v1.4 (solo
+ * en el paso a paso) usan el mismo dibujo: la A8, una casilla sobre la pieza que la frase nombra; la A9, la flecha sólida
+ * de una captura.
  */
 const GRUESO = 0.16
 const PUNTA = 0.42
@@ -77,12 +79,18 @@ function Flecha({ m, ruta, escala }: { m: Marca; ruta: [number, number][]; escal
   )
 }
 
+/**
+ * Una casilla iluminada. La de una pieza que la frase nombra (A8, reglas v1.4, solo en el paso a paso) va con el relleno
+ * más claro: la casilla está ocupada, y la pieza se tiene que seguir viendo de su color.
+ */
+const RELLENO = { casilla: 0.32, pieza: 0.16 }
+
 function Casilla({ m, orientacion }: { m: Marca; orientacion: 'white' | 'black' }) {
   const [x, y] = centro(m.en!, orientacion)
   const color = colorDe(m)
   return (
     <g data-marca="casilla" data-tipo={m.tipo} data-en={m.en} data-color={m.color ?? 'verde'}>
-      <rect x={x - 0.44} y={y - 0.44} width={0.88} height={0.88} rx={0.06} fill={color} fillOpacity={0.32} stroke={color} strokeWidth={0.12} />
+      <rect x={x - 0.44} y={y - 0.44} width={0.88} height={0.88} rx={0.06} fill={color} fillOpacity={m.tipo === 'A8' ? RELLENO.pieza : RELLENO.casilla} stroke={color} strokeWidth={0.12} />
     </g>
   )
 }

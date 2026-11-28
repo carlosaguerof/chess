@@ -1,6 +1,6 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test'
 import { cursoNuevo, jugadasDeVariante } from '../../src/curso/datos.ts'
-import { fotosDePasos, soloPeones } from '../../src/curso/pasos.ts'
+import { fenQueSeVe, fotosDePasos } from '../../src/curso/pasos.ts'
 import { mostrarTexto } from '../../src/ajedrez/mostrar.ts'
 import type { PasoAPaso } from '../../src/curso/tipos.ts'
 
@@ -24,8 +24,10 @@ async function recorrer(page: Page, pa: PasoAPaso, inicio: string[] = []) {
   for (let i = 0; i < pa.pasos.length; i++) {
     await expect(ventana(page)).toHaveAttribute('data-paso', String(i + 1))
     await expect(frase(page)).toHaveText(mostrarTexto(pa.pasos[i]!.frase, 'figuras'))
-    await expect(tablero(page)).toHaveAttribute('data-fen', pa.soloPeones ? soloPeones(fotos[i]!.fen) : fotos[i]!.fen)
+    await expect(tablero(page)).toHaveAttribute('data-fen', fenQueSeVe(fotos[i]!))
     await expect(ventana(page).getByText(`${i + 1} de ${pa.pasos.length}`, { exact: true })).toBeVisible()
+    // la nota de la ilustración, desde el paso que pasa a ilustración (La estructura de la Caro-Kann, 2026-11-28)
+    if (fotos.some((f) => f.ilustrativo)) await expect(page.getByTestId('paso-a-paso-nota')).toBeVisible({ visible: fotos[i]!.ilustrativo })
     if (i < pa.pasos.length - 1) {
       await expect(page.getByTestId('pap-siguiente')).toHaveText('Siguiente')
       await page.getByTestId('pap-siguiente').click()
@@ -80,7 +82,7 @@ test.describe('Correcciones · C3 · Ver paso a paso', () => {
     await expect(ventana(page)).toHaveCount(0)
   })
 
-  test('La estructura: sus dos páginas, solo con peones', async ({ page }, info) => {
+  test('La estructura: sus cinco páginas, de la partida real a solo los peones', async ({ page }, info) => {
     await page.goto('/#/curso/caro-kann-estructuras%3Ab/leer/estructura')
     for (const [k, pagina] of c.piezas.estructura.paginas.entries()) {
       if (k > 0) await page.getByTestId('pagina-siguiente').click()

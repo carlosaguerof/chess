@@ -7,10 +7,10 @@
 // para revisar que solo se marque lo que no se ve solo (R8). La prueba `tests/unit/correcciones-marcas.test.ts` usa lo mismo.
 import { CURSOS_NUEVOS, jugadasDeVariante, lineasDe } from '../src/curso/datos.ts'
 import { fotosDePasos } from '../src/curso/pasos.ts'
-import { frasesDe } from '../src/curso/marcas.ts'
+import { frasesDe, marcasDelPaso } from '../src/curso/marcas.ts'
 import { jugadaEs, lineaHasta, posicion } from '../src/curso/textos.ts'
 import { todosLosVer } from '../src/curso/ver.ts'
-import type { DatosCurso, Marca } from '../src/curso/tipos.ts'
+import type { DatosCurso, Marca, PasoAPaso } from '../src/curso/tipos.ts'
 
 /** Una frase con sus marcas, la posición donde se miden y el momento en que se ven junto con otras. */
 export interface Ligada {
@@ -28,6 +28,40 @@ export interface Ligada {
   grupos: string[]
   /** la posición que muestra el tablero en ese momento */
   fenTablero: string
+  /**
+   * solo en el paso a paso (reglas v1.4): las jugadas que el tablero hizo en ese paso, de dónde a dónde y qué capturó
+   * (la A9 es la flecha de una de ellas), y si el tablero enseña solo los peones (la A8 tiene que caer en uno)
+   */
+  paso?: { hechas: { from: string; to: string; color: 'w' | 'b'; captured?: string }[]; soloPeones: boolean }
+}
+
+/**
+ * Las frases de un paso a paso con sus marcas. Cada una va en los momentos en que se ve: el paso suyo y los de después
+ * que la siguen enseñando (`marcasDelPaso`, la misma cuenta de la ventana), para medir juntas (R2, R3) las que se ven
+ * juntas.
+ */
+function ligadasDelPaso(nombre: string, pa: PasoAPaso, inicio: string[], mio: 'w' | 'b'): Ligada[] {
+  const fotos = fotosDePasos(pa, inicio)
+  const r: Ligada[] = pa.pasos.map((p, i) => ({
+    donde: `${nombre}, paso ${i + 1}`,
+    frase: p.frase,
+    marcas: p.marcas ?? [],
+    fen: fotos[i]!.fen,
+    mio,
+    grupos: [] as string[],
+    fenTablero: fotos[i]!.fen,
+    paso: { hechas: fotos[i]!.hechas.map((m) => ({ from: m.from, to: m.to, color: m.color, captured: m.captured })), soloPeones: fotos[i]!.soloPeones },
+  }))
+  pa.pasos.forEach((p, i) => {
+    const seVen = marcasDelPaso(pa, i)
+    // las de este paso y las de los pasos de antes que se siguen viendo: van en el momento de este paso
+    for (let j = i; j >= 0; j--) {
+      const suyas = pa.pasos[j]!.marcas ?? []
+      if (suyas.length && suyas.some((m) => seVen.includes(m))) r[j]!.grupos.push(`paso:${nombre}:${i}`)
+      if (j < i && !suyas.some((m) => seVen.includes(m))) break
+    }
+  })
+  return r.filter((x) => x.marcas.length > 0)
 }
 
 const color = (ply: number): 'w' | 'b' => (ply % 2 === 0 ? 'w' : 'b')
@@ -93,14 +127,7 @@ export function ligadas(c: DatosCurso): Ligada[] {
     ...(['idea', 'estructura', 'repaso'] as const).flatMap((pieza) => c.piezas[pieza].paginas.map((p, i) => ({ nombre: `${pieza} ${i + 1}`, pa: p.pasoAPaso!, inicio: [] as string[] }))),
     ...c.variantes.map((v) => ({ nombre: `plan ${v.id} paso a paso`, pa: v.plan.pasoAPaso!, inicio: jugadasDeVariante(c, v) })),
   ]
-  for (const { nombre, pa, inicio } of pasos) {
-    const fotos = fotosDePasos(pa, inicio)
-    let grupo = 0
-    pa.pasos.forEach((p, i) => {
-      if (p.jugadas?.length || p.reinicio) grupo = i
-      if (p.marcas?.length) r.push({ donde: `${nombre}, paso ${i + 1}`, frase: p.frase, marcas: p.marcas, fen: fotos[i]!.fen, mio: c.color, grupos: [`paso:${nombre}:${grupo}`], fenTablero: fotos[i]!.fen })
-    })
-  }
+  for (const { nombre, pa, inicio } of pasos) r.push(...ligadasDelPaso(nombre, pa, inicio, c.color))
   // "Ver qué pasaría": las de cada paso, como en el paso a paso; cada frase, su propia ventana
   for (const v of todosLosVer(c)) {
     const nombre = `ver de ${v.clave}, ${v.campo} ${v.i}`
